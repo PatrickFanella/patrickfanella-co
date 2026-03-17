@@ -10,22 +10,43 @@ import {
 } from '../lib/styles'
 
 type ProjectCardProps = {
+  order?: number
   project: Project
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ order, project }: ProjectCardProps) {
+  const orderLabel = order ? order.toString().padStart(2, '0') : null
+
   return (
     <article
-      className={`${surfaceCardClass} p-5.5 transition duration-200 hover:-translate-y-1 hover:-rotate-[0.2deg]`}
+      className={`${surfaceCardClass} group flex h-full flex-col justify-between p-6 hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}
     >
-      <div className="mb-5.5 flex flex-wrap items-start justify-between gap-3">
-        <p className={monoLabelClass}>{project.year}</p>
-        <p className={monoLabelClass}>{project.role}</p>
-      </div>
+      <div className="mb-6 grid gap-5 border-b-2 border-stroke pb-5">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="flex flex-wrap gap-2">
+            {orderLabel ? (
+              <p className="border-2 border-heading bg-heading px-3 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-paper">
+                {orderLabel}
+              </p>
+            ) : null}
+            <p className="border-2 border-stroke bg-panel px-3 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-heading">
+              {project.year}
+            </p>
+          </div>
 
-      <div>
-        <h3 className="mb-2 text-2xl leading-tight text-heading">{project.title}</h3>
-        <p className="text-ink-soft">{project.summary}</p>
+          <p className="border-2 border-stroke bg-surface px-3 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-accent-pink">
+            {project.role}
+          </p>
+        </div>
+
+        <div>
+          <h3 className="max-w-[14ch] font-display text-[2.25rem] font-bold leading-[0.92] tracking-[-0.05em] text-heading md:text-[2.5rem]">
+            {project.title}
+          </h3>
+          <p className="mt-4 max-w-[42ch] text-[1.05rem] leading-relaxed text-ink-soft">
+            {project.summary}
+          </p>
+        </div>
       </div>
 
       <ul className={tagListClass} aria-label={`${project.title} technology stack`}>
@@ -36,9 +57,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
         ))}
       </ul>
 
-      <Link className={`${secondaryButtonClass} mt-5.5`} to={`/projects/${project.slug}`}>
-        Open case study
-      </Link>
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t-2 border-stroke pt-5">
+        {project.featured ? <p className={monoLabelClass}>Featured build</p> : <span />}
+
+        <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>
+          View detail
+        </Link>
+      </div>
     </article>
   )
 }

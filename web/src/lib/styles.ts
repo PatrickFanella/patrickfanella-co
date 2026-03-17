@@ -1,29 +1,29 @@
 export const surfaceCardClass =
-  'rounded-card border border-stroke bg-[linear-gradient(145deg,rgba(255,251,245,0.95),rgba(244,235,223,0.9))] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]'
+  'border-2 border-stroke bg-surface transition-all duration-150 ease-linear'
 
 export const monoLabelClass =
-  'font-mono text-[0.78rem] uppercase tracking-[0.18em] text-ink-soft'
+  'font-mono text-[0.75rem] font-bold uppercase tracking-[0.18em] text-accent-green'
 
 export const primaryButtonClass =
-  'inline-flex items-center justify-center gap-2 rounded-full border border-heading bg-heading px-4 py-3 text-sm text-[#f8efe1] transition duration-150 hover:-translate-y-0.5 focus-visible:-translate-y-0.5'
+  'inline-flex cursor-pointer items-center justify-center border-2 border-heading bg-heading px-6 py-3 text-sm font-bold tracking-[0.05em] text-paper uppercase transition-all duration-150 ease-linear hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none disabled:cursor-not-allowed disabled:opacity-60'
 
 export const secondaryButtonClass =
-  'inline-flex items-center justify-center gap-2 rounded-full border border-stroke bg-surface px-4 py-3 text-sm text-heading transition duration-150 hover:-translate-y-0.5 focus-visible:-translate-y-0.5'
+  'inline-flex cursor-pointer items-center justify-center border-2 border-stroke bg-surface px-6 py-3 text-sm font-bold tracking-[0.05em] uppercase text-heading transition-all duration-150 ease-linear hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-purple hover:text-accent-purple hover:shadow-brutal-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none'
 
 export const textLinkClass =
-  'inline-flex w-fit items-center gap-2 text-sm text-heading underline decoration-[rgba(122,59,40,0.35)] underline-offset-4 transition duration-150 hover:-translate-y-0.5 hover:decoration-accent focus-visible:-translate-y-0.5'
+  'inline-flex w-fit cursor-pointer items-center gap-1.5 text-sm font-bold tracking-[0.05em] uppercase text-heading decoration-2 underline-offset-4 hover:underline hover:text-accent-green hover:decoration-accent-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-all'
 
-export const pageSectionClass = 'px-1 pt-5 pb-4'
+export const pageSectionClass = 'px-1 pt-12 pb-16'
 
 export const pageTitleClass =
-  'max-w-[11ch] font-display text-[clamp(3rem,5vw,5.6rem)] leading-[0.98] text-heading'
+  'max-w-[12ch] font-display text-[clamp(3.5rem,7vw,7.5rem)] font-bold leading-[0.9] tracking-[-0.04em] text-heading'
 
-export const pageIntroClass = 'mt-4 max-w-[62ch] text-[1.02rem] leading-7 text-ink-soft'
+export const pageIntroClass = 'mt-6 max-w-[50ch] text-[1.1rem] leading-relaxed text-ink-soft'
 
 export const tagListClass = 'mt-4 flex list-none flex-wrap gap-2 p-0'
 
 export const tagClass =
-  'rounded-full bg-accent-soft px-3 py-2 font-mono text-[0.78rem] leading-none text-heading'
+  'border-2 border-stroke bg-panel px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-ink'
 
 export const inputClass =
-  'w-full rounded-[18px] border border-stroke bg-[rgba(255,252,246,0.96)] px-4 py-3 text-ink outline-none transition duration-150 placeholder:text-ink-soft/70 focus:border-accent focus:ring-2 focus:ring-[rgba(122,59,40,0.18)]'
+  'w-full border-2 border-stroke bg-surface px-4 py-3 text-ink font-mono text-sm transition-all duration-150 ease-linear placeholder:text-stroke focus-visible:border-accent-green focus-visible:outline-none focus-visible:-translate-x-0.5 focus-visible:-translate-y-0.5 focus-visible:shadow-brutal-green'
