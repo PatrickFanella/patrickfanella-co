@@ -13,31 +13,29 @@ describe('ProjectsPage', () => {
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(screen.getByRole('status')).toHaveTextContent(/hydrating the featured set and archive/i)
+		expect(screen.getByRole('status')).toHaveTextContent(/loading the project index/i)
 	})
 
-	it('renders featured and archived sections from live API data', async () => {
+	it('renders all projects in a single list', async () => {
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: 'Patrick Fanella Portfolio' })).toBeInTheDocument()
-		expect(screen.getByText('Archive')).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: 'Unique ID Rotating Logger' })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: 'Internet-ID' })).toBeInTheDocument()
 	})
 
-	it('filters the archive by tag and keeps empty slice messaging intentional', async () => {
+	it('filters projects by tag', async () => {
 		const user = userEvent.setup()
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: 'Patrick Fanella Portfolio' })).toBeInTheDocument()
-		await user.click(screen.getByRole('button', { name: 'Logging' }))
+		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
+		await user.click(screen.getByRole('button', { name: 'IPFS' }))
 
-		expect(screen.getByRole('heading', { name: 'Unique ID Rotating Logger' })).toBeInTheDocument()
-		expect(screen.getByText(/there are no featured projects tagged logging/i)).toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: 'Patrick Fanella Portfolio' })).not.toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: 'Internet-ID' })).toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: 'Clpr' })).not.toBeInTheDocument()
 	})
 
 	it('renders an error state when the project index request fails', async () => {

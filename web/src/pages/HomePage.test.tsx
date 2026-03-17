@@ -21,7 +21,7 @@ describe('HomePage', () => {
 		renderInRouter(<HomePage />)
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: 'Unique ID Rotating Logger' })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: 'Internet-ID' })).not.toBeInTheDocument()
 	})
 
 	it('renders a recoverable error state when the featured query fails', async () => {
