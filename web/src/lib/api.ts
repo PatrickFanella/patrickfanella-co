@@ -1,3 +1,9 @@
+export type ProjectMedia = {
+  src: string
+  alt: string
+  caption?: string
+}
+
 export type Project = {
   slug: string
   title: string
@@ -10,6 +16,9 @@ export type Project = {
   repoUrl?: string
   liveUrl?: string
   highlights: string[]
+  architecture: string[]
+  lessons: string[]
+  media: ProjectMedia[]
 }
 
 export type ProjectListResponse = {

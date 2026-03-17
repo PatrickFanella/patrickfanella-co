@@ -3,8 +3,8 @@
     {
       "slug": "patrickfanella-co",
       "title": "Patrick Fanella Portfolio",
-      "summary": "Project-first portfolio platform that pairs a React frontend with a Go API and PostgreSQL-backed seeded content.",
-      "description": "Built to turn a static portfolio scaffold into a maintainable full-stack product. The work focused on defining API contracts early, wiring a typed React client to DB-backed Go handlers, and creating a repeatable seed/bootstrap path so project content and contact submissions could run against PostgreSQL from day one.",
+      "summary": "Placeholder summary for the portfolio case study, used to exercise the richer phase-3 project model.",
+      "description": "Placeholder narrative copy for the portfolio project. This entry exists to prove that the expanded detail layout can render longer overview text, richer supporting sections, and seed-driven content without requiring final launch copy yet.",
       "role": "Full stack developer",
       "year": 2026,
       "repoUrl": "https://github.com/PatrickFanella/patrickfanella-co",
@@ -12,16 +12,32 @@
       "sortOrder": 1,
       "tags": ["React", "TypeScript", "Go", "PostgreSQL", "Vite"],
       "highlights": [
-        "Defined phase-driven delivery assumptions, API contracts, and launch scope before feature integration.",
-        "Connected seeded project content and contact submissions to a PostgreSQL-backed API instead of placeholder in-memory data.",
-        "Added async route states and browser smoke coverage to verify the public portfolio journey end to end."
+        "Placeholder highlight describing a product or engineering outcome.",
+        "Placeholder highlight showing how a second bullet should read in the UI.",
+        "Placeholder highlight confirming the seeded detail card can render a short list cleanly."
+      ],
+      "architecture": [
+        "Placeholder architecture note for the frontend/API/data relationship.",
+        "Placeholder architecture note for a persistence or contract decision.",
+        "Placeholder architecture note confirming the section supports multiple bullets."
+      ],
+      "lessons": [
+        "Placeholder lesson learned about what to keep or change in a future version.",
+        "Placeholder lesson learned that demonstrates a second reflective bullet."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/patrickfanella-co-overview.svg",
+          "alt": "Poster-style overview graphic for the Patrick Fanella portfolio build.",
+          "caption": "Seed placeholder for the portfolio case study hero asset."
+        }
       ]
     },
     {
       "slug": "mern-memories",
       "title": "MERN Stack Memories App",
-      "summary": "Authenticated React application for posting memories with titles, images, descriptions, and tags.",
-      "description": "This project tackled the classic full-stack challenge of keeping authoring, authentication, and media-rich content aligned in one user flow. Signed-in users can create and manage memory posts while the client and API stay coordinated around a simple content model for titles, images, descriptions, and tags.",
+      "summary": "Placeholder summary for a media-rich CRUD application with auth and tagging.",
+      "description": "Placeholder narrative copy for the MERN case study. This seed entry stands in for the eventual project story while still giving the page enough structure to validate richer summaries, highlights, architecture bullets, lessons, and media references.",
       "role": "Full stack developer",
       "year": 2025,
       "repoUrl": "https://github.com/PatrickFanella/Mern-memories",
@@ -30,16 +46,32 @@
       "sortOrder": 2,
       "tags": ["React", "Node.js", "MongoDB", "Authentication"],
       "highlights": [
-        "Implemented an authenticated CRUD flow for user-generated memory posts.",
-        "Structured the product around title, image, description, and tag metadata to keep content entry consistent.",
-        "Split responsibilities cleanly across dedicated client and server workspaces in a MERN setup."
+        "Placeholder highlight for an authenticated create/read/update/delete workflow.",
+        "Placeholder highlight for handling image, text, and metadata in one content model.",
+        "Placeholder highlight for a clear client/server split in a full-stack app."
+      ],
+      "architecture": [
+        "Placeholder architecture note for client rendering and protected mutations.",
+        "Placeholder architecture note for how post metadata is modeled.",
+        "Placeholder architecture note for media-aware content handling."
+      ],
+      "lessons": [
+        "Placeholder lesson learned about authentication changing the content workflow.",
+        "Placeholder lesson learned about keeping the content model simple."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/mern-memories-overview.svg",
+          "alt": "Poster-style overview graphic for the MERN Memories application.",
+          "caption": "Seed placeholder for the authenticated memories app overview."
+        }
       ]
     },
     {
       "slug": "yelpcamp",
       "title": "YelpCamp",
-      "summary": "Campground and review directory with authentication, image storage, geospatial mapping, and review workflows.",
-      "description": "Built as a richer multi-surface web application where public browsing, authenticated authoring, and review management all needed to coexist without collapsing into route chaos. The project combines server-rendered pages, map-driven location details, session-based auth, and media uploads to support a more credible public directory experience.",
+      "summary": "Placeholder summary for a directory-style application with reviews, auth, maps, and hosted media.",
+      "description": "Placeholder narrative copy for the YelpCamp case study. This entry is intentionally illustrative rather than final, but it gives the richer project detail model enough content to exercise long-form overview text and optional supporting sections.",
       "role": "Full stack developer",
       "year": 2022,
       "repoUrl": "https://github.com/PatrickFanella/yelpcamp",
@@ -48,16 +80,32 @@
       "sortOrder": 10,
       "tags": ["Node.js", "Express", "MongoDB", "EJS", "Authentication"],
       "highlights": [
-        "Supported campground CRUD, reviews, and user accounts inside one cohesive application.",
-        "Integrated map-based location workflows and hosted image storage for listing content.",
-        "Used session and cookie handling to protect authoring paths and review actions."
+        "Placeholder highlight for browse, create, and review flows in one app.",
+        "Placeholder highlight for map, media, or listing context.",
+        "Placeholder highlight for authenticated authoring and protected actions."
+      ],
+      "architecture": [
+        "Placeholder architecture note for route handling across public and protected screens.",
+        "Placeholder architecture note for integrating media or geospatial services.",
+        "Placeholder architecture note for session-based auth and authorization."
+      ],
+      "lessons": [
+        "Placeholder lesson learned about balancing public discovery with authenticated edits.",
+        "Placeholder lesson learned about designing for third-party integrations early."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/yelpcamp-overview.svg",
+          "alt": "Poster-style overview graphic for YelpCamp.",
+          "caption": "Seed placeholder for the directory, reviews, and mapping case study."
+        }
       ]
     },
     {
       "slug": "unique-id-rotating-logger",
       "title": "Unique ID Rotating Logger",
-      "summary": "Node logging utility that writes access logs, rotates them on schedule, compresses archives, and keeps retention bounded.",
-      "description": "A focused backend utility aimed at a common operational gap: request logs are useful only if they stay traceable and do not grow forever. The logger pairs unique request identifiers with rotating-file retention so lightweight Express services can preserve useful signal without letting local log storage sprawl out of control.",
+      "summary": "Placeholder summary for an operational utility focused on traceable logs and bounded retention.",
+      "description": "Placeholder narrative copy for the logging utility case study. The goal here is to validate that even non-visual projects can still supply overview text, architecture bullets, lessons learned, and media captions through the same seeded content model.",
       "role": "Backend developer",
       "year": 2021,
       "repoUrl": "https://github.com/PatrickFanella/Unique-ID-Rotating-Logger",
@@ -65,9 +113,25 @@
       "sortOrder": 11,
       "tags": ["Node.js", "Express", "Logging", "gzip", "Operations"],
       "highlights": [
-        "Generated unique request-level log identifiers for easier tracing during local debugging.",
-        "Compressed rotated log files and pruned older archives automatically.",
-        "Kept the implementation small enough to drop into lightweight Express services without extra infrastructure."
+        "Placeholder highlight for request-level log tracing.",
+        "Placeholder highlight for archive rotation, compression, or retention behavior.",
+        "Placeholder highlight for small-drop-in utility design."
+      ],
+      "architecture": [
+        "Placeholder architecture note for middleware or request interception.",
+        "Placeholder architecture note for rotation and archive handling.",
+        "Placeholder architecture note for keeping the integration surface small."
+      ],
+      "lessons": [
+        "Placeholder lesson learned about balancing debugging value with storage management.",
+        "Placeholder lesson learned about keeping a utility configurable but focused."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/unique-id-rotating-logger-overview.svg",
+          "alt": "Poster-style overview graphic for the Unique ID Rotating Logger utility.",
+          "caption": "Seed placeholder for the logging and retention utility case study."
+        }
       ]
     }
   ]

@@ -12,7 +12,7 @@ describe('ProjectDetailPage', () => {
 
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/patrickfanella-co')
 
-		expect(screen.getByRole('status')).toHaveTextContent(/fetching the case-study payload/i)
+		expect(screen.getByRole('status')).toHaveTextContent(/fetching the case study, supporting media, and architecture notes/i)
 	})
 
 	it('renders project detail data from the API', async () => {
@@ -21,10 +21,28 @@ describe('ProjectDetailPage', () => {
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/patrickfanella-co')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: /system choices that mattered/i })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: /what the next version would keep/i })).toBeInTheDocument()
 		expect(screen.getByRole('link', { name: /open repository/i })).toHaveAttribute(
 			'href',
 			featuredProject.repoUrl,
 		)
+	})
+
+	it('omits optional rich-content sections when the project does not provide them', async () => {
+		vi.spyOn(api, 'fetchProject').mockResolvedValue({
+			...featuredProject,
+			architecture: [],
+			lessons: [],
+			media: [],
+		})
+
+		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/patrickfanella-co')
+
+		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /system choices that mattered/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /visual references for the build/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /what the next version would keep/i })).not.toBeInTheDocument()
 	})
 
 	it('renders an intentional not-found route when the slug is missing', async () => {

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">MERN Memories overview placeholder</title>
+  <desc id="desc">Editorial placeholder art for the MERN Memories case study.</desc>
+  <rect width="1600" height="1000" fill="#09090b" />
+  <rect x="60" y="60" width="1480" height="880" fill="#121214" stroke="#3f3f46" stroke-width="12" />
+  <rect x="120" y="120" width="560" height="760" fill="#0f0f10" stroke="#5eead4" stroke-width="10" />
+  <rect x="740" y="120" width="680" height="220" fill="#bef264" />
+  <rect x="740" y="388" width="680" height="492" fill="#0f0f10" stroke="#c084fc" stroke-width="10" />
+  <circle cx="400" cy="300" r="110" fill="#bef264" />
+  <rect x="216" y="470" width="368" height="64" fill="#3f3f46" />
+  <rect x="216" y="566" width="240" height="64" fill="#3f3f46" />
+  <text x="780" y="240" fill="#09090b" font-family="'Space Grotesk', Arial, sans-serif" font-size="88" font-weight="700" letter-spacing="8">MERN</text>
+  <text x="780" y="332" fill="#09090b" font-family="'Space Grotesk', Arial, sans-serif" font-size="88" font-weight="700" letter-spacing="8">MEMORIES</text>
+  <text x="780" y="520" fill="#f4f4f5" font-family="'JetBrains Mono', monospace" font-size="34" letter-spacing="6">AUTH / MEDIA / CRUD / TAGS</text>
+  <text x="780" y="600" fill="#a1a1aa" font-family="'JetBrains Mono', monospace" font-size="24" letter-spacing="4">PLACEHOLDER VISUAL FOR FINAL PRODUCT SCREENSHOTS</text>
+</svg>

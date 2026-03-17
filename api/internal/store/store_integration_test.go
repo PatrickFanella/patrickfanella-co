@@ -86,6 +86,22 @@ func TestListProjectsAndGetProjectUseSeededPostgresData(t *testing.T) {
 		t.Fatalf("expected tags %v, got %v", sortedTags, first.Stack)
 	}
 
+	if strings.Join(first.Architecture, "|") != strings.Join(portfolio.Projects[0].Architecture, "|") {
+		t.Fatalf("expected architecture %v, got %v", portfolio.Projects[0].Architecture, first.Architecture)
+	}
+
+	if strings.Join(first.Lessons, "|") != strings.Join(portfolio.Projects[0].Lessons, "|") {
+		t.Fatalf("expected lessons %v, got %v", portfolio.Projects[0].Lessons, first.Lessons)
+	}
+
+	if len(first.Media) != len(portfolio.Projects[0].Media) {
+		t.Fatalf("expected %d media items, got %d", len(portfolio.Projects[0].Media), len(first.Media))
+	}
+
+	if len(first.Media) > 0 && first.Media[0].Src != portfolio.Projects[0].Media[0].Src {
+		t.Fatalf("expected first media src %q, got %q", portfolio.Projects[0].Media[0].Src, first.Media[0].Src)
+	}
+
 	_, err = st.GetProject(ctx, "does-not-exist")
 	if !strings.Contains(err.Error(), models.ErrProjectNotFound.Error()) {
 		t.Fatalf("expected project not found error, got %v", err)

@@ -29,6 +29,15 @@ type Project struct {
 	SortOrder   int      `json:"sortOrder"`
 	Tags        []string `json:"tags"`
 	Highlights  []string `json:"highlights"`
+	Architecture []string       `json:"architecture"`
+	Lessons      []string       `json:"lessons"`
+	Media        []ProjectMedia `json:"media"`
+}
+
+type ProjectMedia struct {
+	Src     string `json:"src"`
+	Alt     string `json:"alt"`
+	Caption string `json:"caption,omitempty"`
 }
 
 func DefaultSeedPath() (string, error) {
@@ -87,11 +96,16 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 	for _, project := range portfolio.Projects {
 		logger.Printf("seeding project slug=%s featured=%t", project.Slug, project.Featured)
 
+		mediaPayload, err := json.Marshal(project.Media)
+		if err != nil {
+			return err
+		}
+
 		var projectID int64
-		err := tx.QueryRow(
+		err = tx.QueryRow(
 			ctx,
-			`INSERT INTO projects (slug, title, summary, description, role, year, repo_url, live_url, featured, sort_order, highlights)
-			 VALUES ($1, $2, $3, $4, $5, $6, NULLIF($7, ''), NULLIF($8, ''), $9, $10, $11)
+			`INSERT INTO projects (slug, title, summary, description, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
+			 VALUES ($1, $2, $3, $4, $5, $6, NULLIF($7, ''), NULLIF($8, ''), $9, $10, $11, $12, $13, $14)
 			 ON CONFLICT (slug) DO UPDATE SET
 			   title = EXCLUDED.title,
 			   summary = EXCLUDED.summary,
@@ -102,7 +116,10 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			   live_url = EXCLUDED.live_url,
 			   featured = EXCLUDED.featured,
 			   sort_order = EXCLUDED.sort_order,
-			   highlights = EXCLUDED.highlights
+			   highlights = EXCLUDED.highlights,
+			   architecture = EXCLUDED.architecture,
+			   lessons_learned = EXCLUDED.lessons_learned,
+			   media = EXCLUDED.media
 			 RETURNING id`,
 			project.Slug,
 			project.Title,
@@ -115,6 +132,9 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			project.Featured,
 			project.SortOrder,
 			project.Highlights,
+			project.Architecture,
+			project.Lessons,
+			mediaPayload,
 		).Scan(&projectID)
 		if err != nil {
 			return err

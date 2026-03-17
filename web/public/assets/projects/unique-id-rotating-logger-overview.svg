@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Unique ID Rotating Logger overview placeholder</title>
+  <desc id="desc">Editorial placeholder art for the logging utility case study.</desc>
+  <rect width="1600" height="1000" fill="#09090b" />
+  <rect x="60" y="60" width="1480" height="880" fill="#121214" stroke="#3f3f46" stroke-width="12" />
+  <rect x="120" y="120" width="1360" height="140" fill="#0f0f10" stroke="#bef264" stroke-width="10" />
+  <rect x="120" y="320" width="420" height="560" fill="#0f0f10" stroke="#c084fc" stroke-width="10" />
+  <rect x="590" y="320" width="890" height="560" fill="#0f0f10" stroke="#5eead4" stroke-width="10" />
+  <text x="156" y="216" fill="#f4f4f5" font-family="'JetBrains Mono', monospace" font-size="38" letter-spacing="6">UNIQUE_ID_ROTATING_LOGGER</text>
+  <text x="180" y="470" fill="#f4f4f5" font-family="'JetBrains Mono', monospace" font-size="26" letter-spacing="4">REQ-0843</text>
+  <text x="180" y="540" fill="#a1a1aa" font-family="'JetBrains Mono', monospace" font-size="26" letter-spacing="4">ROTATE</text>
+  <text x="180" y="610" fill="#a1a1aa" font-family="'JetBrains Mono', monospace" font-size="26" letter-spacing="4">COMPRESS</text>
+  <text x="180" y="680" fill="#a1a1aa" font-family="'JetBrains Mono', monospace" font-size="26" letter-spacing="4">RETENTION</text>
+  <text x="630" y="520" fill="#bef264" font-family="'Space Grotesk', Arial, sans-serif" font-size="92" font-weight="700" letter-spacing="8">TRACEABLE</text>
+  <text x="630" y="628" fill="#f4f4f5" font-family="'Space Grotesk', Arial, sans-serif" font-size="92" font-weight="700" letter-spacing="8">LOG ROTATION</text>
+</svg>

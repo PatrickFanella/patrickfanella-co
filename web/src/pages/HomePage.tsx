@@ -18,19 +18,19 @@ const focusAreas = ['React Ecosystem', 'TypeScript', 'Go', 'PostgreSQL / SQL']
 
 const workingPrinciples = [
   {
-    title: 'Functional > decorative',
+    title: 'Project stories over résumé filler',
     description:
-      'We do not build interfaces to look pretty on Dribbble. We build them to surface information quickly and safely without taxing the user.',
+      'The clearest proof of judgment is shipped work, so the portfolio leads with case studies, trade-offs, and implementation detail.',
   },
   {
-    title: 'Strict mechanical sympathy',
+    title: 'Frontend and backend should agree',
     description:
-      'Understanding how the data actually moves and persists makes the frontend significantly faster and less prone to edge-case errors.',
+      'Typed contracts, explicit data states, and predictable persistence make the interface calmer and easier to trust.',
   },
   {
-    title: 'High signal documentation',
+    title: 'Documentation is part of the product',
     description:
-      'Writing things down forces clarity. A codebase with a dense, unambiguous trail of decisions is much easier to inherit.',
+      'Clear notes, seed content, and route-level intent keep a codebase easier to evolve than clever implementation alone.',
   },
 ]
 
@@ -56,7 +56,7 @@ export function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, ease: 'linear' }}
             >
-              Uncompromising UI. <br/><span className="text-accent-purple">Solid State Data.</span>
+        Project-first builds. <br/><span className="text-accent-purple">Full stack clarity.</span>
             </motion.h1>
 
             <motion.p
@@ -65,8 +65,7 @@ export function HomePage() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2, delay: 0.1, ease: 'linear' }}
             >
-              I build web interfaces that don't shift, glitch, or hesitate.
-              Backed by strict Go APIs and predictable data shapes.
+        I'm Patrick Fanella, a full stack developer focused on React interfaces, Go APIs, and the connective tissue that makes shipped products feel considered.
             </motion.p>
 
             <motion.div
@@ -88,10 +87,10 @@ export function HomePage() {
             <aside className={`${surfaceCardClass} bg-panel p-8`} aria-label="Operating philosophy">
               <p className={monoLabelClass}>Philosophy</p>
               <p className="mt-6 font-display text-[2.2rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                A good tool feels like an extension of intent.
+                Good software should explain itself under pressure.
               </p>
               <p className="mt-4 text-ink-soft leading-relaxed">
-                If the interface is drawing attention to itself, it is usually getting in the way of the task. Keep it fast, keep it high contrast, keep it out of the way.
+                The best builds balance editorial clarity on the surface with calm, predictable systems underneath. That is the through-line across the work collected here.
               </p>
             </aside>
 
@@ -117,14 +116,14 @@ export function HomePage() {
           <div>
             <SectionLabel>Verified builds</SectionLabel>
             <h2 className="mt-6 max-w-[15ch] font-display text-[clamp(3.5rem,5vw,5rem)] font-bold leading-[0.88] tracking-[-0.04em] text-heading uppercase">
-              Production case logic.
+              Selected case studies.
             </h2>
           </div>
 
           <div className="grid gap-4 border-2 border-stroke bg-surface p-6">
             <p className={monoLabelClass}>Access</p>
             <p className="max-w-120 text-[1.05rem] leading-relaxed text-ink-soft">
-              Every log is treated like internal documentation rather than marketing collateral.
+              Each project includes the outcome, the structure behind it, and the constraints that shaped the final implementation.
             </p>
             <Link className={textLinkClass} to="/projects">
               Open master archive ↗
@@ -212,10 +211,10 @@ export function HomePage() {
         <div>
           <SectionLabel>Methodology</SectionLabel>
           <h2 className="mt-6 font-display text-[clamp(3.5rem,5vw,5rem)] font-bold leading-[0.88] tracking-[-0.04em] text-heading uppercase">
-            No invisible magic.
+            How I like to work.
           </h2>
           <p className="mt-6 max-w-[40ch] text-[1.1rem] leading-relaxed text-ink-soft">
-            I don't trust systems that hide too much from the developer. Expose the seams, log the traffic, and enforce rigorous bounds on states.
+            The work tends to sit at the seam between interface craft and implementation discipline: build the right surface, then make the underlying system easy to reason about.
           </p>
         </div>
 

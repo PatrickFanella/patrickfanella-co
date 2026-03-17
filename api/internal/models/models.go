@@ -22,6 +22,15 @@ type Project struct {
 	RepoURL     string   `json:"repoUrl,omitempty"`
 	LiveURL     string   `json:"liveUrl,omitempty"`
 	Highlights  []string `json:"highlights"`
+	Architecture []string      `json:"architecture"`
+	Lessons      []string      `json:"lessons"`
+	Media        []ProjectMedia `json:"media"`
+}
+
+type ProjectMedia struct {
+	Src     string `json:"src"`
+	Alt     string `json:"alt"`
+	Caption string `json:"caption,omitempty"`
 }
 
 type ProjectListResponse struct {

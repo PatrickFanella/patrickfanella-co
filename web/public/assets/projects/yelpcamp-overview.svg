@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">YelpCamp overview placeholder</title>
+  <desc id="desc">Editorial placeholder art for the YelpCamp case study.</desc>
+  <rect width="1600" height="1000" fill="#09090b" />
+  <rect x="60" y="60" width="1480" height="880" fill="#121214" stroke="#3f3f46" stroke-width="12" />
+  <rect x="100" y="100" width="1400" height="180" fill="#c084fc" />
+  <rect x="100" y="324" width="900" height="576" fill="#0f0f10" stroke="#5eead4" stroke-width="10" />
+  <rect x="1040" y="324" width="460" height="576" fill="#0f0f10" stroke="#bef264" stroke-width="10" />
+  <path d="M220 760 L420 500 L560 650 L740 430 L900 760 Z" fill="#bef264" />
+  <circle cx="1268" cy="520" r="120" fill="#c084fc" />
+  <text x="136" y="214" fill="#09090b" font-family="'Space Grotesk', Arial, sans-serif" font-size="96" font-weight="700" letter-spacing="10">YELPCAMP</text>
+  <text x="1080" y="760" fill="#f4f4f5" font-family="'JetBrains Mono', monospace" font-size="30" letter-spacing="5">MAPS / REVIEWS / AUTH / MEDIA</text>
+</svg>

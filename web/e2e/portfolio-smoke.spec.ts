@@ -20,7 +20,7 @@ test('visitor can browse featured work and submit the contact form', async ({ pa
 		.getByLabel(/payload: message/i)
 		.fill('I would love to talk about one of your featured case studies.')
 
-	await page.getByRole('button', { name: /execute request/i }).click()
+	await page.getByRole('button', { name: /send message/i }).click()
 	await expect(page.getByRole('status')).toContainText('Thanks — your note has been saved.')
 })
 
