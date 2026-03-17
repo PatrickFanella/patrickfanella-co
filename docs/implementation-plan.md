@@ -99,6 +99,12 @@ Contact page with:
 - `db/migrations/` — SQL schema migrations
 - `docs/` — project and content planning
 
+## Current baseline status
+
+The repository already contains milestone-1 scaffold work across `web/`, `api/`, `db/`, and the root environment files.
+
+That scaffold is the baseline for implementation, not throwaway setup. Phase-0 alignment, audit notes, and initial contracts now live in `docs/phase-0-foundation.md`.
+
 ## Initial milestones
 
 ### Milestone 1 — project scaffold
@@ -181,10 +187,10 @@ Contact page with:
 
 ## Next implementation move
 
-Start by scaffolding:
+With the scaffold already in place, the next execution steps are:
 
-1. `web/` with Vite + React + TypeScript
-2. `api/` with Go + Chi
-3. root `.env` and `.env.example`
-4. initial route/page structure
-5. initial DB migration and local Postgres setup
+1. use `docs/phase-0-foundation.md` as the source of truth for assumptions, gaps, and contracts
+2. add a repeatable seed workflow for portfolio content
+3. connect API project endpoints to PostgreSQL
+4. connect the frontend pages to typed API data flows
+5. replace placeholder case studies with curated launch content

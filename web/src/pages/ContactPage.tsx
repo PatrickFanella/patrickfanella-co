@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { isApiClientError, submitContact } from '../lib/api'
 import { SectionLabel } from '../components/SectionLabel'
 import {
   inputClass,
@@ -20,16 +21,16 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080'
-
 export function ContactPage() {
   const [submitState, setSubmitState] = useState<'idle' | 'success' | 'error'>('idle')
   const [submitMessage, setSubmitMessage] = useState('')
 
   const {
+    clearErrors,
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -38,25 +39,28 @@ export function ContactPage() {
   const onSubmit = handleSubmit(async (values) => {
     setSubmitState('idle')
     setSubmitMessage('')
+    clearErrors()
 
     try {
-      const response = await fetch(`${apiBaseUrl}/api/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
-
-      if (!response.ok) {
-        throw new Error('The message could not be sent yet.')
-      }
+      const response = await submitContact(values)
 
       setSubmitState('success')
-      setSubmitMessage('Thanks — your note is on file.')
+      setSubmitMessage(response.message)
       reset()
-    } catch {
+    } catch (error) {
       setSubmitState('error')
+
+      if (isApiClientError(error)) {
+        if (error.fields) {
+          for (const [field, message] of Object.entries(error.fields)) {
+            setError(field as keyof ContactFormValues, { type: 'server', message })
+          }
+        }
+
+        setSubmitMessage(error.message)
+        return
+      }
+
       setSubmitMessage('The form is wired up, but the API is not reachable yet.')
     }
   })
@@ -69,8 +73,8 @@ export function ContactPage() {
           Let&apos;s talk about projects, freelance work, or collaboration.
         </h1>
         <p className={pageIntroClass}>
-          This starter form is connected to the Go API route and ready to store messages
-          once PostgreSQL is running locally.
+          This form now posts through the shared API client and surfaces server-side
+          validation or availability issues with clearer messaging.
         </p>
       </div>
 

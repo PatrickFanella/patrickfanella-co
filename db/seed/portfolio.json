@@ -1,0 +1,40 @@
+{
+  "projects": [
+    {
+      "slug": "case-study-one",
+      "title": "Case Study One",
+      "summary": "Starter placeholder for a polished project write-up with measurable outcomes and clear engineering decisions.",
+      "description": "Replace this with one of your strongest portfolio projects and expand it into a full case study.",
+      "role": "Full stack developer",
+      "year": 2026,
+      "featured": true,
+      "sortOrder": 1,
+      "tags": ["Go", "PostgreSQL", "React", "TypeScript"],
+      "highlights": ["Project framing", "Architecture rationale", "Delivery outcomes"]
+    },
+    {
+      "slug": "case-study-two",
+      "title": "Case Study Two",
+      "summary": "Second featured project slot for a product-focused build, redesign, or tool you are proud to showcase.",
+      "description": "Use this slot for a project with a stronger UI story, integration challenge, or cleaner design system.",
+      "role": "Frontend / product engineer",
+      "year": 2025,
+      "featured": true,
+      "sortOrder": 2,
+      "tags": ["Design Systems", "React", "Vite"],
+      "highlights": ["Responsive UI", "Interaction polish", "Technical clarity"]
+    },
+    {
+      "slug": "case-study-three",
+      "title": "Case Study Three",
+      "summary": "Third placeholder reserved for an API-heavy build, data project, or full-stack experiment worth explaining well.",
+      "description": "Swap in a backend-heavy project that helps reinforce your full-stack strengths.",
+      "role": "Backend / full stack developer",
+      "year": 2024,
+      "featured": false,
+      "sortOrder": 10,
+      "tags": ["Go", "PostgreSQL", "REST APIs"],
+      "highlights": ["Data modeling", "API design", "Production thinking"]
+    }
+  ]
+}
