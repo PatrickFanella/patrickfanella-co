@@ -23,7 +23,7 @@ func main() {
 
 	appStore, err := store.New(ctx, cfg.DatabaseURL)
 	if err != nil {
-		log.Printf("database unavailable, continuing with in-memory fallback: %v", err)
+		log.Printf("database unavailable, starting in degraded mode: project reads and contact submissions will return service-unavailable responses: %v", err)
 	}
 	defer appStore.Close()
 

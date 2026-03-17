@@ -2,19 +2,43 @@ package store
 
 import (
 	"context"
-	"sync"
-	"time"
+	"database/sql"
+	"errors"
 
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 
 	"patrickfanella.co/api/internal/models"
 )
 
 type Store struct {
-	db       *pgxpool.Pool
-	mu       sync.Mutex
-	contacts []models.ContactMessage
+	db *pgxpool.Pool
 }
+
+const projectSelect = `
+SELECT
+	p.slug,
+	p.title,
+	p.summary,
+	p.description,
+	p.role,
+	p.year,
+	p.featured,
+	p.repo_url,
+	p.live_url,
+	COALESCE(
+		ARRAY(
+			SELECT t.name
+			FROM project_tag_map ptm
+			JOIN project_tags t ON t.id = ptm.tag_id
+			WHERE ptm.project_id = p.id
+			ORDER BY t.name
+		),
+		ARRAY[]::TEXT[]
+	) AS stack,
+	COALESCE(p.highlights, ARRAY[]::TEXT[]) AS highlights
+FROM projects p
+`
 
 func New(ctx context.Context, databaseURL string) (*Store, error) {
 	if databaseURL == "" {
@@ -42,41 +66,67 @@ func (s *Store) Close() {
 	s.db.Close()
 }
 
+func (s *Store) DB() *pgxpool.Pool {
+	if s == nil {
+		return nil
+	}
+
+	return s.db
+}
+
 func (s *Store) DatabaseEnabled() bool {
 	return s != nil && s.db != nil
 }
 
-func (s *Store) ListProjects() []models.Project {
-	projects := make([]models.Project, len(models.StarterProjects))
-	copy(projects, models.StarterProjects)
-	return projects
-}
-
-func (s *Store) GetProject(slug string) (models.Project, bool) {
-	for _, project := range models.StarterProjects {
-		if project.Slug == slug {
-			return project, true
-		}
+func (s *Store) ListProjects(ctx context.Context) ([]models.Project, error) {
+	if s == nil || s.db == nil {
+		return nil, models.ErrDatabaseUnavailable
 	}
 
-	return models.Project{}, false
+	rows, err := s.db.Query(ctx, projectSelect+`
+ORDER BY p.featured DESC, p.sort_order ASC, p.year DESC, p.created_at DESC, p.slug ASC`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	projects := make([]models.Project, 0)
+	for rows.Next() {
+		project, err := scanProject(rows.Scan)
+		if err != nil {
+			return nil, err
+		}
+
+		projects = append(projects, project)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return projects, nil
+}
+
+func (s *Store) GetProject(ctx context.Context, slug string) (models.Project, error) {
+	if s == nil || s.db == nil {
+		return models.Project{}, models.ErrDatabaseUnavailable
+	}
+
+	project, err := scanProject(s.db.QueryRow(ctx, projectSelect+`WHERE p.slug = $1`, slug).Scan)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) || errors.Is(err, sql.ErrNoRows) {
+			return models.Project{}, models.ErrProjectNotFound
+		}
+
+		return models.Project{}, err
+	}
+
+	return project, nil
 }
 
 func (s *Store) SaveContact(ctx context.Context, input models.ContactInput) (models.ContactMessage, error) {
 	if s.db == nil {
-		s.mu.Lock()
-		defer s.mu.Unlock()
-
-		message := models.ContactMessage{
-			ID:        int64(len(s.contacts) + 1),
-			Name:      input.Name,
-			Email:     input.Email,
-			Message:   input.Message,
-			CreatedAt: time.Now().UTC(),
-		}
-
-		s.contacts = append(s.contacts, message)
-		return message, nil
+		return models.ContactMessage{}, models.ErrDatabaseUnavailable
 	}
 
 	message := models.ContactMessage{
@@ -99,4 +149,37 @@ func (s *Store) SaveContact(ctx context.Context, input models.ContactInput) (mod
 	}
 
 	return message, nil
+}
+
+func scanProject(scan func(dest ...any) error) (models.Project, error) {
+	var project models.Project
+	var repoURL sql.NullString
+	var liveURL sql.NullString
+
+	err := scan(
+		&project.Slug,
+		&project.Title,
+		&project.Summary,
+		&project.Description,
+		&project.Role,
+		&project.Year,
+		&project.Featured,
+		&repoURL,
+		&liveURL,
+		&project.Stack,
+		&project.Highlights,
+	)
+	if err != nil {
+		return models.Project{}, err
+	}
+
+	if repoURL.Valid {
+		project.RepoURL = repoURL.String
+	}
+
+	if liveURL.Valid {
+		project.LiveURL = liveURL.String
+	}
+
+	return project, nil
 }

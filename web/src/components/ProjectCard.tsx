@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import type { Project } from '../data/projects'
+import type { Project } from '../lib/api'
 import {
   monoLabelClass,
   secondaryButtonClass,
