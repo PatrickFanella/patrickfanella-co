@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { SectionLabel } from '../components/SectionLabel'
 import { projects } from '../data/projects'
 import {
+  monoLabelClass,
   pageIntroClass,
   pageSectionClass,
   pageTitleClass,
@@ -16,19 +17,21 @@ import {
 export function ProjectDetailPage() {
   const { slug } = useParams()
   const project = projects.find((item) => item.slug === slug)
+  const metaCardClass =
+    'grid gap-2 border-2 border-stroke bg-surface px-5 py-4 text-ink-soft'
 
   if (!project) {
     return (
       <section className={pageSectionClass}>
-        <SectionLabel>Project not found</SectionLabel>
-        <h1 className={`${pageTitleClass} mt-3`}>
-          This case study hasn&apos;t been filed yet.
+        <SectionLabel>Status 404</SectionLabel>
+        <h1 className={`${pageTitleClass} mt-6 uppercase`}>
+          Record not found.
         </h1>
         <p className={pageIntroClass}>
-          The route is working — it just needs a real project entry.
+          The directory path is valid, but the target record is unassigned or deleted.
         </p>
-        <Link className={`${primaryButtonClass} mt-6`} to="/projects">
-          Back to projects
+        <Link className={`${primaryButtonClass} mt-8`} to="/projects">
+          Return to index
         </Link>
       </section>
     )
@@ -36,59 +39,75 @@ export function ProjectDetailPage() {
 
   return (
     <section className={pageSectionClass}>
-      <SectionLabel>Case study</SectionLabel>
-
-      <div className="grid gap-6 md:grid-cols-2 md:items-start">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.85fr)] lg:items-start border-b-2 border-stroke pb-16 mb-8">
         <div>
-          <h1 className={`${pageTitleClass} mt-3`}>{project.title}</h1>
-          <p className={pageIntroClass}>{project.summary}</p>
+          <SectionLabel>{`Study / ${project.year}`}</SectionLabel>
+          <h1 className={`${pageTitleClass} mt-6 uppercase max-w-[14ch]`}>{project.title}</h1>
+          <p className={`${pageIntroClass} text-[1.2rem] text-ink`}>{project.summary}</p>
         </div>
-        <div className="grid justify-items-start gap-3">
-          <p className="grid min-w-40 gap-1.5 rounded-[18px] bg-[rgba(91,68,49,0.08)] px-4.5 py-4 text-ink-soft">
-            <span className="font-mono text-[0.78rem] uppercase tracking-[0.18em] text-ink-soft">
-              Role
-            </span>
-            {project.role}
-          </p>
-          <p className="grid min-w-40 gap-1.5 rounded-[18px] bg-[rgba(91,68,49,0.08)] px-4.5 py-4 text-ink-soft">
-            <span className="font-mono text-[0.78rem] uppercase tracking-[0.18em] text-ink-soft">
-              Year
-            </span>
-            {project.year}
-          </p>
-        </div>
+
+        <aside className={`${surfaceCardClass} h-fit bg-panel p-8`} aria-label="Project meta information">
+          <p className={monoLabelClass}>Parameters</p>
+          <div className="mt-6 grid gap-4">
+            <p className={metaCardClass}>
+              <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
+                Assignment
+              </span>
+              <span className="text-[1.05rem] text-heading">{project.role}</span>
+            </p>
+            <p className={metaCardClass}>
+              <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
+                Timestamp
+              </span>
+              <span className="text-[1.05rem] text-heading">{project.year}</span>
+            </p>
+          </div>
+
+          <div className="mt-8">
+            <h2 className="font-mono text-[0.8rem] font-bold uppercase tracking-[0.18em] text-accent-green mb-4">Infrastructure</h2>
+            <ul className={tagListClass}>
+              {project.stack.map((item) => (
+                <li key={item} className={tagClass}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
       </div>
 
-      <div className="mt-6 grid gap-6 md:grid-cols-[1.7fr_1fr]">
-        <article className={`${surfaceCardClass} p-6`}>
-          <h2 className="mb-2 text-2xl leading-tight text-heading">Overview</h2>
-          <p className="text-ink-soft">{project.description}</p>
+      <div className="mt-16 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.8fr)] lg:items-start">
+        <article className="pr-4 lg:pr-8">
+          <SectionLabel>Post-mortem</SectionLabel>
+          <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
+            Execution logic
+          </h2>
+          <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft max-w-[55ch]">
+            {project.description}
+          </p>
         </article>
 
-        <article className={`${surfaceCardClass} p-6`}>
-          <h2 className="mb-2 text-2xl leading-tight text-heading">Highlights</h2>
-          <ul className="grid gap-2.5 pl-5 text-ink-soft">
-            {project.highlights.map((highlight) => (
-              <li key={highlight}>{highlight}</li>
+        <article className={`${surfaceCardClass} bg-surface p-8`}>
+          <p className={monoLabelClass}>Critical Path</p>
+          <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft">
+            {project.highlights.map((highlight, index) => (
+              <li
+                key={highlight}
+                className="border-2 border-stroke bg-panel p-5 grid gap-3"
+              >
+                <p className="font-mono text-[0.85rem] font-bold text-accent-purple">0{index + 1}</p>
+                <p className="text-[1.05rem] leading-relaxed">{highlight}</p>
+              </li>
             ))}
           </ul>
         </article>
       </div>
 
-      <article className={`${surfaceCardClass} my-4.5 p-6`}>
-        <h2 className="mb-2 text-2xl leading-tight text-heading">Stack</h2>
-        <ul className={tagListClass}>
-          {project.stack.map((item) => (
-            <li key={item} className={tagClass}>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </article>
-
-      <Link className={textLinkClass} to="/projects">
-        ← Back to all projects
-      </Link>
+      <div className="mt-16 border-t-2 border-stroke pt-8">
+        <Link className={textLinkClass} to="/projects">
+          ← Terminate view
+        </Link>
+      </div>
     </section>
   )
 }

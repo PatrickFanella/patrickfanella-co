@@ -1,23 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --font-display: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-  --font-body: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  --color-paper: #ece5d8;
-  --color-surface: #fffaf2;
-  --color-ink: #2f241c;
-  --color-ink-soft: #625144;
-  --color-heading: #1e1712;
-  --color-accent: #7a3b28;
-  --color-accent-soft: rgba(122, 59, 40, 0.12);
-  --color-stroke: rgba(67, 47, 33, 0.18);
-  --color-success: #235e46;
-  --color-danger: #8f2f23;
+  --color-paper: #282a36;
+  --color-surface: #21222c;
+  --color-panel: #44475a;
+  --color-ink: #d7d7eb; /* Toned down from pure white / f8f8f2 */
+  --color-ink-soft: #a5a6b5;
+  --color-heading: #f8f8f2; /* Swapped pure white for Dracula foreground */
+  --color-stroke: #805bca; /* A deep purple shade replacing the grey-blue */
 
-  --radius-card: 22px;
-  --shadow-portfolio: 0 18px 50px rgba(37, 24, 16, 0.12);
+  --color-accent-green: #50fa7b;
+  --color-accent-purple: #bd93f9;
+  --color-accent-teal: #8be9fd;
+  --color-accent-pink: #ff79c6;
+  --color-accent-orange: #ffb86c;
+  --color-accent-yellow: #f1fa8c;
+
+  --color-success: #50fa7b;
+  --color-danger: #ff5555;
+
+  --radius-card: 0px;
+  --shadow-brutal: 4px 4px 0 0 var(--color-stroke);
+  --shadow-brutal-green: 4px 4px 0 0 var(--color-accent-green);
+  --shadow-brutal-purple: 4px 4px 0 0 var(--color-accent-purple);
 }
 
 @layer base {
@@ -27,6 +37,8 @@
 
   html {
     scroll-behavior: smooth;
+    background: var(--color-paper);
+    color-scheme: dark;
   }
 
   body {
@@ -37,26 +49,21 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: var(--font-body);
-    background:
-      radial-gradient(circle at top, rgba(255, 255, 255, 0.5), transparent 36%),
-      linear-gradient(180deg, #f1eadf 0%, #e7dece 100%);
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.2;
-    background-image:
-      linear-gradient(rgba(64, 45, 32, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(64, 45, 32, 0.025) 1px, transparent 1px);
-    background-size: 18px 18px;
+    background-color: var(--color-paper);
+    /* Subtle dot grid for brutalist terminal vibe */
+    background-image: radial-gradient(var(--color-stroke) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0;
   }
 
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  ::selection {
+    color: var(--color-paper);
+    background: var(--color-accent-green);
   }
 
   button,
@@ -65,8 +72,36 @@
     font: inherit;
   }
 
+  button {
+    cursor: pointer;
+  }
+
   #root {
     min-height: 100vh;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 50;
+    transform: translateY(-220%);
+    border: 1px solid var(--color-accent-green);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-brutal-green);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-heading);
+    transition: transform 150ms ease-out;
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+    outline: none;
   }
 }
 
@@ -80,4 +115,3 @@
     transition-duration: 0.01ms !important;
   }
 }
-
