@@ -10,7 +10,7 @@ describe('ProjectDetailPage', () => {
 	it('shows a loading state while the project detail request is in flight', () => {
 		vi.spyOn(api, 'fetchProject').mockReturnValue(new Promise(() => {}))
 
-		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/patrickfanella-co')
+		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
 		expect(screen.getByRole('status')).toHaveTextContent(/fetching the case study, supporting media, and architecture notes/i)
 	})
@@ -18,7 +18,7 @@ describe('ProjectDetailPage', () => {
 	it('renders project detail data from the API', async () => {
 		vi.spyOn(api, 'fetchProject').mockResolvedValue(featuredProject)
 
-		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/patrickfanella-co')
+		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: /system choices that mattered/i })).toBeInTheDocument()
@@ -37,7 +37,7 @@ describe('ProjectDetailPage', () => {
 			media: [],
 		})
 
-		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/patrickfanella-co')
+		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: /system choices that mattered/i })).not.toBeInTheDocument()
@@ -60,7 +60,7 @@ describe('ProjectDetailPage', () => {
 			new api.ApiClientError(500, 'internal_error', 'Unable to load portfolio data.'),
 		)
 
-		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/patrickfanella-co')
+		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
 		expect(await screen.findByRole('heading', { name: /unable to load record/i })).toBeInTheDocument()
 		expect(screen.getByRole('button', { name: /retry lookup/i })).toBeInTheDocument()

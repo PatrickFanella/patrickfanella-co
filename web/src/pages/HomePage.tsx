@@ -14,23 +14,23 @@ import {
 } from '../lib/styles'
 import { useProjects } from '../lib/useProjects'
 
-const focusAreas = ['React Ecosystem', 'TypeScript', 'Go', 'PostgreSQL / SQL']
+const focusAreas = ['Go / Backend Systems', 'React / TypeScript', 'AI / ML Pipelines', 'Infrastructure / DevOps']
 
 const workingPrinciples = [
   {
-    title: 'Project stories over résumé filler',
+    title: 'Shipped products over side projects',
     description:
-      'The clearest proof of judgment is shipped work, so the portfolio leads with case studies, trade-offs, and implementation detail.',
+      'Every featured project has been deployed to production with monitoring, CI/CD, and real users. The case studies include architecture decisions, trade-offs, and the constraints that shaped the final result.',
   },
   {
-    title: 'Frontend and backend should agree',
+    title: 'Full stack means the whole stack',
     description:
-      'Typed contracts, explicit data states, and predictable persistence make the interface calmer and easier to trust.',
+      'From Solidity smart contracts to Kubernetes orchestration, GPU worker queues to browser extensions. The work spans languages, runtimes, and infrastructure layers because real products require it.',
   },
   {
-    title: 'Documentation is part of the product',
+    title: 'Production engineering is not optional',
     description:
-      'Clear notes, seed content, and route-level intent keep a codebase easier to evolve than clever implementation alone.',
+      'Load testing, security audits, observability, and horizontal scaling are part of the build, not afterthoughts. The projects here include Prometheus dashboards, k6 benchmarks, and Slither contract audits.',
   },
 ]
 
@@ -56,7 +56,7 @@ export function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, ease: 'linear' }}
             >
-        Project-first builds. <br/><span className="text-accent-purple">Full stack clarity.</span>
+        Products that<span className="text-accent-green"> ship.</span> <br/>Systems that<span className="text-accent-teal"> scale.</span>
             </motion.h1>
 
             <motion.p
@@ -65,7 +65,7 @@ export function HomePage() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2, delay: 0.1, ease: 'linear' }}
             >
-        I'm Patrick Fanella, a full stack developer focused on React interfaces, Go APIs, and the connective tissue that makes shipped products feel considered.
+        I'm <span className="text-accent-pink">Patrick Fanella</span>. I build production systems across Go, React, Python, and TypeScript. From AI agent platforms and GPU transcription pipelines to 3D graph visualization and on-chain content provenance.
             </motion.p>
 
             <motion.div
@@ -87,10 +87,10 @@ export function HomePage() {
             <aside className={`${surfaceCardClass} bg-panel p-8`} aria-label="Operating philosophy">
               <p className={monoLabelClass}>Philosophy</p>
               <p className="mt-6 font-display text-[2.2rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                Good software should explain itself under pressure.
+                Build the hard thing, then make it legible.
               </p>
               <p className="mt-4 text-ink-soft leading-relaxed">
-                The best builds balance editorial clarity on the surface with calm, predictable systems underneath. That is the through-line across the work collected here.
+                The interesting problems live where systems meet; search pipelines feeding frontends, AI agents coordinating through WebSockets, smart contracts verified by browser extensions. That is where the work lives.
               </p>
             </aside>
 
@@ -123,7 +123,7 @@ export function HomePage() {
           <div className="grid gap-4 border-2 border-stroke bg-surface p-6">
             <p className={monoLabelClass}>Access</p>
             <p className="max-w-120 text-[1.05rem] leading-relaxed text-ink-soft">
-              Each project includes the outcome, the structure behind it, and the constraints that shaped the final implementation.
+              Each case study covers the shipped result, the architecture behind it, and the engineering trade-offs that shaped the final system.
             </p>
             <Link className={textLinkClass} to="/projects">
               Open master archive ↗
@@ -214,7 +214,7 @@ export function HomePage() {
             How I like to work.
           </h2>
           <p className="mt-6 max-w-[40ch] text-[1.1rem] leading-relaxed text-ink-soft">
-            The work tends to sit at the seam between interface craft and implementation discipline: build the right surface, then make the underlying system easy to reason about.
+            I gravitate toward problems that cross system boundaries; the seam between a GPU worker and a search index, between an AI agent and a real-time chat interface, between a smart contract and a browser extension.
           </p>
         </div>
 

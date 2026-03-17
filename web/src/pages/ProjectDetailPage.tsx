@@ -194,7 +194,7 @@ export function ProjectDetailPage() {
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
-              Seed-backed placeholders now keep asset references stable until final screenshots are ready.
+              Architecture diagrams, interface captures, and supporting visuals for the build.
             </p>
           </div>
 

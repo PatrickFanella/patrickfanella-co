@@ -67,8 +67,17 @@ func TestListProjectsAndGetProjectUseSeededPostgresData(t *testing.T) {
 		t.Fatalf("expected %d projects, got %d", len(portfolio.Projects), len(projects))
 	}
 
-	if !projects[0].Featured || !projects[1].Featured || projects[2].Featured {
-		t.Fatalf("unexpected featured ordering: %#v", projects)
+	featuredCount := 0
+	for _, p := range projects {
+		if p.Featured {
+			featuredCount++
+		}
+	}
+	if featuredCount != 4 {
+		t.Fatalf("expected 4 featured projects, got %d", featuredCount)
+	}
+	if !projects[0].Featured {
+		t.Fatalf("expected first project to be featured, got %#v", projects[0])
 	}
 
 	first, err := st.GetProject(ctx, portfolio.Projects[0].Slug)

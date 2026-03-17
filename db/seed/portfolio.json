@@ -1,136 +1,268 @@
 {
   "projects": [
     {
-      "slug": "patrickfanella-co",
-      "title": "Patrick Fanella Portfolio",
-      "summary": "Placeholder summary for the portfolio case study, used to exercise the richer phase-3 project model.",
-      "description": "Placeholder narrative copy for the portfolio project. This entry exists to prove that the expanded detail layout can render longer overview text, richer supporting sections, and seed-driven content without requiring final launch copy yet.",
-      "role": "Full stack developer",
-      "year": 2026,
-      "repoUrl": "https://github.com/PatrickFanella/patrickfanella-co",
-      "featured": true,
-      "sortOrder": 1,
-      "tags": ["React", "TypeScript", "Go", "PostgreSQL", "Vite"],
-      "highlights": [
-        "Placeholder highlight describing a product or engineering outcome.",
-        "Placeholder highlight showing how a second bullet should read in the UI.",
-        "Placeholder highlight confirming the seeded detail card can render a short list cleanly."
-      ],
-      "architecture": [
-        "Placeholder architecture note for the frontend/API/data relationship.",
-        "Placeholder architecture note for a persistence or contract decision.",
-        "Placeholder architecture note confirming the section supports multiple bullets."
-      ],
-      "lessons": [
-        "Placeholder lesson learned about what to keep or change in a future version.",
-        "Placeholder lesson learned that demonstrates a second reflective bullet."
-      ],
-      "media": [
-        {
-          "src": "/assets/projects/patrickfanella-co-overview.svg",
-          "alt": "Poster-style overview graphic for the Patrick Fanella portfolio build.",
-          "caption": "Seed placeholder for the portfolio case study hero asset."
-        }
-      ]
-    },
-    {
-      "slug": "mern-memories",
-      "title": "MERN Stack Memories App",
-      "summary": "Placeholder summary for a media-rich CRUD application with auth and tagging.",
-      "description": "Placeholder narrative copy for the MERN case study. This seed entry stands in for the eventual project story while still giving the page enough structure to validate richer summaries, highlights, architecture bullets, lessons, and media references.",
+      "slug": "clpr",
+      "title": "Clpr",
+      "summary": "Full-stack Twitch clip curation platform with community voting, hybrid search, and a React Native mobile app — deployed to production at clpr.tv.",
+      "description": "Clpr started as a way to surface the best Twitch clips without relying on platform algorithms. The result is a production-grade content platform with Reddit-style karma voting, hybrid search combining BM25 full-text with semantic vector matching, user collections, and social features. The system runs a Go API backed by PostgreSQL, Redis, and OpenSearch, with a React web client and a React Native mobile app built on Expo. Infrastructure is containerized with Docker, orchestrated via Kubernetes, monitored through Prometheus and Grafana, and deployed through GitHub Actions CI/CD pipelines.",
       "role": "Full stack developer",
       "year": 2025,
-      "repoUrl": "https://github.com/PatrickFanella/Mern-memories",
-      "liveUrl": "https://ornate-meringue-0210b3.netlify.app/posts",
+      "repoUrl": "https://github.com/subculture-collective/clpr",
+      "liveUrl": "https://clpr.tv",
+      "featured": true,
+      "sortOrder": 1,
+      "tags": ["Go", "React", "React Native", "PostgreSQL", "Redis", "OpenSearch", "Kubernetes", "TypeScript"],
+      "highlights": [
+        "Shipped a production web and mobile client with community voting, collections, and hybrid BM25 + semantic vector search.",
+        "Built a Go API layer handling auth, content moderation, and real-time feed composition across PostgreSQL, Redis, and OpenSearch.",
+        "Deployed to a VPS with Kubernetes orchestration, Prometheus/Grafana monitoring, and automated CI/CD through GitHub Actions."
+      ],
+      "architecture": [
+        "Go API with Gin serving both the React web client and the React Native Expo mobile app through a shared JSON contract.",
+        "Hybrid search pipeline combining OpenSearch BM25 full-text scoring with semantic vector embeddings for relevance ranking.",
+        "PostgreSQL 17 as the primary store, Redis 8 for caching and session management, OpenSearch 2.11 for search indexing — all containerized and orchestrated with Kubernetes."
+      ],
+      "lessons": [
+        "Hybrid search is worth the infrastructure cost — users consistently found clips that pure text search missed, and the BM25 + vector blend outperformed either approach alone.",
+        "Running a mobile and web client against the same API forced cleaner contract discipline early, which paid off when adding features later."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/clpr-overview.svg",
+          "alt": "Architecture diagram showing the Clpr platform stack: Go API, React web, React Native mobile, PostgreSQL, Redis, and OpenSearch.",
+          "caption": "Full platform architecture spanning web, mobile, and search infrastructure."
+        }
+      ]
+    },
+    {
+      "slug": "subcorp",
+      "title": "Subcorp",
+      "summary": "Self-hosted multi-agent AI system where six autonomous agents propose, debate, and execute missions through real-time WebSocket chat.",
+      "description": "Subcorp is an experiment in autonomous AI coordination. Six named agents with distinct personalities and access controls autonomously propose missions, debate approaches in roundtable conversations, and execute tasks using a shared toolbox. The system runs on Next.js 16 with React 19, backed by PostgreSQL 16 with pgvector across 32 tables. Agents communicate through real-time WebSocket connections in the Sanctum chat interface, which supports @mention routing, whisper channels, and structured roundtable modes. Each agent has access to sandboxed tools including web search, bash execution, file I/O, and semantic memory retrieval — all running in an isolated Docker container.",
+      "role": "Full stack developer",
+      "year": 2026,
+      "repoUrl": "https://github.com/subculture-collective/subcorp",
+      "liveUrl": "https://subcorp.subcult.tv",
       "featured": true,
       "sortOrder": 2,
-      "tags": ["React", "Node.js", "MongoDB", "Authentication"],
+      "tags": ["Next.js", "React", "TypeScript", "PostgreSQL", "WebSocket", "Docker", "AI Agents", "pgvector"],
       "highlights": [
-        "Placeholder highlight for an authenticated create/read/update/delete workflow.",
-        "Placeholder highlight for handling image, text, and metadata in one content model.",
-        "Placeholder highlight for a clear client/server split in a full-stack app."
+        "Deployed a live multi-agent system where six AI agents autonomously propose, debate, and execute missions with minimal human intervention.",
+        "Built a real-time Sanctum chat interface with WebSocket-driven @mention routing, whisper channels, and structured roundtable conversation modes.",
+        "Designed a sandboxed toolbox container giving agents access to bash, Python, Node.js, web search, file I/O, and semantic memory — isolated from the host system."
       ],
       "architecture": [
-        "Placeholder architecture note for client rendering and protected mutations.",
-        "Placeholder architecture note for how post metadata is modeled.",
-        "Placeholder architecture note for media-aware content handling."
+        "Next.js 16 with React 19 server and client components, PostgreSQL 16 with pgvector for semantic memory across 32 tables, OpenRouter SDK for LLM orchestration.",
+        "WebSocket layer handles real-time agent-to-agent and agent-to-user communication with structured message routing, @mention parsing, and whisper privacy.",
+        "Sandboxed Docker container provides agents with bash, Python, and Node.js execution, web search, and file I/O — network-isolated from the host with resource limits."
       ],
       "lessons": [
-        "Placeholder lesson learned about authentication changing the content workflow.",
-        "Placeholder lesson learned about keeping the content model simple."
+        "Agent personality and access control boundaries matter as much as the underlying model — the same LLM produces radically different outputs when given distinct identities, relationship dynamics, and tool permissions.",
+        "Real-time multi-agent chat requires careful message ordering and conflict resolution — race conditions between agents proposing simultaneous actions were the hardest bugs to debug."
       ],
       "media": [
         {
-          "src": "/assets/projects/mern-memories-overview.svg",
-          "alt": "Poster-style overview graphic for the MERN Memories application.",
-          "caption": "Seed placeholder for the authenticated memories app overview."
+          "src": "/assets/projects/subcorp-overview.svg",
+          "alt": "Diagram of the Subcorp agent system: six named agents communicating through the Sanctum WebSocket interface with a shared sandboxed toolbox.",
+          "caption": "Multi-agent coordination architecture with real-time WebSocket chat and sandboxed execution."
         }
       ]
     },
     {
-      "slug": "yelpcamp",
-      "title": "YelpCamp",
-      "summary": "Placeholder summary for a directory-style application with reviews, auth, maps, and hosted media.",
-      "description": "Placeholder narrative copy for the YelpCamp case study. This entry is intentionally illustrative rather than final, but it gives the richer project detail model enough content to exercise long-form overview text and optional supporting sections.",
+      "slug": "transcript-create",
+      "title": "Transcript Create",
+      "summary": "GPU-accelerated transcription SaaS with Whisper AI, speaker diarization, full-text search, and published client SDKs for Python and TypeScript.",
+      "description": "Transcript Create turns YouTube videos and channels into searchable, exportable transcripts. A FastAPI backend coordinates GPU-accelerated Whisper workers for transcription with optional pyannote speaker diarization. Transcripts are stored in PostgreSQL and indexed in OpenSearch for full-text search, with export support for SRT, VTT, and PDF formats. The system includes OAuth login, Stripe billing with free and pro tiers, a Vite + React frontend, Prometheus and Grafana monitoring, and published client SDKs for both Python and TypeScript. Workers scale horizontally using a Postgres SKIP LOCKED queue pattern, and the full stack ships as Docker images published to GHCR.",
       "role": "Full stack developer",
-      "year": 2022,
-      "repoUrl": "https://github.com/PatrickFanella/yelpcamp",
-      "liveUrl": "https://camped.herokuapp.com/",
-      "featured": false,
-      "sortOrder": 10,
-      "tags": ["Node.js", "Express", "MongoDB", "EJS", "Authentication"],
+      "year": 2025,
+      "repoUrl": "https://github.com/subculture-collective/transcript-create",
+      "featured": true,
+      "sortOrder": 3,
+      "tags": ["Python", "FastAPI", "React", "PostgreSQL", "OpenSearch", "Whisper AI", "Docker", "TypeScript"],
       "highlights": [
-        "Placeholder highlight for browse, create, and review flows in one app.",
-        "Placeholder highlight for map, media, or listing context.",
-        "Placeholder highlight for authenticated authoring and protected actions."
+        "Built a GPU-accelerated Whisper transcription pipeline with optional pyannote speaker diarization, scaling horizontally via Postgres SKIP LOCKED worker queues.",
+        "Published client SDKs for Python and TypeScript, giving third-party developers a typed interface to the transcription and search API.",
+        "Shipped full SaaS infrastructure including OAuth login, Stripe billing with tiered plans, and 255 Playwright E2E tests across the stack."
       ],
       "architecture": [
-        "Placeholder architecture note for route handling across public and protected screens.",
-        "Placeholder architecture note for integrating media or geospatial services.",
-        "Placeholder architecture note for session-based auth and authorization."
+        "FastAPI backend orchestrating GPU Whisper workers (ROCm/CUDA) through a Postgres SKIP LOCKED queue — workers scale independently and pick up jobs without coordination overhead.",
+        "PostgreSQL as the primary store with OpenSearch indexing for full-text transcript search across channels, with SRT/VTT/PDF export pipelines.",
+        "Stripe billing integration with free and pro tiers, OAuth login, Prometheus/Grafana monitoring, and Docker images published to GHCR for reproducible deployments."
       ],
       "lessons": [
-        "Placeholder lesson learned about balancing public discovery with authenticated edits.",
-        "Placeholder lesson learned about designing for third-party integrations early."
+        "The SKIP LOCKED queue pattern in Postgres eliminated the need for a separate message broker — one fewer service to operate, and the transactional guarantees simplified error recovery.",
+        "Publishing typed SDKs early forced the API contract to stabilize faster than internal-only consumption would have — external consumers are unforgiving about breaking changes."
       ],
       "media": [
         {
-          "src": "/assets/projects/yelpcamp-overview.svg",
-          "alt": "Poster-style overview graphic for YelpCamp.",
-          "caption": "Seed placeholder for the directory, reviews, and mapping case study."
+          "src": "/assets/projects/transcript-create-overview.svg",
+          "alt": "Pipeline diagram showing video ingestion, GPU Whisper transcription, speaker diarization, and full-text search indexing.",
+          "caption": "Transcription pipeline from video ingestion through GPU processing to searchable, exportable output."
         }
       ]
     },
     {
-      "slug": "unique-id-rotating-logger",
-      "title": "Unique ID Rotating Logger",
-      "summary": "Placeholder summary for an operational utility focused on traceable logs and bounded retention.",
-      "description": "Placeholder narrative copy for the logging utility case study. The goal here is to validate that even non-visual projects can still supply overview text, architecture bullets, lessons learned, and media captions through the same seeded content model.",
-      "role": "Backend developer",
-      "year": 2021,
-      "repoUrl": "https://github.com/PatrickFanella/Unique-ID-Rotating-Logger",
-      "featured": false,
-      "sortOrder": 11,
-      "tags": ["Node.js", "Express", "Logging", "gzip", "Operations"],
+      "slug": "clustr",
+      "title": "Clustr",
+      "summary": "Reddit community analysis platform with graph algorithms, Louvain community detection, and interactive 3D/2D network visualization.",
+      "description": "Clustr crawls Reddit to map relationships between communities, then visualizes the results as interactive network graphs. A Go backend handles API serving, subreddit crawling, and graph precalculation. Data is stored in PostgreSQL and queried through sqlc-generated type-safe code. The frontend renders 3D and 2D force-directed graphs using WebGL, with dashboard and community detection views powered by the Louvain algorithm. The project includes Prometheus and Grafana monitoring, k6 load testing, security audits, and performance profiling — the kind of production engineering depth that separates analysis tools from demo projects.",
+      "role": "Full stack developer",
+      "year": 2025,
+      "repoUrl": "https://github.com/subculture-collective/clustr",
+      "featured": true,
+      "sortOrder": 4,
+      "tags": ["Go", "React", "PostgreSQL", "WebGL", "Graph Algorithms", "TypeScript", "Docker"],
       "highlights": [
-        "Placeholder highlight for request-level log tracing.",
-        "Placeholder highlight for archive rotation, compression, or retention behavior.",
-        "Placeholder highlight for small-drop-in utility design."
+        "Implemented Louvain community detection to identify clusters of related subreddits from crawled relationship data, surfacing non-obvious connections between communities.",
+        "Built interactive 3D and 2D force-directed graph visualizations using WebGL, with dashboard views and drill-down into detected community clusters.",
+        "Applied production engineering discipline: k6 load testing, security auditing, performance profiling, and Prometheus/Grafana monitoring across the full stack."
       ],
       "architecture": [
-        "Placeholder architecture note for middleware or request interception.",
-        "Placeholder architecture note for rotation and archive handling.",
-        "Placeholder architecture note for keeping the integration surface small."
+        "Go backend split into three concerns: API serving, subreddit crawling, and graph precalculation — each independently deployable and monitored.",
+        "PostgreSQL with sqlc for type-safe query generation, supporting the graph data model for subreddit nodes, relationship edges, and precomputed community assignments.",
+        "Vite + React frontend rendering WebGL force-directed graphs with multiple visualization modes (3D, 2D, dashboard, community detection) and real-time graph interaction."
       ],
       "lessons": [
-        "Placeholder lesson learned about balancing debugging value with storage management.",
-        "Placeholder lesson learned about keeping a utility configurable but focused."
+        "Precalculating graph relationships was essential — real-time Louvain detection on the full dataset was too slow for interactive use, but batch precalculation made the frontend feel instant.",
+        "Load testing with k6 early in development caught a connection pool exhaustion issue that would have been painful to debug in production with real crawl traffic."
       ],
       "media": [
         {
-          "src": "/assets/projects/unique-id-rotating-logger-overview.svg",
-          "alt": "Poster-style overview graphic for the Unique ID Rotating Logger utility.",
-          "caption": "Seed placeholder for the logging and retention utility case study."
+          "src": "/assets/projects/clustr-overview.svg",
+          "alt": "3D network graph visualization showing interconnected Reddit communities with color-coded Louvain clusters.",
+          "caption": "Interactive 3D force-directed graph with Louvain community detection overlays."
+        }
+      ]
+    },
+    {
+      "slug": "internet-id",
+      "title": "Internet-ID",
+      "summary": "Content provenance system anchoring creator ownership on-chain via Solidity smart contracts, IPFS storage, and a browser extension for one-click verification.",
+      "description": "Internet-ID addresses content authenticity in the AI era by letting creators hash their work, sign provenance manifests, store them off-chain on IPFS, and register ownership on-chain through a Solidity smart contract deployed to L2. The system includes a Next.js App Router frontend, an Express API with Prisma ORM, BullMQ async processing with Redis caching, and a browser extension for Chrome, Firefox, and Safari that enables one-click verification on YouTube and Twitter. Smart contracts are audited with Slither, the frontend meets WCAG 2.1 AA accessibility standards, and the full stack is tested through backend, web, and E2E CI pipelines.",
+      "role": "Full stack developer",
+      "year": 2025,
+      "repoUrl": "https://github.com/subculture-collective/internet-id",
+      "featured": false,
+      "sortOrder": 5,
+      "tags": ["Solidity", "Next.js", "TypeScript", "IPFS", "Express", "PostgreSQL", "Browser Extension", "Web3"],
+      "highlights": [
+        "Designed a content provenance pipeline: hash content, sign a manifest, pin to IPFS, and register the claim on-chain through a Solidity smart contract on L2.",
+        "Built a cross-browser extension (Chrome, Firefox, Safari) for one-click ownership verification directly on YouTube and Twitter pages.",
+        "Passed Slither security audits on the ContentRegistry smart contract and met WCAG 2.1 AA accessibility standards on the frontend."
+      ],
+      "architecture": [
+        "Solidity ContentRegistry contract on L2 with Hardhat + TypeScript toolchain, Ethers v6 integration, and Slither static analysis for security auditing.",
+        "Next.js App Router frontend with NextAuth, Express API with Prisma ORM, BullMQ async queue for IPFS pinning, and Redis caching for verification lookups.",
+        "Browser extension supporting Chrome, Firefox, and Safari — injecting verification UI into YouTube and Twitter pages with cross-origin message passing to the API."
+      ],
+      "lessons": [
+        "IPFS pinning reliability varies significantly across providers — abstracting behind Infura, Web3.Storage, and Pinata with automatic failover was necessary for production trust.",
+        "Browser extension development across three engines (Chromium, Gecko, WebKit) required more platform-specific code than expected — a shared core with thin platform adapters was the right pattern."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/internet-id-overview.svg",
+          "alt": "Flow diagram showing content hashing, IPFS storage, on-chain registration, and browser extension verification.",
+          "caption": "Content provenance pipeline from creator signing through on-chain anchoring to browser-based verification."
+        }
+      ]
+    },
+    {
+      "slug": "soundhash",
+      "title": "SoundHash",
+      "summary": "Audio fingerprinting system using spectral analysis to match clips across social media, with a FastAPI backend and automated bot integration.",
+      "description": "SoundHash identifies audio content by processing video and audio through spectral analysis to create compact fingerprint vectors, then matches them against a database of known recordings. The system uses STFT (Short-Time Fourier Transform) with peak detection to generate fingerprints that are robust to compression, re-encoding, and partial clips. A FastAPI REST API handles ingestion and matching, PostgreSQL stores fingerprints and metadata, and automated bots for Twitter and Reddit can detect and flag matched content. The stack includes JWT authentication, Swagger/ReDoc documentation, an enterprise security layer with WAF and DDoS protection, and an email notification system for match alerts.",
+      "role": "Backend developer",
+      "year": 2025,
+      "repoUrl": "https://github.com/subculture-collective/soundhash",
+      "featured": false,
+      "sortOrder": 6,
+      "tags": ["Python", "FastAPI", "PostgreSQL", "Signal Processing", "DSP", "Authentication"],
+      "highlights": [
+        "Built an audio fingerprinting pipeline using STFT spectral analysis and peak detection, producing compact vectors robust to compression, re-encoding, and partial clips.",
+        "Integrated automated Twitter and Reddit bots that detect and flag matched audio content across social media platforms.",
+        "Implemented enterprise security features including WAF, DDoS protection, threat detection, and automated email notifications for match alerts."
+      ],
+      "architecture": [
+        "STFT-based spectral analysis extracts frequency peaks, which are hashed into compact fingerprint vectors and stored in PostgreSQL for efficient similarity matching.",
+        "FastAPI REST API with JWT auth, Swagger/ReDoc documentation, and a processing pipeline that handles audio extraction from video, fingerprint generation, and database matching.",
+        "Social media bot layer integrating Twitter and Reddit APIs for automated content monitoring, with configurable matching thresholds and alert routing."
+      ],
+      "lessons": [
+        "Fingerprint robustness matters more than precision — a fingerprint that survives re-encoding and compression catches more real-world matches than one optimized for exact-match accuracy.",
+        "Rate limiting on social media APIs shaped the bot architecture more than the audio processing did — batching and backoff strategies were critical for sustained operation."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/soundhash-overview.svg",
+          "alt": "Pipeline diagram showing audio extraction, STFT spectral analysis, fingerprint generation, and cross-platform matching.",
+          "caption": "Audio fingerprinting pipeline from ingestion through spectral analysis to social media matching."
+        }
+      ]
+    },
+    {
+      "slug": "jury-rigged",
+      "title": "Jury-Rigged",
+      "summary": "Real-time AI courtroom simulation with multi-agent roles, Ace Attorney-style PixiJS rendering, deterministic replay, and Twitch audience interaction.",
+      "description": "Jury-Rigged is a real-time courtroom simulation where AI agents play judge, prosecutor, defense attorney, witnesses, and bailiff. Cases progress through deterministic phases with live SSE streaming, and a jury system handles voting and deliberation. The visual layer renders proceedings in an Ace Attorney-style format using PixiJS, while an operator dashboard built with React and Vite controls case flow. Every session is recorded as NDJSON for deterministic replay, and Twitch integration lets audiences interact through chat commands like !press and !objection. The system runs on Node.js with TypeScript and Express, using OpenRouter for LLM orchestration.",
+      "role": "Full stack developer",
+      "year": 2026,
+      "repoUrl": "https://github.com/subculture-collective/jury-rigged",
+      "featured": false,
+      "sortOrder": 7,
+      "tags": ["TypeScript", "Node.js", "React", "PixiJS", "WebSocket", "AI Agents", "Twitch API"],
+      "highlights": [
+        "Built a multi-agent courtroom simulation with deterministic phase progression, live SSE streaming, and jury voting and deliberation mechanics.",
+        "Rendered proceedings in Ace Attorney visual style using PixiJS, with character animations, dialogue boxes, and courtroom transitions.",
+        "Integrated Twitch chat commands (!press, !objection) for real-time audience participation, plus NDJSON recording for deterministic session replay."
+      ],
+      "architecture": [
+        "Node.js + TypeScript + Express backend orchestrating multiple AI agents through OpenRouter, with deterministic phase state machines governing case progression.",
+        "PixiJS rendering layer producing Ace Attorney-style courtroom visuals — character sprites, dialogue overlays, and animated transitions driven by the agent output stream.",
+        "Dual interface: a viewer-facing stream with PixiJS rendering and Twitch chat integration, plus an operator dashboard (React + Vite) for case management and phase control."
+      ],
+      "lessons": [
+        "Deterministic replay from NDJSON recordings was invaluable for debugging agent behavior — being able to replay exact sequences without LLM variance made the multi-agent interactions far easier to tune.",
+        "Twitch chat integration drove more engagement than expected — audience commands like !objection created a feedback loop that made the AI responses feel more dynamic and responsive."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/jury-rigged-overview.svg",
+          "alt": "Screenshot of the Ace Attorney-style courtroom rendering with AI agent dialogue and Twitch chat overlay.",
+          "caption": "Ace Attorney-style PixiJS rendering with real-time AI agent dialogue and audience interaction."
+        }
+      ]
+    },
+    {
+      "slug": "patchwork",
+      "title": "Patchwork",
+      "summary": "AT Protocol-native mutual aid platform with map-based discovery, community moderation, geoprivacy controls, and Bluesky Jetstream ingestion.",
+      "description": "Patchwork is a mutual aid platform built natively on the AT Protocol. The system ingests data from Bluesky's Jetstream feed, indexes community posts, and surfaces them through a map-based discovery interface with geoprivacy controls that protect exact user locations. A TypeScript monorepo houses the React web client, a query API, an ingestion and indexing pipeline, and a moderation worker. The architecture prioritizes community safety: moderation runs as a dedicated service, geoprivacy fuzzes coordinates before storage, and the AT Protocol integration means identity and social graph are decentralized rather than platform-owned.",
+      "role": "Full stack developer",
+      "year": 2025,
+      "repoUrl": "https://github.com/subculture-collective/patchwork",
+      "featured": false,
+      "sortOrder": 8,
+      "tags": ["TypeScript", "React", "PostgreSQL", "AT Protocol", "Bluesky", "Vitest", "Playwright"],
+      "highlights": [
+        "Built an AT Protocol-native platform ingesting Bluesky Jetstream data for decentralized identity and social graph integration.",
+        "Implemented geoprivacy controls that fuzz coordinates before storage, protecting user locations while preserving map-based community discovery.",
+        "Shipped a moderation worker as a dedicated service with automated content review, keeping community safety concerns separated from the main application logic."
+      ],
+      "architecture": [
+        "TypeScript monorepo (npm workspaces) with four services: React web client, query API, Jetstream ingestion pipeline, and moderation worker.",
+        "AT Protocol integration via Bluesky Jetstream for real-time data ingestion, with PostgreSQL storing indexed posts and community metadata.",
+        "Geoprivacy layer fuzzes coordinates before persistence, moderation worker processes content asynchronously, and the web client renders map-based discovery through a privacy-aware tile layer."
+      ],
+      "lessons": [
+        "Building on the AT Protocol forced good architectural decisions — decentralized identity eliminated the need for a custom auth system, and the social graph came for free.",
+        "Geoprivacy is harder than it looks. Simple coordinate rounding creates grid artifacts that can be reverse-engineered — adding controlled random noise within a privacy radius was more resilient."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/patchwork-overview.svg",
+          "alt": "Map-based interface showing community aid posts with geoprivacy-fuzzed location markers and AT Protocol identity integration.",
+          "caption": "Map-based mutual aid discovery with geoprivacy controls and decentralized identity."
         }
       ]
     }

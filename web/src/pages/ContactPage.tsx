@@ -28,13 +28,13 @@ const alternateContactPaths = [
   {
     title: 'GitHub profile',
     href: 'https://github.com/PatrickFanella',
-    description: 'Browse shipped repositories, recent activity, and the practical surface area behind the case studies.',
+    description: 'Browse repositories, commit history, and the practical surface area behind the case studies across Go, TypeScript, Python, and Solidity.',
     cta: 'Open GitHub ↗',
   },
   {
     title: 'Portfolio source',
     href: 'https://github.com/PatrickFanella/patrickfanella-co',
-    description: 'Review the code, schema, and seed workflow behind this portfolio build before reaching out.',
+    description: 'Review the React + Go + PostgreSQL source behind this portfolio — the same stack discipline applied to the portfolio itself.',
     cta: 'Open repository ↗',
   },
 ]
@@ -98,7 +98,7 @@ export function ContactPage() {
               Start the conversation.
             </h1>
             <p className={pageIntroClass}>
-              Best fit for product-minded frontend and full stack roles, interface systems work, and teams that want a thoughtful engineering partner.
+              Best fit for full stack and backend roles, teams building real-time systems or AI-driven products, and anyone who values production engineering discipline alongside shipping speed.
             </p>
           </div>
 
