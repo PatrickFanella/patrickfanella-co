@@ -57,10 +57,17 @@ export function ContactPage() {
             setError(field as keyof ContactFormValues, { type: 'server', message })
           }
         }
+
+        if (error.code === 'network_error') {
+          setSubmitMessage('The contact service could not be reached. Please try again in a moment.')
+          return
+        }
+
         setSubmitMessage(error.message)
         return
       }
-      setSubmitMessage('Local validation passed. API service unavailable.')
+
+      setSubmitMessage('Unable to submit your note right now. Please try again shortly.')
     }
   })
 
@@ -123,7 +130,7 @@ export function ContactPage() {
             ) : null}
           </label>
 
-          <button className={`${primaryButtonClass} mt-4 w-full justify-center w-full`} type="submit" disabled={isSubmitting}>
+          <button className={`${primaryButtonClass} mt-4 w-full justify-center`} type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Transmitting...' : 'Execute request'}
           </button>
 

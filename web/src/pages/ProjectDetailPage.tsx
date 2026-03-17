@@ -1,26 +1,42 @@
 import { Link, useParams } from 'react-router-dom'
 
 import { SectionLabel } from '../components/SectionLabel'
-import { projects } from '../data/projects'
+import { getErrorMessage, isNotFoundError } from '../lib/errors'
 import {
   monoLabelClass,
   pageIntroClass,
   pageSectionClass,
   pageTitleClass,
   primaryButtonClass,
+  secondaryButtonClass,
   surfaceCardClass,
   tagClass,
   tagListClass,
   textLinkClass,
 } from '../lib/styles'
+import { useProject } from '../lib/useProjects'
 
 export function ProjectDetailPage() {
   const { slug } = useParams()
-  const project = projects.find((item) => item.slug === slug)
+  const { project, status, error, retry } = useProject(slug)
   const metaCardClass =
     'grid gap-2 border-2 border-stroke bg-surface px-5 py-4 text-ink-soft'
 
-  if (!project) {
+  if (status === 'loading') {
+    return (
+      <section className={pageSectionClass} aria-live="polite" role="status">
+        <SectionLabel>Lookup pending</SectionLabel>
+        <h1 className={`${pageTitleClass} mt-6 uppercase`}>
+          Loading record.
+        </h1>
+        <p className={pageIntroClass}>
+          Fetching the case-study payload for this route from the API.
+        </p>
+      </section>
+    )
+  }
+
+  if (status === 'error' && isNotFoundError(error)) {
     return (
       <section className={pageSectionClass}>
         <SectionLabel>Status 404</SectionLabel>
@@ -35,6 +51,30 @@ export function ProjectDetailPage() {
         </Link>
       </section>
     )
+  }
+
+  if (status === 'error') {
+    return (
+      <section className={pageSectionClass}>
+        <SectionLabel>Route fault</SectionLabel>
+        <h1 className={`${pageTitleClass} mt-6 uppercase`}>
+          Unable to load record.
+        </h1>
+        <p className={pageIntroClass}>{getErrorMessage(error, 'The requested case study could not be loaded.')}</p>
+        <div className="mt-8 flex flex-wrap gap-4">
+          <button className={secondaryButtonClass} onClick={retry} type="button">
+            Retry lookup
+          </button>
+          <Link className={textLinkClass} to="/projects">
+            Return to index
+          </Link>
+        </div>
+      </section>
+    )
+  }
+
+  if (!project) {
+    return null
   }
 
   return (
@@ -73,6 +113,21 @@ export function ProjectDetailPage() {
               ))}
             </ul>
           </div>
+
+          {project.repoUrl || project.liveUrl ? (
+            <div className="mt-8 grid gap-3 border-t-2 border-stroke pt-6">
+              {project.repoUrl ? (
+                <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">
+                  Open repository ↗
+                </a>
+              ) : null}
+              {project.liveUrl ? (
+                <a className={textLinkClass} href={project.liveUrl} rel="noreferrer" target="_blank">
+                  Launch project ↗
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </aside>
       </div>
 

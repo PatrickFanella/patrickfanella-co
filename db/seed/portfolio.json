@@ -1,40 +1,74 @@
 {
   "projects": [
     {
-      "slug": "case-study-one",
-      "title": "Case Study One",
-      "summary": "Starter placeholder for a polished project write-up with measurable outcomes and clear engineering decisions.",
-      "description": "Replace this with one of your strongest portfolio projects and expand it into a full case study.",
+      "slug": "patrickfanella-co",
+      "title": "Patrick Fanella Portfolio",
+      "summary": "Project-first portfolio platform that pairs a React frontend with a Go API and PostgreSQL-backed seeded content.",
+      "description": "Built to turn a static portfolio scaffold into a maintainable full-stack product. The work focused on defining API contracts early, wiring a typed React client to DB-backed Go handlers, and creating a repeatable seed/bootstrap path so project content and contact submissions could run against PostgreSQL from day one.",
       "role": "Full stack developer",
       "year": 2026,
+      "repoUrl": "https://github.com/PatrickFanella/patrickfanella-co",
       "featured": true,
       "sortOrder": 1,
-      "tags": ["Go", "PostgreSQL", "React", "TypeScript"],
-      "highlights": ["Project framing", "Architecture rationale", "Delivery outcomes"]
+      "tags": ["React", "TypeScript", "Go", "PostgreSQL", "Vite"],
+      "highlights": [
+        "Defined phase-driven delivery assumptions, API contracts, and launch scope before feature integration.",
+        "Connected seeded project content and contact submissions to a PostgreSQL-backed API instead of placeholder in-memory data.",
+        "Added async route states and browser smoke coverage to verify the public portfolio journey end to end."
+      ]
     },
     {
-      "slug": "case-study-two",
-      "title": "Case Study Two",
-      "summary": "Second featured project slot for a product-focused build, redesign, or tool you are proud to showcase.",
-      "description": "Use this slot for a project with a stronger UI story, integration challenge, or cleaner design system.",
-      "role": "Frontend / product engineer",
+      "slug": "mern-memories",
+      "title": "MERN Stack Memories App",
+      "summary": "Authenticated React application for posting memories with titles, images, descriptions, and tags.",
+      "description": "This project tackled the classic full-stack challenge of keeping authoring, authentication, and media-rich content aligned in one user flow. Signed-in users can create and manage memory posts while the client and API stay coordinated around a simple content model for titles, images, descriptions, and tags.",
+      "role": "Full stack developer",
       "year": 2025,
+      "repoUrl": "https://github.com/PatrickFanella/Mern-memories",
+      "liveUrl": "https://ornate-meringue-0210b3.netlify.app/posts",
       "featured": true,
       "sortOrder": 2,
-      "tags": ["Design Systems", "React", "Vite"],
-      "highlights": ["Responsive UI", "Interaction polish", "Technical clarity"]
+      "tags": ["React", "Node.js", "MongoDB", "Authentication"],
+      "highlights": [
+        "Implemented an authenticated CRUD flow for user-generated memory posts.",
+        "Structured the product around title, image, description, and tag metadata to keep content entry consistent.",
+        "Split responsibilities cleanly across dedicated client and server workspaces in a MERN setup."
+      ]
     },
     {
-      "slug": "case-study-three",
-      "title": "Case Study Three",
-      "summary": "Third placeholder reserved for an API-heavy build, data project, or full-stack experiment worth explaining well.",
-      "description": "Swap in a backend-heavy project that helps reinforce your full-stack strengths.",
-      "role": "Backend / full stack developer",
-      "year": 2024,
+      "slug": "yelpcamp",
+      "title": "YelpCamp",
+      "summary": "Campground and review directory with authentication, image storage, geospatial mapping, and review workflows.",
+      "description": "Built as a richer multi-surface web application where public browsing, authenticated authoring, and review management all needed to coexist without collapsing into route chaos. The project combines server-rendered pages, map-driven location details, session-based auth, and media uploads to support a more credible public directory experience.",
+      "role": "Full stack developer",
+      "year": 2022,
+      "repoUrl": "https://github.com/PatrickFanella/yelpcamp",
+      "liveUrl": "https://camped.herokuapp.com/",
       "featured": false,
       "sortOrder": 10,
-      "tags": ["Go", "PostgreSQL", "REST APIs"],
-      "highlights": ["Data modeling", "API design", "Production thinking"]
+      "tags": ["Node.js", "Express", "MongoDB", "EJS", "Authentication"],
+      "highlights": [
+        "Supported campground CRUD, reviews, and user accounts inside one cohesive application.",
+        "Integrated map-based location workflows and hosted image storage for listing content.",
+        "Used session and cookie handling to protect authoring paths and review actions."
+      ]
+    },
+    {
+      "slug": "unique-id-rotating-logger",
+      "title": "Unique ID Rotating Logger",
+      "summary": "Node logging utility that writes access logs, rotates them on schedule, compresses archives, and keeps retention bounded.",
+      "description": "A focused backend utility aimed at a common operational gap: request logs are useful only if they stay traceable and do not grow forever. The logger pairs unique request identifiers with rotating-file retention so lightweight Express services can preserve useful signal without letting local log storage sprawl out of control.",
+      "role": "Backend developer",
+      "year": 2021,
+      "repoUrl": "https://github.com/PatrickFanella/Unique-ID-Rotating-Logger",
+      "featured": false,
+      "sortOrder": 11,
+      "tags": ["Node.js", "Express", "Logging", "gzip", "Operations"],
+      "highlights": [
+        "Generated unique request-level log identifiers for easier tracing during local debugging.",
+        "Compressed rotated log files and pruned older archives automatically.",
+        "Kept the implementation small enough to drop into lightweight Express services without extra infrastructure."
+      ]
     }
   ]
 }
