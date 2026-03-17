@@ -17,7 +17,7 @@ async function fillContactForm() {
 		'I would love to talk about one of your featured case studies.',
 	)
 
-	await user.click(screen.getByRole('button', { name: /execute request/i }))
+	await user.click(screen.getByRole('button', { name: /send message/i }))
 
 	return user
 }
@@ -27,6 +27,10 @@ describe('ContactPage', () => {
 		vi.spyOn(api, 'submitContact').mockResolvedValue(contactSubmissionFixture)
 
 		renderInRouter(<ContactPage />, '/contact')
+		expect(screen.getByRole('link', { name: /open github/i })).toHaveAttribute(
+			'href',
+			'https://github.com/PatrickFanella',
+		)
 
 		await fillContactForm()
 

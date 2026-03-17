@@ -3,7 +3,9 @@ package store
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"errors"
+	"fmt"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -36,7 +38,10 @@ SELECT
 		),
 		ARRAY[]::TEXT[]
 	) AS stack,
-	COALESCE(p.highlights, ARRAY[]::TEXT[]) AS highlights
+	COALESCE(p.highlights, ARRAY[]::TEXT[]) AS highlights,
+	COALESCE(p.architecture, ARRAY[]::TEXT[]) AS architecture,
+	COALESCE(p.lessons_learned, ARRAY[]::TEXT[]) AS lessons_learned,
+	COALESCE(p.media, '[]'::JSONB) AS media
 FROM projects p
 `
 
@@ -155,6 +160,7 @@ func scanProject(scan func(dest ...any) error) (models.Project, error) {
 	var project models.Project
 	var repoURL sql.NullString
 	var liveURL sql.NullString
+	var mediaPayload []byte
 
 	err := scan(
 		&project.Slug,
@@ -168,6 +174,9 @@ func scanProject(scan func(dest ...any) error) (models.Project, error) {
 		&liveURL,
 		&project.Stack,
 		&project.Highlights,
+		&project.Architecture,
+		&project.Lessons,
+		&mediaPayload,
 	)
 	if err != nil {
 		return models.Project{}, err
@@ -179,6 +188,12 @@ func scanProject(scan func(dest ...any) error) (models.Project, error) {
 
 	if liveURL.Valid {
 		project.LiveURL = liveURL.String
+	}
+
+	if len(mediaPayload) > 0 {
+		if err := json.Unmarshal(mediaPayload, &project.Media); err != nil {
+			return models.Project{}, fmt.Errorf("decode project media: %w", err)
+		}
 	}
 
 	return project, nil

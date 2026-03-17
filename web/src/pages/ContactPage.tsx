@@ -6,12 +6,14 @@ import { z } from 'zod'
 import { isApiClientError, submitContact } from '../lib/api'
 import { SectionLabel } from '../components/SectionLabel'
 import {
+	monoLabelClass,
   inputClass,
   pageIntroClass,
   pageSectionClass,
   pageTitleClass,
   primaryButtonClass,
   surfaceCardClass,
+	textLinkClass,
 } from '../lib/styles'
 
 const contactSchema = z.object({
@@ -21,6 +23,21 @@ const contactSchema = z.object({
 })
 
 type ContactFormValues = z.infer<typeof contactSchema>
+
+const alternateContactPaths = [
+  {
+    title: 'GitHub profile',
+    href: 'https://github.com/PatrickFanella',
+    description: 'Browse shipped repositories, recent activity, and the practical surface area behind the case studies.',
+    cta: 'Open GitHub ↗',
+  },
+  {
+    title: 'Portfolio source',
+    href: 'https://github.com/PatrickFanella/patrickfanella-co',
+    description: 'Review the code, schema, and seed workflow behind this portfolio build before reaching out.',
+    cta: 'Open repository ↗',
+  },
+]
 
 export function ContactPage() {
   const [submitState, setSubmitState] = useState<'idle' | 'success' | 'error'>('idle')
@@ -76,28 +93,44 @@ export function ContactPage() {
       <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(380px,1fr)] lg:items-start border-b-2 border-stroke pb-16 mb-10">
         <div className="grid gap-8">
           <div>
-            <SectionLabel>Initialize request</SectionLabel>
+            <SectionLabel>Contact</SectionLabel>
             <h1 className={`${pageTitleClass} mt-6 uppercase`}>
-              Open a channel.
+              Start the conversation.
             </h1>
             <p className={pageIntroClass}>
-              The underlying Go service is currently accepting requests for new architectures, interface audits, and core engineering roles.
+              Best fit for product-minded frontend and full stack roles, interface systems work, and teams that want a thoughtful engineering partner.
             </p>
           </div>
 
           <aside className={`${surfaceCardClass} bg-panel p-8`} aria-label="Input guidelines">
-            <p className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">Protocol</p>
+            <p className={monoLabelClass}>Best outreach</p>
             <ul className="mt-6 grid gap-4 pl-0 list-none text-[1.05rem] text-ink-soft">
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">01</span> State the primary objective briefly.</li>
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">02</span> Define current system baseline.</li>
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">03</span> Provide known latency/budget bounds.</li>
+              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">01</span> Mention the role, project, or collaboration context.</li>
+              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">02</span> Share timing, current stage, and any decision constraints.</li>
+              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">03</span> Link any repo, product, or design references that matter.</li>
             </ul>
           </aside>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {alternateContactPaths.map((path) => (
+              <a
+                key={path.href}
+                className={`${surfaceCardClass} grid gap-4 bg-surface p-6 hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-purple hover:shadow-brutal-purple`}
+                href={path.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <p className={monoLabelClass}>{path.title}</p>
+                <p className="text-[1rem] leading-relaxed text-ink-soft">{path.description}</p>
+                <span className={textLinkClass}>{path.cta}</span>
+              </a>
+            ))}
+          </div>
         </div>
 
         <form className={`${surfaceCardClass} grid gap-6 p-8 lg:p-10 bg-panel`} onSubmit={onSubmit} noValidate>
           <p className="font-mono text-[1.1rem] uppercase tracking-[0.05em] text-heading font-bold pb-4 border-b-2 border-stroke">
-            HTTP POST /contact
+            Send project inquiry
           </p>
 
           <label className="grid gap-3 text-ink-soft mt-2">
@@ -131,7 +164,7 @@ export function ContactPage() {
           </label>
 
           <button className={`${primaryButtonClass} mt-4 w-full justify-center`} type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Transmitting...' : 'Execute request'}
+            {isSubmitting ? 'Sending...' : 'Send message'}
           </button>
 
           {submitMessage ? (

@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 
+import { ProjectMediaGallery } from '../components/ProjectMediaGallery'
 import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage, isNotFoundError } from '../lib/errors'
 import {
@@ -30,7 +31,7 @@ export function ProjectDetailPage() {
           Loading record.
         </h1>
         <p className={pageIntroClass}>
-          Fetching the case-study payload for this route from the API.
+          Fetching the case study, supporting media, and architecture notes from the API.
         </p>
       </section>
     )
@@ -44,7 +45,7 @@ export function ProjectDetailPage() {
           Record not found.
         </h1>
         <p className={pageIntroClass}>
-          The directory path is valid, but the target record is unassigned or deleted.
+          The route exists, but this case study has not been published yet.
         </p>
         <Link className={`${primaryButtonClass} mt-8`} to="/projects">
           Return to index
@@ -81,7 +82,7 @@ export function ProjectDetailPage() {
     <section className={pageSectionClass}>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.85fr)] lg:items-start border-b-2 border-stroke pb-16 mb-8">
         <div>
-          <SectionLabel>{`Study / ${project.year}`}</SectionLabel>
+          <SectionLabel>{`Case study / ${project.year}`}</SectionLabel>
           <h1 className={`${pageTitleClass} mt-6 uppercase max-w-[14ch]`}>{project.title}</h1>
           <p className={`${pageIntroClass} text-[1.2rem] text-ink`}>{project.summary}</p>
         </div>
@@ -133,9 +134,9 @@ export function ProjectDetailPage() {
 
       <div className="mt-16 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.8fr)] lg:items-start">
         <article className="pr-4 lg:pr-8">
-          <SectionLabel>Post-mortem</SectionLabel>
+          <SectionLabel>Overview</SectionLabel>
           <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-            Execution logic
+            What shipped and why.
           </h2>
           <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft max-w-[55ch]">
             {project.description}
@@ -143,7 +144,7 @@ export function ProjectDetailPage() {
         </article>
 
         <article className={`${surfaceCardClass} bg-surface p-8`}>
-          <p className={monoLabelClass}>Critical Path</p>
+          <p className={monoLabelClass}>Key outcomes</p>
           <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft">
             {project.highlights.map((highlight, index) => (
               <li
@@ -157,6 +158,69 @@ export function ProjectDetailPage() {
           </ul>
         </article>
       </div>
+
+      {project.architecture.length > 0 ? (
+        <section className="mt-16 grid gap-8 border-t-2 border-stroke pt-10">
+          <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.8fr)] lg:items-end">
+            <div>
+              <SectionLabel>Architecture</SectionLabel>
+              <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
+                System choices that mattered.
+              </h2>
+            </div>
+            <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
+              A concise breakdown of the technical structure behind the shipped result.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {project.architecture.map((item, index) => (
+              <article key={item} className={`${surfaceCardClass} bg-panel p-6`}>
+                <p className={monoLabelClass}>{`Choice ${index + 1}`}</p>
+                <p className="mt-4 text-[1.02rem] leading-relaxed text-ink-soft">{item}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {project.media.length > 0 ? (
+        <section className="mt-16 grid gap-8 border-t-2 border-stroke pt-10">
+          <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.8fr)] lg:items-end">
+            <div>
+              <SectionLabel>Supporting media</SectionLabel>
+              <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
+                Visual references for the build.
+              </h2>
+            </div>
+            <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
+              Seed-backed placeholders now keep asset references stable until final screenshots are ready.
+            </p>
+          </div>
+
+          <ProjectMediaGallery items={project.media} projectTitle={project.title} />
+        </section>
+      ) : null}
+
+      {project.lessons.length > 0 ? (
+        <section className="mt-16 grid gap-8 border-t-2 border-stroke pt-10">
+          <div>
+            <SectionLabel>Lessons learned</SectionLabel>
+            <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
+              What the next version would keep.
+            </h2>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-2">
+            {project.lessons.map((lesson, index) => (
+              <article key={lesson} className={`${surfaceCardClass} bg-panel p-6`}>
+                <p className={monoLabelClass}>{`Lesson ${index + 1}`}</p>
+                <p className="mt-4 text-[1.02rem] leading-relaxed text-ink-soft">{lesson}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <div className="mt-16 border-t-2 border-stroke pt-8">
         <Link className={textLinkClass} to="/projects">

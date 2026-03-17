@@ -43,6 +43,8 @@ Phase 1 adds a repeatable content bootstrap path for the portfolio database.
 
 The seed source of truth lives in `db/seed/portfolio.json` and can be rerun to refresh project and tag content in local/dev environments.
 
+Phase 3 expands the seeded project contract with architecture notes, supporting media, and lessons learned. See `docs/phase-3-content-inventory.md` for placeholder asset conventions and the remaining copy/assets still needed for a final launch pass.
+
 ## Phase 2 smoke path
 
 Phase 2 adds a minimal end-to-end slice across the seeded portfolio routes and live contact flow.

@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
@@ -23,6 +24,20 @@ describe('ProjectsPage', () => {
 		expect(await screen.findByRole('heading', { name: 'Patrick Fanella Portfolio' })).toBeInTheDocument()
 		expect(screen.getByText('Archive')).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: 'Unique ID Rotating Logger' })).toBeInTheDocument()
+	})
+
+	it('filters the archive by tag and keeps empty slice messaging intentional', async () => {
+		const user = userEvent.setup()
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
+
+		renderInRouter(<ProjectsPage />, '/projects')
+
+		expect(await screen.findByRole('heading', { name: 'Patrick Fanella Portfolio' })).toBeInTheDocument()
+		await user.click(screen.getByRole('button', { name: 'Logging' }))
+
+		expect(screen.getByRole('heading', { name: 'Unique ID Rotating Logger' })).toBeInTheDocument()
+		expect(screen.getByText(/there are no featured projects tagged logging/i)).toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: 'Patrick Fanella Portfolio' })).not.toBeInTheDocument()
 	})
 
 	it('renders an error state when the project index request fails', async () => {

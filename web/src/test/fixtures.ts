@@ -3,7 +3,7 @@ import type { ContactSubmissionResponse, Project } from '../lib/api'
 export const featuredProject: Project = {
 	slug: 'patrickfanella-co',
 	title: 'Patrick Fanella Portfolio',
-	summary: 'Project-first portfolio platform backed by a typed React + Go stack.',
+	summary: 'Project-first portfolio platform pairing a tactile React frontend with a Go API and PostgreSQL seed workflow.',
 	description: 'Detailed portfolio case study content for the featured route.',
 	role: 'Full stack developer',
 	year: 2026,
@@ -11,6 +11,21 @@ export const featuredProject: Project = {
 	featured: true,
 	repoUrl: 'https://github.com/PatrickFanella/patrickfanella-co',
 	highlights: ['Shared API contract', 'Seeded PostgreSQL content', 'E2E smoke path'],
+	architecture: [
+		'React routes consume a shared typed API client.',
+		'Go handlers expose a small JSON contract over Chi.',
+	],
+	lessons: [
+		'Content workflows deserve the same rigor as product features.',
+		'Typed route states keep the UI calm during integration work.',
+	],
+	media: [
+		{
+			src: '/assets/projects/patrickfanella-co-overview.svg',
+			alt: 'Poster-style overview graphic for the Patrick Fanella portfolio build.',
+			caption: 'Seed placeholder for the portfolio case study hero asset.',
+		},
+	],
 }
 
 export const archivedProject: Project = {
@@ -24,6 +39,15 @@ export const archivedProject: Project = {
 	featured: false,
 	repoUrl: 'https://github.com/PatrickFanella/Unique-ID-Rotating-Logger',
 	highlights: ['Unique request identifiers', 'Rotating logs', 'Compressed archives'],
+	architecture: ['Middleware issues a unique identifier per request.'],
+	lessons: ['Operational tooling earns trust when it stays small and explicit.'],
+	media: [
+		{
+			src: '/assets/projects/unique-id-rotating-logger-overview.svg',
+			alt: 'Poster-style overview graphic for the Unique ID Rotating Logger utility.',
+			caption: 'Seed placeholder for the logging utility case study.',
+		},
+	],
 }
 
 export const projectsFixture: Project[] = [featuredProject, archivedProject]

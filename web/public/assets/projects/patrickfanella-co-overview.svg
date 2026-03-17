@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Patrick Fanella Portfolio overview placeholder</title>
+  <desc id="desc">Editorial placeholder art for the Patrick Fanella portfolio project.</desc>
+  <rect width="1600" height="1000" fill="#09090b" />
+  <rect x="60" y="60" width="1480" height="880" fill="#121214" stroke="#3f3f46" stroke-width="12" />
+  <rect x="96" y="96" width="620" height="808" fill="#bef264" />
+  <rect x="752" y="96" width="752" height="248" fill="#0f0f10" stroke="#c084fc" stroke-width="10" />
+  <rect x="752" y="384" width="752" height="520" fill="#0f0f10" stroke="#5eead4" stroke-width="10" />
+  <text x="140" y="228" fill="#09090b" font-family="'Space Grotesk', Arial, sans-serif" font-size="92" font-weight="700" letter-spacing="10">PATRICK</text>
+  <text x="140" y="332" fill="#09090b" font-family="'Space Grotesk', Arial, sans-serif" font-size="92" font-weight="700" letter-spacing="10">FANELLA</text>
+  <text x="140" y="470" fill="#09090b" font-family="'JetBrains Mono', monospace" font-size="34" letter-spacing="6">PROJECT-FIRST PORTFOLIO</text>
+  <text x="796" y="204" fill="#f4f4f5" font-family="'JetBrains Mono', monospace" font-size="34" letter-spacing="6">REACT / GO / POSTGRES</text>
+  <text x="796" y="476" fill="#f4f4f5" font-family="'Space Grotesk', Arial, sans-serif" font-size="68" font-weight="700" letter-spacing="8">SEED-DRIVEN CASE</text>
+  <text x="796" y="562" fill="#f4f4f5" font-family="'Space Grotesk', Arial, sans-serif" font-size="68" font-weight="700" letter-spacing="8">STUDY SYSTEM</text>
+  <text x="796" y="676" fill="#a1a1aa" font-family="'JetBrains Mono', monospace" font-size="26" letter-spacing="4">PLACEHOLDER ART UNTIL FINAL PRODUCT SHOTS ARE READY</text>
+</svg>
