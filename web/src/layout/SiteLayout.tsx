@@ -15,7 +15,7 @@ export function SiteLayout() {
         Skip to main content
       </a>
 
-      <div className="mx-auto max-w-[1400px] border-x-2 border-stroke bg-paper min-h-screen flex flex-col">
+      <div className="mx-auto flex min-h-screen max-w-350 flex-col border-x-2 border-stroke bg-paper">
         <header className="grid gap-6 border-b-2 border-stroke p-5 md:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div className="grid gap-4">
             <div className="flex flex-wrap items-center gap-3">
@@ -23,12 +23,12 @@ export function SiteLayout() {
               <p className={monoLabelClass}><span className="text-accent-pink">Patrick Fanella</span> &mdash; Full Stack Developer</p>
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.48fr)] lg:items-start max-w-[65rem]">
+            <div className="grid max-w-260 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.48fr)] lg:items-start">
               <div>
                 <p className="font-display text-[clamp(2.5rem,4vw,4rem)] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
                   High contrast. <span className="text-accent-teal">Low latency.</span> Strict grids.
                 </p>
-                <p className="mt-4 max-w-[42rem] text-[1.05rem] leading-relaxed text-ink-soft">
+                <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
                   Engineering products with uncompromising functional clarity. Every component is justified, every interaction is deliberate.
                 </p>
               </div>

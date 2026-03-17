@@ -38,10 +38,24 @@ See `docs/phase-0-foundation.md` for the current contract details and launch ass
 Phase 1 adds a repeatable content bootstrap path for the portfolio database.
 
 1. Start PostgreSQL with `docker compose up -d postgres`
-2. Apply migrations in order from `db/migrations/`
+2. Apply migrations with `cd api && go run ./cmd/migrate`
 3. Seed the portfolio content from the Go module with `cd api && go run ./cmd/seed`
 
 The seed source of truth lives in `db/seed/portfolio.json` and can be rerun to refresh project and tag content in local/dev environments.
+
+## Phase 2 smoke path
+
+Phase 2 adds a minimal end-to-end slice across the seeded portfolio routes and live contact flow.
+
+Recommended local verification order:
+
+1. Start PostgreSQL with `docker compose up -d postgres`
+2. Apply migrations with `cd api && go run ./cmd/migrate`
+3. Seed launch content with `cd api && go run ./cmd/seed`
+4. Run backend tests with `cd api && go test ./...`
+5. Run frontend checks with `cd web && npm run lint && npm run test && npm run build`
+6. Install Playwright browsers once with `cd web && npx playwright install chromium`
+7. Run the browser smoke path with `cd web && npm run test:e2e`
 
 ## Suggested next steps
 

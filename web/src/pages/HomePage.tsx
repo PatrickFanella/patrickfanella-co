@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { ProjectCard } from '../components/ProjectCard'
 import { SectionLabel } from '../components/SectionLabel'
-import { projects } from '../data/projects'
+import { getErrorMessage } from '../lib/errors'
 import {
   monoLabelClass,
   pageIntroClass,
@@ -12,8 +12,7 @@ import {
   surfaceCardClass,
   textLinkClass,
 } from '../lib/styles'
-
-const featuredProjects = projects.filter((project) => project.featured)
+import { useProjects } from '../lib/useProjects'
 
 const focusAreas = ['React Ecosystem', 'TypeScript', 'Go', 'PostgreSQL / SQL']
 
@@ -36,6 +35,14 @@ const workingPrinciples = [
 ]
 
 export function HomePage() {
+  const { projects, status, error, retry } = useProjects()
+  const featuredProjects = projects.filter((project) => project.featured)
+
+  const featuredMessage = getErrorMessage(
+    error,
+    'Featured case studies are temporarily unavailable.',
+  )
+
   return (
     <>
       <section className="border-b-2 border-stroke pb-16 pt-8">
@@ -44,7 +51,7 @@ export function HomePage() {
             <SectionLabel>Index / 2026</SectionLabel>
 
             <motion.h1
-              className="mt-8 font-display text-[clamp(4rem,8vw,8rem)] font-bold leading-[0.85] tracking-[-0.05em] text-heading uppercase uppercase"
+              className="mt-8 font-display text-[clamp(4rem,8vw,8rem)] font-bold leading-[0.85] tracking-[-0.05em] text-heading uppercase"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, ease: 'linear' }}
@@ -116,7 +123,7 @@ export function HomePage() {
 
           <div className="grid gap-4 border-2 border-stroke bg-surface p-6">
             <p className={monoLabelClass}>Access</p>
-            <p className="max-w-[30rem] text-[1.05rem] leading-relaxed text-ink-soft">
+            <p className="max-w-120 text-[1.05rem] leading-relaxed text-ink-soft">
               Every log is treated like internal documentation rather than marketing collateral.
             </p>
             <Link className={textLinkClass} to="/projects">
@@ -125,11 +132,80 @@ export function HomePage() {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {featuredProjects.map((project, index) => (
-            <ProjectCard key={project.slug} order={index + 1} project={project} />
-          ))}
-        </div>
+        {status === 'loading' ? (
+          <div className="grid gap-6">
+            <article
+              className={`${surfaceCardClass} bg-panel p-6`}
+              aria-live="polite"
+              role="status"
+            >
+              <p className={monoLabelClass}>Loading</p>
+              <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
+                Pulling the featured case-study set from the API.
+              </p>
+            </article>
+
+            <div className="grid gap-6 md:grid-cols-2" aria-hidden="true">
+              {[0, 1].map((index) => (
+                <article key={index} className={`${surfaceCardClass} p-6`}>
+                  <div className="grid gap-5 border-b-2 border-stroke pb-5">
+                    <div className="h-7 w-24 border-2 border-stroke bg-panel" />
+                    <div className="grid gap-3">
+                      <div className="h-12 w-2/3 border-2 border-stroke bg-panel" />
+                      <div className="h-5 w-full border-2 border-stroke bg-panel" />
+                      <div className="h-5 w-4/5 border-2 border-stroke bg-panel" />
+                    </div>
+                  </div>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {[0, 1, 2].map((tag) => (
+                      <span key={tag} className="h-7 w-20 border-2 border-stroke bg-panel" />
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {status === 'error' ? (
+          <article className={`${surfaceCardClass} grid gap-6 bg-panel p-8`} role="alert">
+            <div>
+              <p className={monoLabelClass}>Fetch fault</p>
+              <h3 className="mt-5 font-display text-[2rem] font-bold uppercase tracking-[-0.04em] text-heading">
+                Featured work is offline.
+              </h3>
+              <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
+                {featuredMessage}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <button className={secondaryButtonClass} onClick={retry} type="button">
+                Retry request
+              </button>
+              <Link className={textLinkClass} to="/projects">
+                Open master archive ↗
+              </Link>
+            </div>
+          </article>
+        ) : null}
+
+        {status === 'success' && featuredProjects.length === 0 ? (
+          <article className={`${surfaceCardClass} bg-panel p-8`}>
+            <p className={monoLabelClass}>Empty set</p>
+            <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
+              Featured case studies have not been published yet. Use the master archive to browse the full portfolio once entries are seeded.
+            </p>
+          </article>
+        ) : null}
+
+        {status === 'success' && featuredProjects.length > 0 ? (
+          <div className="grid gap-6 md:grid-cols-2">
+            {featuredProjects.map((project, index) => (
+              <ProjectCard key={project.slug} order={index + 1} project={project} />
+            ))}
+          </div>
+        ) : null}
       </section>
 
       <section className="grid gap-12 pb-8 pt-16 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1.4fr)] xl:items-start">
