@@ -19,14 +19,14 @@ export default defineConfig({
 			command: 'cd ../api && go run ./cmd/server',
 			url: 'http://localhost:8080/api/health',
 			timeout: 120_000,
-			reuseExistingServer: !process.env.CI,
+			reuseExistingServer: false,
 		},
 		{
 			name: 'Web',
 			command: 'npm run dev -- --host localhost --port 5173',
 			url: 'http://localhost:5173',
 			timeout: 120_000,
-			reuseExistingServer: !process.env.CI,
+			reuseExistingServer: false,
 		},
 	],
 	projects: [

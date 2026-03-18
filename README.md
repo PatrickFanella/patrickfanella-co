@@ -57,6 +57,28 @@ Phase 4 adds launch-quality guardrails across the public routes:
 
 See `docs/phase-4-quality-hardening.md` for the implementation details, runtime knobs, and release-verification checklist.
 
+## Phase 5 release and operations
+
+Phase 5 adds the launch-facing baseline needed to operate the portfolio as a real site instead of a local-only project:
+
+- optional webhook notifications for new contact submissions
+- opt-in privacy-safe Plausible analytics for page views and outbound links
+- structured API request logging and richer `/api/health` diagnostics
+- representative containerized deployment topology for `web`, `api`, and `postgres`
+- operator docs for setup, release, troubleshooting, rollback, and launch verification
+
+Primary docs:
+
+- `docs/deployment.md` — topology, secrets, env contract, and container workflow
+- `docs/runbook.md` — day-to-day operator and release steps
+- `docs/launch-checklist.md` — reusable go/no-go verification pass
+
+To boot the full stack locally in containers:
+
+1. Copy `.env.example` to `.env` and fill any required values.
+2. Run `docker compose --profile stack up --build`.
+3. Visit the web app at `http://localhost:4173` and the API health endpoint at `http://localhost:8080/api/health`.
+
 ## Phase 2 smoke path
 
 Phase 2 adds a minimal end-to-end slice across the seeded portfolio routes and live contact flow.

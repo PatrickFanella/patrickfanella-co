@@ -11,6 +11,61 @@ services:
       - '5432:5432'
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d patrickfanella']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    profiles: ['stack']
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      API_PORT: 8080
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/patrickfanella?sslmode=disable
+      CORS_ORIGIN: http://localhost:4173
+      CONTACT_MAX_BODY_BYTES: ${CONTACT_MAX_BODY_BYTES:-16384}
+      CONTACT_RATE_LIMIT_MAX_REQUESTS: ${CONTACT_RATE_LIMIT_MAX_REQUESTS:-5}
+      CONTACT_RATE_LIMIT_WINDOW_SECONDS: ${CONTACT_RATE_LIMIT_WINDOW_SECONDS:-60}
+      CONTACT_HONEYPOT_FIELD: ${CONTACT_HONEYPOT_FIELD:-website}
+      CONTACT_NOTIFICATION_WEBHOOK_URL: ${CONTACT_NOTIFICATION_WEBHOOK_URL:-}
+      CONTACT_NOTIFICATION_BEARER_TOKEN: ${CONTACT_NOTIFICATION_BEARER_TOKEN:-}
+      CONTACT_NOTIFICATION_TIMEOUT_SECONDS: ${CONTACT_NOTIFICATION_TIMEOUT_SECONDS:-5}
+    ports:
+      - '8080:8080'
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -q -O - http://127.0.0.1:8080/api/health >/dev/null 2>&1 || exit 1']
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  web:
+    profiles: ['stack']
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8080}
+        VITE_SITE_URL: ${VITE_SITE_URL:-https://patrickfanella.co}
+        VITE_ANALYTICS_PLAUSIBLE_DOMAIN: ${VITE_ANALYTICS_PLAUSIBLE_DOMAIN:-}
+        VITE_ANALYTICS_PLAUSIBLE_SCRIPT_URL: ${VITE_ANALYTICS_PLAUSIBLE_SCRIPT_URL:-https://plausible.io/js/script.file-downloads.outbound-links.js}
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - '4173:80'
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -q -O - http://127.0.0.1/healthz >/dev/null 2>&1 || exit 1']
+      interval: 15s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres-data:

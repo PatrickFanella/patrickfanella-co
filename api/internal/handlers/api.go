@@ -5,13 +5,15 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
-	"log"
+	"log/slog"
 	"net/http"
 	"net/mail"
 	"strings"
+	"sync/atomic"
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 
 	"patrickfanella.co/api/internal/models"
 )
@@ -27,6 +29,13 @@ type API struct {
 	store           Store
 	contactSecurity ContactSecurityConfig
 	contactLimiter  *contactRateLimiter
+	logger          *slog.Logger
+	notifier        ContactNotifier
+	startedAt       time.Time
+	requestCount    atomic.Uint64
+	errorCount      atomic.Uint64
+	contactCount    atomic.Uint64
+	notificationFailures atomic.Uint64
 }
 
 type contactRequest struct {
@@ -46,21 +55,62 @@ func New(store Store, options ...ContactSecurityConfig) *API {
 		store:           store,
 		contactSecurity: security,
 		contactLimiter:  newContactRateLimiter(security.RateLimitMaxRequests, security.RateLimitWindow),
+		logger:          slog.New(slog.NewJSONHandler(io.Discard, nil)),
+		notifier:        noopNotifier{},
+		startedAt:       time.Now().UTC(),
 	}
 }
 
+func (api *API) SetLogger(logger *slog.Logger) {
+	if logger == nil {
+		return
+	}
+
+	api.logger = logger
+}
+
+func (api *API) SetNotifier(notifier ContactNotifier) {
+	if notifier == nil {
+		api.notifier = noopNotifier{}
+		return
+	}
+
+	api.notifier = notifier
+}
+
+func (api *API) NotificationsEnabled() bool {
+	return api.notifier != nil && api.notifier.Enabled()
+}
+
 func (api *API) Health(w http.ResponseWriter, r *http.Request) {
+	status := "ok"
+	databaseStatus := "ok"
+	if !api.store.DatabaseEnabled() {
+		status = "degraded"
+		databaseStatus = "unavailable"
+	}
+
+	now := time.Now().UTC()
 	writeJSON(w, http.StatusOK, map[string]any{
-		"status":          "ok",
-		"databaseEnabled": api.store.DatabaseEnabled(),
-		"timestamp":       time.Now().UTC(),
+		"status":                 status,
+		"databaseEnabled":        api.store.DatabaseEnabled(),
+		"databaseStatus":         databaseStatus,
+		"notificationsEnabled":   api.NotificationsEnabled(),
+		"startedAt":              api.startedAt,
+		"uptimeSeconds":          int64(now.Sub(api.startedAt).Seconds()),
+		"requestCount":           api.requestCount.Load(),
+		"errorCount":             api.errorCount.Load(),
+		"contactSubmissionCount": api.contactCount.Load(),
+		"notificationFailureCount": api.notificationFailures.Load(),
+		"requestId":              middleware.GetReqID(r.Context()),
+		"timestamp":              now,
 	})
 }
 
 func (api *API) ListProjects(w http.ResponseWriter, r *http.Request) {
 	projects, err := api.store.ListProjects(r.Context())
 	if err != nil {
-		log.Printf("projects.list error=%v", err)
+		api.loggerForRequest(r).Error("projects.list failed", slog.Any("error", err))
 		writeStoreError(w, err)
 		return
 	}
@@ -72,7 +122,7 @@ func (api *API) GetProject(w http.ResponseWriter, r *http.Request) {
 	slug := chi.URLParam(r, "slug")
 	project, err := api.store.GetProject(r.Context(), slug)
 	if err != nil {
-		log.Printf("projects.detail slug=%q error=%v", slug, err)
+		api.loggerForRequest(r).Error("projects.detail failed", slog.String("slug", slug), slog.Any("error", err))
 		writeStoreError(w, err)
 		return
 	}
@@ -88,19 +138,19 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 	contentType := strings.TrimSpace(r.Header.Get("Content-Type"))
 
 	if origin != "" && !sameOrigin(origin, api.contactSecurity.AllowedOrigin) {
-		log.Printf("contact.create rejected reason=origin_mismatch origin=%q remote=%s", origin, clientIP)
+		api.loggerForRequest(r).Warn("contact.create rejected", slog.String("reason", "origin_mismatch"), slog.String("origin", origin), slog.String("client_ip", clientIP))
 		writeError(w, http.StatusForbidden, "forbidden_origin", "This origin is not allowed to submit the contact form.", nil)
 		return
 	}
 
 	if !strings.HasPrefix(strings.ToLower(contentType), "application/json") {
-		log.Printf("contact.create rejected reason=unsupported_media_type content_type=%q remote=%s", contentType, clientIP)
+		api.loggerForRequest(r).Warn("contact.create rejected", slog.String("reason", "unsupported_media_type"), slog.String("content_type", contentType), slog.String("client_ip", clientIP))
 		writeError(w, http.StatusUnsupportedMediaType, "unsupported_media_type", "Contact submissions must be sent as JSON.", nil)
 		return
 	}
 
 	if !api.contactLimiter.Allow(clientIP) {
-		log.Printf("contact.create rejected reason=rate_limit remote=%s", clientIP)
+		api.loggerForRequest(r).Warn("contact.create rejected", slog.String("reason", "rate_limit"), slog.String("client_ip", clientIP))
 		writeError(w, http.StatusTooManyRequests, "rate_limited", "Too many contact attempts. Please wait a moment and try again.", nil)
 		return
 	}
@@ -113,19 +163,19 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 	if err := decoder.Decode(&request); err != nil {
 		var maxBytesErr *http.MaxBytesError
 		if errors.As(err, &maxBytesErr) {
-			log.Printf("contact.create rejected reason=payload_too_large remote=%s limit=%d", clientIP, api.contactSecurity.MaxBodyBytes)
+			api.loggerForRequest(r).Warn("contact.create rejected", slog.String("reason", "payload_too_large"), slog.String("client_ip", clientIP), slog.Int64("limit_bytes", api.contactSecurity.MaxBodyBytes))
 			writeError(w, http.StatusRequestEntityTooLarge, "payload_too_large", "The contact request is too large.", nil)
 			return
 		}
 
-		log.Printf("contact.create invalid_json error=%v", err)
+		api.loggerForRequest(r).Warn("contact.create invalid_json", slog.Any("error", err), slog.String("client_ip", clientIP))
 		writeError(w, http.StatusBadRequest, "invalid_json", "Request body must be valid JSON.", nil)
 		return
 	}
 
 	var extra json.RawMessage
 	if err := decoder.Decode(&extra); err != io.EOF {
-		log.Printf("contact.create invalid_json error=multiple_json_values")
+		api.loggerForRequest(r).Warn("contact.create invalid_json", slog.String("reason", "multiple_json_values"), slog.String("client_ip", clientIP))
 		writeError(w, http.StatusBadRequest, "invalid_json", "Request body must contain a single JSON object.", nil)
 		return
 	}
@@ -136,7 +186,7 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 	request.Website = strings.TrimSpace(request.Website)
 
 	if request.Website != "" {
-		log.Printf("contact.create suppressed reason=honeypot remote=%s field=%q", clientIP, api.contactSecurity.HoneypotField)
+		api.loggerForRequest(r).Warn("contact.create suppressed", slog.String("reason", "honeypot"), slog.String("client_ip", clientIP), slog.String("field", api.contactSecurity.HoneypotField))
 		writeJSON(w, http.StatusAccepted, models.ContactSubmissionResponse{
 			Message: "Thanks — your note has been saved.",
 			Item: models.ContactMessage{
@@ -155,7 +205,7 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if fields := validateContactInput(input); len(fields) > 0 {
-		log.Printf("contact.create validation_failed fields=%v", fields)
+		api.loggerForRequest(r).Warn("contact.create validation_failed", slog.Any("fields", fields), slog.String("client_ip", clientIP))
 		writeError(w, http.StatusBadRequest, "validation_error", "Please correct the highlighted fields.", fields)
 		return
 	}
@@ -164,14 +214,26 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		switch {
 		case errors.Is(err, models.ErrDatabaseUnavailable):
-			log.Printf("contact.create database_unavailable")
+			api.loggerForRequest(r).Error("contact.create database_unavailable", slog.String("client_ip", clientIP))
 			writeError(w, http.StatusServiceUnavailable, "database_unavailable", "Contact submissions are temporarily unavailable.", nil)
 		default:
-			log.Printf("contact.create persistence_error error=%v", err)
+			api.loggerForRequest(r).Error("contact.create persistence_error", slog.Any("error", err), slog.String("client_ip", clientIP))
 			writeError(w, http.StatusInternalServerError, "internal_error", "Unable to store message.", nil)
 		}
 		return
 	}
+
+	api.contactCount.Add(1)
+	if api.NotificationsEnabled() {
+		if err := api.notifier.NotifyContact(r.Context(), message); err != nil {
+			api.notificationFailures.Add(1)
+			api.loggerForRequest(r).Error("contact.create notification_failed", slog.Int64("contact_id", message.ID), slog.Any("error", err))
+		} else {
+			api.loggerForRequest(r).Info("contact.create notification_sent", slog.Int64("contact_id", message.ID))
+		}
+	}
+
+	api.loggerForRequest(r).Info("contact.create stored", slog.Int64("contact_id", message.ID))
 
 	writeJSON(w, http.StatusCreated, models.ContactSubmissionResponse{
 		Message: "Thanks — your note has been saved.",
@@ -226,4 +288,17 @@ func validateContactInput(input models.ContactInput) map[string]string {
 	}
 
 	return fields
+}
+
+func (api *API) loggerForRequest(r *http.Request) *slog.Logger {
+	logger := api.logger
+	if logger == nil {
+		return slog.New(slog.NewJSONHandler(io.Discard, nil))
+	}
+
+	return logger.With(
+		slog.String("request_id", middleware.GetReqID(r.Context())),
+		slog.String("method", r.Method),
+		slog.String("path", r.URL.Path),
+	)
 }

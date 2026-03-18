@@ -26,6 +26,13 @@ type stubStore struct {
 	saveCalls       int
 }
 
+type stubNotifier struct {
+	enabled bool
+	err     error
+	calls   int
+	last    models.ContactMessage
+}
+
 func (s stubStore) DatabaseEnabled() bool {
 	return s.databaseEnabled
 }
@@ -42,6 +49,59 @@ func (s stubStore) GetProject(context.Context, string) (models.Project, error) {
 func (s *stubStore) SaveContact(context.Context, models.ContactInput) (models.ContactMessage, error) {
 	s.saveCalls++
 	return s.contact, s.contactErr
+}
+
+func (n *stubNotifier) NotifyContact(_ context.Context, message models.ContactMessage) error {
+	n.calls++
+	n.last = message
+	return n.err
+}
+
+func (n *stubNotifier) Enabled() bool {
+	return n != nil && n.enabled
+}
+
+func TestHealthReportsOperationalFields(t *testing.T) {
+	api := New(&stubStore{databaseEnabled: true})
+	api.SetNotifier(&stubNotifier{enabled: true})
+	req := httptest.NewRequest(http.MethodGet, "/api/health", nil)
+	res := httptest.NewRecorder()
+
+	api.Health(res, req)
+
+	if res.Code != http.StatusOK {
+		t.Fatalf("expected 200, got %d", res.Code)
+	}
+
+	var payload map[string]any
+	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if payload["status"] != "ok" {
+		t.Fatalf("expected ok status, got %#v", payload["status"])
+	}
+
+	if payload["databaseStatus"] != "ok" {
+		t.Fatalf("expected ok database status, got %#v", payload["databaseStatus"])
+	}
+
+	if payload["notificationsEnabled"] != true {
+		t.Fatalf("expected notifications enabled, got %#v", payload["notificationsEnabled"])
+	}
+
+	if _, ok := payload["uptimeSeconds"]; !ok {
+		t.Fatalf("expected uptimeSeconds in payload: %#v", payload)
+	}
+	if _, ok := payload["startedAt"]; !ok {
+		t.Fatalf("expected startedAt in payload: %#v", payload)
+	}
+	if _, ok := payload["notificationFailureCount"]; !ok {
+		t.Fatalf("expected notificationFailureCount in payload: %#v", payload)
+	}
+	if _, ok := payload["contactSubmissionCount"]; !ok {
+		t.Fatalf("expected contactSubmissionCount in payload: %#v", payload)
+	}
 }
 
 func TestListProjectsReturnsWrappedPayload(t *testing.T) {
@@ -186,6 +246,52 @@ func TestCreateContactSuccess(t *testing.T) {
 
 	if payload.Item.ID != 7 || payload.Message == "" {
 		t.Fatalf("unexpected success payload: %#v", payload)
+	}
+}
+
+func TestCreateContactSendsNotificationWhenConfigured(t *testing.T) {
+	notifier := &stubNotifier{enabled: true}
+	api := newTestAPI(&stubStore{contact: models.ContactMessage{ID: 8, Name: "Patrick", Email: "patrick@example.com", Message: "I would like to talk about one of your projects."}})
+	api.SetNotifier(notifier)
+	req := httptest.NewRequest(http.MethodPost, "/api/contact", bytes.NewBufferString(`{"name":"Patrick","email":"patrick@example.com","message":"I would like to talk about one of your projects."}`))
+	req.Header.Set("Content-Type", "application/json")
+	res := httptest.NewRecorder()
+
+	api.CreateContact(res, req)
+
+	if res.Code != http.StatusCreated {
+		t.Fatalf("expected 201, got %d", res.Code)
+	}
+
+	if notifier.calls != 1 {
+		t.Fatalf("expected notifier to be called once, got %d", notifier.calls)
+	}
+
+	if notifier.last.ID != 8 {
+		t.Fatalf("expected notifier to receive saved contact, got %#v", notifier.last)
+	}
+}
+
+func TestCreateContactNotificationFailureDoesNotFailSubmission(t *testing.T) {
+	notifier := &stubNotifier{enabled: true, err: errors.New("webhook offline")}
+	api := newTestAPI(&stubStore{contact: models.ContactMessage{ID: 9, Name: "Patrick", Email: "patrick@example.com", Message: "I would like to talk about one of your projects."}})
+	api.SetNotifier(notifier)
+	req := httptest.NewRequest(http.MethodPost, "/api/contact", bytes.NewBufferString(`{"name":"Patrick","email":"patrick@example.com","message":"I would like to talk about one of your projects."}`))
+	req.Header.Set("Content-Type", "application/json")
+	res := httptest.NewRecorder()
+
+	api.CreateContact(res, req)
+
+	if res.Code != http.StatusCreated {
+		t.Fatalf("expected 201 even when notifications fail, got %d", res.Code)
+	}
+
+	if notifier.calls != 1 {
+		t.Fatalf("expected notifier call, got %d", notifier.calls)
+	}
+
+	if got := api.notificationFailures.Load(); got != 1 {
+		t.Fatalf("expected notification failure counter to be 1, got %d", got)
 	}
 }
 
