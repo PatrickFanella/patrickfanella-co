@@ -45,6 +45,18 @@ The seed source of truth lives in `db/seed/portfolio.json` and can be rerun to r
 
 Phase 3 expands the seeded project contract with architecture notes, supporting media, and lessons learned. See `docs/phase-3-content-inventory.md` for placeholder asset conventions and the remaining copy/assets still needed for a final launch pass.
 
+## Phase 4 quality hardening
+
+Phase 4 adds launch-quality guardrails across the public routes:
+
+- shared empty/error/loading route states
+- accessibility improvements for focus management, live regions, and reduced motion
+- route-level SEO metadata plus generated `sitemap.xml` and `robots.txt`
+- contact endpoint abuse protection and privacy-minded request handling
+- expanded frontend, backend, and browser smoke coverage
+
+See `docs/phase-4-quality-hardening.md` for the implementation details, runtime knobs, and release-verification checklist.
+
 ## Phase 2 smoke path
 
 Phase 2 adds a minimal end-to-end slice across the seeded portfolio routes and live contact flow.

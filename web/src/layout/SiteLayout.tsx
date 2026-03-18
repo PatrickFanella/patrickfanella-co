@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 
 import { monoLabelClass } from '../lib/styles'
 
@@ -9,6 +10,19 @@ const navigation = [
 ]
 
 export function SiteLayout() {
+  const location = useLocation()
+  const mainRef = useRef<HTMLElement | null>(null)
+  const hasMounted = useRef(false)
+
+  useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true
+      return
+    }
+
+    mainRef.current?.focus()
+  }, [location.pathname])
+
   return (
     <div className="relative min-h-screen bg-paper text-ink selection:bg-accent-green selection:text-paper font-body">
       <a className="skip-link" href="#main-content">
@@ -63,7 +77,7 @@ export function SiteLayout() {
           </div>
         </header>
 
-        <main id="main-content" className="flex-1 p-5 md:p-8">
+    		<main className="flex-1 p-5 md:p-8 focus-visible:outline-none" id="main-content" ref={mainRef} tabIndex={-1}>
           <Outlet />
         </main>
 

@@ -27,7 +27,13 @@ func main() {
 	}
 	defer appStore.Close()
 
-	api := handlers.New(appStore)
+	api := handlers.New(appStore, handlers.ContactSecurityConfig{
+		AllowedOrigin:        cfg.CORSOrigin,
+		HoneypotField:        cfg.ContactHoneypotField,
+		MaxBodyBytes:         cfg.ContactMaxBodyBytes,
+		RateLimitMaxRequests: cfg.ContactRateLimitMax,
+		RateLimitWindow:      cfg.ContactRateLimitWindow,
+	})
 
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID)

@@ -1,8 +1,11 @@
 import { Link, useParams } from 'react-router-dom'
 
 import { ProjectMediaGallery } from '../components/ProjectMediaGallery'
+import { RouteState } from '../components/RouteState'
+import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage, isNotFoundError } from '../lib/errors'
+import { getSiteUrl } from '../lib/site'
 import {
   monoLabelClass,
   pageIntroClass,
@@ -20,19 +23,26 @@ import { useProject } from '../lib/useProjects'
 export function ProjectDetailPage() {
   const { slug } = useParams()
   const { project, status, error, retry } = useProject(slug)
+  const siteUrl = getSiteUrl()
   const metaCardClass =
     'grid gap-2 border-2 border-stroke bg-surface px-5 py-4 text-ink-soft'
 
   if (status === 'loading') {
     return (
-      <section className={pageSectionClass} aria-live="polite" role="status">
-        <SectionLabel>Lookup pending</SectionLabel>
-        <h1 className={`${pageTitleClass} mt-6 uppercase`}>
-          Loading record.
-        </h1>
-        <p className={pageIntroClass}>
-          Fetching the case study, supporting media, and architecture notes from the API.
-        </p>
+      <section className={pageSectionClass}>
+        <Seo
+          description="Fetching project details, supporting media, and architecture notes."
+          path={slug ? `/projects/${slug}` : '/projects'}
+          title="Loading project"
+        />
+        <RouteState
+          ariaLive="polite"
+          description="Fetching the case study, supporting media, and architecture notes from the API."
+          headingLevel="h1"
+          label="Lookup pending"
+          role="status"
+          title="Loading record."
+        />
       </section>
     )
   }
@@ -40,16 +50,23 @@ export function ProjectDetailPage() {
   if (status === 'error' && isNotFoundError(error)) {
     return (
       <section className={pageSectionClass}>
-        <SectionLabel>Status 404</SectionLabel>
-        <h1 className={`${pageTitleClass} mt-6 uppercase`}>
-          Record not found.
-        </h1>
-        <p className={pageIntroClass}>
-          The route exists, but this case study has not been published yet.
-        </p>
-        <Link className={`${primaryButtonClass} mt-8`} to="/projects">
-          Return to index
-        </Link>
+        <Seo
+          description="The requested case study has not been published yet."
+          path={slug ? `/projects/${slug}` : '/projects'}
+          robots="noindex,follow"
+          title="Project not found"
+        />
+        <RouteState
+          actions={
+            <Link className={primaryButtonClass} to="/projects">
+              Return to index
+            </Link>
+          }
+          description="The route exists, but this case study has not been published yet."
+          headingLevel="h1"
+          label="Status 404"
+          title="Record not found."
+        />
       </section>
     )
   }
@@ -57,19 +74,29 @@ export function ProjectDetailPage() {
   if (status === 'error') {
     return (
       <section className={pageSectionClass}>
-        <SectionLabel>Route fault</SectionLabel>
-        <h1 className={`${pageTitleClass} mt-6 uppercase`}>
-          Unable to load record.
-        </h1>
-        <p className={pageIntroClass}>{getErrorMessage(error, 'The requested case study could not be loaded.')}</p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <button className={secondaryButtonClass} onClick={retry} type="button">
-            Retry lookup
-          </button>
-          <Link className={textLinkClass} to="/projects">
-            Return to index
-          </Link>
-        </div>
+        <Seo
+          description="The requested case study could not be loaded."
+          path={slug ? `/projects/${slug}` : '/projects'}
+          robots="noindex,follow"
+          title="Project unavailable"
+        />
+        <RouteState
+          actions={(
+            <>
+              <button className={secondaryButtonClass} onClick={retry} type="button">
+                Retry lookup
+              </button>
+              <Link className={textLinkClass} to="/projects">
+                Return to index
+              </Link>
+            </>
+          )}
+          description={getErrorMessage(error, 'The requested case study could not be loaded.')}
+          headingLevel="h1"
+          label="Route fault"
+          role="alert"
+          title="Unable to load record."
+        />
       </section>
     )
   }
@@ -80,6 +107,27 @@ export function ProjectDetailPage() {
 
   return (
     <section className={pageSectionClass}>
+      <Seo
+        description={project.summary}
+        image={project.media[0]?.src}
+        path={`/projects/${project.slug}`}
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'CreativeWork',
+          author: {
+            '@type': 'Person',
+            name: 'Patrick Fanella',
+          },
+          description: project.summary,
+          headline: project.title,
+            image: project.media[0]?.src ? [`${siteUrl}${project.media[0].src}`] : undefined,
+          keywords: project.stack.join(', '),
+          name: project.title,
+            url: `${siteUrl}/projects/${project.slug}`,
+        }}
+        title={project.title}
+        type="article"
+      />
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.85fr)] lg:items-start border-b-2 border-stroke pb-16 mb-8">
         <div>
           <SectionLabel>{`Case study / ${project.year}`}</SectionLabel>

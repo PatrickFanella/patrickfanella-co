@@ -3,14 +3,15 @@ import { expect, test } from '@playwright/test'
 test('visitor can browse featured work and submit the contact form', async ({ page }) => {
 	await page.goto('/')
 
-	await expect(page.getByRole('heading', { name: /patrick fanella portfolio/i })).toBeVisible()
+	await expect(page.getByRole('heading', { name: /products that ship/i })).toBeVisible()
 
 	await page.getByRole('link', { name: /open master archive/i }).click()
 	await expect(page).toHaveURL(/\/projects$/)
-	await expect(page.getByRole('heading', { name: /patrick fanella portfolio/i })).toBeVisible()
+	await expect(page.getByRole('heading', { name: /all projects/i })).toBeVisible()
 
 	await page.getByRole('link', { name: /view detail/i }).first().click()
-	await expect(page).toHaveURL(/\/projects\/patrickfanella-co$/)
+	await expect(page).toHaveURL(/\/projects\/clpr$/)
+	await expect(page.getByRole('heading', { name: /clpr/i })).toBeVisible()
 	await expect(page.getByRole('link', { name: /open repository/i })).toBeVisible()
 
 	await page.goto('/contact')

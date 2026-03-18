@@ -115,6 +115,23 @@ func TestListProjectsAndGetProjectUseSeededPostgresData(t *testing.T) {
 	if !strings.Contains(err.Error(), models.ErrProjectNotFound.Error()) {
 		t.Fatalf("expected project not found error, got %v", err)
 	}
+
+	message, err := st.SaveContact(ctx, models.ContactInput{
+		Name:    "Patrick Fanella",
+		Email:   "patrick@example.com",
+		Message: "I would like to talk about one of your featured case studies.",
+	})
+	if err != nil {
+		t.Fatalf("save contact: %v", err)
+	}
+
+	if message.ID == 0 {
+		t.Fatalf("expected persisted contact message id, got %#v", message)
+	}
+
+	if message.CreatedAt.IsZero() {
+		t.Fatalf("expected contact created_at timestamp, got %#v", message)
+	}
 }
 
 func applyMigrations(ctx context.Context, pool *pgxpool.Pool) error {
@@ -159,6 +176,6 @@ func migrationFiles() ([]string, error) {
 }
 
 func resetProjectTables(ctx context.Context, pool *pgxpool.Pool) error {
-	_, err := pool.Exec(ctx, `TRUNCATE project_tag_map, project_tags, projects RESTART IDENTITY CASCADE`)
+	_, err := pool.Exec(ctx, `TRUNCATE contact_messages, project_tag_map, project_tags, projects RESTART IDENTITY CASCADE`)
 	return err
 }

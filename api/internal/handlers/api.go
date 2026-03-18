@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"io"
 	"log"
 	"net/http"
 	"net/mail"
@@ -23,11 +24,29 @@ type Store interface {
 }
 
 type API struct {
-	store Store
+	store           Store
+	contactSecurity ContactSecurityConfig
+	contactLimiter  *contactRateLimiter
 }
 
-func New(store Store) *API {
-	return &API{store: store}
+type contactRequest struct {
+	Name    string `json:"name"`
+	Email   string `json:"email"`
+	Message string `json:"message"`
+	Website string `json:"website,omitempty"`
+}
+
+func New(store Store, options ...ContactSecurityConfig) *API {
+	security := defaultContactSecurityConfig()
+	if len(options) > 0 {
+		security = options[0].withDefaults()
+	}
+
+	return &API{
+		store:           store,
+		contactSecurity: security,
+		contactLimiter:  newContactRateLimiter(security.RateLimitMaxRequests, security.RateLimitWindow),
+	}
 }
 
 func (api *API) Health(w http.ResponseWriter, r *http.Request) {
@@ -64,24 +83,76 @@ func (api *API) GetProject(w http.ResponseWriter, r *http.Request) {
 func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
-	var input models.ContactInput
+	clientIP := clientIPFromRequest(r)
+	origin := strings.TrimSpace(r.Header.Get("Origin"))
+	contentType := strings.TrimSpace(r.Header.Get("Content-Type"))
+
+	if origin != "" && !sameOrigin(origin, api.contactSecurity.AllowedOrigin) {
+		log.Printf("contact.create rejected reason=origin_mismatch origin=%q remote=%s", origin, clientIP)
+		writeError(w, http.StatusForbidden, "forbidden_origin", "This origin is not allowed to submit the contact form.", nil)
+		return
+	}
+
+	if !strings.HasPrefix(strings.ToLower(contentType), "application/json") {
+		log.Printf("contact.create rejected reason=unsupported_media_type content_type=%q remote=%s", contentType, clientIP)
+		writeError(w, http.StatusUnsupportedMediaType, "unsupported_media_type", "Contact submissions must be sent as JSON.", nil)
+		return
+	}
+
+	if !api.contactLimiter.Allow(clientIP) {
+		log.Printf("contact.create rejected reason=rate_limit remote=%s", clientIP)
+		writeError(w, http.StatusTooManyRequests, "rate_limited", "Too many contact attempts. Please wait a moment and try again.", nil)
+		return
+	}
+
+	r.Body = http.MaxBytesReader(w, r.Body, api.contactSecurity.MaxBodyBytes)
+
+	var request contactRequest
 	decoder := json.NewDecoder(r.Body)
 	decoder.DisallowUnknownFields()
-	if err := decoder.Decode(&input); err != nil {
+	if err := decoder.Decode(&request); err != nil {
+		var maxBytesErr *http.MaxBytesError
+		if errors.As(err, &maxBytesErr) {
+			log.Printf("contact.create rejected reason=payload_too_large remote=%s limit=%d", clientIP, api.contactSecurity.MaxBodyBytes)
+			writeError(w, http.StatusRequestEntityTooLarge, "payload_too_large", "The contact request is too large.", nil)
+			return
+		}
+
 		log.Printf("contact.create invalid_json error=%v", err)
 		writeError(w, http.StatusBadRequest, "invalid_json", "Request body must be valid JSON.", nil)
 		return
 	}
 
-	if decoder.More() {
+	var extra json.RawMessage
+	if err := decoder.Decode(&extra); err != io.EOF {
 		log.Printf("contact.create invalid_json error=multiple_json_values")
 		writeError(w, http.StatusBadRequest, "invalid_json", "Request body must contain a single JSON object.", nil)
 		return
 	}
 
-	input.Name = strings.TrimSpace(input.Name)
-	input.Email = strings.TrimSpace(input.Email)
-	input.Message = strings.TrimSpace(input.Message)
+	request.Name = strings.TrimSpace(request.Name)
+	request.Email = strings.TrimSpace(request.Email)
+	request.Message = strings.TrimSpace(request.Message)
+	request.Website = strings.TrimSpace(request.Website)
+
+	if request.Website != "" {
+		log.Printf("contact.create suppressed reason=honeypot remote=%s field=%q", clientIP, api.contactSecurity.HoneypotField)
+		writeJSON(w, http.StatusAccepted, models.ContactSubmissionResponse{
+			Message: "Thanks — your note has been saved.",
+			Item: models.ContactMessage{
+				Name:    request.Name,
+				Email:   request.Email,
+				Message: request.Message,
+			},
+		})
+		return
+	}
+
+	input := models.ContactInput{
+		Name:    request.Name,
+		Email:   request.Email,
+		Message: request.Message,
+	}
 
 	if fields := validateContactInput(input); len(fields) > 0 {
 		log.Printf("contact.create validation_failed fields=%v", fields)

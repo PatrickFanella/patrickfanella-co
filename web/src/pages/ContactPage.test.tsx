@@ -39,6 +39,7 @@ describe('ContactPage', () => {
 			name: 'Patrick Fanella',
 			email: 'patrick@example.com',
 			message: 'I would love to talk about one of your featured case studies.',
+			website: '',
 		})
 	})
 
