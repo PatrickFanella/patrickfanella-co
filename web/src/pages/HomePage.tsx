@@ -51,14 +51,14 @@ export function HomePage() {
     : {
       initial: { opacity: 0, y: 10 },
       animate: { opacity: 1, y: 0 },
-      transition: { duration: 0.2, ease: 'linear' as const },
+      transition: { duration: 0.3, ease: 'easeOut' as const },
     }
   const fadeInProps = prefersReducedMotion
     ? {}
     : {
       initial: { opacity: 0 },
       animate: { opacity: 1 },
-      transition: { duration: 0.2, delay: 0.1, ease: 'linear' as const },
+      transition: { duration: 0.3, delay: 0.1, ease: 'easeOut' as const },
     }
   const structuredData = {
     '@context': 'https://schema.org',
@@ -114,7 +114,7 @@ export function HomePage() {
           <div className="grid gap-6 content-start">
             <aside className={`${surfaceCardClass} bg-panel p-8`} aria-label="Operating philosophy">
               <p className={monoLabelClass}>Approach</p>
-              <p className="mt-6 font-display text-[2.2rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
+              <p className="mt-5 font-display text-[2.2rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
                 Complex systems, made clear.
               </p>
               <p className="mt-4 text-ink-soft leading-relaxed">
@@ -128,7 +128,7 @@ export function HomePage() {
                 {focusAreas.map((item) => (
                   <li
                     key={item}
-                    className="border-2 border-stroke bg-surface px-4 py-3 font-mono text-[0.8rem] uppercase tracking-[0.15em] text-heading transition-colors hover:border-accent-pink hover:bg-accent-pink hover:text-paper"
+                    className="border-2 border-stroke bg-surface px-4 py-3 font-mono text-[0.8rem] uppercase tracking-[0.15em] text-heading transition-colors duration-150 ease-out hover:border-accent-pink hover:bg-accent-pink hover:text-paper"
                   >
                     {item}
                   </li>

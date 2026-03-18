@@ -19,9 +19,9 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
 
   return (
     <article
-      className={`${surfaceCardClass} group flex h-full flex-col justify-between p-6 hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}
+      className={`${surfaceCardClass} group flex h-full flex-col justify-between p-7 hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}
     >
-      <div className="mb-6 grid gap-5 border-b-2 border-stroke pb-5">
+      <div className="mb-6 grid gap-5 border-b-2 border-stroke pb-6">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             {orderLabel ? (
@@ -43,7 +43,7 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
           <h3 className="max-w-[14ch] font-display text-[2.25rem] font-bold leading-[0.92] tracking-[-0.05em] text-heading md:text-[2.5rem]">
             {project.title}
           </h3>
-          <p className="mt-4 max-w-[42ch] text-[1.05rem] leading-relaxed text-ink-soft">
+          <p className="mt-3 max-w-[42ch] text-[1.05rem] leading-relaxed text-ink-soft">
             {project.summary}
           </p>
         </div>
@@ -57,7 +57,7 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
         ))}
       </ul>
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t-2 border-stroke pt-5">
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t-2 border-stroke pt-6">
         {project.featured ? <p className={monoLabelClass}>Featured Project</p> : <span />}
 
         <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>
