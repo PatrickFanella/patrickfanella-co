@@ -38,13 +38,6 @@ type API struct {
 	notificationFailures atomic.Uint64
 }
 
-type contactRequest struct {
-	Name    string `json:"name"`
-	Email   string `json:"email"`
-	Message string `json:"message"`
-	Website string `json:"website,omitempty"`
-}
-
 func New(store Store, options ...ContactSecurityConfig) *API {
 	security := defaultContactSecurityConfig()
 	if len(options) > 0 {
@@ -157,7 +150,7 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 
 	r.Body = http.MaxBytesReader(w, r.Body, api.contactSecurity.MaxBodyBytes)
 
-	var request contactRequest
+	var request models.ContactInput
 	decoder := json.NewDecoder(r.Body)
 	decoder.DisallowUnknownFields()
 	if err := decoder.Decode(&request); err != nil {

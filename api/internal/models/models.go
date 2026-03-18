@@ -55,6 +55,7 @@ type ContactInput struct {
 	Name    string `json:"name"`
 	Email   string `json:"email"`
 	Message string `json:"message"`
+	Website string `json:"website,omitempty"` // Honeypot field for abuse prevention
 }
 
 type ContactMessage struct {
