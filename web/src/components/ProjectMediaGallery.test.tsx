@@ -39,8 +39,8 @@ describe('ProjectMediaGallery', () => {
 		const image = screen.getByRole('img', { name: /broken visual/i })
 		fireEvent.error(image)
 
-		expect(screen.getByText(/fallback asset in use/i)).toBeInTheDocument()
-		expect(screen.getByRole('img', { name: /demo project fallback placeholder artwork/i })).toHaveAttribute(
+		expect(screen.getByText(/placeholder visual in use/i)).toBeInTheDocument()
+		expect(screen.getByRole('img', { name: /demo project placeholder artwork/i })).toHaveAttribute(
 			'src',
 			'/assets/projects/project-fallback.svg',
 		)

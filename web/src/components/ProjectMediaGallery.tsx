@@ -49,7 +49,7 @@ function ProjectMediaCard({ item, projectTitle, index }: ProjectMediaCardProps) 
   }
 
   const altText = usingFallback
-    ? `${projectTitle} fallback placeholder artwork`
+    ? `${projectTitle} placeholder artwork`
     : item.alt || `${projectTitle} supporting visual ${index + 1}`
 
   return (
@@ -71,7 +71,7 @@ function ProjectMediaCard({ item, projectTitle, index }: ProjectMediaCardProps) 
         <p>{item.caption || 'Supporting visual for the case study.'}</p>
         {usingFallback ? (
           <p className="font-mono text-[0.72rem] uppercase tracking-[0.15em] text-accent-purple">
-            Fallback asset in use
+            Placeholder visual in use
           </p>
         ) : null}
       </figcaption>

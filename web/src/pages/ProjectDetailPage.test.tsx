@@ -12,7 +12,7 @@ describe('ProjectDetailPage', () => {
 
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
-		expect(screen.getByRole('status')).toHaveTextContent(/fetching the case study, supporting media, and architecture notes/i)
+		expect(screen.getByRole('status')).toHaveTextContent(/fetching the project details, media, and architecture notes/i)
 	})
 
 	it('renders project detail data from the API', async () => {
@@ -21,9 +21,9 @@ describe('ProjectDetailPage', () => {
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /system choices that mattered/i })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /what the next version would keep/i })).toBeInTheDocument()
-		expect(screen.getByRole('link', { name: /open repository/i })).toHaveAttribute(
+		expect(screen.getByRole('heading', { name: /technical decisions that mattered/i })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: /what held up/i })).toBeInTheDocument()
+		expect(screen.getByRole('link', { name: /view repository/i })).toHaveAttribute(
 			'href',
 			featuredProject.repoUrl,
 		)
@@ -40,9 +40,9 @@ describe('ProjectDetailPage', () => {
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: /system choices that mattered/i })).not.toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: /visual references for the build/i })).not.toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: /what the next version would keep/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /technical decisions that mattered/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /screens and diagrams/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /what held up/i })).not.toBeInTheDocument()
 	})
 
 	it('renders an intentional not-found route when the slug is missing', async () => {
@@ -52,7 +52,7 @@ describe('ProjectDetailPage', () => {
 
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/does-not-exist')
 
-		expect(await screen.findByRole('heading', { name: /record not found/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: /this case study isn't available/i })).toBeInTheDocument()
 	})
 
 	it('renders a retryable generic error state for non-404 failures', async () => {
@@ -62,7 +62,7 @@ describe('ProjectDetailPage', () => {
 
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
-		expect(await screen.findByRole('heading', { name: /unable to load record/i })).toBeInTheDocument()
-		expect(screen.getByRole('button', { name: /retry lookup/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: /unable to load case study/i })).toBeInTheDocument()
+		expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument()
 	})
 })

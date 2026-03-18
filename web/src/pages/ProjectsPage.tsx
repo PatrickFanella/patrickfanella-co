@@ -18,7 +18,7 @@ export function ProjectsPage() {
   const visibleProjects = activeTag
     ? projects.filter((project) => project.stack.includes(activeTag))
     : projects
-  const projectsError = getErrorMessage(error, 'The project index could not be loaded from the API.')
+  const projectsError = getErrorMessage(error, 'Please try again in a moment.')
   const filterButtonClass =
     'inline-flex cursor-pointer items-center justify-center border-2 px-4 py-2 text-[0.72rem] font-mono font-bold uppercase tracking-[0.15em] transition-all duration-150 ease-linear focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple focus-visible:ring-offset-2 focus-visible:ring-offset-paper'
 
@@ -31,19 +31,19 @@ export function ProjectsPage() {
       />
       <div className="grid gap-8 md:grid-cols-[minmax(0,1.5fr)_minmax(320px,0.85fr)] md:items-start border-b-2 border-stroke pb-12 mb-10">
         <div>
-          <SectionLabel>Database query</SectionLabel>
+          <SectionLabel>Project Archive</SectionLabel>
           <h1 className={`${pageTitleClass} mt-6 uppercase`}>
-            All projects.
+            Projects
           </h1>
           <p className={pageIntroClass}>
-            Browse production systems by stack, then open each case study for architecture decisions, infrastructure details, and engineering takeaways.
+            Each project below is a production system &mdash; built, deployed, and documented. Filter by stack, then open any case study for the architecture decisions, trade-offs, and lessons behind the build.
           </p>
         </div>
 
         <aside className={`${surfaceCardClass} h-fit bg-panel p-8`} aria-label="Reading protocol">
-          <p className={monoLabelClass}>Protocol</p>
+          <p className={monoLabelClass}>Filter by</p>
           <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">
-            Filter by language, framework, or problem domain. Each card links to the full case study.
+            Explore projects by language, framework, or problem domain. Each card links to the full case study.
           </p>
         </aside>
       </div>
@@ -52,7 +52,7 @@ export function ProjectsPage() {
         <div className="grid gap-6">
           <RouteState
             ariaLive="polite"
-            description="Loading the project index from the API."
+            description="Loading project index."
             label="Loading"
             role="status"
             title="Project index incoming."
@@ -88,20 +88,20 @@ export function ProjectsPage() {
               onClick={retry}
               type="button"
             >
-              Retry query
+              Try Again
             </button>
           )}
           description={projectsError}
-          label="Query failed"
+          label="Unavailable"
           role="alert"
-          title="Project index unavailable."
+          title="The project index couldn't be loaded."
         />
       ) : null}
 
       {status === 'success' && projects.length === 0 ? (
         <RouteState
-          description="The portfolio database is reachable, but it does not contain any seeded projects yet."
-          label="No records"
+          description="The portfolio is online, but no projects have been published yet."
+          label="No projects yet"
           title="The archive is empty."
         />
       ) : null}
@@ -114,7 +114,7 @@ export function ProjectsPage() {
                 <p className={monoLabelClass}>Filters</p>
                 <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
                   Showing {visibleProjects.length} of {projects.length} projects
-                  {activeTag ? ` tagged ${activeTag}.` : '.'}
+                  {activeTag ? ` for ${activeTag}.` : '.'}
                 </p>
               </div>
               {activeTag ? (
@@ -123,7 +123,7 @@ export function ProjectsPage() {
                   onClick={() => setActiveTag(null)}
                   type="button"
                 >
-                  Reset filter
+                  Clear Filter
                 </button>
               ) : null}
             </div>
@@ -173,10 +173,10 @@ export function ProjectsPage() {
                     onClick={() => setActiveTag(null)}
                     type="button"
                   >
-                    Reset filter
+                    Clear Filter
                   </button>
                 )}
-                description={`No projects match the ${activeTag} filter. Try another tag or reset the view.`}
+                description={`No projects match the ${activeTag} filter. Try another tag or clear the filter.`}
                 label="No matches"
                 title="That filter came up empty."
               />

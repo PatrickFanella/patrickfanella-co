@@ -13,7 +13,7 @@ describe('ProjectsPage', () => {
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(screen.getByRole('status')).toHaveTextContent(/loading the project index/i)
+		expect(screen.getByRole('status')).toHaveTextContent(/loading project index/i)
 	})
 
 	it('renders all projects in a single list', async () => {
