@@ -13,6 +13,14 @@ export const secondaryButtonClass =
 export const textLinkClass =
   'inline-flex w-fit cursor-pointer items-center gap-1.5 text-sm font-bold tracking-[0.05em] uppercase text-heading decoration-2 underline-offset-4 hover:underline hover:text-accent-green hover:decoration-accent-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper transition-all duration-150 ease-out'
 
+/* Compact button variant for filters and toggles */
+export const compactButtonClass =
+  'inline-flex min-w-0 cursor-pointer items-center justify-center border-2 px-4 py-2 text-sm font-bold uppercase tracking-[0.05em] transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-paper'
+
+/* Navigation button variant - combines base compact button with nav colors */
+export const navButtonClass =
+  'inline-flex min-w-0 cursor-pointer items-center justify-center border-2 px-4 py-2.5 text-center text-sm font-bold uppercase tracking-[0.05em] transition-all duration-150 ease-out hover:-translate-x-1 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none'
+
 export const pageSectionClass = 'px-1 pt-12 pb-16'
 
 export const pageTitleClass =

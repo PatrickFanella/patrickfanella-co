@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 
-import { monoLabelClass } from '../lib/styles'
+import { monoLabelClass, navButtonClass } from '../lib/styles'
 
 const navigation = [
   { to: '/', label: 'Home', end: true },
@@ -63,7 +63,8 @@ export function SiteLayout() {
                   end={item.end}
                   className={({ isActive }) =>
                     [
-                      'inline-flex min-w-0 cursor-pointer items-center justify-center border-2 px-4 py-2.5 text-center text-sm font-bold uppercase tracking-[0.05em] transition-all duration-150 ease-linear hover:-translate-x-1 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none lg:w-full',
+                      navButtonClass,
+                      'lg:w-full',
                       isActive
                         ? 'border-heading bg-heading text-paper shadow-brutal-green focus-visible:ring-accent-green'
                         : 'border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple hover:shadow-brutal-purple focus-visible:ring-accent-purple',

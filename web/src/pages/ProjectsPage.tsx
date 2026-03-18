@@ -5,7 +5,7 @@ import { RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage } from '../lib/errors'
-import { monoLabelClass, pageIntroClass, pageSectionClass, pageTitleClass, surfaceCardClass } from '../lib/styles'
+import { compactButtonClass, monoLabelClass, pageIntroClass, pageSectionClass, pageTitleClass, secondaryButtonClass, surfaceCardClass } from '../lib/styles'
 import { useProjects } from '../lib/useProjects'
 
 export function ProjectsPage() {
@@ -19,8 +19,6 @@ export function ProjectsPage() {
     ? projects.filter((project) => project.stack.includes(activeTag))
     : projects
   const projectsError = getErrorMessage(error, 'Please try again in a moment.')
-  const filterButtonClass =
-    'inline-flex cursor-pointer items-center justify-center border-2 px-4 py-2 text-[0.72rem] font-mono font-bold uppercase tracking-[0.15em] transition-all duration-150 ease-linear focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple focus-visible:ring-offset-2 focus-visible:ring-offset-paper'
 
   return (
     <section className={`${pageSectionClass} pt-4`}>
@@ -84,7 +82,7 @@ export function ProjectsPage() {
         <RouteState
           actions={(
             <button
-              className="inline-flex cursor-pointer items-center justify-center border-2 border-stroke bg-surface px-6 py-3 text-sm font-bold uppercase tracking-[0.05em] text-heading transition-all duration-150 ease-linear hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-purple hover:text-accent-purple hover:shadow-brutal-purple"
+              className={secondaryButtonClass}
               onClick={retry}
               type="button"
             >
@@ -119,7 +117,10 @@ export function ProjectsPage() {
               </div>
               {activeTag ? (
                 <button
-                  className={`${filterButtonClass} border-stroke bg-surface text-heading hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-purple hover:text-accent-purple hover:shadow-brutal-purple`}
+                  className={[
+                    compactButtonClass,
+                    'text-[0.72rem] font-mono border-stroke bg-surface text-heading hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-purple hover:text-accent-purple hover:shadow-brutal-purple focus-visible:ring-accent-purple',
+                  ].join(' ')}
                   onClick={() => setActiveTag(null)}
                   type="button"
                 >
@@ -131,11 +132,13 @@ export function ProjectsPage() {
             <div className="flex flex-wrap gap-3">
               <button
                 aria-pressed={activeTag === null}
-                className={`${filterButtonClass} ${
+                className={[
+                  compactButtonClass,
+                  'text-[0.72rem] font-mono',
                   activeTag === null
                     ? 'border-accent-green bg-accent-green text-paper'
-                    : 'border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple'
-                }`}
+                    : 'border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple focus-visible:ring-accent-purple',
+                ].join(' ')}
                 onClick={() => setActiveTag(null)}
                 type="button"
               >
@@ -145,11 +148,13 @@ export function ProjectsPage() {
                 <button
                   key={tag}
                   aria-pressed={activeTag === tag}
-                  className={`${filterButtonClass} ${
+                  className={[
+                    compactButtonClass,
+                    'text-[0.72rem] font-mono',
                     activeTag === tag
                       ? 'border-accent-green bg-accent-green text-paper'
-                      : 'border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple'
-                  }`}
+                      : 'border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple focus-visible:ring-accent-purple',
+                  ].join(' ')}
                   onClick={() => setActiveTag(tag)}
                   type="button"
                 >
@@ -169,7 +174,10 @@ export function ProjectsPage() {
               <RouteState
                 actions={(
                   <button
-                    className={filterButtonClass + ' border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple'}
+                    className={[
+                      compactButtonClass,
+                      'text-[0.72rem] font-mono border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple focus-visible:ring-accent-purple',
+                    ].join(' ')}
                     onClick={() => setActiveTag(null)}
                     type="button"
                   >
