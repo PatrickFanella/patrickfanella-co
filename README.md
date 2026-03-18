@@ -18,8 +18,8 @@ Project-first full stack developer portfolio scaffold built with:
 
 - The current scaffold is the implementation baseline, not throwaway work.
 - v1 scope is the four public routes, curated project content, API-backed project browsing, and a working contact submission flow.
-- PostgreSQL is the runtime source of truth for project content and contact submissions at launch.
-- Placeholder data in `web/src/data/projects.ts` and `api/internal/models/models.go` is temporary and should be phased out from runtime use.
+- PostgreSQL is the runtime source of truth and serving layer for project content and contact submissions at launch.
+- Remaining placeholder copy is limited to tests and fallback UI states.
 
 ## Configuration
 
@@ -89,11 +89,3 @@ Recommended local verification order:
 5. Run frontend checks with `cd web && npm run lint && npm run test && npm run build`
 6. Install Playwright browsers once with `cd web && npx playwright install chromium`
 7. Run the browser smoke path with `cd web && npm run test:e2e`
-
-## Suggested next steps
-
-1. Add a repeatable seed workflow for project content
-2. Connect the API project routes to PostgreSQL
-3. Replace starter project content with curated case studies
-4. Connect the frontend project pages to the API project endpoints
-5. Add launch polish for assets, SEO, testing, and deployment
