@@ -18,6 +18,11 @@ function readEnvValue(source, key) {
 }
 
 async function resolveSiteUrl() {
+	const envSiteUrl = (process.env.VITE_SITE_URL || '').trim()
+	if (envSiteUrl) {
+		return envSiteUrl.replace(/\/$/, '')
+	}
+
 	try {
 		const envFile = await readFile(envPath, 'utf8')
 		return (readEnvValue(envFile, 'VITE_SITE_URL') || 'https://patrickfanella.co').replace(/\/$/, '')

@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
-	"log"
+	"log/slog"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -12,18 +13,20 @@ import (
 
 	"patrickfanella.co/api/internal/config"
 	"patrickfanella.co/api/internal/handlers"
+	"patrickfanella.co/api/internal/notifications"
 	"patrickfanella.co/api/internal/store"
 )
 
 func main() {
 	cfg := config.Load()
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo}))
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	appStore, err := store.New(ctx, cfg.DatabaseURL)
 	if err != nil {
-		log.Printf("database unavailable, starting in degraded mode: project reads and contact submissions will return service-unavailable responses: %v", err)
+		logger.Warn("database unavailable, starting in degraded mode", slog.Any("error", err))
 	}
 	defer appStore.Close()
 
@@ -34,11 +37,17 @@ func main() {
 		RateLimitMaxRequests: cfg.ContactRateLimitMax,
 		RateLimitWindow:      cfg.ContactRateLimitWindow,
 	})
+	api.SetLogger(logger)
+	api.SetNotifier(notifications.NewWebhookNotifier(
+		cfg.ContactNotificationWebhookURL,
+		cfg.ContactNotificationBearerToken,
+		cfg.ContactNotificationTimeout,
+	))
 
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
-	r.Use(middleware.Logger)
+	r.Use(api.Observability)
 	r.Use(middleware.Recoverer)
 	r.Use(cors.Handler(cors.Options{
 		AllowedOrigins:   []string{cfg.CORSOrigin},
@@ -60,8 +69,9 @@ func main() {
 		ReadHeaderTimeout: 5 * time.Second,
 	}
 
-	log.Printf("api listening on http://localhost:%s", cfg.Port)
+	logger.Info("api listening", slog.String("addr", ":"+cfg.Port), slog.Bool("database_enabled", appStore.DatabaseEnabled()), slog.Bool("notifications_enabled", api.NotificationsEnabled()))
 	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		log.Fatal(err)
+		logger.Error("server exited unexpectedly", slog.Any("error", err))
+		os.Exit(1)
 	}
 }
