@@ -26,9 +26,9 @@ describe('App navigation flows', () => {
 		renderApp('/')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		await user.click(screen.getByRole('link', { name: /read the case studies/i }))
+		await user.click(screen.getByRole('link', { name: /view case studies/i }))
 
-		expect(await screen.findByRole('heading', { name: /all projects/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
 		await waitFor(() => {
 			expect(document.title).toBe('Projects | Patrick Fanella')
 		})
@@ -41,8 +41,8 @@ describe('App navigation flows', () => {
 
 		renderApp('/projects')
 
-		expect(await screen.findByRole('heading', { name: /all projects/i })).toBeInTheDocument()
-		await user.click(screen.getAllByRole('link', { name: /view detail/i })[0])
+		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
+		await user.click(screen.getAllByRole('link', { name: /read case study/i })[0])
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
 		await waitFor(() => {

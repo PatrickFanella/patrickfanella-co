@@ -34,24 +34,24 @@ export function SiteLayout() {
           <div className="grid gap-4">
             <div className="flex flex-wrap items-center gap-3">
               <span aria-hidden="true" className="h-3 w-3 bg-accent-green" />
-              <p className={monoLabelClass}><span className="text-accent-pink">Patrick Fanella</span> &mdash; Full Stack Developer</p>
+              <p className={monoLabelClass}><span className="text-accent-pink">Patrick Fanella</span> &mdash; Full-Stack Engineer</p>
             </div>
 
             <div className="max-w-120">
               <p className="font-display text-[clamp(2.5rem,4vw,4rem)] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
-                Ships products. <span className="text-accent-teal">Full stack.</span> From<span className="text-accent-green"> Go </span>to<span className="text-accent-purple"> pixel perfect</span>.
+                I build products that<span className="text-accent-green"> ship </span>and systems that<span className="text-accent-teal"> hold up</span>.
               </p>
               <p className="mt-4 max-w-[40ch] text-[1.05rem] leading-relaxed text-ink-soft">
-                Building production systems across Go APIs, React interfaces, AI pipelines, and real-time infrastructure. Every project here has been deployed, monitored, and used.
+                Building reliable software across Go, React, Python, and TypeScript&mdash;from backend services and search infrastructure to real-time interfaces and AI-enabled products.
               </p>
             </div>
           </div>
 
           <div className="grid gap-6 lg:col-start-3 lg:h-full lg:grid-rows-[auto_1fr_auto] lg:justify-items-end">
             <div className="grid gap-2 border-2 border-stroke bg-surface p-4 shadow-brutal transition-all hover:shadow-brutal-green lg:w-full lg:max-w-[320px]">
-              <p className={monoLabelClass}>Stack</p>
+              <p className={monoLabelClass}>Core stack</p>
               <p className="text-sm leading-relaxed text-ink-soft">
-                Go / React / PostgreSQL / Python / TypeScript. From search infrastructure to smart contracts.
+                Go / React / PostgreSQL / Python / TypeScript. APIs, search, AI workflows, developer tooling, and product infrastructure.
               </p>
             </div>
 
@@ -83,7 +83,7 @@ export function SiteLayout() {
 
         <footer className="grid gap-6 border-t-2 border-stroke p-5 md:p-8 text-sm leading-relaxed text-ink-soft lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] lg:items-start bg-surface">
           <p className="max-w-[30ch]">
-            Polyglot engineering across Go, TypeScript, Python, and Solidity.
+            Polyglot builds. Production discipline. Open source by default.
           </p>
 
           <p className={`${monoLabelClass} lg:justify-self-end text-accent-purple`}>

@@ -12,7 +12,7 @@ describe('HomePage', () => {
 
 		renderInRouter(<HomePage />)
 
-		expect(screen.getByRole('status')).toHaveTextContent(/pulling the featured case-study set/i)
+		expect(screen.getByRole('status')).toHaveTextContent(/loading featured projects/i)
 	})
 
 	it('renders featured projects from the API response', async () => {
@@ -33,6 +33,6 @@ describe('HomePage', () => {
 		renderInRouter(<HomePage />)
 
 		expect(await screen.findByRole('alert')).toHaveTextContent(/temporarily unavailable/i)
-		expect(screen.getByRole('button', { name: /retry request/i })).toBeInTheDocument()
+		expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument()
 	})
 })

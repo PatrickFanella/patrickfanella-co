@@ -58,10 +58,10 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
       </ul>
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t-2 border-stroke pt-5">
-        {project.featured ? <p className={monoLabelClass}>Featured build</p> : <span />}
+        {project.featured ? <p className={monoLabelClass}>Featured Project</p> : <span />}
 
         <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>
-          View detail
+          Read Case Study
         </Link>
       </div>
     </article>

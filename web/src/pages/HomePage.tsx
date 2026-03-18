@@ -17,23 +17,23 @@ import {
 } from '../lib/styles'
 import { useProjects } from '../lib/useProjects'
 
-const focusAreas = ['Go / Backend Systems', 'React / TypeScript', 'AI / ML Pipelines', 'Infrastructure / DevOps']
+const focusAreas = ['Go / Backend Architecture', 'React / TypeScript Interfaces', 'AI, Search, and Data Pipelines', 'Infrastructure / DevOps']
 
 const workingPrinciples = [
   {
     title: 'Shipped products over side projects',
     description:
-      'Every featured project has been deployed to production with monitoring, CI/CD, and real users. The case studies include architecture decisions, trade-offs, and the constraints that shaped the final result.',
+      'Production forces decisions that prototypes never do. Every project here has been deployed, monitored, and used \u2014 and the case studies capture the constraints that shaped each build, not just the final architecture.',
   },
   {
     title: 'Full stack means the whole stack',
     description:
-      'From Solidity smart contracts to Kubernetes orchestration, GPU worker queues to browser extensions. The work spans languages, runtimes, and infrastructure layers because real products require it.',
+      'From Solidity smart contracts to Kubernetes orchestration, GPU worker queues to browser extensions. Real products don\u2019t respect stack boundaries, and neither does this work.',
   },
   {
     title: 'Production engineering is not optional',
     description:
-      'Load testing, security audits, observability, and horizontal scaling are part of the build, not afterthoughts. The projects here include Prometheus dashboards, k6 benchmarks, and Slither contract audits.',
+      'Load testing, security audits, observability, and horizontal scaling are part of the build \u2014 not items for a post-launch backlog. The projects here ship with Prometheus dashboards, k6 benchmarks, and Slither contract audits as standard.',
   },
 ]
 
@@ -82,14 +82,14 @@ export function HomePage() {
               className="mt-8 font-display text-[clamp(4rem,8vw,8rem)] font-bold leading-[0.85] tracking-[-0.05em] text-heading uppercase"
               {...motionProps}
             >
-        Products that<span className="text-accent-green"> ship.</span> <br/>Systems that<span className="text-accent-teal"> scale.</span>
+        I build products that<span className="text-accent-green"> ship </span>and systems that<span className="text-accent-teal"> scale.</span>
             </motion.h1>
 
             <motion.p
               className={`${pageIntroClass} max-w-[46ch] mt-8 text-[1.2rem]`}
               {...fadeInProps}
             >
-        I'm <span className="text-accent-pink">Patrick Fanella</span>. I build production systems across Go, React, Python, and TypeScript. From AI agent platforms and GPU transcription pipelines to 3D graph visualization and on-chain content provenance.
+        I'm <span className="text-accent-pink">Patrick Fanella</span>. I build AI agent platforms, GPU transcription pipelines, 3D graph visualization tools, and on-chain provenance systems &mdash; production software across Go, React, Python, and TypeScript, from first commit to monitored deployment.
             </motion.p>
 
             <motion.div
@@ -103,27 +103,27 @@ export function HomePage() {
                 })}
             >
               <Link className={primaryButtonClass} to="/projects">
-                Read the Case Studies
+                View Case Studies
               </Link>
               <Link className={secondaryButtonClass} to="/contact">
-                Initialize Contact
+                Get in Touch
               </Link>
             </motion.div>
           </div>
 
           <div className="grid gap-6 content-start">
             <aside className={`${surfaceCardClass} bg-panel p-8`} aria-label="Operating philosophy">
-              <p className={monoLabelClass}>Philosophy</p>
+              <p className={monoLabelClass}>Approach</p>
               <p className="mt-6 font-display text-[2.2rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                Build the hard thing, then make it legible.
+                Build the hard thing, then make it understandable.
               </p>
               <p className="mt-4 text-ink-soft leading-relaxed">
-                The interesting problems live where systems meet; search pipelines feeding frontends, AI agents coordinating through WebSockets, smart contracts verified by browser extensions. That is where the work lives.
+                The interesting problems live where systems meet &mdash; search pipelines feeding frontends, AI agents coordinating through WebSockets, smart contracts verified by browser extensions. I build at those seams.
               </p>
             </aside>
 
             <aside className={`${surfaceCardClass} p-8`} aria-label="Core competences">
-              <p className={monoLabelClass}>Competences</p>
+              <p className={monoLabelClass}>Core strengths</p>
               <ul className="mt-6 grid list-none gap-3 p-0" aria-label="Primary technology focus">
                 {focusAreas.map((item) => (
                   <li
@@ -142,19 +142,19 @@ export function HomePage() {
       <section className="border-b-2 border-stroke pb-16 pt-16">
         <div className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,auto)] lg:items-end">
           <div>
-            <SectionLabel>Verified builds</SectionLabel>
+            <SectionLabel>Featured Work</SectionLabel>
             <h2 className="mt-6 max-w-[15ch] font-display text-[clamp(3.5rem,5vw,5rem)] font-bold leading-[0.88] tracking-[-0.04em] text-heading uppercase">
               Selected case studies.
             </h2>
           </div>
 
           <div className="grid gap-4 border-2 border-stroke bg-surface p-6">
-            <p className={monoLabelClass}>Access</p>
+            <p className={monoLabelClass}>What's inside</p>
             <p className="max-w-120 text-[1.05rem] leading-relaxed text-ink-soft">
-              Each case study covers the shipped result, the architecture behind it, and the engineering trade-offs that shaped the final system.
+              Each case study covers what shipped, how it was built, and the engineering trade-offs that drove the final architecture.
             </p>
             <Link className={textLinkClass} to="/projects">
-              Open master archive ↗
+              Browse All Projects ↗
             </Link>
           </div>
         </div>
@@ -163,10 +163,10 @@ export function HomePage() {
           <div className="grid gap-6">
             <RouteState
               ariaLive="polite"
-              description="Pulling the featured case-study set from the API."
+              description="Loading featured projects."
               label="Loading"
               role="status"
-              title="Featured case studies incoming."
+              title="Featured projects incoming."
             />
 
             <div className="grid gap-6 md:grid-cols-2" aria-hidden="true">
@@ -196,25 +196,25 @@ export function HomePage() {
             actions={(
               <>
                 <button className={secondaryButtonClass} onClick={retry} type="button">
-                  Retry request
+                  Try Again
                 </button>
                 <Link className={textLinkClass} to="/projects">
-                  Open master archive ↗
+                  Browse All Projects ↗
                 </Link>
               </>
             )}
             description={featuredMessage}
-            label="Fetch fault"
+            label="Unavailable"
             role="alert"
-            title="Featured work is offline."
+            title="Featured projects are temporarily unavailable."
           />
         ) : null}
 
         {status === 'success' && featuredProjects.length === 0 ? (
           <RouteState
-            actions={<Link className={textLinkClass} to="/projects">Open master archive ↗</Link>}
-            description="Featured case studies have not been published yet. Use the master archive to browse the full portfolio once entries are seeded."
-            label="Empty set"
+            actions={<Link className={textLinkClass} to="/projects">Browse All Projects ↗</Link>}
+            description="Featured case studies haven't been published yet. Browse the full archive to explore the portfolio."
+            label="No featured projects yet"
             title="No featured projects yet."
           />
         ) : null}
@@ -230,12 +230,12 @@ export function HomePage() {
 
       <section className="grid gap-12 pb-8 pt-16 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1.4fr)] xl:items-start">
         <div>
-          <SectionLabel>Methodology</SectionLabel>
+          <SectionLabel>How I Work</SectionLabel>
           <h2 className="mt-6 font-display text-[clamp(3.5rem,5vw,5rem)] font-bold leading-[0.88] tracking-[-0.04em] text-heading uppercase">
             How I like to work.
           </h2>
           <p className="mt-6 max-w-[40ch] text-[1.1rem] leading-relaxed text-ink-soft">
-            I gravitate toward problems that cross system boundaries; the seam between a GPU worker and a search index, between an AI agent and a real-time chat interface, between a smart contract and a browser extension.
+            I start by understanding what the system needs to do under real conditions &mdash; actual load, real users, genuine failure modes. The methodology below reflects how that thinking shapes every build, from the first architecture sketch to the monitoring dashboard.
           </p>
         </div>
 
@@ -245,7 +245,7 @@ export function HomePage() {
               key={principle.title}
               className={`${surfaceCardClass} p-8 ${index === 0 ? 'sm:col-span-2' : ''}`}
             >
-              <p className={monoLabelClass}>Axiom {index + 1}</p>
+              <p className={monoLabelClass}>Principle {index + 1}</p>
               <h3 className="mt-6 font-display text-[1.8rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
                 {principle.title}
               </h3>

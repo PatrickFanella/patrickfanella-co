@@ -18,9 +18,9 @@ import {
 } from '../lib/styles'
 
 const contactSchema = z.object({
-  name: z.string().min(2, 'Name parameter requires 2+ chars.'),
-  email: z.email('Invalid email syntax.'),
-  message: z.string().min(20, 'Message body requires 20+ chars for context.'),
+  name: z.string().min(2, 'Please enter at least 2 characters.'),
+  email: z.email('Please enter a valid email address.'),
+  message: z.string().min(20, 'Please include a bit more context so I can respond helpfully.'),
   website: z.string(),
 })
 
@@ -30,13 +30,13 @@ const alternateContactPaths = [
   {
     title: 'GitHub profile',
     href: 'https://github.com/PatrickFanella',
-    description: 'Browse repositories, commit history, and the practical surface area behind the case studies across Go, TypeScript, Python, and Solidity.',
+    description: 'Browse my repositories, commit history, and the practical work behind the case studies across Go, TypeScript, Python, and Solidity.',
     cta: 'Open GitHub ↗',
   },
   {
     title: 'Portfolio source',
     href: 'https://github.com/PatrickFanella/patrickfanella-co',
-    description: 'Review the React + Go + PostgreSQL source behind this portfolio — the same stack discipline applied to the portfolio itself.',
+    description: 'Review the React + Go + PostgreSQL source behind this portfolio \u2014 the same stack discipline applied to the portfolio itself.',
     cta: 'Open repository ↗',
   },
 ]
@@ -90,7 +90,7 @@ export function ContactPage() {
         }
 
         if (error.code === 'network_error') {
-          setSubmitMessage('The contact service could not be reached. Please try again in a moment.')
+          setSubmitMessage('The contact form couldn\'t be reached. Please try again in a moment.')
           return
         }
 
@@ -98,7 +98,7 @@ export function ContactPage() {
         return
       }
 
-      setSubmitMessage('Unable to submit your note right now. Please try again shortly.')
+      setSubmitMessage('Something went wrong while sending your message. Please try again shortly.')
     }
   })
 
@@ -114,19 +114,19 @@ export function ContactPage() {
           <div>
             <SectionLabel>Contact</SectionLabel>
             <h1 className={`${pageTitleClass} mt-6 uppercase`}>
-              Start the conversation.
+              Let's build something useful.
             </h1>
             <p className={pageIntroClass}>
-              Best fit for full stack and backend roles, teams building real-time systems or AI-driven products, and anyone who values production engineering discipline alongside shipping speed.
+              I'm strongest on full-stack and backend roles, especially teams building real-time systems or AI-driven products. If you value production discipline alongside shipping speed, we should talk.
             </p>
           </div>
 
           <aside className={`${surfaceCardClass} bg-panel p-8`} aria-label="Input guidelines">
-            <p className={monoLabelClass}>Best outreach</p>
+            <p className={monoLabelClass}>How to make this easy</p>
             <ul className="mt-6 grid gap-4 pl-0 list-none text-[1.05rem] text-ink-soft">
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">01</span> Mention the role, project, or collaboration context.</li>
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">02</span> Share timing, current stage, and any decision constraints.</li>
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">03</span> Link any repo, product, or design references that matter.</li>
+              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">01</span> Tell me about the role, project, or collaboration.</li>
+              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">02</span> Share timing, team context, and any important constraints.</li>
+              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">03</span> Link anything relevant&mdash;repo, product, brief, or design direction.</li>
             </ul>
           </aside>
 
@@ -149,7 +149,7 @@ export function ContactPage() {
 
         <form className={`${surfaceCardClass} grid gap-6 p-8 lg:p-10 bg-panel`} onSubmit={onSubmit} noValidate>
           <p className="font-mono text-[1.1rem] uppercase tracking-[0.05em] text-heading font-bold pb-4 border-b-2 border-stroke">
-            Send project inquiry
+            Send a message
           </p>
 
           <div aria-hidden="true" className="pointer-events-none absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
@@ -160,7 +160,7 @@ export function ContactPage() {
           </div>
 
           <label className="grid gap-3 text-ink-soft mt-2">
-            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Parameter: Name</span>
+            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Name</span>
             <input
               aria-describedby={errors.name ? `${nameFieldId}-error` : undefined}
               aria-invalid={Boolean(errors.name)}
@@ -171,13 +171,13 @@ export function ContactPage() {
             />
             {errors.name ? (
               <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${nameFieldId}-error`} role="alert">
-                ERR: {errors.name.message}
+                Error:{errors.name.message}
               </span>
             ) : null}
           </label>
 
           <label className="grid gap-3 text-ink-soft">
-            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Parameter: Email</span>
+            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Email</span>
             <input
               aria-describedby={errors.email ? `${emailFieldId}-error` : undefined}
               aria-invalid={Boolean(errors.email)}
@@ -188,13 +188,13 @@ export function ContactPage() {
             />
             {errors.email ? (
               <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${emailFieldId}-error`} role="alert">
-                ERR: {errors.email.message}
+                Error:{errors.email.message}
               </span>
             ) : null}
           </label>
 
           <label className="grid gap-3 text-ink-soft">
-            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Payload: Message</span>
+            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Message</span>
             <textarea
               aria-describedby={errors.message ? `${messageFieldId}-error` : undefined}
               aria-invalid={Boolean(errors.message)}
@@ -205,13 +205,13 @@ export function ContactPage() {
             />
             {errors.message ? (
               <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${messageFieldId}-error`} role="alert">
-                ERR: {errors.message.message}
+                Error:{errors.message.message}
               </span>
             ) : null}
           </label>
 
           <button className={`${primaryButtonClass} mt-4 w-full justify-center`} type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send message'}
+            {isSubmitting ? 'Sending...' : 'Send Message'}
           </button>
 
           {submitMessage ? (
@@ -220,7 +220,7 @@ export function ContactPage() {
               className={`text-sm tracking-wide font-mono px-4 py-3 border-2 ${submitState === 'error' ? 'text-danger border-danger bg-danger/10' : 'text-paper border-accent-green bg-accent-green'}`}
               role={submitState === 'error' ? 'alert' : 'status'}
             >
-              {submitState === 'error' ? 'FAIL: ' : 'SUCCESS: '} {submitMessage}
+              {submitState === 'error' ? 'Error: ' : 'Success: '} {submitMessage}
             </p>
           ) : null}
         </form>

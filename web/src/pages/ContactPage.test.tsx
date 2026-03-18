@@ -10,10 +10,10 @@ import { ContactPage } from './ContactPage'
 async function fillContactForm() {
 	const user = userEvent.setup()
 
-	await user.type(screen.getByLabelText(/parameter: name/i), 'Patrick Fanella')
-	await user.type(screen.getByLabelText(/parameter: email/i), 'patrick@example.com')
+	await user.type(screen.getByLabelText(/^name$/i), 'Patrick Fanella')
+	await user.type(screen.getByLabelText(/^email$/i), 'patrick@example.com')
 	await user.type(
-		screen.getByLabelText(/payload: message/i),
+		screen.getByLabelText(/^message$/i),
 		'I would love to talk about one of your featured case studies.',
 	)
 
@@ -67,6 +67,6 @@ describe('ContactPage', () => {
 
 		await fillContactForm()
 
-		expect(await screen.findByRole('alert')).toHaveTextContent(/could not be reached/i)
+		expect(await screen.findByRole('alert')).toHaveTextContent(/couldn't be reached/i)
 	})
 })

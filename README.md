@@ -6,14 +6,13 @@ Project-first full stack developer portfolio scaffold built with:
 - `api/` — Go + Chi starter API
 - `db/migrations/` — PostgreSQL schema
 
-## Current scaffold status
+## Current project status
 
-- Project plan saved in `docs/implementation-plan.md`
-- Phase-0 assumptions, audit findings, and API/env contracts saved in `docs/phase-0-foundation.md`
-- Frontend routes scaffolded for home, projects, project detail, and contact
-- Go API scaffolded for health, projects, and contact endpoints
-- Local PostgreSQL development setup added via `docker-compose.yml`
-- Root environment templates added in `.env` and `.env.example`
+- Frontend routes are live for home, projects, project detail, and contact
+- Go API supports health, projects, and contact flows backed by PostgreSQL
+- Seed content now includes richer case-study structure for highlights, architecture, lessons, and media
+- Local PostgreSQL and production-shaped container workflows are supported through `docker-compose.yml`
+- Current operator references live in `docs/deployment.md`, `docs/runbook.md`, and `docs/launch-checklist.md`
 
 ## Baseline delivery assumptions
 
@@ -31,7 +30,7 @@ The repo currently expects these runtime variables:
 - `CORS_ORIGIN` — browser origin allowed by the API
 - `VITE_API_BASE_URL` — frontend base URL for API requests
 
-See `docs/phase-0-foundation.md` for the current contract details and launch assumptions.
+See `docs/deployment.md` for the current runtime contract and `docs/runbook.md` for the day-to-day workflow.
 
 ## Local database bootstrap
 
@@ -41,9 +40,7 @@ Phase 1 adds a repeatable content bootstrap path for the portfolio database.
 2. Apply migrations with `cd api && go run ./cmd/migrate`
 3. Seed the portfolio content from the Go module with `cd api && go run ./cmd/seed`
 
-The seed source of truth lives in `db/seed/portfolio.json` and can be rerun to refresh project and tag content in local/dev environments.
-
-Phase 3 expands the seeded project contract with architecture notes, supporting media, and lessons learned. See `docs/phase-3-content-inventory.md` for placeholder asset conventions and the remaining copy/assets still needed for a final launch pass.
+The seed source of truth lives in `db/seed/portfolio.json` and can be rerun to refresh project and tag content in local/dev environments. The seeded contract now includes architecture notes, supporting media, and lessons learned for case-study pages.
 
 ## Phase 4 quality hardening
 
@@ -55,7 +52,7 @@ Phase 4 adds launch-quality guardrails across the public routes:
 - contact endpoint abuse protection and privacy-minded request handling
 - expanded frontend, backend, and browser smoke coverage
 
-See `docs/phase-4-quality-hardening.md` for the implementation details, runtime knobs, and release-verification checklist.
+The current release verification and runtime guidance now live in `docs/launch-checklist.md`, `docs/deployment.md`, and `docs/runbook.md`.
 
 ## Phase 5 release and operations
 

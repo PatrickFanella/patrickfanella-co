@@ -37,11 +37,11 @@ export function ProjectDetailPage() {
         />
         <RouteState
           ariaLive="polite"
-          description="Fetching the case study, supporting media, and architecture notes from the API."
+          description="Fetching the project details, media, and architecture notes."
           headingLevel="h1"
-          label="Lookup pending"
+          label="Loading"
           role="status"
-          title="Loading record."
+          title="Loading case study."
         />
       </section>
     )
@@ -59,13 +59,13 @@ export function ProjectDetailPage() {
         <RouteState
           actions={
             <Link className={primaryButtonClass} to="/projects">
-              Return to index
+              Back to Projects
             </Link>
           }
           description="The route exists, but this case study has not been published yet."
           headingLevel="h1"
-          label="Status 404"
-          title="Record not found."
+          label="Not found"
+          title="This case study isn't available."
         />
       </section>
     )
@@ -84,18 +84,18 @@ export function ProjectDetailPage() {
           actions={(
             <>
               <button className={secondaryButtonClass} onClick={retry} type="button">
-                Retry lookup
+                Try Again
               </button>
               <Link className={textLinkClass} to="/projects">
-                Return to index
+                Back to Projects
               </Link>
             </>
           )}
           description={getErrorMessage(error, 'The requested case study could not be loaded.')}
           headingLevel="h1"
-          label="Route fault"
+          label="Unavailable"
           role="alert"
-          title="Unable to load record."
+          title="Unable to load case study."
         />
       </section>
     )
@@ -136,17 +136,17 @@ export function ProjectDetailPage() {
         </div>
 
         <aside className={`${surfaceCardClass} h-fit bg-panel p-8`} aria-label="Project meta information">
-          <p className={monoLabelClass}>Parameters</p>
+          <p className={monoLabelClass}>Project Details</p>
           <div className="mt-6 grid gap-4">
             <p className={metaCardClass}>
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Assignment
+                Role
               </span>
               <span className="text-[1.05rem] text-heading">{project.role}</span>
             </p>
             <p className={metaCardClass}>
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Timestamp
+                Year
               </span>
               <span className="text-[1.05rem] text-heading">{project.year}</span>
             </p>
@@ -167,12 +167,12 @@ export function ProjectDetailPage() {
             <div className="mt-8 grid gap-3 border-t-2 border-stroke pt-6">
               {project.repoUrl ? (
                 <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">
-                  Open repository ↗
+                  View Repository ↗
                 </a>
               ) : null}
               {project.liveUrl ? (
                 <a className={textLinkClass} href={project.liveUrl} rel="noreferrer" target="_blank">
-                  Launch project ↗
+                  Visit Project ↗
                 </a>
               ) : null}
             </div>
@@ -184,7 +184,7 @@ export function ProjectDetailPage() {
         <article className="pr-4 lg:pr-8">
           <SectionLabel>Overview</SectionLabel>
           <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-            What shipped and why.
+            What I built and why.
           </h2>
           <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft max-w-[55ch]">
             {project.description}
@@ -213,11 +213,11 @@ export function ProjectDetailPage() {
             <div>
               <SectionLabel>Architecture</SectionLabel>
               <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                System choices that mattered.
+                Technical decisions that mattered.
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
-              A concise breakdown of the technical structure behind the shipped result.
+              A concise look at the architecture behind the shipped product.
             </p>
           </div>
 
@@ -238,7 +238,7 @@ export function ProjectDetailPage() {
             <div>
               <SectionLabel>Supporting media</SectionLabel>
               <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                Visual references for the build.
+                Screens and diagrams.
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
@@ -255,7 +255,7 @@ export function ProjectDetailPage() {
           <div>
             <SectionLabel>Lessons learned</SectionLabel>
             <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-              What the next version would keep.
+              What held up &mdash; and what I'd change.
             </h2>
           </div>
 
@@ -272,7 +272,7 @@ export function ProjectDetailPage() {
 
       <div className="mt-16 border-t-2 border-stroke pt-8">
         <Link className={textLinkClass} to="/projects">
-          ← Terminate view
+          ← Back to Projects
         </Link>
       </div>
     </section>
