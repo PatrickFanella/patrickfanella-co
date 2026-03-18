@@ -20,6 +20,7 @@ export function SiteLayout() {
       return
     }
 
+    window.scrollTo(0, 0)
     mainRef.current?.focus()
   }, [location.pathname])
 
