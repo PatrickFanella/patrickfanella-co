@@ -18,8 +18,7 @@ Project-first full stack developer portfolio scaffold built with:
 
 - The current scaffold is the implementation baseline, not throwaway work.
 - v1 scope is the four public routes, curated project content, API-backed project browsing, and a working contact submission flow.
-- PostgreSQL is the runtime source of truth for project content and contact submissions at launch.
-- Runtime project content and contact submissions are served from PostgreSQL.
+- PostgreSQL is the runtime source of truth and serving layer for project content and contact submissions at launch.
 - Remaining placeholder copy is limited to tests and fallback UI states.
 
 ## Configuration
