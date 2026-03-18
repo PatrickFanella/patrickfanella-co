@@ -39,7 +39,7 @@ export function SiteLayout() {
 
             <div className="max-w-120">
               <p className="font-display text-[clamp(2.5rem,4vw,4rem)] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
-                I build products that<span className="text-accent-green"> ship</span>. From<span className="text-accent-teal"> Go</span> to <span className="text-accent-pink">pixel-perfect</span>.
+                I build products that<span className="text-accent-green"> ship.</span> From<span className="text-accent-teal"> Go</span> to <span className="text-accent-pink">pixel-perfect.</span>
               </p>
               <p className="mt-4 max-w-[40ch] text-[1.05rem] leading-relaxed text-ink-soft">
                 Building reliable software across Go, React, Python, and TypeScript, from backend services and search infrastructure to real-time interfaces and AI-enabled products.

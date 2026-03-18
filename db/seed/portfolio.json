@@ -109,6 +109,7 @@
       "role": "Full-stack engineer",
       "year": 2025,
       "repoUrl": "https://github.com/subculture-collective/clustr",
+      "liveUrl": "https://clustr.subcult.tv",
       "featured": true,
       "sortOrder": 4,
       "tags": ["Go", "React", "PostgreSQL", "WebGL", "Graph Algorithms", "TypeScript", "Docker"],
@@ -241,6 +242,7 @@
       "role": "Full-stack engineer",
       "year": 2025,
       "repoUrl": "https://github.com/subculture-collective/patchwork",
+      "liveUrl": "https://patchwork.subcult.tv",
       "featured": false,
       "sortOrder": 8,
       "tags": ["TypeScript", "React", "PostgreSQL", "AT Protocol", "Bluesky", "Vitest", "Playwright"],
@@ -265,6 +267,90 @@
           "caption": "Map-based mutual aid discovery with geoprivacy controls and decentralized identity."
         }
       ]
+    },
+    {
+      "slug": "galdr",
+      "title": "Galdr",
+      "summary": "B2B SaaS customer health scoring platform that combines Stripe, HubSpot, and Intercom signals through a Go API and React frontend.",
+      "description": "Galdr is a customer health scoring platform for B2B SaaS companies. It centralizes customer signals from Stripe, HubSpot, and Intercom, then surfaces automated health scoring through a Go backend and a React 19 + TypeScript frontend. The project ships with PostgreSQL-backed persistence, migration workflows, Dockerized development and production topology, SEO-aware frontend build steps, and a manual GitHub Actions deployment flow that targets a VPS behind Nginx.",
+      "role": "Full-stack engineer",
+      "year": 2026,
+      "repoUrl": "https://github.com/PatrickFanella/galdr",
+      "liveUrl": "https://galdr.subcult.tv",
+      "featured": false,
+      "sortOrder": 9,
+      "tags": ["Go", "React", "TypeScript", "PostgreSQL", "TailwindCSS", "Docker", "Stripe", "HubSpot", "Intercom"],
+      "highlights": [
+        "Built Galdr as a customer health scoring product for B2B SaaS teams that combines Stripe, HubSpot, and Intercom data into an automated scoring workflow.",
+        "Shipped a full-stack implementation with a Go net/http API, React 19 + TypeScript frontend, PostgreSQL 16 persistence, and Docker-based dev/prod workflows.",
+        "Added production-facing delivery concerns including manual GitHub Actions VPS deployment, Nginx-backed container orchestration, frontend SEO artifact generation, and a dedicated Stripe billing domain."
+      ],
+      "architecture": [
+        "Go backend organized around internal handler, middleware, model, repository, and service layers, with migrations managing the PostgreSQL 16 data model.",
+        "React 19 + TypeScript frontend built with Vite and TailwindCSS v4, including SEO validation, sitemap artifact generation, and prerender steps in the frontend build pipeline.",
+        "Containerized development and production topology using Docker Compose, Nginx, and a manual GitHub Actions deploy workflow that targets a VPS and verifies both database readiness and API health."
+      ],
+      "lessons": [
+        "Separating billing into its own domain makes a SaaS product easier to evolve; the dedicated Stripe billing endpoints and environment contract keep payment concerns from bleeding into the core scoring flows.",
+        "Treating SEO and deploy automation as first-class build concerns pays off early; validating SEO artifacts and codifying the VPS deployment path reduces launch friction later."
+      ],
+      "media": []
+    },
+    {
+      "slug": "cutroom",
+      "title": "Cutroom",
+      "summary": "Collaborative AI video production pipeline where specialized agents research, script, voice, edit, and publish short-form videos with structured handoffs and attribution tracking.",
+      "description": "Cutroom is a collaborative short-form video production system built for agent-native creative workflows. The product orchestrates a seven-stage pipeline from research through publishing, with each stage claimable by a specialized agent and every handoff represented as structured output. The stack pairs a Next.js 14 + React 18 dashboard with API routes, Prisma-backed PostgreSQL persistence, Remotion video rendering, and integrations for ElevenLabs voice generation, Pexels-powered visuals, and tokenized attribution on Base. The hosted app at cutroom.subcult.tv exposes templates, pipeline views, and examples for the end-to-end creative flow.",
+      "role": "Full-stack engineer",
+      "year": 2026,
+      "repoUrl": "https://github.com/openwork-hackathon/team-cutroom",
+      "liveUrl": "https://cutroom.subcult.tv",
+      "featured": false,
+      "sortOrder": 10,
+      "tags": ["Next.js", "React", "TypeScript", "PostgreSQL", "Prisma", "Remotion", "AI Agents", "ElevenLabs", "Base"],
+      "highlights": [
+        "Built a seven-stage agent-native production pipeline that turns a topic into a published short-form video through structured handoffs.",
+        "Shipped a template-driven creative system with real-time pipeline tracking, attribution weights, and token-based reward logic for contributors.",
+        "Integrated Remotion rendering, ElevenLabs voice synthesis, and multi-platform publishing workflows behind a single hosted dashboard."
+      ],
+      "architecture": [
+        "Next.js 14 app-router frontend and API surface share a TypeScript codebase, with dashboard pages, REST endpoints, and pipeline orchestration living in the same application boundary.",
+        "Prisma-backed PostgreSQL persistence stores pipelines, stages, and attribution metadata while Remotion assembles the final video output from structured stage artifacts.",
+        "External integrations connect voice generation, visual sourcing, and Base token distribution so the production flow can move from topic intake to published asset without ad hoc handoff glue."
+      ],
+      "lessons": [
+        "Structured agent handoffs matter more than raw model quality in creative pipelines; the clearer the schema between stages, the less rework the editor stage has to absorb.",
+        "Treating attribution as a first-class system concern changes the product architecture early, because contribution tracking has to be threaded through every stage rather than bolted on at the end."
+      ],
+      "media": []
+    },
+    {
+      "slug": "subcults",
+      "title": "Subcults",
+      "summary": "Privacy-first platform for underground music communities with map-based discovery, scene identity, live audio sessions, and AT Protocol ingestion.",
+      "description": "Subcults is a platform for underground and local music communities built around presence, scene sovereignty, and privacy-first discovery. It maps scenes, events, and live audio sessions without leaning on opaque follower-feed ranking, instead combining trust-aware discovery, decentralized AT Protocol ingestion, and coarse-location controls. The stack uses a Go API and Jetstream indexer, a Vite + React + TypeScript frontend with MapLibre, Neon Postgres with PostGIS, LiveKit for audio sessions, Cloudflare R2 for media, and Stripe Connect for direct scene payouts. The hosted site at subcults.subcult.tv is the public-facing home for that product direction.",
+      "role": "Full-stack engineer",
+      "year": 2026,
+      "repoUrl": "https://github.com/PatrickFanella/subcults",
+      "liveUrl": "https://subcults.subcult.tv",
+      "featured": false,
+      "sortOrder": 11,
+      "tags": ["Go", "React", "TypeScript", "PostgreSQL", "PostGIS", "MapLibre", "LiveKit", "AT Protocol", "Stripe Connect", "Cloudflare R2"],
+      "highlights": [
+        "Designed a scene-first platform for underground music communities with map-based discovery, scene identity, and privacy-aware event publishing.",
+        "Combined AT Protocol Jetstream ingestion, live audio sessions, and direct revenue tooling so scenes can coordinate culture without ceding control to algorithmic feeds.",
+        "Built privacy and operational rigor into the platform early with coarse-location controls, EXIF stripping, observability, security scanning, and legal/privacy documentation."
+      ],
+      "architecture": [
+        "Go API and Jetstream indexer handle core application flows plus decentralized AT Protocol ingestion, with Neon Postgres 16 + PostGIS storing spatial and trust-aware community data.",
+        "Vite + React + TypeScript frontend uses MapLibre for scene and event discovery, while LiveKit powers real-time audio rooms and Cloudflare R2 stores media assets and recordings.",
+        "Production-oriented Docker Compose deployment runs API, indexer, and frontend behind an external reverse proxy, with metrics, vulnerability scanning, and performance budgets built into the workflow."
+      ],
+      "lessons": [
+        "Privacy constraints reshape product design in a good way; when precise location is optional and consent-based, map and feed workflows have to become clearer and more intentional.",
+        "Underground-community tooling needs governance and observability as early as discovery features, because trust and safety are part of the product, not an afterthought."
+      ],
+      "media": []
     }
   ]
 }
