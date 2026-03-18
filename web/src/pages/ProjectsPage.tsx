@@ -36,7 +36,7 @@ export function ProjectsPage() {
             Projects
           </h1>
           <p className={pageIntroClass}>
-            Each project below is a production system &mdash; built, deployed, and documented. Filter by stack, then open any case study for the architecture decisions, trade-offs, and lessons behind the build.
+            Each project below is a production system: built, deployed, and documented. Filter by stack, then open any case study for the architecture decisions, trade-offs, and lessons behind the build.
           </p>
         </div>
 

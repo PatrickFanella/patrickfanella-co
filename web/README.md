@@ -23,11 +23,11 @@ It centralizes:
 
 ## Commands
 
-- `npm run dev` — start the frontend dev server
-- `npm run build` — type-check and build the frontend
-- `npm run lint` — run ESLint
-- `npm run test` — run frontend unit tests
-- `npm run test:e2e` — run the Playwright smoke path against the seeded local stack
+- `npm run dev`: start the frontend dev server
+- `npm run build`: type-check and build the frontend
+- `npm run lint`: run ESLint
+- `npm run test`: run frontend unit tests
+- `npm run test:e2e`: run the Playwright smoke path against the seeded local stack
 
 ## Phase 2 route states
 

@@ -3,7 +3,7 @@ import type { ContactSubmissionResponse, Project } from '../lib/api'
 export const featuredProject: Project = {
 	slug: 'clpr',
 	title: 'Clpr',
-	summary: 'Full-stack Twitch clip curation platform with community voting, hybrid search, and a React Native mobile app — live in production at clpr.tv.',
+	summary: 'Full-stack Twitch clip curation platform with community voting, hybrid search, and a React Native mobile app, live in production at clpr.tv.',
 	description: 'Clpr started as a way to surface the best Twitch clips without relying on platform algorithms.',
 	role: 'Full-stack engineer',
 	year: 2025,
@@ -21,7 +21,7 @@ export const featuredProject: Project = {
 		'Hybrid search pipeline combining OpenSearch BM25 full-text scoring with semantic vector embeddings for relevance ranking.',
 	],
 	lessons: [
-		'Hybrid search is worth the infrastructure cost — users consistently found clips that pure text search missed.',
+		'Hybrid search is worth the infrastructure cost; users consistently found clips that pure text search missed.',
 		'Running a mobile and web client against the same API forced cleaner contract discipline early.',
 	],
 	media: [
@@ -49,7 +49,7 @@ export const archivedProject: Project = {
 		'Passed Slither security audits on the ContentRegistry smart contract and met WCAG 2.1 AA accessibility standards on the frontend.',
 	],
 	architecture: ['Solidity ContentRegistry contract on L2 with Hardhat + TypeScript toolchain, Ethers v6 integration, and Slither static analysis for security auditing.'],
-	lessons: ['IPFS pinning reliability varies significantly across providers — abstracting behind Infura, Web3.Storage, and Pinata with automatic failover was necessary for production trust.'],
+	lessons: ['IPFS pinning reliability varies significantly across providers; abstracting behind Infura, Web3.Storage, and Pinata with automatic failover was necessary for production trust.'],
 	media: [
 		{
 			src: '/assets/projects/internet-id-overview.svg',
@@ -62,7 +62,7 @@ export const archivedProject: Project = {
 export const projectsFixture: Project[] = [featuredProject, archivedProject]
 
 export const contactSubmissionFixture: ContactSubmissionResponse = {
-	message: 'Thanks — your note has been saved.',
+	message: 'Thanks. Your note has been saved.',
 	item: {
 		id: 7,
 		name: 'Patrick Fanella',

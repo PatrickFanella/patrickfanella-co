@@ -23,7 +23,7 @@ const workingPrinciples = [
   {
     title: 'Shipped products over side projects',
     description:
-      'Production forces decisions that prototypes never do. Every project here has been deployed, monitored, and used \u2014 and the case studies capture the constraints that shaped each build, not just the final architecture.',
+      'Production forces decisions that prototypes never do. Every project here has been deployed, monitored, and used. The case studies capture the constraints that shaped each build, not just the final architecture.',
   },
   {
     title: 'Full stack means the whole stack',
@@ -33,7 +33,7 @@ const workingPrinciples = [
   {
     title: 'Production engineering is not optional',
     description:
-      'Load testing, security audits, observability, and horizontal scaling are part of the build \u2014 not items for a post-launch backlog. The projects here ship with Prometheus dashboards, k6 benchmarks, and Slither contract audits as standard.',
+      'Load testing, security audits, observability, and horizontal scaling are part of the build, not items for a post-launch backlog. The projects here ship with Prometheus dashboards, k6 benchmarks, and Slither contract audits as standard.',
   },
 ]
 
@@ -82,14 +82,14 @@ export function HomePage() {
               className="mt-8 font-display text-[clamp(4rem,8vw,8rem)] font-bold leading-[0.85] tracking-[-0.05em] text-heading uppercase"
               {...motionProps}
             >
-        I build products that<span className="text-accent-green"> ship </span>and systems that<span className="text-accent-teal"> scale.</span>
+              Backend<span className="text-accent-green"> depth.</span> Frontend<span className="text-accent-teal"> clarity.</span> Production<span className="text-accent-pink"> throughout.</span>
             </motion.h1>
 
             <motion.p
               className={`${pageIntroClass} max-w-[46ch] mt-8 text-[1.2rem]`}
               {...fadeInProps}
             >
-        I'm <span className="text-accent-pink">Patrick Fanella</span>. I build AI agent platforms, GPU transcription pipelines, 3D graph visualization tools, and on-chain provenance systems &mdash; production software across Go, React, Python, and TypeScript, from first commit to monitored deployment.
+              I'm <span className="text-accent-pink">Patrick Fanella</span>. I build AI agent platforms, GPU transcription pipelines, 3D graph visualization tools, and on-chain provenance systems: production software across Go, React, Python, and TypeScript, from first commit to monitored deployment.
             </motion.p>
 
             <motion.div
@@ -115,10 +115,10 @@ export function HomePage() {
             <aside className={`${surfaceCardClass} bg-panel p-8`} aria-label="Operating philosophy">
               <p className={monoLabelClass}>Approach</p>
               <p className="mt-6 font-display text-[2.2rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                Build the hard thing, then make it understandable.
+                Complex systems, made clear.
               </p>
               <p className="mt-4 text-ink-soft leading-relaxed">
-                The interesting problems live where systems meet &mdash; search pipelines feeding frontends, AI agents coordinating through WebSockets, smart contracts verified by browser extensions. I build at those seams.
+                The interesting problems live where systems meet: search pipelines feeding frontends, AI agents coordinating through WebSockets, smart contracts verified by browser extensions. I like building at those seams.
               </p>
             </aside>
 
@@ -235,7 +235,7 @@ export function HomePage() {
             How I like to work.
           </h2>
           <p className="mt-6 max-w-[40ch] text-[1.1rem] leading-relaxed text-ink-soft">
-            I start by understanding what the system needs to do under real conditions &mdash; actual load, real users, genuine failure modes. The methodology below reflects how that thinking shapes every build, from the first architecture sketch to the monitoring dashboard.
+            I start by understanding what the system needs to do under real conditions: actual load, real users, genuine failure modes. The methodology below reflects how that thinking shapes every build, from the first architecture sketch to the monitoring dashboard.
           </p>
         </div>
 

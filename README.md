@@ -2,9 +2,9 @@
 
 Project-first full stack developer portfolio scaffold built with:
 
-- `web/` — Vite + React + TypeScript frontend
-- `api/` — Go + Chi starter API
-- `db/migrations/` — PostgreSQL schema
+- `web/`: Vite + React + TypeScript frontend
+- `api/`: Go + Chi starter API
+- `db/migrations/`: PostgreSQL schema
 
 ## Current project status
 
@@ -25,10 +25,10 @@ Project-first full stack developer portfolio scaffold built with:
 
 The repo currently expects these runtime variables:
 
-- `API_PORT` — API listen port, defaults to `8080`
-- `DATABASE_URL` — PostgreSQL connection string for the API
-- `CORS_ORIGIN` — browser origin allowed by the API
-- `VITE_API_BASE_URL` — frontend base URL for API requests
+- `API_PORT`: API listen port, defaults to `8080`
+- `DATABASE_URL`: PostgreSQL connection string for the API
+- `CORS_ORIGIN`: browser origin allowed by the API
+- `VITE_API_BASE_URL`: frontend base URL for API requests
 
 See `docs/deployment.md` for the current runtime contract and `docs/runbook.md` for the day-to-day workflow.
 
@@ -66,9 +66,9 @@ Phase 5 adds the launch-facing baseline needed to operate the portfolio as a rea
 
 Primary docs:
 
-- `docs/deployment.md` — topology, secrets, env contract, and container workflow
-- `docs/runbook.md` — day-to-day operator and release steps
-- `docs/launch-checklist.md` — reusable go/no-go verification pass
+- `docs/deployment.md`: topology, secrets, env contract, and container workflow
+- `docs/runbook.md`: day-to-day operator and release steps
+- `docs/launch-checklist.md`: reusable go/no-go verification pass
 
 To boot the full stack locally in containers:
 
