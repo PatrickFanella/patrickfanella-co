@@ -1,9 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { isApiClientError, submitContact } from '../lib/api'
+import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import {
 	monoLabelClass,
@@ -20,6 +21,7 @@ const contactSchema = z.object({
   name: z.string().min(2, 'Name parameter requires 2+ chars.'),
   email: z.email('Invalid email syntax.'),
   message: z.string().min(20, 'Message body requires 20+ chars for context.'),
+  website: z.string(),
 })
 
 type ContactFormValues = z.infer<typeof contactSchema>
@@ -40,6 +42,10 @@ const alternateContactPaths = [
 ]
 
 export function ContactPage() {
+  const nameFieldId = useId()
+  const emailFieldId = useId()
+  const messageFieldId = useId()
+  const honeypotFieldId = useId()
   const [submitState, setSubmitState] = useState<'idle' | 'success' | 'error'>('idle')
   const [submitMessage, setSubmitMessage] = useState('')
 
@@ -52,6 +58,9 @@ export function ContactPage() {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
+		defaultValues: {
+			website: '',
+		},
   })
 
   const onSubmit = handleSubmit(async (values) => {
@@ -60,7 +69,12 @@ export function ContactPage() {
     clearErrors()
 
     try {
-      const response = await submitContact(values)
+      const response = await submitContact({
+        email: values.email,
+        message: values.message,
+        name: values.name,
+        website: values.website,
+      })
 
       setSubmitState('success')
       setSubmitMessage(response.message)
@@ -90,6 +104,11 @@ export function ContactPage() {
 
   return (
     <section className={`${pageSectionClass} pt-4`}>
+      <Seo
+        description="Start a conversation with Patrick Fanella about backend, full stack, AI-driven, or real-time product work."
+        path="/contact"
+        title="Contact"
+      />
       <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(380px,1fr)] lg:items-start border-b-2 border-stroke pb-16 mb-10">
         <div className="grid gap-8">
           <div>
@@ -133,11 +152,25 @@ export function ContactPage() {
             Send project inquiry
           </p>
 
+          <div aria-hidden="true" className="pointer-events-none absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
+            <label className="grid gap-2" htmlFor={honeypotFieldId}>
+              <span>Website</span>
+              <input autoComplete="off" id={honeypotFieldId} tabIndex={-1} type="text" {...register('website')} />
+            </label>
+          </div>
+
           <label className="grid gap-3 text-ink-soft mt-2">
             <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Parameter: Name</span>
-            <input className={inputClass} type="text" {...register('name')} />
+            <input
+              aria-describedby={errors.name ? `${nameFieldId}-error` : undefined}
+              aria-invalid={Boolean(errors.name)}
+              className={inputClass}
+              id={nameFieldId}
+              type="text"
+              {...register('name')}
+            />
             {errors.name ? (
-              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" role="alert">
+              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${nameFieldId}-error`} role="alert">
                 ERR: {errors.name.message}
               </span>
             ) : null}
@@ -145,9 +178,16 @@ export function ContactPage() {
 
           <label className="grid gap-3 text-ink-soft">
             <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Parameter: Email</span>
-            <input className={inputClass} type="email" {...register('email')} />
+            <input
+              aria-describedby={errors.email ? `${emailFieldId}-error` : undefined}
+              aria-invalid={Boolean(errors.email)}
+              className={inputClass}
+              id={emailFieldId}
+              type="email"
+              {...register('email')}
+            />
             {errors.email ? (
-              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" role="alert">
+              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${emailFieldId}-error`} role="alert">
                 ERR: {errors.email.message}
               </span>
             ) : null}
@@ -155,9 +195,16 @@ export function ContactPage() {
 
           <label className="grid gap-3 text-ink-soft">
             <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Payload: Message</span>
-            <textarea className={inputClass} rows={6} {...register('message')} />
+            <textarea
+              aria-describedby={errors.message ? `${messageFieldId}-error` : undefined}
+              aria-invalid={Boolean(errors.message)}
+              className={inputClass}
+              id={messageFieldId}
+              rows={6}
+              {...register('message')}
+            />
             {errors.message ? (
-              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" role="alert">
+              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${messageFieldId}-error`} role="alert">
                 ERR: {errors.message.message}
               </span>
             ) : null}

@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 
 import { ProjectCard } from '../components/ProjectCard'
+import { RouteState } from '../components/RouteState'
+import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage } from '../lib/errors'
 import { monoLabelClass, pageIntroClass, pageSectionClass, pageTitleClass, surfaceCardClass } from '../lib/styles'
@@ -22,6 +24,11 @@ export function ProjectsPage() {
 
   return (
     <section className={`${pageSectionClass} pt-4`}>
+      <Seo
+        description="Browse Patrick Fanella's production case studies by stack, problem domain, and shipped system design."
+        path="/projects"
+        title="Projects"
+      />
       <div className="grid gap-8 md:grid-cols-[minmax(0,1.5fr)_minmax(320px,0.85fr)] md:items-start border-b-2 border-stroke pb-12 mb-10">
         <div>
           <SectionLabel>Database query</SectionLabel>
@@ -42,13 +49,14 @@ export function ProjectsPage() {
       </div>
 
       {status === 'loading' ? (
-        <div className="grid gap-6" aria-live="polite" role="status">
-          <article className={`${surfaceCardClass} bg-panel p-6`}>
-            <p className={monoLabelClass}>Loading</p>
-            <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
-              Loading the project index from the API.
-            </p>
-          </article>
+        <div className="grid gap-6">
+          <RouteState
+            ariaLive="polite"
+            description="Loading the project index from the API."
+            label="Loading"
+            role="status"
+            title="Project index incoming."
+          />
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3" aria-hidden="true">
             {[0, 1, 2].map((index) => (
@@ -73,16 +81,8 @@ export function ProjectsPage() {
       ) : null}
 
       {status === 'error' ? (
-        <article className={`${surfaceCardClass} grid gap-6 bg-panel p-8`} role="alert">
-          <div>
-            <p className={monoLabelClass}>Query failed</p>
-            <h2 className="mt-5 font-display text-[2rem] font-bold uppercase tracking-[-0.04em] text-heading">
-              Project index unavailable.
-            </h2>
-            <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">{projectsError}</p>
-          </div>
-
-          <div>
+        <RouteState
+          actions={(
             <button
               className="inline-flex cursor-pointer items-center justify-center border-2 border-stroke bg-surface px-6 py-3 text-sm font-bold uppercase tracking-[0.05em] text-heading transition-all duration-150 ease-linear hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-purple hover:text-accent-purple hover:shadow-brutal-purple"
               onClick={retry}
@@ -90,17 +90,20 @@ export function ProjectsPage() {
             >
               Retry query
             </button>
-          </div>
-        </article>
+          )}
+          description={projectsError}
+          label="Query failed"
+          role="alert"
+          title="Project index unavailable."
+        />
       ) : null}
 
       {status === 'success' && projects.length === 0 ? (
-        <article className={`${surfaceCardClass} bg-panel p-8`}>
-          <p className={monoLabelClass}>No records</p>
-          <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
-            The portfolio database is reachable, but it does not contain any seeded projects yet.
-          </p>
-        </article>
+        <RouteState
+          description="The portfolio database is reachable, but it does not contain any seeded projects yet."
+          label="No records"
+          title="The archive is empty."
+        />
       ) : null}
 
       {status === 'success' && projects.length > 0 ? (
@@ -163,12 +166,20 @@ export function ProjectsPage() {
               ))}
             </div>
           ) : (
-            <article className={`${surfaceCardClass} bg-panel p-8`}>
-              <p className={monoLabelClass}>No matches</p>
-              <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
-                No projects match the {activeTag} filter. Try another tag or reset the view.
-              </p>
-            </article>
+              <RouteState
+                actions={(
+                  <button
+                    className={filterButtonClass + ' border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple'}
+                    onClick={() => setActiveTag(null)}
+                    type="button"
+                  >
+                    Reset filter
+                  </button>
+                )}
+                description={`No projects match the ${activeTag} filter. Try another tag or reset the view.`}
+                label="No matches"
+                title="That filter came up empty."
+              />
           )}
         </div>
       ) : null}

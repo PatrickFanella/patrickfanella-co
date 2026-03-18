@@ -21,6 +21,7 @@ describe('HomePage', () => {
 		renderInRouter(<HomePage />)
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
+		expect(document.title).toBe('Patrick Fanella — Full Stack Developer')
 		expect(screen.queryByRole('heading', { name: 'Internet-ID' })).not.toBeInTheDocument()
 	})
 

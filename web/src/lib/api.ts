@@ -33,6 +33,7 @@ export type ContactInput = {
   name: string
   email: string
   message: string
+  website?: string
 }
 
 export type ContactMessage = {

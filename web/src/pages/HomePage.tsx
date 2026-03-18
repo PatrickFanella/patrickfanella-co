@@ -1,9 +1,12 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 import { ProjectCard } from '../components/ProjectCard'
+import { RouteState } from '../components/RouteState'
+import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage } from '../lib/errors'
+import { getSiteUrl } from '../lib/site'
 import {
   monoLabelClass,
   pageIntroClass,
@@ -35,6 +38,7 @@ const workingPrinciples = [
 ]
 
 export function HomePage() {
+  const prefersReducedMotion = useReducedMotion()
   const { projects, status, error, retry } = useProjects()
   const featuredProjects = projects.filter((project) => project.featured)
 
@@ -42,9 +46,33 @@ export function HomePage() {
     error,
     'Featured case studies are temporarily unavailable.',
   )
+  const motionProps = prefersReducedMotion
+    ? {}
+    : {
+      initial: { opacity: 0, y: 10 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.2, ease: 'linear' as const },
+    }
+  const fadeInProps = prefersReducedMotion
+    ? {}
+    : {
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      transition: { duration: 0.2, delay: 0.1, ease: 'linear' as const },
+    }
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    jobTitle: 'Full Stack Developer',
+    knowsAbout: focusAreas,
+    name: 'Patrick Fanella',
+    sameAs: ['https://github.com/PatrickFanella'],
+    url: getSiteUrl(),
+  }
 
   return (
     <>
+      <Seo structuredData={structuredData} />
       <section className="border-b-2 border-stroke pb-16 pt-8">
         <div className="grid gap-12 xl:grid-cols-[minmax(0,1.6fr)_minmax(320px,0.8fr)]">
           <div className="flex flex-col justify-center">
@@ -52,27 +80,27 @@ export function HomePage() {
 
             <motion.h1
               className="mt-8 font-display text-[clamp(4rem,8vw,8rem)] font-bold leading-[0.85] tracking-[-0.05em] text-heading uppercase"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2, ease: 'linear' }}
+              {...motionProps}
             >
         Products that<span className="text-accent-green"> ship.</span> <br/>Systems that<span className="text-accent-teal"> scale.</span>
             </motion.h1>
 
             <motion.p
               className={`${pageIntroClass} max-w-[46ch] mt-8 text-[1.2rem]`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2, delay: 0.1, ease: 'linear' }}
+              {...fadeInProps}
             >
         I'm <span className="text-accent-pink">Patrick Fanella</span>. I build production systems across Go, React, Python, and TypeScript. From AI agent platforms and GPU transcription pipelines to 3D graph visualization and on-chain content provenance.
             </motion.p>
 
             <motion.div
               className="mt-10 flex flex-wrap gap-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2, delay: 0.15, ease: 'linear' }}
+              {...(prefersReducedMotion
+                ? {}
+                : {
+                  initial: { opacity: 0 },
+                  animate: { opacity: 1 },
+                  transition: { duration: 0.2, delay: 0.15, ease: 'linear' as const },
+                })}
             >
               <Link className={primaryButtonClass} to="/projects">
                 Read the Case Studies
@@ -133,16 +161,13 @@ export function HomePage() {
 
         {status === 'loading' ? (
           <div className="grid gap-6">
-            <article
-              className={`${surfaceCardClass} bg-panel p-6`}
-              aria-live="polite"
+            <RouteState
+              ariaLive="polite"
+              description="Pulling the featured case-study set from the API."
+              label="Loading"
               role="status"
-            >
-              <p className={monoLabelClass}>Loading</p>
-              <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
-                Pulling the featured case-study set from the API.
-              </p>
-            </article>
+              title="Featured case studies incoming."
+            />
 
             <div className="grid gap-6 md:grid-cols-2" aria-hidden="true">
               {[0, 1].map((index) => (
@@ -167,35 +192,31 @@ export function HomePage() {
         ) : null}
 
         {status === 'error' ? (
-          <article className={`${surfaceCardClass} grid gap-6 bg-panel p-8`} role="alert">
-            <div>
-              <p className={monoLabelClass}>Fetch fault</p>
-              <h3 className="mt-5 font-display text-[2rem] font-bold uppercase tracking-[-0.04em] text-heading">
-                Featured work is offline.
-              </h3>
-              <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
-                {featuredMessage}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <button className={secondaryButtonClass} onClick={retry} type="button">
-                Retry request
-              </button>
-              <Link className={textLinkClass} to="/projects">
-                Open master archive ↗
-              </Link>
-            </div>
-          </article>
+          <RouteState
+            actions={(
+              <>
+                <button className={secondaryButtonClass} onClick={retry} type="button">
+                  Retry request
+                </button>
+                <Link className={textLinkClass} to="/projects">
+                  Open master archive ↗
+                </Link>
+              </>
+            )}
+            description={featuredMessage}
+            label="Fetch fault"
+            role="alert"
+            title="Featured work is offline."
+          />
         ) : null}
 
         {status === 'success' && featuredProjects.length === 0 ? (
-          <article className={`${surfaceCardClass} bg-panel p-8`}>
-            <p className={monoLabelClass}>Empty set</p>
-            <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
-              Featured case studies have not been published yet. Use the master archive to browse the full portfolio once entries are seeded.
-            </p>
-          </article>
+          <RouteState
+            actions={<Link className={textLinkClass} to="/projects">Open master archive ↗</Link>}
+            description="Featured case studies have not been published yet. Use the master archive to browse the full portfolio once entries are seeded."
+            label="Empty set"
+            title="No featured projects yet."
+          />
         ) : null}
 
         {status === 'success' && featuredProjects.length > 0 ? (

@@ -38,6 +38,14 @@ describe('ProjectsPage', () => {
 		expect(screen.queryByRole('heading', { name: 'Clpr' })).not.toBeInTheDocument()
 	})
 
+	it('renders an intentional empty-archive state when the API returns no projects', async () => {
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue([])
+
+		renderInRouter(<ProjectsPage />, '/projects')
+
+		expect(await screen.findByRole('heading', { name: /the archive is empty/i })).toBeInTheDocument()
+	})
+
 	it('renders an error state when the project index request fails', async () => {
 		vi.spyOn(api, 'fetchProjects').mockRejectedValue(
 			new api.ApiClientError(500, 'internal_error', 'Unable to load portfolio data.'),
