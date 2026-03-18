@@ -36,7 +36,7 @@ const alternateContactPaths = [
   {
     title: 'Portfolio source',
     href: 'https://github.com/PatrickFanella/patrickfanella-co',
-    description: 'Review the React + Go + PostgreSQL source behind this portfolio \u2014 the same stack discipline applied to the portfolio itself.',
+    description: 'Review the React + Go + PostgreSQL source behind this portfolio, with the same stack discipline applied to the site itself.',
     cta: 'Open repository ↗',
   },
 ]
@@ -126,7 +126,7 @@ export function ContactPage() {
             <ul className="mt-6 grid gap-4 pl-0 list-none text-[1.05rem] text-ink-soft">
               <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">01</span> Tell me about the role, project, or collaboration.</li>
               <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">02</span> Share timing, team context, and any important constraints.</li>
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">03</span> Link anything relevant&mdash;repo, product, brief, or design direction.</li>
+              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">03</span> Link anything relevant: repo, product, brief, or design direction.</li>
             </ul>
           </aside>
 

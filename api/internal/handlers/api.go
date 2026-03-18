@@ -188,7 +188,7 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 	if request.Website != "" {
 		api.loggerForRequest(r).Warn("contact.create suppressed", slog.String("reason", "honeypot"), slog.String("client_ip", clientIP), slog.String("field", api.contactSecurity.HoneypotField))
 		writeJSON(w, http.StatusAccepted, models.ContactSubmissionResponse{
-			Message: "Thanks — your note has been saved.",
+			Message: "Thanks. Your note has been saved.",
 			Item: models.ContactMessage{
 				Name:    request.Name,
 				Email:   request.Email,
@@ -236,7 +236,7 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 	api.loggerForRequest(r).Info("contact.create stored", slog.Int64("contact_id", message.ID))
 
 	writeJSON(w, http.StatusCreated, models.ContactSubmissionResponse{
-		Message: "Thanks — your note has been saved.",
+		Message: "Thanks. Your note has been saved.",
 		Item:    message,
 	})
 }
@@ -280,7 +280,7 @@ func validateContactInput(input models.ContactInput) map[string]string {
 	}
 
 	if len(input.Message) < 20 {
-		fields["message"] = "A little more detail helps — aim for at least 20 characters."
+		fields["message"] = "A little more detail helps; aim for at least 20 characters."
 	}
 
 	if len(fields) == 0 {

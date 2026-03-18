@@ -34,7 +34,7 @@ describe('ContactPage', () => {
 
 		await fillContactForm()
 
-		expect(await screen.findByRole('status')).toHaveTextContent(/thanks — your note has been saved/i)
+		expect(await screen.findByRole('status')).toHaveTextContent(/thanks\. your note has been saved/i)
 		expect(api.submitContact).toHaveBeenCalledWith({
 			name: 'Patrick Fanella',
 			email: 'patrick@example.com',

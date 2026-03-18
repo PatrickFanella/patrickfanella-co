@@ -3,7 +3,7 @@
     {
       "slug": "clpr",
       "title": "Clpr",
-      "summary": "Full-stack Twitch clip curation platform with community voting, hybrid search, and a React Native mobile app — live in production at clpr.tv.",
+      "summary": "Full-stack Twitch clip curation platform with community voting, hybrid search, and a React Native mobile app, live in production at clpr.tv.",
       "description": "Clpr started as a way to surface the best Twitch clips without relying on platform algorithms. The result is a production content platform with Reddit-style karma voting, hybrid search combining BM25 full-text with semantic vector matching, user collections, and social features. A Go API serves both the React web client and a React Native mobile app built on Expo through a shared JSON contract. Infrastructure is containerized with Docker, orchestrated via Kubernetes, monitored through Prometheus and Grafana, and deployed through GitHub Actions CI/CD pipelines.",
       "role": "Full-stack engineer",
       "year": 2025,
@@ -20,10 +20,10 @@
       "architecture": [
         "Go API with Gin serving both the React web client and the React Native Expo mobile app through a shared JSON contract.",
         "Hybrid search pipeline combining OpenSearch BM25 full-text scoring with semantic vector embeddings for relevance ranking.",
-        "PostgreSQL 17 as the primary store, Redis 8 for caching and session management, OpenSearch 2.11 for search indexing — all containerized and orchestrated with Kubernetes."
+        "PostgreSQL 17 as the primary store, Redis 8 for caching and session management, OpenSearch 2.11 for search indexing; all containerized and orchestrated with Kubernetes."
       ],
       "lessons": [
-        "Hybrid search is worth the infrastructure cost — users consistently found clips that pure text search missed, and the BM25 + vector blend outperformed either approach alone.",
+        "Hybrid search is worth the infrastructure cost; users consistently found clips that pure text search missed, and the BM25 + vector blend outperformed either approach alone.",
         "Running a mobile and web client against the same API forced cleaner contract discipline early, which paid off when adding features later."
       ],
       "media": [
@@ -38,7 +38,7 @@
       "slug": "subcorp",
       "title": "Subcorp",
       "summary": "Self-hosted multi-agent AI platform where six autonomous agents propose, debate, and execute missions through real-time WebSocket chat with sandboxed tool execution.",
-      "description": "Subcorp is a self-hosted platform for autonomous AI coordination. Six named agents with distinct personalities and access controls propose missions, debate approaches in roundtable conversations, and execute tasks using a shared toolbox — with minimal human intervention. The system runs on Next.js 16 with React 19, backed by PostgreSQL 16 with pgvector across 32 tables. Agents communicate through real-time WebSocket connections in the Sanctum chat interface, which supports @mention routing, whisper channels, and structured roundtable modes. Each agent has access to sandboxed tools including web search, bash execution, file I/O, and semantic memory retrieval — all running in an isolated Docker container.",
+      "description": "Subcorp is a self-hosted platform for autonomous AI coordination. Six named agents with distinct personalities and access controls propose missions, debate approaches in roundtable conversations, and execute tasks using a shared toolbox, with minimal human intervention. The system runs on Next.js 16 with React 19, backed by PostgreSQL 16 with pgvector across 32 tables. Agents communicate through real-time WebSocket connections in the Sanctum chat interface, which supports @mention routing, whisper channels, and structured roundtable modes. Each agent has access to sandboxed tools including web search, bash execution, file I/O, and semantic memory retrieval, all running in an isolated Docker container.",
       "role": "Full-stack engineer",
       "year": 2026,
       "repoUrl": "https://github.com/subculture-collective/subcorp",
@@ -49,16 +49,16 @@
       "highlights": [
         "Deployed a live multi-agent system where six AI agents autonomously propose, debate, and execute missions with minimal human intervention.",
         "Built a real-time Sanctum chat interface with WebSocket-driven @mention routing, whisper channels, and structured roundtable conversation modes.",
-        "Designed a sandboxed toolbox container giving agents access to bash, Python, Node.js, web search, file I/O, and semantic memory — isolated from the host system."
+        "Designed a sandboxed toolbox container giving agents access to bash, Python, Node.js, web search, file I/O, and semantic memory, isolated from the host system."
       ],
       "architecture": [
         "Next.js 16 with React 19 server and client components, PostgreSQL 16 with pgvector for semantic memory across 32 tables, OpenRouter SDK for LLM orchestration.",
         "WebSocket layer handles real-time agent-to-agent and agent-to-user communication with structured message routing, @mention parsing, and whisper privacy.",
-        "Sandboxed Docker container provides agents with bash, Python, and Node.js execution, web search, and file I/O — network-isolated from the host with resource limits."
+        "Sandboxed Docker container provides agents with bash, Python, and Node.js execution, web search, and file I/O, network-isolated from the host with resource limits."
       ],
       "lessons": [
-        "Agent personality and access control boundaries matter as much as the underlying model — the same LLM produces radically different outputs when given distinct identities, relationship dynamics, and tool permissions.",
-        "Real-time multi-agent chat requires careful message ordering and conflict resolution — race conditions between agents proposing simultaneous actions were the hardest bugs to debug."
+        "Agent personality and access control boundaries matter as much as the underlying model; the same LLM produces radically different outputs when given distinct identities, relationship dynamics, and tool permissions.",
+        "Real-time multi-agent chat requires careful message ordering and conflict resolution; race conditions between agents proposing simultaneous actions were the hardest bugs to debug."
       ],
       "media": [
         {
@@ -72,7 +72,7 @@
       "slug": "transcript-create",
       "title": "Transcript Create",
       "summary": "GPU-accelerated transcription SaaS with Whisper AI, speaker diarization, full-text search, and published client SDKs for Python and TypeScript.",
-      "description": "Searching inside video content is still broken — most platforms don't transcribe, and those that do make the output unsearchable. Transcript Create fixes that with GPU-accelerated Whisper transcription, optional pyannote speaker diarization, and full-text search across channels via OpenSearch. A FastAPI backend coordinates GPU workers that scale horizontally using a Postgres SKIP LOCKED queue pattern. Transcripts are stored in PostgreSQL with export support for SRT, VTT, and PDF. The system includes OAuth login, Stripe billing with free and pro tiers, a Vite + React frontend, Prometheus and Grafana monitoring, published client SDKs for Python and TypeScript, and Docker images published to GHCR.",
+      "description": "Searching inside video content is still broken. Most platforms don't transcribe, and those that do make the output unsearchable. Transcript Create fixes that with GPU-accelerated Whisper transcription, optional pyannote speaker diarization, and full-text search across channels via OpenSearch. A FastAPI backend coordinates GPU workers that scale horizontally using a Postgres SKIP LOCKED queue pattern. Transcripts are stored in PostgreSQL with export support for SRT, VTT, and PDF. The system includes OAuth login, Stripe billing with free and pro tiers, a Vite + React frontend, Prometheus and Grafana monitoring, published client SDKs for Python and TypeScript, and Docker images published to GHCR.",
       "role": "Full-stack engineer",
       "year": 2025,
       "repoUrl": "https://github.com/subculture-collective/transcript-create",
@@ -85,13 +85,13 @@
         "Shipped full SaaS infrastructure including OAuth login, Stripe billing with tiered plans, and 255 Playwright E2E tests across the stack."
       ],
       "architecture": [
-        "FastAPI backend orchestrating GPU Whisper workers (ROCm/CUDA) through a Postgres SKIP LOCKED queue — workers scale independently and pick up jobs without coordination overhead.",
+        "FastAPI backend orchestrating GPU Whisper workers (ROCm/CUDA) through a Postgres SKIP LOCKED queue; workers scale independently and pick up jobs without coordination overhead.",
         "PostgreSQL as the primary store with OpenSearch indexing for full-text transcript search across channels, with SRT/VTT/PDF export pipelines.",
         "Stripe billing integration with free and pro tiers, OAuth login, Prometheus/Grafana monitoring, and Docker images published to GHCR for reproducible deployments."
       ],
       "lessons": [
-        "The SKIP LOCKED queue pattern in Postgres eliminated the need for a separate message broker — one fewer service to operate, and the transactional guarantees simplified error recovery.",
-        "Publishing typed SDKs early forced the API contract to stabilize faster than internal-only consumption would have — external consumers are unforgiving about breaking changes."
+        "The SKIP LOCKED queue pattern in Postgres eliminated the need for a separate message broker: one fewer service to operate, and the transactional guarantees simplified error recovery.",
+        "Publishing typed SDKs early forced the API contract to stabilize faster than internal-only consumption would have; external consumers are unforgiving about breaking changes."
       ],
       "media": [
         {
@@ -118,12 +118,12 @@
         "Applied production engineering discipline: k6 load testing, security auditing, performance profiling, and Prometheus/Grafana monitoring across the full stack."
       ],
       "architecture": [
-        "Go backend split into three concerns: API serving, subreddit crawling, and graph precalculation — each independently deployable and monitored.",
+        "Go backend split into three concerns: API serving, subreddit crawling, and graph precalculation; each independently deployable and monitored.",
         "PostgreSQL with sqlc for type-safe query generation, supporting the graph data model for subreddit nodes, relationship edges, and precomputed community assignments.",
         "Vite + React frontend rendering WebGL force-directed graphs with multiple visualization modes (3D, 2D, dashboard, community detection) and real-time graph interaction."
       ],
       "lessons": [
-        "Precalculating graph relationships was essential — real-time Louvain detection on the full dataset was too slow for interactive use, but batch precalculation made the frontend feel instant.",
+        "Precalculating graph relationships was essential; real-time Louvain detection on the full dataset was too slow for interactive use, but batch precalculation made the frontend feel instant.",
         "Load testing with k6 early in development caught a connection pool exhaustion issue that would have been painful to debug in production with real crawl traffic."
       ],
       "media": [
@@ -153,11 +153,11 @@
       "architecture": [
         "Solidity ContentRegistry contract on L2 with Hardhat + TypeScript toolchain, Ethers v6 integration, and Slither static analysis for security auditing.",
         "Next.js App Router frontend with NextAuth, Express API with Prisma ORM, BullMQ async queue for IPFS pinning, and Redis caching for verification lookups.",
-        "Browser extension supporting Chrome, Firefox, and Safari — injecting verification UI into YouTube and Twitter pages with cross-origin message passing to the API."
+        "Browser extension supporting Chrome, Firefox, and Safari, injecting verification UI into YouTube and Twitter pages with cross-origin message passing to the API."
       ],
       "lessons": [
-        "IPFS pinning reliability varies significantly across providers — abstracting behind Infura, Web3.Storage, and Pinata with automatic failover was necessary for production trust.",
-        "Browser extension development across three engines (Chromium, Gecko, WebKit) required more platform-specific code than expected — a shared core with thin platform adapters was the right pattern."
+        "IPFS pinning reliability varies significantly across providers; abstracting behind Infura, Web3.Storage, and Pinata with automatic failover was necessary for production trust.",
+        "Browser extension development across three engines (Chromium, Gecko, WebKit) required more platform-specific code than expected; a shared core with thin platform adapters was the right pattern."
       ],
       "media": [
         {
@@ -189,8 +189,8 @@
         "Social media bot layer integrating Twitter and Reddit APIs for automated content monitoring, with configurable matching thresholds and alert routing."
       ],
       "lessons": [
-        "Fingerprint robustness matters more than precision — a fingerprint that survives re-encoding and compression catches more real-world matches than one optimized for exact-match accuracy.",
-        "Rate limiting on social media APIs shaped the bot architecture more than the audio processing did — batching and backoff strategies were critical for sustained operation."
+        "Fingerprint robustness matters more than precision: a fingerprint that survives re-encoding and compression catches more real-world matches than one optimized for exact-match accuracy.",
+        "Rate limiting on social media APIs shaped the bot architecture more than the audio processing did; batching and backoff strategies were critical for sustained operation."
       ],
       "media": [
         {
@@ -218,12 +218,12 @@
       ],
       "architecture": [
         "Node.js + TypeScript + Express backend orchestrating multiple AI agents through OpenRouter, with deterministic phase state machines governing case progression.",
-        "PixiJS rendering layer producing Ace Attorney-style courtroom visuals — character sprites, dialogue overlays, and animated transitions driven by the agent output stream.",
+        "PixiJS rendering layer producing Ace Attorney-style courtroom visuals, character sprites, dialogue overlays, and animated transitions driven by the agent output stream.",
         "Dual interface: a viewer-facing stream with PixiJS rendering and Twitch chat integration, plus an operator dashboard (React + Vite) for case management and phase control."
       ],
       "lessons": [
-        "Deterministic replay from NDJSON recordings was invaluable for debugging agent behavior — being able to replay exact sequences without LLM variance made the multi-agent interactions far easier to tune.",
-        "Twitch chat integration drove more engagement than expected — audience commands like !objection created a feedback loop that made the AI responses feel more dynamic and responsive."
+        "Deterministic replay from NDJSON recordings was invaluable for debugging agent behavior; being able to replay exact sequences without LLM variance made the multi-agent interactions far easier to tune.",
+        "Twitch chat integration drove more engagement than expected; audience commands like !objection created a feedback loop that made the AI responses feel more dynamic and responsive."
       ],
       "media": [
         {
@@ -255,8 +255,8 @@
         "Geoprivacy layer fuzzes coordinates before persistence, moderation worker processes content asynchronously, and the web client renders map-based discovery through a privacy-aware tile layer."
       ],
       "lessons": [
-        "Building on the AT Protocol forced good architectural decisions — decentralized identity eliminated the need for a custom auth system, and the social graph came for free.",
-        "Geoprivacy is harder than it looks. Simple coordinate rounding creates grid artifacts that can be reverse-engineered — adding controlled random noise within a privacy radius was more resilient."
+        "Building on the AT Protocol forced good architectural decisions; decentralized identity eliminated the need for a custom auth system, and the social graph came for free.",
+        "Geoprivacy is harder than it looks. Simple coordinate rounding creates grid artifacts that can be reverse-engineered; adding controlled random noise within a privacy radius was more resilient."
       ],
       "media": [
         {

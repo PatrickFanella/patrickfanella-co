@@ -255,7 +255,7 @@ export function ProjectDetailPage() {
           <div>
             <SectionLabel>Lessons learned</SectionLabel>
             <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-              What held up &mdash; and what I'd change.
+              What held up, and what I'd change.
             </h2>
           </div>
 

@@ -34,15 +34,15 @@ export function SiteLayout() {
           <div className="grid gap-4">
             <div className="flex flex-wrap items-center gap-3">
               <span aria-hidden="true" className="h-3 w-3 bg-accent-green" />
-              <p className={monoLabelClass}><span className="text-accent-pink">Patrick Fanella</span> &mdash; Full-Stack Engineer</p>
+              <p className={monoLabelClass}><span className="text-accent-pink">Patrick Fanella</span>, Full-Stack Engineer</p>
             </div>
 
             <div className="max-w-120">
               <p className="font-display text-[clamp(2.5rem,4vw,4rem)] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
-                I build products that<span className="text-accent-green"> ship </span>and systems that<span className="text-accent-teal"> hold up</span>.
+                I build products that<span className="text-accent-green"> ship</span>. From<span className="text-accent-teal"> Go</span> to <span className="text-accent-pink">pixel-perfect</span>.
               </p>
               <p className="mt-4 max-w-[40ch] text-[1.05rem] leading-relaxed text-ink-soft">
-                Building reliable software across Go, React, Python, and TypeScript&mdash;from backend services and search infrastructure to real-time interfaces and AI-enabled products.
+                Building reliable software across Go, React, Python, and TypeScript, from backend services and search infrastructure to real-time interfaces and AI-enabled products.
               </p>
             </div>
           </div>
