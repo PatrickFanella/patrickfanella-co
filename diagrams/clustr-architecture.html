@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clustr — System Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 20px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca}
+  svg text{font-family:'JetBrains Mono','Space Grotesk',monospace}
+</style>
+</head>
+<body>
+<div class="card">
+<svg width="100%" viewBox="0 0 680 660" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<!-- Frontend tier -->
+<text x="40" y="28" font-size="12" fill="#6272a4">Frontend</text>
+<line x1="92" y1="24" x2="640" y2="24" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="44" y="42" width="596" height="120" fill="#191a21"/>
+<rect x="40" y="38" width="596" height="120" fill="rgba(189,147,249,0.06)" stroke="#bd93f9" stroke-width="2"/>
+<text x="340" y="60" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#bd93f9">Vite + React · 46 components · 23k LoC</text>
+
+<!-- Viz mode boxes -->
+<rect x="63" y="76" width="130" height="32" fill="#191a21"/><rect x="60" y="73" width="130" height="32" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
+<text x="125" y="89" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#bd93f9">3D graph (WebGL)</text>
+<rect x="203" y="76" width="130" height="32" fill="#191a21"/><rect x="200" y="73" width="130" height="32" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
+<text x="265" y="89" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#bd93f9">2D graph (D3.js)</text>
+<rect x="343" y="76" width="130" height="32" fill="#191a21"/><rect x="340" y="73" width="130" height="32" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
+<text x="405" y="89" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#bd93f9">Community map</text>
+<rect x="483" y="76" width="140" height="32" fill="#191a21"/><rect x="480" y="73" width="140" height="32" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
+<text x="550" y="89" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#bd93f9">Dashboard + analytics</text>
+
+<text x="340" y="128" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6272a4">Octree spatial index · Edge bundler · SDF text · Instanced renderer · Web Worker layout · Minimap</text>
+
+<!-- Arrows down -->
+<line x1="340" y1="158" x2="340" y2="188" stroke="#6272a4" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Backend tier -->
+<text x="40" y="180" font-size="12" fill="#6272a4">Backend (Go)</text>
+<line x1="116" y1="176" x2="640" y2="176" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<!-- Three cmd services -->
+<rect x="44" y="196" width="186" height="100" fill="#191a21"/>
+<rect x="40" y="192" width="186" height="100" fill="#44475a" stroke="#8be9fd" stroke-width="2"/>
+<text x="133" y="214" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#8be9fd">API server</text>
+<text x="133" y="232" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#f8f8f2" opacity="0.7">39 API module files</text>
+<rect x="53" y="246" width="80" height="24" fill="rgba(139,233,253,0.1)" stroke="#8be9fd" stroke-width="0.5"/>
+<text x="93" y="258" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#8be9fd">22 handlers</text>
+<rect x="139" y="246" width="80" height="24" fill="rgba(139,233,253,0.1)" stroke="#8be9fd" stroke-width="0.5"/>
+<text x="179" y="258" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#8be9fd">17 middleware</text>
+
+<rect x="250" y="196" width="186" height="100" fill="#191a21"/>
+<rect x="246" y="192" width="186" height="100" fill="#44475a" stroke="#ff79c6" stroke-width="2"/>
+<text x="339" y="214" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#ff79c6">Crawler</text>
+<text x="339" y="232" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#f8f8f2" opacity="0.7">Reddit OAuth + rate limit</text>
+<rect x="259" y="246" width="80" height="24" fill="rgba(255,121,198,0.1)" stroke="#ff79c6" stroke-width="0.5"/>
+<text x="299" y="258" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#ff79c6">Circuit breaker</text>
+<rect x="345" y="246" width="80" height="24" fill="rgba(255,121,198,0.1)" stroke="#ff79c6" stroke-width="0.5"/>
+<text x="385" y="258" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#ff79c6">Retry + backoff</text>
+
+<rect x="456" y="196" width="184" height="100" fill="#191a21"/>
+<rect x="452" y="192" width="184" height="100" fill="#44475a" stroke="#50fa7b" stroke-width="2"/>
+<text x="544" y="214" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#50fa7b">Precalculate</text>
+<text x="544" y="232" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#f8f8f2" opacity="0.7">Graph + community detection</text>
+<rect x="465" y="246" width="80" height="24" fill="rgba(80,250,123,0.1)" stroke="#50fa7b" stroke-width="0.5"/>
+<text x="505" y="258" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#50fa7b">Louvain algo</text>
+<rect x="551" y="246" width="80" height="24" fill="rgba(80,250,123,0.1)" stroke="#50fa7b" stroke-width="0.5"/>
+<text x="591" y="258" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#50fa7b">Barnes-Hut</text>
+
+<!-- Internal modules -->
+<text x="40" y="316" font-size="12" fill="#6272a4">Internal modules</text>
+<line x1="136" y1="312" x2="640" y2="312" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="44" y="328" width="596" height="36" fill="#191a21"/>
+<rect x="40" y="324" width="596" height="36" fill="rgba(255,184,108,0.06)" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="340" y="342" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ffb86c">23 packages: graph · crawler · cache · middleware · metrics · secrets · scheduler · integrity · tracing …</text>
+
+<!-- Arrows to data -->
+<line x1="140" y1="360" x2="140" y2="396" stroke="#6272a4" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="340" y1="360" x2="340" y2="396" stroke="#6272a4" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="540" y1="360" x2="540" y2="396" stroke="#6272a4" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Data tier -->
+<text x="40" y="388" font-size="12" fill="#6272a4">Data</text>
+<line x1="65" y1="384" x2="640" y2="384" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="144" y="400" width="396" height="56" fill="#191a21"/>
+<rect x="140" y="396" width="396" height="56" fill="#44475a" stroke="#50fa7b" stroke-width="2"/>
+<text x="338" y="416" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#50fa7b">PostgreSQL</text>
+<text x="338" y="434" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#f8f8f2" opacity="0.7">37 migrations · 13 queries (sqlc) · FTS</text>
+
+<!-- Observability tier -->
+<text x="40" y="476" font-size="12" fill="#6272a4">Observability</text>
+<line x1="112" y1="472" x2="640" y2="472" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="44" y="488" width="186" height="40" fill="#191a21"/>
+<rect x="40" y="484" width="186" height="40" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
+<text x="133" y="504" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f1fa8c">Prometheus + alerts</text>
+
+<rect x="250" y="488" width="186" height="40" fill="#191a21"/>
+<rect x="246" y="484" width="186" height="40" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
+<text x="339" y="504" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f1fa8c">Grafana dashboards</text>
+
+<rect x="456" y="488" width="184" height="40" fill="#191a21"/>
+<rect x="452" y="484" width="184" height="40" fill="#44475a" stroke="#6272a4" stroke-width="1.5"/>
+<text x="544" y="504" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">k6 load testing</text>
+
+<!-- Quality tier -->
+<text x="40" y="548" font-size="12" fill="#6272a4">Quality + security</text>
+<line x1="144" y1="544" x2="640" y2="544" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="44" y="560" width="140" height="36" fill="#191a21"/>
+<rect x="40" y="556" width="140" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="110" y="574" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ff5555">Rate limiting</text>
+
+<rect x="204" y="560" width="140" height="36" fill="#191a21"/>
+<rect x="200" y="556" width="140" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="270" y="574" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ff5555">CORS + security</text>
+
+<rect x="364" y="560" width="140" height="36" fill="#191a21"/>
+<rect x="360" y="556" width="140" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="430" y="574" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ff5555">Pen testing suite</text>
+
+<rect x="524" y="560" width="116" height="36" fill="#191a21"/>
+<rect x="520" y="556" width="116" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="578" y="574" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ff5555">Data integrity</text>
+
+<!-- External -->
+<text x="40" y="618" font-size="12" fill="#6272a4">External</text>
+<line x1="82" y1="614" x2="640" y2="614" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="204" y="628" width="140" height="36" fill="#191a21"/>
+<rect x="200" y="624" width="140" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="270" y="642" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ffb86c">Reddit OAuth API</text>
+
+<rect x="364" y="628" width="140" height="36" fill="#191a21"/>
+<rect x="360" y="624" width="140" height="36" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="430" y="642" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#8be9fd">GitHub Actions CI</text>
+
+</svg>
+</div>
+</body>
+</html>

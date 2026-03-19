@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clustr — Tech Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 24px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca;color:#f8f8f2}
+  .section{margin-bottom:20px}
+  .section-label{font-size:11px;color:#6272a4;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;font-weight:500;font-family:'JetBrains Mono',monospace}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="card">
+
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
+  <span style="font-size:18px;font-weight:700;color:#8be9fd;font-family:'JetBrains Mono',monospace;">Clustr</span>
+  <span style="font-size:13px;color:#6272a4;">Reddit community network visualization</span>
+</div>
+<div style="font-size:12px;color:#44475a;margin-bottom:16px;font-family:'JetBrains Mono',monospace">Solo-built · 58k+ LoC · Go + React + WebGL</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #bd93f9;box-shadow:3px 3px 0 #bd93f9;">
+    <div style="font-size:20px;font-weight:500;color:#bd93f9;font-family:'JetBrains Mono',monospace">4</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">Visualization modes</div>
+  </div>
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #8be9fd;box-shadow:3px 3px 0 #8be9fd;">
+    <div style="font-size:20px;font-weight:500;color:#8be9fd;font-family:'JetBrains Mono',monospace">23</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">Internal packages</div>
+  </div>
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #50fa7b;box-shadow:3px 3px 0 #50fa7b;">
+    <div style="font-size:20px;font-weight:500;color:#50fa7b;font-family:'JetBrains Mono',monospace">22</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">API handlers</div>
+  </div>
+</div>
+
+<div style="height:2px;background:#44475a;margin:20px 0;"></div>
+
+<div class="section"><div class="section-label">Backend</div><div class="chip-row" id="be"></div></div>
+<div class="section"><div class="section-label">Frontend</div><div class="chip-row" id="fe"></div></div>
+<div class="section"><div class="section-label">Graph + algorithms</div><div class="chip-row" id="graph"></div></div>
+<div class="section"><div class="section-label">Data</div><div class="chip-row" id="data"></div></div>
+<div class="section"><div class="section-label">Observability</div><div class="chip-row" id="obs"></div></div>
+<div class="section" style="margin-bottom:0"><div class="section-label">Key capabilities</div><div class="chip-row" id="cap"></div></div>
+</div>
+
+<script>
+function chip(parent,label,dotColor,accent){
+  const el=document.getElementById(parent);
+  const s=document.createElement('span');
+  const border=accent||'#6272a4';
+  const textColor=accent||'#f8f8f2';
+  s.style.cssText='display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:0;font-size:13px;font-weight:500;border:2px solid '+border+';background:#44475a;color:'+textColor+';box-shadow:2px 2px 0 '+border+';transition:transform .1s,box-shadow .1s;cursor:default;font-family:"JetBrains Mono","Space Grotesk",monospace;';
+  s.onmouseenter=()=>{s.style.transform='translate(-1px,-1px)';s.style.boxShadow='3px 3px 0 '+border;};
+  s.onmouseleave=()=>{s.style.transform='';s.style.boxShadow='2px 2px 0 '+border;};
+  if(dotColor){
+    const d=document.createElement('span');
+    d.style.cssText='width:8px;height:8px;flex-shrink:0;background:'+dotColor;
+    s.appendChild(d);
+  }
+  s.appendChild(document.createTextNode(label));
+  el.appendChild(s);
+}
+
+const P='#bd93f9',C='#8be9fd',G='#50fa7b',O='#ffb86c',K='#ff79c6',Y='#f1fa8c',R='#ff5555';
+
+chip('be','Go',C,null);chip('be','sqlc',C,null);
+chip('be','Reddit OAuth',O,null);chip('be','Circuit breaker',R,null);
+chip('be','Job scheduler',Y,null);
+
+chip('fe','React','#61DAFB',null);chip('fe','TypeScript','#3178C6',null);
+chip('fe','Vite','#646CFF',null);chip('fe','Tailwind CSS',C,null);
+chip('fe','Three.js / WebGL',P,null);chip('fe','D3.js',O,null);
+chip('fe','react-force-graph-3d',K,null);
+
+chip('graph','Louvain communities',K,null);chip('graph','Barnes-Hut simulation',P,null);
+chip('graph','Octree spatial index',G,null);chip('graph','Edge bundling',C,null);
+chip('graph','Instanced rendering',O,null);chip('graph','SDF text rendering',Y,null);
+
+chip('data','PostgreSQL',G,null);chip('data','sqlc codegen',C,null);
+chip('data','37 migrations','#336791',null);chip('data','Full-text search',P,null);
+
+chip('obs','Prometheus',Y,null);chip('obs','Grafana',Y,null);
+chip('obs','k6 load testing',R,null);chip('obs','Performance HUD',O,null);
+chip('obs','CPU/mem profiling',C,null);
+
+chip('cap','Interactive 3D + 2D network graph',null,P);
+chip('cap','Louvain community detection',null,K);
+chip('cap','Barnes-Hut n-body simulation',null,C);
+chip('cap','Resilient Reddit crawler',null,G);
+chip('cap','Pen testing + security audit',null,R);
+chip('cap','k6 load + benchmark testing',null,O);
+</script>
+</body>
+</html>

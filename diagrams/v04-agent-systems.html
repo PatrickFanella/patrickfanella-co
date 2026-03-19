@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Portfolio — Multi-Agent Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}.card{background:#282a36;padding:28px 20px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca}svg text{font-family:'JetBrains Mono','Space Grotesk',monospace}</style>
+</head>
+<body>
+<div class="card">
+<svg width="100%" viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg">
+
+<text x="340" y="28" text-anchor="middle" font-size="14" font-weight="500" fill="#f8f8f2">Three agent architectures, three patterns</text>
+<text x="340" y="46" text-anchor="middle" font-size="11" fill="#6272a4">Different approaches to multi-agent orchestration</text>
+
+<!-- SubCorp: Autonomous collective -->
+<rect x="44" y="70" width="596" height="150" fill="#191a21"/>
+<rect x="40" y="66" width="596" height="150" fill="rgba(189,147,249,0.06)" stroke="#bd93f9" stroke-width="2"/>
+<text x="338" y="90" text-anchor="middle" font-size="13" font-weight="500" fill="#bd93f9">SubCorp — Autonomous collective</text>
+<text x="338" y="106" text-anchor="middle" font-size="10" fill="#6272a4">6 persistent agents · closed-loop · self-sustaining</text>
+
+<!-- Agent circles -->
+<circle cx="100" cy="158" r="22" fill="#44475a" stroke="#b4befe" stroke-width="2"/>
+<text x="100" y="155" text-anchor="middle" font-size="9" font-weight="500" fill="#b4befe">Chora</text>
+<text x="100" y="167" text-anchor="middle" font-size="8" fill="#6272a4">Analyst</text>
+
+<circle cx="200" cy="158" r="22" fill="#44475a" stroke="#f38ba8" stroke-width="2"/>
+<text x="200" y="155" text-anchor="middle" font-size="9" font-weight="500" fill="#f38ba8">Subrosa</text>
+<text x="200" y="167" text-anchor="middle" font-size="8" fill="#6272a4">Protector</text>
+
+<circle cx="300" cy="158" r="22" fill="#44475a" stroke="#cba6f7" stroke-width="2"/>
+<text x="300" y="155" text-anchor="middle" font-size="9" font-weight="500" fill="#cba6f7">Thaum</text>
+<text x="300" y="167" text-anchor="middle" font-size="8" fill="#6272a4">Innovator</text>
+
+<circle cx="400" cy="158" r="22" fill="#44475a" stroke="#a6e3a1" stroke-width="2"/>
+<text x="400" y="155" text-anchor="middle" font-size="9" font-weight="500" fill="#a6e3a1">Praxis</text>
+<text x="400" y="167" text-anchor="middle" font-size="8" fill="#6272a4">Executor</text>
+
+<circle cx="500" cy="158" r="22" fill="#44475a" stroke="#89b4fa" stroke-width="2"/>
+<text x="500" y="155" text-anchor="middle" font-size="9" font-weight="500" fill="#89b4fa">Mux</text>
+<text x="500" y="167" text-anchor="middle" font-size="8" fill="#6272a4">Operations</text>
+
+<circle cx="580" cy="158" r="22" fill="#44475a" stroke="#f1fa8c" stroke-width="2"/>
+<text x="580" y="155" text-anchor="middle" font-size="9" font-weight="500" fill="#f1fa8c">Primus</text>
+<text x="580" y="167" text-anchor="middle" font-size="8" fill="#6272a4">Sovereign</text>
+
+<!-- Interconnect lines between agents -->
+<line x1="122" y1="158" x2="178" y2="158" stroke="#6272a4" stroke-width="0.5" opacity="0.4"/>
+<line x1="222" y1="158" x2="278" y2="158" stroke="#6272a4" stroke-width="0.5" opacity="0.4"/>
+<line x1="322" y1="158" x2="378" y2="158" stroke="#6272a4" stroke-width="0.5" opacity="0.4"/>
+<line x1="422" y1="158" x2="478" y2="158" stroke="#6272a4" stroke-width="0.5" opacity="0.4"/>
+<line x1="522" y1="158" x2="558" y2="158" stroke="#6272a4" stroke-width="0.5" opacity="0.4"/>
+
+<!-- Loop arrow hint -->
+<text x="338" y="200" text-anchor="middle" font-size="10" fill="#bd93f9">Propose → Approve → Mission → Steps → Execute → Trigger → Propose …</text>
+
+<!-- JuryRigged: Deterministic phases -->
+<rect x="44" y="232" width="596" height="150" fill="#191a21"/>
+<rect x="40" y="228" width="596" height="150" fill="rgba(139,233,253,0.06)" stroke="#8be9fd" stroke-width="2"/>
+<text x="338" y="252" text-anchor="middle" font-size="13" font-weight="500" fill="#8be9fd">JuryRigged — Deterministic courtroom</text>
+<text x="338" y="268" text-anchor="middle" font-size="10" fill="#6272a4">4 agent roles · phase-driven · audience-interactive</text>
+
+<!-- Phase boxes -->
+<rect x="63" y="284" width="96" height="40" fill="#191a21"/><rect x="60" y="281" width="96" height="40" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="108" y="295" text-anchor="middle" font-size="10" font-weight="500" fill="#8be9fd">Opening</text>
+<text x="108" y="309" text-anchor="middle" font-size="9" fill="#6272a4">Judge + counsel</text>
+
+<rect x="178" y="284" width="96" height="40" fill="#191a21"/><rect x="175" y="281" width="96" height="40" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="223" y="295" text-anchor="middle" font-size="10" font-weight="500" fill="#8be9fd">Examination</text>
+<text x="223" y="309" text-anchor="middle" font-size="9" fill="#6272a4">Witness + cross</text>
+
+<rect x="293" y="284" width="96" height="40" fill="#191a21"/><rect x="290" y="281" width="96" height="40" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="338" y="295" text-anchor="middle" font-size="10" font-weight="500" fill="#8be9fd">Closing</text>
+<text x="338" y="309" text-anchor="middle" font-size="9" fill="#6272a4">Arguments</text>
+
+<rect x="408" y="284" width="96" height="40" fill="#191a21"/><rect x="405" y="281" width="96" height="40" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="453" y="295" text-anchor="middle" font-size="10" font-weight="500" fill="#8be9fd">Deliberation</text>
+<text x="453" y="309" text-anchor="middle" font-size="9" fill="#6272a4">Jury votes</text>
+
+<rect x="523" y="284" width="96" height="40" fill="#191a21"/><rect x="520" y="281" width="96" height="40" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
+<text x="568" y="295" text-anchor="middle" font-size="10" font-weight="500" fill="#f1fa8c">Verdict</text>
+<text x="568" y="309" text-anchor="middle" font-size="9" fill="#6272a4">SSE streamed</text>
+
+<!-- Arrows between phases -->
+<line x1="156" y1="301" x2="175" y2="301" stroke="#6272a4" stroke-width="1"/>
+<line x1="271" y1="301" x2="290" y2="301" stroke="#6272a4" stroke-width="1"/>
+<line x1="386" y1="301" x2="405" y2="301" stroke="#6272a4" stroke-width="1"/>
+<line x1="501" y1="301" x2="520" y2="301" stroke="#6272a4" stroke-width="1"/>
+
+<text x="338" y="360" text-anchor="middle" font-size="10" fill="#8be9fd">PixiJS courtroom renderer · Ace Attorney-inspired · Live jury interaction</text>
+
+<!-- Cutroom: Pipeline stages -->
+<rect x="44" y="394" width="596" height="150" fill="#191a21"/>
+<rect x="40" y="390" width="596" height="150" fill="rgba(255,184,108,0.06)" stroke="#ffb86c" stroke-width="2"/>
+<text x="338" y="414" text-anchor="middle" font-size="13" font-weight="500" fill="#ffb86c">Cutroom — Production pipeline</text>
+<text x="338" y="430" text-anchor="middle" font-size="10" fill="#6272a4">7 specialized stages · template-driven · Remotion video output</text>
+
+<!-- Stage chain -->
+<rect x="56" y="446" width="76" height="36" fill="#191a21"/><rect x="54" y="444" width="76" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="92" y="462" text-anchor="middle" font-size="9" font-weight="500" fill="#ffb86c">Research</text>
+
+<rect x="142" y="446" width="76" height="36" fill="#191a21"/><rect x="140" y="444" width="76" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="178" y="462" text-anchor="middle" font-size="9" font-weight="500" fill="#ffb86c">Script</text>
+
+<rect x="228" y="446" width="76" height="36" fill="#191a21"/><rect x="226" y="444" width="76" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="264" y="462" text-anchor="middle" font-size="9" font-weight="500" fill="#ffb86c">Voice</text>
+
+<rect x="314" y="446" width="76" height="36" fill="#191a21"/><rect x="312" y="444" width="76" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="350" y="462" text-anchor="middle" font-size="9" font-weight="500" fill="#ffb86c">Music</text>
+
+<rect x="400" y="446" width="76" height="36" fill="#191a21"/><rect x="398" y="444" width="76" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="436" y="462" text-anchor="middle" font-size="9" font-weight="500" fill="#ffb86c">Visuals</text>
+
+<rect x="486" y="446" width="76" height="36" fill="#191a21"/><rect x="484" y="444" width="76" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="522" y="462" text-anchor="middle" font-size="9" font-weight="500" fill="#ffb86c">Edit</text>
+
+<rect x="572" y="446" width="60" height="36" fill="#191a21"/><rect x="570" y="444" width="60" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
+<text x="600" y="462" text-anchor="middle" font-size="9" font-weight="500" fill="#50fa7b">Publish</text>
+
+<!-- Arrows -->
+<line x1="130" y1="462" x2="140" y2="462" stroke="#6272a4" stroke-width="1"/>
+<line x1="216" y1="462" x2="226" y2="462" stroke="#6272a4" stroke-width="1"/>
+<line x1="302" y1="462" x2="312" y2="462" stroke="#6272a4" stroke-width="1"/>
+<line x1="388" y1="462" x2="398" y2="462" stroke="#6272a4" stroke-width="1"/>
+<line x1="474" y1="462" x2="484" y2="462" stroke="#6272a4" stroke-width="1"/>
+<line x1="560" y1="462" x2="570" y2="462" stroke="#6272a4" stroke-width="1"/>
+
+<text x="338" y="516" text-anchor="middle" font-size="10" fill="#ffb86c">15+ Remotion templates · Stage ownership + handoffs · 300+ tests</text>
+
+<!-- Comparison footer -->
+<text x="340" y="570" text-anchor="middle" font-size="11" fill="#f8f8f2" opacity="0.5">Autonomous loop · Phase-driven simulation · Linear pipeline</text>
+<text x="340" y="588" text-anchor="middle" font-size="10" fill="#6272a4">Three distinct orchestration patterns across the portfolio</text>
+</svg>
+</div>
+</body></html>

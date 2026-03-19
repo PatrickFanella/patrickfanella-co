@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Portfolio — By The Numbers</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}.card{background:#282a36;padding:28px 24px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca;color:#f8f8f2}
+.stat{background:#44475a;padding:16px 20px;border:2px solid;transition:transform .1s,box-shadow .1s;cursor:default}
+.stat:hover{transform:translate(-1px,-1px)}
+.stat .val{font-size:28px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.stat .lbl{font-size:11px;color:#6272a4;margin-top:4px;font-family:'JetBrains Mono',monospace}
+</style>
+</head>
+<body>
+<div class="card">
+<div style="font-size:18px;font-weight:500;margin-bottom:4px;font-family:'JetBrains Mono',monospace;color:#f8f8f2;">By the numbers</div>
+<div style="font-size:12px;color:#6272a4;margin-bottom:20px;font-family:'JetBrains Mono',monospace;">Aggregate totals across 13 public repositories</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;">
+  <div class="stat" style="border-color:#bd93f9;box-shadow:4px 4px 0 #bd93f9;"><div class="val" style="color:#bd93f9;">886k+</div><div class="lbl">Lines of code</div></div>
+  <div class="stat" style="border-color:#8be9fd;box-shadow:4px 4px 0 #8be9fd;"><div class="val" style="color:#8be9fd;">3,669</div><div class="lbl">Source files</div></div>
+  <div class="stat" style="border-color:#50fa7b;box-shadow:4px 4px 0 #50fa7b;"><div class="val" style="color:#50fa7b;">1,110</div><div class="lbl">Test files</div></div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;">
+  <div class="stat" style="border-color:#ff79c6;box-shadow:4px 4px 0 #ff79c6;"><div class="val" style="color:#ff79c6;">191</div><div class="lbl">CI/CD workflows</div></div>
+  <div class="stat" style="border-color:#ffb86c;box-shadow:4px 4px 0 #ffb86c;"><div class="val" style="color:#ffb86c;">765</div><div class="lbl">Documentation pages</div></div>
+  <div class="stat" style="border-color:#f1fa8c;box-shadow:4px 4px 0 #f1fa8c;"><div class="val" style="color:#f1fa8c;">36</div><div class="lbl">Docker configs</div></div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+  <div class="stat" style="border-color:#ff5555;box-shadow:4px 4px 0 #ff5555;"><div class="val" style="color:#ff5555;">5</div><div class="lbl">Languages</div></div>
+  <div class="stat" style="border-color:#6272a4;box-shadow:4px 4px 0 #6272a4;"><div class="val" style="color:#f8f8f2;">15+</div><div class="lbl">External integrations</div></div>
+  <div class="stat" style="border-color:#bd93f9;box-shadow:4px 4px 0 #bd93f9;"><div class="val" style="color:#bd93f9;">200+</div><div class="lbl">DB migrations</div></div>
+</div>
+
+<div style="height:2px;background:#44475a;margin:20px 0;"></div>
+
+<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;" id="langs"></div>
+</div>
+<script>
+function chip(label,color){
+  const el=document.getElementById('langs');
+  const s=document.createElement('span');
+  s.style.cssText='display:inline-flex;align-items:center;gap:6px;padding:6px 14px;font-size:13px;font-weight:500;border:2px solid '+color+';background:#44475a;color:'+color+';box-shadow:2px 2px 0 '+color+';font-family:"JetBrains Mono",monospace;transition:transform .1s;cursor:default;';
+  s.onmouseenter=()=>{s.style.transform='translate(-1px,-1px)';s.style.boxShadow='3px 3px 0 '+color;};
+  s.onmouseleave=()=>{s.style.transform='';s.style.boxShadow='2px 2px 0 '+color;};
+  s.textContent=label;el.appendChild(s);
+}
+chip('Go','#8be9fd');chip('TypeScript','#bd93f9');chip('Python','#ff79c6');chip('SQL','#50fa7b');chip('Solidity','#f1fa8c');
+chip('React','#8be9fd');chip('Next.js','#f8f8f2');chip('FastAPI','#ff79c6');chip('Gin','#8be9fd');chip('PostgreSQL','#50fa7b');
+chip('Redis','#ff5555');chip('Docker','#8be9fd');chip('K8s','#bd93f9');chip('Terraform','#ffb86c');
+</script>
+</body></html>

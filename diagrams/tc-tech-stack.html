@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transcript Create — Tech Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 24px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca;color:#f8f8f2}
+  .section{margin-bottom:20px}
+  .section-label{font-size:11px;color:#6272a4;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;font-weight:500;font-family:'JetBrains Mono',monospace}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="card">
+
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
+  <span style="font-size:18px;font-weight:700;color:#ff79c6;font-family:'JetBrains Mono',monospace;">Transcript Create</span>
+  <span style="font-size:13px;color:#6272a4;">YouTube transcription platform</span>
+</div>
+<div style="font-size:12px;color:#44475a;margin-bottom:16px;font-family:'JetBrains Mono',monospace">Solo-built · 45k+ LoC · Apache 2.0 · GPU-accelerated</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #bd93f9;box-shadow:3px 3px 0 #bd93f9;">
+    <div style="font-size:20px;font-weight:500;color:#bd93f9;font-family:'JetBrains Mono',monospace">13</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">API route modules</div>
+  </div>
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #8be9fd;box-shadow:3px 3px 0 #8be9fd;">
+    <div style="font-size:20px;font-weight:500;color:#8be9fd;font-family:'JetBrains Mono',monospace">16</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">Worker modules</div>
+  </div>
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #50fa7b;box-shadow:3px 3px 0 #50fa7b;">
+    <div style="font-size:20px;font-weight:500;color:#50fa7b;font-family:'JetBrains Mono',monospace">255</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">E2E tests</div>
+  </div>
+</div>
+
+<div style="height:2px;background:#44475a;margin:20px 0;"></div>
+
+<div class="section"><div class="section-label">Backend</div><div class="chip-row" id="be"></div></div>
+<div class="section"><div class="section-label">AI / ML</div><div class="chip-row" id="ai"></div></div>
+<div class="section"><div class="section-label">Frontend</div><div class="chip-row" id="fe"></div></div>
+<div class="section"><div class="section-label">Data</div><div class="chip-row" id="data"></div></div>
+<div class="section"><div class="section-label">Infrastructure</div><div class="chip-row" id="inf"></div></div>
+<div class="section" style="margin-bottom:0"><div class="section-label">Key capabilities</div><div class="chip-row" id="cap"></div></div>
+</div>
+
+<script>
+function chip(parent,label,dotColor,accent){
+  const el=document.getElementById(parent);
+  const s=document.createElement('span');
+  const border=accent||'#6272a4';
+  const textColor=accent||'#f8f8f2';
+  s.style.cssText='display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:0;font-size:13px;font-weight:500;border:2px solid '+border+';background:#44475a;color:'+textColor+';box-shadow:2px 2px 0 '+border+';transition:transform .1s,box-shadow .1s;cursor:default;font-family:"JetBrains Mono","Space Grotesk",monospace;';
+  s.onmouseenter=()=>{s.style.transform='translate(-1px,-1px)';s.style.boxShadow='3px 3px 0 '+border;};
+  s.onmouseleave=()=>{s.style.transform='';s.style.boxShadow='2px 2px 0 '+border;};
+  if(dotColor){
+    const d=document.createElement('span');
+    d.style.cssText='width:8px;height:8px;flex-shrink:0;background:'+dotColor;
+    s.appendChild(d);
+  }
+  s.appendChild(document.createTextNode(label));
+  el.appendChild(s);
+}
+
+const P='#bd93f9',C='#8be9fd',G='#50fa7b',O='#ffb86c',K='#ff79c6',Y='#f1fa8c',R='#ff5555';
+
+chip('be','Python 3.12',P,null);chip('be','FastAPI',K,null);
+chip('be','Alembic',P,null);chip('be','SQLAlchemy','#d63939',null);
+chip('be','Pydantic',O,null);chip('be','yt-dlp',C,null);
+
+chip('ai','Whisper large-v3',K,null);chip('ai','pyannote diarization',P,null);
+chip('ai','ROCm',R,null);chip('ai','CUDA',G,null);
+chip('ai','CPU fallback',O,null);
+
+chip('fe','React 19','#61DAFB',null);chip('fe','TypeScript','#3178C6',null);
+chip('fe','Vite','#646CFF',null);chip('fe','Tailwind CSS',C,null);
+
+chip('data','PostgreSQL 16',G,null);chip('data','Redis 7',R,null);
+chip('data','OpenSearch',P,null);chip('data','Postgres FTS',G,null);
+chip('data','SKIP LOCKED queue',O,null);
+
+chip('inf','Docker (3 variants)','#2496ED',null);chip('inf','Kubernetes',C,null);
+chip('inf','Helm chart',C,null);chip('inf','Terraform AWS',P,null);
+chip('inf','Ansible',R,null);chip('inf','Prometheus + Grafana',Y,null);
+chip('inf','GitHub Actions',G,null);
+
+chip('cap','GPU-accelerated Whisper',null,K);
+chip('cap','Speaker diarization',null,P);
+chip('cap','Multi-format export (SRT/VTT/PDF)',null,O);
+chip('cap','Stripe billing + pro tiers',null,G);
+chip('cap','255 E2E + unit tests',null,R);
+chip('cap','Python + JS/TS client SDKs',null,C);
+</script>
+</body>
+</html>

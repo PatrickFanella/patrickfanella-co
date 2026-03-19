@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Portfolio — Integration Map</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}.card{background:#282a36;padding:28px 24px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca;color:#f8f8f2}</style>
+</head>
+<body>
+<div class="card">
+<div style="font-size:16px;font-weight:500;margin-bottom:4px;font-family:'JetBrains Mono',monospace;color:#ffb86c;">Integration map</div>
+<div style="font-size:12px;color:#6272a4;margin-bottom:20px;font-family:'JetBrains Mono',monospace;">External services and APIs connected across the portfolio</div>
+<div style="position:relative;height:380px;"><canvas id="c"></canvas></div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;font-size:11px;color:#6272a4;font-family:'JetBrains Mono',monospace;">
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#bd93f9;"></span>AI/LLM</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#8be9fd;"></span>Platform API</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#50fa7b;"></span>Payments</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#ffb86c;"></span>Media</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#ff79c6;"></span>Auth</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#f1fa8c;"></span>Blockchain</span>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+Chart.defaults.color='#6272a4';Chart.defaults.font.family='"JetBrains Mono",monospace';Chart.defaults.font.size=10;
+const labels=['Twitch','Reddit','Discord','YouTube','OpenRouter','Brave Search','Stripe','AT Protocol','LiveKit','HubSpot','Intercom','Ethereum','Google OAuth','SendGrid','Cloudflare R2'];
+const projects=['CLPR','SubCorp','Transcript','Clustr','SoundHash','Subcults','Discord Spy','Galdr','Internet-ID','Patchwork','JuryRigged','Cutroom'];
+// Each service: which projects use it (count)
+const data=[
+  2, // Twitch (CLPR, Transcript)
+  1, // Reddit (Clustr)
+  1, // Discord (Discord Spy)
+  2, // YouTube (Transcript, SoundHash)
+  2, // OpenRouter (SubCorp, JuryRigged)
+  1, // Brave (SubCorp)
+  3, // Stripe (CLPR, Subcults, Galdr)
+  2, // AT Protocol (Patchwork, Subcults)
+  1, // LiveKit (Subcults)
+  1, // HubSpot (Galdr)
+  1, // Intercom (Galdr)
+  1, // Ethereum (Internet-ID)
+  3, // Google OAuth (CLPR, Transcript, Subcults)
+  1, // SendGrid (CLPR)
+  1, // Cloudflare R2 (Subcults)
+];
+const colors = data.map((v,i)=>{
+  // AI/LLM
+  if([4,5].includes(i)) return '#bd93f9';
+  // Platform API
+  if([0,1,2,3].includes(i)) return '#8be9fd';
+  // Payments
+  if([6].includes(i)) return '#50fa7b';
+  // Media
+  if([8,14].includes(i)) return '#ffb86c';
+  // Auth
+  if([12,13].includes(i)) return '#ff79c6';
+  // Blockchain
+  if([11].includes(i)) return '#f1fa8c';
+  // Protocol
+  if([7].includes(i)) return '#8be9fd';
+  // CRM
+  if([9,10].includes(i)) return '#50fa7b';
+  return '#6272a4';
+});
+new Chart(document.getElementById('c'),{type:'bar',
+  data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:0,barPercentage:0.7}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+' project'+(c.raw>1?'s':'')}}},
+    scales:{x:{grid:{display:false},ticks:{maxRotation:45,autoSkip:false}},y:{grid:{color:'rgba(98,114,164,0.2)'},beginAtZero:true,ticks:{stepSize:1}}}}
+});
+</script>
+</body></html>

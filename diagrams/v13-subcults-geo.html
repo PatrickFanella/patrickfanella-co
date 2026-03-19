@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Subcults — Privacy-First Geospatial</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}.card{background:#282a36;padding:28px 20px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca}svg text{font-family:'JetBrains Mono','Space Grotesk',monospace}</style>
+</head>
+<body>
+<div class="card">
+<svg width="100%" viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<text x="340" y="28" text-anchor="middle" font-size="14" font-weight="500" fill="#50fa7b">Subcults — Underground music discovery</text>
+<text x="340" y="46" text-anchor="middle" font-size="11" fill="#6272a4">Privacy-first geospatial platform · 135k LoC · Go + React</text>
+
+<!-- Top: MapLibre frontend -->
+<rect x="164" y="66" width="356" height="50" fill="#191a21"/><rect x="160" y="62" width="356" height="50" fill="#44475a" stroke="#bd93f9" stroke-width="2"/>
+<text x="338" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#bd93f9">React + MapLibre web app</text>
+<text x="338" y="100" text-anchor="middle" font-size="10" fill="#f8f8f2" opacity="0.7">Interactive map · scene discovery · live audio</text>
+
+<line x1="338" y1="112" x2="338" y2="140" stroke="#6272a4" stroke-width="1.5" marker-end="url(#a)"/>
+
+<!-- Go API -->
+<rect x="84" y="146" width="516" height="80" fill="#191a21"/><rect x="80" y="142" width="516" height="80" fill="rgba(139,233,253,0.06)" stroke="#8be9fd" stroke-width="2"/>
+<text x="338" y="164" text-anchor="middle" font-size="13" font-weight="500" fill="#8be9fd">Go API (Chi-style HTTP)</text>
+
+<!-- Inner modules -->
+<rect x="98" y="178" width="82" height="28" fill="#191a21"/><rect x="96" y="176" width="82" height="28" fill="#44475a" stroke="#8be9fd" stroke-width="1"/>
+<text x="137" y="190" text-anchor="middle" font-size="9" fill="#8be9fd">Auth (JWT)</text>
+
+<rect x="190" y="178" width="82" height="28" fill="#191a21"/><rect x="188" y="176" width="82" height="28" fill="#44475a" stroke="#8be9fd" stroke-width="1"/>
+<text x="229" y="190" text-anchor="middle" font-size="9" fill="#8be9fd">Geo queries</text>
+
+<rect x="282" y="178" width="82" height="28" fill="#191a21"/><rect x="280" y="176" width="82" height="28" fill="#44475a" stroke="#8be9fd" stroke-width="1"/>
+<text x="321" y="190" text-anchor="middle" font-size="9" fill="#8be9fd">Membership</text>
+
+<rect x="374" y="178" width="82" height="28" fill="#191a21"/><rect x="372" y="176" width="82" height="28" fill="#44475a" stroke="#8be9fd" stroke-width="1"/>
+<text x="413" y="190" text-anchor="middle" font-size="9" fill="#8be9fd">Payments</text>
+
+<rect x="466" y="178" width="110" height="28" fill="#191a21"/><rect x="464" y="176" width="110" height="28" fill="#44475a" stroke="#8be9fd" stroke-width="1"/>
+<text x="519" y="190" text-anchor="middle" font-size="9" fill="#8be9fd">20+ packages</text>
+
+<!-- Arrows to data + services -->
+<line x1="200" y1="222" x2="130" y2="268" stroke="#6272a4" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="338" y1="222" x2="338" y2="268" stroke="#6272a4" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="476" y1="222" x2="540" y2="268" stroke="#6272a4" stroke-width="1.5" marker-end="url(#a)"/>
+
+<!-- Data stores -->
+<rect x="44" y="274" width="170" height="50" fill="#191a21"/><rect x="40" y="270" width="170" height="50" fill="#44475a" stroke="#50fa7b" stroke-width="2"/>
+<text x="125" y="290" text-anchor="middle" font-size="12" font-weight="500" fill="#50fa7b">PostgreSQL + PostGIS</text>
+<text x="125" y="306" text-anchor="middle" font-size="9" fill="#f8f8f2" opacity="0.7">Spatial queries · FTS</text>
+
+<rect x="254" y="274" width="170" height="50" fill="#191a21"/><rect x="250" y="270" width="170" height="50" fill="#44475a" stroke="#ff79c6" stroke-width="2"/>
+<text x="335" y="290" text-anchor="middle" font-size="12" font-weight="500" fill="#ff79c6">LiveKit</text>
+<text x="335" y="306" text-anchor="middle" font-size="9" fill="#f8f8f2" opacity="0.7">Live audio streaming</text>
+
+<rect x="464" y="274" width="180" height="50" fill="#191a21"/><rect x="460" y="270" width="180" height="50" fill="#44475a" stroke="#ffb86c" stroke-width="2"/>
+<text x="550" y="290" text-anchor="middle" font-size="12" font-weight="500" fill="#ffb86c">External services</text>
+<text x="550" y="306" text-anchor="middle" font-size="9" fill="#f8f8f2" opacity="0.7">Stripe · R2 · AT Protocol</text>
+
+<!-- Indexer -->
+<line x1="338" y1="320" x2="338" y2="348" stroke="#6272a4" stroke-width="1" marker-end="url(#a)"/>
+<rect x="194" y="354" width="296" height="40" fill="#191a21"/><rect x="190" y="350" width="296" height="40" fill="rgba(241,250,140,0.06)" stroke="#f1fa8c" stroke-width="1.5"/>
+<text x="338" y="366" text-anchor="middle" font-size="11" font-weight="500" fill="#f1fa8c">AT Protocol indexer</text>
+<text x="338" y="380" text-anchor="middle" font-size="9" fill="#f8f8f2" opacity="0.6">Jetstream subscription · decentralized data ingestion</text>
+
+<!-- Privacy callout -->
+<text x="340" y="418" text-anchor="middle" font-size="11" fill="#50fa7b" font-weight="500">Privacy-first: consent enforcement · trust-based discovery · location obfuscation</text>
+<text x="340" y="436" text-anchor="middle" font-size="10" fill="#6272a4">244 test files · 31 CI workflows · The largest Go project in the portfolio</text>
+</svg>
+</div>
+</body></html>

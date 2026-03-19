@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SubCorp — Tech Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 24px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca;color:#f8f8f2}
+  .section{margin-bottom:20px}
+  .section-label{font-size:11px;color:#6272a4;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;font-weight:500;font-family:'JetBrains Mono',monospace}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="card">
+
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
+  <span style="font-size:18px;font-weight:700;color:#bd93f9;font-family:'JetBrains Mono',monospace;">SubCorp</span>
+  <span style="font-size:13px;color:#6272a4;">Closed-loop multi-agent AI system</span>
+</div>
+<div style="font-size:12px;color:#44475a;margin-bottom:16px;font-family:'JetBrains Mono',monospace">Solo-built · 54k+ LoC · 6 autonomous agents</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #ff79c6;box-shadow:3px 3px 0 #ff79c6;">
+    <div style="font-size:20px;font-weight:500;color:#ff79c6;font-family:'JetBrains Mono',monospace">38</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">Ops modules</div>
+  </div>
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #8be9fd;box-shadow:3px 3px 0 #8be9fd;">
+    <div style="font-size:20px;font-weight:500;color:#8be9fd;font-family:'JetBrains Mono',monospace">41</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">API routes</div>
+  </div>
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #50fa7b;box-shadow:3px 3px 0 #50fa7b;">
+    <div style="font-size:20px;font-weight:500;color:#50fa7b;font-family:'JetBrains Mono',monospace">14</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">Native tools</div>
+  </div>
+</div>
+
+<div style="height:2px;background:#44475a;margin:20px 0;"></div>
+
+<div class="section"><div class="section-label">Application</div><div class="chip-row" id="app"></div></div>
+<div class="section"><div class="section-label">AI + LLM</div><div class="chip-row" id="ai"></div></div>
+<div class="section"><div class="section-label">Data</div><div class="chip-row" id="data"></div></div>
+<div class="section"><div class="section-label">Infrastructure</div><div class="chip-row" id="inf"></div></div>
+<div class="section"><div class="section-label">Agent council</div><div class="chip-row" id="agents"></div></div>
+<div class="section" style="margin-bottom:0"><div class="section-label">Key capabilities</div><div class="chip-row" id="cap"></div></div>
+</div>
+
+<script>
+function chip(parent,label,dotColor,accent){
+  const el=document.getElementById(parent);
+  const s=document.createElement('span');
+  const border=accent||'#6272a4';
+  const textColor=accent||'#f8f8f2';
+  s.style.cssText='display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:0;font-size:13px;font-weight:500;border:2px solid '+border+';background:#44475a;color:'+textColor+';box-shadow:2px 2px 0 '+border+';transition:transform .1s,box-shadow .1s;cursor:default;font-family:"JetBrains Mono","Space Grotesk",monospace;';
+  s.onmouseenter=()=>{s.style.transform='translate(-1px,-1px)';s.style.boxShadow='3px 3px 0 '+border;};
+  s.onmouseleave=()=>{s.style.transform='';s.style.boxShadow='2px 2px 0 '+border;};
+  if(dotColor){
+    const d=document.createElement('span');
+    d.style.cssText='width:8px;height:8px;flex-shrink:0;background:'+dotColor;
+    s.appendChild(d);
+  }
+  s.appendChild(document.createTextNode(label));
+  el.appendChild(s);
+}
+
+const P='#bd93f9',C='#8be9fd',G='#50fa7b',O='#ffb86c',K='#ff79c6',Y='#f1fa8c',R='#ff5555';
+
+chip('app','Next.js 16','#f8f8f2',null);chip('app','React 19','#61DAFB',null);
+chip('app','TypeScript 5','#3178C6',null);chip('app','Tailwind 4',C,null);
+chip('app','WebSocket',K,null);
+
+chip('ai','OpenRouter SDK',P,null);chip('ai','Claude Sonnet 4',P,null);
+chip('ai','pgvector embeddings',G,null);chip('ai','Brave Search API',O,null);
+chip('ai','TTS synthesis',K,null);
+
+chip('data','PostgreSQL 16',G,null);chip('data','pgvector',G,null);
+chip('data','45 tables','#336791',null);chip('data','14 migrations','#336791',null);
+
+chip('inf','Docker Compose','#2496ED',null);chip('inf','Systemd deploy',R,null);
+chip('inf','Sandboxed toolbox',O,null);chip('inf','SSE event stream',C,null);
+chip('inf','Cron scheduler',Y,null);
+
+chip('agents','Chora','#b4befe',null);chip('agents','Subrosa','#f38ba8',null);
+chip('agents','Thaum','#cba6f7',null);chip('agents','Praxis','#a6e3a1',null);
+chip('agents','Mux','#89b4fa',null);chip('agents','Primus',Y,null);
+
+chip('cap','Self-sustaining agent loop',null,P);
+chip('cap','Sanctum real-time chat',null,K);
+chip('cap','Roundtable orchestration',null,R);
+chip('cap','14-tool native execution',null,O);
+chip('cap','Governance + veto system',null,G);
+chip('cap','Memory archaeology + dreams',null,C);
+</script>
+</body>
+</html>

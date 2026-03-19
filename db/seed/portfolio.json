@@ -20,7 +20,7 @@
       "architecture": [
         "Go API with Gin serving both the React web client and the React Native Expo mobile app through a shared JSON contract.",
         "Hybrid search pipeline combining OpenSearch BM25 full-text scoring with semantic vector embeddings for relevance ranking.",
-        "PostgreSQL 17 as the primary store, Redis 8 for caching and session management, OpenSearch 2.11 for search indexing; all containerized and orchestrated with Kubernetes."
+        "PostgreSQL 17 as the primary store, Redis 7 for caching and session management, OpenSearch 2.11 for search indexing; all containerized and orchestrated with Kubernetes."
       ],
       "lessons": [
         "Hybrid search is worth the infrastructure cost; users consistently found clips that pure text search missed, and the BM25 + vector blend outperformed either approach alone.",
@@ -31,6 +31,26 @@
           "src": "/assets/projects/clpr-overview.svg",
           "alt": "Architecture diagram showing the Clpr platform stack: Go API, React web, React Native mobile, PostgreSQL, Redis, and OpenSearch.",
           "caption": "Full platform architecture spanning web, mobile, and search infrastructure."
+        },
+        {
+          "src": "/assets/projects/diagrams/clpr-architecture.webp",
+          "alt": "System architecture diagram showing CLPR's layered stack: client tier with web, mobile, and browser extension; Caddy reverse proxy; Go API server with 63 handlers and 73 services; PostgreSQL 17, Redis 7, and OpenSearch 2.11 data tier; Docker Compose infrastructure.",
+          "caption": "Layered system architecture from client surfaces through the Go API to the data and infrastructure tiers."
+        },
+        {
+          "src": "/assets/projects/diagrams/clpr-features.webp",
+          "alt": "Feature ecosystem diagram showing CLPR's eight domains: search and discovery, community and social, content management, moderation and safety, auth and monetization, infrastructure, real-time streaming, and data intelligence.",
+          "caption": "Feature ecosystem across eight domains covering search, community, moderation, monetization, and real-time capabilities."
+        },
+        {
+          "src": "/assets/projects/diagrams/clpr-tech-stack.webp",
+          "alt": "Tech stack overview showing CLPR's backend (Go, Gin, PostgreSQL 17, Redis 7, OpenSearch), frontend (React 19, TypeScript, Vite, Tailwind), mobile (React Native 0.81, Expo 54), and infrastructure (Docker, Caddy, GitHub Actions, Vault).",
+          "caption": "Full tech stack spanning backend, frontend, mobile, and infrastructure with key capabilities."
+        },
+        {
+          "src": "/assets/projects/diagrams/clpr-metrics.webp",
+          "alt": "Codebase metrics dashboard for CLPR showing 280k+ lines of code, 1,094 source files, 102 DB migrations, and backend service breakdown across 12 domains.",
+          "caption": "Codebase metrics: 280k+ LoC across Go, TypeScript, SQL, with backend service breakdown by domain."
         }
       ]
     },
@@ -38,7 +58,7 @@
       "slug": "subcorp",
       "title": "Subcorp",
       "summary": "Self-hosted multi-agent AI platform where six autonomous agents propose, debate, and execute missions through real-time WebSocket chat with sandboxed tool execution.",
-      "description": "Subcorp is a self-hosted platform for autonomous AI coordination. Six named agents with distinct personalities and access controls propose missions, debate approaches in roundtable conversations, and execute tasks using a shared toolbox, with minimal human intervention. The system runs on Next.js 16 with React 19, backed by PostgreSQL 16 with pgvector across 32 tables. Agents communicate through real-time WebSocket connections in the Sanctum chat interface, which supports @mention routing, whisper channels, and structured roundtable modes. Each agent has access to sandboxed tools including web search, bash execution, file I/O, and semantic memory retrieval, all running in an isolated Docker container.",
+      "description": "Subcorp is a self-hosted platform for autonomous AI coordination. Six named agents with distinct personalities and access controls propose missions, debate approaches in roundtable conversations, and execute tasks using a shared toolbox, with minimal human intervention. The system runs on Next.js 16 with React 19, backed by PostgreSQL 16 with pgvector across 45 tables. Agents communicate through real-time WebSocket connections in the Sanctum chat interface, which supports @mention routing, whisper channels, and structured roundtable modes. Each agent has access to sandboxed tools including web search, bash execution, file I/O, and semantic memory retrieval, all running in an isolated Docker container.",
       "role": "Full-stack engineer",
       "year": 2026,
       "repoUrl": "https://github.com/subculture-collective/subcorp",
@@ -52,7 +72,7 @@
         "Designed a sandboxed toolbox container giving agents access to bash, Python, Node.js, web search, file I/O, and semantic memory, isolated from the host system."
       ],
       "architecture": [
-        "Next.js 16 with React 19 server and client components, PostgreSQL 16 with pgvector for semantic memory across 32 tables, OpenRouter SDK for LLM orchestration.",
+        "Next.js 16 with React 19 server and client components, PostgreSQL 16 with pgvector for semantic memory across 45 tables, OpenRouter SDK for LLM orchestration.",
         "WebSocket layer handles real-time agent-to-agent and agent-to-user communication with structured message routing, @mention parsing, and whisper privacy.",
         "Sandboxed Docker container provides agents with bash, Python, and Node.js execution, web search, and file I/O, network-isolated from the host with resource limits."
       ],
@@ -65,6 +85,26 @@
           "src": "/assets/projects/subcorp-overview.svg",
           "alt": "Diagram of the Subcorp agent system: six named agents communicating through the Sanctum WebSocket interface with a shared sandboxed toolbox.",
           "caption": "Multi-agent coordination architecture with real-time WebSocket chat and sandboxed execution."
+        },
+        {
+          "src": "/assets/projects/diagrams/subcorp-architecture.webp",
+          "alt": "System architecture diagram showing SubCorp's Docker Compose stack: Next.js app with 41 API routes, unified worker with 4 queues, Sanctum WebSocket server, sandboxed toolbox, six-agent council, 38 ops modules, 14 tools, and PostgreSQL 16 with pgvector.",
+          "caption": "Full system architecture from the agent council through the ops engine to PostgreSQL with pgvector."
+        },
+        {
+          "src": "/assets/projects/diagrams/subcorp-features.webp",
+          "alt": "Feature ecosystem diagram showing SubCorp's eight domains: agent system, Sanctum chat, autonomous ops, governance and safety, memory and knowledge, content generation, roundtable debates, and platform infrastructure.",
+          "caption": "Feature ecosystem across agent orchestration, governance, memory, content, and real-time capabilities."
+        },
+        {
+          "src": "/assets/projects/diagrams/subcorp-tech-stack.webp",
+          "alt": "Tech stack overview showing SubCorp's application layer (Next.js 16, React 19, TypeScript, WebSocket), AI and LLM stack (OpenRouter, Claude, pgvector, Brave Search), data layer (PostgreSQL 16, 45 tables), and the six-agent council.",
+          "caption": "Full tech stack spanning application, AI/LLM, data, infrastructure, and the six-agent council."
+        },
+        {
+          "src": "/assets/projects/diagrams/subcorp-metrics.webp",
+          "alt": "Codebase metrics dashboard for SubCorp showing 54k+ lines of code, 246 source files, 6 AI agents, 41 API routes, 38 ops modules, and ops module size breakdown.",
+          "caption": "Codebase metrics: 54k+ LoC with ops engine, frontend, Sanctum, and roundtable module breakdown."
         }
       ]
     },
@@ -98,6 +138,26 @@
           "src": "/assets/projects/transcript-create-overview.svg",
           "alt": "Pipeline diagram showing video ingestion, GPU Whisper transcription, speaker diarization, and full-text search indexing.",
           "caption": "Transcription pipeline from video ingestion through GPU processing to searchable, exportable output."
+        },
+        {
+          "src": "/assets/projects/diagrams/tc-architecture.webp",
+          "alt": "System architecture diagram showing Transcript Create's layered stack: web frontend, Python/JS SDKs; FastAPI server with 13 route modules; GPU transcription worker with yt-dlp, Whisper v3, and diarization; PostgreSQL 16, Redis 7, OpenSearch; Prometheus and Grafana; five deployment targets.",
+          "caption": "Layered architecture from client SDKs through the FastAPI server and GPU worker to data and deployment tiers."
+        },
+        {
+          "src": "/assets/projects/diagrams/tc-features.webp",
+          "alt": "Feature ecosystem diagram showing Transcript Create's eight domains: transcription engine, YouTube ingestion, search and discovery, export formats, auth and monetization, observability, testing and quality, and deployment.",
+          "caption": "Feature ecosystem spanning GPU transcription, multi-format export, billing, observability, and five deployment targets."
+        },
+        {
+          "src": "/assets/projects/diagrams/tc-tech-stack.webp",
+          "alt": "Tech stack overview showing Transcript Create's backend (Python, FastAPI, Alembic, yt-dlp), AI/ML (Whisper large-v3, pyannote, ROCm, CUDA), frontend (React, TypeScript, Vite), data (PostgreSQL, Redis, OpenSearch), and infrastructure (Docker, Kubernetes, Terraform, Ansible).",
+          "caption": "Full tech stack spanning Python backend, GPU-accelerated AI/ML, React frontend, and multi-target infrastructure."
+        },
+        {
+          "src": "/assets/projects/diagrams/tc-metrics.webp",
+          "alt": "Codebase metrics dashboard for Transcript Create showing 45k+ LoC, 17k test lines, 255 E2E tests, 70 documentation pages, and API route complexity breakdown.",
+          "caption": "Codebase metrics: 45k+ LoC with 255 E2E tests, 13 route modules, and API complexity breakdown."
         }
       ]
     },
@@ -132,6 +192,26 @@
           "src": "/assets/projects/clustr-overview.svg",
           "alt": "3D network graph visualization showing interconnected Reddit communities with color-coded Louvain clusters.",
           "caption": "Interactive 3D force-directed graph with Louvain community detection overlays."
+        },
+        {
+          "src": "/assets/projects/diagrams/clustr-architecture.webp",
+          "alt": "System architecture diagram showing Clustr's full stack: Vite + React frontend with 4 visualization modes; Go backend with API server, crawler, and precalculate services; 23 internal packages; PostgreSQL with 37 migrations and sqlc; Prometheus, Grafana, and k6 observability.",
+          "caption": "Full stack from WebGL/D3.js visualization through the Go backend to PostgreSQL and observability."
+        },
+        {
+          "src": "/assets/projects/diagrams/clustr-features.webp",
+          "alt": "Feature ecosystem diagram showing Clustr's eight domains: visualization, graph engine, community detection, Reddit crawler, performance, security, user experience, and ops and observability.",
+          "caption": "Feature ecosystem spanning 3D/2D visualization, Louvain community detection, resilient crawling, and production ops."
+        },
+        {
+          "src": "/assets/projects/diagrams/clustr-tech-stack.webp",
+          "alt": "Tech stack overview showing Clustr's backend (Go, sqlc, Reddit OAuth, circuit breaker), frontend (React, TypeScript, Three.js, D3.js, react-force-graph-3d), graph algorithms (Louvain, Barnes-Hut, octree, edge bundling), and observability (Prometheus, Grafana, k6).",
+          "caption": "Full tech stack spanning Go backend, WebGL rendering, graph algorithms, and production observability."
+        },
+        {
+          "src": "/assets/projects/diagrams/clustr-metrics.webp",
+          "alt": "Codebase metrics dashboard for Clustr showing 58k+ LoC, 154 Go files, 85 TS/TSX files, 22 API handlers, 23 internal packages, 37 DB migrations, and frontend rendering pipeline breakdown.",
+          "caption": "Codebase metrics: 58k+ LoC across Go and TypeScript with backend package and frontend pipeline breakdown."
         }
       ]
     },

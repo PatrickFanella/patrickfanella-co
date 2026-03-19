@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLPR — Codebase Metrics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 24px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca;color:#f8f8f2}
+</style>
+</head>
+<body>
+<div class="card">
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;">
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #bd93f9;box-shadow:3px 3px 0 #bd93f9;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">Total lines of code</div>
+    <div style="font-size:22px;font-weight:500;color:#bd93f9;font-family:'JetBrains Mono',monospace">280k+</div>
+  </div>
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #8be9fd;box-shadow:3px 3px 0 #8be9fd;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">Source files</div>
+    <div style="font-size:22px;font-weight:500;color:#8be9fd;font-family:'JetBrains Mono',monospace">1,094</div>
+  </div>
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #50fa7b;box-shadow:3px 3px 0 #50fa7b;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">DB migrations</div>
+    <div style="font-size:22px;font-weight:500;color:#50fa7b;font-family:'JetBrains Mono',monospace">102</div>
+  </div>
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #ffb86c;box-shadow:3px 3px 0 #ffb86c;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">Documentation</div>
+    <div style="font-size:22px;font-weight:500;color:#ffb86c;font-family:'JetBrains Mono',monospace">50+</div>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+  <div>
+    <div style="font-size:13px;font-weight:500;margin-bottom:12px;">Lines of code by module</div>
+    <div style="position:relative;height:260px;"><canvas id="locChart"></canvas></div>
+  </div>
+  <div>
+    <div style="font-size:13px;font-weight:500;margin-bottom:12px;">File distribution</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:11px;color:#6272a4;font-family:'JetBrains Mono',monospace;">
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#bd93f9;"></span>Go 463</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#8be9fd;"></span>TS/TSX 631</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#50fa7b;"></span>SQL 102</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#ffb86c;"></span>Shell 28</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#6272a4;"></span>Docs 85</span>
+    </div>
+    <div style="position:relative;height:220px;"><canvas id="filesChart"></canvas></div>
+  </div>
+</div>
+
+<div style="font-size:13px;font-weight:500;margin-bottom:12px;">Backend service breakdown</div>
+<div style="position:relative;height:300px;"><canvas id="servicesChart"></canvas></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const D={bg:'#282a36',cur:'#44475a',fg:'#f8f8f2',comment:'#6272a4',cyan:'#8be9fd',green:'#50fa7b',orange:'#ffb86c',pink:'#ff79c6',purple:'#bd93f9',red:'#ff5555',yellow:'#f1fa8c'};
+const gridC='rgba(98,114,164,0.2)';
+Chart.defaults.color=D.comment;
+Chart.defaults.font.family='"JetBrains Mono","Space Grotesk",monospace';
+Chart.defaults.font.size=11;
+
+new Chart(document.getElementById('locChart'),{
+  type:'bar',
+  data:{labels:['Backend (Go)','Frontend (TS)','Mobile (TS)','Extension (TS)','Scripts'],
+    datasets:[{data:[170520,109818,8400,1200,4800],backgroundColor:[D.purple,D.cyan,D.green,D.orange,D.comment],borderRadius:0,barPercentage:0.7}]},
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.toLocaleString()+' lines'}}},
+    scales:{x:{grid:{color:gridC},ticks:{callback:v=>(v/1000)+'k'}},y:{grid:{display:false}}}}
+});
+
+new Chart(document.getElementById('filesChart'),{
+  type:'doughnut',
+  data:{labels:['Go','TypeScript','SQL','Shell','Docs'],
+    datasets:[{data:[463,631,102,28,85],backgroundColor:[D.purple,D.cyan,D.green,D.orange,D.comment],borderWidth:2,borderColor:D.bg}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.label+': '+c.raw+' files'}}}}
+});
+
+const sL=['Search','Moderation','Auth','Clips','Analytics','Notifications','Billing','Reputation','Recs','CDN','Webhooks','Community'];
+const sD=[12,10,6,10,8,8,6,6,6,5,6,4];
+new Chart(document.getElementById('servicesChart'),{
+  type:'bar',
+  data:{labels:sL,datasets:[{data:sD,
+    backgroundColor:sD.map((_,i)=>[D.purple,D.cyan,D.green,D.pink,D.orange,D.yellow,D.red,D.purple,D.cyan,D.green,D.pink,D.orange][i]),
+    borderRadius:0,barPercentage:0.65}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{grid:{display:false},ticks:{maxRotation:45,autoSkip:false}},y:{grid:{color:gridC},beginAtZero:true,ticks:{stepSize:2}}}}
+});
+</script>
+</body>
+</html>
