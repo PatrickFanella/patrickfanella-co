@@ -7,14 +7,14 @@ import { isApiClientError, submitContact } from '../lib/api'
 import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import {
-	monoLabelClass,
+  monoLabelClass,
   inputClass,
   pageIntroClass,
   pageSectionClass,
   pageTitleClass,
   primaryButtonClass,
   surfaceCardClass,
-	textLinkClass,
+  textLinkClass,
 } from '../lib/styles'
 
 const contactSchema = z.object({
@@ -58,9 +58,9 @@ export function ContactPage() {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
-		defaultValues: {
-			website: '',
-		},
+    defaultValues: {
+      website: '',
+    },
   })
 
   const onSubmit = handleSubmit(async (values) => {
@@ -171,7 +171,7 @@ export function ContactPage() {
             />
             {errors.name ? (
               <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${nameFieldId}-error`} role="alert">
-                Error:{errors.name.message}
+                Error: {errors.name.message}
               </span>
             ) : null}
           </label>
@@ -188,7 +188,7 @@ export function ContactPage() {
             />
             {errors.email ? (
               <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${emailFieldId}-error`} role="alert">
-                Error:{errors.email.message}
+                Error: {errors.email.message}
               </span>
             ) : null}
           </label>
@@ -205,7 +205,7 @@ export function ContactPage() {
             />
             {errors.message ? (
               <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${messageFieldId}-error`} role="alert">
-                Error:{errors.message.message}
+                Error: {errors.message.message}
               </span>
             ) : null}
           </label>

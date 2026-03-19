@@ -89,7 +89,7 @@ func TestListProjectsAndGetProjectUseSeededPostgresData(t *testing.T) {
 		t.Fatalf("expected title %q, got %q", portfolio.Projects[0].Title, first.Title)
 	}
 
-	sortedTags := append([]string(nil), portfolio.Projects[0].Tags...)
+	sortedTags := append([]string(nil), portfolio.Projects[0].Stack...)
 	sort.Strings(sortedTags)
 	if strings.Join(first.Stack, ",") != strings.Join(sortedTags, ",") {
 		t.Fatalf("expected tags %v, got %v", sortedTags, first.Stack)

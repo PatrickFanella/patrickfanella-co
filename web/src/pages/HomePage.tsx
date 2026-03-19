@@ -37,6 +37,27 @@ const workingPrinciples = [
   },
 ]
 
+const engineeringDepthItems = [
+  {
+    src: '/assets/projects/diagrams/v10-by-the-numbers.webp',
+    alt: 'Aggregate portfolio metrics: 886k+ lines of code, 3,669 source files, 1,110 test files, 200+ DB migrations across 13 repositories.',
+    caption: 'By the numbers',
+    label: 'Aggregate metrics',
+  },
+  {
+    src: '/assets/projects/diagrams/v04-agent-systems.webp',
+    alt: 'Three agent architectures compared: SubCorp autonomous collective, JuryRigged deterministic courtroom, and Cutroom production pipeline.',
+    caption: 'Agent architectures',
+    label: 'Three patterns',
+  },
+  {
+    src: '/assets/projects/diagrams/v05-postgres-depth.webp',
+    alt: 'PostgreSQL feature matrix across 10 projects showing usage of FTS, pgvector, PostGIS, SKIP LOCKED, sqlc, Alembic, Prisma, and materialized views.',
+    caption: 'PostgreSQL depth',
+    label: 'Feature matrix',
+  },
+]
+
 export function HomePage() {
   const prefersReducedMotion = useReducedMotion()
   const { projects, status, error, retry } = useProjects()
@@ -242,26 +263,7 @@ export function HomePage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {[
-            {
-              src: '/assets/projects/diagrams/v10-by-the-numbers.webp',
-              alt: 'Aggregate portfolio metrics: 886k+ lines of code, 3,669 source files, 1,110 test files, 200+ DB migrations across 13 repositories.',
-              caption: 'By the numbers',
-              label: 'Aggregate metrics',
-            },
-            {
-              src: '/assets/projects/diagrams/v04-agent-systems.webp',
-              alt: 'Three agent architectures compared: SubCorp autonomous collective, JuryRigged deterministic courtroom, and Cutroom production pipeline.',
-              caption: 'Agent architectures',
-              label: 'Three patterns',
-            },
-            {
-              src: '/assets/projects/diagrams/v05-postgres-depth.webp',
-              alt: 'PostgreSQL feature matrix across 10 projects showing usage of FTS, pgvector, PostGIS, SKIP LOCKED, sqlc, Alembic, Prisma, and materialized views.',
-              caption: 'PostgreSQL depth',
-              label: 'Feature matrix',
-            },
-          ].map((item) => (
+          {engineeringDepthItems.map((item) => (
             <figure key={item.src} className={`${surfaceCardClass} overflow-hidden bg-panel`}>
               <div className="border-b-2 border-stroke bg-surface px-5 py-4">
                 <p className={monoLabelClass}>{item.label}</p>
@@ -270,8 +272,10 @@ export function HomePage() {
                 className="w-full border-b-2 border-stroke bg-surface object-cover"
                 src={item.src}
                 alt={item.alt}
+                decoding="async"
                 loading="lazy"
-                style={{ aspectRatio: '16 / 10' }}
+                width={800}
+                height={500}
               />
               <figcaption className="p-5 text-[0.98rem] leading-relaxed text-ink-soft">
                 {item.caption}
