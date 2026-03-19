@@ -9,9 +9,9 @@ describe('api client', () => {
   })
 
   it('returns the configured base url without a trailing slash', () => {
-    vi.stubEnv('VITE_API_BASE_URL', 'http://localhost:8080/')
+    vi.stubEnv('VITE_API_BASE_URL', 'http://localhost:8181/')
 
-    expect(getApiBaseUrl()).toBe('http://localhost:8080')
+    expect(getApiBaseUrl()).toBe('http://localhost:8181')
   })
 
   it('loads projects from the wrapped list payload', async () => {

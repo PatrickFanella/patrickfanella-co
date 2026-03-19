@@ -39,7 +39,7 @@ docker compose --profile stack up --build
 ```
 
 Web is exposed on `http://localhost:4173`.
-API is exposed on `http://localhost:8080`.
+API is exposed on `http://localhost:8181`.
 Health checks:
 
 - web: `GET /healthz`

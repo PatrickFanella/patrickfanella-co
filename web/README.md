@@ -5,7 +5,7 @@ The portfolio frontend is a Vite + React + TypeScript app.
 ## Runtime API configuration
 
 - `VITE_API_BASE_URL` is read from the workspace root `.env` because `vite.config.ts` sets `envDir: '..'`.
-- If the variable is omitted, the frontend falls back to `http://localhost:8080` for local development.
+- If the variable is omitted, the frontend falls back to `http://localhost:8181` for local development.
 
 ## Shared API client
 

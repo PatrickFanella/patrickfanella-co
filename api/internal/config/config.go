@@ -25,7 +25,7 @@ func Load() Config {
 	_ = godotenv.Load("../.env", ".env")
 
 	return Config{
-		Port:                   getEnv("API_PORT", "8080"),
+		Port:                   getEnv("API_PORT", "8181"),
 		DatabaseURL:            os.Getenv("DATABASE_URL"),
 		CORSOrigin:             getEnv("CORS_ORIGIN", "http://localhost:5173"),
 		ContactMaxBodyBytes:    getEnvInt64("CONTACT_MAX_BODY_BYTES", 16*1024),
