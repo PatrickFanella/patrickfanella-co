@@ -18,11 +18,24 @@ Full-stack portfolio application built to showcase product thinking, clean engin
 
 ## Local setup
 
+The included `Makefile` automates the full bootstrap:
+
+```bash
+make bootstrap   # postgres + install + migrate + seed
+make api         # run Go API (separate terminal)
+make web         # run Vite frontend (separate terminal)
+make verify      # lint + test + build
+```
+
+Or step by step:
+
 1. `docker compose up -d postgres`
 2. `cd api && go run ./cmd/migrate && go run ./cmd/seed`
 3. `cd web && npm ci`
 4. `cd web && npm run lint && npm run test && npm run build`
 5. Optional full-stack run: `docker compose --profile stack up --build`
+
+Run `make help` to see all available targets.
 
 ## Project docs
 

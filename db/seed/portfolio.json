@@ -11,7 +11,7 @@
       "liveUrl": "https://clpr.tv",
       "featured": true,
       "sortOrder": 1,
-      "tags": ["Go", "React", "React Native", "PostgreSQL", "Redis", "OpenSearch", "Kubernetes", "TypeScript"],
+      "stack": ["Go", "React", "React Native", "PostgreSQL", "Redis", "OpenSearch", "Kubernetes", "TypeScript"],
       "highlights": [
         "Shipped a production web and mobile client with community voting, collections, and hybrid BM25 + semantic vector search.",
         "Built a Go API layer handling auth, content moderation, and real-time feed composition across PostgreSQL, Redis, and OpenSearch.",
@@ -65,7 +65,7 @@
       "liveUrl": "https://subcorp.subcult.tv",
       "featured": true,
       "sortOrder": 2,
-      "tags": ["Next.js", "React", "TypeScript", "PostgreSQL", "WebSocket", "Docker", "AI Agents", "pgvector"],
+      "stack": ["Next.js", "React", "TypeScript", "PostgreSQL", "WebSocket", "Docker", "AI Agents", "pgvector"],
       "highlights": [
         "Deployed a live multi-agent system where six AI agents autonomously propose, debate, and execute missions with minimal human intervention.",
         "Built a real-time Sanctum chat interface with WebSocket-driven @mention routing, whisper channels, and structured roundtable conversation modes.",
@@ -118,7 +118,7 @@
       "repoUrl": "https://github.com/subculture-collective/transcript-create",
       "featured": true,
       "sortOrder": 3,
-      "tags": ["Python", "FastAPI", "React", "PostgreSQL", "OpenSearch", "Whisper AI", "Docker", "TypeScript"],
+      "stack": ["Python", "FastAPI", "React", "PostgreSQL", "OpenSearch", "Whisper AI", "Docker", "TypeScript"],
       "highlights": [
         "Built a GPU-accelerated Whisper transcription pipeline with optional pyannote speaker diarization, scaling horizontally via Postgres SKIP LOCKED worker queues.",
         "Published client SDKs for Python and TypeScript, giving third-party developers a typed interface to the transcription and search API.",
@@ -172,7 +172,7 @@
       "liveUrl": "https://clustr.subcult.tv",
       "featured": true,
       "sortOrder": 4,
-      "tags": ["Go", "React", "PostgreSQL", "WebGL", "Graph Algorithms", "TypeScript", "Docker"],
+      "stack": ["Go", "React", "PostgreSQL", "WebGL", "Graph Algorithms", "TypeScript", "Docker"],
       "highlights": [
         "Implemented Louvain community detection to identify clusters of related subreddits from crawled relationship data, surfacing non-obvious connections between communities.",
         "Built interactive 3D and 2D force-directed graph visualizations using WebGL, with dashboard views and drill-down into detected community clusters.",
@@ -225,7 +225,7 @@
       "repoUrl": "https://github.com/subculture-collective/internet-id",
       "featured": false,
       "sortOrder": 5,
-      "tags": ["Solidity", "Next.js", "TypeScript", "IPFS", "Express", "PostgreSQL", "Browser Extension", "Web3"],
+      "stack": ["Solidity", "Next.js", "TypeScript", "IPFS", "Express", "PostgreSQL", "Browser Extension", "Web3"],
       "highlights": [
         "Designed a content provenance pipeline: hash content, sign a manifest, pin to IPFS, and register the claim on-chain through a Solidity smart contract on L2.",
         "Built a cross-browser extension (Chrome, Firefox, Safari) for one-click ownership verification directly on YouTube and Twitter pages.",
@@ -258,7 +258,7 @@
       "repoUrl": "https://github.com/subculture-collective/soundhash",
       "featured": false,
       "sortOrder": 6,
-      "tags": ["Python", "FastAPI", "PostgreSQL", "Signal Processing", "DSP", "Authentication"],
+      "stack": ["Python", "FastAPI", "PostgreSQL", "Signal Processing", "DSP", "Authentication"],
       "highlights": [
         "Built an audio fingerprinting pipeline using STFT spectral analysis and peak detection, producing compact vectors robust to compression, re-encoding, and partial clips.",
         "Integrated automated Twitter and Reddit bots that detect and flag matched audio content across social media platforms.",
@@ -291,7 +291,7 @@
       "repoUrl": "https://github.com/subculture-collective/jury-rigged",
       "featured": false,
       "sortOrder": 7,
-      "tags": ["TypeScript", "Node.js", "React", "PixiJS", "WebSocket", "AI Agents", "Twitch API"],
+      "stack": ["TypeScript", "Node.js", "React", "PixiJS", "WebSocket", "AI Agents", "Twitch API"],
       "highlights": [
         "Built a multi-agent courtroom simulation with deterministic phase progression, live SSE streaming, and jury voting and deliberation mechanics.",
         "Rendered proceedings in Ace Attorney visual style using PixiJS, with character animations, dialogue boxes, and courtroom transitions.",
@@ -325,7 +325,7 @@
       "liveUrl": "https://patchwork.subcult.tv",
       "featured": false,
       "sortOrder": 8,
-      "tags": ["TypeScript", "React", "PostgreSQL", "AT Protocol", "Bluesky", "Vitest", "Playwright"],
+      "stack": ["TypeScript", "React", "PostgreSQL", "AT Protocol", "Bluesky", "Vitest", "Playwright"],
       "highlights": [
         "Built an AT Protocol-native platform ingesting Bluesky Jetstream data for decentralized identity and social graph integration.",
         "Implemented geoprivacy controls that fuzz coordinates before storage, protecting user locations while preserving map-based community discovery.",
@@ -359,7 +359,7 @@
       "liveUrl": "https://galdr.subcult.tv",
       "featured": false,
       "sortOrder": 9,
-      "tags": ["Go", "React", "TypeScript", "PostgreSQL", "TailwindCSS", "Docker", "Stripe", "HubSpot", "Intercom"],
+      "stack": ["Go", "React", "TypeScript", "PostgreSQL", "TailwindCSS", "Docker", "Stripe", "HubSpot", "Intercom"],
       "highlights": [
         "Built Galdr as a customer health scoring product for B2B SaaS teams that combines Stripe, HubSpot, and Intercom data into an automated scoring workflow.",
         "Shipped a full-stack implementation with a Go net/http API, React 19 + TypeScript frontend, PostgreSQL 16 persistence, and Docker-based dev/prod workflows.",
@@ -387,7 +387,7 @@
       "liveUrl": "https://cutroom.subcult.tv",
       "featured": false,
       "sortOrder": 10,
-      "tags": ["Next.js", "React", "TypeScript", "PostgreSQL", "Prisma", "Remotion", "AI Agents", "ElevenLabs", "Base"],
+      "stack": ["Next.js", "React", "TypeScript", "PostgreSQL", "Prisma", "Remotion", "AI Agents", "ElevenLabs", "Base"],
       "highlights": [
         "Built a seven-stage agent-native production pipeline that turns a topic into a published short-form video through structured handoffs.",
         "Shipped a template-driven creative system with real-time pipeline tracking, attribution weights, and token-based reward logic for contributors.",
@@ -415,7 +415,7 @@
       "liveUrl": "https://subcults.subcult.tv",
       "featured": false,
       "sortOrder": 11,
-      "tags": ["Go", "React", "TypeScript", "PostgreSQL", "PostGIS", "MapLibre", "LiveKit", "AT Protocol", "Stripe Connect", "Cloudflare R2"],
+      "stack": ["Go", "React", "TypeScript", "PostgreSQL", "PostGIS", "MapLibre", "LiveKit", "AT Protocol", "Stripe Connect", "Cloudflare R2"],
       "highlights": [
         "Designed a scene-first platform for underground music communities with map-based discovery, scene identity, and privacy-aware event publishing.",
         "Combined AT Protocol Jetstream ingestion, live audio sessions, and direct revenue tooling so scenes can coordinate culture without ceding control to algorithmic feeds.",

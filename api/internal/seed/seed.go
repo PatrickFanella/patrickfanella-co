@@ -27,7 +27,7 @@ type Project struct {
 	LiveURL     string   `json:"liveUrl,omitempty"`
 	Featured    bool     `json:"featured"`
 	SortOrder   int      `json:"sortOrder"`
-	Tags        []string `json:"tags"`
+	Stack       []string `json:"stack"`
 	Highlights  []string `json:"highlights"`
 	Architecture []string       `json:"architecture"`
 	Lessons      []string       `json:"lessons"`
@@ -144,7 +144,7 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			return err
 		}
 
-		for _, tag := range project.Tags {
+		for _, tag := range project.Stack {
 			var tagID int64
 			err := tx.QueryRow(
 				ctx,

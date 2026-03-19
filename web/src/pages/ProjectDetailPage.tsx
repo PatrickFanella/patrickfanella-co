@@ -202,7 +202,7 @@ export function ProjectDetailPage() {
                 key={highlight}
                 className="border-2 border-stroke bg-panel p-5 grid gap-3"
               >
-                <p className="font-mono text-[0.85rem] font-bold text-accent-purple">0{index + 1}</p>
+                <p className="font-mono text-[0.85rem] font-bold text-accent-purple">{String(index + 1).padStart(2, '0')}</p>
                 <p className="text-[1.05rem] leading-relaxed">{highlight}</p>
               </li>
             ))}
