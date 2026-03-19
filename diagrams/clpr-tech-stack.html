@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLPR — Tech Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 24px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca;color:#f8f8f2}
+  .section{margin-bottom:20px}
+  .section-label{font-size:11px;color:#6272a4;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;font-weight:500;font-family:'JetBrains Mono',monospace}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="card">
+
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
+  <span style="font-size:18px;font-weight:700;color:#bd93f9;font-family:'JetBrains Mono',monospace;">CLPR</span>
+  <span style="font-size:13px;color:#6272a4;">Community-driven Twitch clip curation platform</span>
+</div>
+<div style="font-size:12px;color:#44475a;margin-bottom:16px;font-family:'JetBrains Mono',monospace">Solo-built · 280k+ LoC · Pre-release</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #ff79c6;box-shadow:3px 3px 0 #ff79c6;">
+    <div style="font-size:20px;font-weight:500;color:#ff79c6;font-family:'JetBrains Mono',monospace">4</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">Client surfaces</div>
+  </div>
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #8be9fd;box-shadow:3px 3px 0 #8be9fd;">
+    <div style="font-size:20px;font-weight:500;color:#8be9fd;font-family:'JetBrains Mono',monospace">63</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">API handlers</div>
+  </div>
+  <div style="background:#44475a;padding:12px 16px;border:2px solid #50fa7b;box-shadow:3px 3px 0 #50fa7b;">
+    <div style="font-size:20px;font-weight:500;color:#50fa7b;font-family:'JetBrains Mono',monospace">73</div>
+    <div style="font-size:12px;color:#6272a4;margin-top:2px;">Backend services</div>
+  </div>
+</div>
+
+<div style="height:2px;background:#44475a;margin:20px 0;"></div>
+
+<div class="section"><div class="section-label">Backend</div><div class="chip-row" id="be"></div></div>
+<div class="section"><div class="section-label">Frontend</div><div class="chip-row" id="fe"></div></div>
+<div class="section"><div class="section-label">Mobile</div><div class="chip-row" id="mo"></div></div>
+<div class="section"><div class="section-label">Infrastructure</div><div class="chip-row" id="inf"></div></div>
+<div class="section" style="margin-bottom:0"><div class="section-label">Key capabilities</div><div class="chip-row" id="cap"></div></div>
+</div>
+
+<script>
+function chip(parent,label,dotColor,accent){
+  const el=document.getElementById(parent);
+  const s=document.createElement('span');
+  const border=accent||'#6272a4';
+  const textColor=accent||'#f8f8f2';
+  s.style.cssText='display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:0;font-size:13px;font-weight:500;border:2px solid '+border+';background:#44475a;color:'+textColor+';box-shadow:2px 2px 0 '+border+';transition:transform .1s,box-shadow .1s;cursor:default;font-family:"JetBrains Mono","Space Grotesk",monospace;';
+  s.onmouseenter=()=>{s.style.transform='translate(-1px,-1px)';s.style.boxShadow='3px 3px 0 '+border;};
+  s.onmouseleave=()=>{s.style.transform='';s.style.boxShadow='2px 2px 0 '+border;};
+  if(dotColor){
+    const d=document.createElement('span');
+    d.style.cssText='width:8px;height:8px;flex-shrink:0;background:'+dotColor;
+    s.appendChild(d);
+  }
+  s.appendChild(document.createTextNode(label));
+  el.appendChild(s);
+}
+
+const P='#bd93f9',C='#8be9fd',G='#50fa7b',O='#ffb86c',K='#ff79c6',Y='#f1fa8c',R='#ff5555';
+
+chip('be','Go 1.24',C,null);chip('be','Gin',C,null);chip('be','PostgreSQL 17','#336791',null);
+chip('be','Redis 7',R,null);chip('be','OpenSearch 2.11',K,null);chip('be','JWT + OAuth',O,null);
+
+chip('fe','React 19','#61DAFB',null);chip('fe','TypeScript','#3178C6',null);
+chip('fe','Vite','#646CFF',null);chip('fe','Tailwind CSS',C,null);
+chip('fe','TanStack Query',R,null);chip('fe','Zustand',O,null);chip('fe','React Router 7','#CA4245',null);
+
+chip('mo','React Native 0.81','#61DAFB',null);chip('mo','Expo 54',P,null);
+chip('mo','Expo Router','#3178C6',null);chip('mo','TanStack Query',R,null);
+
+chip('inf','Docker','#2496ED',null);chip('inf','Caddy',G,null);
+chip('inf','GitHub Actions','#2088FF',null);chip('inf','HashiCorp Vault',Y,null);
+chip('inf','Prometheus',O,null);chip('inf','Grafana',O,null);
+
+chip('cap','Hybrid search (BM25 + vector)',null,P);
+chip('cap','Blue-green deployment',null,C);
+chip('cap','Real-time WebSockets',null,G);
+chip('cap','ML toxicity classifier',null,K);
+chip('cap','Stripe billing',null,O);
+chip('cap','CDN failover',null,R);
+</script>
+</body>
+</html>

@@ -228,6 +228,59 @@ export function HomePage() {
         ) : null}
       </section>
 
+      <section className="border-b-2 border-stroke pb-16 pt-16">
+        <div className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,auto)] lg:items-end">
+          <div>
+            <SectionLabel>Engineering Depth</SectionLabel>
+            <h2 className="mt-6 max-w-[15ch] font-display text-[clamp(3.5rem,5vw,5rem)] font-bold leading-[0.88] tracking-[-0.04em] text-heading uppercase">
+              Portfolio at scale.
+            </h2>
+          </div>
+          <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
+            Cross-cutting views across thirteen repositories: aggregate metrics, architecture patterns, and the PostgreSQL backbone that ties it all together.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {[
+            {
+              src: '/assets/projects/diagrams/v10-by-the-numbers.webp',
+              alt: 'Aggregate portfolio metrics: 886k+ lines of code, 3,669 source files, 1,110 test files, 200+ DB migrations across 13 repositories.',
+              caption: 'By the numbers',
+              label: 'Aggregate metrics',
+            },
+            {
+              src: '/assets/projects/diagrams/v04-agent-systems.webp',
+              alt: 'Three agent architectures compared: SubCorp autonomous collective, JuryRigged deterministic courtroom, and Cutroom production pipeline.',
+              caption: 'Agent architectures',
+              label: 'Three patterns',
+            },
+            {
+              src: '/assets/projects/diagrams/v05-postgres-depth.webp',
+              alt: 'PostgreSQL feature matrix across 10 projects showing usage of FTS, pgvector, PostGIS, SKIP LOCKED, sqlc, Alembic, Prisma, and materialized views.',
+              caption: 'PostgreSQL depth',
+              label: 'Feature matrix',
+            },
+          ].map((item) => (
+            <figure key={item.src} className={`${surfaceCardClass} overflow-hidden bg-panel`}>
+              <div className="border-b-2 border-stroke bg-surface px-5 py-4">
+                <p className={monoLabelClass}>{item.label}</p>
+              </div>
+              <img
+                className="w-full border-b-2 border-stroke bg-surface object-cover"
+                src={item.src}
+                alt={item.alt}
+                loading="lazy"
+                style={{ aspectRatio: '16 / 10' }}
+              />
+              <figcaption className="p-5 text-[0.98rem] leading-relaxed text-ink-soft">
+                {item.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
       <section className="grid gap-12 pb-8 pt-16 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1.4fr)] xl:items-start">
         <div>
           <SectionLabel>How I Work</SectionLabel>

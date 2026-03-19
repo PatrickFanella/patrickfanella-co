@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLPR — Feature Ecosystem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 20px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca}
+  svg text{font-family:'JetBrains Mono','Space Grotesk',monospace}
+</style>
+</head>
+<body>
+<div class="card">
+<svg width="100%" viewBox="0 0 680 740" xmlns="http://www.w3.org/2000/svg">
+
+<text x="340" y="30" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#f8f8f2">Feature ecosystem</text>
+<text x="340" y="48" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#6272a4">CLPR — Twitch clip curation platform</text>
+
+<!-- Row 1 left: Search (purple) -->
+<rect x="44" y="76" width="290" height="140" fill="#191a21"/>
+<rect x="40" y="72" width="290" height="140" fill="rgba(189,147,249,0.06)" stroke="#bd93f9" stroke-width="2"/>
+<text x="185" y="96" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#bd93f9">Search + discovery</text>
+<rect x="59" y="113" width="124" height="36" fill="#191a21"/><rect x="56" y="110" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
+<text x="118" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Hybrid BM25+vector</text>
+<rect x="193" y="113" width="124" height="36" fill="#191a21"/><rect x="190" y="110" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
+<text x="252" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Saved searches</text>
+<rect x="59" y="159" width="124" height="36" fill="#191a21"/><rect x="56" y="156" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
+<text x="118" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Discovery lists</text>
+<rect x="193" y="159" width="124" height="36" fill="#191a21"/><rect x="190" y="156" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
+<text x="252" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Recommendations</text>
+
+<!-- Row 1 right: Community (cyan) -->
+<rect x="354" y="76" width="290" height="140" fill="#191a21"/>
+<rect x="350" y="72" width="290" height="140" fill="rgba(139,233,253,0.06)" stroke="#8be9fd" stroke-width="2"/>
+<text x="495" y="96" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#8be9fd">Community + social</text>
+<rect x="369" y="113" width="120" height="36" fill="#191a21"/><rect x="366" y="110" width="120" height="36" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="426" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Voting + karma</text>
+<rect x="499" y="113" width="128" height="36" fill="#191a21"/><rect x="496" y="110" width="128" height="36" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="560" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Comments + forums</text>
+<rect x="369" y="159" width="120" height="36" fill="#191a21"/><rect x="366" y="156" width="120" height="36" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="426" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Watch parties</text>
+<rect x="499" y="159" width="128" height="36" fill="#191a21"/><rect x="496" y="156" width="128" height="36" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="560" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Reputation system</text>
+
+<!-- Row 2 left: Content (orange) -->
+<rect x="44" y="236" width="290" height="140" fill="#191a21"/>
+<rect x="40" y="232" width="290" height="140" fill="rgba(255,184,108,0.06)" stroke="#ffb86c" stroke-width="2"/>
+<text x="185" y="256" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#ffb86c">Content management</text>
+<rect x="59" y="273" width="124" height="36" fill="#191a21"/><rect x="56" y="270" width="124" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="118" y="288" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Clip submissions</text>
+<rect x="193" y="273" width="124" height="36" fill="#191a21"/><rect x="190" y="270" width="124" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="252" y="288" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Playlists + queues</text>
+<rect x="59" y="319" width="124" height="36" fill="#191a21"/><rect x="56" y="316" width="124" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="118" y="334" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Auto-tagging</text>
+<rect x="193" y="319" width="124" height="36" fill="#191a21"/><rect x="190" y="316" width="124" height="36" fill="#44475a" stroke="#ffb86c" stroke-width="1.5"/>
+<text x="252" y="334" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">CDN + mirroring</text>
+
+<!-- Row 2 right: Moderation (pink) -->
+<rect x="354" y="236" width="290" height="140" fill="#191a21"/>
+<rect x="350" y="232" width="290" height="140" fill="rgba(255,121,198,0.06)" stroke="#ff79c6" stroke-width="2"/>
+<text x="495" y="256" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#ff79c6">Moderation + safety</text>
+<rect x="369" y="273" width="120" height="36" fill="#191a21"/><rect x="366" y="270" width="120" height="36" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="426" y="288" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Abuse detection</text>
+<rect x="499" y="273" width="128" height="36" fill="#191a21"/><rect x="496" y="270" width="128" height="36" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="560" y="288" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">NSFW filtering</text>
+<rect x="369" y="319" width="120" height="36" fill="#191a21"/><rect x="366" y="316" width="120" height="36" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="426" y="334" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Twitch ban sync</text>
+<rect x="499" y="319" width="128" height="36" fill="#191a21"/><rect x="496" y="316" width="128" height="36" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="560" y="334" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">DMCA handling</text>
+
+<!-- Row 3 left: Auth (green) -->
+<rect x="44" y="396" width="290" height="140" fill="#191a21"/>
+<rect x="40" y="392" width="290" height="140" fill="rgba(80,250,123,0.06)" stroke="#50fa7b" stroke-width="2"/>
+<text x="185" y="416" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#50fa7b">Auth + monetization</text>
+<rect x="59" y="433" width="124" height="36" fill="#191a21"/><rect x="56" y="430" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
+<text x="118" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Twitch OAuth + MFA</text>
+<rect x="193" y="433" width="124" height="36" fill="#191a21"/><rect x="190" y="430" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
+<text x="252" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Stripe subscriptions</text>
+<rect x="59" y="479" width="124" height="36" fill="#191a21"/><rect x="56" y="476" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
+<text x="118" y="494" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Premium tiers</text>
+<rect x="193" y="479" width="124" height="36" fill="#191a21"/><rect x="190" y="476" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
+<text x="252" y="494" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Ad system</text>
+
+<!-- Row 3 right: Infra (gray) -->
+<rect x="354" y="396" width="290" height="140" fill="#191a21"/>
+<rect x="350" y="392" width="290" height="140" fill="rgba(98,114,164,0.08)" stroke="#6272a4" stroke-width="2"/>
+<text x="495" y="416" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#f8f8f2" opacity="0.8">Infrastructure + ops</text>
+<rect x="369" y="433" width="120" height="36" fill="#191a21"/><rect x="366" y="430" width="120" height="36" fill="#44475a" stroke="#6272a4" stroke-width="1.5"/>
+<text x="426" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">Blue-green deploy</text>
+<rect x="499" y="433" width="128" height="36" fill="#191a21"/><rect x="496" y="430" width="128" height="36" fill="#44475a" stroke="#6272a4" stroke-width="1.5"/>
+<text x="560" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">Vault secrets</text>
+<rect x="369" y="479" width="120" height="36" fill="#191a21"/><rect x="366" y="476" width="120" height="36" fill="#44475a" stroke="#6272a4" stroke-width="1.5"/>
+<text x="426" y="494" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">Observability</text>
+<rect x="499" y="479" width="128" height="36" fill="#191a21"/><rect x="496" y="476" width="128" height="36" fill="#44475a" stroke="#6272a4" stroke-width="1.5"/>
+<text x="560" y="494" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">Search failover</text>
+
+<!-- Row 4 left: Realtime (yellow) -->
+<rect x="44" y="556" width="290" height="140" fill="#191a21"/>
+<rect x="40" y="552" width="290" height="140" fill="rgba(241,250,140,0.06)" stroke="#f1fa8c" stroke-width="2"/>
+<text x="185" y="576" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#f1fa8c">Real-time + streaming</text>
+<rect x="59" y="593" width="124" height="36" fill="#191a21"/><rect x="56" y="590" width="124" height="36" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
+<text x="118" y="608" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">WebSocket chat</text>
+<rect x="193" y="593" width="124" height="36" fill="#191a21"/><rect x="190" y="590" width="124" height="36" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
+<text x="252" y="608" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Live stream status</text>
+<rect x="59" y="639" width="124" height="36" fill="#191a21"/><rect x="56" y="636" width="124" height="36" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
+<text x="118" y="654" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Notifications</text>
+<rect x="193" y="639" width="124" height="36" fill="#191a21"/><rect x="190" y="636" width="124" height="36" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
+<text x="252" y="654" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Event tracking</text>
+
+<!-- Row 4 right: Data (red) -->
+<rect x="354" y="556" width="290" height="140" fill="#191a21"/>
+<rect x="350" y="552" width="290" height="140" fill="rgba(255,85,85,0.06)" stroke="#ff5555" stroke-width="2"/>
+<text x="495" y="576" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#ff5555">Data + intelligence</text>
+<rect x="369" y="593" width="120" height="36" fill="#191a21"/><rect x="366" y="590" width="120" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="426" y="608" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Creator analytics</text>
+<rect x="499" y="593" width="128" height="36" fill="#191a21"/><rect x="496" y="590" width="128" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="560" y="608" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Toxicity classifier</text>
+<rect x="369" y="639" width="120" height="36" fill="#191a21"/><rect x="366" y="636" width="120" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="426" y="654" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Trending scores</text>
+<rect x="499" y="639" width="128" height="36" fill="#191a21"/><rect x="496" y="636" width="128" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="560" y="654" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Trust scoring</text>
+
+<text x="340" y="724" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#6272a4">8 domains · 32 features</text>
+</svg>
+</div>
+</body>
+</html>

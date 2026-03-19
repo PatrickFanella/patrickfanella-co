@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clustr — Codebase Metrics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 24px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca;color:#f8f8f2}
+</style>
+</head>
+<body>
+<div class="card">
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;">
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #bd93f9;box-shadow:3px 3px 0 #bd93f9;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">Total LoC</div>
+    <div style="font-size:22px;font-weight:500;color:#bd93f9;font-family:'JetBrains Mono',monospace">58k+</div>
+  </div>
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #8be9fd;box-shadow:3px 3px 0 #8be9fd;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">Go files</div>
+    <div style="font-size:22px;font-weight:500;color:#8be9fd;font-family:'JetBrains Mono',monospace">154</div>
+  </div>
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #50fa7b;box-shadow:3px 3px 0 #50fa7b;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">TS/TSX files</div>
+    <div style="font-size:22px;font-weight:500;color:#50fa7b;font-family:'JetBrains Mono',monospace">85</div>
+  </div>
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #ffb86c;box-shadow:3px 3px 0 #ffb86c;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">Documentation</div>
+    <div style="font-size:22px;font-weight:500;color:#ffb86c;font-family:'JetBrains Mono',monospace">61 pages</div>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;">
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #ff79c6;box-shadow:3px 3px 0 #ff79c6;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">API handlers</div>
+    <div style="font-size:22px;font-weight:500;color:#ff79c6;font-family:'JetBrains Mono',monospace">22</div>
+  </div>
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #f1fa8c;box-shadow:3px 3px 0 #f1fa8c;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">Internal packages</div>
+    <div style="font-size:22px;font-weight:500;color:#f1fa8c;font-family:'JetBrains Mono',monospace">23</div>
+  </div>
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #ff5555;box-shadow:3px 3px 0 #ff5555;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">DB migrations</div>
+    <div style="font-size:22px;font-weight:500;color:#ff5555;font-family:'JetBrains Mono',monospace">37</div>
+  </div>
+  <div style="background:#44475a;padding:14px 16px;border:2px solid #6272a4;box-shadow:3px 3px 0 #6272a4;">
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">Viz modes</div>
+    <div style="font-size:22px;font-weight:500;color:#f8f8f2;font-family:'JetBrains Mono',monospace">4</div>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+  <div>
+    <div style="font-size:13px;font-weight:500;margin-bottom:12px;">Lines of code by module</div>
+    <div style="position:relative;height:260px;"><canvas id="locChart"></canvas></div>
+  </div>
+  <div>
+    <div style="font-size:13px;font-weight:500;margin-bottom:12px;">Backend package distribution</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:11px;color:#6272a4;font-family:'JetBrains Mono',monospace;">
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#8be9fd;"></span>API 39</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#ff79c6;"></span>Crawler 19</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#50fa7b;"></span>Graph 15</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#bd93f9;"></span>Middleware 17</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#ffb86c;"></span>DB 17</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#6272a4;"></span>Other 47</span>
+    </div>
+    <div style="position:relative;height:220px;"><canvas id="pkgChart"></canvas></div>
+  </div>
+</div>
+
+<div style="font-size:13px;font-weight:500;margin-bottom:12px;">Frontend rendering pipeline (file count)</div>
+<div style="position:relative;height:260px;"><canvas id="feChart"></canvas></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const D={bg:'#282a36',cur:'#44475a',fg:'#f8f8f2',comment:'#6272a4',cyan:'#8be9fd',green:'#50fa7b',orange:'#ffb86c',pink:'#ff79c6',purple:'#bd93f9',red:'#ff5555',yellow:'#f1fa8c'};
+const gridC='rgba(98,114,164,0.2)';
+Chart.defaults.color=D.comment;
+Chart.defaults.font.family='"JetBrains Mono","Space Grotesk",monospace';
+Chart.defaults.font.size=11;
+
+new Chart(document.getElementById('locChart'),{
+  type:'bar',
+  data:{labels:['Backend (Go)','Frontend (TS)','SQL queries','Load tests','Scripts'],
+    datasets:[{data:[30379,23202,2100,1200,976],
+    backgroundColor:[D.cyan,D.purple,D.green,D.red,D.comment],borderRadius:0,barPercentage:0.7}]},
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.toLocaleString()+' lines'}}},
+    scales:{x:{grid:{color:gridC},ticks:{callback:v=>(v/1000)+'k'}},y:{grid:{display:false}}}}
+});
+
+new Chart(document.getElementById('pkgChart'),{
+  type:'doughnut',
+  data:{labels:['API','Crawler','Graph','Middleware','DB','Other'],
+    datasets:[{data:[39,19,15,17,17,47],backgroundColor:[D.cyan,D.pink,D.green,D.purple,D.orange,D.comment],borderWidth:2,borderColor:D.bg}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.label+': '+c.raw+' files'}}}}
+});
+
+const fL=['Components','Rendering','E2E tests','Hooks','Workers','Spatial','Contexts','Utils','Types'];
+const fD=[46,12,3,4,1,2,3,5,4];
+new Chart(document.getElementById('feChart'),{
+  type:'bar',
+  data:{labels:fL,datasets:[{data:fD,
+    backgroundColor:fD.map((_,i)=>[D.purple,D.pink,D.red,D.cyan,D.yellow,D.green,D.orange,D.comment,D.comment][i]),
+    borderRadius:0,barPercentage:0.65}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{grid:{display:false},ticks:{autoSkip:false}},y:{grid:{color:gridC},beginAtZero:true,ticks:{stepSize:10}}}}
+});
+</script>
+</body>
+</html>

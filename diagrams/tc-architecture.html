@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transcript Create — System Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 20px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca}
+  svg text{font-family:'JetBrains Mono','Space Grotesk',monospace}
+</style>
+</head>
+<body>
+<div class="card">
+<svg width="100%" viewBox="0 0 680 660" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<!-- Client tier -->
+<text x="40" y="28" font-size="12" fill="#6272a4">Client tier</text>
+<line x1="100" y1="24" x2="640" y2="24" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="44" y="42" width="186" height="56" fill="#191a21"/>
+<rect x="40" y="38" width="186" height="56" fill="#44475a" stroke="#bd93f9" stroke-width="2"/>
+<text x="133" y="58" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#bd93f9">Web frontend</text>
+<text x="133" y="76" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">Vite + React + Tailwind</text>
+
+<rect x="254" y="42" width="186" height="56" fill="#191a21"/>
+<rect x="250" y="38" width="186" height="56" fill="#44475a" stroke="#8be9fd" stroke-width="2"/>
+<text x="343" y="58" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#8be9fd">Python SDK</text>
+<text x="343" y="76" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">Async + typed</text>
+
+<rect x="464" y="42" width="186" height="56" fill="#191a21"/>
+<rect x="460" y="38" width="186" height="56" fill="#44475a" stroke="#8be9fd" stroke-width="2"/>
+<text x="553" y="58" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#8be9fd">JS/TS SDK</text>
+<text x="553" y="76" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">Node + browser</text>
+
+<line x1="133" y1="94" x2="133" y2="126" stroke="#6272a4" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="343" y1="94" x2="343" y2="126" stroke="#6272a4" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="553" y1="94" x2="553" y2="126" stroke="#6272a4" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- API tier -->
+<text x="40" y="120" font-size="12" fill="#6272a4">Application</text>
+<line x1="108" y1="116" x2="640" y2="116" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="44" y="132" width="596" height="150" fill="#191a21"/>
+<rect x="40" y="128" width="596" height="150" fill="rgba(255,121,198,0.06)" stroke="#ff79c6" stroke-width="2"/>
+<text x="340" y="150" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#ff79c6">FastAPI server</text>
+
+<!-- Route boxes -->
+<rect x="63" y="166" width="80" height="32" fill="#191a21"/><rect x="60" y="163" width="80" height="32" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="100" y="179" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#ff79c6">Auth + OAuth</text>
+
+<rect x="153" y="166" width="70" height="32" fill="#191a21"/><rect x="150" y="163" width="70" height="32" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="185" y="179" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#ff79c6">Billing</text>
+
+<rect x="233" y="166" width="70" height="32" fill="#191a21"/><rect x="230" y="163" width="70" height="32" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="265" y="179" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#ff79c6">Search</text>
+
+<rect x="313" y="166" width="70" height="32" fill="#191a21"/><rect x="310" y="163" width="70" height="32" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="345" y="179" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#ff79c6">Exports</text>
+
+<rect x="393" y="166" width="70" height="32" fill="#191a21"/><rect x="390" y="163" width="70" height="32" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="425" y="179" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#ff79c6">Videos</text>
+
+<rect x="473" y="166" width="70" height="32" fill="#191a21"/><rect x="470" y="163" width="70" height="32" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="505" y="179" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#ff79c6">Analytics</text>
+
+<rect x="553" y="166" width="70" height="32" fill="#191a21"/><rect x="550" y="163" width="70" height="32" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
+<text x="585" y="179" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#ff79c6">Health</text>
+
+<!-- Middleware row -->
+<rect x="60" y="207" width="90" height="26" fill="rgba(255,121,198,0.08)" stroke="#ff79c6" stroke-width="0.5"/>
+<text x="105" y="220" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#f8f8f2" opacity="0.7">Middleware</text>
+<rect x="160" y="207" width="90" height="26" fill="rgba(255,121,198,0.08)" stroke="#ff79c6" stroke-width="0.5"/>
+<text x="205" y="220" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#f8f8f2" opacity="0.7">Caching</text>
+<rect x="260" y="207" width="90" height="26" fill="rgba(255,121,198,0.08)" stroke="#ff79c6" stroke-width="0.5"/>
+<text x="305" y="220" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#f8f8f2" opacity="0.7">Security</text>
+<rect x="360" y="207" width="90" height="26" fill="rgba(255,121,198,0.08)" stroke="#ff79c6" stroke-width="0.5"/>
+<text x="405" y="220" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#f8f8f2" opacity="0.7">Audit logs</text>
+<rect x="460" y="207" width="90" height="26" fill="rgba(255,121,198,0.08)" stroke="#ff79c6" stroke-width="0.5"/>
+<text x="505" y="220" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#f8f8f2" opacity="0.7">Metrics</text>
+
+<text x="340" y="260" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#6272a4">13 route modules · 4,485 lines</text>
+
+<!-- Worker tier -->
+<text x="40" y="296" font-size="12" fill="#6272a4">Worker</text>
+<line x1="78" y1="292" x2="640" y2="292" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="44" y="308" width="596" height="100" fill="#191a21"/>
+<rect x="40" y="304" width="596" height="100" fill="rgba(139,233,253,0.06)" stroke="#8be9fd" stroke-width="2"/>
+<text x="340" y="326" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#8be9fd">GPU transcription worker</text>
+
+<rect x="63" y="342" width="100" height="28" fill="#191a21"/><rect x="60" y="339" width="100" height="28" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="110" y="353" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#8be9fd">yt-dlp ingest</text>
+<rect x="173" y="342" width="100" height="28" fill="#191a21"/><rect x="170" y="339" width="100" height="28" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="220" y="353" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#8be9fd">Audio chunking</text>
+<rect x="283" y="342" width="100" height="28" fill="#191a21"/><rect x="280" y="339" width="100" height="28" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="330" y="353" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#8be9fd">Whisper v3</text>
+<rect x="393" y="342" width="100" height="28" fill="#191a21"/><rect x="390" y="339" width="100" height="28" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="440" y="353" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#8be9fd">Diarization</text>
+<rect x="503" y="342" width="120" height="28" fill="#191a21"/><rect x="500" y="339" width="120" height="28" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
+<text x="560" y="353" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#8be9fd">YouTube captions</text>
+
+<text x="340" y="388" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#6272a4">SKIP LOCKED queue · ROCm / CUDA / CPU · PO token manager</text>
+
+<!-- Arrows to data -->
+<line x1="140" y1="404" x2="140" y2="440" stroke="#6272a4" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="340" y1="404" x2="340" y2="440" stroke="#6272a4" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="540" y1="404" x2="540" y2="440" stroke="#6272a4" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Data tier -->
+<text x="40" y="432" font-size="12" fill="#6272a4">Data</text>
+<line x1="65" y1="428" x2="640" y2="428" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="44" y="446" width="200" height="56" fill="#191a21"/>
+<rect x="40" y="442" width="200" height="56" fill="#44475a" stroke="#50fa7b" stroke-width="2"/>
+<text x="140" y="462" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#50fa7b">PostgreSQL 16</text>
+<text x="140" y="480" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">14 tables · FTS · SKIP LOCKED</text>
+
+<rect x="264" y="446" width="166" height="56" fill="#191a21"/>
+<rect x="260" y="442" width="166" height="56" fill="#44475a" stroke="#ffb86c" stroke-width="2"/>
+<text x="343" y="462" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#ffb86c">Redis 7</text>
+<text x="343" y="480" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">Cache layer</text>
+
+<rect x="454" y="446" width="186" height="56" fill="#191a21"/>
+<rect x="450" y="442" width="186" height="56" fill="#44475a" stroke="#bd93f9" stroke-width="2"/>
+<text x="543" y="462" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#bd93f9">OpenSearch</text>
+<text x="543" y="480" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">Full-text + highlighting</text>
+
+<!-- Observability tier -->
+<text x="40" y="528" font-size="12" fill="#6272a4">Observability</text>
+<line x1="112" y1="524" x2="640" y2="524" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="44" y="540" width="140" height="40" fill="#191a21"/>
+<rect x="40" y="536" width="140" height="40" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
+<text x="110" y="556" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f1fa8c">Prometheus</text>
+
+<rect x="204" y="540" width="140" height="40" fill="#191a21"/>
+<rect x="200" y="536" width="140" height="40" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
+<text x="270" y="556" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f1fa8c">Grafana</text>
+
+<rect x="364" y="540" width="140" height="40" fill="#191a21"/>
+<rect x="360" y="536" width="140" height="40" fill="#44475a" stroke="#6272a4" stroke-width="1.5"/>
+<text x="430" y="556" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">OS Dashboards</text>
+
+<rect x="524" y="540" width="116" height="40" fill="#191a21"/>
+<rect x="520" y="536" width="116" height="40" fill="#44475a" stroke="#6272a4" stroke-width="1.5"/>
+<text x="578" y="556" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.7">Backup cron</text>
+
+<!-- Deploy tier -->
+<text x="40" y="604" font-size="12" fill="#6272a4">Deploy</text>
+<line x1="72" y1="600" x2="640" y2="600" stroke="#6272a4" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+
+<rect x="44" y="614" width="120" height="36" fill="#191a21"/>
+<rect x="40" y="610" width="120" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="100" y="628" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ff5555">Docker 3 variants</text>
+
+<rect x="184" y="614" width="100" height="36" fill="#191a21"/>
+<rect x="180" y="610" width="100" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="230" y="628" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ff5555">Helm chart</text>
+
+<rect x="304" y="614" width="100" height="36" fill="#191a21"/>
+<rect x="300" y="610" width="100" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="350" y="628" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ff5555">K8s manifests</text>
+
+<rect x="424" y="614" width="100" height="36" fill="#191a21"/>
+<rect x="420" y="610" width="100" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="470" y="628" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ff5555">Terraform AWS</text>
+
+<rect x="544" y="614" width="96" height="36" fill="#191a21"/>
+<rect x="540" y="610" width="96" height="36" fill="#44475a" stroke="#ff5555" stroke-width="1.5"/>
+<text x="588" y="628" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#ff5555">Ansible</text>
+
+</svg>
+</div>
+</body>
+</html>
