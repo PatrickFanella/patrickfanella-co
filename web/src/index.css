@@ -62,6 +62,7 @@
   body {
     margin: 0;
     min-width: 320px;
+    cursor: default;
     color: var(--color-ink);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -79,6 +80,14 @@
     text-decoration: none;
   }
 
+  a[href],
+  button,
+  input[type='button'],
+  input[type='submit'],
+  input[type='reset'] {
+    cursor: pointer;
+  }
+
   ::selection {
     color: var(--color-paper);
     background: var(--color-accent-green);
@@ -86,12 +95,15 @@
 
   button,
   input,
+  select,
   textarea {
     font: inherit;
   }
 
-  button {
-    cursor: pointer;
+  input:not([type='button']):not([type='submit']):not([type='reset']),
+  select,
+  textarea {
+    cursor: default;
   }
 
   /* Enhanced focus state for better accessibility and tactile feel */

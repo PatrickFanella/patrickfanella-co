@@ -4,10 +4,13 @@ import { fetchProject, fetchProjects, getApiBaseUrl, submitContact } from './api
 
 describe('api client', () => {
   afterEach(() => {
+    vi.unstubAllEnvs()
     vi.restoreAllMocks()
   })
 
   it('returns the configured base url without a trailing slash', () => {
+    vi.stubEnv('VITE_API_BASE_URL', 'http://localhost:8080/')
+
     expect(getApiBaseUrl()).toBe('http://localhost:8080')
   })
 

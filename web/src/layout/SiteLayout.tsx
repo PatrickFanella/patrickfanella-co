@@ -21,7 +21,7 @@ export function SiteLayout() {
     }
 
     window.scrollTo(0, 0)
-    mainRef.current?.focus()
+    mainRef.current?.focus({ preventScroll: true })
   }, [location.pathname])
 
   return (

@@ -19,9 +19,20 @@ function renderApp(route = '/') {
 }
 
 describe('App navigation flows', () => {
+	it('renders a not-found page for unmatched routes', async () => {
+		renderApp('/does-not-exist')
+
+		expect(await screen.findByRole('heading', { name: /this page isn't available/i })).toBeInTheDocument()
+		await waitFor(() => {
+			expect(document.title).toBe('Page not found | Patrick Fanella')
+		})
+	})
+
 	it('navigates from the home page to the projects archive', async () => {
 		const user = userEvent.setup()
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
+		const scrollToSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {})
+		const focusSpy = vi.spyOn(HTMLElement.prototype, 'focus').mockImplementation(() => {})
 
 		renderApp('/')
 
@@ -29,6 +40,8 @@ describe('App navigation flows', () => {
 		await user.click(screen.getByRole('link', { name: /view case studies/i }))
 
 		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
+		expect(scrollToSpy).toHaveBeenCalledWith(0, 0)
+		expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true })
 		await waitFor(() => {
 			expect(document.title).toBe('Projects | Patrick Fanella')
 		})

@@ -14,8 +14,11 @@ type SeoProps = {
 	description?: string
 	path?: string
 	image?: string
+	imageAlt?: string
 	type?: 'article' | 'website'
 	robots?: string
+	includeCanonical?: boolean
+	includeSocialUrl?: boolean
 	structuredData?: StructuredData
 }
 
@@ -24,12 +27,17 @@ export function Seo({
 	description = defaultDescription,
 	path = '/',
 	image = defaultImagePath,
+	imageAlt,
 	type = 'website',
 	robots = 'index,follow',
+	includeCanonical = true,
+	includeSocialUrl = true,
 	structuredData,
 }: SeoProps) {
 	const resolvedTitle = title ? `${title} | ${siteName}` : defaultTitle
-	const canonicalUrl = toAbsoluteUrl(path)
+	const absoluteUrl = toAbsoluteUrl(path)
+	const canonicalUrl = includeCanonical ? absoluteUrl : undefined
+	const ogUrl = includeSocialUrl ? absoluteUrl : undefined
 	const imageUrl = toAbsoluteUrl(image)
 	const structuredEntries = structuredData
 		? Array.isArray(structuredData)
@@ -47,12 +55,14 @@ export function Seo({
 			<meta content={description} property="og:description" />
 			<meta content={type} property="og:type" />
 			<meta content={siteName} property="og:site_name" />
-			{canonicalUrl ? <meta content={canonicalUrl} property="og:url" /> : null}
+			{ogUrl ? <meta content={ogUrl} property="og:url" /> : null}
 			{imageUrl ? <meta content={imageUrl} property="og:image" /> : null}
+			{imageUrl && imageAlt ? <meta content={imageAlt} property="og:image:alt" /> : null}
 			<meta content="summary_large_image" name="twitter:card" />
 			<meta content={resolvedTitle} name="twitter:title" />
 			<meta content={description} name="twitter:description" />
 			{imageUrl ? <meta content={imageUrl} name="twitter:image" /> : null}
+			{imageUrl && imageAlt ? <meta content={imageAlt} name="twitter:image:alt" /> : null}
 			{canonicalUrl ? <link href={canonicalUrl} rel="canonical" /> : null}
 			{structuredEntries.map((entry, index) => (
 				<script key={index} type="application/ld+json">

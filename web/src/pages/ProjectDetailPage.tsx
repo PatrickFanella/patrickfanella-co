@@ -52,6 +52,8 @@ export function ProjectDetailPage() {
       <section className={pageSectionClass}>
         <Seo
           description="The requested case study has not been published yet."
+          includeCanonical={false}
+          includeSocialUrl={false}
           path={slug ? `/projects/${slug}` : '/projects'}
           robots="noindex,follow"
           title="Project not found"
@@ -110,6 +112,7 @@ export function ProjectDetailPage() {
       <Seo
         description={project.summary}
         image={project.media[0]?.src}
+        imageAlt={project.media[0]?.alt}
         path={`/projects/${project.slug}`}
         structuredData={{
           '@context': 'https://schema.org',
