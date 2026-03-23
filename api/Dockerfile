@@ -18,7 +18,7 @@ WORKDIR /app
 
 COPY --from=build /out/server /app/server
 
-EXPOSE 8080
+EXPOSE 8181
 
 USER appuser
 

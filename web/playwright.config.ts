@@ -17,7 +17,7 @@ export default defineConfig({
 		{
 			name: 'API',
 			command: 'cd ../api && go run ./cmd/server',
-			url: 'http://localhost:8080/api/health',
+			url: 'http://localhost:8181/api/health',
 			timeout: 120_000,
 			reuseExistingServer: false,
 		},

@@ -42,7 +42,7 @@ docker compose --profile stack up --build
 Expected endpoints:
 
 - web: `http://localhost:4173`
-- api: `http://localhost:8080`
+- api: `http://localhost:8181`
 - postgres: `localhost:5432`
 
 ## 3. Database updates

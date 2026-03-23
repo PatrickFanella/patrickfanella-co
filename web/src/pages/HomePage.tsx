@@ -1,6 +1,8 @@
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
+import { CarouselNav } from '../components/CarouselNav'
 import { ProjectCard } from '../components/ProjectCard'
 import { RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
@@ -57,6 +59,162 @@ const engineeringDepthItems = [
     label: 'Feature matrix',
   },
 ]
+
+const ROTATE_INTERVAL_MS = 6000
+
+function EngineeringDepthCarousel() {
+  const [index, setIndex] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const item = engineeringDepthItems[index]
+
+  const advance = useCallback(() => {
+    setIndex((prev) => (prev + 1) % engineeringDepthItems.length)
+  }, [])
+
+  const goTo = useCallback((next: number) => {
+    setIndex(next)
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(advance, ROTATE_INTERVAL_MS)
+  }, [advance])
+
+  useEffect(() => {
+    timerRef.current = setInterval(advance, ROTATE_INTERVAL_MS)
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
+  }, [advance])
+
+  return (
+    <>
+      <figure className={`${surfaceCardClass} mx-auto max-w-4xl overflow-hidden bg-panel`}>
+        <div className="flex items-center justify-between border-b-2 border-stroke bg-surface px-5 py-4">
+          <p className={monoLabelClass}>{`${String(index + 1).padStart(2, '0')} / ${String(engineeringDepthItems.length).padStart(2, '0')}`}</p>
+          <button
+            className="inline-flex cursor-pointer items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.15em] text-ink-soft transition-colors duration-150 hover:text-accent-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green"
+            onClick={() => setLightboxOpen(true)}
+            type="button"
+            aria-label={`View ${item.caption} fullscreen`}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+              <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+              <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+              <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+            </svg>
+            Expand
+          </button>
+        </div>
+
+        <div className="border-b-2 border-stroke bg-surface" style={{ aspectRatio: '16 / 10' }}>
+          <img
+            className="h-full w-full object-contain"
+            src={item.src}
+            alt={item.alt}
+            decoding="async"
+            key={item.src}
+            width={1600}
+            height={1000}
+          />
+        </div>
+
+        <div className="flex items-center justify-between gap-4 p-5">
+          <figcaption className="text-[0.98rem] leading-relaxed text-ink-soft">
+            {item.caption}
+          </figcaption>
+
+          <CarouselNav
+            onPrev={() => goTo((index - 1 + engineeringDepthItems.length) % engineeringDepthItems.length)}
+            onNext={() => goTo((index + 1) % engineeringDepthItems.length)}
+            prevLabel="Previous diagram"
+            nextLabel="Next diagram"
+          />
+        </div>
+      </figure>
+
+      {lightboxOpen ? (
+        <DiagramLightbox
+          initialIndex={index}
+          onClose={() => setLightboxOpen(false)}
+        />
+      ) : null}
+    </>
+  )
+}
+
+function DiagramLightbox({ initialIndex, onClose }: { initialIndex: number; onClose: () => void }) {
+  const [index, setIndex] = useState(initialIndex)
+  const item = engineeringDepthItems[index]
+
+  const goPrev = useCallback(() => {
+    setIndex((prev) => (prev - 1 + engineeringDepthItems.length) % engineeringDepthItems.length)
+  }, [])
+
+  const goNext = useCallback(() => {
+    setIndex((prev) => (prev + 1) % engineeringDepthItems.length)
+  }, [])
+
+  useEffect(() => {
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+      if (event.key === 'ArrowLeft') goPrev()
+      if (event.key === 'ArrowRight') goNext()
+    }
+
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
+    }
+  }, [onClose, goPrev, goNext])
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex flex-col bg-paper/95 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Engineering depth diagram viewer"
+    >
+      <div className="flex shrink-0 items-center justify-between border-b-2 border-stroke bg-surface px-5 py-4">
+        <div className="flex items-center gap-4">
+          <p className={monoLabelClass}>{item.caption}</p>
+          <p className="font-mono text-[0.72rem] uppercase tracking-[0.15em] text-ink-soft">
+            {index + 1} / {engineeringDepthItems.length}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <CarouselNav onPrev={goPrev} onNext={goNext} />
+          <button
+            aria-label="Close viewer"
+            className="inline-flex cursor-pointer items-center justify-center border-2 border-stroke bg-surface px-4 py-3 text-heading transition-all duration-150 ease-out hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-accent-green hover:text-accent-green hover:shadow-brutal-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none"
+            onClick={onClose}
+            type="button"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <div className="flex min-h-0 flex-1 items-center justify-center p-6">
+        <img
+          className="max-h-full max-w-full object-contain"
+          src={item.src}
+          alt={item.alt}
+          key={item.src}
+        />
+      </div>
+
+      {item.alt ? (
+        <div className="shrink-0 border-t-2 border-stroke bg-surface px-5 py-3">
+          <p className="text-[0.85rem] leading-relaxed text-ink-soft">{item.alt}</p>
+        </div>
+      ) : null}
+    </div>
+  )
+}
 
 export function HomePage() {
   const prefersReducedMotion = useReducedMotion()
@@ -262,27 +420,7 @@ export function HomePage() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {engineeringDepthItems.map((item) => (
-            <figure key={item.src} className={`${surfaceCardClass} overflow-hidden bg-panel`}>
-              <div className="border-b-2 border-stroke bg-surface px-5 py-4">
-                <p className={monoLabelClass}>{item.label}</p>
-              </div>
-              <img
-                className="w-full border-b-2 border-stroke bg-surface object-cover"
-                src={item.src}
-                alt={item.alt}
-                decoding="async"
-                loading="lazy"
-                width={800}
-                height={500}
-              />
-              <figcaption className="p-5 text-[0.98rem] leading-relaxed text-ink-soft">
-                {item.caption}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        <EngineeringDepthCarousel />
       </section>
 
       <section className="grid gap-12 pb-8 pt-16 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1.4fr)] xl:items-start">

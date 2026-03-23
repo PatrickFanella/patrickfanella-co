@@ -23,7 +23,7 @@ describe('ProjectDetailPage', () => {
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: /technical decisions that mattered/i })).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: /what held up/i })).toBeInTheDocument()
-		expect(screen.getByRole('link', { name: /view repository/i })).toHaveAttribute(
+		expect(screen.getByRole('link', { name: /repository/i })).toHaveAttribute(
 			'href',
 			featuredProject.repoUrl,
 		)

@@ -110,9 +110,8 @@ export function ProjectsPage() {
             <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
               <div>
                 <p className={monoLabelClass}>Filters</p>
-                <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
-                  Showing {visibleProjects.length} of {projects.length} projects
-                  {activeTag ? ` for ${activeTag}.` : '.'}
+                <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
+                  Showing {visibleProjects.length} of {projects.length} projects{activeTag ? ` for ${activeTag}.` : '.'}
                 </p>
               </div>
               {activeTag ? (

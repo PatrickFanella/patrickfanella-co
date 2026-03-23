@@ -39,7 +39,7 @@ docker compose --profile stack up --build
 ```
 
 Web is exposed on `http://localhost:4173`.
-API is exposed on `http://localhost:8080`.
+API is exposed on `http://localhost:8181`.
 Health checks:
 
 - web: `GET /healthz`
@@ -69,8 +69,9 @@ Health checks:
 
 | Variable | Service | Required | Notes |
 | --- | --- | --- | --- |
-| `CONTACT_NOTIFICATION_WEBHOOK_URL` | api | optional | Receives contact submission notifications |
-| `CONTACT_NOTIFICATION_BEARER_TOKEN` | api | optional | Added as `Authorization: Bearer ...` if set |
+| `CONTACT_NOTIFICATION_NTFY_URL` | api | optional | ntfy topic URL for push notifications (e.g. `https://ntfy.example.com/contact`) |
+| `CONTACT_NOTIFICATION_NTFY_TOKEN` | api | optional | Bearer token for ntfy authentication |
+| `CONTACT_NOTIFICATION_N8N_URL` | api | optional | n8n webhook trigger URL for workflow automation |
 | `CONTACT_NOTIFICATION_TIMEOUT_SECONDS` | api | optional | Defaults to `5` |
 | `VITE_ANALYTICS_PLAUSIBLE_DOMAIN` | web build | optional | Enables Plausible analytics when set |
 | `VITE_ANALYTICS_PLAUSIBLE_SCRIPT_URL` | web build | optional | Override only when self-hosting Plausible |
@@ -112,4 +113,7 @@ Verify at minimum:
 ## Notes on analytics and notifications
 
 - Analytics are **opt-in** and intentionally minimal: Plausible page views plus outbound-link tracking only.
-- Contact notifications send a redacted preview plus sender metadata to the configured webhook. The database remains the source of truth for the full message body.
+- Contact notifications support two targets simultaneously:
+  - **ntfy**: push notification with title, priority, and 240-char message preview (set `CONTACT_NOTIFICATION_NTFY_URL`)
+  - **n8n**: structured JSON webhook with full message body for workflow automation (set `CONTACT_NOTIFICATION_N8N_URL`)
+- The database remains the source of truth for the full message body.

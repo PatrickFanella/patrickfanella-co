@@ -8,7 +8,7 @@ RUN npm install
 COPY web/ ./
 COPY db/ ../db/
 
-ARG VITE_API_BASE_URL=http://localhost:8080
+ARG VITE_API_BASE_URL=http://localhost:8181
 ARG VITE_SITE_URL=https://patrickfanella.co
 ARG VITE_ANALYTICS_PLAUSIBLE_DOMAIN=
 ARG VITE_ANALYTICS_PLAUSIBLE_SCRIPT_URL=https://plausible.io/js/script.file-downloads.outbound-links.js

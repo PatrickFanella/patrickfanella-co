@@ -38,9 +38,10 @@ func main() {
 		RateLimitWindow:      cfg.ContactRateLimitWindow,
 	})
 	api.SetLogger(logger)
-	api.SetNotifier(notifications.NewWebhookNotifier(
-		cfg.ContactNotificationWebhookURL,
-		cfg.ContactNotificationBearerToken,
+	api.SetNotifier(notifications.NewMultiNotifier(
+		cfg.ContactNotificationNtfyURL,
+		cfg.ContactNotificationNtfyToken,
+		cfg.ContactNotificationN8nURL,
 		cfg.ContactNotificationTimeout,
 	))
 
