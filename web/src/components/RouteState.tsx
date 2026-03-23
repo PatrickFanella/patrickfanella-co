@@ -38,7 +38,7 @@ export function RouteState({
 				<Heading className="mt-5 font-display text-[2rem] font-bold uppercase tracking-[-0.04em] text-heading">
 					{title}
 				</Heading>
-				<p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">{description}</p>
+				<p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">{description}</p>
 			</div>
 
 			{children}

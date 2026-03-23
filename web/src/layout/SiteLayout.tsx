@@ -27,6 +27,8 @@ export function SiteLayout() {
 
   return (
     <div className="relative min-h-screen bg-paper text-ink selection:bg-accent-green selection:text-paper font-body">
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-50 mx-auto max-w-350 border-2 border-stroke" />
+
       <a className="skip-link" href="#main-content">
         Skip to main content
       </a>

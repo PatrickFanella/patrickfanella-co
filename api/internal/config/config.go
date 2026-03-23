@@ -16,9 +16,10 @@ type Config struct {
 	ContactRateLimitMax     int
 	ContactRateLimitWindow  time.Duration
 	ContactHoneypotField    string
-	ContactNotificationWebhookURL string
-	ContactNotificationBearerToken string
-	ContactNotificationTimeout time.Duration
+	ContactNotificationNtfyURL     string
+	ContactNotificationNtfyToken   string
+	ContactNotificationN8nURL      string
+	ContactNotificationTimeout     time.Duration
 }
 
 func Load() Config {
@@ -32,9 +33,10 @@ func Load() Config {
 		ContactRateLimitMax:    getEnvInt("CONTACT_RATE_LIMIT_MAX_REQUESTS", 5),
 		ContactRateLimitWindow: getEnvSeconds("CONTACT_RATE_LIMIT_WINDOW_SECONDS", 60*time.Second),
 		ContactHoneypotField:   getEnv("CONTACT_HONEYPOT_FIELD", "website"),
-		ContactNotificationWebhookURL: getEnv("CONTACT_NOTIFICATION_WEBHOOK_URL", ""),
-		ContactNotificationBearerToken: getEnv("CONTACT_NOTIFICATION_BEARER_TOKEN", ""),
-		ContactNotificationTimeout: getEnvSeconds("CONTACT_NOTIFICATION_TIMEOUT_SECONDS", 5*time.Second),
+		ContactNotificationNtfyURL:   getEnv("CONTACT_NOTIFICATION_NTFY_URL", ""),
+		ContactNotificationNtfyToken: getEnv("CONTACT_NOTIFICATION_NTFY_TOKEN", ""),
+		ContactNotificationN8nURL:    getEnv("CONTACT_NOTIFICATION_N8N_URL", ""),
+		ContactNotificationTimeout:   getEnvSeconds("CONTACT_NOTIFICATION_TIMEOUT_SECONDS", 5*time.Second),
 	}
 }
 

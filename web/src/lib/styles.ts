@@ -33,5 +33,8 @@ export const tagListClass = 'mt-4 flex list-none flex-wrap gap-2 p-0'
 export const tagClass =
   'border-2 border-stroke bg-panel px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-ink'
 
+export const tagCompactClass =
+  'border border-stroke bg-panel px-2 py-0.5 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-ink'
+
 export const inputClass =
   'w-full border-2 border-stroke bg-surface px-4 py-3 text-ink font-mono text-sm transition-all duration-150 ease-out placeholder:text-stroke focus-visible:border-accent-green focus-visible:outline-none focus-visible:-translate-x-0.5 focus-visible:-translate-y-0.5 focus-visible:shadow-brutal-green'

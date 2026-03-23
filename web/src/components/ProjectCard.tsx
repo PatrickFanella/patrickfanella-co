@@ -5,8 +5,7 @@ import {
   monoLabelClass,
   secondaryButtonClass,
   surfaceCardClass,
-  tagClass,
-  tagListClass,
+  tagCompactClass,
 } from '../lib/styles'
 
 type ProjectCardProps = {
@@ -21,7 +20,7 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
     <article
       className={`${surfaceCardClass} group flex h-full flex-col justify-between p-7 hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}
     >
-      <div className="mb-6 grid gap-5 border-b-2 border-stroke pb-6">
+      <div className="mb-4 grid gap-5 border-b-2 border-stroke pb-4">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             {orderLabel ? (
@@ -49,15 +48,20 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
         </div>
       </div>
 
-      <ul className={tagListClass} aria-label={`${project.title} technology stack`}>
-        {project.stack.map((item) => (
-          <li key={item} className={tagClass}>
+      <ul className="flex list-none flex-wrap gap-1.5 p-0" aria-label={`${project.title} technology stack`}>
+        {project.stack.slice(0, 8).map((item) => (
+          <li key={item} className={tagCompactClass}>
             {item}
           </li>
         ))}
+        {project.stack.length > 8 ? (
+          <li className={`${tagCompactClass} text-accent-purple`}>
+            +{project.stack.length - 8}
+          </li>
+        ) : null}
       </ul>
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t-2 border-stroke pt-6">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-4 border-t-2 border-stroke pt-4">
         {project.featured ? <p className={monoLabelClass}>Featured Project</p> : <span />}
 
         <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>

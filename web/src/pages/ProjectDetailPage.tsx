@@ -25,7 +25,7 @@ export function ProjectDetailPage() {
   const { project, status, error, retry } = useProject(slug)
   const siteUrl = getSiteUrl()
   const metaCardClass =
-    'grid gap-2 border-2 border-stroke bg-surface px-5 py-4 text-ink-soft'
+    'flex items-baseline gap-3 border-2 border-stroke bg-surface px-5 py-3 text-ink-soft'
 
   if (status === 'loading') {
     return (
@@ -131,16 +131,16 @@ export function ProjectDetailPage() {
         title={project.title}
         type="article"
       />
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.85fr)] lg:items-start border-b-2 border-stroke pb-16 mb-8">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b-2 border-stroke pb-10 mb-8">
         <div>
           <SectionLabel>{`Case study / ${project.year}`}</SectionLabel>
-          <h1 className={`${pageTitleClass} mt-6 uppercase max-w-[14ch]`}>{project.title}</h1>
-          <p className={`${pageIntroClass} text-[1.2rem] text-ink`}>{project.summary}</p>
+          <h1 className={`${pageTitleClass} mt-6 uppercase`}>{project.title}</h1>
+          <p className="mt-6 text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
         </div>
 
-        <aside className={`${surfaceCardClass} h-fit bg-panel p-8`} aria-label="Project meta information">
+        <aside className={`${surfaceCardClass} h-fit bg-panel p-6`} aria-label="Project meta information">
           <p className={monoLabelClass}>Project Details</p>
-          <div className="mt-6 grid gap-4">
+          <div className="mt-5 grid gap-3">
             <p className={metaCardClass}>
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
                 Role
@@ -155,41 +155,38 @@ export function ProjectDetailPage() {
             </p>
           </div>
 
-          <div className="mt-8">
-            <h2 className="font-mono text-[0.8rem] font-bold uppercase tracking-[0.18em] text-accent-green mb-4">Infrastructure</h2>
-            <ul className={tagListClass}>
-              {project.stack.map((item) => (
-                <li key={item} className={tagClass}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {project.repoUrl || project.liveUrl ? (
-            <div className="mt-8 grid gap-3 border-t-2 border-stroke pt-6">
+            <div className="mt-5 flex flex-wrap gap-4 border-t-2 border-stroke pt-5">
               {project.repoUrl ? (
                 <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">
-                  View Repository ↗
+                  Repository ↗
                 </a>
               ) : null}
               {project.liveUrl ? (
                 <a className={textLinkClass} href={project.liveUrl} rel="noreferrer" target="_blank">
-                  Visit Project ↗
+                  Live Site ↗
                 </a>
               ) : null}
             </div>
           ) : null}
         </aside>
+
+        <ul className={`${tagListClass} lg:col-span-2`}>
+          {project.stack.map((item) => (
+            <li key={item} className={tagClass}>
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <div className="mt-16 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.8fr)] lg:items-start">
+      <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.8fr)] lg:items-start">
         <article className="pr-4 lg:pr-8">
           <SectionLabel>Overview</SectionLabel>
           <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
             What I built and why.
           </h2>
-          <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft max-w-[55ch]">
+          <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft">
             {project.description}
           </p>
         </article>

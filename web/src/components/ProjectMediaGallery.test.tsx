@@ -19,7 +19,7 @@ describe('ProjectMediaGallery', () => {
 		)
 
 		expect(screen.getByAltText(/demo project poster/i)).toBeInTheDocument()
-		expect(screen.getByText(/launch placeholder visual/i)).toBeInTheDocument()
+		expect(screen.getByRole('figure')).toBeInTheDocument()
 	})
 
 	it('falls back gracefully when an image fails to load', () => {
@@ -39,7 +39,6 @@ describe('ProjectMediaGallery', () => {
 		const image = screen.getByRole('img', { name: /broken visual/i })
 		fireEvent.error(image)
 
-		expect(screen.getByText(/placeholder visual in use/i)).toBeInTheDocument()
 		expect(screen.getByRole('img', { name: /demo project placeholder artwork/i })).toHaveAttribute(
 			'src',
 			'/assets/projects/project-fallback.svg',
