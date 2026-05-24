@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://patrickfanella.co/</loc></url>
   <url><loc>https://patrickfanella.co/projects</loc></url>
+  <url><loc>https://patrickfanella.co/tools</loc></url>
+  <url><loc>https://patrickfanella.co/resume</loc></url>
   <url><loc>https://patrickfanella.co/contact</loc></url>
   <url><loc>https://patrickfanella.co/projects/clpr</loc></url>
   <url><loc>https://patrickfanella.co/projects/subcorp</loc></url>
@@ -14,4 +16,9 @@
   <url><loc>https://patrickfanella.co/projects/galdr</loc></url>
   <url><loc>https://patrickfanella.co/projects/cutroom</loc></url>
   <url><loc>https://patrickfanella.co/projects/subcults</loc></url>
+  <url><loc>https://patrickfanella.co/projects/augr</loc></url>
+  <url><loc>https://patrickfanella.co/projects/llama-line</loc></url>
+  <url><loc>https://patrickfanella.co/projects/open-pilot</loc></url>
+  <url><loc>https://patrickfanella.co/projects/edda</loc></url>
+  <url><loc>https://patrickfanella.co/projects/paqr</loc></url>
 </urlset>

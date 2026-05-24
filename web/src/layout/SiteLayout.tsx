@@ -6,6 +6,7 @@ import { monoLabelClass, navButtonClass } from '../lib/styles'
 const navigation = [
   { to: '/', label: 'Home', end: true },
   { to: '/projects', label: 'Projects' },
+  { to: '/tools', label: 'Tools' },
   { to: '/resume', label: 'Resume' },
   { to: '/contact', label: 'Contact' },
 ]
@@ -59,7 +60,7 @@ export function SiteLayout() {
               </p>
             </div>
 
-            <nav className="flex flex-wrap gap-3 lg:w-full lg:self-end lg:grid lg:grid-cols-4" aria-label="Primary navigation">
+            <nav className="flex flex-wrap gap-3 lg:w-full lg:self-end lg:grid lg:grid-cols-5" aria-label="Primary navigation">
               {navigation.map((item) => (
                 <NavLink
                   key={item.to}

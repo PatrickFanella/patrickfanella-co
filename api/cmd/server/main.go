@@ -21,14 +21,34 @@ func main() {
 	cfg := config.Load()
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo}))
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	appStore, err := store.New(ctx, cfg.DatabaseURL)
+	appStore, err := store.New(context.Background(), cfg.DatabaseURL, store.ConnectConfig{
+		MaxAttempts: 10,
+		InitialWait: 500 * time.Millisecond,
+		MaxWait:     10 * time.Second,
+	})
+	appStore.SetLogger(logger)
 	if err != nil {
 		logger.Warn("database unavailable, starting in degraded mode", slog.Any("error", err))
 	}
 	defer appStore.Close()
+
+	// Background goroutine: periodically check DB health and reconnect if needed.
+	go func() {
+		ticker := time.NewTicker(15 * time.Second)
+		defer ticker.Stop()
+		for range ticker.C {
+			if appStore.DatabaseEnabled() {
+				continue
+			}
+			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			if err := appStore.TryReconnect(ctx); err != nil {
+				logger.Warn("background reconnect failed", slog.Any("error", err))
+			} else {
+				logger.Info("database connection restored")
+			}
+			cancel()
+		}
+	}()
 
 	api := handlers.New(appStore, handlers.ContactSecurityConfig{
 		AllowedOrigin:        cfg.CORSOrigin,

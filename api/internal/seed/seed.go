@@ -17,18 +17,19 @@ type Portfolio struct {
 }
 
 type Project struct {
-	Slug        string   `json:"slug"`
-	Title       string   `json:"title"`
-	Summary     string   `json:"summary"`
-	Description string   `json:"description"`
-	Role        string   `json:"role"`
-	Year        int      `json:"year"`
-	RepoURL     string   `json:"repoUrl,omitempty"`
-	LiveURL     string   `json:"liveUrl,omitempty"`
-	Featured    bool     `json:"featured"`
-	SortOrder   int      `json:"sortOrder"`
-	Stack       []string `json:"stack"`
-	Highlights  []string `json:"highlights"`
+	Slug         string         `json:"slug"`
+	Title        string         `json:"title"`
+	Kind         string         `json:"kind,omitempty"`
+	Summary      string         `json:"summary"`
+	Description  string         `json:"description"`
+	Role         string         `json:"role"`
+	Year         int            `json:"year"`
+	RepoURL      string         `json:"repoUrl,omitempty"`
+	LiveURL      string         `json:"liveUrl,omitempty"`
+	Featured     bool           `json:"featured"`
+	SortOrder    int            `json:"sortOrder"`
+	Stack        []string       `json:"stack"`
+	Highlights   []string       `json:"highlights"`
 	Architecture []string       `json:"architecture"`
 	Lessons      []string       `json:"lessons"`
 	Media        []ProjectMedia `json:"media"`
@@ -96,6 +97,11 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 	for _, project := range portfolio.Projects {
 		logger.Printf("seeding project slug=%s featured=%t", project.Slug, project.Featured)
 
+		kind := project.Kind
+		if kind == "" {
+			kind = "case-study"
+		}
+
 		mediaPayload, err := json.Marshal(project.Media)
 		if err != nil {
 			return err
@@ -104,10 +110,11 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 		var projectID int64
 		err = tx.QueryRow(
 			ctx,
-			`INSERT INTO projects (slug, title, summary, description, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
-			 VALUES ($1, $2, $3, $4, $5, $6, NULLIF($7, ''), NULLIF($8, ''), $9, $10, $11, $12, $13, $14)
+			`INSERT INTO projects (slug, title, kind, summary, description, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
+			 VALUES ($1, $2, $3, $4, $5, $6, $7, NULLIF($8, ''), NULLIF($9, ''), $10, $11, $12, $13, $14, $15)
 			 ON CONFLICT (slug) DO UPDATE SET
 			   title = EXCLUDED.title,
+			   kind = EXCLUDED.kind,
 			   summary = EXCLUDED.summary,
 			   description = EXCLUDED.description,
 			   role = EXCLUDED.role,
@@ -123,6 +130,7 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			 RETURNING id`,
 			project.Slug,
 			project.Title,
+			kind,
 			project.Summary,
 			project.Description,
 			project.Role,

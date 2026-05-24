@@ -39,16 +39,17 @@ func TestScanProjectDecodesMediaPayload(t *testing.T) {
 	project, err := scanProject(func(dest ...any) error {
 		*dest[0].(*string) = "clpr"
 		*dest[1].(*string) = "Clpr"
-		*dest[2].(*string) = "Summary"
-		*dest[3].(*string) = "Description"
-		*dest[4].(*string) = "Full stack developer"
-		*dest[5].(*int) = 2025
-		*dest[6].(*bool) = true
-		*dest[9].(*[]string) = []string{"Go", "React"}
-		*dest[10].(*[]string) = []string{"Highlight"}
-		*dest[11].(*[]string) = []string{"Architecture"}
-		*dest[12].(*[]string) = []string{"Lesson"}
-		*dest[13].(*[]byte) = []byte(`[{"src":"/assets/projects/clpr-overview.svg","alt":"Architecture diagram"}]`)
+		*dest[2].(*string) = ""
+		*dest[3].(*string) = "Summary"
+		*dest[4].(*string) = "Description"
+		*dest[5].(*string) = "Full stack developer"
+		*dest[6].(*int) = 2025
+		*dest[7].(*bool) = true
+		*dest[10].(*[]string) = []string{"Go", "React"}
+		*dest[11].(*[]string) = []string{"Highlight"}
+		*dest[12].(*[]string) = []string{"Architecture"}
+		*dest[13].(*[]string) = []string{"Lesson"}
+		*dest[14].(*[]byte) = []byte(`[{"src":"/assets/projects/clpr-overview.svg","alt":"Architecture diagram"}]`)
 		return nil
 	})
 	if err != nil {
@@ -57,5 +58,9 @@ func TestScanProjectDecodesMediaPayload(t *testing.T) {
 
 	if len(project.Media) != 1 || project.Media[0].Src == "" {
 		t.Fatalf("expected decoded media payload, got %#v", project)
+	}
+
+	if project.Kind != "case-study" {
+		t.Fatalf("expected default kind case-study, got %q", project.Kind)
 	}
 }

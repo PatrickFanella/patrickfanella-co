@@ -1,8 +1,10 @@
-import { screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import { HelmetProvider } from 'react-helmet-async'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
-import { featuredProject } from '../test/fixtures'
+import { featuredProject, toolProject } from '../test/fixtures'
 import { renderRoute } from '../test/renderWithRouter'
 import { ProjectDetailPage } from './ProjectDetailPage'
 
@@ -27,6 +29,23 @@ describe('ProjectDetailPage', () => {
 			'href',
 			featuredProject.repoUrl,
 		)
+	})
+
+	it('sends tool projects to the tools archive route state', async () => {
+		vi.spyOn(api, 'fetchProject').mockResolvedValue(toolProject)
+
+		render(
+			<HelmetProvider>
+				<MemoryRouter initialEntries={['/projects/tmux-popups']}>
+					<Routes>
+						<Route element={<ProjectDetailPage />} path="/projects/:slug" />
+						<Route element={<h1>Tools archive</h1>} path="/tools" />
+					</Routes>
+				</MemoryRouter>
+			</HelmetProvider>,
+		)
+
+		expect(await screen.findByRole('heading', { name: /tools archive/i })).toBeInTheDocument()
 	})
 
 	it('omits optional rich-content sections when the project does not provide them', async () => {

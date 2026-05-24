@@ -11,19 +11,20 @@ var (
 )
 
 type Project struct {
-	Slug        string   `json:"slug"`
-	Title       string   `json:"title"`
-	Summary     string   `json:"summary"`
-	Description string   `json:"description"`
-	Role        string   `json:"role"`
-	Year        int      `json:"year"`
-	Stack       []string `json:"stack"`
-	Featured    bool     `json:"featured"`
-	RepoURL     string   `json:"repoUrl,omitempty"`
-	LiveURL     string   `json:"liveUrl,omitempty"`
-	Highlights  []string `json:"highlights"`
-	Architecture []string      `json:"architecture"`
-	Lessons      []string      `json:"lessons"`
+	Slug         string         `json:"slug"`
+	Title        string         `json:"title"`
+	Kind         string         `json:"kind"`
+	Summary      string         `json:"summary"`
+	Description  string         `json:"description"`
+	Role         string         `json:"role"`
+	Year         int            `json:"year"`
+	Stack        []string       `json:"stack"`
+	Featured     bool           `json:"featured"`
+	RepoURL      string         `json:"repoUrl,omitempty"`
+	LiveURL      string         `json:"liveUrl,omitempty"`
+	Highlights   []string       `json:"highlights"`
+	Architecture []string       `json:"architecture"`
+	Lessons      []string       `json:"lessons"`
 	Media        []ProjectMedia `json:"media"`
 }
 

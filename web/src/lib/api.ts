@@ -4,9 +4,12 @@ export type ProjectMedia = {
   caption?: string
 }
 
+export type ProjectKind = 'case-study' | 'tool'
+
 export type Project = {
   slug: string
   title: string
+  kind: ProjectKind
   summary: string
   description: string
   role: string

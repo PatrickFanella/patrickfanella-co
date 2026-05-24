@@ -33,7 +33,7 @@ const workingPrinciples = [
       'From Solidity smart contracts to Kubernetes orchestration, GPU worker queues to browser extensions. Real products don\u2019t respect stack boundaries, and neither does this work.',
   },
   {
-    title: 'Production engineering is not optional',
+    title: 'Production engineering is built in',
     description:
       'Load testing, security audits, observability, and horizontal scaling are part of the build, not items for a post-launch backlog. The projects here ship with Prometheus dashboards, k6 benchmarks, and Slither contract audits as standard.',
   },
@@ -42,7 +42,7 @@ const workingPrinciples = [
 const engineeringDepthItems = [
   {
     src: '/assets/projects/diagrams/v10-by-the-numbers.webp',
-    alt: 'Aggregate portfolio metrics: 886k+ lines of code, 3,669 source files, 1,110 test files, 200+ DB migrations across 13 repositories.',
+    alt: 'Aggregate portfolio metrics: 886k+ lines of code, 3,669 source files, 1,110 test files, and 200+ DB migrations across the portfolio.',
     caption: 'By the numbers',
     label: 'Aggregate metrics',
   },
@@ -219,7 +219,9 @@ function DiagramLightbox({ initialIndex, onClose }: { initialIndex: number; onCl
 export function HomePage() {
   const prefersReducedMotion = useReducedMotion()
   const { projects, status, error, retry } = useProjects()
-  const featuredProjects = projects.filter((project) => project.featured)
+  const caseStudies = projects.filter((project) => project.kind === 'case-study')
+  const tools = projects.filter((project) => project.kind === 'tool')
+  const featuredProjects = caseStudies.filter((project) => project.featured)
 
   const featuredMessage = getErrorMessage(
     error,
@@ -245,7 +247,7 @@ export function HomePage() {
     jobTitle: 'Full Stack Developer',
     knowsAbout: focusAreas,
     name: 'Patrick Fanella',
-    sameAs: ['https://github.com/PatrickFanella'],
+    sameAs: ['https://github.com/PatrickFanella', 'https://git.subcult.tv/PatrickFanella'],
     url: getSiteUrl(),
   }
 
@@ -261,7 +263,7 @@ export function HomePage() {
               className="mt-8 font-display text-[clamp(4rem,8vw,8rem)] font-bold leading-[0.85] tracking-[-0.05em] text-heading uppercase"
               {...motionProps}
             >
-              Backend<span className="text-accent-green"> depth.</span> Frontend<span className="text-accent-teal"> clarity.</span> Production<span className="text-accent-pink"> throughout.</span>
+              Backend<span className="text-accent-green"> depth.</span> Frontend<span className="text-accent-teal"> clarity.</span> Production<span className="text-accent-pink"> discipline.</span>
             </motion.h1>
 
             <motion.p
@@ -334,6 +336,14 @@ export function HomePage() {
             </p>
             <Link className={textLinkClass} to="/projects">
               Browse All Projects ↗
+            </Link>
+            {status === 'success' ? (
+              <p className="text-sm leading-relaxed text-ink-soft">
+                {tools.length} public tools and services live in the archive.
+              </p>
+            ) : null}
+            <Link className={textLinkClass} to="/tools">
+              Browse Developer Tools ↗
             </Link>
           </div>
         </div>
@@ -416,7 +426,7 @@ export function HomePage() {
             </h2>
           </div>
           <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
-            Cross-cutting views across thirteen repositories: aggregate metrics, architecture patterns, and the PostgreSQL backbone that ties it all together.
+            Cross-cutting views across the portfolio: aggregate metrics, architecture patterns, and the PostgreSQL backbone that ties it all together.
           </p>
         </div>
 

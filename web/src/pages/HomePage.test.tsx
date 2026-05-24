@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
-import { projectsFixture, featuredProject } from '../test/fixtures'
+import { featuredProject, projectsFixture, toolProject } from '../test/fixtures'
 import { renderInRouter } from '../test/renderWithRouter'
 import { HomePage } from './HomePage'
 
@@ -23,6 +23,8 @@ describe('HomePage', () => {
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
 		expect(document.title).toBe('Patrick Fanella | Full Stack Developer')
 		expect(screen.queryByRole('heading', { name: 'Internet-ID' })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
+		expect(screen.getByRole('link', { name: /browse developer tools/i })).toHaveAttribute('href', '/tools')
 	})
 
 	it('renders a recoverable error state when the featured query fails', async () => {

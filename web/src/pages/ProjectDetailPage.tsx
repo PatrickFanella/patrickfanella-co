@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 
 import { ProjectMediaGallery } from '../components/ProjectMediaGallery'
 import { RouteState } from '../components/RouteState'
@@ -8,7 +8,6 @@ import { getErrorMessage, isNotFoundError } from '../lib/errors'
 import { getSiteUrl } from '../lib/site'
 import {
   monoLabelClass,
-  pageIntroClass,
   pageSectionClass,
   pageTitleClass,
   primaryButtonClass,
@@ -105,6 +104,10 @@ export function ProjectDetailPage() {
 
   if (!project) {
     return null
+  }
+
+  if (project.kind === 'tool') {
+    return <Navigate replace to="/tools" />
   }
 
   return (

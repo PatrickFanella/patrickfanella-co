@@ -1,6 +1,6 @@
 # Photo Asset Production Brief
 
-Last updated: 2026-03-18
+Last updated: 2026-05-24
 Project: `patrickfanella-co`
 
 ## Objective
@@ -23,6 +23,7 @@ The app currently references these paths:
 - Favicon: `/favicon.svg`
 - Default social image (OG + Twitter): `/assets/projects/project-fallback.svg`
 - Project media: `/assets/projects/<slug>-overview.svg` from `db/seed/portfolio.json`
+- Tools archive cards are compact and do not require per-tool media assets; the fallback social image remains `/assets/projects/project-fallback.svg`.
 
 If filenames/paths change, frontend and/or seed references must be updated.
 
@@ -69,11 +70,28 @@ Recommended social images:
 
 Add media for projects currently missing visuals in seed data:
 
-- `galdr-overview.svg`
-- `cutroom-overview.svg`
-- `subcults-overview.svg`
+- `galdr-overview.svg` — customer health scoring dashboard with data-source lanes and alert thresholds.
+- `cutroom-overview.svg` — multi-stage AI video production pipeline with timeline, ingest, and export stages.
+- `subcults-overview.svg` — scene map with live audio, decentralized ingestion, and community graph signals.
+- `augr-overview.svg` — multi-agent trading pipeline with research debate, risk debate, broker adapters, and market-data feeds.
+- `llama-line-overview.svg` — local Ollama broker queue with SSE status, admin controls, and GPU contention management.
+- `open-pilot-overview.svg` — agent automation workspace showing task queue, browser/control surfaces, and run logs.
+- `edda-overview.svg` — game/LLM systems dashboard with CLI, REST, and runtime state panels.
+- `paqr-overview.svg` — packaging and data-workflow pipeline with dataset ingress, validation, and publish steps.
 
 Optional: create per-project social cards (1200x630) for richer sharing.
+
+### [P3] Optional tool visuals (not required for the tools archive)
+
+The tools page works without images. If the team wants decorative media later, these filenames are reserved:
+
+- `tmux-popups-tool.svg` — terminal popup layout, quick commands, and tmux pane framing.
+- `super-productivity-mcp-tool.svg` — productivity bridge diagram with task sync and MCP connector nodes.
+- `ocq-tool.svg` — command/query flow for OpenCode automation and review prompts.
+- `patrickfanella-co-tool.svg` — portfolio system map showing routes, content, and build pipeline.
+- `artemis-tool.svg` — automation agent dashboard with triggers, jobs, and execution lanes.
+- `discord-spywatcher-tool.svg` — moderation/analytics monitor with event stream and alert summaries.
+- `vod-tender-tool.svg` — Twitch video service diagram with ingest, transcode, and delivery stages.
 
 ---
 
@@ -144,6 +162,25 @@ Use one primary visual per project minimum.
 | `galdr` | `galdr-overview.svg` | Customer health scoring dashboard + data sources |
 | `cutroom` | `cutroom-overview.svg` | Multi-stage AI video production pipeline + timeline |
 | `subcults` | `subcults-overview.svg` | Scene map + live audio + decentralized ingestion view |
+| `augr` | `augr-overview.svg` | Multi-agent trading pipeline with research debate, risk debate, broker adapters, and market data feeds |
+| `llama-line` | `llama-line-overview.svg` | Local broker queue with SSE status, admin controls, and GPU contention map |
+| `open-pilot` | `open-pilot-overview.svg` | Agent workspace with task queue, browser automation, and run logs |
+| `edda` | `edda-overview.svg` | Game/LLM systems dashboard with CLI, API, and runtime state panels |
+| `paqr` | `paqr-overview.svg` | Packaging pipeline with dataset ingestion, validation, and publish steps |
+
+### Optional tools visuals
+
+These do not gate launch; the archive is fine without them.
+
+| Tool slug | File name | Suggested visual |
+| --- | --- | --- |
+| `tmux-popups` | `tmux-popups-tool.svg` | Terminal popup layout, quick commands, and tmux pane framing |
+| `super-productivity-mcp` | `super-productivity-mcp-tool.svg` | Productivity bridge diagram with task sync and MCP connector nodes |
+| `ocq` | `ocq-tool.svg` | Command/query flow for OpenCode automation and review prompts |
+| `patrickfanella-co` | `patrickfanella-co-tool.svg` | Portfolio system map showing routes, content, and build pipeline |
+| `artemis` | `artemis-tool.svg` | Automation agent dashboard with triggers, jobs, and execution lanes |
+| `discord-spywatcher` | `discord-spywatcher-tool.svg` | Moderation/analytics monitor with event stream and alert summaries |
+| `vod-tender` | `vod-tender-tool.svg` | Twitch video service diagram with ingest, transcode, and delivery stages |
 
 ---
 
@@ -199,4 +236,5 @@ assets-delivery/
 - If the team decides to use raster social cards, update metadata/image paths in:
   - `web/index.html`
   - `web/src/components/Seo.tsx`
-- If adding media for `galdr`, `cutroom`, and `subcults`, update `db/seed/portfolio.json` to include those `media` entries.
+- If adding media for `galdr`, `cutroom`, `subcults`, `llama-line`, `open-pilot`, `edda`, or `paqr`, update `db/seed/portfolio.json` to include those `media` entries.
+- Optional tool visuals can be added later without changing the tools archive contract.

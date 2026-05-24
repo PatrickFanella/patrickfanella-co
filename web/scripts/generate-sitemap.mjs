@@ -34,7 +34,16 @@ async function resolveSiteUrl() {
 async function main() {
 	const siteUrl = await resolveSiteUrl()
 	const portfolio = JSON.parse(await readFile(seedPath, 'utf8'))
-	const routes = ['/', '/projects', '/contact', ...portfolio.projects.map((project) => `/projects/${project.slug}`)]
+	const routes = [
+		'/',
+		'/projects',
+		'/tools',
+		'/resume',
+		'/contact',
+		...portfolio.projects
+			.filter((project) => (project.kind || 'case-study') === 'case-study')
+			.map((project) => `/projects/${project.slug}`),
+	]
 	const uniqueRoutes = [...new Set(routes)]
 
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${uniqueRoutes

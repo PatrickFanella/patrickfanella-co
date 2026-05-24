@@ -3,13 +3,14 @@ import type { ContactSubmissionResponse, Project } from '../lib/api'
 export const featuredProject: Project = {
 	slug: 'clpr',
 	title: 'Clpr',
+	kind: 'case-study',
 	summary: 'Full-stack Twitch clip curation platform with community voting, hybrid search, and a React Native mobile app, live in production at clpr.tv.',
 	description: 'Clpr started as a way to surface the best Twitch clips without relying on platform algorithms.',
 	role: 'Full-stack engineer',
 	year: 2025,
 	stack: ['Go', 'React', 'React Native', 'PostgreSQL', 'Redis', 'OpenSearch', 'Kubernetes', 'TypeScript'],
 	featured: true,
-	repoUrl: 'https://github.com/subculture-collective/clpr',
+	repoUrl: 'https://git.subcult.tv/subculture-collective/clpr',
 	liveUrl: 'https://clpr.tv',
 	highlights: [
 		'Shipped a production web and mobile client with community voting, collections, and hybrid BM25 + semantic vector search.',
@@ -36,13 +37,14 @@ export const featuredProject: Project = {
 export const archivedProject: Project = {
 	slug: 'internet-id',
 	title: 'Internet-ID',
+	kind: 'case-study',
 	summary: 'Content provenance system anchoring creator ownership on-chain via Solidity smart contracts, IPFS storage, and a browser extension for one-click verification.',
 	description: 'Content authenticity is collapsing in the AI era.',
 	role: 'Full-stack engineer',
 	year: 2025,
 	stack: ['Solidity', 'Next.js', 'TypeScript', 'IPFS', 'Express', 'PostgreSQL', 'Browser Extension', 'Web3'],
 	featured: false,
-	repoUrl: 'https://github.com/subculture-collective/internet-id',
+	repoUrl: 'https://git.subcult.tv/subculture-collective/internet-id',
 	highlights: [
 		'Designed a content provenance pipeline: hash content, sign a manifest, pin to IPFS, and register the claim on-chain through a Solidity smart contract on L2.',
 		'Built a cross-browser extension (Chrome, Firefox, Safari) for one-click ownership verification directly on YouTube and Twitter pages.',
@@ -59,7 +61,26 @@ export const archivedProject: Project = {
 	],
 }
 
-export const projectsFixture: Project[] = [featuredProject, archivedProject]
+export const toolProject: Project = {
+	slug: 'tmux-popups',
+	title: 'tmux-popups',
+	kind: 'tool',
+	summary: 'Developer utility for opening tmux popup panes quickly, keeping terminal side quests and scratch workflows out of the main window.',
+	description: 'A small tmux helper for launching popup panes for quick commands, notes, and short-lived shell tasks.',
+	role: 'Developer tool',
+	year: 2026,
+	stack: ['Shell', 'tmux', 'CLI', 'Automation'],
+	featured: false,
+	repoUrl: 'https://git.subcult.tv/PatrickFanella/tmux-popups',
+	highlights: [
+		'Wrapped common tmux popup workflows into a tiny helper so transient shell tasks stay lightweight and predictable.',
+	],
+	architecture: [],
+	lessons: [],
+	media: [],
+}
+
+export const projectsFixture: Project[] = [featuredProject, archivedProject, toolProject]
 
 export const contactSubmissionFixture: ContactSubmissionResponse = {
 	message: 'Thanks. Your note has been saved.',

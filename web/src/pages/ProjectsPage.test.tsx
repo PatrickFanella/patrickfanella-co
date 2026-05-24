@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
-import { projectsFixture } from '../test/fixtures'
+import { projectsFixture, toolProject } from '../test/fixtures'
 import { renderInRouter } from '../test/renderWithRouter'
 import { ProjectsPage } from './ProjectsPage'
 
@@ -16,13 +16,15 @@ describe('ProjectsPage', () => {
 		expect(screen.getByRole('status')).toHaveTextContent(/loading project index/i)
 	})
 
-	it('renders all projects in a single list', async () => {
+	it('renders only case studies in a single list', async () => {
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
 		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: 'Internet-ID' })).toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
+		expect(screen.getByText(/showing 2 of 2 case studies/i)).toBeInTheDocument()
 	})
 
 	it('filters projects by tag', async () => {
@@ -43,7 +45,7 @@ describe('ProjectsPage', () => {
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: /the archive is empty/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: /the case study archive is empty/i })).toBeInTheDocument()
 	})
 
 	it('renders an error state when the project index request fails', async () => {

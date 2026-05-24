@@ -13,6 +13,8 @@ const seedPath = path.join(repoRoot, 'db', 'seed', 'portfolio.json')
 const siteName = 'Patrick Fanella'
 const defaultDescription =
   'Project-first portfolio for Patrick Fanella covering Go APIs, React interfaces, PostgreSQL, AI pipelines, and production systems.'
+const toolsDescription = 'Compact index of public developer tools, services, CLIs, and automation utilities on Gitea.'
+const resumeDescription = "View or download Patrick Fanella's resume: full-stack engineer specializing in Go, React, PostgreSQL, and production systems."
 const fallbackImagePath = '/assets/projects/project-fallback.svg'
 
 function readEnvValue(source, key) {
@@ -151,7 +153,7 @@ function getHomePageDefinition(siteUrl, assetTags) {
             'Infrastructure / DevOps',
           ],
           name: siteName,
-          sameAs: ['https://github.com/PatrickFanella'],
+          sameAs: ['https://github.com/PatrickFanella', 'https://git.subcult.tv/PatrickFanella'],
           url: siteUrl,
         },
       ],
@@ -175,6 +177,36 @@ function getProjectsPageDefinition(siteUrl, assetTags) {
   }
 }
 
+function getToolsPageDefinition(siteUrl, assetTags) {
+  const canonicalUrl = `${siteUrl}/tools`
+  return {
+    html: createHtmlDocument({
+      assetTags,
+      canonicalUrl,
+      description: toolsDescription,
+      imageUrl: toAbsoluteUrl(siteUrl, fallbackImagePath),
+      title: `Tools | ${siteName}`,
+      url: canonicalUrl,
+    }),
+    outputPath: path.join(distDir, 'tools', 'index.html'),
+  }
+}
+
+function getResumePageDefinition(siteUrl, assetTags) {
+  const canonicalUrl = `${siteUrl}/resume`
+  return {
+    html: createHtmlDocument({
+      assetTags,
+      canonicalUrl,
+      description: resumeDescription,
+      imageUrl: toAbsoluteUrl(siteUrl, fallbackImagePath),
+      title: `Resume | ${siteName}`,
+      url: canonicalUrl,
+    }),
+    outputPath: path.join(distDir, 'resume', 'index.html'),
+  }
+}
+
 function getContactPageDefinition(siteUrl, assetTags) {
   const canonicalUrl = `${siteUrl}/contact`
   return {
@@ -194,6 +226,7 @@ function getProjectPageDefinition(siteUrl, assetTags, project) {
   const canonicalUrl = `${siteUrl}/projects/${project.slug}`
   const imagePath = project.media?.[0]?.src || fallbackImagePath
   const imageAlt = project.media?.[0]?.alt || `${project.title} supporting visual`
+  const keywordsSource = ensureArray(project.stack).length > 0 ? ensureArray(project.stack) : ensureArray(project.tags)
 
   return {
     html: createHtmlDocument({
@@ -216,7 +249,7 @@ function getProjectPageDefinition(siteUrl, assetTags, project) {
           description: project.summary,
           headline: project.title,
           image: imagePath ? [toAbsoluteUrl(siteUrl, imagePath)] : undefined,
-          keywords: ensureArray(project.tags).join(', '),
+          keywords: keywordsSource.join(', '),
           name: project.title,
           url: canonicalUrl,
         },
@@ -253,9 +286,13 @@ async function main() {
   const pages = [
     getHomePageDefinition(siteUrl, assetTags),
     getProjectsPageDefinition(siteUrl, assetTags),
+    getToolsPageDefinition(siteUrl, assetTags),
+    getResumePageDefinition(siteUrl, assetTags),
     getContactPageDefinition(siteUrl, assetTags),
     getNotFoundPageDefinition(assetTags),
-    ...portfolio.projects.map((project) => getProjectPageDefinition(siteUrl, assetTags, project)),
+    ...portfolio.projects
+      .filter((project) => (project.kind || 'case-study') === 'case-study')
+      .map((project) => getProjectPageDefinition(siteUrl, assetTags, project)),
   ]
 
   await Promise.all(pages.map(writePage))

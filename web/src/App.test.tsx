@@ -47,6 +47,18 @@ describe('App navigation flows', () => {
 		})
 	})
 
+	it('navigates from the home page to the tools archive', async () => {
+		const user = userEvent.setup()
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
+
+		renderApp('/')
+
+		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
+		await user.click(screen.getByRole('link', { name: /^tools$/i }))
+
+		expect(await screen.findByRole('heading', { name: /tools/i })).toBeInTheDocument()
+	})
+
 	it('navigates from the projects archive to a project detail route', async () => {
 		const user = userEvent.setup()
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
