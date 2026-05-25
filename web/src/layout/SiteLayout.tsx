@@ -35,7 +35,7 @@ export function SiteLayout() {
       </a>
 
       <div className="mx-auto flex min-h-screen max-w-350 flex-col border-x-2 border-stroke bg-paper">
-        <header className="grid gap-6 border-b-2 border-stroke p-5 md:p-8 lg:grid-cols-[minmax(0,32rem)_minmax(1.5rem,1fr)_minmax(360px,26rem)] lg:items-start">
+        <header className="grid gap-6 border-b-2 border-stroke p-5 md:p-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,30rem)] lg:items-start xl:grid-cols-[minmax(0,1fr)_minmax(24rem,32rem)]">
           <div className="grid gap-4">
             <div className="flex flex-wrap items-center gap-3">
               <span aria-hidden="true" className="h-3 w-3 bg-accent-green" />
@@ -52,15 +52,15 @@ export function SiteLayout() {
             </div>
           </div>
 
-          <div className="grid gap-6 lg:col-start-3 lg:h-full lg:grid-rows-[auto_1fr_auto] lg:justify-items-end">
-            <div className="grid gap-2 border-2 border-stroke bg-surface p-4 shadow-brutal transition-all hover:shadow-brutal-green lg:w-full lg:max-w-[320px]">
+          <div className="grid min-w-0 gap-6 lg:h-full lg:grid-rows-[auto_1fr_auto] lg:justify-items-stretch">
+            <div className="grid gap-2 border-2 border-stroke bg-surface p-4 shadow-brutal transition-all hover:shadow-brutal-green lg:w-full">
               <p className={monoLabelClass}>Core stack</p>
               <p className="text-sm leading-relaxed text-ink-soft">
                 Go / React / PostgreSQL / Python / TypeScript. APIs, search, AI workflows, developer tooling, and product infrastructure.
               </p>
             </div>
 
-            <nav className="flex flex-wrap gap-3 lg:w-full lg:self-end lg:grid lg:grid-cols-5" aria-label="Primary navigation">
+            <nav className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:w-full lg:self-end lg:grid-cols-[repeat(auto-fit,minmax(6.5rem,1fr))]" aria-label="Primary navigation">
               {navigation.map((item) => (
                 <NavLink
                   key={item.to}
@@ -69,7 +69,7 @@ export function SiteLayout() {
                   className={({ isActive }) =>
                     [
                       navButtonClass,
-                      'lg:w-full',
+                      'w-full',
                       isActive
                         ? 'border-heading bg-heading text-paper shadow-brutal-green focus-visible:ring-accent-green'
                         : 'border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple hover:shadow-brutal-purple focus-visible:ring-accent-purple',
