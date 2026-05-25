@@ -19,7 +19,7 @@ export const compactButtonClass =
 
 /* Navigation button variant - combines base compact button with nav colors */
 export const navButtonClass =
-  'inline-flex min-w-0 cursor-pointer items-center justify-center whitespace-nowrap border-2 px-3 py-2.5 text-center text-[0.78rem] font-bold uppercase leading-none tracking-[0.04em] transition-all duration-150 ease-out hover:-translate-x-1 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none sm:px-4 sm:text-sm lg:px-3 lg:text-[0.78rem] xl:px-4 xl:text-sm'
+  'inline-flex min-w-0 cursor-pointer items-center justify-center whitespace-nowrap border-2 px-3 py-2.5 text-center text-[0.78rem] font-bold uppercase leading-none tracking-[0.04em] transition-all duration-150 ease-out hover:-translate-x-1 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none sm:px-4 sm:text-sm lg:px-2 lg:text-[0.72rem] lg:tracking-[0.02em] xl:px-3 xl:text-[0.78rem] xl:tracking-[0.04em] 2xl:px-4 2xl:text-sm'
 
 export const pageSectionClass = 'px-1 pt-12 pb-16'
 

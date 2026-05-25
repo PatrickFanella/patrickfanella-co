@@ -60,7 +60,7 @@ export function SiteLayout() {
               </p>
             </div>
 
-            <nav className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:w-full lg:self-end lg:grid-cols-[repeat(auto-fit,minmax(6.5rem,1fr))]" aria-label="Primary navigation">
+            <nav className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:w-full lg:self-end lg:grid-cols-5" aria-label="Primary navigation">
               {navigation.map((item) => (
                 <NavLink
                   key={item.to}
