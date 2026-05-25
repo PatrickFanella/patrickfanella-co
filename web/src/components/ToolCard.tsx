@@ -1,43 +1,44 @@
 import type { Project } from '../lib/api'
-import { monoLabelClass, surfaceCardClass, tagCompactClass, textLinkClass } from '../lib/styles'
+import { monoLabelClass, surfaceCardClass, textLinkClass } from '../lib/styles'
+import { StackCueList } from './StackCueList'
 
 type ToolCardProps = {
 	project: Project
+	density?: 'featured' | 'archive'
 }
 
-export function ToolCard({ project }: ToolCardProps) {
+
+export function ToolCard({ project, density = 'featured' }: ToolCardProps) {
+	const isArchive = density === 'archive'
+	const maxVisibleStack = isArchive ? 2 : 3
 	const cardContent = (
 		<>
-			<div className="grid gap-5 border-b-2 border-stroke pb-4">
+			<div className={`${isArchive ? 'gap-4' : 'gap-5'} grid border-b-2 border-stroke pb-4`}>
 				<div className="flex flex-wrap items-start justify-between gap-3">
-					<p className="border-2 border-stroke bg-panel px-3 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-accent-pink">
-						{project.role}
-					</p>
+					{!isArchive ? (
+						<p className="border-2 border-stroke bg-panel px-3 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-accent-pink">
+							{project.role}
+						</p>
+					) : null}
 					<p className="border-2 border-stroke bg-surface px-3 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-heading">
 						{project.year}
 					</p>
 				</div>
 
 				<div>
-					<h3 className="max-w-[16ch] font-display text-[2rem] font-bold leading-[0.92] tracking-[-0.05em] text-heading">
+					<h3 className={`${isArchive ? 'max-w-[18ch] text-[1.6rem]' : 'max-w-[16ch] text-[2rem]'} font-display font-bold leading-[0.92] tracking-[-0.05em] text-heading`}>
 						{project.title}
 					</h3>
-					<p className="mt-3 max-w-[42ch] text-[0.98rem] leading-relaxed text-ink-soft">
+					<p className={`${isArchive ? 'mt-2 text-[0.95rem]' : 'mt-3 text-[0.98rem]'} max-w-[42ch] leading-relaxed text-ink-soft`}>
 						{project.summary}
 					</p>
 				</div>
 			</div>
 
-			<ul className="mt-4 flex list-none flex-wrap gap-1.5 p-0" aria-label={`${project.title} technology stack`}>
-				{project.stack.slice(0, 8).map((item) => (
-					<li key={item} className={tagCompactClass}>
-						{item}
-					</li>
-				))}
-			</ul>
+			<StackCueList ariaLabel={`${project.title} technology stack`} className="mt-4" items={project.stack} maxVisible={maxVisibleStack} />
 
 			<div className="mt-4 flex flex-wrap items-center justify-between gap-4 border-t-2 border-stroke pt-4">
-				<p className={monoLabelClass}>Tool</p>
+				<p className={monoLabelClass}>{isArchive ? 'Repository' : 'Tool'}</p>
 				{project.repoUrl ? (
 					<span className={textLinkClass}>
 						Open {project.title} Repository ↗
@@ -51,7 +52,7 @@ export function ToolCard({ project }: ToolCardProps) {
 		return (
 			<a
 				aria-label={`Open ${project.title} repository`}
-				className={`${surfaceCardClass} group flex h-full flex-col justify-between p-6 hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}
+				className={`${surfaceCardClass} group flex h-full flex-col justify-between ${isArchive ? 'p-5' : 'p-6'} hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}
 				href={project.repoUrl}
 				rel="noreferrer"
 				target="_blank"
@@ -62,7 +63,7 @@ export function ToolCard({ project }: ToolCardProps) {
 	}
 
 	return (
-		<article className={`${surfaceCardClass} group flex h-full flex-col justify-between p-6 hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}>
+		<article className={`${surfaceCardClass} group flex h-full flex-col justify-between ${isArchive ? 'p-5' : 'p-6'} hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}>
 			{cardContent}
 		</article>
 	)

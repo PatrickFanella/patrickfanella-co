@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
@@ -14,30 +13,23 @@ describe('ProjectsPage', () => {
 		renderInRouter(<ProjectsPage />, '/projects')
 
 		expect(screen.getByRole('status')).toHaveTextContent(/loading project index/i)
+		expect(screen.getByText(/counts appear after the project index loads/i)).toBeInTheDocument()
+		expect(screen.queryByText(/0 featured/i)).not.toBeInTheDocument()
+		expect(screen.queryByText(/0 archive/i)).not.toBeInTheDocument()
 	})
 
-	it('renders only case studies in a single list', async () => {
+	it('renders featured and archive case study sections', async () => {
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: /featured case studies/i, level: 2 })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: /more case studies/i, level: 2 })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: 'Internet-ID' })).toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
-		expect(screen.getByText(/showing 2 of 2 case studies/i)).toBeInTheDocument()
-	})
-
-	it('filters projects by tag', async () => {
-		const user = userEvent.setup()
-		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
-
-		renderInRouter(<ProjectsPage />, '/projects')
-
-		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
-		await user.click(screen.getByRole('button', { name: 'IPFS' }))
-
-		expect(screen.getByRole('heading', { name: 'Internet-ID' })).toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: 'Clpr' })).not.toBeInTheDocument()
+		expect(screen.getByText(/featured first/i)).toBeInTheDocument()
+		expect(screen.getByText(/1 featured case study/i)).toBeInTheDocument()
 	})
 
 	it('renders an intentional empty-archive state when the API returns no projects', async () => {
@@ -56,5 +48,8 @@ describe('ProjectsPage', () => {
 		renderInRouter(<ProjectsPage />, '/projects')
 
 		expect(await screen.findByRole('alert')).toHaveTextContent(/unable to load portfolio data/i)
+		expect(screen.getByText(/counts appear after the project index loads/i)).toBeInTheDocument()
+		expect(screen.queryByText(/0 featured/i)).not.toBeInTheDocument()
+		expect(screen.queryByText(/0 archive/i)).not.toBeInTheDocument()
 	})
 })

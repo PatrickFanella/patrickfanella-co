@@ -1,12 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
 import { ProjectCard } from '../components/ProjectCard'
 import { RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
-import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage } from '../lib/errors'
 import {
-  compactButtonClass,
   monoLabelClass,
   pageIntroClass,
   pageSectionClass,
@@ -17,39 +15,46 @@ import {
 import { useProjects } from '../lib/useProjects'
 
 export function ProjectsPage() {
-  const [activeTag, setActiveTag] = useState<string | null>(null)
   const { projects, status, error, retry } = useProjects()
   const caseStudies = projects.filter((project) => project.kind === 'case-study')
-  const availableTags = useMemo(
-    () => [...new Set(caseStudies.flatMap((project) => project.stack))].sort((left, right) => left.localeCompare(right)),
+  const featuredCaseStudies = useMemo(() => caseStudies.filter((project) => project.featured), [caseStudies])
+  const archiveCaseStudies = useMemo(() => caseStudies.filter((project) => !project.featured), [caseStudies])
+  const featuredCountLabel = featuredCaseStudies.length === 1 ? 'featured case study' : 'featured case studies'
+  const archiveCountLabel = archiveCaseStudies.length === 1 ? 'more case study' : 'more case studies'
+  const projectsError = getErrorMessage(error, 'Please try again in a moment.')
+
+  const caseStudyEntries = useMemo(
+    () => caseStudies.map((project, index) => ({ order: index + 1, project })),
     [caseStudies],
   )
-  const visibleProjects = activeTag
-    ? caseStudies.filter((project) => project.stack.includes(activeTag))
-    : caseStudies
-  const projectsError = getErrorMessage(error, 'Please try again in a moment.')
-  const caseStudyNoun = caseStudies.length === 1 ? 'case study' : 'case studies'
+  const featuredEntries = caseStudyEntries.filter(({ project }) => project.featured)
+  const archiveEntries = caseStudyEntries.filter(({ project }) => !project.featured)
 
   return (
     <section className={`${pageSectionClass} pt-4`}>
       <Seo
-        description="Browse Patrick Fanella's production case studies by stack, problem domain, and shipped system design."
+        description="Browse Patrick Fanella's production case studies, led by featured work and followed by a compact archive."
         path="/projects"
         title="Projects"
       />
       <div className="mb-10 grid gap-8 border-b-2 border-stroke pb-12 md:grid-cols-[minmax(0,1.5fr)_minmax(320px,0.85fr)] md:items-start">
         <div>
-          <SectionLabel>Project Archive</SectionLabel>
           <h1 className={`${pageTitleClass} mt-6 uppercase`}>Projects</h1>
           <p className={pageIntroClass}>
-            Each project below is a production case study: built, deployed, and documented. Filter by stack, then open any case study for the architecture decisions, trade-offs, and lessons behind the build.
+            Each project below is a production case study: built, deployed, and documented. Start with the featured work, then browse the compact archive for the rest.
           </p>
         </div>
 
         <aside className={`${surfaceCardClass} h-fit bg-panel p-8`} aria-label="Reading protocol">
-          <p className={monoLabelClass}>Filter by</p>
+          <p className={monoLabelClass}>Featured first</p>
           <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">
-            Explore projects by language, framework, or problem domain. Each card links to the full case study.
+            {status === 'success' && caseStudies.length > 0 ? (
+              <>
+                {featuredCaseStudies.length} {featuredCountLabel} and {archiveCaseStudies.length} {archiveCountLabel} are available. Each card links to the full case study.
+              </>
+            ) : (
+              <>Counts appear after the project index loads. Each card links to the full case study.</>
+            )}
           </p>
         </aside>
       </div>
@@ -110,89 +115,43 @@ export function ProjectsPage() {
 
       {status === 'success' && caseStudies.length > 0 ? (
         <div className="grid gap-14">
-          <section className={`${surfaceCardClass} grid gap-5 bg-panel p-6`} aria-label="Project filters">
-            <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          {featuredEntries.length > 0 ? (
+            <section className="grid gap-5" aria-labelledby="featured-case-studies-heading">
               <div>
-                <p className={monoLabelClass}>Filters</p>
+                <h2 id="featured-case-studies-heading" className={monoLabelClass}>
+                  Featured Case Studies
+                </h2>
                 <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
-                  Showing {visibleProjects.length} of {caseStudies.length} {caseStudyNoun}
-                  {activeTag ? ` for ${activeTag}.` : '.'}
+                  {featuredEntries.length} curated case study{featuredEntries.length === 1 ? '' : 's'} leading the archive.
                 </p>
               </div>
-              {activeTag ? (
-                <button
-                  className={[
-                    compactButtonClass,
-                    'text-[0.72rem] font-mono border-stroke bg-surface text-heading hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-purple hover:text-accent-purple hover:shadow-brutal-purple focus-visible:ring-accent-purple',
-                  ].join(' ')}
-                  onClick={() => setActiveTag(null)}
-                  type="button"
-                >
-                  Clear Filter
-                </button>
-              ) : null}
-            </div>
 
-            <div className="flex flex-wrap gap-3">
-              <button
-                aria-pressed={activeTag === null}
-                className={[
-                  compactButtonClass,
-                  'text-[0.72rem] font-mono',
-                  activeTag === null
-                    ? 'border-accent-green bg-accent-green text-paper'
-                    : 'border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple focus-visible:ring-accent-purple',
-                ].join(' ')}
-                onClick={() => setActiveTag(null)}
-                type="button"
-              >
-                All
-              </button>
-              {availableTags.map((tag) => (
-                <button
-                  key={tag}
-                  aria-pressed={activeTag === tag}
-                  className={[
-                    compactButtonClass,
-                    'text-[0.72rem] font-mono',
-                    activeTag === tag
-                      ? 'border-accent-green bg-accent-green text-paper'
-                      : 'border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple focus-visible:ring-accent-purple',
-                  ].join(' ')}
-                  onClick={() => setActiveTag(tag)}
-                  type="button"
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </section>
+              <div className="grid gap-6 md:grid-cols-2">
+                {featuredEntries.map(({ order, project }) => (
+                  <ProjectCard key={project.slug} order={order} project={project} />
+                ))}
+              </div>
+            </section>
+          ) : null}
 
-          {visibleProjects.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {visibleProjects.map((project, index) => (
-                <ProjectCard key={project.slug} order={index + 1} project={project} />
-              ))}
-            </div>
-          ) : (
-            <RouteState
-              actions={(
-                <button
-                  className={[
-                    compactButtonClass,
-                    'text-[0.72rem] font-mono border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple focus-visible:ring-accent-purple',
-                  ].join(' ')}
-                  onClick={() => setActiveTag(null)}
-                  type="button"
-                >
-                  Clear Filter
-                </button>
-              )}
-              description={`No case studies match the ${activeTag} filter. Try another tag or clear the filter.`}
-              label="No matches"
-              title="That filter came up empty."
-            />
-          )}
+          {archiveEntries.length > 0 ? (
+            <section className="grid gap-5" aria-labelledby="more-case-studies-heading">
+              <div>
+                <h2 id="more-case-studies-heading" className={monoLabelClass}>
+                  More Case Studies
+                </h2>
+                <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
+                  {archiveEntries.length} additional case study{archiveEntries.length === 1 ? '' : 's'} in a compact archive.
+                </p>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {archiveEntries.map(({ order, project }) => (
+                  <ProjectCard key={project.slug} density="archive" order={order} project={project} />
+                ))}
+              </div>
+            </section>
+          ) : null}
         </div>
       ) : null}
     </section>

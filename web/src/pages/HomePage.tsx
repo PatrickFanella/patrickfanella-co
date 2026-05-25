@@ -332,10 +332,10 @@ export function HomePage() {
           <div className="grid gap-4 border-2 border-stroke bg-surface p-6">
             <p className={monoLabelClass}>What's inside</p>
             <p className="max-w-120 text-[1.05rem] leading-relaxed text-ink-soft">
-              Each case study covers what shipped, how it was built, and the engineering trade-offs that drove the final architecture.
+              Start with focused case studies, then browse the quieter archive when you want breadth.
             </p>
             <Link className={textLinkClass} to="/projects">
-              Browse All Projects ↗
+              Browse the archive ↗
             </Link>
             {status === 'success' ? (
               <p className="text-sm leading-relaxed text-ink-soft">

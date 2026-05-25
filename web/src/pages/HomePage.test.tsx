@@ -21,9 +21,11 @@ describe('HomePage', () => {
 		renderInRouter(<HomePage />)
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
+		expect(screen.getByText(/start with focused case studies/i)).toBeInTheDocument()
 		expect(document.title).toBe('Patrick Fanella | Full Stack Developer')
 		expect(screen.queryByRole('heading', { name: 'Internet-ID' })).not.toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
+		expect(screen.getByRole('link', { name: /browse the archive/i })).toHaveAttribute('href', '/projects')
 		expect(screen.getByRole('link', { name: /browse developer tools/i })).toHaveAttribute('href', '/tools')
 	})
 
