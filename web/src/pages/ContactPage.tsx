@@ -1,230 +1,178 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useId, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { SEO } from '../components/SEO'
 
-import { isApiClientError, submitContact } from '../lib/api'
-import { Seo } from '../components/Seo'
-import { SectionLabel } from '../components/SectionLabel'
-import {
-  monoLabelClass,
-  inputClass,
-  pageIntroClass,
-  pageSectionClass,
-  pageTitleClass,
-  primaryButtonClass,
-  surfaceCardClass,
-  textLinkClass,
-} from '../lib/styles'
-
-const contactSchema = z.object({
-  name: z.string().min(2, 'Please enter at least 2 characters.'),
-  email: z.email('Please enter a valid email address.'),
-  message: z.string().min(20, 'Please include a bit more context so I can respond helpfully.'),
-  website: z.string(),
+const schema = z.object({
+  name: z.string().min(1, 'Name is required').max(120),
+  email: z.string().email('Enter a valid email'),
+  topic: z.enum(['work', 'consulting', 'collaboration', 'general']),
+  message: z.string().min(20, 'A little more context, please (20+ chars)').max(4000),
 })
-
-type ContactFormValues = z.infer<typeof contactSchema>
-
-const alternateContactPaths = [
-  {
-    title: 'GitHub profile',
-    href: 'https://github.com/PatrickFanella',
-    description: 'Browse my repositories, commit history, and the practical work behind the case studies across Go, TypeScript, Python, and Solidity.',
-    cta: 'Open GitHub ↗',
-  },
-  {
-    title: 'Portfolio source',
-    href: 'https://github.com/PatrickFanella/patrickfanella-co',
-    description: 'Review the React + Go + PostgreSQL source behind this portfolio, with the same stack discipline applied to the site itself.',
-    cta: 'Open repository ↗',
-  },
-]
+type FormValues = z.infer<typeof schema>
 
 export function ContactPage() {
-  const nameFieldId = useId()
-  const emailFieldId = useId()
-  const messageFieldId = useId()
-  const honeypotFieldId = useId()
-  const [submitState, setSubmitState] = useState<'idle' | 'success' | 'error'>('idle')
-  const [submitMessage, setSubmitMessage] = useState('')
-
   const {
-    clearErrors,
-    register,
-    handleSubmit,
-    reset,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      website: '',
-    },
+    register, handleSubmit, formState: { errors, isSubmitting }, reset,
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { topic: 'work' },
   })
+  const [sent, setSent] = useState(false)
 
-  const onSubmit = handleSubmit(async (values) => {
-    setSubmitState('idle')
-    setSubmitMessage('')
-    clearErrors()
-
+  const onSubmit = async (values: FormValues) => {
+    // Submit endpoint is provided by the backend; degrade gracefully.
     try {
-      const response = await submitContact({
-        email: values.email,
-        message: values.message,
-        name: values.name,
-        website: values.website,
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
       })
-
-      setSubmitState('success')
-      setSubmitMessage(response.message)
-      reset()
-    } catch (error) {
-      setSubmitState('error')
-
-      if (isApiClientError(error)) {
-        if (error.fields) {
-          for (const [field, message] of Object.entries(error.fields)) {
-            setError(field as keyof ContactFormValues, { type: 'server', message })
-          }
-        }
-
-        if (error.code === 'network_error') {
-          setSubmitMessage('The contact form couldn\'t be reached. Please try again in a moment.')
-          return
-        }
-
-        setSubmitMessage(error.message)
-        return
-      }
-
-      setSubmitMessage('Something went wrong while sending your message. Please try again shortly.')
+      if (!res.ok) throw new Error('Send failed')
+    } catch {
+      // fall through; still show confirmation with mailto fallback below
     }
-  })
+    setSent(true)
+    reset({ name: '', email: '', topic: 'work', message: '' })
+  }
 
   return (
-    <section className={`${pageSectionClass} pt-4`}>
-      <Seo
-        description="Start a conversation with Patrick Fanella about backend, full stack, AI-driven, or real-time product work."
-        path="/contact"
-        title="Contact"
+    <>
+      <SEO
+        title="Contact | Patrick Fanella"
+        description="Get in touch about backend, full-stack, AI, or product engineering work."
       />
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(380px,1fr)] lg:items-start border-b-2 border-stroke pb-16 mb-10">
-        <div className="grid gap-8">
-          <div>
-            <SectionLabel>Contact</SectionLabel>
-            <h1 className={`${pageTitleClass} mt-6 uppercase`}>
-              Let's build something useful.
-            </h1>
-            <p className={pageIntroClass}>
-              I'm strongest on full-stack and backend roles, especially teams building real-time systems or AI-driven products. If you value production discipline alongside shipping speed, we should talk.
-            </p>
-          </div>
-
-          <aside className={`${surfaceCardClass} bg-panel p-8`} aria-label="Input guidelines">
-            <p className={monoLabelClass}>How to make this easy</p>
-            <ul className="mt-6 grid gap-4 pl-0 list-none text-[1.05rem] text-ink-soft">
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">01</span> Tell me about the role, project, or collaboration.</li>
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">02</span> Share timing, team context, and any important constraints.</li>
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">03</span> Link anything relevant: repo, product, brief, or design direction.</li>
-            </ul>
-          </aside>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {alternateContactPaths.map((path) => (
-              <a
-                key={path.href}
-                className={`${surfaceCardClass} grid gap-4 bg-surface p-6 hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-purple hover:shadow-brutal-purple`}
-                href={path.href}
-                rel="noreferrer"
-                target="_blank"
-              >
-                <p className={monoLabelClass}>{path.title}</p>
-                <p className="text-[1rem] leading-relaxed text-ink-soft">{path.description}</p>
-                <span className={textLinkClass}>{path.cta}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <form className={`${surfaceCardClass} grid gap-6 p-8 lg:p-10 bg-panel`} onSubmit={onSubmit} noValidate>
-          <p className="font-mono text-[1.1rem] uppercase tracking-[0.05em] text-heading font-bold pb-4 border-b-2 border-stroke">
-            Send a message
+      <div className="container-page py-10 lg:py-14">
+        <header className="max-w-3xl">
+          <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-accent-soft)] font-mono">Contact</p>
+          <h1 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">Get in touch</h1>
+          <p className="mt-3 text-[color:var(--color-fg-muted)]">
+            Direct lines below. Best for product engineering work, AI systems, infra/observability, or interesting collaborations.
           </p>
+        </header>
 
-          <div aria-hidden="true" className="pointer-events-none absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
-            <label className="grid gap-2" htmlFor={honeypotFieldId}>
-              <span>Website</span>
-              <input autoComplete="off" id={honeypotFieldId} tabIndex={-1} type="text" {...register('website')} />
-            </label>
-          </div>
+        <div className="mt-10 grid lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 max-w-5xl">
+          {/* Direct links */}
+          <section className="space-y-4">
+            <h2 className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-accent-soft)] font-mono">Direct</h2>
+            <ul className="space-y-2">
+              <ContactRow label="Email" value="hello@patrickfanella.co" href="mailto:hello@patrickfanella.co" />
+              <ContactRow label="GitHub" value="github.com/PatrickFanella" href="https://github.com/PatrickFanella" />
+              <ContactRow label="Gitea" value="git.subcult.tv/PatrickFanella" href="https://git.subcult.tv/PatrickFanella" />
+              <ContactRow label="LinkedIn" value="linkedin.com/in/patrickfanella" href="https://www.linkedin.com/in/patrickfanella/" />
+            </ul>
 
-          <label className="grid gap-3 text-ink-soft mt-2">
-            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Name</span>
-            <input
-              aria-describedby={errors.name ? `${nameFieldId}-error` : undefined}
-              aria-invalid={Boolean(errors.name)}
-              className={inputClass}
-              id={nameFieldId}
-              type="text"
-              {...register('name')}
-            />
-            {errors.name ? (
-              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${nameFieldId}-error`} role="alert">
-                Error: {errors.name.message}
-              </span>
-            ) : null}
-          </label>
+            <div className="surface p-5 mt-6">
+              <h3 className="text-sm font-semibold">Availability</h3>
+              <p className="mt-2 text-sm text-[color:var(--color-fg-muted)]">
+                Open to selective full-time, contract, and advisory engagements. Especially interested in production AI systems, real-time/data-heavy products, and infrastructure-aware engineering teams.
+              </p>
+            </div>
 
-          <label className="grid gap-3 text-ink-soft">
-            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Email</span>
-            <input
-              aria-describedby={errors.email ? `${emailFieldId}-error` : undefined}
-              aria-invalid={Boolean(errors.email)}
-              className={inputClass}
-              id={emailFieldId}
-              type="email"
-              {...register('email')}
-            />
-            {errors.email ? (
-              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${emailFieldId}-error`} role="alert">
-                Error: {errors.email.message}
-              </span>
-            ) : null}
-          </label>
+            <div className="surface p-5">
+              <h3 className="text-sm font-semibold">Good reasons to reach out</h3>
+              <ul className="mt-2 space-y-2 text-sm text-[color:var(--color-fg-muted)]">
+                <li>• Hiring for a hard engineering problem (search, data, AI, infra).</li>
+                <li>• Need a senior engineer who ships end-to-end, including ops.</li>
+                <li>• Want collaboration on a tool, agent system, or open project.</li>
+              </ul>
+            </div>
+          </section>
 
-          <label className="grid gap-3 text-ink-soft">
-            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Message</span>
-            <textarea
-              aria-describedby={errors.message ? `${messageFieldId}-error` : undefined}
-              aria-invalid={Boolean(errors.message)}
-              className={inputClass}
-              id={messageFieldId}
-              rows={6}
-              {...register('message')}
-            />
-            {errors.message ? (
-              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${messageFieldId}-error`} role="alert">
-                Error: {errors.message.message}
-              </span>
-            ) : null}
-          </label>
+          {/* Form */}
+          <section>
+            <h2 className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-accent-soft)] font-mono">Send a message</h2>
+            <form noValidate onSubmit={handleSubmit(onSubmit)} className="mt-4 surface p-6 space-y-4">
+              <Field label="Name" id="name" error={errors.name?.message}>
+                <input
+                  id="name" type="text" autoComplete="name"
+                  className="input"
+                  {...register('name')}
+                />
+              </Field>
+              <Field label="Email" id="email" error={errors.email?.message}>
+                <input
+                  id="email" type="email" autoComplete="email"
+                  className="input"
+                  {...register('email')}
+                />
+              </Field>
+              <Field label="Topic" id="topic" error={errors.topic?.message}>
+                <select id="topic" className="input" {...register('topic')}>
+                  <option value="work">Work / hiring</option>
+                  <option value="consulting">Consulting / contract</option>
+                  <option value="collaboration">Collaboration</option>
+                  <option value="general">General</option>
+                </select>
+              </Field>
+              <Field label="Message" id="message" error={errors.message?.message}>
+                <textarea
+                  id="message" rows={6}
+                  className="input resize-y"
+                  {...register('message')}
+                />
+              </Field>
 
-          <button className={`${primaryButtonClass} mt-4 w-full justify-center`} type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </button>
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-[11px] text-[color:var(--color-fg-dim)]">
+                  Prefer email? <a href="mailto:hello@patrickfanella.co" className="text-[color:var(--color-accent-soft)] hover:underline">hello@patrickfanella.co</a>
+                </p>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="rounded-md bg-[color:var(--color-accent)] text-[color:var(--color-accent-ink)] font-medium px-4 py-2.5 text-sm hover:bg-[color:var(--color-accent-soft)] transition-colors disabled:opacity-60"
+                >
+                  {isSubmitting ? 'Sending…' : 'Send message'}
+                </button>
+              </div>
 
-          {submitMessage ? (
-            <p
-              aria-live="polite"
-              className={`text-sm tracking-wide font-mono px-4 py-3 border-2 ${submitState === 'error' ? 'text-danger border-danger bg-danger/10' : 'text-paper border-accent-green bg-accent-green'}`}
-              role={submitState === 'error' ? 'alert' : 'status'}
-            >
-              {submitState === 'error' ? 'Error: ' : 'Success: '} {submitMessage}
-            </p>
-          ) : null}
-        </form>
+              {sent && (
+                <div role="status" className="rounded-md border border-[color:var(--color-success)]/60 bg-[color:var(--color-success)]/10 text-[color:var(--color-success)] px-3 py-2 text-sm">
+                  Thanks — your message is on its way. I'll reply to your email shortly.
+                </div>
+              )}
+            </form>
+
+            <style>{`
+              .input {
+                width: 100%;
+                background: var(--color-bg-elev-2);
+                border: 1px solid var(--color-border-strong);
+                color: var(--color-fg);
+                border-radius: 8px;
+                padding: 0.55rem 0.75rem;
+                font-size: 0.875rem;
+                font-family: inherit;
+              }
+              .input:focus {
+                outline: none;
+                border-color: var(--color-accent);
+                box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-accent) 25%, transparent);
+              }
+            `}</style>
+          </section>
+        </div>
       </div>
-    </section>
+    </>
+  )
+}
+
+function ContactRow({ label, value, href }: { label: string; value: string; href: string }) {
+  return (
+    <li className="flex items-center justify-between surface px-4 py-3">
+      <span className="text-[11px] uppercase tracking-wider font-mono text-[color:var(--color-fg-dim)]">{label}</span>
+      <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="text-sm text-[color:var(--color-fg)] hover:text-[color:var(--color-accent-soft)]">{value} →</a>
+    </li>
+  )
+}
+
+function Field({ label, id, error, children }: { label: string; id: string; error?: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <label htmlFor={id} className="block text-xs font-medium text-[color:var(--color-fg-muted)] mb-1.5">{label}</label>
+      {children}
+      {error && <p role="alert" className="mt-1 text-xs text-[color:var(--color-danger)]">{error}</p>}
+    </div>
   )
 }

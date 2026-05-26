@@ -1,153 +1,58 @@
-import { useMemo } from 'react'
-
-import { RouteState } from '../components/RouteState'
-import { Seo } from '../components/Seo'
-import { ToolCard } from '../components/ToolCard'
-import { getErrorMessage } from '../lib/errors'
-import {
-  monoLabelClass,
-  pageIntroClass,
-  pageSectionClass,
-  pageTitleClass,
-  secondaryButtonClass,
-  surfaceCardClass,
-} from '../lib/styles'
-import { useProjects } from '../lib/useProjects'
+import { Link } from 'react-router-dom'
+import { SEO } from '../components/SEO'
+import { toolProjects } from '../data/portfolio'
+import { statusBadges } from '../lib/project-utils'
 
 export function ToolsPage() {
-  const { projects, status, error, retry } = useProjects()
-  const tools = projects.filter((project) => project.kind === 'tool')
-  const featuredTools = useMemo(() => {
-    const explicitFeaturedTools = tools.filter((project) => project.featured)
-
-    return explicitFeaturedTools.length > 0 ? explicitFeaturedTools : tools.slice(0, 3)
-  }, [tools])
-  const featuredToolSlugs = new Set(featuredTools.map((project) => project.slug))
-  const archiveTools = tools.filter((project) => !featuredToolSlugs.has(project.slug))
-  const featuredCountLabel = featuredTools.length === 1 ? 'featured tool' : 'featured tools'
-  const archiveCountLabel = archiveTools.length === 1 ? 'source archive entry' : 'source archive entries'
-  const toolsError = getErrorMessage(error, 'Please try again in a moment.')
-
   return (
-    <section className={`${pageSectionClass} pt-4`}>
-      <Seo
-        description="Browse Patrick Fanella's public tools, led by featured repos and followed by a compact source archive."
-        path="/tools"
-        title="Tools"
+    <>
+      <SEO
+        title="Tools | Patrick Fanella"
+        description="CLI tools, plugins, MCP servers, and infra utilities."
       />
-      <div className="mb-10 grid gap-8 border-b-2 border-stroke pb-12 md:grid-cols-[minmax(0,1.5fr)_minmax(320px,0.85fr)] md:items-start">
-        <div>
-          <h1 className={`${pageTitleClass} mt-6 uppercase`}>Tools</h1>
-          <p className={pageIntroClass}>
-            Compact public utilities, services, CLIs, and automation helpers live here. Start with featured repos, then browse the source archive.
+      <div className="container-page py-10 lg:py-14">
+        <header className="max-w-3xl">
+          <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-accent-soft)] font-mono">Utilities</p>
+          <h1 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">Tools</h1>
+          <p className="mt-3 text-[color:var(--color-fg-muted)]">
+            Small utilities: CLIs, plugins, MCP servers, and infra helpers. Evaluated differently from full products — these are sharp, focused pieces.
           </p>
-        </div>
+        </header>
 
-        <aside className={`${surfaceCardClass} h-fit bg-panel p-8`} aria-label="Reading protocol">
-          <p className={monoLabelClass}>Featured first</p>
-          <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">
-            {status === 'success' && tools.length > 0 ? (
-              <>
-                {featuredTools.length} {featuredCountLabel} and {archiveTools.length} {archiveCountLabel} are available. Each card links directly to the repository.
-              </>
-            ) : (
-              <>Counts appear after the tool index loads. Each card links directly to the repository.</>
-            )}
-          </p>
-        </aside>
-      </div>
-
-      {status === 'loading' ? (
-        <div className="grid gap-6">
-          <RouteState
-            ariaLive="polite"
-            description="Loading tool index."
-            label="Loading"
-            role="status"
-            title="Tool index incoming."
-          />
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3" aria-hidden="true">
-            {[0, 1, 2].map((index) => (
-              <article key={index} className={`${surfaceCardClass} p-6`}>
-                <div className="grid gap-5 border-b-2 border-stroke pb-5">
-                  <div className="h-7 w-28 border-2 border-stroke bg-panel" />
-                  <div className="grid gap-3">
-                    <div className="h-12 w-2/3 border-2 border-stroke bg-panel" />
-                    <div className="h-5 w-full border-2 border-stroke bg-panel" />
-                    <div className="h-5 w-4/5 border-2 border-stroke bg-panel" />
-                  </div>
-                </div>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {[0, 1, 2].map((tag) => (
-                    <span key={tag} className="h-7 w-20 border-2 border-stroke bg-panel" />
-                  ))}
-                </div>
-              </article>
-            ))}
+        {toolProjects.length === 0 ? (
+          <div className="mt-12 surface p-12 text-center text-[color:var(--color-fg-muted)]">
+            No public tools yet.
           </div>
-        </div>
-      ) : null}
-
-      {status === 'error' ? (
-        <RouteState
-          actions={<button className={secondaryButtonClass} onClick={retry} type="button">Try Again</button>}
-          description={toolsError}
-          label="Unavailable"
-          role="alert"
-          title="The tool index couldn't be loaded."
-        />
-      ) : null}
-
-      {status === 'success' && tools.length === 0 ? (
-        <RouteState
-          description="The tools archive is online, but no public tools have been published yet."
-          label="No tools yet"
-          title="The archive is empty."
-        />
-      ) : null}
-
-      {status === 'success' && tools.length > 0 ? (
-        <div className="grid gap-14">
-          {featuredTools.length > 0 ? (
-            <section className="grid gap-5" aria-labelledby="featured-tools-heading">
-              <div>
-                <h2 id="featured-tools-heading" className={monoLabelClass}>
-                  Featured Tools
-                </h2>
-                <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
-                  {featuredTools.length} featured repo{featuredTools.length === 1 ? '' : 's'} leading the shelf.
-                </p>
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {featuredTools.map((project) => (
-                  <ToolCard key={project.slug} project={project} />
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {archiveTools.length > 0 ? (
-            <section className="grid gap-5" aria-labelledby="source-archive-heading">
-              <div>
-                <h2 id="source-archive-heading" className={monoLabelClass}>
-                  Source Archive
-                </h2>
-                <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
-                  {archiveTools.length} source archive entr{archiveTools.length === 1 ? 'y' : 'ies'} ready when you want the repo.
-                </p>
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {archiveTools.map((project) => (
-                  <ToolCard key={project.slug} density="archive" project={project} />
-                ))}
-              </div>
-            </section>
-          ) : null}
-        </div>
-      ) : null}
-    </section>
+        ) : (
+          <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {toolProjects.map((t) => (
+              <li key={t.slug}>
+                <Link
+                  to={`/projects/${t.slug}`}
+                  className="block surface p-5 hover:bg-[color:var(--color-bg-elev-2)] hover:border-[color:var(--color-border-strong)] transition-colors h-full"
+                >
+                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider font-mono text-[color:var(--color-warning)]">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--color-warning)]" />
+                    Tool · {t.year}
+                  </div>
+                  <h2 className="mt-2 text-lg font-semibold">{t.title}</h2>
+                  <p className="mt-1 text-sm text-[color:var(--color-fg-muted)] leading-relaxed line-clamp-3">{t.summary}</p>
+                  <ul className="mt-3 flex flex-wrap gap-1.5">
+                    {t.stack.slice(0, 4).map((s) => (
+                      <li key={s} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[color:var(--color-bg-elev-2)] text-[color:var(--color-fg-muted)] border border-[color:var(--color-border)]">{s}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 pt-3 border-t border-[color:var(--color-border)]/60 flex items-center gap-3 text-xs">
+                    <span className="text-[color:var(--color-accent-soft)]">Details →</span>
+                    {t.repoUrl && <a href={t.repoUrl} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="text-[color:var(--color-fg-muted)] hover:text-[color:var(--color-fg)]">Repo ↗</a>}
+                    <span className="ml-auto text-[10px] font-mono text-[color:var(--color-fg-dim)]">{statusBadges(t).join(' · ')}</span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   )
 }

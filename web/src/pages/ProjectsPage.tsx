@@ -1,159 +1,246 @@
-import { useMemo } from 'react'
-
+import { useMemo, useState } from 'react'
+import { useSearchParams, Link } from 'react-router-dom'
+import { SEO } from '../components/SEO'
 import { ProjectCard } from '../components/ProjectCard'
-import { RouteState } from '../components/RouteState'
-import { Seo } from '../components/Seo'
-import { getErrorMessage } from '../lib/errors'
 import {
-  monoLabelClass,
-  pageIntroClass,
-  pageSectionClass,
-  pageTitleClass,
-  secondaryButtonClass,
-  surfaceCardClass,
-} from '../lib/styles'
-import { useProjects } from '../lib/useProjects'
+  allProjectsSorted,
+  categories,
+  techFilters,
+  categoriesForProject,
+  projectMatchesTech,
+} from '../data/portfolio'
+import type { CategoryId, Project } from '../lib/types'
+import { typeLabel, statusBadges } from '../lib/project-utils'
+
+type ViewMode = 'gallery' | 'directory' | 'table'
+type CatFilter = 'all' | CategoryId
+type KindFilter = 'all' | 'case-study' | 'tool'
 
 export function ProjectsPage() {
-  const { projects, status, error, retry } = useProjects()
-  const caseStudies = projects.filter((project) => project.kind === 'case-study')
-  const featuredCaseStudies = useMemo(() => caseStudies.filter((project) => project.featured), [caseStudies])
-  const archiveCaseStudies = useMemo(() => caseStudies.filter((project) => !project.featured), [caseStudies])
-  const featuredCountLabel = featuredCaseStudies.length === 1 ? 'featured case study' : 'featured case studies'
-  const archiveCountLabel = archiveCaseStudies.length === 1 ? 'more case study' : 'more case studies'
-  const projectsError = getErrorMessage(error, 'Please try again in a moment.')
+  const [params, setParams] = useSearchParams()
+  const initialCat = (params.get('category') as CatFilter) || 'all'
 
-  const caseStudyEntries = useMemo(
-    () => caseStudies.map((project, index) => ({ order: index + 1, project })),
-    [caseStudies],
-  )
-  const featuredEntries = caseStudyEntries.filter(({ project }) => project.featured)
-  const archiveEntries = caseStudyEntries.filter(({ project }) => !project.featured)
+  const [view, setView] = useState<ViewMode>('gallery')
+  const [cat, setCat] = useState<CatFilter>(initialCat)
+  const [kind, setKind] = useState<KindFilter>('all')
+  const [tech, setTech] = useState<string | null>(null)
+  const [query, setQuery] = useState('')
+
+  const filtered = useMemo(() => {
+    return allProjectsSorted.filter((p) => {
+      if (kind !== 'all' && p.kind !== kind) return false
+      if (cat !== 'all' && !categoriesForProject(p).includes(cat)) return false
+      if (tech && !projectMatchesTech(p, tech)) return false
+      if (query) {
+        const q = query.toLowerCase()
+        const hay = `${p.title} ${p.summary} ${p.description} ${p.stack.join(' ')}`.toLowerCase()
+        if (!hay.includes(q)) return false
+      }
+      return true
+    })
+  }, [cat, kind, tech, query])
+
+  const updateCat = (c: CatFilter) => {
+    setCat(c)
+    if (c === 'all') params.delete('category')
+    else params.set('category', c)
+    setParams(params, { replace: true })
+  }
 
   return (
-    <section className={`${pageSectionClass} pt-4`}>
-      <Seo
-        description="Browse Patrick Fanella's production case studies, led by featured work and followed by a compact archive."
-        path="/projects"
-        title="Projects"
+    <>
+      <SEO
+        title="Projects | Patrick Fanella"
+        description="Browse projects, case studies, and tools — by category, stack, and status."
       />
-      <div className="mb-10 grid gap-8 border-b-2 border-stroke pb-12 md:grid-cols-[minmax(0,1.5fr)_minmax(320px,0.85fr)] md:items-start">
-        <div>
-          <h1 className={`${pageTitleClass} mt-6 uppercase`}>Projects</h1>
-          <p className={pageIntroClass}>
-            Each project below is a production case study: built, deployed, and documented. Start with the featured work, then browse the compact archive for the rest.
+      <div className="container-page py-10 lg:py-14">
+        <header className="max-w-3xl">
+          <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-accent-soft)] font-mono">
+            Archive
           </p>
-        </div>
-
-        <aside className={`${surfaceCardClass} h-fit bg-panel p-8`} aria-label="Reading protocol">
-          <p className={monoLabelClass}>Featured first</p>
-          <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">
-            {status === 'success' && caseStudies.length > 0 ? (
-              <>
-                {featuredCaseStudies.length} {featuredCountLabel} and {archiveCaseStudies.length} {archiveCountLabel} are available. Each card links to the full case study.
-              </>
-            ) : (
-              <>Counts appear after the project index loads. Each card links to the full case study.</>
-            )}
+          <h1 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">All projects</h1>
+          <p className="mt-3 text-[color:var(--color-fg-muted)]">
+            The full archive — projects, tools, experiments. Filter, search, and switch between gallery, directory, and table modes.
           </p>
-        </aside>
-      </div>
+        </header>
 
-      {status === 'loading' ? (
-        <div className="grid gap-6">
-          <RouteState
-            ariaLive="polite"
-            description="Loading project index."
-            label="Loading"
-            role="status"
-            title="Project index incoming."
-          />
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3" aria-hidden="true">
-            {[0, 1, 2].map((index) => (
-              <article key={index} className={`${surfaceCardClass} p-6`}>
-                <div className="grid gap-5 border-b-2 border-stroke pb-5">
-                  <div className="h-7 w-28 border-2 border-stroke bg-panel" />
-                  <div className="grid gap-3">
-                    <div className="h-12 w-2/3 border-2 border-stroke bg-panel" />
-                    <div className="h-5 w-full border-2 border-stroke bg-panel" />
-                    <div className="h-5 w-4/5 border-2 border-stroke bg-panel" />
-                  </div>
-                </div>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {[0, 1, 2].map((tag) => (
-                    <span key={tag} className="h-7 w-20 border-2 border-stroke bg-panel" />
-                  ))}
-                </div>
-              </article>
-            ))}
+        {/* Controls */}
+        <div className="mt-8 space-y-4">
+          {/* search + view */}
+          <div className="flex flex-wrap items-center gap-3">
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search projects, stack, descriptions…"
+              className="flex-1 min-w-[220px] rounded-md bg-[color:var(--color-bg-elev)] border border-[color:var(--color-border-strong)] px-3 py-2 text-sm placeholder:text-[color:var(--color-fg-dim)] focus:border-[color:var(--color-accent)]"
+              aria-label="Search projects"
+            />
+            <div role="tablist" aria-label="View mode" className="flex items-center gap-1 p-1 rounded-md border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg-elev)]">
+              {(['gallery', 'directory', 'table'] as const).map((v) => (
+                <button
+                  key={v}
+                  role="tab"
+                  aria-selected={view === v}
+                  onClick={() => setView(v)}
+                  className={`text-xs px-3 py-1.5 rounded transition-colors capitalize ${
+                    view === v
+                      ? 'bg-[color:var(--color-accent)] text-[color:var(--color-accent-ink)]'
+                      : 'text-[color:var(--color-fg-muted)] hover:text-[color:var(--color-fg)]'
+                  }`}
+                >
+                  {v}
+                </button>
+              ))}
+            </div>
           </div>
+
+          <FilterRow label="Type" options={[
+            { id: 'all' as KindFilter, label: 'All' },
+            { id: 'case-study', label: 'Case studies' },
+            { id: 'tool', label: 'Tools' },
+          ]} value={kind} onChange={setKind} />
+
+          <FilterRow label="Category" options={[
+            { id: 'all' as CatFilter, label: 'All' },
+            ...categories.map((c) => ({ id: c.id as CatFilter, label: c.label })),
+          ]} value={cat} onChange={updateCat} />
+
+          <FilterRow label="Stack" options={[
+            { id: null as string | null, label: 'Any' },
+            ...techFilters.map((t) => ({ id: t as string | null, label: t })),
+          ]} value={tech} onChange={setTech} />
         </div>
-      ) : null}
 
-      {status === 'error' ? (
-        <RouteState
-          actions={(
-            <button className={secondaryButtonClass} onClick={retry} type="button">
-              Try Again
-            </button>
-          )}
-          description={projectsError}
-          label="Unavailable"
-          role="alert"
-          title="The project index couldn't be loaded."
-        />
-      ) : null}
+        <p className="mt-6 text-xs text-[color:var(--color-fg-dim)] font-mono">
+          {filtered.length} {filtered.length === 1 ? 'result' : 'results'}
+        </p>
 
-      {status === 'success' && caseStudies.length === 0 ? (
-        <RouteState
-          description="The portfolio is online, but no case studies have been published yet."
-          label="No projects yet"
-          title="The case study archive is empty."
-        />
-      ) : null}
-
-      {status === 'success' && caseStudies.length > 0 ? (
-        <div className="grid gap-14">
-          {featuredEntries.length > 0 ? (
-            <section className="grid gap-5" aria-labelledby="featured-case-studies-heading">
-              <div>
-                <h2 id="featured-case-studies-heading" className={monoLabelClass}>
-                  Featured Case Studies
-                </h2>
-                <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
-                  {featuredEntries.length} curated case study{featuredEntries.length === 1 ? '' : 's'} leading the archive.
-                </p>
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-2">
-                {featuredEntries.map(({ order, project }) => (
-                  <ProjectCard key={project.slug} order={order} project={project} />
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {archiveEntries.length > 0 ? (
-            <section className="grid gap-5" aria-labelledby="more-case-studies-heading">
-              <div>
-                <h2 id="more-case-studies-heading" className={monoLabelClass}>
-                  More Case Studies
-                </h2>
-                <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
-                  {archiveEntries.length} additional case study{archiveEntries.length === 1 ? '' : 's'} in a compact archive.
-                </p>
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {archiveEntries.map(({ order, project }) => (
-                  <ProjectCard key={project.slug} density="archive" order={order} project={project} />
-                ))}
-              </div>
-            </section>
-          ) : null}
+        {/* Views */}
+        <div className="mt-4">
+          {view === 'gallery' && <GalleryView projects={filtered} />}
+          {view === 'directory' && <DirectoryView projects={filtered} />}
+          {view === 'table' && <TableView projects={filtered} />}
         </div>
-      ) : null}
-    </section>
+      </div>
+    </>
+  )
+}
+
+function GalleryView({ projects }: { projects: Project[] }) {
+  if (projects.length === 0) return <EmptyState />
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      {projects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
+    </div>
+  )
+}
+
+function DirectoryView({ projects }: { projects: Project[] }) {
+  if (projects.length === 0) return <EmptyState />
+  return (
+    <ul className="surface divide-y divide-[color:var(--color-border)]">
+      {projects.map((p) => (
+        <li key={p.slug}>
+          <Link to={`/projects/${p.slug}`} className="flex items-center gap-4 p-4 hover:bg-[color:var(--color-bg-elev-2)] transition-colors">
+            <span className="block h-12 w-20 shrink-0 rounded-md overflow-hidden bg-[color:var(--color-bg-elev-2)] border border-[color:var(--color-border)]">
+              <img src={p.media[0]?.src ?? '/assets/projects/project-fallback.svg'} alt="" className="h-full w-full object-cover" />
+            </span>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider font-mono text-[color:var(--color-fg-dim)]">
+                <span>{typeLabel(p)}</span>
+                <span aria-hidden>·</span>
+                <span>{p.year}</span>
+                {p.liveUrl && <><span aria-hidden>·</span><span className="text-[color:var(--color-success)]">Live</span></>}
+              </div>
+              <div className="mt-0.5 flex items-center gap-3">
+                <h3 className="text-base font-semibold truncate">{p.title}</h3>
+                <span className="text-xs text-[color:var(--color-fg-dim)] hidden md:inline truncate">{p.stack.slice(0,4).join(' · ')}</span>
+              </div>
+              <p className="mt-1 text-sm text-[color:var(--color-fg-muted)] truncate">{p.summary}</p>
+            </div>
+            <span className="text-[color:var(--color-fg-dim)] text-sm shrink-0">→</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function TableView({ projects }: { projects: Project[] }) {
+  if (projects.length === 0) return <EmptyState />
+  return (
+    <div className="surface overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead className="text-[10px] uppercase tracking-wider text-[color:var(--color-fg-dim)] font-mono">
+          <tr className="border-b border-[color:var(--color-border)]">
+            <th className="text-left p-3 font-normal">Project</th>
+            <th className="text-left p-3 font-normal">Type</th>
+            <th className="text-left p-3 font-normal">Year</th>
+            <th className="text-left p-3 font-normal">Stack</th>
+            <th className="text-left p-3 font-normal">Status</th>
+            <th className="text-left p-3 font-normal">Links</th>
+          </tr>
+        </thead>
+        <tbody>
+          {projects.map((p) => (
+            <tr key={p.slug} className="border-b border-[color:var(--color-border)]/60 hover:bg-[color:var(--color-bg-elev-2)] transition-colors">
+              <td className="p-3 font-medium">
+                <Link to={`/projects/${p.slug}`} className="hover:text-[color:var(--color-accent-soft)]">{p.title}</Link>
+              </td>
+              <td className="p-3 text-[color:var(--color-fg-muted)]">{typeLabel(p)}</td>
+              <td className="p-3 text-[color:var(--color-fg-muted)] font-mono text-xs">{p.year}</td>
+              <td className="p-3 text-[color:var(--color-fg-muted)] text-xs">{p.stack.slice(0, 5).join(', ')}</td>
+              <td className="p-3 text-xs">
+                <span className="font-mono text-[color:var(--color-fg-dim)]">{statusBadges(p).join(' · ')}</span>
+              </td>
+              <td className="p-3 text-xs space-x-3">
+                {p.liveUrl && <a href={p.liveUrl} target="_blank" rel="noreferrer" className="text-[color:var(--color-accent-soft)] hover:underline">Live</a>}
+                {p.repoUrl && <a href={p.repoUrl} target="_blank" rel="noreferrer" className="text-[color:var(--color-accent-soft)] hover:underline">Repo</a>}
+                <Link to={`/projects/${p.slug}`} className="text-[color:var(--color-fg-muted)] hover:text-[color:var(--color-fg)]">Detail</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function EmptyState() {
+  return (
+    <div className="surface p-12 text-center text-[color:var(--color-fg-muted)]">No projects match those filters.</div>
+  )
+}
+
+interface RowProps<T> {
+  label: string
+  options: { id: T; label: string }[]
+  value: T
+  onChange: (v: T) => void
+}
+function FilterRow<T>({ label, options, value, onChange }: RowProps<T>) {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <span className="text-[11px] uppercase tracking-wider text-[color:var(--color-fg-dim)] font-mono mr-2">{label}</span>
+      {options.map((opt) => {
+        const active = opt.id === value
+        return (
+          <button
+            key={String(opt.id)}
+            type="button"
+            onClick={() => onChange(opt.id)}
+            aria-pressed={active}
+            className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+              active
+                ? 'bg-[color:var(--color-accent)] text-[color:var(--color-accent-ink)] border-[color:var(--color-accent)]'
+                : 'border-[color:var(--color-border-strong)] text-[color:var(--color-fg-muted)] hover:text-[color:var(--color-fg)] hover:bg-[color:var(--color-bg-elev)]'
+            }`}
+          >
+            {opt.label}
+          </button>
+        )
+      })}
+    </div>
   )
 }

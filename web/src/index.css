@@ -1,153 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --color-bg: #0a0b10;
+  --color-bg-elev: #11131c;
+  --color-bg-elev-2: #181b27;
+  --color-border: #232735;
+  --color-border-strong: #2f3447;
+  --color-fg: #e6e8ef;
+  --color-fg-muted: #9aa1b5;
+  --color-fg-dim: #6b7188;
+  --color-accent: #7c5cff;
+  --color-accent-soft: #a895ff;
+  --color-accent-ink: #0a0b10;
+  --color-success: #5ce0a8;
+  --color-warning: #ffb86b;
+  --color-danger: #ff6b8a;
 
-  --color-paper: #282a36;
-  --color-surface: #21222c;
-  --color-panel: #44475a;
-  --color-ink: #d7d7eb; /* Toned down from pure white / f8f8f2 */
-  --color-ink-soft: #a5a6b5;
-  --color-heading: #f8f8f2; /* Swapped pure white for Dracula foreground */
-  --color-stroke: #805bca; /* A deep purple shade replacing the grey-blue */
-
-  --color-accent-green: #50fa7b;
-  --color-accent-purple: #bd93f9;
-  --color-accent-teal: #8be9fd;
-  --color-accent-pink: #ff79c6;
-  --color-accent-orange: #ffb86c;
-  --color-accent-yellow: #f1fa8c;
-
-  --color-success: #50fa7b;
-  --color-danger: #ff5555;
-
-  --radius-card: 0px;
-  --shadow-brutal: 4px 4px 0 0 var(--color-stroke);
-  --shadow-brutal-green: 4px 4px 0 0 var(--color-accent-green);
-  --shadow-brutal-purple: 4px 4px 0 0 var(--color-accent-purple);
-  --shadow-subtle: 2px 2px 0 0 rgba(128, 91, 202, 0.3);
-
-  /* Motion and timing primitives for tactile refinement */
-  --duration-fast: 100ms;
-  --duration-base: 150ms;
-  --duration-slow: 200ms;
-  --ease-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-linear: linear;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* Spacing comfort for vertical rhythm */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "Fira Code", Menlo, monospace;
 }
 
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
-
   html {
-    scroll-behavior: smooth;
-    background: var(--color-paper);
     color-scheme: dark;
+    scroll-behavior: smooth;
   }
-
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
   body {
-    margin: 0;
-    min-width: 320px;
-    cursor: default;
-    color: var(--color-ink);
-    text-rendering: optimizeLegibility;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: var(--font-body);
-    background-color: var(--color-paper);
-    /* Subtle dot grid for brutalist terminal vibe */
-    background-image: radial-gradient(var(--color-stroke) 1px, transparent 1px);
-    background-size: 24px 24px;
-    background-position: 0 0;
+    text-rendering: optimizeLegibility;
   }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  a[href],
-  button,
-  input[type='button'],
-  input[type='submit'],
-  input[type='reset'] {
-    cursor: pointer;
-  }
-
   ::selection {
-    color: var(--color-paper);
-    background: var(--color-accent-green);
+    background: color-mix(in oklab, var(--color-accent) 60%, transparent);
+    color: var(--color-fg);
   }
-
-  button,
-  input,
-  select,
-  textarea {
-    font: inherit;
-  }
-
-  input:not([type='button']):not([type='submit']):not([type='reset']),
-  select,
-  textarea {
-    cursor: default;
-  }
-
-  /* Enhanced focus state for better accessibility and tactile feel */
-  *:focus-visible {
-    outline: 2px solid var(--color-accent-green);
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
-  }
-
-  #root {
-    min-height: 100vh;
-  }
-
-  .skip-link {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    z-index: 50;
-    transform: translateY(-220%);
-    border: 1px solid var(--color-accent-green);
-    background: var(--color-surface);
-    box-shadow: var(--shadow-brutal-green);
-    padding: 0.75rem 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--color-heading);
-    transition: transform var(--duration-base) ease-out;
-  }
-
-  .skip-link:focus-visible {
-    transform: translateY(0);
-    outline: none;
+    border-radius: 6px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+@utility container-page {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@utility hairline {
+  border: 1px solid var(--color-border);
+}
+
+@utility surface {
+  background: var(--color-bg-elev);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+
+@utility surface-2 {
+  background: var(--color-bg-elev-2);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+
+/* visually-hidden */
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }

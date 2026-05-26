@@ -1,283 +1,201 @@
-import { Link, Navigate, useParams } from 'react-router-dom'
-
-import { ProjectMediaGallery } from '../components/ProjectMediaGallery'
-import { RouteState } from '../components/RouteState'
-import { Seo } from '../components/Seo'
-import { SectionLabel } from '../components/SectionLabel'
-import { getErrorMessage, isNotFoundError } from '../lib/errors'
-import { getSiteUrl } from '../lib/site'
-import {
-  monoLabelClass,
-  pageSectionClass,
-  pageTitleClass,
-  primaryButtonClass,
-  secondaryButtonClass,
-  surfaceCardClass,
-  tagClass,
-  tagListClass,
-  textLinkClass,
-} from '../lib/styles'
-import { useProject } from '../lib/useProjects'
+import { Link, useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { SEO } from '../components/SEO'
+import { projectsBySlug, allProjectsSorted } from '../data/portfolio'
+import { statusBadges, typeLabel } from '../lib/project-utils'
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
 export function ProjectDetailPage() {
-  const { slug } = useParams()
-  const { project, status, error, retry } = useProject(slug)
-  const siteUrl = getSiteUrl()
-  const metaCardClass =
-    'flex items-baseline gap-3 border-2 border-stroke bg-surface px-5 py-3 text-ink-soft'
-
-  if (status === 'loading') {
-    return (
-      <section className={pageSectionClass}>
-        <Seo
-          description="Fetching project details, supporting media, and architecture notes."
-          path={slug ? `/projects/${slug}` : '/projects'}
-          title="Loading project"
-        />
-        <RouteState
-          ariaLive="polite"
-          description="Fetching the project details, media, and architecture notes."
-          headingLevel="h1"
-          label="Loading"
-          role="status"
-          title="Loading case study."
-        />
-      </section>
-    )
-  }
-
-  if (status === 'error' && isNotFoundError(error)) {
-    return (
-      <section className={pageSectionClass}>
-        <Seo
-          description="The requested case study has not been published yet."
-          includeCanonical={false}
-          includeSocialUrl={false}
-          path={slug ? `/projects/${slug}` : '/projects'}
-          robots="noindex,follow"
-          title="Project not found"
-        />
-        <RouteState
-          actions={
-            <Link className={primaryButtonClass} to="/projects">
-              Back to Projects
-            </Link>
-          }
-          description="The route exists, but this case study has not been published yet."
-          headingLevel="h1"
-          label="Not found"
-          title="This case study isn't available."
-        />
-      </section>
-    )
-  }
-
-  if (status === 'error') {
-    return (
-      <section className={pageSectionClass}>
-        <Seo
-          description="The requested case study could not be loaded."
-          path={slug ? `/projects/${slug}` : '/projects'}
-          robots="noindex,follow"
-          title="Project unavailable"
-        />
-        <RouteState
-          actions={(
-            <>
-              <button className={secondaryButtonClass} onClick={retry} type="button">
-                Try Again
-              </button>
-              <Link className={textLinkClass} to="/projects">
-                Back to Projects
-              </Link>
-            </>
-          )}
-          description={getErrorMessage(error, 'The requested case study could not be loaded.')}
-          headingLevel="h1"
-          label="Unavailable"
-          role="alert"
-          title="Unable to load case study."
-        />
-      </section>
-    )
-  }
+  const { slug = '' } = useParams()
+  const project = projectsBySlug[slug]
+  const reduced = usePrefersReducedMotion()
 
   if (!project) {
-    return null
+    return (
+      <div className="container-page py-24 text-center">
+        <SEO title="Project not found | Patrick Fanella" />
+        <p className="text-sm uppercase tracking-wider text-[color:var(--color-fg-dim)] font-mono">404</p>
+        <h1 className="mt-3 text-3xl font-semibold">Project not found</h1>
+        <p className="mt-3 text-[color:var(--color-fg-muted)]">That project doesn't exist or has moved.</p>
+        <Link to="/projects" className="mt-6 inline-block text-[color:var(--color-accent-soft)] hover:underline">← Back to projects</Link>
+      </div>
+    )
   }
 
-  if (project.kind === 'tool') {
-    return <Navigate replace to="/tools" />
-  }
+  const heroMedia = project.media[0]
+  const gallery = project.media.slice(1)
+  const badges = statusBadges(project)
+
+  // related: same category-ish (share stack tokens), exclude self
+  const related = allProjectsSorted
+    .filter((p) => p.slug !== project.slug)
+    .filter((p) => p.stack.some((s) => project.stack.includes(s)))
+    .slice(0, 3)
 
   return (
-    <section className={pageSectionClass}>
-      <Seo
-        description={project.summary}
-        image={project.media[0]?.src}
-        imageAlt={project.media[0]?.alt}
-        path={`/projects/${project.slug}`}
-        structuredData={{
-          '@context': 'https://schema.org',
-          '@type': 'CreativeWork',
-          author: {
-            '@type': 'Person',
-            name: 'Patrick Fanella',
-          },
-          description: project.summary,
-          headline: project.title,
-            image: project.media[0]?.src ? [`${siteUrl}${project.media[0].src}`] : undefined,
-          keywords: project.stack.join(', '),
-          name: project.title,
-            url: `${siteUrl}/projects/${project.slug}`,
-        }}
-        title={project.title}
-        type="article"
-      />
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b-2 border-stroke pb-10 mb-8">
-        <div>
-          <SectionLabel>{`Case study / ${project.year}`}</SectionLabel>
-          <h1 className={`${pageTitleClass} mt-6 uppercase`}>{project.title}</h1>
-          <p className="mt-6 text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
+    <>
+      <SEO title={`${project.title} | Patrick Fanella`} description={project.summary} />
+      <article className="container-page py-10 lg:py-14">
+        <Link to="/projects" className="inline-flex items-center gap-1 text-xs text-[color:var(--color-fg-muted)] hover:text-[color:var(--color-fg)]">
+          <span aria-hidden>←</span> All projects
+        </Link>
+
+        <header className="mt-6 grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 items-start">
+          <motion.div
+            initial={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.99, y: 8 }}
+            animate={reduced ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: reduced ? 0 : 0.5 }}
+            className="aspect-[16/10] rounded-2xl overflow-hidden surface-2"
+          >
+            <img
+              src={heroMedia?.src ?? '/assets/projects/project-fallback.svg'}
+              alt={heroMedia?.alt ?? `${project.title} hero`}
+              className="h-full w-full object-cover"
+            />
+          </motion.div>
+          <div>
+            <div className="flex items-center gap-2 text-[11px] uppercase tracking-wider font-mono text-[color:var(--color-fg-dim)]">
+              <span>{typeLabel(project)}</span>
+              <span aria-hidden>·</span>
+              <span>{project.year}</span>
+              <span aria-hidden>·</span>
+              <span>{project.role}</span>
+            </div>
+            <h1 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05]">{project.title}</h1>
+            <p className="mt-4 text-lg text-[color:var(--color-fg-muted)] leading-relaxed">{project.summary}</p>
+
+            {badges.length > 0 && (
+              <div className="mt-5 flex flex-wrap gap-1.5">
+                {badges.map((b) => (
+                  <span key={b} className="text-[11px] font-mono uppercase tracking-wider px-2 py-1 rounded-md border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg-elev)] text-[color:var(--color-fg-muted)]">{b}</span>
+                ))}
+              </div>
+            )}
+
+            <div className="mt-6 flex flex-wrap items-center gap-2">
+              {project.liveUrl && (
+                <a href={project.liveUrl} target="_blank" rel="noreferrer" className="rounded-md bg-[color:var(--color-accent)] text-[color:var(--color-accent-ink)] font-medium px-4 py-2.5 text-sm hover:bg-[color:var(--color-accent-soft)] transition-colors">
+                  Live Demo ↗
+                </a>
+              )}
+              {project.repoUrl && (
+                <a href={project.repoUrl} target="_blank" rel="noreferrer" className="rounded-md border border-[color:var(--color-border-strong)] px-4 py-2.5 text-sm hover:bg-[color:var(--color-bg-elev)] transition-colors">
+                  GitHub ↗
+                </a>
+              )}
+            </div>
+          </div>
+        </header>
+
+        <div className="mt-14 grid lg:grid-cols-[1fr_280px] gap-12">
+          <div className="space-y-12 min-w-0">
+            <Section title="Overview">
+              <p className="text-[color:var(--color-fg)]/90 leading-relaxed whitespace-pre-line">{project.description}</p>
+            </Section>
+
+            {project.highlights.length > 0 && (
+              <Section title="Proof points">
+                <ul className="space-y-3">
+                  {project.highlights.map((h, i) => (
+                    <li key={i} className="flex gap-3 text-[color:var(--color-fg)]/90">
+                      <span aria-hidden className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)] shrink-0" />
+                      <span className="leading-relaxed">{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+            )}
+
+            {project.architecture && project.architecture.length > 0 && (
+              <Section title="Architecture & technical notes">
+                <ul className="space-y-3">
+                  {project.architecture.map((a, i) => (
+                    <li key={i} className="flex gap-3 text-[color:var(--color-fg)]/90">
+                      <span aria-hidden className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent-soft)] shrink-0" />
+                      <span className="leading-relaxed">{a}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+            )}
+
+            {project.lessons && project.lessons.length > 0 && (
+              <Section title="What I learned">
+                <ul className="space-y-3">
+                  {project.lessons.map((l, i) => (
+                    <li key={i} className="flex gap-3 text-[color:var(--color-fg)]/90">
+                      <span aria-hidden className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-success)] shrink-0" />
+                      <span className="leading-relaxed">{l}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+            )}
+
+            {gallery.length > 0 && (
+              <Section title="Gallery">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {gallery.map((m, i) => (
+                    <figure key={i} className="surface overflow-hidden">
+                      <img src={m.src} alt={m.alt} className="w-full h-auto" loading="lazy" />
+                      {m.caption && (
+                        <figcaption className="p-3 text-xs text-[color:var(--color-fg-muted)] border-t border-[color:var(--color-border)]">
+                          {m.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  ))}
+                </div>
+              </Section>
+            )}
+          </div>
+
+          <aside className="space-y-6">
+            <div className="surface p-5">
+              <h3 className="text-[10px] uppercase tracking-wider font-mono text-[color:var(--color-fg-dim)]">Role</h3>
+              <p className="mt-2 text-sm">{project.role}</p>
+            </div>
+            <div className="surface p-5">
+              <h3 className="text-[10px] uppercase tracking-wider font-mono text-[color:var(--color-fg-dim)]">Stack</h3>
+              <ul className="mt-2 flex flex-wrap gap-1.5">
+                {project.stack.map((s) => (
+                  <li key={s} className="text-[11px] font-mono px-2 py-1 rounded bg-[color:var(--color-bg-elev-2)] text-[color:var(--color-fg-muted)] border border-[color:var(--color-border)]">{s}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="surface p-5">
+              <h3 className="text-[10px] uppercase tracking-wider font-mono text-[color:var(--color-fg-dim)]">Year</h3>
+              <p className="mt-2 text-sm font-mono">{project.year}</p>
+            </div>
+          </aside>
         </div>
 
-        <aside className={`${surfaceCardClass} h-fit bg-panel p-6`} aria-label="Project meta information">
-          <p className={monoLabelClass}>Project Details</p>
-          <div className="mt-5 grid gap-3">
-            <p className={metaCardClass}>
-              <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Role
-              </span>
-              <span className="text-[1.05rem] text-heading">{project.role}</span>
-            </p>
-            <p className={metaCardClass}>
-              <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Year
-              </span>
-              <span className="text-[1.05rem] text-heading">{project.year}</span>
-            </p>
-          </div>
+        {related.length > 0 && (
+          <section className="mt-20 pt-10 border-t border-[color:var(--color-border)]">
+            <h2 className="text-2xl font-semibold tracking-tight">Related work</h2>
+            <ul className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {related.map((p) => (
+                <li key={p.slug}>
+                  <Link to={`/projects/${p.slug}`} className="block surface p-5 hover:bg-[color:var(--color-bg-elev-2)] hover:border-[color:var(--color-border-strong)] transition-colors">
+                    <div className="text-[10px] uppercase tracking-wider font-mono text-[color:var(--color-fg-dim)]">{typeLabel(p)} · {p.year}</div>
+                    <h3 className="mt-1 text-base font-semibold">{p.title}</h3>
+                    <p className="mt-1 text-xs text-[color:var(--color-fg-muted)] line-clamp-2">{p.summary}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </article>
+    </>
+  )
+}
 
-          {project.repoUrl || project.liveUrl ? (
-            <div className="mt-5 flex flex-wrap gap-4 border-t-2 border-stroke pt-5">
-              {project.repoUrl ? (
-                <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">
-                  Repository ↗
-                </a>
-              ) : null}
-              {project.liveUrl ? (
-                <a className={textLinkClass} href={project.liveUrl} rel="noreferrer" target="_blank">
-                  Live Site ↗
-                </a>
-              ) : null}
-            </div>
-          ) : null}
-        </aside>
-
-        <ul className={`${tagListClass} lg:col-span-2`}>
-          {project.stack.map((item) => (
-            <li key={item} className={tagClass}>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.8fr)] lg:items-start">
-        <article className="pr-4 lg:pr-8">
-          <SectionLabel>Overview</SectionLabel>
-          <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-            What I built and why.
-          </h2>
-          <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft">
-            {project.description}
-          </p>
-        </article>
-
-        <article className={`${surfaceCardClass} bg-surface p-8`}>
-          <p className={monoLabelClass}>Key outcomes</p>
-          <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft">
-            {project.highlights.map((highlight, index) => (
-              <li
-                key={highlight}
-                className="border-2 border-stroke bg-panel p-5 grid gap-3"
-              >
-                <p className="font-mono text-[0.85rem] font-bold text-accent-purple">{String(index + 1).padStart(2, '0')}</p>
-                <p className="text-[1.05rem] leading-relaxed">{highlight}</p>
-              </li>
-            ))}
-          </ul>
-        </article>
-      </div>
-
-      {project.architecture.length > 0 ? (
-        <section className="mt-16 grid gap-8 border-t-2 border-stroke pt-10">
-          <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.8fr)] lg:items-end">
-            <div>
-              <SectionLabel>Architecture</SectionLabel>
-              <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                Technical decisions that mattered.
-              </h2>
-            </div>
-            <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
-              A concise look at the architecture behind the shipped product.
-            </p>
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            {project.architecture.map((item, index) => (
-              <article key={item} className={`${surfaceCardClass} bg-panel p-6`}>
-                <p className={monoLabelClass}>{`Choice ${index + 1}`}</p>
-                <p className="mt-4 text-[1.02rem] leading-relaxed text-ink-soft">{item}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {project.media.length > 0 ? (
-        <section className="mt-16 grid gap-8 border-t-2 border-stroke pt-10">
-          <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.8fr)] lg:items-end">
-            <div>
-              <SectionLabel>Supporting media</SectionLabel>
-              <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                Screens and diagrams.
-              </h2>
-            </div>
-            <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
-              Architecture diagrams, interface captures, and supporting visuals for the build.
-            </p>
-          </div>
-
-          <ProjectMediaGallery items={project.media} projectTitle={project.title} />
-        </section>
-      ) : null}
-
-      {project.lessons.length > 0 ? (
-        <section className="mt-16 grid gap-8 border-t-2 border-stroke pt-10">
-          <div>
-            <SectionLabel>Lessons learned</SectionLabel>
-            <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-              What held up, and what I'd change.
-            </h2>
-          </div>
-
-          <div className="grid gap-5 lg:grid-cols-2">
-            {project.lessons.map((lesson, index) => (
-              <article key={lesson} className={`${surfaceCardClass} bg-panel p-6`}>
-                <p className={monoLabelClass}>{`Lesson ${index + 1}`}</p>
-                <p className="mt-4 text-[1.02rem] leading-relaxed text-ink-soft">{lesson}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      <div className="mt-16 border-t-2 border-stroke pt-8">
-        <Link className={textLinkClass} to="/projects">
-          ← Back to Projects
-        </Link>
-      </div>
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section>
+      <h2 className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-accent-soft)] font-mono">{title}</h2>
+      <div className="mt-4">{children}</div>
     </section>
   )
 }
