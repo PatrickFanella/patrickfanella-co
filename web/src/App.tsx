@@ -1,13 +1,13 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { SiteNav } from './components/SiteNav'
 import { SiteFooter } from './components/SiteFooter'
 import { HomePage } from './pages/HomePage'
 import { ProjectsPage } from './pages/ProjectsPage'
 import { ProjectDetailPage } from './pages/ProjectDetailPage'
-import { ToolsPage } from './pages/ToolsPage'
 import { ResumePage } from './pages/ResumePage'
 import { ContactPage } from './pages/ContactPage'
+import { DevlogPage } from './pages/DevlogPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
 function ScrollToTop() {
@@ -29,9 +29,10 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-          <Route path="/tools" element={<ToolsPage />} />
+          <Route path="/tools" element={<Navigate to="/projects?kind=tool" replace />} />
           <Route path="/resume" element={<ResumePage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/devlog" element={<DevlogPage />} />
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

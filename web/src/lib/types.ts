@@ -1,5 +1,20 @@
 export type ProjectKind = 'case-study' | 'tool'
 
+export type CareerThemeId =
+  | 'backend-engineering'
+  | 'full-stack-apps'
+  | 'ai-ml-integration'
+  | 'devops-infra'
+  | 'developer-tooling'
+  | 'data-pipelines'
+  | 'product-systems'
+  | 'community-platforms'
+  | 'security-identity'
+  | 'media-workflows'
+  | 'interactive-systems'
+
+export type CuratedSetId = 'featured-systems' | 'ai-automation' | 'devtools-infra'
+
 export interface ProjectMedia {
   src: string
   alt: string
@@ -25,21 +40,11 @@ export interface Project {
   media: ProjectMedia[]
 }
 
-export type CategoryId =
-  | 'web-apps'
-  | 'ai-agents'
-  | 'tools'
-  | 'infrastructure'
-  | 'streaming'
-  | 'experiments'
-
-export interface Category {
-  id: CategoryId
+export interface CareerTheme {
+  id: CareerThemeId
   label: string
   description: string
 }
-
-export type CuratedSetId = 'featured-systems' | 'ai-automation' | 'devtools-infra'
 
 export interface CuratedSet {
   id: CuratedSetId
@@ -47,6 +52,16 @@ export interface CuratedSet {
   purpose: string
   takeaway: string
   slugs: string[]
+}
+
+export interface DevlogPost {
+  id: string
+  date: string
+  title: string
+  body: string
+  tags: string[]
+  source: string
+  projectRef?: string
 }
 
 export type ProjectStatus = 'live' | 'open-source' | 'case-study' | 'in-development'

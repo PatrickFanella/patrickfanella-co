@@ -1,126 +1,247 @@
 import { useMemo, useState } from 'react'
-import { useSearchParams, Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { SEO } from '../components/SEO'
 import { ProjectCard } from '../components/ProjectCard'
+import { WorkMediaPlaceholder } from '../components/WorkMediaPlaceholder'
 import {
   allProjectsSorted,
-  categories,
-  techFilters,
-  categoriesForProject,
-  projectMatchesTech,
+  archiveViewModes,
+  careerThemes,
+  primaryThemeForProject,
+  projectKindFilters,
+  projectMatchesQuery,
+  projectMatchesStack,
+  themeLabel,
+  themesForProject,
 } from '../data/portfolio'
-import type { CategoryId, Project } from '../lib/types'
-import { typeLabel, statusBadges } from '../lib/project-utils'
+import type { CareerThemeId, Project } from '../lib/types'
+import { statusBadges, typeLabel } from '../lib/project-utils'
 
-type ViewMode = 'gallery' | 'directory' | 'table'
-type CatFilter = 'all' | CategoryId
+type ViewMode = 'gallery' | 'directory'
 type KindFilter = 'all' | 'case-study' | 'tool'
+type SortMode = 'featured' | 'recent' | 'title'
+
+const stackFilters = [
+  { id: 'go', label: 'Go' },
+  { id: 'react', label: 'React' },
+  { id: 'typescript', label: 'TypeScript' },
+  { id: 'python', label: 'Python' },
+  { id: 'postgresql', label: 'PostgreSQL' },
+  { id: 'docker', label: 'Docker' },
+  { id: 'llms', label: 'LLMs' },
+]
+
+function parseThemeParam(params: URLSearchParams) {
+  const repeated = params.getAll('category')
+  if (repeated.length > 0) return repeated.filter(Boolean) as CareerThemeId[]
+
+  const single = params.get('category')
+  return single ? (single.split(',').map((value) => value.trim()).filter(Boolean) as CareerThemeId[]) : []
+}
 
 export function ProjectsPage() {
   const [params, setParams] = useSearchParams()
-  const initialCat = (params.get('category') as CatFilter) || 'all'
+  const [sort, setSort] = useState<SortMode>('featured')
+  const [filtersOpen, setFiltersOpen] = useState(false)
 
-  const [view, setView] = useState<ViewMode>('gallery')
-  const [cat, setCat] = useState<CatFilter>(initialCat)
-  const [kind, setKind] = useState<KindFilter>('all')
-  const [tech, setTech] = useState<string | null>(null)
-  const [query, setQuery] = useState('')
+  const kind = ((params.get('kind') as KindFilter) || 'all') as KindFilter
+  const view = ((params.get('view') as ViewMode) || 'gallery') as ViewMode
+  const query = params.get('q') ?? ''
+  const selectedThemes = parseThemeParam(params)
+  const stack = (params.get('stack') ?? '').toLowerCase()
 
   const filtered = useMemo(() => {
-    return allProjectsSorted.filter((p) => {
-      if (kind !== 'all' && p.kind !== kind) return false
-      if (cat !== 'all' && !categoriesForProject(p).includes(cat)) return false
-      if (tech && !projectMatchesTech(p, tech)) return false
-      if (query) {
-        const q = query.toLowerCase()
-        const hay = `${p.title} ${p.summary} ${p.description} ${p.stack.join(' ')}`.toLowerCase()
-        if (!hay.includes(q)) return false
-      }
+    const list = allProjectsSorted.filter((project) => {
+      if (kind !== 'all' && project.kind !== kind) return false
+      if (selectedThemes.length > 0 && !selectedThemes.some((theme) => themesForProject(project).includes(theme))) return false
+      if (stack && !projectMatchesStack(project, stack)) return false
+      if (!projectMatchesQuery(project, query)) return false
       return true
     })
-  }, [cat, kind, tech, query])
 
-  const updateCat = (c: CatFilter) => {
-    setCat(c)
-    if (c === 'all') params.delete('category')
-    else params.set('category', c)
-    setParams(params, { replace: true })
+    return [...list].sort((a, b) => {
+      if (sort === 'title') return a.title.localeCompare(b.title)
+      if (sort === 'recent') return b.year - a.year || a.sortOrder - b.sortOrder
+      if (a.featured !== b.featured) return a.featured ? -1 : 1
+      if (b.year !== a.year) return b.year - a.year
+      return a.sortOrder - b.sortOrder
+    })
+  }, [kind, query, selectedThemes, sort, stack])
+
+  const themeCountMap = useMemo(() => {
+    return careerThemes.reduce((acc, theme) => {
+      acc[theme.id] = filtered.filter((project) => themesForProject(project).includes(theme.id)).length
+      return acc
+    }, {} as Record<CareerThemeId, number>)
+  }, [filtered])
+
+  const stackCountMap = useMemo(() => {
+    return stackFilters.reduce((acc, option) => {
+      acc[option.id] = filtered.filter((project) => projectMatchesStack(project, option.id)).length
+      return acc
+    }, {} as Record<string, number>)
+  }, [filtered])
+
+  const updateParam = (key: string, value: string | null) => {
+    const next = new URLSearchParams(params)
+    if (!value) next.delete(key)
+    else next.set(key, value)
+    setParams(next, { replace: true })
+  }
+
+  const updateCategories = (nextThemes: CareerThemeId[]) => {
+    const next = new URLSearchParams(params)
+    next.delete('category')
+    nextThemes.forEach((theme) => next.append('category', theme))
+    setParams(next, { replace: true })
+  }
+
+  const resetFilters = () => {
+    setSort('featured')
+    setFiltersOpen(false)
+    setParams(new URLSearchParams(), { replace: true })
   }
 
   return (
     <>
       <SEO
         title="Projects | Patrick Fanella"
-        description="Browse projects, case studies, and tools — by category, stack, and status."
+        description="Browse projects and tools by job-search-friendly categories, stack, and mode."
       />
-      <div className="container-page py-10 lg:py-14">
-        <header className="max-w-3xl">
-          <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-accent-soft)] font-mono">
-            Archive
-          </p>
-          <h1 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">All projects</h1>
-          <p className="mt-3 text-[color:var(--color-fg-muted)]">
-            The full archive — projects, tools, experiments. Filter, search, and switch between gallery, directory, and table modes.
-          </p>
-        </header>
 
-        {/* Controls */}
-        <div className="mt-8 space-y-4">
-          {/* search + view */}
-          <div className="flex flex-wrap items-center gap-3">
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search projects, stack, descriptions…"
-              className="flex-1 min-w-[220px] rounded-md bg-[color:var(--color-bg-elev)] border border-[color:var(--color-border-strong)] px-3 py-2 text-sm placeholder:text-[color:var(--color-fg-dim)] focus:border-[color:var(--color-accent)]"
-              aria-label="Search projects"
-            />
-            <div role="tablist" aria-label="View mode" className="flex items-center gap-1 p-1 rounded-md border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg-elev)]">
-              {(['gallery', 'directory', 'table'] as const).map((v) => (
-                <button
-                  key={v}
-                  role="tab"
-                  aria-selected={view === v}
-                  onClick={() => setView(v)}
-                  className={`text-xs px-3 py-1.5 rounded transition-colors capitalize ${
-                    view === v
-                      ? 'bg-[color:var(--color-accent)] text-[color:var(--color-accent-ink)]'
-                      : 'text-[color:var(--color-fg-muted)] hover:text-[color:var(--color-fg)]'
-                  }`}
-                >
-                  {v}
-                </button>
-              ))}
-            </div>
+      <div className="container-page py-10 lg:py-14">
+        <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="section-kicker">Projects</p>
+            <h1 className="mt-3 text-4xl md:text-5xl font-display font-semibold tracking-tight">Projects + tools, one archive.</h1>
+            <p className="mt-3 max-w-2xl text-[color:var(--color-fg-muted)] leading-relaxed">
+              Filter by career framing first — Backend Engineering, AI / ML Integration, DevOps & Infra, Developer Tooling — then drill into the stack only when it helps.
+            </p>
           </div>
 
-          <FilterRow label="Type" options={[
-            { id: 'all' as KindFilter, label: 'All' },
-            { id: 'case-study', label: 'Case studies' },
-            { id: 'tool', label: 'Tools' },
-          ]} value={kind} onChange={setKind} />
+          <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+            {projectKindFilters.map((option) => {
+              const active = kind === option.id
+              return (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => {
+                    const next = option.id as KindFilter
+                    updateParam('kind', next === 'all' ? null : next)
+                  }}
+                  aria-pressed={active}
+                  className={`chip transition-colors ${active ? 'chip-active' : 'hover:border-[color:var(--color-border-strong)] hover:text-[color:var(--color-fg)]'}`}
+                >
+                  {option.label}
+                </button>
+              )
+            })}
 
-          <FilterRow label="Category" options={[
-            { id: 'all' as CatFilter, label: 'All' },
-            ...categories.map((c) => ({ id: c.id as CatFilter, label: c.label })),
-          ]} value={cat} onChange={updateCat} />
+            <div className="ml-2 flex items-center gap-1 rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-surface-2)] p-1">
+              {archiveViewModes.map((option) => {
+                const active = view === option.id
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    onClick={() => {
+                      const next = option.id as ViewMode
+                      updateParam('view', next)
+                    }}
+                    aria-pressed={active}
+                    className={`rounded-full px-3 py-1.5 text-xs transition-colors ${active ? 'bg-[color:var(--color-accent)] text-[color:var(--color-accent-ink)]' : 'text-[color:var(--color-fg-muted)] hover:text-[color:var(--color-fg)]'}`}
+                  >
+                    {option.label}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        </header>
 
-          <FilterRow label="Stack" options={[
-            { id: null as string | null, label: 'Any' },
-            ...techFilters.map((t) => ({ id: t as string | null, label: t })),
-          ]} value={tech} onChange={setTech} />
-        </div>
+        <div className="mt-8 lg:grid lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-6">
+          <aside className="lg:sticky lg:top-20 lg:self-start">
+            <div className="lg:hidden mb-3 flex justify-end">
+              <button type="button" onClick={() => setFiltersOpen((value) => !value)} className="btn-secondary text-sm">
+                {filtersOpen ? 'Hide filters' : 'Show filters'}
+              </button>
+            </div>
 
-        <p className="mt-6 text-xs text-[color:var(--color-fg-dim)] font-mono">
-          {filtered.length} {filtered.length === 1 ? 'result' : 'results'}
-        </p>
+            <div className={`${filtersOpen ? 'block' : 'hidden'} lg:block panel p-5 space-y-5`}>
+              <div>
+                <label htmlFor="archive-search" className="block text-[11px] uppercase tracking-[0.2em] font-mono text-[color:var(--color-fg-dim)]">
+                  Search
+                </label>
+                <input
+                  id="archive-search"
+                  type="search"
+                  value={query}
+                  onChange={(event) => {
+                    const next = event.target.value
+                    updateParam('q', next || null)
+                  }}
+                  placeholder="Title, summary, stack, role…"
+                  className="control mt-2"
+                />
+              </div>
 
-        {/* Views */}
-        <div className="mt-4">
-          {view === 'gallery' && <GalleryView projects={filtered} />}
-          {view === 'directory' && <DirectoryView projects={filtered} />}
-          {view === 'table' && <TableView projects={filtered} />}
+              <FilterBlock
+                title="Career themes"
+                subtitle="Filter by job-search framing."
+                counts={themeCountMap}
+                options={careerThemes}
+                selected={selectedThemes}
+                onToggle={(themeId) => {
+                  const next = selectedThemes.includes(themeId)
+                    ? selectedThemes.filter((value) => value !== themeId)
+                    : [...selectedThemes, themeId]
+                  updateCategories(next)
+                }}
+              />
+
+              <FilterBlock
+                title="Stack signal"
+                subtitle="One quick tech lens at a time."
+                counts={stackCountMap}
+                options={stackFilters.map((option) => ({ id: option.id, label: option.label, description: '' }))}
+                selected={stack ? [stack] : []}
+                onToggle={(value) => {
+                  const next = stack === value ? '' : value.toLowerCase()
+                  updateParam('stack', next || null)
+                }}
+              />
+
+              <div>
+                <label htmlFor="sort-mode" className="block text-[11px] uppercase tracking-[0.2em] font-mono text-[color:var(--color-fg-dim)]">
+                  Sort
+                </label>
+                <select
+                  id="sort-mode"
+                  value={sort}
+                  onChange={(event) => setSort(event.target.value as SortMode)}
+                  className="control mt-2"
+                >
+                  <option value="featured">Featured first</option>
+                  <option value="recent">Most recent</option>
+                  <option value="title">Title A–Z</option>
+                </select>
+              </div>
+
+              <div className="flex items-center justify-between gap-3 pt-1">
+                <p className="text-xs text-[color:var(--color-fg-dim)] font-mono">
+                  {filtered.length} {filtered.length === 1 ? 'result' : 'results'}
+                </p>
+                <button type="button" onClick={resetFilters} className="text-xs text-[color:var(--color-accent-soft)] hover:underline">
+                  Reset all
+                </button>
+              </div>
+            </div>
+          </aside>
+
+          <main className="mt-6 lg:mt-0 min-w-0">
+            {view === 'gallery' ? <GalleryView projects={filtered} /> : <DirectoryView projects={filtered} />}
+          </main>
         </div>
       </div>
     </>
@@ -129,118 +250,124 @@ export function ProjectsPage() {
 
 function GalleryView({ projects }: { projects: Project[] }) {
   if (projects.length === 0) return <EmptyState />
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-      {projects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)}
-    </div>
-  )
+
+  return <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">{projects.map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}</div>
 }
 
 function DirectoryView({ projects }: { projects: Project[] }) {
   if (projects.length === 0) return <EmptyState />
-  return (
-    <ul className="surface divide-y divide-[color:var(--color-border)]">
-      {projects.map((p) => (
-        <li key={p.slug}>
-          <Link to={`/projects/${p.slug}`} className="flex items-center gap-4 p-4 hover:bg-[color:var(--color-bg-elev-2)] transition-colors">
-            <span className="block h-12 w-20 shrink-0 rounded-md overflow-hidden bg-[color:var(--color-bg-elev-2)] border border-[color:var(--color-border)]">
-              <img src={p.media[0]?.src ?? '/assets/projects/project-fallback.svg'} alt="" className="h-full w-full object-cover" />
-            </span>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider font-mono text-[color:var(--color-fg-dim)]">
-                <span>{typeLabel(p)}</span>
-                <span aria-hidden>·</span>
-                <span>{p.year}</span>
-                {p.liveUrl && <><span aria-hidden>·</span><span className="text-[color:var(--color-success)]">Live</span></>}
-              </div>
-              <div className="mt-0.5 flex items-center gap-3">
-                <h3 className="text-base font-semibold truncate">{p.title}</h3>
-                <span className="text-xs text-[color:var(--color-fg-dim)] hidden md:inline truncate">{p.stack.slice(0,4).join(' · ')}</span>
-              </div>
-              <p className="mt-1 text-sm text-[color:var(--color-fg-muted)] truncate">{p.summary}</p>
-            </div>
-            <span className="text-[color:var(--color-fg-dim)] text-sm shrink-0">→</span>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  )
-}
 
-function TableView({ projects }: { projects: Project[] }) {
-  if (projects.length === 0) return <EmptyState />
   return (
-    <div className="surface overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead className="text-[10px] uppercase tracking-wider text-[color:var(--color-fg-dim)] font-mono">
-          <tr className="border-b border-[color:var(--color-border)]">
-            <th className="text-left p-3 font-normal">Project</th>
-            <th className="text-left p-3 font-normal">Type</th>
-            <th className="text-left p-3 font-normal">Year</th>
-            <th className="text-left p-3 font-normal">Stack</th>
-            <th className="text-left p-3 font-normal">Status</th>
-            <th className="text-left p-3 font-normal">Links</th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects.map((p) => (
-            <tr key={p.slug} className="border-b border-[color:var(--color-border)]/60 hover:bg-[color:var(--color-bg-elev-2)] transition-colors">
-              <td className="p-3 font-medium">
-                <Link to={`/projects/${p.slug}`} className="hover:text-[color:var(--color-accent-soft)]">{p.title}</Link>
-              </td>
-              <td className="p-3 text-[color:var(--color-fg-muted)]">{typeLabel(p)}</td>
-              <td className="p-3 text-[color:var(--color-fg-muted)] font-mono text-xs">{p.year}</td>
-              <td className="p-3 text-[color:var(--color-fg-muted)] text-xs">{p.stack.slice(0, 5).join(', ')}</td>
-              <td className="p-3 text-xs">
-                <span className="font-mono text-[color:var(--color-fg-dim)]">{statusBadges(p).join(' · ')}</span>
-              </td>
-              <td className="p-3 text-xs space-x-3">
-                {p.liveUrl && <a href={p.liveUrl} target="_blank" rel="noreferrer" className="text-[color:var(--color-accent-soft)] hover:underline">Live</a>}
-                {p.repoUrl && <a href={p.repoUrl} target="_blank" rel="noreferrer" className="text-[color:var(--color-accent-soft)] hover:underline">Repo</a>}
-                <Link to={`/projects/${p.slug}`} className="text-[color:var(--color-fg-muted)] hover:text-[color:var(--color-fg)]">Detail</Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="space-y-3">
+      {projects.map((project) => {
+        const themes = themesForProject(project).slice(0, 3).map((themeId) => themeLabel(themeId))
+        return (
+          <Link
+            key={project.slug}
+            to={`/projects/${project.slug}`}
+            className="panel block p-4 hover:border-[color:var(--color-border-strong)] transition-colors"
+          >
+            <div className="grid gap-4 lg:grid-cols-[160px_minmax(0,1fr)_260px] lg:items-center">
+              <WorkMediaPlaceholder
+                title={project.title}
+                kicker={project.kind === 'tool' ? 'Tool' : 'Project'}
+                summary={project.summary}
+                caption={`${themeLabel(primaryThemeForProject(project))} · ${project.year}`}
+                accent={project.kind === 'tool' ? 'amber' : project.featured ? 'violet' : 'green'}
+                variant="thumb"
+                className="h-full"
+              />
+
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-mono text-[color:var(--color-fg-dim)]">
+                  <span>{typeLabel(project)}</span>
+                  <span aria-hidden>·</span>
+                  <span>{project.year}</span>
+                  {project.liveUrl && (
+                    <>
+                      <span aria-hidden>·</span>
+                      <span className="text-[color:var(--color-success)]">Live</span>
+                    </>
+                  )}
+                </div>
+
+                <div className="mt-2 flex flex-wrap items-baseline gap-3">
+                  <h3 className="text-xl font-semibold tracking-tight">{project.title}</h3>
+                  <p className="text-sm text-[color:var(--color-fg-muted)] leading-relaxed line-clamp-2">{project.summary}</p>
+                </div>
+
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {themes.map((theme) => (
+                    <span key={theme} className="chip text-[11px]">
+                      {theme}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid gap-2 text-xs text-[color:var(--color-fg-muted)]">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-[color:var(--color-fg-dim)]">Stack</span>
+                  <span>{project.stack.slice(0, 4).join(' · ')}</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-[color:var(--color-fg-dim)]">Status</span>
+                  <span className="font-mono">{statusBadges(project).join(' · ') || '—'}</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-[color:var(--color-fg-dim)]">Role</span>
+                  <span>{project.role}</span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        )
+      })}
     </div>
   )
 }
 
 function EmptyState() {
-  return (
-    <div className="surface p-12 text-center text-[color:var(--color-fg-muted)]">No projects match those filters.</div>
-  )
+  return <div className="panel p-12 text-center text-[color:var(--color-fg-muted)]">No work matches those filters.</div>
 }
 
-interface RowProps<T> {
-  label: string
-  options: { id: T; label: string }[]
-  value: T
-  onChange: (v: T) => void
+interface FilterBlockProps<T extends { id: string; label: string; description: string }> {
+  title: string
+  subtitle: string
+  options: T[]
+  selected: string[]
+  onToggle: (id: T['id']) => void
+  counts?: Record<string, number>
 }
-function FilterRow<T>({ label, options, value, onChange }: RowProps<T>) {
+
+function FilterBlock<T extends { id: string; label: string; description: string }>({ title, subtitle, options, selected, onToggle, counts }: FilterBlockProps<T>) {
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="text-[11px] uppercase tracking-wider text-[color:var(--color-fg-dim)] font-mono mr-2">{label}</span>
-      {options.map((opt) => {
-        const active = opt.id === value
-        return (
-          <button
-            key={String(opt.id)}
-            type="button"
-            onClick={() => onChange(opt.id)}
-            aria-pressed={active}
-            className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-              active
-                ? 'bg-[color:var(--color-accent)] text-[color:var(--color-accent-ink)] border-[color:var(--color-accent)]'
-                : 'border-[color:var(--color-border-strong)] text-[color:var(--color-fg-muted)] hover:text-[color:var(--color-fg)] hover:bg-[color:var(--color-bg-elev)]'
-            }`}
-          >
-            {opt.label}
-          </button>
-        )
-      })}
-    </div>
+    <section>
+      <div className="flex items-end justify-between gap-3">
+        <div>
+          <h2 className="text-[11px] uppercase tracking-[0.2em] font-mono text-[color:var(--color-fg-dim)]">{title}</h2>
+          <p className="mt-1 text-xs text-[color:var(--color-fg-muted)]">{subtitle}</p>
+        </div>
+      </div>
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        {options.map((option) => {
+          const active = selected.includes(option.id)
+          const count = counts?.[option.id]
+          return (
+            <button
+              key={option.id}
+              type="button"
+              aria-pressed={active}
+              onClick={() => onToggle(option.id)}
+              className={`chip text-left transition-colors ${active ? 'chip-active' : 'hover:border-[color:var(--color-border-strong)] hover:text-[color:var(--color-fg)]'}`}
+            >
+              <span>{option.label}</span>
+              {typeof count === 'number' && <span className="text-[10px] opacity-80">{count}</span>}
+            </button>
+          )
+        })}
+      </div>
+    </section>
   )
 }

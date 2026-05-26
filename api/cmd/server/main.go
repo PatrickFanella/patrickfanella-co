@@ -84,6 +84,13 @@ func main() {
 	r.Get("/api/projects/{slug}", api.GetProject)
 	r.Post("/api/contact", api.CreateContact)
 
+	// TODO(devlog ingestion): add POST /api/devlog for Changemaker.
+	// Auth: Authorization: Bearer <shared secret> (or equivalent signed token).
+	// Payload: { id, date, title, body, tags, source, projectRef? }.
+	// Store raw posts in a devlog_posts table with upsert-on-id semantics,
+	// then surface them through the web app's daily feed.
+	// Suggested registration once the handler exists: r.Post("/api/devlog", api.CreateDevlog)
+
 	server := &http.Server{
 		Addr:              ":" + cfg.Port,
 		Handler:           r,
