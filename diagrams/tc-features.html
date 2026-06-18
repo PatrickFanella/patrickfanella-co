@@ -8,8 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
-  .card{background:#282a36;border-radius:0;padding:28px 20px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca}
+  body{background:#1a1b26;display:flex;align-items:flex-start;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 20px;max-width:820px;width:100%;box-shadow:4px 4px 0 #805bca;overflow:auto}
   svg text{font-family:'JetBrains Mono','Space Grotesk',monospace}
 </style>
 </head>
@@ -27,9 +27,9 @@
 <rect x="59" y="113" width="124" height="36" fill="#191a21"/><rect x="56" y="110" width="124" height="36" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
 <text x="118" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Whisper large-v3</text>
 <rect x="193" y="113" width="124" height="36" fill="#191a21"/><rect x="190" y="110" width="124" height="36" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
-<text x="252" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Speaker diarization</text>
+<text x="252" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Diarization</text>
 <rect x="59" y="159" width="124" height="36" fill="#191a21"/><rect x="56" y="156" width="124" height="36" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
-<text x="118" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Long-audio chunking</text>
+<text x="118" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Audio chunking</text>
 <rect x="193" y="159" width="124" height="36" fill="#191a21"/><rect x="190" y="156" width="124" height="36" fill="#44475a" stroke="#ff79c6" stroke-width="1.5"/>
 <text x="252" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Quality presets</text>
 
@@ -38,9 +38,9 @@
 <rect x="350" y="72" width="290" height="140" fill="rgba(139,233,253,0.06)" stroke="#8be9fd" stroke-width="2"/>
 <text x="495" y="96" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#8be9fd">YouTube ingestion</text>
 <rect x="369" y="113" width="120" height="36" fill="#191a21"/><rect x="366" y="110" width="120" height="36" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
-<text x="426" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">yt-dlp integration</text>
+<text x="426" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">yt-dlp</text>
 <rect x="499" y="113" width="128" height="36" fill="#191a21"/><rect x="496" y="110" width="128" height="36" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
-<text x="560" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Auto-captions fetch</text>
+<text x="560" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Auto-captions</text>
 <rect x="369" y="159" width="120" height="36" fill="#191a21"/><rect x="366" y="156" width="120" height="36" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
 <text x="426" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Channel ingestion</text>
 <rect x="499" y="159" width="128" height="36" fill="#191a21"/><rect x="496" y="156" width="128" height="36" fill="#44475a" stroke="#8be9fd" stroke-width="1.5"/>
@@ -55,7 +55,7 @@
 <rect x="193" y="273" width="124" height="36" fill="#191a21"/><rect x="190" y="270" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
 <text x="252" y="288" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">OpenSearch</text>
 <rect x="59" y="319" width="124" height="36" fill="#191a21"/><rect x="56" y="316" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
-<text x="118" y="334" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Timestamp deep links</text>
+<text x="118" y="334" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Timestamp links</text>
 <rect x="193" y="319" width="124" height="36" fill="#191a21"/><rect x="190" y="316" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
 <text x="252" y="334" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Highlighting</text>
 
@@ -77,22 +77,22 @@
 <rect x="40" y="392" width="290" height="140" fill="rgba(80,250,123,0.06)" stroke="#50fa7b" stroke-width="2"/>
 <text x="185" y="416" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#50fa7b">Auth + monetization</text>
 <rect x="59" y="433" width="124" height="36" fill="#191a21"/><rect x="56" y="430" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
-<text x="118" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">OAuth (Google/Twitch)</text>
+<text x="118" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">OAuth providers</text>
 <rect x="193" y="433" width="124" height="36" fill="#191a21"/><rect x="190" y="430" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
 <text x="252" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Stripe billing</text>
 <rect x="59" y="479" width="124" height="36" fill="#191a21"/><rect x="56" y="476" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
 <text x="118" y="494" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Free vs pro tiers</text>
 <rect x="193" y="479" width="124" height="36" fill="#191a21"/><rect x="190" y="476" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
-<text x="252" y="494" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">API key management</text>
+<text x="252" y="494" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">API keys</text>
 
 <!-- Row 3 right: Ops (yellow) -->
 <rect x="354" y="396" width="290" height="140" fill="#191a21"/>
 <rect x="350" y="392" width="290" height="140" fill="rgba(241,250,140,0.06)" stroke="#f1fa8c" stroke-width="2"/>
 <text x="495" y="416" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#f1fa8c">Observability</text>
 <rect x="369" y="433" width="120" height="36" fill="#191a21"/><rect x="366" y="430" width="120" height="36" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
-<text x="426" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Prometheus metrics</text>
+<text x="426" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Prometheus</text>
 <rect x="499" y="433" width="128" height="36" fill="#191a21"/><rect x="496" y="430" width="128" height="36" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
-<text x="560" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Grafana dashboards</text>
+<text x="560" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Grafana</text>
 <rect x="369" y="479" width="120" height="36" fill="#191a21"/><rect x="366" y="476" width="120" height="36" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>
 <text x="426" y="494" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Health checks</text>
 <rect x="499" y="479" width="128" height="36" fill="#191a21"/><rect x="496" y="476" width="128" height="36" fill="#44475a" stroke="#f1fa8c" stroke-width="1.5"/>

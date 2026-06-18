@@ -41,7 +41,7 @@ describe('ProjectMediaGallery', () => {
 
 		expect(screen.getByRole('img', { name: /demo project placeholder artwork/i })).toHaveAttribute(
 			'src',
-			'/assets/projects/project-fallback.svg',
+			'/assets/projects/diagrams/v10-by-the-numbers.webp',
 		)
 	})
 })

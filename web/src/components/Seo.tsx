@@ -5,7 +5,7 @@ import { siteName, toAbsoluteUrl } from '../lib/site'
 const defaultTitle = `${siteName} | Full Stack Developer`
 const defaultDescription =
 	'Project-first portfolio for Patrick Fanella covering Go APIs, React interfaces, PostgreSQL, AI pipelines, and production systems.'
-const defaultImagePath = '/assets/projects/project-fallback.svg'
+const defaultImagePath = '/assets/projects/diagrams/v10-by-the-numbers.webp'
 
 type StructuredData = Record<string, unknown> | Array<Record<string, unknown>>
 

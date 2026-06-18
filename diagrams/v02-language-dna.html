@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Portfolio — Language DNA</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}.card{background:#282a36;padding:28px 24px;max-width:760px;width:100%;box-shadow:6px 6px 0 #f8f8f2;color:#f8f8f2}</style>
+</head>
+<body>
+<div class="card">
+<div style="font-size:16px;font-weight:500;margin-bottom:4px;font-family:'JetBrains Mono',monospace;color:#8be9fd;">Language DNA</div>
+<div style="font-size:12px;color:#6272a4;margin-bottom:12px;font-family:'JetBrains Mono',monospace;">Lines of code by language per project</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;font-size:11px;color:#6272a4;font-family:'JetBrains Mono',monospace;">
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#8be9fd;"></span>Go</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#ff79c6;"></span>Python</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#bd93f9;"></span>TypeScript</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#50fa7b;"></span>SQL</span>
+  <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#f1fa8c;"></span>Solidity</span>
+</div>
+<div style="position:relative;height:420px;"><canvas id="c"></canvas></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+Chart.defaults.color='#6272a4';Chart.defaults.font.family='"JetBrains Mono",monospace';Chart.defaults.font.size=11;
+const labels=['CLPR','Subcults','SoundHash','Patchwork','SubCorp','Clustr','Discord Spy','Transcript','Internet-ID','Galdr','Jury-Rigged','Cutroom'];
+new Chart(document.getElementById('c'),{type:'bar',
+  data:{labels,datasets:[
+    {label:'Go',data:[170520,87991,0,0,0,30379,0,0,0,22675,0,0],backgroundColor:'#8be9fd',borderRadius:0},
+    {label:'Python',data:[447,0,60173,0,0,0,0,35020,0,0,0,0],backgroundColor:'#ff79c6',borderRadius:0},
+    {label:'TypeScript',data:[126247,45907,8014,66871,54804,24590,46924,8255,30051,10009,16335,16075],backgroundColor:'#bd93f9',borderRadius:0},
+    {label:'SQL',data:[9699,1956,12,84,1185,2888,674,286,231,3691,44,0],backgroundColor:'#50fa7b',borderRadius:0},
+    {label:'Solidity',data:[0,0,0,0,0,0,0,0,408,0,0,0],backgroundColor:'#f1fa8c',borderRadius:0},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.raw.toLocaleString()}}},
+    scales:{x:{stacked:true,grid:{color:'rgba(98,114,164,0.2)'},ticks:{callback:v=>(v/1000)+'k'}},y:{stacked:true,grid:{display:false}}}}
+});
+</script>
+</body></html>

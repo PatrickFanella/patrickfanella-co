@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project SVG Assets</title>
+<style>
+  *{box-sizing:border-box}body{margin:0;background:#1a1b26;color:#f8f8f2;font-family:Inter,system-ui,sans-serif;padding:32px}main{max-width:1200px;margin:0 auto}.header{border:2px solid #bd93f9;background:#282a36;box-shadow:4px 4px 0 #805bca;padding:24px;margin-bottom:24px}h1{margin:0 0 8px;font-size:28px}p{margin:0;color:#8a95bd}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}.card{background:#282a36;border:1px solid #44475a;box-shadow:3px 3px 0 #44475a;padding:12px}.card:hover{border-color:#bd93f9;box-shadow:3px 3px 0 #bd93f9}.title{font:700 13px/1.2 ui-monospace,monospace;color:#8be9fd;margin-bottom:10px}img{display:block;width:100%;height:auto;background:#1a1b26;border:1px solid #44475a}a{color:inherit;text-decoration:none}.nav{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}.nav a{color:#8be9fd;font:700 13px ui-monospace,monospace}
+</style>
+</head>
+<body>
+<main>
+  <div class="header">
+    <h1>Project SVG assets</h1>
+    <p>Overview SVGs from <code>web/public/assets/projects</code>.</p>
+    <div class="nav"><a href="diagrams/">Generated WebP diagrams</a></div>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+<script>
+const files = [
+  'artemis-overview.svg','augr-overview.svg','blacktower-overview.svg','clpr-overview.svg','clustr-overview.svg','cutroom-overview.svg','echo-trails-overview.svg','edda-overview.svg','galdr-overview.svg','internet-id-overview.svg','invisible-museum-overview.svg','jury-rigged-overview.svg','llama-line-overview.svg','nearbody-overview.svg','one-block-cinema-overview.svg','open-pilot-overview.svg','paqr-overview.svg','patchwork-overview.svg','pocket-civilization-overview.svg','redstring-overview.svg','soundhash-overview.svg','subcorp-overview.svg','subcult-os-overview.svg','subcult-tv-overview.svg','subcults-overview.svg','switchyard-overview.svg','transcript-create-overview.svg'
+];
+const grid = document.getElementById('grid');
+for (const file of files) {
+  const a = document.createElement('a');
+  a.className = 'card';
+  a.href = file;
+  a.innerHTML = `<div class="title">${file.replace('.svg','')}</div><img src="${file}" alt="${file.replace(/[-.]/g,' ')}">`;
+  grid.appendChild(a);
+}
+</script>
+</body>
+</html>

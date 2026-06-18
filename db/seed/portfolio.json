@@ -1174,13 +1174,7 @@
         "Not every portfolio project needs a full flagship narrative; some are better presented as concise highlights with clear scope and outcome.",
         "Small infrastructure and meta-projects still show engineering taste when their boundaries, trade-offs, and operating model are explicit."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/patrickfanella-co-overview.svg",
-          "alt": "Overview diagram for PatrickFanella.co showing the project scope, stack, and core system relationships.",
-          "caption": "PatrickFanella.co overview: project scope, stack, and core architecture cues."
-        }
-      ]
+      "media": []
     },
     {
       "slug": "artemis",

@@ -4,7 +4,7 @@ import type { ProjectMedia } from '../lib/api'
 import { monoLabelClass, surfaceCardClass } from '../lib/styles'
 import { CarouselNav } from './CarouselNav'
 
-const fallbackMediaSrc = '/assets/projects/project-fallback.svg'
+const fallbackMediaSrc = '/assets/projects/diagrams/v10-by-the-numbers.webp'
 
 const ROTATE_INTERVAL_MS = 6000
 

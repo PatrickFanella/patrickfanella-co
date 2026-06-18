@@ -8,8 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
-  .card{background:#282a36;border-radius:0;padding:28px 20px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca}
+  body{background:#1a1b26;display:flex;align-items:flex-start;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}
+  .card{background:#282a36;border-radius:0;padding:28px 20px;max-width:820px;width:100%;box-shadow:4px 4px 0 #805bca;overflow:auto}
   svg text{font-family:'JetBrains Mono','Space Grotesk',monospace}
 </style>
 </head>
@@ -25,13 +25,13 @@
 <rect x="40" y="72" width="290" height="140" fill="rgba(189,147,249,0.06)" stroke="#bd93f9" stroke-width="2"/>
 <text x="185" y="96" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#bd93f9">Search + discovery</text>
 <rect x="59" y="113" width="124" height="36" fill="#191a21"/><rect x="56" y="110" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
-<text x="118" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Hybrid BM25+vector</text>
+<text x="118" y="128" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#f8f8f2" opacity="0.85">BM25 + vector</text>
 <rect x="193" y="113" width="124" height="36" fill="#191a21"/><rect x="190" y="110" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
 <text x="252" y="128" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Saved searches</text>
 <rect x="59" y="159" width="124" height="36" fill="#191a21"/><rect x="56" y="156" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
 <text x="118" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Discovery lists</text>
 <rect x="193" y="159" width="124" height="36" fill="#191a21"/><rect x="190" y="156" width="124" height="36" fill="#44475a" stroke="#bd93f9" stroke-width="1.5"/>
-<text x="252" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Recommendations</text>
+<text x="252" y="174" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Recs</text>
 
 <!-- Row 1 right: Community (cyan) -->
 <rect x="354" y="76" width="290" height="140" fill="#191a21"/>
@@ -79,7 +79,7 @@
 <rect x="59" y="433" width="124" height="36" fill="#191a21"/><rect x="56" y="430" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
 <text x="118" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Twitch OAuth + MFA</text>
 <rect x="193" y="433" width="124" height="36" fill="#191a21"/><rect x="190" y="430" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
-<text x="252" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Stripe subscriptions</text>
+<text x="252" y="448" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Stripe billing</text>
 <rect x="59" y="479" width="124" height="36" fill="#191a21"/><rect x="56" y="476" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
 <text x="118" y="494" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#f8f8f2" opacity="0.85">Premium tiers</text>
 <rect x="193" y="479" width="124" height="36" fill="#191a21"/><rect x="190" y="476" width="124" height="36" fill="#44475a" stroke="#50fa7b" stroke-width="1.5"/>
