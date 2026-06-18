@@ -110,6 +110,9 @@ export function ProjectDetailPage() {
     return <Navigate replace to="/tools" />
   }
 
+  const isHighlight = project.kind === 'highlight'
+  const projectKindLabel = isHighlight ? 'Project highlight' : 'Case study'
+
   return (
     <section className={pageSectionClass}>
       <Seo
@@ -136,7 +139,7 @@ export function ProjectDetailPage() {
       />
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b-2 border-stroke pb-10 mb-8">
         <div>
-          <SectionLabel>{`Case study / ${project.year}`}</SectionLabel>
+          <SectionLabel>{`${projectKindLabel} / ${project.year}`}</SectionLabel>
           <h1 className={`${pageTitleClass} mt-6 uppercase`}>{project.title}</h1>
           <p className="mt-6 text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
         </div>

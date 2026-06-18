@@ -21,7 +21,7 @@
     <div style="font-size:22px;font-weight:500;color:#bd93f9;font-family:'JetBrains Mono',monospace">45k+</div>
   </div>
   <div style="background:#44475a;padding:14px 16px;border:2px solid #8be9fd;box-shadow:3px 3px 0 #8be9fd;">
-    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">Test coverage</div>
+    <div style="font-size:12px;color:#6272a4;font-family:'JetBrains Mono',monospace">Test code</div>
     <div style="font-size:22px;font-weight:500;color:#8be9fd;font-family:'JetBrains Mono',monospace">17k lines</div>
   </div>
   <div style="background:#44475a;padding:14px 16px;border:2px solid #50fa7b;box-shadow:3px 3px 0 #50fa7b;">
@@ -109,8 +109,8 @@ new Chart(document.getElementById('routesChart'),{
   data:{labels:rL,datasets:[{data:rD,
     backgroundColor:rD.map((_,i)=>[D.pink,D.cyan,D.purple,D.green,D.orange,D.yellow,D.red,D.pink,D.cyan,D.purple,D.green,D.orange,D.yellow][i]),
     borderRadius:0,barPercentage:0.65}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{grid:{display:false},ticks:{maxRotation:45,autoSkip:false}},y:{grid:{color:gridC},beginAtZero:true}}}
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},
+    scales:{x:{grid:{color:gridC},beginAtZero:true},y:{grid:{display:false},ticks:{autoSkip:false}}}}
 });
 </script>
 </body>

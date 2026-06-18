@@ -4,15 +4,24 @@
       "slug": "clpr",
       "title": "Clpr",
       "kind": "case-study",
-      "summary": "Full-stack Twitch clip curation platform with community voting, hybrid search, and a React Native mobile app, live in production at clpr.tv.",
-      "description": "Clpr started as a way to surface the best Twitch clips without relying on platform algorithms. The result is a production content platform with Reddit-style karma voting, hybrid search combining BM25 full-text with semantic vector matching, user collections, and social features. A Go API serves both the React web client and a React Native mobile app built on Expo through a shared JSON contract. Infrastructure is containerized with Docker, orchestrated via Kubernetes, monitored through Prometheus and Grafana, and deployed through GitHub Actions CI/CD pipelines.",
-      "role": "Full-stack engineer",
+      "summary": "Production Twitch clip curation platform with community voting, hybrid BM25/vector search, web/mobile clients, and live deployment at clpr.tv.",
+      "description": "Clpr is a production content platform for discovering, organizing, and sharing Twitch clips without depending on platform algorithms. It combines Reddit-style voting, collections, moderation workflows, hybrid BM25 plus vector search, and shared API contracts for React web and React Native mobile clients. The backend is a Go service backed by PostgreSQL, Redis, and OpenSearch, with containerized deployment, observability, and CI/CD around the full stack.",
+      "role": "Lead full-stack engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/clpr",
       "liveUrl": "https://clpr.tv",
       "featured": true,
       "sortOrder": 1,
-      "stack": ["Go", "React", "React Native", "PostgreSQL", "Redis", "OpenSearch", "Kubernetes", "TypeScript"],
+      "stack": [
+        "Go",
+        "React",
+        "React Native",
+        "PostgreSQL",
+        "Redis",
+        "OpenSearch",
+        "TypeScript",
+        "Docker"
+      ],
       "highlights": [
         "Shipped a production web and mobile client with community voting, collections, and hybrid BM25 + semantic vector search.",
         "Built a Go API layer handling auth, content moderation, and real-time feed composition across PostgreSQL, Redis, and OpenSearch.",
@@ -59,15 +68,24 @@
       "slug": "subcorp",
       "title": "Subcorp",
       "kind": "case-study",
-      "summary": "Self-hosted multi-agent AI platform where six autonomous agents propose, debate, and execute missions through real-time WebSocket chat with sandboxed tool execution.",
-      "description": "Subcorp is a self-hosted platform for autonomous AI coordination. Six named agents with distinct personalities and access controls propose missions, debate approaches in roundtable conversations, and execute tasks using a shared toolbox, with minimal human intervention. The system runs on Next.js 16 with React 19, backed by PostgreSQL 16 with pgvector across 45 tables. Agents communicate through real-time WebSocket connections in the Sanctum chat interface, which supports @mention routing, whisper channels, and structured roundtable modes. Each agent has access to sandboxed tools including web search, bash execution, file I/O, and semantic memory retrieval, all running in an isolated Docker container.",
-      "role": "Full-stack engineer",
+      "summary": "Self-hosted multi-agent platform where six autonomous agents propose, debate, execute missions, and persist semantic memory through a real-time Sanctum interface.",
+      "description": "Subcorp is a self-hosted platform for autonomous AI coordination. Six named agents with distinct identities and access boundaries propose work, debate approaches, execute missions, and communicate in real time through the Sanctum chat interface. The application pairs Next.js and React with PostgreSQL plus pgvector, a WebSocket communication layer, queue-backed autonomous workflows, and sandboxed tool execution for bash, file I/O, web search, and semantic memory retrieval.",
+      "role": "Lead full-stack engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/subcorp",
       "liveUrl": "https://subcorp.subcult.tv",
       "featured": true,
       "sortOrder": 2,
-      "stack": ["Next.js", "React", "TypeScript", "PostgreSQL", "WebSocket", "Docker", "AI Agents", "pgvector"],
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "pgvector",
+        "WebSocket",
+        "Docker",
+        "AI Agents"
+      ],
       "highlights": [
         "Deployed a live multi-agent system where six AI agents autonomously propose, debate, and execute missions with minimal human intervention.",
         "Built a real-time Sanctum chat interface with WebSocket-driven @mention routing, whisper channels, and structured roundtable conversation modes.",
@@ -112,16 +130,26 @@
     },
     {
       "slug": "transcript-create",
-      "title": "Transcript Create",
+      "title": "HasanAra",
       "kind": "case-study",
-      "summary": "GPU-accelerated transcription SaaS with Whisper AI, speaker diarization, full-text search, and published client SDKs for Python and TypeScript.",
-      "description": "Searching inside video content is still broken. Most platforms don't transcribe, and those that do make the output unsearchable. Transcript Create fixes that with GPU-accelerated Whisper transcription, optional pyannote speaker diarization, and full-text search across channels via OpenSearch. A FastAPI backend coordinates GPU workers that scale horizontally using a Postgres SKIP LOCKED queue pattern. Transcripts are stored in PostgreSQL with export support for SRT, VTT, and PDF. The system includes OAuth login, Stripe billing with free and pro tiers, a Vite + React frontend, Prometheus and Grafana monitoring, published client SDKs for Python and TypeScript, and Docker images published to GHCR.",
-      "role": "Full-stack engineer",
+      "summary": "GPU transcription and searchable video archive for YouTube channels, built with Whisper workers, speaker diarization, full-text search, and export tooling.",
+      "description": "HasanAra turns long-form YouTube content into searchable, exportable transcripts. A FastAPI backend coordinates yt-dlp ingestion, GPU-accelerated Whisper transcription, optional speaker diarization, queue-backed workers, and transcript export formats such as SRT, VTT, and PDF. The React frontend gives users channel search, deep links, and transcript review, while PostgreSQL, OpenSearch, Redis, Docker, and observability tooling keep the pipeline operable for real workloads.",
+      "role": "Lead full-stack engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/transcript-create",
+      "liveUrl": "https://hasanara.tv",
       "featured": true,
       "sortOrder": 3,
-      "stack": ["Python", "FastAPI", "React", "PostgreSQL", "OpenSearch", "Whisper AI", "Docker", "TypeScript"],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Whisper",
+        "React",
+        "PostgreSQL",
+        "OpenSearch",
+        "Redis",
+        "Docker"
+      ],
       "highlights": [
         "Built a GPU-accelerated Whisper transcription pipeline with optional pyannote speaker diarization, scaling horizontally via Postgres SKIP LOCKED worker queues.",
         "Published client SDKs for Python and TypeScript, giving third-party developers a typed interface to the transcription and search API.",
@@ -165,18 +193,158 @@
       ]
     },
     {
+      "slug": "jury-rigged",
+      "title": "Jury-Rigged",
+      "kind": "case-study",
+      "summary": "Real-time AI courtroom simulation with deterministic case phases, multi-agent roles, SSE streaming, jury voting, and operator controls.",
+      "description": "Jury-Rigged is a real-time courtroom simulation where AI agents play judge, prosecutor, defense, witnesses, and bailiff. Cases progress through deterministic phases, stream events over SSE, support jury voting and deliberation, and can be replayed from recorded session data. A TypeScript/Express backend orchestrates the agent state machine and OpenRouter calls, while a React/Vite operator dashboard controls case flow and presentation surfaces can render the proceedings for live audiences.",
+      "role": "Full-stack systems engineer",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/jury-rigged",
+      "liveUrl": "https://jury-rigged.subcult.tv",
+      "featured": true,
+      "sortOrder": 4,
+      "stack": [
+        "TypeScript",
+        "Node.js",
+        "Express",
+        "React",
+        "SSE",
+        "AI Agents",
+        "OpenRouter",
+        "Twitch API"
+      ],
+      "highlights": [
+        "Built a multi-agent courtroom simulation with deterministic phase progression, live SSE streaming, and jury voting and deliberation mechanics.",
+        "Rendered proceedings in Ace Attorney visual style using PixiJS, with character animations, dialogue boxes, and courtroom transitions.",
+        "Integrated Twitch chat commands (!press, !objection) for real-time audience participation, plus NDJSON recording for deterministic session replay."
+      ],
+      "architecture": [
+        "Node.js + TypeScript + Express backend orchestrating multiple AI agents through OpenRouter, with deterministic phase state machines governing case progression.",
+        "PixiJS rendering layer producing Ace Attorney-style courtroom visuals, character sprites, dialogue overlays, and animated transitions driven by the agent output stream.",
+        "Dual interface: a viewer-facing stream with PixiJS rendering and Twitch chat integration, plus an operator dashboard (React + Vite) for case management and phase control."
+      ],
+      "lessons": [
+        "Deterministic replay from NDJSON recordings was invaluable for debugging agent behavior; being able to replay exact sequences without LLM variance made the multi-agent interactions far easier to tune.",
+        "Twitch chat integration drove more engagement than expected; audience commands like !objection created a feedback loop that made the AI responses feel more dynamic and responsive."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/jury-rigged-overview.svg",
+          "alt": "Screenshot of the Ace Attorney-style courtroom rendering with AI agent dialogue and Twitch chat overlay.",
+          "caption": "Ace Attorney-style PixiJS rendering with real-time AI agent dialogue and audience interaction."
+        }
+      ]
+    },
+    {
+      "slug": "patchwork",
+      "title": "Patchwork",
+      "kind": "case-study",
+      "summary": "AT Protocol-native mutual aid platform with map-based discovery, geoprivacy controls, moderation workers, and Bluesky Jetstream ingestion.",
+      "description": "Patchwork is a mutual-aid platform built around decentralized identity and community safety. It ingests Bluesky Jetstream data, indexes community posts, and surfaces them through map-based discovery while protecting precise location through geoprivacy controls. The TypeScript monorepo separates the web client, query API, ingestion pipeline, and moderation worker so discovery, safety, and protocol integration can evolve independently.",
+      "role": "Full-stack protocol engineer",
+      "year": 2025,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/patchwork",
+      "liveUrl": "https://patchwork.subcult.tv",
+      "featured": false,
+      "sortOrder": 5,
+      "stack": [
+        "TypeScript",
+        "React",
+        "PostgreSQL",
+        "AT Protocol",
+        "Bluesky",
+        "Jetstream",
+        "Moderation",
+        "Playwright"
+      ],
+      "highlights": [
+        "Built an AT Protocol-native platform ingesting Bluesky Jetstream data for decentralized identity and social graph integration.",
+        "Implemented geoprivacy controls that fuzz coordinates before storage, protecting user locations while preserving map-based community discovery.",
+        "Shipped a moderation worker as a dedicated service with automated content review, keeping community safety concerns separated from the main application logic."
+      ],
+      "architecture": [
+        "TypeScript monorepo (npm workspaces) with four services: React web client, query API, Jetstream ingestion pipeline, and moderation worker.",
+        "AT Protocol integration via Bluesky Jetstream for real-time data ingestion, with PostgreSQL storing indexed posts and community metadata.",
+        "Geoprivacy layer fuzzes coordinates before persistence, moderation worker processes content asynchronously, and the web client renders map-based discovery through a privacy-aware tile layer."
+      ],
+      "lessons": [
+        "Building on the AT Protocol forced good architectural decisions; decentralized identity eliminated the need for a custom auth system, and the social graph came for free.",
+        "Geoprivacy is harder than it looks. Simple coordinate rounding creates grid artifacts that can be reverse-engineered; adding controlled random noise within a privacy radius was more resilient."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/patchwork-overview.svg",
+          "alt": "Map-based interface showing community aid posts with geoprivacy-fuzzed location markers and AT Protocol identity integration.",
+          "caption": "Map-based mutual aid discovery with geoprivacy controls and decentralized identity."
+        }
+      ]
+    },
+    {
+      "slug": "augr",
+      "title": "Augr",
+      "kind": "case-study",
+      "summary": "Autonomous multi-agent trading system in Go with LLM analysis, adversarial debate, risk review, and paper/live broker adapters.",
+      "description": "Augr is an autonomous trading system where LLM-powered agents collaborate through a structured pipeline: parallel analysis, bull/bear debate, signal generation, risk debate, and execution. The Go backend unifies multiple LLM providers, market-data feeds, broker adapters, a Cobra CLI, Bubble Tea TUI, REST API, WebSocket streaming, and a React dashboard. Paper-trading paths make the full workflow testable before live execution.",
+      "role": "Systems/product engineer",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/augr",
+      "liveUrl": "https://augr.subcult.tv",
+      "featured": false,
+      "sortOrder": 6,
+      "stack": [
+        "Go",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Redis",
+        "WebSocket",
+        "Bubble Tea",
+        "AI Agents"
+      ],
+      "highlights": [
+        "Architected a five-phase agent pipeline where LLM-powered analysts debate bull/bear and risk perspectives across multiple rounds before generating execution signals.",
+        "Built broker adapters for Alpaca and Binance with paper-trading modes, enabling full pipeline testing against real market data without capital risk.",
+        "Integrated six LLM providers and four market data sources behind unified interfaces, allowing runtime provider switching without pipeline changes."
+      ],
+      "architecture": [
+        "Go 1.25 backend coordinating a five-phase agent pipeline: parallel analysis, research debate (3 rounds), trading signal, risk debate (3 rounds), and execution, with each phase producing structured output consumed by the next.",
+        "Multi-provider LLM abstraction supporting OpenAI, Anthropic, Google, OpenRouter, XAI, and Ollama; market data layer unifying Alpha Vantage, Polygon, Yahoo Finance, and Binance behind a common interface.",
+        "Cobra CLI with Bubble Tea TUI for operator control, chi/v5 REST API with WebSocket streaming for real-time pipeline visibility, React + Vite dashboard, PostgreSQL 17 for state persistence, Redis 7 for caching."
+      ],
+      "lessons": [
+        "Multi-round debate between agents with opposing mandates (bull vs. bear, aggressive vs. conservative) produces more nuanced signals than single-pass analysis; the structured adversarial format catches blind spots that consensus-seeking approaches miss.",
+        "Paper trading adapters need to faithfully simulate latency, partial fills, and slippage to be useful; a naive mock that always fills instantly gives false confidence in strategies that fail under real conditions."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/augr-overview.svg",
+          "alt": "Overview diagram for Augr showing the project scope, stack, and core system relationships.",
+          "caption": "Augr overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
       "slug": "clustr",
       "title": "Clustr",
       "kind": "case-study",
-      "summary": "Reddit community analysis platform with graph algorithms, Louvain community detection, and interactive 3D/2D network visualization.",
-      "description": "Clustr crawls Reddit to map relationships between communities, then visualizes the results as interactive network graphs. A Go backend handles API serving, subreddit crawling, and graph precalculation. Data is stored in PostgreSQL and queried through sqlc-generated type-safe code. The frontend renders 3D and 2D force-directed graphs using WebGL, with dashboard and community detection views powered by the Louvain algorithm. The project includes Prometheus and Grafana monitoring, k6 load testing, security audits, and performance profiling.",
-      "role": "Full-stack engineer",
+      "summary": "Reddit community graph analysis platform with crawling, Louvain clustering, precomputed graph relationships, and 2D/3D visualization.",
+      "description": "Clustr maps relationships between Reddit communities and visualizes them as interactive network graphs. A Go backend handles API serving, crawling, and graph precalculation; PostgreSQL stores nodes, edges, and precomputed community assignments; and a React frontend renders 2D/3D force-directed graph views. The project applies production discipline around profiling, load testing, observability, and graph-performance trade-offs.",
+      "role": "Full-stack data engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/clustr",
-      "liveUrl": "https://clustr.subcult.tv",
-      "featured": true,
-      "sortOrder": 4,
-      "stack": ["Go", "React", "PostgreSQL", "WebGL", "Graph Algorithms", "TypeScript", "Docker"],
+      "featured": false,
+      "sortOrder": 7,
+      "stack": [
+        "Go",
+        "React",
+        "PostgreSQL",
+        "sqlc",
+        "WebGL",
+        "Graph Algorithms",
+        "TypeScript",
+        "Docker"
+      ],
       "highlights": [
         "Implemented Louvain community detection to identify clusters of related subreddits from crawled relationship data, surfacing non-obvious connections between communities.",
         "Built interactive 3D and 2D force-directed graph visualizations using WebGL, with dashboard views and drill-down into detected community clusters.",
@@ -223,14 +391,23 @@
       "slug": "internet-id",
       "title": "Internet-ID",
       "kind": "case-study",
-      "summary": "Content provenance system anchoring creator ownership on-chain via Solidity smart contracts, IPFS storage, and a browser extension for one-click verification.",
-      "description": "Content authenticity is collapsing in the AI era. Internet-ID gives creators a pipeline to prove ownership: hash your work, sign a provenance manifest, store it on IPFS, and register the claim on-chain through a Solidity smart contract on L2. The system includes a Next.js App Router frontend, an Express API with Prisma ORM, BullMQ async processing with Redis caching, and a browser extension for Chrome, Firefox, and Safari that enables one-click verification on YouTube and Twitter. Smart contracts are audited with Slither, the frontend meets WCAG 2.1 AA accessibility standards, and the full stack is tested through backend, web, and E2E CI pipelines.",
-      "role": "Full-stack engineer",
+      "summary": "Creator provenance system that anchors signed content claims through hashes, IPFS manifests, smart contracts, and browser verification.",
+      "description": "Internet-ID is a content provenance system for creators who need to prove ownership without uploading originals to a new gatekeeper. The workflow hashes content, signs a provenance manifest, stores metadata on IPFS, and anchors claims through a Solidity registry contract. A web app, API, async processing layer, and browser extension make verification available where audiences encounter content.",
+      "role": "Full-stack/Web3 engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/internet-id",
       "featured": false,
-      "sortOrder": 5,
-      "stack": ["Solidity", "Next.js", "TypeScript", "IPFS", "Express", "PostgreSQL", "Browser Extension", "Web3"],
+      "sortOrder": 8,
+      "stack": [
+        "Solidity",
+        "Next.js",
+        "TypeScript",
+        "IPFS",
+        "Express",
+        "PostgreSQL",
+        "Browser Extension",
+        "Web3"
+      ],
       "highlights": [
         "Designed a content provenance pipeline: hash content, sign a manifest, pin to IPFS, and register the claim on-chain through a Solidity smart contract on L2.",
         "Built a cross-browser extension (Chrome, Firefox, Safari) for one-click ownership verification directly on YouTube and Twitter pages.",
@@ -256,15 +433,22 @@
     {
       "slug": "soundhash",
       "title": "SoundHash",
-      "kind": "case-study",
-      "summary": "Audio fingerprinting system using spectral analysis to match clips across social media, with a FastAPI backend and automated bot integration.",
+      "kind": "highlight",
+      "summary": "Audio fingerprinting service for matching clips across social platforms using spectral analysis, FastAPI, and PostgreSQL.",
       "description": "SoundHash identifies audio content by processing video and audio through spectral analysis to create compact fingerprint vectors, then matches them against a database of known recordings. The system uses STFT (Short-Time Fourier Transform) with peak detection to generate fingerprints that are robust to compression, re-encoding, and partial clips. A FastAPI REST API handles ingestion and matching, PostgreSQL stores fingerprints and metadata, and automated bots for Twitter and Reddit can detect and flag matched content. The stack includes JWT authentication, Swagger/ReDoc documentation, an enterprise security layer with WAF and DDoS protection, and an email notification system for match alerts.",
-      "role": "Backend engineer",
+      "role": "Backend/DSP engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/soundhash",
       "featured": false,
-      "sortOrder": 6,
-      "stack": ["Python", "FastAPI", "PostgreSQL", "Signal Processing", "DSP", "Authentication"],
+      "sortOrder": 9,
+      "stack": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "DSP",
+        "Audio Fingerprinting",
+        "Docker"
+      ],
       "highlights": [
         "Built an audio fingerprinting pipeline using STFT spectral analysis and peak detection, producing compact vectors robust to compression, re-encoding, and partial clips.",
         "Integrated automated Twitter and Reddit bots that detect and flag matched audio content across social media platforms.",
@@ -288,87 +472,27 @@
       ]
     },
     {
-      "slug": "jury-rigged",
-      "title": "Jury-Rigged",
-      "kind": "case-study",
-      "summary": "Real-time AI courtroom simulation with multi-agent roles, Ace Attorney-style PixiJS rendering, deterministic replay, and Twitch audience interaction.",
-      "description": "Jury-Rigged is a real-time courtroom simulation where AI agents play judge, prosecutor, defense attorney, witnesses, and bailiff. Cases progress through deterministic phases with live SSE streaming, and a jury system handles voting and deliberation. The visual layer renders proceedings in an Ace Attorney-style format using PixiJS, while an operator dashboard built with React and Vite controls case flow. Every session is recorded as NDJSON for deterministic replay, and Twitch integration lets audiences interact through chat commands like !press and !objection. The system runs on Node.js with TypeScript and Express, using OpenRouter for LLM orchestration.",
-      "role": "Full-stack engineer",
-      "year": 2026,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/jury-rigged",
-      "featured": false,
-      "sortOrder": 7,
-      "stack": ["TypeScript", "Node.js", "React", "PixiJS", "WebSocket", "AI Agents", "Twitch API"],
-      "highlights": [
-        "Built a multi-agent courtroom simulation with deterministic phase progression, live SSE streaming, and jury voting and deliberation mechanics.",
-        "Rendered proceedings in Ace Attorney visual style using PixiJS, with character animations, dialogue boxes, and courtroom transitions.",
-        "Integrated Twitch chat commands (!press, !objection) for real-time audience participation, plus NDJSON recording for deterministic session replay."
-      ],
-      "architecture": [
-        "Node.js + TypeScript + Express backend orchestrating multiple AI agents through OpenRouter, with deterministic phase state machines governing case progression.",
-        "PixiJS rendering layer producing Ace Attorney-style courtroom visuals, character sprites, dialogue overlays, and animated transitions driven by the agent output stream.",
-        "Dual interface: a viewer-facing stream with PixiJS rendering and Twitch chat integration, plus an operator dashboard (React + Vite) for case management and phase control."
-      ],
-      "lessons": [
-        "Deterministic replay from NDJSON recordings was invaluable for debugging agent behavior; being able to replay exact sequences without LLM variance made the multi-agent interactions far easier to tune.",
-        "Twitch chat integration drove more engagement than expected; audience commands like !objection created a feedback loop that made the AI responses feel more dynamic and responsive."
-      ],
-      "media": [
-        {
-          "src": "/assets/projects/jury-rigged-overview.svg",
-          "alt": "Screenshot of the Ace Attorney-style courtroom rendering with AI agent dialogue and Twitch chat overlay.",
-          "caption": "Ace Attorney-style PixiJS rendering with real-time AI agent dialogue and audience interaction."
-        }
-      ]
-    },
-    {
-      "slug": "patchwork",
-      "title": "Patchwork",
-      "kind": "case-study",
-      "summary": "AT Protocol-native mutual aid platform with map-based discovery, community moderation, geoprivacy controls, and Bluesky Jetstream ingestion.",
-      "description": "Patchwork is a mutual aid platform built natively on the AT Protocol. The system ingests data from Bluesky's Jetstream feed, indexes community posts, and surfaces them through a map-based discovery interface with geoprivacy controls that protect exact user locations. A TypeScript monorepo houses the React web client, a query API, an ingestion and indexing pipeline, and a moderation worker. The architecture prioritizes community safety: moderation runs as a dedicated service, geoprivacy fuzzes coordinates before storage, and the AT Protocol integration means identity and social graph are decentralized rather than platform-owned.",
-      "role": "Full-stack engineer",
-      "year": 2025,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/patchwork",
-      "liveUrl": "https://patchwork.subcult.tv",
-      "featured": false,
-      "sortOrder": 8,
-      "stack": ["TypeScript", "React", "PostgreSQL", "AT Protocol", "Bluesky", "Vitest", "Playwright"],
-      "highlights": [
-        "Built an AT Protocol-native platform ingesting Bluesky Jetstream data for decentralized identity and social graph integration.",
-        "Implemented geoprivacy controls that fuzz coordinates before storage, protecting user locations while preserving map-based community discovery.",
-        "Shipped a moderation worker as a dedicated service with automated content review, keeping community safety concerns separated from the main application logic."
-      ],
-      "architecture": [
-        "TypeScript monorepo (npm workspaces) with four services: React web client, query API, Jetstream ingestion pipeline, and moderation worker.",
-        "AT Protocol integration via Bluesky Jetstream for real-time data ingestion, with PostgreSQL storing indexed posts and community metadata.",
-        "Geoprivacy layer fuzzes coordinates before persistence, moderation worker processes content asynchronously, and the web client renders map-based discovery through a privacy-aware tile layer."
-      ],
-      "lessons": [
-        "Building on the AT Protocol forced good architectural decisions; decentralized identity eliminated the need for a custom auth system, and the social graph came for free.",
-        "Geoprivacy is harder than it looks. Simple coordinate rounding creates grid artifacts that can be reverse-engineered; adding controlled random noise within a privacy radius was more resilient."
-      ],
-      "media": [
-        {
-          "src": "/assets/projects/patchwork-overview.svg",
-          "alt": "Map-based interface showing community aid posts with geoprivacy-fuzzed location markers and AT Protocol identity integration.",
-          "caption": "Map-based mutual aid discovery with geoprivacy controls and decentralized identity."
-        }
-      ]
-    },
-    {
       "slug": "galdr",
       "title": "Galdr",
-      "kind": "case-study",
-      "summary": "B2B SaaS customer health scoring platform that combines Stripe, HubSpot, and Intercom signals through a Go API and React frontend.",
+      "kind": "highlight",
+      "summary": "B2B SaaS customer-health scoring product combining Stripe, HubSpot, and Intercom signals through a Go API and React frontend.",
       "description": "Galdr is a customer health scoring platform for B2B SaaS companies. It centralizes customer signals from Stripe, HubSpot, and Intercom, then surfaces automated health scoring through a Go backend and a React 19 + TypeScript frontend. The project ships with PostgreSQL-backed persistence, migration workflows, Dockerized development and production topology, SEO-aware frontend build steps, and a manual GitHub Actions deployment flow that targets a VPS behind Nginx.",
-      "role": "Full-stack engineer",
+      "role": "Full-stack product engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/galdr",
       "liveUrl": "https://galdr.subcult.tv",
       "featured": false,
-      "sortOrder": 9,
-      "stack": ["Go", "React", "TypeScript", "PostgreSQL", "TailwindCSS", "Docker", "Stripe", "HubSpot", "Intercom"],
+      "sortOrder": 10,
+      "stack": [
+        "Go",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Stripe",
+        "HubSpot",
+        "Intercom",
+        "Docker"
+      ],
       "highlights": [
         "Built Galdr as a customer health scoring product for B2B SaaS teams that combines Stripe, HubSpot, and Intercom data into an automated scoring workflow.",
         "Shipped a full-stack implementation with a Go net/http API, React 19 + TypeScript frontend, PostgreSQL 16 persistence, and Docker-based dev/prod workflows.",
@@ -383,21 +507,36 @@
         "Separating billing into its own domain makes a SaaS product easier to evolve; the dedicated Stripe billing endpoints and environment contract keep payment concerns from bleeding into the core scoring flows.",
         "Treating SEO and deploy automation as first-class build concerns pays off early; validating SEO artifacts and codifying the VPS deployment path reduces launch friction later."
       ],
-      "media": []
+      "media": [
+        {
+          "src": "/assets/projects/galdr-overview.svg",
+          "alt": "Overview diagram for Galdr showing the project scope, stack, and core system relationships.",
+          "caption": "Galdr overview: project scope, stack, and core architecture cues."
+        }
+      ]
     },
     {
       "slug": "cutroom",
       "title": "Cutroom",
-      "kind": "case-study",
-      "summary": "Collaborative AI video production pipeline where specialized agents research, script, voice, edit, and publish short-form videos with structured handoffs and attribution tracking.",
+      "kind": "highlight",
+      "summary": "Collaborative AI video-production workflow where specialized agents research, script, voice, edit, and publish short-form videos.",
       "description": "Cutroom is a collaborative short-form video production system built for agent-native creative workflows. The product orchestrates a seven-stage pipeline from research through publishing, with each stage claimable by a specialized agent and every handoff represented as structured output. The stack pairs a Next.js 14 + React 18 dashboard with API routes, Prisma-backed PostgreSQL persistence, Remotion video rendering, and integrations for ElevenLabs voice generation, Pexels-powered visuals, and tokenized attribution on Base. The hosted app at cutroom.subcult.tv exposes templates, pipeline views, and examples for the end-to-end creative flow.",
-      "role": "Full-stack engineer",
+      "role": "Full-stack product engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/cutroom",
       "liveUrl": "https://cutroom.subcult.tv",
       "featured": false,
-      "sortOrder": 10,
-      "stack": ["Next.js", "React", "TypeScript", "PostgreSQL", "Prisma", "Remotion", "AI Agents", "ElevenLabs", "Base"],
+      "sortOrder": 11,
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Prisma",
+        "PostgreSQL",
+        "Remotion",
+        "AI Agents",
+        "ElevenLabs"
+      ],
       "highlights": [
         "Built a seven-stage agent-native production pipeline that turns a topic into a published short-form video through structured handoffs.",
         "Shipped a template-driven creative system with real-time pipeline tracking, attribution weights, and token-based reward logic for contributors.",
@@ -412,21 +551,35 @@
         "Structured agent handoffs matter more than raw model quality in creative pipelines; the clearer the schema between stages, the less rework the editor stage has to absorb.",
         "Treating attribution as a first-class system concern changes the product architecture early, because contribution tracking has to be threaded through every stage rather than bolted on at the end."
       ],
-      "media": []
+      "media": [
+        {
+          "src": "/assets/projects/cutroom-overview.svg",
+          "alt": "Overview diagram for Cutroom showing the project scope, stack, and core system relationships.",
+          "caption": "Cutroom overview: project scope, stack, and core architecture cues."
+        }
+      ]
     },
     {
       "slug": "subcults",
       "title": "Subcults",
-      "kind": "case-study",
-      "summary": "Privacy-first platform for underground music communities with map-based discovery, scene identity, live audio sessions, and AT Protocol ingestion.",
+      "kind": "highlight",
+      "summary": "Privacy-first scene platform for underground music communities with maps, local identity, live audio, and AT Protocol ingestion.",
       "description": "Subcults is a platform for underground and local music communities built around presence, scene sovereignty, and privacy-first discovery. It maps scenes, events, and live audio sessions without leaning on opaque follower-feed ranking, instead combining trust-aware discovery, decentralized AT Protocol ingestion, and coarse-location controls. The stack uses a Go API and Jetstream indexer, a Vite + React + TypeScript frontend with MapLibre, Neon Postgres with PostGIS, LiveKit for audio sessions, Cloudflare R2 for media, and Stripe Connect for direct scene payouts. The hosted site at subcults.subcult.tv is the public-facing home for that product direction.",
-      "role": "Full-stack engineer",
+      "role": "Full-stack product engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/subcults",
-      "liveUrl": "https://subcults.subcult.tv",
       "featured": false,
-      "sortOrder": 11,
-      "stack": ["Go", "React", "TypeScript", "PostgreSQL", "PostGIS", "MapLibre", "LiveKit", "AT Protocol", "Stripe Connect", "Cloudflare R2"],
+      "sortOrder": 12,
+      "stack": [
+        "Go",
+        "React",
+        "TypeScript",
+        "PostGIS",
+        "MapLibre",
+        "LiveKit",
+        "AT Protocol",
+        "Cloudflare R2"
+      ],
       "highlights": [
         "Designed a scene-first platform for underground music communities with map-based discovery, scene identity, and privacy-aware event publishing.",
         "Combined AT Protocol Jetstream ingestion, live audio sessions, and direct revenue tooling so scenes can coordinate culture without ceding control to algorithmic feeds.",
@@ -441,48 +594,34 @@
         "Privacy constraints reshape product design in a good way; when precise location is optional and consent-based, map and feed workflows have to become clearer and more intentional.",
         "Underground-community tooling needs governance and observability as early as discovery features, because trust and safety are part of the product, not an afterthought."
       ],
-      "media": []
-    },
-    {
-      "slug": "augr",
-      "title": "Augr",
-      "kind": "case-study",
-      "summary": "Autonomous multi-agent trading system in Go with LLM-powered analysis, multi-round debate pipelines, and broker adapters for paper and live trading.",
-      "description": "Get Rich Quick is an autonomous trading system where LLM-powered agents collaborate through a structured five-phase pipeline: parallel analysis, bull-vs-bear research debate (three rounds), trading signal generation, risk debate across aggressive, conservative, and neutral perspectives (three rounds), and execution through broker adapters. The system supports multiple LLM providers including OpenAI, Anthropic, Google, OpenRouter, XAI, and Ollama, with market data from Alpha Vantage, Polygon, Yahoo Finance, and Binance. A Go backend coordinates the full pipeline with a Cobra CLI and Bubble Tea TUI for operator control, a chi/v5 REST API with WebSocket streaming for real-time pipeline visibility, and a React + Vite frontend for dashboard monitoring. Paper trading through Alpaca and Binance adapters enables full pipeline testing without capital risk.",
-      "role": "Full-stack engineer",
-      "year": 2026,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/augr",
-      "featured": false,
-      "sortOrder": 12,
-      "stack": ["Go", "PostgreSQL", "Redis", "React", "TypeScript", "WebSocket", "AI Agents", "Bubble Tea"],
-      "highlights": [
-        "Architected a five-phase agent pipeline where LLM-powered analysts debate bull/bear and risk perspectives across multiple rounds before generating execution signals.",
-        "Built broker adapters for Alpaca and Binance with paper-trading modes, enabling full pipeline testing against real market data without capital risk.",
-        "Integrated six LLM providers and four market data sources behind unified interfaces, allowing runtime provider switching without pipeline changes."
-      ],
-      "architecture": [
-        "Go 1.25 backend coordinating a five-phase agent pipeline: parallel analysis, research debate (3 rounds), trading signal, risk debate (3 rounds), and execution, with each phase producing structured output consumed by the next.",
-        "Multi-provider LLM abstraction supporting OpenAI, Anthropic, Google, OpenRouter, XAI, and Ollama; market data layer unifying Alpha Vantage, Polygon, Yahoo Finance, and Binance behind a common interface.",
-        "Cobra CLI with Bubble Tea TUI for operator control, chi/v5 REST API with WebSocket streaming for real-time pipeline visibility, React + Vite dashboard, PostgreSQL 17 for state persistence, Redis 7 for caching."
-      ],
-      "lessons": [
-        "Multi-round debate between agents with opposing mandates (bull vs. bear, aggressive vs. conservative) produces more nuanced signals than single-pass analysis; the structured adversarial format catches blind spots that consensus-seeking approaches miss.",
-        "Paper trading adapters need to faithfully simulate latency, partial fills, and slippage to be useful; a naive mock that always fills instantly gives false confidence in strategies that fail under real conditions."
-      ],
-      "media": []
+      "media": [
+        {
+          "src": "/assets/projects/subcults-overview.svg",
+          "alt": "Overview diagram for Subcults showing the project scope, stack, and core system relationships.",
+          "caption": "Subcults overview: project scope, stack, and core architecture cues."
+        }
+      ]
     },
     {
       "slug": "llama-line",
       "title": "Llama Line",
-      "kind": "case-study",
-      "summary": "Go HTTP broker and gateway for Ollama with strict FIFO inference queuing, SSE queue updates, and safe proxying for non-inference endpoints.",
+      "kind": "highlight",
+      "summary": "Go gateway for Ollama that serializes local inference through a visible FIFO queue with SSE wait updates.",
       "description": "Llama Line is a Go HTTP broker and gateway for Ollama that serializes inference traffic through a strict FIFO queue. It keeps one inference request in flight at a time across endpoints like /api/generate, /api/chat, /api/embed, and /v1/chat/completions, streams queue position and elapsed wait updates over SSE, proxies non-inference endpoints immediately, and handles disconnects cleanly. The service includes retry and backoff behavior when Ollama is unavailable, YAML config with environment and CLI overrides, static API-key authentication, and an unauthenticated /broker/status endpoint for health checks.",
       "role": "Systems engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/PatrickFanella/llama-line",
       "featured": false,
       "sortOrder": 13,
-      "stack": ["Go", "Ollama", "SSE", "HTTP", "Prometheus", "Docker", "Local AI"],
+      "stack": [
+        "Go",
+        "Ollama",
+        "SSE",
+        "HTTP",
+        "Prometheus",
+        "Docker",
+        "Local AI"
+      ],
       "highlights": [
         "Built a strict FIFO broker that keeps only one Ollama inference request active at a time while preserving immediate passthrough for non-inference routes.",
         "Streamed live queue position and elapsed wait updates over SSE so clients can track broker progress without polling.",
@@ -497,20 +636,34 @@
         "Local AI infrastructure needs visible backpressure; a transparent FIFO queue makes GPU contention understandable instead of mysterious.",
         "Keeping the public surface Ollama-compatible lowers adoption friction because existing tools can point at the broker with minimal client changes."
       ],
-      "media": []
+      "media": [
+        {
+          "src": "/assets/projects/llama-line-overview.svg",
+          "alt": "Overview diagram for Llama Line showing the project scope, stack, and core system relationships.",
+          "caption": "Llama Line overview: project scope, stack, and core architecture cues."
+        }
+      ]
     },
     {
       "slug": "open-pilot",
       "title": "Open Pilot",
-      "kind": "case-study",
-      "summary": "Self-hosted Gitea + OpenCode automation service that turns ready issues into tested pull requests through a durable queue and worker pipeline.",
+      "kind": "highlight",
+      "summary": "Self-hosted Gitea-to-OpenCode automation service that turns approved issues into tested branches and pull requests.",
       "description": "Open Pilot is a self-hosted automation service that connects Gitea issues to OpenCode-driven code changes. A webhook receiver accepts ready issue events, jobs move through a durable queue, and a worker claims work in a git worktree, edits code with OpenCode, runs tests, and pushes a branch as a pull request. The system includes a core issue-to-PR runner, dashboard, logging, supervisor and autopilot helpers, and a smart scheduler, while conservative defaults keep FIFO ordering, a single worker, and dashboard/scheduler features disabled unless explicitly enabled.",
       "role": "Automation engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/PatrickFanella/open-pilot",
       "featured": false,
       "sortOrder": 14,
-      "stack": ["Python", "Gitea", "OpenCode", "Webhooks", "SQLite", "Agents", "Automation"],
+      "stack": [
+        "Python",
+        "Gitea",
+        "OpenCode",
+        "Webhooks",
+        "SQLite",
+        "Agents",
+        "Automation"
+      ],
       "highlights": [
         "Built the issue-to-PR runner that receives ready issue webhooks, claims jobs from a durable queue, and drives OpenCode changes inside a git worktree.",
         "Added conservative self-hosted defaults with FIFO ordering, a single worker, and dashboard and scheduler features disabled unless explicitly turned on.",
@@ -525,20 +678,35 @@
         "Trusted automation still needs conservative defaults; FIFO scheduling and one-worker execution make the first self-hosted deployment easier to reason about.",
         "Issue-to-PR systems work best when policy, logs, tests, and worktree isolation are treated as core product features rather than operational extras."
       ],
-      "media": []
+      "media": [
+        {
+          "src": "/assets/projects/open-pilot-overview.svg",
+          "alt": "Overview diagram for Open Pilot showing the project scope, stack, and core system relationships.",
+          "caption": "Open Pilot overview: project scope, stack, and core architecture cues."
+        }
+      ]
     },
     {
       "slug": "edda",
       "title": "Edda",
-      "kind": "case-study",
-      "summary": "LLM-powered dungeon master and game master application in Go with a TUI, REST API, and provider-configurable backend.",
+      "kind": "highlight",
+      "summary": "LLM-powered game master application with a Go TUI, REST API, provider configuration, and Dockerized development stack.",
       "description": "Edda is an LLM-powered dungeon master and game master application built in Go. It ships both a terminal UI and a REST API, with cmd/tui and cmd/server entry points, internal packages for the core game logic, and pkg/api for exported API types. Configuration uses koanf with YAML and environment variables prefixed by GM_, database migrations are managed with goose, and the project is packaged for Docker Compose deployments.",
-      "role": "Full-stack engineer",
+      "role": "Application engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/edda",
+      "liveUrl": "https://edda.subcult.tv",
       "featured": false,
       "sortOrder": 15,
-      "stack": ["Go", "TUI", "REST API", "LLM", "Docker", "PostgreSQL", "Goose"],
+      "stack": [
+        "Go",
+        "TUI",
+        "REST API",
+        "LLM",
+        "PostgreSQL",
+        "Docker",
+        "Goose"
+      ],
       "highlights": [
         "Built a Go application that serves both a terminal game-master experience and a REST API from the same codebase.",
         "Structured the project around cmd/tui and cmd/server entry points, internal packages, and exported pkg/api types for external integration.",
@@ -553,20 +721,34 @@
         "Interactive AI applications need both a human-first interface and an API surface; separating TUI and server entry points keeps those needs from fighting each other.",
         "Game-state systems benefit from boring infrastructure choices: explicit migrations, layered config, and repeatable local containers make model behavior easier to debug."
       ],
-      "media": []
+      "media": [
+        {
+          "src": "/assets/projects/edda-overview.svg",
+          "alt": "Overview diagram for Edda showing the project scope, stack, and core system relationships.",
+          "caption": "Edda overview: project scope, stack, and core architecture cues."
+        }
+      ]
     },
     {
       "slug": "paqr",
       "title": "Paqr",
-      "kind": "case-study",
-      "summary": "Research Data Packager AI that turns messy datasets into documented, searchable, AI-ready HDF5 packages with a REST API and CLI.",
+      "kind": "highlight",
+      "summary": "Research data packager that turns messy datasets into documented, searchable, AI-ready HDF5 archives.",
       "description": "Paqr is a Research Data Packager AI that turns messy research datasets into documented, searchable, AI-ready HDF5 packages. Discovery scans raw folders, sanitization normalizes names, paths, and tabular data, and metadata extraction captures schema and provenance before packaging into HDF5. The system includes a searchable inventory, a REST API, CLI commands for scan, profile, package, search, and serve, a Streamlit browser, a React frontend shell, and Docker Compose with PostgreSQL; AI_MODE=mock is the default for safe local development.",
-      "role": "Data engineer",
+      "role": "Data tooling engineer",
       "year": 2026,
-      "repoUrl": "https://git.subcult.tv/PatrickFanella/paqr",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/paqr",
       "featured": false,
       "sortOrder": 16,
-      "stack": ["Python", "HDF5", "FastAPI", "CLI", "Streamlit", "React", "PostgreSQL", "Data Packaging"],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "HDF5",
+        "CLI",
+        "Streamlit",
+        "React",
+        "PostgreSQL"
+      ],
       "highlights": [
         "Built a pipeline that discovers messy research folders, sanitizes names and tabular data, and packages the result into documented HDF5 archives.",
         "Shipped a searchable inventory plus REST API and CLI commands for scanning, profiling, packaging, searching, and serving research datasets.",
@@ -581,20 +763,522 @@
         "Research packaging succeeds when provenance is captured alongside the data, not reconstructed after files have already been transformed.",
         "Mock-first AI defaults make data tooling easier to demo, test, and trust before connecting it to external model providers."
       ],
-      "media": []
+      "media": [
+        {
+          "src": "/assets/projects/paqr-overview.svg",
+          "alt": "Overview diagram for Paqr showing the project scope, stack, and core system relationships.",
+          "caption": "Paqr overview: project scope, stack, and core architecture cues."
+        }
+      ],
+      "liveUrl": "https://paqr.subcult.tv"
+    },
+    {
+      "slug": "redstring",
+      "title": "Redstring",
+      "summary": "Evidence-first litigation workspace for organizing documents, filings, facts, deadlines, and communications into a case map.",
+      "description": "Redstring is an evidence-first litigation workspace for paralegals and lawyers. It organizes messy documents, filings, deadlines, communications, and facts into a structured case graph so teams can see what is known, what is disputed, and what still needs follow-up. The repository is built from a production-shaped template with Docker and Make workflows, emphasizing local repeatability and a clean path from document intake to searchable case context.",
+      "role": "Product engineer",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/redstring",
+      "stack": [
+        "Go",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Docker",
+        "Legal Tech"
+      ],
+      "highlights": [
+        "Modeled legal work around evidence, facts, deadlines, and communications instead of a flat document dump.",
+        "Built a repeatable Docker-based local stack so legal workflows can be tested with realistic services from the beginning.",
+        "Framed AI assistance around traceable case context, keeping provenance and reviewability central to the product."
+      ],
+      "architecture": [
+        "Dockerized application stack with service boundaries for the case workspace, persistence layer, and supporting local infrastructure.",
+        "Data model centers documents, filings, deadlines, communications, and extracted facts so attorneys can navigate from evidence to argument.",
+        "Searchable workspace design keeps AI-ready context connected to source material rather than detached summaries."
+      ],
+      "lessons": [
+        "Legal tooling needs provenance-first interfaces; users must be able to trace every suggested fact back to source evidence.",
+        "Case-management products benefit from graph-shaped thinking because legal work is more about relationships than folders."
+      ],
+      "kind": "highlight",
+      "year": 2026,
+      "featured": false,
+      "sortOrder": 17,
+      "media": [
+        {
+          "src": "/assets/projects/redstring-overview.svg",
+          "alt": "Overview diagram for Redstring showing the project scope, stack, and core system relationships.",
+          "caption": "Redstring overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "switchyard",
+      "title": "Switchyard",
+      "summary": "Automation runtime foundation for routing workflows, operators, and service handoffs through a visible control surface.",
+      "description": "Switchyard is an automation runtime for coordinating workflows, operators, and service handoffs. The project uses a Go backend with a Vite React TypeScript frontend in a Dockerized monorepo, giving operators a place to route work, inspect state, and keep automation flows visible. It follows the SUBCULT project-template conventions for make targets, environment contracts, and Open Pilot readiness, turning a raw automation idea into a repeatable application stack.",
+      "role": "Automation engineer",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/switchyard",
+      "stack": [
+        "Go",
+        "React",
+        "TypeScript",
+        "Docker",
+        "Workflow Engine",
+        "Automation"
+      ],
+      "highlights": [
+        "Built a full-stack automation runtime foundation with Go services and a Vite React operator interface.",
+        "Used template-driven Make and Docker workflows so new automation modules can be added without reinventing project plumbing.",
+        "Focused the product around visible workflow routing instead of opaque background scripts."
+      ],
+      "architecture": [
+        "Go backend exposes workflow and runtime primitives while the React frontend provides an operator-facing control surface.",
+        "Docker Compose and Make targets standardize local development, test, and deployment flows across backend and frontend services.",
+        "Runtime model treats automation as routed work with inspectable state, making failures and handoffs easier to reason about."
+      ],
+      "lessons": [
+        "Automation platforms become safer when operators can see queues, decisions, and handoff state instead of only reading logs.",
+        "A consistent project template reduces setup drag and lets the architecture focus on workflow semantics sooner."
+      ],
+      "kind": "highlight",
+      "year": 2026,
+      "featured": false,
+      "sortOrder": 18,
+      "media": [
+        {
+          "src": "/assets/projects/switchyard-overview.svg",
+          "alt": "Overview diagram for Switchyard showing the project scope, stack, and core system relationships.",
+          "caption": "Switchyard overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "subcult-os",
+      "title": "Subcult OS",
+      "summary": "Full-stack SUBCULT operating-system shell for dashboards, workflows, identity, and collective infrastructure.",
+      "description": "Subcult OS is a full-stack foundation for a SUBCULT operating-system layer: a Go backend, Vite React TypeScript Tailwind frontend, Postgres database, and Docker Compose topology. It exists as a product scaffold for tying together identity, workflows, dashboards, and collective infrastructure under one coherent interface. The repository emphasizes reproducible local development, clear service ownership, and an Open Pilot-ready project shape.",
+      "role": "Platform engineer",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/subcult-os",
+      "stack": [
+        "Go",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Docker",
+        "TailwindCSS"
+      ],
+      "highlights": [
+        "Created a full-stack OS-style product shell for SUBCULT infrastructure and workflows.",
+        "Combined Go, Vite React, Postgres, and Docker Compose into one repeatable application base.",
+        "Kept the repo Open Pilot-ready with template conventions that support automated issue-to-PR work."
+      ],
+      "architecture": [
+        "Go API and Vite React frontend run as separate services against a Postgres persistence layer.",
+        "Docker Compose defines the local service topology while Make targets wrap common development and verification tasks.",
+        "Frontend shell is designed to host dashboards and workflow surfaces as the larger SUBCULT operating layer grows."
+      ],
+      "lessons": [
+        "Operating-system metaphors work best when backed by boring service contracts and repeatable local infrastructure.",
+        "A strong scaffold is worthwhile when multiple future products need the same deployment and automation conventions."
+      ],
+      "kind": "highlight",
+      "year": 2026,
+      "featured": false,
+      "sortOrder": 19,
+      "media": [
+        {
+          "src": "/assets/projects/subcult-os-overview.svg",
+          "alt": "Overview diagram for Subcult OS showing the project scope, stack, and core system relationships.",
+          "caption": "Subcult OS overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "subcult-tv",
+      "title": "Subcult.tv",
+      "summary": "Public SUBCULT web presence for projects, tools, media, infrastructure, and collective identity.",
+      "description": "Subcult.tv is the public web presence for the Subculture Collective: curated projects, tools, media, and infrastructure for digital subcultures. The repository provides a production-shaped TypeScript web app with Docker and Make workflows, positioning SUBCULT as both a portfolio and a platform surface. It collects the collective identity, project catalog, and distribution layer into one site.",
+      "role": "Frontend/product engineer",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/subcult-tv",
+      "liveUrl": "https://subcult.tv",
+      "stack": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Docker",
+        "Content",
+        "Brand System"
+      ],
+      "highlights": [
+        "Built the public identity and project surface for SUBCULT across tools, media, and infrastructure.",
+        "Packaged the site with Docker and Make workflows so the brand surface deploys like the rest of the stack.",
+        "Created a catalog-style entry point for the collective rather than scattering project context across repos."
+      ],
+      "architecture": [
+        "TypeScript web application organizes public pages, project content, and collective positioning in one repository.",
+        "Dockerized deployment keeps the public site aligned with the operational pattern used by other SUBCULT services.",
+        "Content architecture treats projects, tools, and infrastructure as connected parts of one ecosystem."
+      ],
+      "lessons": [
+        "A collective needs a durable index as much as individual products; otherwise project context fragments across repositories.",
+        "Brand surfaces are easier to maintain when they share the same build and deploy discipline as application code."
+      ],
+      "kind": "highlight",
+      "year": 2026,
+      "featured": false,
+      "sortOrder": 20,
+      "media": [
+        {
+          "src": "/assets/projects/subcult-tv-overview.svg",
+          "alt": "Overview diagram for Subcult.tv showing the project scope, stack, and core system relationships.",
+          "caption": "Subcult.tv overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "invisible-museum",
+      "title": "Invisible Museum",
+      "summary": "Place-based museum prototype pairing a SwiftUI iOS app with a Dockerized Go/PostgreSQL backend.",
+      "description": "Invisible Museum is a place-based museum prototype. It pairs a SwiftUI iOS app with a Dockerized Go and PostgreSQL backend so physical locations can host lightweight exhibits, stories, and artifacts. The product explores how museums can exist as contextual layers over real places rather than as fixed buildings or feeds.",
+      "role": "Prototype engineer",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/invisible-museum",
+      "stack": [
+        "SwiftUI",
+        "Go",
+        "PostgreSQL",
+        "Docker",
+        "iOS",
+        "Place-based Media"
+      ],
+      "highlights": [
+        "Built a SwiftUI prototype for discovering exhibits tied to real-world locations.",
+        "Added a Dockerized Go/PostgreSQL backend so place metadata and exhibit content can be served locally.",
+        "Explored museum UX as a location-aware layer instead of a conventional archive or gallery feed."
+      ],
+      "architecture": [
+        "SwiftUI client handles the mobile exhibit experience while a Go backend exposes location and exhibit APIs.",
+        "PostgreSQL stores places, exhibit records, and supporting metadata for local development and deployment.",
+        "Dockerized backend makes it possible to test the mobile experience against a realistic service instead of mocks."
+      ],
+      "lessons": [
+        "Location-based cultural products need a small, fast mobile surface because the user is already in motion.",
+        "Treating exhibits as place-attached records changes the data model from collections-first to context-first."
+      ],
+      "kind": "highlight",
+      "year": 2026,
+      "featured": false,
+      "sortOrder": 21,
+      "media": [
+        {
+          "src": "/assets/projects/invisible-museum-overview.svg",
+          "alt": "Overview diagram for Invisible Museum showing the project scope, stack, and core system relationships.",
+          "caption": "Invisible Museum overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "echo-trails",
+      "title": "Echo Trails",
+      "summary": "Public place-stories product where people leave short echoes tied to real-world locations.",
+      "description": "Echo Trails is a public place-stories product for real-world locations. Its core promise is simple: people leave short echoes tied to places, and others discover those stories in context. The repository frames a location-aware product around place records, lightweight story capture, and local discovery, with Make-driven project workflows for repeatable development.",
+      "role": "Product engineer",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/echo-trails",
+      "stack": [
+        "Go",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Maps",
+        "Location UX"
+      ],
+      "highlights": [
+        "Designed a place-story model around short public echoes attached to real locations.",
+        "Framed the product around contextual discovery rather than social-feed consumption.",
+        "Kept the implementation scaffold small and repeatable with project-template Make conventions."
+      ],
+      "architecture": [
+        "Place records anchor the product model, with story entries attached to physical locations.",
+        "Frontend discovery surfaces prioritize nearby/contextual reading over global ranking.",
+        "Template-based local workflows keep the prototype easy to run, test, and expand."
+      ],
+      "lessons": [
+        "Place-based apps need low-friction capture; if adding a story feels like publishing a post, most users will not do it.",
+        "Local discovery products should optimize for context and memory, not infinite-feed engagement."
+      ],
+      "kind": "highlight",
+      "year": 2026,
+      "featured": false,
+      "sortOrder": 22,
+      "media": [
+        {
+          "src": "/assets/projects/echo-trails-overview.svg",
+          "alt": "Overview diagram for Echo Trails showing the project scope, stack, and core system relationships.",
+          "caption": "Echo Trails overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "nearbody",
+      "title": "Nearbody",
+      "summary": "Phone-based body-doubling product for helping people start one hard task with lightweight presence and accountability.",
+      "description": "Nearbody is a phone-based body-doubling product for starting hard tasks. The product promise is: you are not alone; start one hard thing now. It explores lightweight presence, task initiation, and accountability for people who need support crossing the activation threshold rather than a heavyweight productivity suite.",
+      "role": "Product engineer",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/nearbody",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Mobile UX",
+        "Presence",
+        "Productivity"
+      ],
+      "highlights": [
+        "Defined a task-starting product around body doubling rather than task management.",
+        "Focused the UX on immediate phone-based presence and activation support.",
+        "Kept the prototype narrow: help the user begin one hard thing instead of managing a full backlog."
+      ],
+      "architecture": [
+        "Product model centers sessions, participants, and the task-start moment rather than large project/task hierarchies.",
+        "Mobile-first interface is designed for quick joining and minimal setup.",
+        "Template-backed app structure leaves room for real-time presence and notification services as the product matures."
+      ],
+      "lessons": [
+        "For task avoidance, the first minute is the product; body-doubling tools should remove setup before adding management features.",
+        "Presence can be more motivating than planning when the user already knows what they need to do."
+      ],
+      "kind": "highlight",
+      "year": 2026,
+      "featured": false,
+      "sortOrder": 23,
+      "media": [
+        {
+          "src": "/assets/projects/nearbody-overview.svg",
+          "alt": "Overview diagram for Nearbody showing the project scope, stack, and core system relationships.",
+          "caption": "Nearbody overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "one-block-cinema",
+      "title": "One-Block Cinema",
+      "summary": "Smartphone filmmaking coach that turns a walk around one block into a structured 1\u20133 minute short-film workflow.",
+      "description": "One-Block Cinema is a smartphone filmmaking coach for beginners and hobbyists. It turns a phone and a small local area into a structured plan for shooting 1\u20133 minute shorts, helping users move from idea to shot list to finished miniature film. The repository explores creative coaching as a guided workflow rather than a blank editor.",
+      "role": "Creative tooling engineer",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/one-block-cinema",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Creative Tools",
+        "Mobile UX",
+        "Media",
+        "Workflow Design"
+      ],
+      "highlights": [
+        "Created a guided filmmaking concept that converts everyday surroundings into short-film prompts.",
+        "Structured the workflow around beginner-friendly steps: idea, shot plan, capture, and edit.",
+        "Positioned the app as a creative coach rather than a generic video editor."
+      ],
+      "architecture": [
+        "Workflow model breaks filmmaking into small stages suitable for phone-based creation.",
+        "Frontend experience emphasizes prompts, checklists, and shot guidance over complex editing controls.",
+        "Template-based repo structure keeps the concept easy to evolve into a full mobile or web application."
+      ],
+      "lessons": [
+        "Creative tools for beginners need constraints; narrowing to one block and 1\u20133 minutes makes the act of starting less intimidating.",
+        "Coaching interfaces can create more value than blank canvases when users are still learning the craft."
+      ],
+      "kind": "highlight",
+      "year": 2026,
+      "featured": false,
+      "sortOrder": 24,
+      "media": [
+        {
+          "src": "/assets/projects/one-block-cinema-overview.svg",
+          "alt": "Overview diagram for One-Block Cinema showing the project scope, stack, and core system relationships.",
+          "caption": "One-Block Cinema overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "pocket-civilization",
+      "title": "Pocket Civilization",
+      "summary": "Passive lifelog simulator that turns personal traces into a small evolving world with privacy controls up front.",
+      "description": "Pocket Civilization is a passive lifelog civilization simulator. It explores turning personal traces into a small evolving world while keeping local privacy controls explicit. The repository currently ships privacy-control UI work and a project foundation for modeling memories, signals, and simulation state without exposing sensitive data by default.",
+      "role": "Product engineer",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/pocket-civilization",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Simulation",
+        "Privacy",
+        "Lifelogging"
+      ],
+      "highlights": [
+        "Explored a lifelog simulator where personal signals become a miniature evolving civilization.",
+        "Built privacy-control UI as an early product surface rather than a late settings page.",
+        "Framed simulation data around local control so sensitive traces do not become default cloud exhaust."
+      ],
+      "architecture": [
+        "Simulation model separates raw personal traces from derived world state and user-facing civilization events.",
+        "Privacy-control interface governs what signals can enter the simulator and what remains local.",
+        "Template-backed application foundation leaves room for future ingestion, timeline, and visualization modules."
+      ],
+      "lessons": [
+        "Lifelog products should begin with privacy controls because retrofitting consent after ingestion is too late.",
+        "Simulation can make personal data feel less extractive when it produces playful local meaning instead of surveillance dashboards."
+      ],
+      "kind": "highlight",
+      "year": 2026,
+      "featured": false,
+      "sortOrder": 25,
+      "media": [
+        {
+          "src": "/assets/projects/pocket-civilization-overview.svg",
+          "alt": "Overview diagram for Pocket Civilization showing the project scope, stack, and core system relationships.",
+          "caption": "Pocket Civilization overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "patrickfanella-co",
+      "title": "PatrickFanella.co",
+      "kind": "highlight",
+      "summary": "This portfolio application: a Go API, React frontend, PostgreSQL content model, seed workflow, and production deployment path.",
+      "description": "PatrickFanella.co is the portfolio application itself: a React frontend, Go API, PostgreSQL-backed portfolio model, migrations, seed workflow, generated sitemap, and deployment documentation. It is a compact platform project that proves the content system, production path, and presentation layer behind the public site.",
+      "role": "Portfolio/platform engineer",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/PatrickFanella/patrickfanella-co",
+      "featured": false,
+      "sortOrder": 26,
+      "stack": [
+        "Go",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Docker",
+        "Vite",
+        "SEO"
+      ],
+      "highlights": [
+        "Built and maintained PatrickFanella.co as a focused project in the broader portfolio ecosystem.",
+        "Kept the implementation small enough to support ongoing iteration while still documenting the product boundary.",
+        "Used the project to consolidate reusable patterns for future SUBCULT and personal infrastructure work."
+      ],
+      "architecture": [
+        "Project structure follows the same production-shaped conventions used across the portfolio: explicit environment contracts, repeatable local workflows, and documented ownership.",
+        "The implementation prioritizes a narrow core workflow rather than broad platform scope, keeping the project legible as a portfolio highlight.",
+        "Repository-level tooling and deployment conventions make the project easy to operate, revisit, and extend."
+      ],
+      "lessons": [
+        "Not every portfolio project needs a full flagship narrative; some are better presented as concise highlights with clear scope and outcome.",
+        "Small infrastructure and meta-projects still show engineering taste when their boundaries, trade-offs, and operating model are explicit."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/patrickfanella-co-overview.svg",
+          "alt": "Overview diagram for PatrickFanella.co showing the project scope, stack, and core system relationships.",
+          "caption": "PatrickFanella.co overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "artemis",
+      "title": "Artemis",
+      "kind": "highlight",
+      "summary": "Information-site and API project for packaging a focused product surface with TypeScript automation conventions.",
+      "description": "Artemis is a compact TypeScript project that combines an information-site/API shape with automation-friendly repository conventions. It belongs as a project highlight: useful enough to show the product and code boundary, but intentionally smaller than the flagship case studies.",
+      "role": "Product engineer",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/artemis",
+      "featured": false,
+      "sortOrder": 27,
+      "stack": [
+        "TypeScript",
+        "Automation",
+        "API",
+        "Frontend",
+        "Agents"
+      ],
+      "highlights": [
+        "Built and maintained Artemis as a focused project in the broader portfolio ecosystem.",
+        "Kept the implementation small enough to support ongoing iteration while still documenting the product boundary.",
+        "Used the project to consolidate reusable patterns for future SUBCULT and personal infrastructure work."
+      ],
+      "architecture": [
+        "Project structure follows the same production-shaped conventions used across the portfolio: explicit environment contracts, repeatable local workflows, and documented ownership.",
+        "The implementation prioritizes a narrow core workflow rather than broad platform scope, keeping the project legible as a portfolio highlight.",
+        "Repository-level tooling and deployment conventions make the project easy to operate, revisit, and extend."
+      ],
+      "lessons": [
+        "Not every portfolio project needs a full flagship narrative; some are better presented as concise highlights with clear scope and outcome.",
+        "Small infrastructure and meta-projects still show engineering taste when their boundaries, trade-offs, and operating model are explicit."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/artemis-overview.svg",
+          "alt": "Overview diagram for Artemis showing the project scope, stack, and core system relationships.",
+          "caption": "Artemis overview: project scope, stack, and core architecture cues."
+        }
+      ]
+    },
+    {
+      "slug": "blacktower",
+      "title": "Blacktower",
+      "kind": "highlight",
+      "summary": "Slimmed OpenCode configuration and agent toolkit tuned for lower token overhead and day-to-day autonomous workflows.",
+      "description": "Blacktower is a slimmed and tuned OpenCode configuration and agent toolkit. It packages a curated agent system, lower-token workflow defaults, and practical day-to-day automation conventions for working with autonomous coding agents.",
+      "role": "Agent tooling engineer",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/blacktower",
+      "featured": false,
+      "sortOrder": 28,
+      "stack": [
+        "TypeScript",
+        "OpenCode",
+        "Agents",
+        "Developer Tooling",
+        "Automation"
+      ],
+      "highlights": [
+        "Built and maintained Blacktower as a focused project in the broader portfolio ecosystem.",
+        "Kept the implementation small enough to support ongoing iteration while still documenting the product boundary.",
+        "Used the project to consolidate reusable patterns for future SUBCULT and personal infrastructure work."
+      ],
+      "architecture": [
+        "Project structure follows the same production-shaped conventions used across the portfolio: explicit environment contracts, repeatable local workflows, and documented ownership.",
+        "The implementation prioritizes a narrow core workflow rather than broad platform scope, keeping the project legible as a portfolio highlight.",
+        "Repository-level tooling and deployment conventions make the project easy to operate, revisit, and extend."
+      ],
+      "lessons": [
+        "Not every portfolio project needs a full flagship narrative; some are better presented as concise highlights with clear scope and outcome.",
+        "Small infrastructure and meta-projects still show engineering taste when their boundaries, trade-offs, and operating model are explicit."
+      ],
+      "media": [
+        {
+          "src": "/assets/projects/blacktower-overview.svg",
+          "alt": "Overview diagram for Blacktower showing the project scope, stack, and core system relationships.",
+          "caption": "Blacktower overview: project scope, stack, and core architecture cues."
+        }
+      ]
     },
     {
       "slug": "tmux-popups",
       "title": "Tmux Popups",
       "kind": "tool",
-      "summary": "Bash and tmux popup toolkit with a TSV registry, generated bindings, a quick menu, and dependency checks.",
-      "description": "Tmux Popups is a Bash and tmux popup toolkit built around a TSV registry, generated bindings, and a quick menu for local workflows. It supports local overrides, dependency checks, and a doctor script so the setup can self-diagnose missing prerequisites.",
+      "summary": "tmux popup toolkit with a TSV registry, generated bindings, quick menu, local overrides, and diagnostics.",
+      "description": "tmux popup toolkit with a TSV registry, generated bindings, quick menu, local overrides, and diagnostics. It stays in Tools because the primary value is the reusable utility or service itself, not a long-form product case study.",
       "role": "Developer tool",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/PatrickFanella/tmux-popups",
       "featured": false,
-      "sortOrder": 30,
-      "stack": ["Shell", "tmux", "CLI"],
+      "sortOrder": 40,
+      "stack": [
+        "Shell",
+        "tmux",
+        "CLI",
+        "Developer Tooling"
+      ],
       "highlights": [],
       "architecture": [],
       "lessons": [],
@@ -604,65 +1288,20 @@
       "slug": "super-productivity-mcp",
       "title": "Super Productivity MCP",
       "kind": "tool",
-      "summary": "MCP server with a desktop quick-add bridge, Super Productivity plugin integration, and an agent skill bundle.",
-      "description": "Super Productivity MCP is a self-hosted bridge between an MCP server, a desktop quick-add flow, and the Super Productivity plugin ecosystem. It uses file-based IPC inbox, outbox, and deadletter paths, and ships both Go binaries and a JavaScript plugin to connect the pieces.",
+      "summary": "MCP and desktop quick-add bridge for automating Super Productivity task capture and planning workflows.",
+      "description": "MCP and desktop quick-add bridge for automating Super Productivity task capture and planning workflows. It stays in Tools because the primary value is the reusable utility or service itself, not a long-form product case study.",
       "role": "Automation tool",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/PatrickFanella/super-productivity-mcp",
       "featured": false,
-      "sortOrder": 31,
-      "stack": ["Go", "JavaScript", "MCP", "Automation"],
-      "highlights": [],
-      "architecture": [],
-      "lessons": [],
-      "media": []
-    },
-    {
-      "slug": "ocq",
-      "title": "OCQ",
-      "kind": "tool",
-      "summary": "Tiny Node CLI for one-shot prompts to a local OpenCode server with session, model, directory, and auth options.",
-      "description": "OCQ is a tiny Node CLI for sending one-shot prompts to a local OpenCode server. It can create or continue sessions, accepts model, provider, directory, system, and JSON options, and reads auth details from an env file.",
-      "role": "CLI utility",
-      "year": 2026,
-      "repoUrl": "https://git.subcult.tv/PatrickFanella/ocq",
-      "featured": false,
-      "sortOrder": 32,
-      "stack": ["JavaScript", "OpenCode", "CLI", "Automation"],
-      "highlights": [],
-      "architecture": [],
-      "lessons": [],
-      "media": []
-    },
-    {
-      "slug": "patrickfanella-co",
-      "title": "PatrickFanella.co",
-      "kind": "tool",
-      "summary": "This portfolio app with a React frontend, Go API, and PostgreSQL content layer.",
-      "description": "PatrickFanella.co is the portfolio app itself, combining a React frontend, a Go API, and a PostgreSQL-backed content layer. It includes migrations, seed data, deployment docs, a runbook, and a launch checklist.",
-      "role": "Developer tool",
-      "year": 2026,
-      "repoUrl": "https://git.subcult.tv/PatrickFanella/patrickfanella-co",
-      "featured": false,
-      "sortOrder": 33,
-      "stack": ["Go", "React", "PostgreSQL", "Portfolio"],
-      "highlights": [],
-      "architecture": [],
-      "lessons": [],
-      "media": []
-    },
-    {
-      "slug": "artemis",
-      "title": "Artemis",
-      "kind": "tool",
-      "summary": "TypeScript automation and agent utility.",
-      "description": "Artemis is a compact TypeScript automation and agent utility.",
-      "role": "Automation tool",
-      "year": 2026,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/artemis",
-      "featured": false,
-      "sortOrder": 34,
-      "stack": ["TypeScript", "Automation", "Agents"],
+      "sortOrder": 41,
+      "stack": [
+        "Go",
+        "JavaScript",
+        "MCP",
+        "Super Productivity",
+        "Automation"
+      ],
       "highlights": [],
       "architecture": [],
       "lessons": [],
@@ -672,14 +1311,20 @@
       "slug": "discord-spywatcher",
       "title": "Discord Spywatcher",
       "kind": "tool",
-      "summary": "Full-stack Discord presence and analytics tool with a bot, REST API, React dashboard, OAuth2, and public SDK surfaces.",
-      "description": "Discord Spywatcher is a full-stack Discord presence and analytics tool with a bot, REST API, and React dashboard. It supports Discord OAuth2, SDK and public API access, quotas and rate limiting, a plugin system, and monitoring and deployment documentation.",
+      "summary": "Discord presence and analytics service with bot collection, REST APIs, dashboard surfaces, and monitoring hooks.",
+      "description": "Discord presence and analytics service with bot collection, REST APIs, dashboard surfaces, and monitoring hooks. It stays in Tools because the primary value is the reusable utility or service itself, not a long-form product case study.",
       "role": "Service tool",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/discord-spywatcher",
       "featured": false,
-      "sortOrder": 35,
-      "stack": ["TypeScript", "Discord", "Analytics", "Automation"],
+      "sortOrder": 42,
+      "stack": [
+        "TypeScript",
+        "Discord",
+        "Analytics",
+        "REST API",
+        "Automation"
+      ],
       "highlights": [],
       "architecture": [],
       "lessons": [],
@@ -689,14 +1334,67 @@
       "slug": "vod-tender",
       "title": "VOD Tender",
       "kind": "tool",
-      "summary": "Go service for discovering Twitch VODs, downloading them with yt-dlp, and recording live chat alongside the video.",
-      "description": "VOD Tender is a Go service that discovers Twitch VODs, downloads them through yt-dlp, records live chat tied to the VOD, and can optionally upload to YouTube. It keeps a minimal API and frontend, uses PostgreSQL for state, and includes Jaeger and Prometheus observability with a responsible-use framing.",
-      "role": "Service tool",
+      "summary": "Twitch VOD discovery, download, chat capture, and optional upload service built for responsible archival workflows.",
+      "description": "Twitch VOD discovery, download, chat capture, and optional upload service built for responsible archival workflows. It stays in Tools because the primary value is the reusable utility or service itself, not a long-form product case study.",
+      "role": "Media service",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/vod-tender",
       "featured": false,
-      "sortOrder": 36,
-      "stack": ["Go", "Twitch", "Video", "Service"],
+      "sortOrder": 43,
+      "stack": [
+        "Go",
+        "Twitch",
+        "yt-dlp",
+        "Video",
+        "PostgreSQL",
+        "Observability"
+      ],
+      "highlights": [],
+      "architecture": [],
+      "lessons": [],
+      "media": []
+    },
+    {
+      "slug": "magic-playlists",
+      "title": "Magic Playlists",
+      "kind": "tool",
+      "summary": "Small Go web UI for creating and scheduling Navidrome playlists through Magic Lists recipes.",
+      "description": "Small Go web UI for creating and scheduling Navidrome playlists through Magic Lists recipes. It stays in Tools because the primary value is the reusable utility or service itself, not a long-form product case study.",
+      "role": "Media tool",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/PatrickFanella/magic-playlists",
+      "featured": false,
+      "sortOrder": 44,
+      "stack": [
+        "Go",
+        "Navidrome",
+        "Music",
+        "Docker",
+        "Scheduling"
+      ],
+      "highlights": [],
+      "architecture": [],
+      "lessons": [],
+      "media": []
+    },
+    {
+      "slug": "overlaid",
+      "title": "Overlaid",
+      "kind": "tool",
+      "summary": "OBS overlay MVP for livestream alerts, homelab status, and broadcast-friendly event surfaces.",
+      "description": "OBS overlay MVP for livestream alerts, homelab status, and broadcast-friendly event surfaces. It stays in Tools because the primary value is the reusable utility or service itself, not a long-form product case study.",
+      "role": "Broadcast tool",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/overlaid",
+      "featured": false,
+      "sortOrder": 45,
+      "stack": [
+        "Docker",
+        "OBS",
+        "Streaming",
+        "Alerts",
+        "Overlay UI"
+      ],
       "highlights": [],
       "architecture": [],
       "lessons": [],

@@ -17,8 +17,14 @@ import { useProjects } from '../lib/useProjects'
 export function ProjectsPage() {
   const { projects, status, error, retry } = useProjects()
   const caseStudies = projects.filter((project) => project.kind === 'case-study')
+  const highlights = projects.filter((project) => project.kind === 'highlight')
+  const projectEntries = [...caseStudies, ...highlights]
   const featuredCaseStudies = useMemo(() => caseStudies.filter((project) => project.featured), [caseStudies])
   const archiveCaseStudies = useMemo(() => caseStudies.filter((project) => !project.featured), [caseStudies])
+  const highlightEntries = useMemo(
+    () => highlights.map((project, index) => ({ order: caseStudies.length + index + 1, project })),
+    [caseStudies.length, highlights],
+  )
   const featuredCountLabel = featuredCaseStudies.length === 1 ? 'featured case study' : 'featured case studies'
   const archiveCountLabel = archiveCaseStudies.length === 1 ? 'more case study' : 'more case studies'
   const projectsError = getErrorMessage(error, 'Please try again in a moment.')
@@ -50,7 +56,7 @@ export function ProjectsPage() {
           <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">
             {status === 'success' && caseStudies.length > 0 ? (
               <>
-                {featuredCaseStudies.length} {featuredCountLabel} and {archiveCaseStudies.length} {archiveCountLabel} are available. Each card links to the full case study.
+                {featuredCaseStudies.length} {featuredCountLabel}, {archiveCaseStudies.length} {archiveCountLabel}, and {highlights.length} project highlight{highlights.length === 1 ? '' : 's'} are available.
               </>
             ) : (
               <>Counts appear after the project index loads. Each card links to the full case study.</>
@@ -105,7 +111,7 @@ export function ProjectsPage() {
         />
       ) : null}
 
-      {status === 'success' && caseStudies.length === 0 ? (
+      {status === 'success' && projectEntries.length === 0 ? (
         <RouteState
           description="The portfolio is online, but no case studies have been published yet."
           label="No projects yet"
@@ -113,7 +119,7 @@ export function ProjectsPage() {
         />
       ) : null}
 
-      {status === 'success' && caseStudies.length > 0 ? (
+      {status === 'success' && projectEntries.length > 0 ? (
         <div className="grid gap-14">
           {featuredEntries.length > 0 ? (
             <section className="grid gap-5" aria-labelledby="featured-case-studies-heading">
@@ -147,6 +153,25 @@ export function ProjectsPage() {
 
               <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {archiveEntries.map(({ order, project }) => (
+                  <ProjectCard key={project.slug} density="archive" order={order} project={project} />
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {highlightEntries.length > 0 ? (
+            <section className="grid gap-5" aria-labelledby="project-highlights-heading">
+              <div>
+                <h2 id="project-highlights-heading" className={monoLabelClass}>
+                  Project Highlights
+                </h2>
+                <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
+                  {highlightEntries.length} lighter project highlight{highlightEntries.length === 1 ? '' : 's'}: scoped builds, infrastructure, prototypes, and product experiments.
+                </p>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {highlightEntries.map(({ order, project }) => (
                   <ProjectCard key={project.slug} density="archive" order={order} project={project} />
                 ))}
               </div>

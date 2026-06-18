@@ -41,7 +41,7 @@ async function main() {
 		'/resume',
 		'/contact',
 		...portfolio.projects
-			.filter((project) => (project.kind || 'case-study') === 'case-study')
+			.filter((project) => ['case-study', 'highlight'].includes(project.kind || 'case-study'))
 			.map((project) => `/projects/${project.slug}`),
 	]
 	const uniqueRoutes = [...new Set(routes)]

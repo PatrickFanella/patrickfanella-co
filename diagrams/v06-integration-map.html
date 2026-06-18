@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Portfolio — Integration Map</title>
+<title>Portfolio — Service Usage Map</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>*{margin:0;padding:0;box-sizing:border-box}body{background:#1a1b26;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;font-family:'Space Grotesk',sans-serif}.card{background:#282a36;padding:28px 24px;max-width:760px;width:100%;box-shadow:4px 4px 0 #805bca;color:#f8f8f2}</style>
 </head>
 <body>
 <div class="card">
-<div style="font-size:16px;font-weight:500;margin-bottom:4px;font-family:'JetBrains Mono',monospace;color:#ffb86c;">Integration map</div>
-<div style="font-size:12px;color:#6272a4;margin-bottom:20px;font-family:'JetBrains Mono',monospace;">External services and APIs connected across the portfolio</div>
+<div style="font-size:16px;font-weight:500;margin-bottom:4px;font-family:'JetBrains Mono',monospace;color:#ffb86c;">Service usage map</div>
+<div style="font-size:12px;color:#8a95bd;margin-bottom:20px;font-family:'JetBrains Mono',monospace;">External APIs grouped by how often they appear across portfolio projects</div>
 <div style="position:relative;height:380px;"><canvas id="c"></canvas></div>
 <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;font-size:11px;color:#6272a4;font-family:'JetBrains Mono',monospace;">
   <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#bd93f9;"></span>AI/LLM</span>
@@ -64,9 +64,9 @@ const colors = data.map((v,i)=>{
 });
 new Chart(document.getElementById('c'),{type:'bar',
   data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:0,barPercentage:0.7}]},
-  options:{responsive:true,maintainAspectRatio:false,
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
     plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+' project'+(c.raw>1?'s':'')}}},
-    scales:{x:{grid:{display:false},ticks:{maxRotation:45,autoSkip:false}},y:{grid:{color:'rgba(98,114,164,0.2)'},beginAtZero:true,ticks:{stepSize:1}}}}
+    scales:{x:{grid:{color:'rgba(98,114,164,0.2)'},beginAtZero:true,ticks:{stepSize:1}},y:{grid:{display:false},ticks:{autoSkip:false}}}}
 });
 </script>
 </body></html>

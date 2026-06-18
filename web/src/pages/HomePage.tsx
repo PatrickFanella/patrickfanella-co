@@ -220,6 +220,7 @@ export function HomePage() {
   const prefersReducedMotion = useReducedMotion()
   const { projects, status, error, retry } = useProjects()
   const caseStudies = projects.filter((project) => project.kind === 'case-study')
+  const highlights = projects.filter((project) => project.kind === 'highlight')
   const tools = projects.filter((project) => project.kind === 'tool')
   const featuredProjects = caseStudies.filter((project) => project.featured)
 
@@ -339,7 +340,7 @@ export function HomePage() {
             </Link>
             {status === 'success' ? (
               <p className="text-sm leading-relaxed text-ink-soft">
-                {tools.length} public tools and services live in the archive.
+                {highlights.length} project highlights and {tools.length} public tools live in the archive.
               </p>
             ) : null}
             <Link className={textLinkClass} to="/tools">

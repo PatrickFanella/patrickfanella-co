@@ -4,7 +4,7 @@ export type ProjectMedia = {
   caption?: string
 }
 
-export type ProjectKind = 'case-study' | 'tool'
+export type ProjectKind = 'case-study' | 'highlight' | 'tool'
 
 export type Project = {
   slug: string

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Subcults overview</title>
+  <desc id="desc">Overview diagram for Subcults, showing project type, summary, stack, and core architecture cues.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2 2 L10 6 L2 10 Z" fill="#6272a4"/></marker>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#282a36" stroke-width="2" opacity="0.55"/></pattern>
+  </defs>
+  <rect width="1600" height="1000" fill="#1a1b26"/>
+  <rect width="1600" height="1000" fill="url(#grid)"/>
+  <rect x="56" y="56" width="1488" height="888" fill="#282a36" stroke="#ffb86c" stroke-width="10"/>
+  <rect x="84" y="84" width="1488" height="888" fill="none" stroke="#0f111a" stroke-width="10" opacity="0.8"/>
+  <rect x="96" y="102" width="664" height="104" fill="#191a21" stroke="#f1fa8c" stroke-width="6"/>
+  <text x="122" y="146" fill="#f1fa8c" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700" letter-spacing="4">PROJECT HIGHLIGHT / 2026</text>
+  <text x="122" y="182" fill="#f8f8f2" font-family="JetBrains Mono, monospace" font-size="20" letter-spacing="3">FULL-STACK PRODUCT ENGINEER</text>
+  <text x="112" y="304" fill="#ffb86c" font-family="Space Grotesk, Arial, sans-serif" font-size="78" font-weight="800" letter-spacing="6">SUBCULTS</text>
+  <rect x="118" y="350" width="104" height="12" fill="#8a95bd"/>
+  <text x="118" y="414" fill="#d7d9ef" font-family="JetBrains Mono, monospace" font-size="28">Privacy-first scene platform for underground music communities with maps,</text>
+<text x="118" y="458" fill="#d7d9ef" font-family="JetBrains Mono, monospace" font-size="28">local identity, live audio, and AT Protocol ingestion.</text>
+  <text x="118" y="646" fill="#8a95bd" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700" letter-spacing="4">STACK</text>
+  <rect x="118" y="690" width="244" height="48" fill="#44475a" stroke="#ffb86c" stroke-width="4"/><text x="240" y="722" text-anchor="middle" fill="#f8f8f2" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">GO</text><rect x="394" y="690" width="244" height="48" fill="#44475a" stroke="#ff79c6" stroke-width="4"/><text x="516" y="722" text-anchor="middle" fill="#f8f8f2" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">REACT</text><rect x="670" y="690" width="244" height="48" fill="#44475a" stroke="#f1fa8c" stroke-width="4"/><text x="792" y="722" text-anchor="middle" fill="#f8f8f2" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">TYPESCRIPT</text><rect x="118" y="766" width="244" height="48" fill="#44475a" stroke="#ff5555" stroke-width="4"/><text x="240" y="798" text-anchor="middle" fill="#f8f8f2" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">POSTGIS</text><rect x="394" y="766" width="244" height="48" fill="#44475a" stroke="#8a95bd" stroke-width="4"/><text x="516" y="798" text-anchor="middle" fill="#f8f8f2" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">MAPLIBRE</text><rect x="670" y="766" width="244" height="48" fill="#44475a" stroke="#bd93f9" stroke-width="4"/><text x="792" y="798" text-anchor="middle" fill="#f8f8f2" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">LIVEKIT</text>
+  <rect x="820" y="246" width="160" height="330" fill="#191a21" stroke="#ffb86c" stroke-width="6"/>
+  <text x="900" y="392" text-anchor="middle" fill="#ffb86c" font-family="Space Grotesk, Arial, sans-serif" font-size="44" font-weight="800">CORE</text>
+  <text x="900" y="444" text-anchor="middle" fill="#f8f8f2" font-family="JetBrains Mono, monospace" font-size="24">SYSTEM</text>
+  <path d="M890 330 L1030 280" stroke="#6272a4" stroke-width="6" fill="none" marker-end="url(#arrow)"/>
+<path d="M890 390 L1260 402" stroke="#6272a4" stroke-width="6" fill="none" marker-end="url(#arrow)"/>
+<path d="M890 450 L1030 524" stroke="#6272a4" stroke-width="6" fill="none" marker-end="url(#arrow)"/>
+<path d="M890 510 L1260 646" stroke="#6272a4" stroke-width="6" fill="none" marker-end="url(#arrow)"/>
+  <rect x="1030" y="238" width="280" height="84" fill="#282a36" stroke="#ff79c6" stroke-width="6"/><text x="1170" y="288" text-anchor="middle" fill="#ff79c6" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">GO</text><rect x="1260" y="360" width="280" height="84" fill="#282a36" stroke="#f1fa8c" stroke-width="6"/><text x="1400" y="410" text-anchor="middle" fill="#f1fa8c" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">REACT</text><rect x="1030" y="482" width="280" height="84" fill="#282a36" stroke="#ff5555" stroke-width="6"/><text x="1170" y="532" text-anchor="middle" fill="#ff5555" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">TYPESCRIPT</text><rect x="1260" y="604" width="280" height="84" fill="#282a36" stroke="#8a95bd" stroke-width="6"/><text x="1400" y="654" text-anchor="middle" fill="#8a95bd" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">POSTGIS</text>
+  <rect x="812" y="732" width="550" height="92" fill="#191a21" stroke="#44475a" stroke-width="6"/>
+  <text x="842" y="776" fill="#f8f8f2" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">PORTFOLIO ASSET</text>
+  <text x="842" y="810" fill="#8a95bd" font-family="JetBrains Mono, monospace" font-size="18">Generated from seed metadata · replace with product screenshot when available</text>
+</svg>

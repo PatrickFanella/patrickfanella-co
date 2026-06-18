@@ -110,7 +110,7 @@ new Chart(document.getElementById('opsChart'),{
     backgroundColor:oD.map((_,i)=>[D.purple,D.cyan,D.pink,D.green,D.orange,D.yellow,D.red,D.purple,D.cyan,D.pink,D.green,D.orange,D.yellow,D.red][i]),
     borderRadius:0,barPercentage:0.65}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{grid:{display:false},ticks:{maxRotation:45,autoSkip:false}},y:{grid:{color:gridC},beginAtZero:true,ticks:{callback:v=>v>=1000?(v/1000)+'k':v}}}}
+    scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:true}},y:{grid:{color:gridC},beginAtZero:true,ticks:{callback:v=>v>=1000?(v/1000)+'k':v}}}}
 });
 </script>
 </body>
