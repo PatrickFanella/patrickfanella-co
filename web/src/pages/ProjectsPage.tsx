@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { SEO } from '../components/SEO'
 import { ProjectCard } from '../components/ProjectCard'
 import { WorkMediaPlaceholder } from '../components/WorkMediaPlaceholder'
+import { assetsFor } from '../data/project-assets'
 import {
   allProjectsSorted,
   archiveViewModes,
@@ -261,6 +262,7 @@ function DirectoryView({ projects }: { projects: Project[] }) {
     <div className="space-y-3">
       {projects.map((project) => {
         const themes = themesForProject(project).slice(0, 3).map((themeId) => themeLabel(themeId))
+        const assets = assetsFor(project.slug)
         return (
           <Link
             key={project.slug}
@@ -274,8 +276,9 @@ function DirectoryView({ projects }: { projects: Project[] }) {
                 summary={project.summary}
                 caption={`${themeLabel(primaryThemeForProject(project))} · ${project.year}`}
                 accent={project.kind === 'tool' ? 'amber' : project.featured ? 'violet' : 'green'}
-                variant="thumb"
+                variant="square"
                 className="h-full"
+                src={assets.thumbDirectory ?? assets.thumbSquare ?? assets.hero}
               />
 
               <div className="min-w-0">

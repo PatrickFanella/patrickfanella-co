@@ -4,6 +4,7 @@ import type { Project } from '../lib/types'
 import { statusBadges, typeLabel } from '../lib/project-utils'
 import { themeLabel, themesForProject } from '../data/portfolio'
 import { WorkMediaPlaceholder } from './WorkMediaPlaceholder'
+import { assetsFor } from '../data/project-assets'
 
 interface Props {
   project: Project
@@ -13,6 +14,7 @@ interface Props {
 export function ProjectCard({ project, index = 0 }: Props) {
   const badges = statusBadges(project)
   const themes = themesForProject(project).slice(0, 3).map((themeId) => themeLabel(themeId))
+  const assets = assetsFor(project.slug)
 
   return (
     <motion.article
@@ -31,6 +33,8 @@ export function ProjectCard({ project, index = 0 }: Props) {
           caption={themes.join(' · ') || 'Portfolio placeholder asset'}
           accent={project.kind === 'tool' ? 'amber' : project.featured ? 'violet' : 'green'}
           className="rounded-none border-0"
+          src={assets.hero ?? assets.thumbSquare}
+          video={assets.video}
         />
       </Link>
 

@@ -1,0 +1,1258 @@
+[
+  {
+    "asset": "projects/clpr/hero.webp",
+    "type": "infographic",
+    "description": "Hero image for a Twitch clip platform. Show the product as a polished dashboard + clip discovery surface, with search, voting, and a mobile companion cue.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (clpr)",
+    "generated_files": [
+      "projects/clpr/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcorp/hero.webp",
+    "type": "infographic",
+    "description": "Multi-agent orchestration hero. Depict six agents collaborating in a live command-and-control workspace with debate, memory, and tool execution.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (subcorp)",
+    "generated_files": [
+      "projects/subcorp/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/transcript-create/hero.webp",
+    "type": "infographic",
+    "description": "Transcription SaaS hero. Show video ingestion, GPU transcription, diarization, and searchable transcript output in one clean product montage.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (transcript-create)",
+    "generated_files": [
+      "projects/transcript-create/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/clustr/hero.webp",
+    "type": "infographic",
+    "description": "Community graph hero. Show a dense network visualization with clusters, filters, and a data panel for subreddit analysis.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (clustr)",
+    "generated_files": [
+      "projects/clustr/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/galdr/hero.webp",
+    "type": "infographic",
+    "description": "SaaS health scoring hero. Show a customer intelligence dashboard with scoring, signals, and operational status blocks.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (galdr)",
+    "generated_files": [
+      "projects/galdr/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/cutroom/hero.webp",
+    "type": "infographic",
+    "description": "AI video production hero. Depict a seven-stage production pipeline from research to publishing with handoff cards and rendering cues.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (cutroom)",
+    "generated_files": [
+      "projects/cutroom/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/edda/hero.webp",
+    "type": "infographic",
+    "description": "Game-master tool hero. Show a TUI + API split with session state, config, and a game board / campaign flow.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (edda)",
+    "generated_files": [
+      "projects/edda/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/augr/hero.webp",
+    "type": "infographic",
+    "description": "Autonomous trading system hero. Show an agent pipeline with analysis, debate, risk scoring, and execution controls.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (augr)",
+    "generated_files": [
+      "projects/augr/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/llama-line/hero.webp",
+    "type": "infographic",
+    "description": "Local AI broker hero. Show FIFO queueing, SSE wait-state updates, and a proxied Ollama inference lane.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (llama-line)",
+    "generated_files": [
+      "projects/llama-line/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/open-pilot/hero.webp",
+    "type": "infographic",
+    "description": "Issue-to-PR automation hero. Show a webhook, queue, worker, tests, and branch/PR handoff in a single flow.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (open-pilot)",
+    "generated_files": [
+      "projects/open-pilot/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/super-productivity-mcp/hero.webp",
+    "type": "infographic",
+    "description": "Productivity integration hero. Show an MCP-style bridge between a task app and agentic automation tools.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (super-productivity-mcp)",
+    "generated_files": [
+      "projects/super-productivity-mcp/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/tmux-popups/hero.webp",
+    "type": "infographic",
+    "description": "Terminal tooling hero. Show a terminal workspace with popup panels, shortcuts, and command-driven UI overlays.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (tmux-popups)",
+    "generated_files": [
+      "projects/tmux-popups/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/ocq/hero.webp",
+    "type": "infographic",
+    "description": "Developer workflow hero. Show a compact automation or queue-management interface with status and operator controls.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (ocq)",
+    "generated_files": [
+      "projects/ocq/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/patrickfanella-co/hero.webp",
+    "type": "infographic",
+    "description": "Portfolio hero. Show the site itself as a polished editorial portfolio spread with sections, cards, and project highlights.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (patrickfanella-co)",
+    "generated_files": [
+      "projects/patrickfanella-co/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/artemis/hero.webp",
+    "type": "infographic",
+    "description": "Automation or tooling hero. Show a dashboard-like system with actions, jobs, and operator feedback.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P0",
+    "variant": "wide",
+    "location": "`web/src/components/HeroCarousel.tsx` \u2014 Featured work slide (artemis)",
+    "generated_files": [
+      "projects/artemis/hero.webp"
+    ]
+  },
+  {
+    "asset": "projects/clpr/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the Clpr product surface. Emphasize clip discovery, voting, and search in a tight crop.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (clpr)",
+    "generated_files": [
+      "projects/clpr/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcorp/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the agent console. Show chat, roundtable debate, and agent status in a compact crop.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (subcorp)",
+    "generated_files": [
+      "projects/subcorp/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/transcript-create/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the transcription dashboard. Show upload, transcript list, and search results in a compact frame.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (transcript-create)",
+    "generated_files": [
+      "projects/transcript-create/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/clustr/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the graph explorer. Show a cluster visualization and sidebar controls.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (clustr)",
+    "generated_files": [
+      "projects/clustr/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/galdr/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the SaaS health dashboard. Show customer scorecards and integration signals.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (galdr)",
+    "generated_files": [
+      "projects/galdr/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/cutroom/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the video pipeline UI. Show stages, assets, and render progress.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (cutroom)",
+    "generated_files": [
+      "projects/cutroom/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcults/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the music community map. Show map pins, event cards, and audio session cues.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (subcults)",
+    "generated_files": [
+      "projects/subcults/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/augr/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the trading workspace. Show charts, debate panels, and execution status.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (augr)",
+    "generated_files": [
+      "projects/augr/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/llama-line/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the queue/broker UI. Show request queue state, wait time, and local AI endpoint routing.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (llama-line)",
+    "generated_files": [
+      "projects/llama-line/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/open-pilot/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the automation dashboard. Show queued issues, worker status, and generated PRs.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (open-pilot)",
+    "generated_files": [
+      "projects/open-pilot/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/edda/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the game-master UI. Show the TUI or API console with campaign state.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (edda)",
+    "generated_files": [
+      "projects/edda/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/paqr/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the dataset packaging workflow. Show file ingest, metadata, and searchable package output.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (paqr)",
+    "generated_files": [
+      "projects/paqr/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/tmux-popups/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of a terminal workspace with popup panes and command shortcuts.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (tmux-popups)",
+    "generated_files": [
+      "projects/tmux-popups/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/super-productivity-mcp/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of a task-management integration dashboard linking productivity software to agent tooling.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (super-productivity-mcp)",
+    "generated_files": [
+      "projects/super-productivity-mcp/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/ocq/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of a compact operator workflow or queue interface.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (ocq)",
+    "generated_files": [
+      "projects/ocq/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/patrickfanella-co/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the portfolio itself. Show the homepage or project grid as a branded site preview.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (patrickfanella-co)",
+    "generated_files": [
+      "projects/patrickfanella-co/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/artemis/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of the tool surface. Show a dense operator dashboard with tasks and status.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (artemis)",
+    "generated_files": [
+      "projects/artemis/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/discord-spywatcher/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of a monitoring or moderation workflow for Discord activity.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (discord-spywatcher)",
+    "generated_files": [
+      "projects/discord-spywatcher/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/vod-tender/thumb-square.webp",
+    "type": "screenshot",
+    "description": "Square thumbnail of a VOD processing or media automation workflow.",
+    "width": 1200,
+    "height": 1200,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Gallery card thumbnail (vod-tender)",
+    "generated_files": [
+      "projects/vod-tender/thumb-square.webp"
+    ]
+  },
+  {
+    "asset": "projects/clpr/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Clpr. Show the same product, but cropped for a list row.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (clpr)",
+    "generated_files": [
+      "projects/clpr/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcorp/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Subcorp. Keep the agent chat and orchestration visible in a tighter crop.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (subcorp)",
+    "generated_files": [
+      "projects/subcorp/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/transcript-create/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Transcript Create. Show upload, transcript, and export UI.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (transcript-create)",
+    "generated_files": [
+      "projects/transcript-create/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/clustr/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Clustr. Prioritize the network graph and cluster legend.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (clustr)",
+    "generated_files": [
+      "projects/clustr/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/galdr/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Galdr. Show the health score and signal panels.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (galdr)",
+    "generated_files": [
+      "projects/galdr/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/cutroom/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Cutroom. Show the pipeline view and render state.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (cutroom)",
+    "generated_files": [
+      "projects/cutroom/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcults/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Subcults. Show the map and scene discovery panel.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (subcults)",
+    "generated_files": [
+      "projects/subcults/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/augr/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Augr. Show charts, debate streams, and execution controls.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (augr)",
+    "generated_files": [
+      "projects/augr/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/llama-line/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Llama Line. Show queue state, SSE progress, and broker status.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (llama-line)",
+    "generated_files": [
+      "projects/llama-line/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/open-pilot/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Open Pilot. Show issue intake, worker execution, and PR output.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (open-pilot)",
+    "generated_files": [
+      "projects/open-pilot/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/edda/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Edda. Show a TUI or API surface with game session state.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (edda)",
+    "generated_files": [
+      "projects/edda/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/paqr/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Paqr. Show packaged dataset cards and search-ready metadata.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (paqr)",
+    "generated_files": [
+      "projects/paqr/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/tmux-popups/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for tmux-popups. Show the popup terminals and command palette in a tight crop.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (tmux-popups)",
+    "generated_files": [
+      "projects/tmux-popups/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/super-productivity-mcp/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Super Productivity MCP. Show task sync, assistant actions, and productivity signals.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (super-productivity-mcp)",
+    "generated_files": [
+      "projects/super-productivity-mcp/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/ocq/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for OCQ. Show the operational queue or control panel.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (ocq)",
+    "generated_files": [
+      "projects/ocq/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/patrickfanella-co/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for the portfolio site. Show a condensed project archive or homepage view.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (patrickfanella-co)",
+    "generated_files": [
+      "projects/patrickfanella-co/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/artemis/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Artemis. Show a tool/dashboard surface with compact controls.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (artemis)",
+    "generated_files": [
+      "projects/artemis/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/discord-spywatcher/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for Discord Spywatcher. Show alert cards and moderation signals.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (discord-spywatcher)",
+    "generated_files": [
+      "projects/discord-spywatcher/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/vod-tender/thumb-directory.webp",
+    "type": "screenshot",
+    "description": "Wide directory thumbnail for VOD Tender. Show media queueing and processing state.",
+    "width": 960,
+    "height": 960,
+    "priority": "P2",
+    "variant": "square",
+    "location": "`web/src/pages/ProjectsPage.tsx` \u2014 Directory thumbnail (vod-tender)",
+    "generated_files": [
+      "projects/vod-tender/thumb-directory.webp"
+    ]
+  },
+  {
+    "asset": "projects/clpr/figure-1.webp",
+    "type": "diagram",
+    "description": "Overview image of the Clpr system with the main product surface and core architecture cues.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clpr figure 1",
+    "generated_files": [
+      "projects/clpr/figure-1.webp"
+    ]
+  },
+  {
+    "asset": "projects/clpr/figure-2.webp",
+    "type": "diagram",
+    "description": "Layered architecture diagram showing client, API, data, and infrastructure tiers.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clpr figure 2",
+    "generated_files": [
+      "projects/clpr/figure-2.webp"
+    ]
+  },
+  {
+    "asset": "projects/clpr/figure-3.webp",
+    "type": "diagram",
+    "description": "Feature ecosystem map showing search, moderation, collections, and monetization surfaces.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clpr figure 3",
+    "generated_files": [
+      "projects/clpr/figure-3.webp"
+    ]
+  },
+  {
+    "asset": "projects/clpr/figure-4.webp",
+    "type": "diagram",
+    "description": "Tech stack diagram spanning Go, React, mobile, search, and deployment tooling.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clpr figure 4",
+    "generated_files": [
+      "projects/clpr/figure-4.webp"
+    ]
+  },
+  {
+    "asset": "projects/clpr/figure-5.webp",
+    "type": "diagram",
+    "description": "Codebase metrics or system scale graphic with service counts, migrations, and deployment facts.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clpr figure 5",
+    "generated_files": [
+      "projects/clpr/figure-5.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcorp/figure-1.webp",
+    "type": "diagram",
+    "description": "Overview of the agent system with the Sanctum interface and shared tool layer.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 subcorp figure 1",
+    "generated_files": [
+      "projects/subcorp/figure-1.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcorp/figure-2.webp",
+    "type": "diagram",
+    "description": "Full system architecture covering app, agent council, worker, and database layers.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 subcorp figure 2",
+    "generated_files": [
+      "projects/subcorp/figure-2.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcorp/figure-3.webp",
+    "type": "diagram",
+    "description": "Feature ecosystem map for debate, memory, governance, and agent tooling.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 subcorp figure 3",
+    "generated_files": [
+      "projects/subcorp/figure-3.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcorp/figure-4.webp",
+    "type": "diagram",
+    "description": "Tech stack overview for app, AI orchestration, data, and infrastructure.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 subcorp figure 4",
+    "generated_files": [
+      "projects/subcorp/figure-4.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcorp/figure-5.webp",
+    "type": "diagram",
+    "description": "Codebase metrics or ops breakdown showing route count, modules, agents, and scale.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 subcorp figure 5",
+    "generated_files": [
+      "projects/subcorp/figure-5.webp"
+    ]
+  },
+  {
+    "asset": "projects/transcript-create/figure-1.webp",
+    "type": "diagram",
+    "description": "Pipeline overview from video ingestion through GPU transcription and search indexing.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 transcript-create figure 1",
+    "generated_files": [
+      "projects/transcript-create/figure-1.webp"
+    ]
+  },
+  {
+    "asset": "projects/transcript-create/figure-2.webp",
+    "type": "diagram",
+    "description": "Layered architecture diagram for frontend, API, workers, data, and deployment tiers.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 transcript-create figure 2",
+    "generated_files": [
+      "projects/transcript-create/figure-2.webp"
+    ]
+  },
+  {
+    "asset": "projects/transcript-create/figure-3.webp",
+    "type": "diagram",
+    "description": "Feature ecosystem map spanning transcription, export, billing, observability, and testing.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 transcript-create figure 3",
+    "generated_files": [
+      "projects/transcript-create/figure-3.webp"
+    ]
+  },
+  {
+    "asset": "projects/transcript-create/figure-4.webp",
+    "type": "diagram",
+    "description": "Tech stack overview for Python backend, GPU AI/ML, React frontend, and infra.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 transcript-create figure 4",
+    "generated_files": [
+      "projects/transcript-create/figure-4.webp"
+    ]
+  },
+  {
+    "asset": "projects/transcript-create/figure-5.webp",
+    "type": "diagram",
+    "description": "Metrics graphic showing codebase size, test coverage, and route complexity.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 transcript-create figure 5",
+    "generated_files": [
+      "projects/transcript-create/figure-5.webp"
+    ]
+  },
+  {
+    "asset": "projects/clustr/figure-1.webp",
+    "type": "diagram",
+    "description": "Network graph visualization of Reddit communities with cluster coloring.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clustr figure 1",
+    "generated_files": [
+      "projects/clustr/figure-1.webp"
+    ]
+  },
+  {
+    "asset": "projects/clustr/figure-2.webp",
+    "type": "diagram",
+    "description": "Full stack architecture showing visualization, Go backend, and observability.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clustr figure 2",
+    "generated_files": [
+      "projects/clustr/figure-2.webp"
+    ]
+  },
+  {
+    "asset": "projects/clustr/figure-3.webp",
+    "type": "diagram",
+    "description": "Feature ecosystem map covering graph engine, crawler, security, and ops.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clustr figure 3",
+    "generated_files": [
+      "projects/clustr/figure-3.webp"
+    ]
+  },
+  {
+    "asset": "projects/clustr/figure-4.webp",
+    "type": "diagram",
+    "description": "Tech stack diagram for Go, WebGL, graph algorithms, and observability.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clustr figure 4",
+    "generated_files": [
+      "projects/clustr/figure-4.webp"
+    ]
+  },
+  {
+    "asset": "projects/clustr/figure-5.webp",
+    "type": "diagram",
+    "description": "Codebase metrics graphic with file counts, handlers, migrations, and rendering pipeline stats.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clustr figure 5",
+    "generated_files": [
+      "projects/clustr/figure-5.webp"
+    ]
+  },
+  {
+    "asset": "projects/internet-id/figure-1.webp",
+    "type": "diagram",
+    "description": "Provenance flow from hashing and signing through IPFS and on-chain registration.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 internet-id figure 1",
+    "generated_files": [
+      "projects/internet-id/figure-1.webp"
+    ]
+  },
+  {
+    "asset": "projects/soundhash/figure-1.webp",
+    "type": "diagram",
+    "description": "Audio fingerprinting pipeline from ingestion to cross-platform matching.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 soundhash figure 1",
+    "generated_files": [
+      "projects/soundhash/figure-1.webp"
+    ]
+  },
+  {
+    "asset": "projects/jury-rigged/figure-1.webp",
+    "type": "screenshot",
+    "description": "Ace Attorney-style courtroom scene with AI dialogue and Twitch overlay.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 jury-rigged figure 1",
+    "generated_files": [
+      "projects/jury-rigged/figure-1.webp"
+    ]
+  },
+  {
+    "asset": "projects/patchwork/figure-1.webp",
+    "type": "screenshot",
+    "description": "Map-based mutual aid interface with location markers and privacy controls.",
+    "width": 1600,
+    "height": 900,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 patchwork figure 1",
+    "generated_files": [
+      "projects/patchwork/figure-1.webp"
+    ]
+  },
+  {
+    "asset": "projects/tmux-popups/demo.mp4",
+    "type": "motion (screen capture)",
+    "description": "Terminal showing popup spawn \u2192 action \u2192 dismiss cycle. Demonstrate the whole product loop end-to-end.",
+    "width": 800,
+    "height": 500,
+    "priority": "P0",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 tmux-popups detail",
+    "generated_files": [
+      "projects/tmux-popups/demo.mp4",
+      "projects/tmux-popups/demo.webm",
+      "projects/tmux-popups/demo-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/clustr/graph.mp4",
+    "type": "motion (screen capture)",
+    "description": "Force-directed graph settling into clusters, then user pans/zooms. Convey scale + interactivity.",
+    "width": 1200,
+    "height": 750,
+    "priority": "P0",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 clustr detail",
+    "generated_files": [
+      "projects/clustr/graph.mp4",
+      "projects/clustr/graph.webm",
+      "projects/clustr/graph-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/jury-rigged/reactive.mp4",
+    "type": "motion (screen capture)",
+    "description": "AI visuals reacting to live audio/input in real time. Highlight responsiveness.",
+    "width": 1200,
+    "height": 675,
+    "priority": "P0",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 jury-rigged detail",
+    "generated_files": [
+      "projects/jury-rigged/reactive.mp4",
+      "projects/jury-rigged/reactive.webm",
+      "projects/jury-rigged/reactive-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/cutroom/timeline.mp4",
+    "type": "motion (screen capture)",
+    "description": "Clip selection on a video timeline \u2014 scrub, mark in/out, extract.",
+    "width": 1280,
+    "height": 720,
+    "priority": "P0",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 cutroom detail",
+    "generated_files": [
+      "projects/cutroom/timeline.mp4",
+      "projects/cutroom/timeline.webm",
+      "projects/cutroom/timeline-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/galdr/workflow.mp4",
+    "type": "motion (screen capture)",
+    "description": "Workflow surface in motion \u2014 drag, transition, completion state.",
+    "width": 1200,
+    "height": 720,
+    "priority": "P0",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 galdr detail",
+    "generated_files": [
+      "projects/galdr/workflow.mp4",
+      "projects/galdr/workflow.webm",
+      "projects/galdr/workflow-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/transcript-create/streaming.mp4",
+    "type": "motion (screen capture)",
+    "description": "Live transcription streaming in word-by-word with speaker diarization.",
+    "width": 1100,
+    "height": 620,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 transcript-create detail",
+    "generated_files": [
+      "projects/transcript-create/streaming.mp4",
+      "projects/transcript-create/streaming.webm",
+      "projects/transcript-create/streaming-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/llama-line/queue.mp4",
+    "type": "motion (screen capture)",
+    "description": "SSE queue-position counter ticking down, then LLM response streaming token-by-token.",
+    "width": 1000,
+    "height": 600,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 llama-line detail",
+    "generated_files": [
+      "projects/llama-line/queue.mp4",
+      "projects/llama-line/queue.webm",
+      "projects/llama-line/queue-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/augr/reasoning.mp4",
+    "type": "motion (screen capture)",
+    "description": "Agent reasoning steps appearing sequentially with tool calls + results.",
+    "width": 1000,
+    "height": 620,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 augr detail",
+    "generated_files": [
+      "projects/augr/reasoning.mp4",
+      "projects/augr/reasoning.webm",
+      "projects/augr/reasoning-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/edda/agent-flow.mp4",
+    "type": "motion (screen capture)",
+    "description": "Multi-step agent flow with intermediate state visible.",
+    "width": 1000,
+    "height": 620,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 edda detail",
+    "generated_files": [
+      "projects/edda/agent-flow.mp4",
+      "projects/edda/agent-flow.webm",
+      "projects/edda/agent-flow-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/vod-tender/scrub.mp4",
+    "type": "motion (screen capture)",
+    "description": "VOD scrub + automatic clip extraction in action.",
+    "width": 1280,
+    "height": 720,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 vod-tender detail",
+    "generated_files": [
+      "projects/vod-tender/scrub.mp4",
+      "projects/vod-tender/scrub.webm",
+      "projects/vod-tender/scrub-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/subcults/feed.mp4",
+    "type": "motion (screen capture, mobile portrait)",
+    "description": "Feed scroll + interaction (like, comment, navigate).",
+    "width": 900,
+    "height": 1600,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 subcults detail",
+    "generated_files": [
+      "projects/subcults/feed.mp4",
+      "projects/subcults/feed.webm",
+      "projects/subcults/feed-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/patchwork/feed.mp4",
+    "type": "motion (screen capture, mobile portrait)",
+    "description": "Community feed scrolling with content + moderation surface.",
+    "width": 900,
+    "height": 1600,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 patchwork detail",
+    "generated_files": [
+      "projects/patchwork/feed.mp4",
+      "projects/patchwork/feed.webm",
+      "projects/patchwork/feed-poster.webp"
+    ]
+  },
+  {
+    "asset": "projects/discord-spywatcher/detection.mp4",
+    "type": "motion (screen capture)",
+    "description": "Detection event firing \u2192 pipeline \u2192 alert surfaced.",
+    "width": 1100,
+    "height": 620,
+    "priority": "P1",
+    "variant": "",
+    "location": "`web/src/pages/ProjectDetailPage.tsx` \u2014 discord-spywatcher detail",
+    "generated_files": [
+      "projects/discord-spywatcher/detection.mp4",
+      "projects/discord-spywatcher/detection.webm",
+      "projects/discord-spywatcher/detection-poster.webp"
+    ]
+  },
+  {
+    "asset": "site/hero-carousel.mp4",
+    "type": "motion (screen capture)",
+    "description": "Coverflow hero rotating through curated set with group selector swap mid-loop.",
+    "width": 1400,
+    "height": 700,
+    "priority": "P3",
+    "variant": "",
+    "location": "`README.md` / OG share / `web/src/pages/HomePage.tsx`",
+    "generated_files": [
+      "site/hero-carousel.mp4",
+      "site/hero-carousel.webm",
+      "site/hero-carousel-poster.webp"
+    ]
+  },
+  {
+    "asset": "site/detail-layout-toggle.mp4",
+    "type": "motion (screen capture)",
+    "description": "Project detail toggling between infographic and article layouts.",
+    "width": 1200,
+    "height": 680,
+    "priority": "P3",
+    "variant": "",
+    "location": "`README.md` / `web/src/pages/ProjectDetailPage.tsx` ambient demo",
+    "generated_files": [
+      "site/detail-layout-toggle.mp4",
+      "site/detail-layout-toggle.webm",
+      "site/detail-layout-toggle-poster.webp"
+    ]
+  },
+  {
+    "asset": "site/resume-layout-toggle.mp4",
+    "type": "motion (screen capture)",
+    "description": "Resume toggling between infographic and traditional layouts.",
+    "width": 1200,
+    "height": 680,
+    "priority": "P3",
+    "variant": "",
+    "location": "`README.md` / `web/src/pages/ResumePage.tsx` ambient demo",
+    "generated_files": [
+      "site/resume-layout-toggle.mp4",
+      "site/resume-layout-toggle.webm",
+      "site/resume-layout-toggle-poster.webp"
+    ]
+  },
+  {
+    "asset": "site/devlog-scroll.mp4",
+    "type": "motion (screen capture)",
+    "description": "Devlog feed scrolling through day groupings + tag interactions.",
+    "width": 1100,
+    "height": 700,
+    "priority": "P3",
+    "variant": "",
+    "location": "`README.md` / `web/src/pages/DevlogPage.tsx` ambient demo",
+    "generated_files": [
+      "site/devlog-scroll.mp4",
+      "site/devlog-scroll.webm",
+      "site/devlog-scroll-poster.webp"
+    ]
+  }
+]

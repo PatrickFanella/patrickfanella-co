@@ -3,6 +3,9 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { SEO } from '../components/SEO'
 import { WorkMediaPlaceholder } from '../components/WorkMediaPlaceholder'
+import { DiagramGrid } from '../components/DiagramFrame'
+import { diagramsForProject } from '../data/diagrams'
+import { assetsFor } from '../data/project-assets'
 import {
   primaryThemeForProject,
   projectsBySlug,
@@ -42,6 +45,8 @@ export function ProjectDetailPage() {
   const primaryTheme = primaryThemeForProject(project)
   const heroMedia = project.media[0]
   const gallery = project.media.slice(1)
+  const diagrams = diagramsForProject(project.slug)
+  const assets = assetsFor(project.slug)
 
   return (
     <>
@@ -63,9 +68,11 @@ export function ProjectDetailPage() {
               title={project.title}
               kicker={`${typeLabel(project)} · ${project.year}`}
               summary={project.summary}
-              caption={heroMedia?.caption ?? 'Placeholder asset: create a hero visual that explains the project at a glance.'}
+              caption={heroMedia?.caption ?? 'Hero visual for this project.'}
               accent={project.kind === 'tool' ? 'amber' : project.featured ? 'violet' : 'green'}
               className="h-full"
+              src={assets.hero ?? assets.thumbSquare}
+              video={assets.video}
             />
 
             <div className="panel p-5 lg:p-6">
@@ -142,8 +149,8 @@ export function ProjectDetailPage() {
           </aside>
         </header>
 
-        <div className="mt-12">
-          {layout === 'infographic' ? <InfographicLayout project={project} gallery={gallery} /> : <ArticleLayout project={project} gallery={gallery} />}
+        <div className="mt-10 lg:mt-12">
+          {layout === 'infographic' ? <InfographicLayout project={project} gallery={gallery} diagrams={diagrams} figures={assets.figures} /> : <ArticleLayout project={project} gallery={gallery} diagrams={diagrams} figures={assets.figures} />}
         </div>
 
         <RelatedWorkSection project={project} primaryTheme={primaryTheme} />
@@ -152,7 +159,7 @@ export function ProjectDetailPage() {
   )
 }
 
-function InfographicLayout({ project, gallery }: { project: Project; gallery: Project['media'] }) {
+function InfographicLayout({ project, gallery, diagrams, figures }: { project: Project; gallery: Project['media']; diagrams: ReturnType<typeof diagramsForProject>; figures: string[] }) {
   return (
     <div className="space-y-10">
       <section>
@@ -192,6 +199,8 @@ function InfographicLayout({ project, gallery }: { project: Project; gallery: Pr
         </section>
       )}
 
+      <DiagramGrid diagrams={diagrams} heading="Diagrams" />
+
       {project.lessons && project.lessons.length > 0 && (
         <section>
           <h2 className="section-kicker">Lessons</h2>
@@ -206,7 +215,25 @@ function InfographicLayout({ project, gallery }: { project: Project; gallery: Pr
         </section>
       )}
 
-      {gallery.length > 0 && (
+      {figures.length > 0 ? (
+        <section>
+          <h2 className="section-kicker">Visuals</h2>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {figures.map((src, index) => (
+              <WorkMediaPlaceholder
+                key={src}
+                title={`${project.title} — figure ${index + 1}`}
+                kicker={`Figure ${index + 1}`}
+                summary={project.summary}
+                caption={gallery[index]?.caption}
+                accent="violet"
+                variant="wide"
+                src={src}
+              />
+            ))}
+          </div>
+        </section>
+      ) : gallery.length > 0 ? (
         <section>
           <h2 className="section-kicker">Visuals</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -215,19 +242,21 @@ function InfographicLayout({ project, gallery }: { project: Project; gallery: Pr
             ))}
           </div>
         </section>
-      )}
+      ) : null}
     </div>
   )
 }
 
-function ArticleLayout({ project, gallery }: { project: Project; gallery: Project['media'] }) {
+function ArticleLayout({ project, gallery, diagrams, figures }: { project: Project; gallery: Project['media']; diagrams: ReturnType<typeof diagramsForProject>; figures: string[] }) {
   const topMedia = gallery[0]
   const bottomMedia = gallery[1]
+  const topFigure = figures[0]
+  const bottomFigure = figures[1]
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-8">
-      <div className="space-y-10 min-w-0">
-        <section className="space-y-5">
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-8">
+      <div className="min-w-0 space-y-8">
+        <section className="space-y-4">
           <p className="text-sm text-[color:var(--color-fg-muted)] leading-relaxed">
             <strong className="text-[color:var(--color-fg)]">{project.role}</strong> · {project.year} · {themeLabel(primaryThemeForProject(project))}
           </p>
@@ -237,15 +266,27 @@ function ArticleLayout({ project, gallery }: { project: Project; gallery: Projec
           {project.highlights[0] && <PullQuote text={project.highlights[0]} />}
         </section>
 
-        {topMedia && (
-          <MediaFigure
-            media={topMedia}
-            compact
-            note="Integrated visual — place a screenshot, diagram, or short gif here when the asset is created."
+        {topFigure ? (
+          <WorkMediaPlaceholder
+            title={`${project.title} — figure 1`}
+            kicker="Figure"
+            summary={project.summary}
+            caption={topMedia?.caption}
+            accent="violet"
+            variant="inline"
+            src={topFigure}
           />
+        ) : (
+          topMedia && (
+            <MediaFigure
+              media={topMedia}
+              compact
+              note="Integrated visual — place a screenshot, diagram, or short gif here when the asset is created."
+            />
+          )
         )}
 
-        <section className="space-y-4">
+        <section className="space-y-3">
           <h2 className="section-kicker">What shipped</h2>
           <div className="space-y-3 text-[color:var(--color-fg)]/92 leading-relaxed">
             {project.highlights.map((point) => (
@@ -257,7 +298,7 @@ function ArticleLayout({ project, gallery }: { project: Project; gallery: Projec
         </section>
 
         {project.architecture && project.architecture.length > 0 && (
-          <section className="space-y-4">
+          <section className="space-y-3">
             <h2 className="section-kicker">How it works</h2>
             <div className="space-y-3">
               {project.architecture.map((item, index) => (
@@ -277,10 +318,24 @@ function ArticleLayout({ project, gallery }: { project: Project; gallery: Projec
           </section>
         )}
 
-        {bottomMedia && <MediaFigure media={bottomMedia} compact />}
+        {bottomFigure ? (
+          <WorkMediaPlaceholder
+            title={`${project.title} — figure 2`}
+            kicker="Figure"
+            summary={project.summary}
+            caption={bottomMedia?.caption}
+            accent="violet"
+            variant="inline"
+            src={bottomFigure}
+          />
+        ) : (
+          bottomMedia && <MediaFigure media={bottomMedia} compact />
+        )}
+
+        <DiagramGrid diagrams={diagrams} heading="Diagrams" />
 
         {project.lessons && project.lessons.length > 0 && (
-          <section className="space-y-4">
+          <section className="space-y-3">
             <h2 className="section-kicker">What I learned</h2>
             <div className="grid gap-3 md:grid-cols-2">
               {project.lessons.map((lesson) => (
@@ -475,8 +530,7 @@ function MediaFigure({ media, compact = false, note }: { media: Project['media']
       summary={media.alt}
       caption={media.caption ?? note ?? 'Replace with a real asset later.'}
       accent="violet"
-      variant={compact ? 'thumb' : 'hero'}
-      className={compact ? 'h-full' : ''}
+      variant={compact ? 'inline' : 'wide'}
     />
   )
 }
