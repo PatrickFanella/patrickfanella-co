@@ -7,7 +7,9 @@ RUN go mod download
 
 COPY api/ ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags='-s -w' -o /out/server ./cmd/server
+RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags='-s -w' -o /out/server ./cmd/server \
+	&& CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags='-s -w' -o /out/migrate ./cmd/migrate \
+	&& CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags='-s -w' -o /out/seed ./cmd/seed
 
 FROM alpine:3.21
 
@@ -16,7 +18,7 @@ RUN apk add --no-cache ca-certificates wget \
 
 WORKDIR /app
 
-COPY --from=build /out/server /app/server
+COPY --from=build /out/server /out/migrate /out/seed /app/
 
 EXPOSE 8181
 
