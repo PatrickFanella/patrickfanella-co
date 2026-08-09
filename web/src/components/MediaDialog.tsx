@@ -45,7 +45,7 @@ export function MediaDialog({ alt, caption, onClose, open, src, srcSet }: MediaD
     >
       <div className="flex items-center justify-between gap-4 border-b-2 border-stroke bg-surface px-5 py-4">
         <p className={monoLabelClass}>{caption}</p>
-        <button className="border-2 border-stroke bg-paper px-4 py-2 font-mono text-sm font-bold uppercase text-heading hover:border-accent-green hover:text-accent-green" onClick={onClose} ref={closeRef} type="button">Close</button>
+        <button className="border-2 border-stroke bg-paper px-4 pt-[calc(0.5rem+0.5px)] pb-[calc(0.5rem-0.5px)] font-mono text-sm font-bold uppercase text-heading hover:border-accent-green hover:text-accent-green" onClick={onClose} ref={closeRef} type="button">Close</button>
       </div>
       <div className="grid max-h-[calc(92vh-5rem)] place-items-center overflow-auto p-4 sm:p-6">
         <img alt={alt} className="max-h-[75vh] max-w-full object-contain" sizes="92vw" src={src} srcSet={srcSet} />

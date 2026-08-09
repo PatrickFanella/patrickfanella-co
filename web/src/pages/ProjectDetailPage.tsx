@@ -24,7 +24,7 @@ export function ProjectDetailPage() {
   const { project, status, error, retry } = useProject(slug)
   const siteUrl = getSiteUrl()
   const metaCardClass =
-    'flex items-baseline gap-3 border-2 border-stroke bg-surface px-5 py-3 text-ink-soft'
+    'flex items-baseline gap-3 border-2 border-stroke bg-surface px-5 pt-[calc(0.75rem+0.5px)] pb-[calc(0.75rem-0.5px)] text-ink-soft'
 
   if (status === 'loading') {
     return (

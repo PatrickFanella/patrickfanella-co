@@ -51,7 +51,7 @@ export function HomePage() {
           <p className={monoLabelClass}>Available now</p>
           <p className="mt-4 font-display text-2xl font-bold leading-tight text-heading">Chicago or remote</p>
           <ul className="mt-5 grid list-none gap-2 p-0">
-            {focusAreas.map((area) => <li className="border-2 border-stroke bg-surface px-3 py-2 font-mono text-xs uppercase tracking-[0.12em]" key={area}>{area}</li>)}
+            {focusAreas.map((area) => <li className="border-2 border-stroke bg-surface px-3 pt-[calc(0.5rem+0.5px)] pb-[calc(0.5rem-0.5px)] font-mono text-xs uppercase tracking-[0.12em]" key={area}>{area}</li>)}
           </ul>
           <a className={`${textLinkClass} mt-5`} href="mailto:fanella.patrick@gmail.com">fanella.patrick@gmail.com</a>
         </aside>

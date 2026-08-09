@@ -1,5 +1,5 @@
 const arrowButtonClass =
-  'inline-flex cursor-pointer items-center justify-center border-2 border-stroke bg-surface px-4 py-3 text-heading transition-all duration-150 ease-out hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-accent-green hover:text-accent-green hover:shadow-brutal-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none'
+  'inline-flex cursor-pointer items-center justify-center border-2 border-stroke bg-surface px-4 pt-[calc(0.75rem+0.5px)] pb-[calc(0.75rem-0.5px)] text-heading transition-all duration-150 ease-out hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-accent-green hover:text-accent-green hover:shadow-brutal-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none'
 
 function ArrowLeft() {
   return (

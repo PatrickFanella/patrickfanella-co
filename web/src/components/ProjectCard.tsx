@@ -29,17 +29,17 @@ export function ProjectCard({ order, project, density = 'featured' }: ProjectCar
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             {orderLabel ? (
-              <p className="border-2 border-heading bg-heading px-3 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-paper">
+              <p className="border-2 border-heading bg-heading px-3 pt-[calc(0.25rem+0.5px)] pb-[calc(0.25rem-0.5px)] font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-paper">
                 {orderLabel}
               </p>
             ) : null}
-            <p className="border-2 border-stroke bg-panel px-3 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-heading">
+            <p className="border-2 border-stroke bg-panel px-3 pt-[calc(0.25rem+0.5px)] pb-[calc(0.25rem-0.5px)] font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-heading">
               {project.periodLabel || project.year}
             </p>
           </div>
 
           {!isArchive ? (
-            <p className="border-2 border-stroke bg-surface px-3 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-accent-pink">
+            <p className="border-2 border-stroke bg-surface px-3 pt-[calc(0.25rem+0.5px)] pb-[calc(0.25rem-0.5px)] font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-accent-pink">
               {project.role}
             </p>
           ) : null}
