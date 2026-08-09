@@ -158,7 +158,7 @@
       "architecture": [
         "FastAPI backend orchestrating GPU Whisper workers (ROCm/CUDA) through a Postgres SKIP LOCKED queue; workers scale independently and pick up jobs without coordination overhead.",
         "PostgreSQL as the primary store with OpenSearch indexing for full-text transcript search across channels, with SRT/VTT/PDF export pipelines.",
-        "Stripe billing integration with free and pro tiers, OAuth login, Prometheus/Grafana monitoring, and Docker images published to GHCR for reproducible deployments."
+        "Authelia-fronted access, Prometheus/Grafana monitoring, health and readiness checks, and containerized release automation across the API, frontend, and worker services."
       ],
       "lessons": [
         "The SKIP LOCKED queue pattern in Postgres eliminated the need for a separate message broker: one fewer service to operate, and the transactional guarantees simplified error recovery.",
