@@ -75,7 +75,7 @@ export function isApiClientError(error: unknown): error is ApiClientError {
 }
 
 export function getApiBaseUrl(): string {
-  return (import.meta.env.VITE_API_BASE_URL?.trim() || 'http://localhost:8181').replace(/\/$/, '')
+  return (import.meta.env.VITE_API_BASE_URL?.trim() || '').replace(/\/$/, '')
 }
 
 export async function fetchProjects(): Promise<Project[]> {
