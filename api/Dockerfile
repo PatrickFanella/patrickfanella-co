@@ -19,6 +19,7 @@ RUN apk add --no-cache ca-certificates wget \
 WORKDIR /app
 
 COPY --from=build /out/server /out/migrate /out/seed /app/
+COPY db/ /app/db/
 
 EXPOSE 8181
 
