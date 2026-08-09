@@ -1,4 +1,6 @@
-patrickfanella.co {
+# Cloudflare terminates public TLS and forwards to this private origin over HTTP.
+# Keeping the scheme explicit prevents Caddy from starting a second TLS boundary.
+http://patrickfanella.co {
 	header {
 		Content-Security-Policy "default-src 'self'; base-uri 'self'; connect-src 'self' https://plausible.io; font-src 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'self'; img-src 'self' data:; object-src 'self'; script-src 'self' https://plausible.io; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
 		Referrer-Policy "no-referrer"
@@ -16,4 +18,8 @@ patrickfanella.co {
 	handle {
 		reverse_proxy 10.0.0.56:3016
 	}
+}
+
+http://www.patrickfanella.co {
+	redir https://patrickfanella.co{uri} permanent
 }
