@@ -37,7 +37,7 @@ describe('App navigation flows', () => {
 		renderApp('/')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		await user.click(screen.getByRole('link', { name: /view three case studies/i }))
+		await user.click(screen.getByRole('link', { name: /review the case studies/i }))
 
 		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
 		expect(scrollToSpy).toHaveBeenCalledWith(0, 0)
@@ -72,7 +72,7 @@ describe('App navigation flows', () => {
 
 		expect(await screen.findByRole('heading', { level: 1, name: featuredProject.title })).toBeInTheDocument()
 		await waitFor(() => {
-			expect(document.title).toBe(`${featuredProject.title} | Patrick Fanella`)
+			expect(document.title).toBe('Clpr Case Study — Go, React & Hybrid Search | Patrick Fanella')
 		})
 	})
 })

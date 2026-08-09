@@ -16,7 +16,7 @@ export function ResumePage() {
   return (
     <section className={`${pageSectionClass} pt-4`}>
       <Seo
-        description="View or download Patrick Fanella's resume for senior full-stack and backend engineering roles."
+        description="Download Patrick Fanella's one-page resume for senior full-stack and backend engineering roles."
         path="/resume"
         title="Resume"
       />
@@ -28,7 +28,7 @@ export function ResumePage() {
             Patrick Fanella
           </h1>
           <p className={pageIntroClass}>
-            Senior full-stack and backend engineer building operational products across Go, React, Python, TypeScript, and PostgreSQL. View the one-page resume below or download a copy.
+            Senior full-stack and backend engineer building operational products across Go, React, Python, TypeScript, and PostgreSQL. Download the one-page résumé or open it in a new tab.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -81,26 +81,17 @@ export function ResumePage() {
           </a>
         </div>
 
-        <object
-          className="w-full bg-surface"
-          data={resumePath}
-          type="application/pdf"
-          style={{ minHeight: '80vh' }}
-          aria-label="Patrick Fanella resume PDF preview"
-        >
-          <div className="grid gap-6 p-8 text-center">
-            <p className="text-ink-soft text-[1.05rem] leading-relaxed">
-              Your browser doesn't support embedded PDF previews.
-            </p>
-            <a
-              className={primaryButtonClass}
-              href={resumePath}
-              download="Patrick_Fanella_Resume.pdf"
-            >
-              Download Resume PDF
-            </a>
-          </div>
-        </object>
+        <a href={resumePath} target="_blank" rel="noreferrer" aria-label="Open Patrick Fanella's one-page résumé PDF in a new tab">
+          <img
+            alt="Preview of Patrick Fanella's one-page senior full-stack and backend engineering résumé"
+            className="h-auto w-full bg-white"
+            decoding="async"
+            height="1584"
+            loading="lazy"
+            src="/assets/patrick_fanella_resume.webp"
+            width="1224"
+          />
+        </a>
       </div>
     </section>
   )

@@ -30,7 +30,7 @@ const alternateContactPaths = [
   {
     title: 'Email directly',
     href: 'mailto:fanella.patrick@gmail.com',
-    description: 'Prefer email? Send the role, team context, and timing directly to fanella.patrick@gmail.com.',
+    description: 'Send the role, team context, and timing directly to fanella.patrick@gmail.com.',
     cta: 'Compose email ↗',
   },
   {
@@ -105,7 +105,7 @@ export function ContactPage() {
   return (
     <section className={`${pageSectionClass} pt-4`}>
       <Seo
-        description="Start a conversation with Patrick Fanella about backend, full stack, AI-driven, or real-time product work."
+        description="Contact Patrick Fanella about senior full-stack or backend engineering roles in Chicago or remote."
         path="/contact"
         title="Contact"
       />
@@ -114,20 +114,16 @@ export function ContactPage() {
           <div>
             <SectionLabel>Contact</SectionLabel>
             <h1 className={`${pageTitleClass} mt-6 uppercase`}>
-              Let's build something useful.
+              Tell me about the role.
             </h1>
             <p className={pageIntroClass}>
-              I'm actively interviewing for senior full-stack and backend roles in Chicago or remote. If your team values clear product decisions and reliable delivery, we should talk.
+              I'm interviewing for senior full-stack and backend roles in Chicago or remote. If your team needs someone who can own backend systems, product interfaces, and the path to production, I'd like to hear from you.
             </p>
           </div>
 
           <aside className={`${surfaceCardClass} bg-panel p-8`} aria-label="Input guidelines">
-            <p className={monoLabelClass}>How to make this easy</p>
-            <ul className="mt-6 grid gap-4 pl-0 list-none text-[1.05rem] text-ink-soft">
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">01</span> Tell me about the role, project, or collaboration.</li>
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">02</span> Share timing, team context, and any important constraints.</li>
-              <li className="flex gap-4"><span className="text-accent-orange font-bold font-mono">03</span> Link anything relevant: repo, product, brief, or design direction.</li>
-            </ul>
+            <p className={monoLabelClass}>What to include</p>
+            <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">Include the role, team, and timing if you have them. A job description is welcome but not required.</p>
           </aside>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -211,7 +207,7 @@ export function ContactPage() {
           </label>
 
           <button className={`${primaryButtonClass} mt-4 w-full justify-center`} type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send Message'}
+            {isSubmitting ? 'Sending...' : 'Send Patrick a message'}
           </button>
 
           {submitMessage ? (

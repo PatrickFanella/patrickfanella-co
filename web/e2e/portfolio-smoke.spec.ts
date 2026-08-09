@@ -4,16 +4,16 @@ import { expect, test } from '@playwright/test'
 test('visitor can browse featured work and submit the contact form', async ({ page }) => {
 	await page.goto('/')
 
-	await expect(page.getByRole('heading', { name: /reliable systems/i })).toBeVisible()
+	await expect(page.getByRole('heading', { name: /backend depth\. product ownership/i })).toBeVisible()
 
-	await page.getByRole('link', { name: /view three case studies/i }).click()
+	await page.getByRole('link', { name: /review the case studies/i }).click()
 	await expect(page).toHaveURL(/\/projects$/)
 	await expect(page.getByRole('heading', { name: /^projects$/i })).toBeVisible()
 
 	await page.getByRole('link', { name: /read case study/i }).first().click()
 	await expect(page).toHaveURL(/\/projects\/clpr$/)
 	await expect(page.getByRole('heading', { name: /clpr/i })).toBeVisible()
-	await expect(page.getByRole('link', { name: /repository/i })).toBeVisible()
+	await expect(page.getByRole('link', { name: /view source/i })).toBeVisible()
 
 	await page.goto('/contact')
 	await page.getByLabel(/^name$/i).fill('Patrick Fanella')
@@ -22,7 +22,7 @@ test('visitor can browse featured work and submit the contact form', async ({ pa
 		.getByLabel(/^message$/i)
 		.fill('I would love to talk about one of your featured case studies.')
 
-	await page.getByRole('button', { name: /send message/i }).click()
+	await page.getByRole('button', { name: /send patrick a message/i }).click()
 	await expect(page.getByRole('status')).toContainText('Thanks. Your note has been saved.')
 })
 
@@ -65,16 +65,16 @@ test('primary recruiter routes expose useful content in the first mobile viewpor
 	await page.setViewportSize({ width: 390, height: 844 })
 
 	await page.goto('/')
-	await expect(page.getByRole('heading', { name: /reliable systems/i })).toBeInViewport()
-	await expect(page.getByRole('link', { name: /view three case studies/i })).toBeInViewport()
+	await expect(page.getByRole('heading', { name: /backend depth\. product ownership/i })).toBeInViewport()
+	await expect(page.getByRole('link', { name: /review the case studies/i })).toBeInViewport()
 
 	await page.goto('/projects')
 	await expect(page.getByRole('heading', { name: /^projects$/i })).toBeInViewport()
-	await expect(page.getByText(/three case studies chosen/i)).toBeInViewport()
+	await expect(page.getByText(/three projects showing/i)).toBeInViewport()
 
 	await page.goto('/contact')
-	await expect(page.getByRole('heading', { name: /let's build something useful/i })).toBeInViewport()
-	await expect(page.getByText(/actively interviewing for senior full-stack/i)).toBeInViewport()
+	await expect(page.getByRole('heading', { name: /tell me about the role/i })).toBeInViewport()
+	await expect(page.getByText(/interviewing for senior full-stack/i)).toBeInViewport()
 })
 
 test('media dialog contains focus and restores it to the invoking control', async ({ page }) => {

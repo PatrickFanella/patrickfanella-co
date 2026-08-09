@@ -4,7 +4,7 @@ import { siteName, toAbsoluteUrl } from '../lib/site'
 
 const defaultTitle = `${siteName} | Senior Full-Stack / Backend Engineer`
 const defaultDescription =
-	'Patrick Fanella is a senior full-stack and backend engineer building reliable products with Go, React, TypeScript, Python, and PostgreSQL.'
+	'Patrick Fanella is a senior full-stack and backend engineer who builds operational products from data modeling and API design through React interfaces and production delivery.'
 const defaultImagePath = '/assets/social/patrick-fanella-portfolio-1200x630.png'
 
 type StructuredData = Record<string, unknown> | Array<Record<string, unknown>>

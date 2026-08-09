@@ -23,12 +23,13 @@ describe('ProjectDetailPage', () => {
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /technical decisions that mattered/i })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /what held up/i })).toBeInTheDocument()
-		expect(screen.getByRole('link', { name: /repository/i })).toHaveAttribute(
+		expect(screen.getByRole('heading', { name: /decisions and tradeoffs/i })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: /what i learned/i })).toBeInTheDocument()
+		expect(screen.getByRole('link', { name: /view source/i })).toHaveAttribute(
 			'href',
 			featuredProject.repoUrl,
 		)
+		expect(screen.getByRole('link', { name: /discuss a role/i })).toHaveAttribute('href', '/contact')
 	})
 
 	it('sends tool projects to the tools archive route state', async () => {
@@ -59,9 +60,9 @@ describe('ProjectDetailPage', () => {
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: /technical decisions that mattered/i })).not.toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: /screens and diagrams/i })).not.toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: /what held up/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /decisions and tradeoffs/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /see it working/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /what i learned/i })).not.toBeInTheDocument()
 	})
 
 	it('renders an intentional not-found route when the slug is missing', async () => {

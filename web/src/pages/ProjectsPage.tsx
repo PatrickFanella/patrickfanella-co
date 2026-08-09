@@ -13,7 +13,7 @@ export function ProjectsPage() {
   return (
     <section className={`${pageSectionClass} pt-3`}>
       <Seo
-        description="Three focused case studies from Patrick Fanella: Clpr, Patchwork, and HasanAra."
+        description="See how Patrick Fanella built and shipped Clpr, Patchwork, and HasanAra across Go, Python, TypeScript, React, PostgreSQL, search, and asynchronous workflows."
         image="/assets/social/patrick-fanella-portfolio-1200x630.png"
         path="/projects"
         title="Projects"
@@ -21,7 +21,7 @@ export function ProjectsPage() {
       <div className="mb-10 border-b-2 border-stroke pb-9">
         <SectionLabel>Selected work</SectionLabel>
         <h1 className={`${pageTitleClass} mt-5 uppercase`}>Projects</h1>
-        <p className={pageIntroClass}>Three case studies chosen for relevance to senior full-stack and backend roles. Each states its delivery status and separates implemented evidence from work in progress.</p>
+        <p className={pageIntroClass}>Three projects showing how I design backend systems, turn them into usable products, and carry them through testing and deployment.</p>
       </div>
 
       {status === 'loading' ? <RouteState ariaLive="polite" description="Loading the selected case studies." label="Loading" role="status" title="Project index incoming." /> : null}

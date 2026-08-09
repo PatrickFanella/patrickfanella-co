@@ -26,7 +26,7 @@ function ArchiveGroup({ id, title, description, projects }: { id: string; title:
             </div>
             <p className="text-sm leading-relaxed text-ink-soft">{project.summary}</p>
             <div className="flex flex-wrap gap-4">
-              {project.kind === 'tool' && project.repoUrl ? <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">Repository ↗</a> : <Link className={textLinkClass} to={`/projects/${project.slug}`}>Project details →</Link>}
+              {project.repoUrl ? <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">Repository ↗</a> : <Link className={textLinkClass} to={`/projects/${project.slug}`}>Project details →</Link>}
             </div>
           </article>
         ))}
@@ -44,20 +44,20 @@ export function ArchivePage() {
 
   return (
     <section className={`${pageSectionClass} pt-3`}>
-      <Seo description="Older projects, experiments, and tools retained for provenance." path="/archive" robots="noindex,follow" title="Archive" />
+      <Seo description="Earlier projects, technical experiments, and small utilities from Patrick Fanella." path="/archive" robots="noindex,follow" title="Archive" />
       <div className="mb-10 border-b-2 border-stroke pb-9">
         <SectionLabel>Supporting evidence</SectionLabel>
         <h1 className={`${pageTitleClass} mt-5 uppercase`}>Archive</h1>
-        <p className={pageIntroClass}>Experiments, utilities, and earlier work remain publicly verifiable here, but they are not presented as equal-weight flagship case studies.</p>
+        <p className={pageIntroClass}>Earlier projects, technical experiments, and small utilities. Kept here for context; not part of the primary case-study set.</p>
       </div>
 
       {status === 'loading' ? <RouteState ariaLive="polite" description="Loading archived work." label="Loading" role="status" title="Archive incoming." /> : null}
       {status === 'error' ? <RouteState actions={<button className={secondaryButtonClass} onClick={retry} type="button">Try again</button>} description={getErrorMessage(error, 'Please try again in a moment.')} label="Unavailable" role="alert" title="The archive could not be loaded." /> : null}
       {status === 'success' ? (
         <div className="grid gap-14">
-          <ArchiveGroup description="Focused technical investigations and prototypes. Their status and limitations are part of the record." id="experiments" projects={experiments} title="Experiments" />
-          <ArchiveGroup description="Earlier or non-priority product work retained for provenance." id="projects-archive" projects={archived} title="Archived projects" />
-          <ArchiveGroup description="Small developer utilities and operational tools." id="tools" projects={tools} title="Tools" />
+          <ArchiveGroup description="Focused prototypes built to test one product or systems question. Current state: experiment." id="experiments" projects={experiments} title="Experiments" />
+          <ArchiveGroup description="Earlier product work retained for context. Current state: archived." id="projects-archive" projects={archived} title="Archived projects" />
+          <ArchiveGroup description="Small developer utilities and operational tools. Current state: archived or maintained as noted in the repository." id="tools" projects={tools} title="Tools" />
         </div>
       ) : null}
     </section>

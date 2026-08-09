@@ -19,6 +19,18 @@ import {
 } from '../lib/styles'
 import { useProject } from '../lib/useProjects'
 
+const flagshipProblemHeadings: Record<string, string> = {
+  clpr: 'Twitch clips disappear after the stream.',
+  patchwork: 'Discovery without exposing precise locations.',
+  hasanara: 'Finding one moment across hundreds of hours.',
+}
+
+const flagshipSeoTitles: Record<string, string> = {
+  clpr: 'Clpr Case Study — Go, React & Hybrid Search',
+  patchwork: 'Patchwork Case Study — AT Protocol & Location Privacy',
+  hasanara: 'HasanAra Case Study — GPU Transcription & Search',
+}
+
 export function ProjectDetailPage() {
   const { slug } = useParams()
   const { project, status, error, retry } = useProject(slug)
@@ -138,7 +150,7 @@ export function ProjectDetailPage() {
           name: project.title,
             url: `${siteUrl}/projects/${project.slug}`,
         }}
-        title={project.title}
+        title={flagshipSeoTitles[project.slug] || project.title}
         type="article"
       />
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b-2 border-stroke pb-10 mb-8">
@@ -175,12 +187,12 @@ export function ProjectDetailPage() {
             <div className="mt-5 flex flex-wrap gap-4 border-t-2 border-stroke pt-5">
               {project.repoUrl ? (
                 <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">
-                  Repository ↗
+                  View source ↗
                 </a>
               ) : null}
               {project.liveUrl ? (
                 <a className={textLinkClass} href={project.liveUrl} rel="noreferrer" target="_blank">
-                  Live Site ↗
+                  Open {project.title} ↗
                 </a>
               ) : null}
             </div>
@@ -198,9 +210,9 @@ export function ProjectDetailPage() {
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.8fr)] lg:items-start">
         <article className="pr-4 lg:pr-8">
-          <SectionLabel>Problem and role</SectionLabel>
+          <SectionLabel>Problem and ownership</SectionLabel>
           <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-            What needed to work.
+            {flagshipProblemHeadings[project.slug] || 'The problem this project explored.'}
           </h2>
           <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft">
             {project.description}
@@ -208,7 +220,7 @@ export function ProjectDetailPage() {
         </article>
 
         <article className={`${surfaceCardClass} bg-surface p-8`}>
-          <p className={monoLabelClass}>Evidence</p>
+          <p className={monoLabelClass}>What I shipped</p>
           <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft">
             {project.highlights.map((highlight, index) => (
               <li
@@ -229,18 +241,18 @@ export function ProjectDetailPage() {
             <div>
               <SectionLabel>Architecture</SectionLabel>
               <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                Technical decisions that mattered.
+                Decisions and tradeoffs.
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
-              A concise look at decisions implemented in the current product state.
+              Why the system is built this way, including the constraints each choice introduced.
             </p>
           </div>
 
           <div className="grid gap-5 md:grid-cols-3">
             {project.architecture.map((item, index) => (
               <article key={item} className={`${surfaceCardClass} bg-panel p-6`}>
-                <p className={monoLabelClass}>{`Choice ${index + 1}`}</p>
+                <p className={monoLabelClass}>{`Decision ${index + 1}`}</p>
                 <p className="mt-4 text-[1.02rem] leading-relaxed text-ink-soft">{item}</p>
               </article>
             ))}
@@ -254,11 +266,11 @@ export function ProjectDetailPage() {
             <div>
               <SectionLabel>Supporting media</SectionLabel>
               <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                Screens and diagrams.
+                See it working.
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
-              Architecture diagrams, interface captures, and supporting visuals for the build.
+              Product captures and architecture diagrams showing the implemented system.
             </p>
           </div>
 
@@ -271,7 +283,7 @@ export function ProjectDetailPage() {
           <div>
             <SectionLabel>Lessons learned</SectionLabel>
             <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-              What held up, and what I'd change.
+              What I learned.
             </h2>
           </div>
 
@@ -286,10 +298,22 @@ export function ProjectDetailPage() {
         </section>
       ) : null}
 
-      <div className="mt-16 border-t-2 border-stroke pt-8">
-        <Link className={textLinkClass} to="/projects">
-          ← Back to Projects
-        </Link>
+      {project.classification === 'flagship' ? (
+        <section className={`${surfaceCardClass} mt-16 grid gap-6 bg-panel p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end`} aria-labelledby="case-study-contact-heading">
+          <div>
+            <SectionLabel>Work together</SectionLabel>
+            <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading" id="case-study-contact-heading">Discuss this work.</h2>
+            <p className="mt-4 max-w-[58ch] leading-relaxed text-ink-soft">Building a product with similar backend, search, data, or workflow challenges? I’d be glad to discuss the tradeoffs and hear about the role.</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link className={primaryButtonClass} to="/contact">Discuss a role</Link>
+            <a className={secondaryButtonClass} download="Patrick_Fanella_Resume.pdf" href="/assets/patrick_fanella_resume.pdf">Download résumé</a>
+          </div>
+        </section>
+      ) : null}
+
+      <div className="mt-10 border-t-2 border-stroke pt-8">
+        <Link className={textLinkClass} to="/projects">← Back to Projects</Link>
       </div>
     </section>
   )

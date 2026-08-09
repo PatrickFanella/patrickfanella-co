@@ -17,7 +17,7 @@ async function fillContactForm() {
 		'I would love to talk about one of your featured case studies.',
 	)
 
-	await user.click(screen.getByRole('button', { name: /send message/i }))
+	await user.click(screen.getByRole('button', { name: /send patrick a message/i }))
 
 	return user
 }

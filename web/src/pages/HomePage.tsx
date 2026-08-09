@@ -18,7 +18,7 @@ export function HomePage() {
   return (
     <>
       <Seo
-        description="Patrick Fanella is a senior full-stack and backend engineer building reliable products with Go, React, TypeScript, Python, and PostgreSQL."
+        description="Patrick Fanella is a senior full-stack and backend engineer who builds operational products from data modeling and API design through React interfaces and production delivery."
         image="/assets/social/patrick-fanella-portfolio-1200x630.png"
         imageAlt="Patrick Fanella, Senior Full-Stack and Backend Engineer"
         structuredData={{
@@ -36,14 +36,15 @@ export function HomePage() {
         <div>
           <SectionLabel>Senior Full-Stack / Backend</SectionLabel>
           <h1 className="mt-5 max-w-[13ch] font-display text-[clamp(3.2rem,8vw,7.6rem)] font-bold uppercase leading-[0.84] tracking-[-0.055em] text-heading">
-            Reliable systems. <span className="text-accent-green">Useful products.</span>
+            Backend depth. <span className="text-accent-green">Product ownership.</span>
           </h1>
           <p className="mt-6 max-w-[48ch] text-[1.08rem] leading-relaxed text-ink-soft sm:text-[1.2rem]">
-            I’m Patrick Fanella. I build product backends, search and data workflows, and the React interfaces that make complex systems usable—from first schema to deployed service.
+            I build operational products from data model and API design through accessible React interfaces and production delivery—using Go, Python, TypeScript, PostgreSQL, search, and asynchronous workflows.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className={primaryButtonClass} to="/projects">View three case studies</Link>
-            <Link className={secondaryButtonClass} to="/contact">Start a conversation</Link>
+            <Link className={primaryButtonClass} to="/projects">Review the case studies</Link>
+            <Link className={secondaryButtonClass} to="/resume">Download my résumé</Link>
+            <Link className={textLinkClass} to="/contact">Discuss a role →</Link>
           </div>
         </div>
 
@@ -65,7 +66,7 @@ export function HomePage() {
               Three case studies.
             </h2>
           </div>
-          <p className="max-w-[38ch] text-ink-soft">Production, pre-alpha, and active-development labels make the evidence boundary explicit.</p>
+          <p className="max-w-[38ch] text-ink-soft">Three projects showing production delivery, safety-conscious prototyping, and systems under active development.</p>
         </div>
 
         {status === 'loading' ? <RouteState ariaLive="polite" description="Loading the three featured case studies." label="Loading" role="status" title="Loading featured work." /> : null}
