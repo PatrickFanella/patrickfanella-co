@@ -1,4 +1,29 @@
 import { defineConfig, devices } from '@playwright/test'
+import { readFileSync } from 'node:fs'
+
+function dockerHostForCI() {
+	if (!process.env.CI) return 'localhost'
+
+	try {
+		const defaultRoute = readFileSync('/proc/net/route', 'utf8')
+			.split(/\r?\n/)
+			.map((line) => line.trim().split(/\s+/))
+			.find((fields) => fields[1] === '00000000')
+		const gateway = defaultRoute?.[2]
+		if (!gateway || gateway.length !== 8) return 'localhost'
+
+		return gateway
+			.match(/../g)!
+			.reverse()
+			.map((octet) => Number.parseInt(octet, 16))
+			.join('.')
+	} catch {
+		return 'localhost'
+	}
+}
+
+const webHost = process.env.E2E_WEB_HOST || dockerHostForCI()
+const webBaseURL = `http://${webHost}:4173`
 
 export default defineConfig({
 	testDir: './e2e',
@@ -9,7 +34,7 @@ export default defineConfig({
 	globalSetup: './e2e/global-setup.ts',
 	globalTeardown: './e2e/global-teardown.ts',
 	use: {
-		baseURL: 'http://localhost:4173',
+		baseURL: webBaseURL,
 		headless: true,
 		...(process.env.E2E_CHROMIUM_EXECUTABLE
 			? { launchOptions: { executablePath: process.env.E2E_CHROMIUM_EXECUTABLE } }
@@ -20,7 +45,7 @@ export default defineConfig({
 	webServer: [
 		{
 			name: 'API',
-			command: 'CORS_ORIGIN=http://localhost:4173 bash ./scripts/start-api-preview.sh',
+			command: `CORS_ORIGIN=${webBaseURL} bash ./scripts/start-api-preview.sh`,
 			url: 'http://localhost:8181/api/health',
 			timeout: 120_000,
 			reuseExistingServer: false,
@@ -28,7 +53,7 @@ export default defineConfig({
 		{
 			name: 'Production Nginx web',
 			command: 'bash ./scripts/start-e2e-web.sh',
-			url: 'http://localhost:4173/healthz',
+			url: `${webBaseURL}/healthz`,
 			timeout: 120_000,
 			reuseExistingServer: false,
 		},
