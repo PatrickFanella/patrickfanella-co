@@ -17,11 +17,7 @@ import { useProjects } from '../lib/useProjects'
 export function ToolsPage() {
   const { projects, status, error, retry } = useProjects()
   const tools = projects.filter((project) => project.kind === 'tool')
-  const featuredTools = useMemo(() => {
-    const explicitFeaturedTools = tools.filter((project) => project.featured)
-
-    return explicitFeaturedTools.length > 0 ? explicitFeaturedTools : tools.slice(0, 3)
-  }, [tools])
+  const featuredTools = useMemo(() => tools.filter((project) => project.classification === 'flagship'), [tools])
   const featuredToolSlugs = new Set(featuredTools.map((project) => project.slug))
   const archiveTools = tools.filter((project) => !featuredToolSlugs.has(project.slug))
   const featuredCountLabel = featuredTools.length === 1 ? 'featured tool' : 'featured tools'
@@ -39,16 +35,16 @@ export function ToolsPage() {
         <div>
           <h1 className={`${pageTitleClass} mt-6 uppercase`}>Tools</h1>
           <p className={pageIntroClass}>
-            Compact public utilities, services, CLIs, and automation helpers live here. Start with featured repos, then browse the source archive.
+            Supporting utilities, services, CLIs, and automation helpers are retained here as a compact source archive.
           </p>
         </div>
 
         <aside className={`${surfaceCardClass} h-fit bg-panel p-8`} aria-label="Reading protocol">
-          <p className={monoLabelClass}>Featured first</p>
+          <p className={monoLabelClass}>Supporting archive</p>
           <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">
             {status === 'success' && tools.length > 0 ? (
               <>
-                {featuredTools.length} {featuredCountLabel} and {archiveTools.length} {archiveCountLabel} are available. Each card links directly to the repository.
+                {featuredTools.length > 0 ? <>{featuredTools.length} {featuredCountLabel} and </> : null}{archiveTools.length} {archiveCountLabel} are available. Each card links directly to the repository.
               </>
             ) : (
               <>Counts appear after the tool index loads. Each card links directly to the repository.</>

@@ -40,16 +40,17 @@ func TestScanProjectDecodesMediaPayload(t *testing.T) {
 		*dest[0].(*string) = "clpr"
 		*dest[1].(*string) = "Clpr"
 		*dest[2].(*string) = ""
-		*dest[3].(*string) = "Summary"
-		*dest[4].(*string) = "Description"
-		*dest[5].(*string) = "Full stack developer"
-		*dest[6].(*int) = 2025
-		*dest[7].(*bool) = true
-		*dest[10].(*[]string) = []string{"Go", "React"}
-		*dest[11].(*[]string) = []string{"Highlight"}
-		*dest[12].(*[]string) = []string{"Architecture"}
-		*dest[13].(*[]string) = []string{"Lesson"}
-		*dest[14].(*[]byte) = []byte(`[{"src":"/assets/projects/clpr-overview.svg","alt":"Architecture diagram"}]`)
+		*dest[3].(*string) = ""
+		*dest[4].(*string) = "Summary"
+		*dest[5].(*string) = "Description"
+		*dest[6].(*string) = "Full stack developer"
+		*dest[7].(*int) = 2025
+		*dest[8].(*bool) = true
+		*dest[11].(*[]string) = []string{"Go", "React"}
+		*dest[12].(*[]string) = []string{"Highlight"}
+		*dest[13].(*[]string) = []string{"Architecture"}
+		*dest[14].(*[]string) = []string{"Lesson"}
+		*dest[15].(*[]byte) = []byte(`[{"src":"/assets/projects/clpr-overview.svg","alt":"Architecture diagram"}]`)
 		return nil
 	})
 	if err != nil {
@@ -62,5 +63,8 @@ func TestScanProjectDecodesMediaPayload(t *testing.T) {
 
 	if project.Kind != "case-study" {
 		t.Fatalf("expected default kind case-study, got %q", project.Kind)
+	}
+	if project.Classification != "archive" {
+		t.Fatalf("expected default classification archive, got %q", project.Classification)
 	}
 }

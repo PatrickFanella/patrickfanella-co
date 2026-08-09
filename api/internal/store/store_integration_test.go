@@ -73,8 +73,8 @@ func TestListProjectsAndGetProjectUseSeededPostgresData(t *testing.T) {
 			featuredCount++
 		}
 	}
-	if featuredCount != 4 {
-		t.Fatalf("expected 4 featured projects, got %d", featuredCount)
+	if featuredCount != 3 {
+		t.Fatalf("expected 3 featured projects, got %d", featuredCount)
 	}
 	if !projects[0].Featured {
 		t.Fatalf("expected first project to be featured, got %#v", projects[0])

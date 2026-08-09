@@ -17,22 +17,23 @@ type Portfolio struct {
 }
 
 type Project struct {
-	Slug         string         `json:"slug"`
-	Title        string         `json:"title"`
-	Kind         string         `json:"kind,omitempty"`
-	Summary      string         `json:"summary"`
-	Description  string         `json:"description"`
-	Role         string         `json:"role"`
-	Year         int            `json:"year"`
-	RepoURL      string         `json:"repoUrl,omitempty"`
-	LiveURL      string         `json:"liveUrl,omitempty"`
-	Featured     bool           `json:"featured"`
-	SortOrder    int            `json:"sortOrder"`
-	Stack        []string       `json:"stack"`
-	Highlights   []string       `json:"highlights"`
-	Architecture []string       `json:"architecture"`
-	Lessons      []string       `json:"lessons"`
-	Media        []ProjectMedia `json:"media"`
+	Slug           string         `json:"slug"`
+	Title          string         `json:"title"`
+	Kind           string         `json:"kind,omitempty"`
+	Classification string         `json:"classification,omitempty"`
+	Summary        string         `json:"summary"`
+	Description    string         `json:"description"`
+	Role           string         `json:"role"`
+	Year           int            `json:"year"`
+	RepoURL        string         `json:"repoUrl,omitempty"`
+	LiveURL        string         `json:"liveUrl,omitempty"`
+	Featured       bool           `json:"featured"`
+	SortOrder      int            `json:"sortOrder"`
+	Stack          []string       `json:"stack"`
+	Highlights     []string       `json:"highlights"`
+	Architecture   []string       `json:"architecture"`
+	Lessons        []string       `json:"lessons"`
+	Media          []ProjectMedia `json:"media"`
 }
 
 type ProjectMedia struct {
@@ -102,6 +103,18 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			kind = "case-study"
 		}
 
+		classification := project.Classification
+		if classification == "" {
+			switch {
+			case project.Featured:
+				classification = "flagship"
+			case kind == "highlight":
+				classification = "experiment"
+			default:
+				classification = "archive"
+			}
+		}
+
 		mediaPayload, err := json.Marshal(project.Media)
 		if err != nil {
 			return err
@@ -110,11 +123,12 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 		var projectID int64
 		err = tx.QueryRow(
 			ctx,
-			`INSERT INTO projects (slug, title, kind, summary, description, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
-			 VALUES ($1, $2, $3, $4, $5, $6, $7, NULLIF($8, ''), NULLIF($9, ''), $10, $11, $12, $13, $14, $15)
+			`INSERT INTO projects (slug, title, kind, classification, summary, description, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
+			 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NULLIF($9, ''), NULLIF($10, ''), $11, $12, $13, $14, $15, $16)
 			 ON CONFLICT (slug) DO UPDATE SET
 			   title = EXCLUDED.title,
 			   kind = EXCLUDED.kind,
+			   classification = EXCLUDED.classification,
 			   summary = EXCLUDED.summary,
 			   description = EXCLUDED.description,
 			   role = EXCLUDED.role,
@@ -131,6 +145,7 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			project.Slug,
 			project.Title,
 			kind,
+			classification,
 			project.Summary,
 			project.Description,
 			project.Role,

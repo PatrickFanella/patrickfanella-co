@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { Link } from 'react-router-dom'
 
 import { ProjectCard } from '../components/ProjectCard'
 import { RouteState } from '../components/RouteState'
@@ -16,25 +17,21 @@ import { useProjects } from '../lib/useProjects'
 
 export function ProjectsPage() {
   const { projects, status, error, retry } = useProjects()
-  const caseStudies = projects.filter((project) => project.kind === 'case-study')
-  const highlights = projects.filter((project) => project.kind === 'highlight')
-  const projectEntries = [...caseStudies, ...highlights]
-  const featuredCaseStudies = useMemo(() => caseStudies.filter((project) => project.featured), [caseStudies])
-  const archiveCaseStudies = useMemo(() => caseStudies.filter((project) => !project.featured), [caseStudies])
-  const highlightEntries = useMemo(
-    () => highlights.map((project, index) => ({ order: caseStudies.length + index + 1, project })),
-    [caseStudies.length, highlights],
+  const projectEntries = useMemo(
+    () => projects.filter((project) => project.kind === 'case-study' || project.kind === 'highlight'),
+    [projects],
   )
+  const featuredCaseStudies = useMemo(() => projectEntries.filter((project) => project.classification === 'flagship'), [projectEntries])
+  const experiments = useMemo(() => projectEntries.filter((project) => project.classification === 'experiment'), [projectEntries])
+  const archive = useMemo(() => projectEntries.filter((project) => project.classification === 'archive'), [projectEntries])
   const featuredCountLabel = featuredCaseStudies.length === 1 ? 'featured case study' : 'featured case studies'
-  const archiveCountLabel = archiveCaseStudies.length === 1 ? 'more case study' : 'more case studies'
   const projectsError = getErrorMessage(error, 'Please try again in a moment.')
 
   const caseStudyEntries = useMemo(
-    () => caseStudies.map((project, index) => ({ order: index + 1, project })),
-    [caseStudies],
+    () => featuredCaseStudies.map((project, index) => ({ order: index + 1, project })),
+    [featuredCaseStudies],
   )
-  const featuredEntries = caseStudyEntries.filter(({ project }) => project.featured)
-  const archiveEntries = caseStudyEntries.filter(({ project }) => !project.featured)
+  const featuredEntries = caseStudyEntries
 
   return (
     <section className={`${pageSectionClass} pt-4`}>
@@ -47,16 +44,16 @@ export function ProjectsPage() {
         <div>
           <h1 className={`${pageTitleClass} mt-6 uppercase`}>Projects</h1>
           <p className={pageIntroClass}>
-            Each project below is a production case study: built, deployed, and documented. Start with the featured work, then browse the compact archive for the rest.
+            Three flagship case studies show the work most relevant to full-stack and product engineering roles. Everything else is explicitly catalogued as an experiment or archive.
           </p>
         </div>
 
         <aside className={`${surfaceCardClass} h-fit bg-panel p-8`} aria-label="Reading protocol">
           <p className={monoLabelClass}>Featured first</p>
           <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">
-            {status === 'success' && caseStudies.length > 0 ? (
+            {status === 'success' && projectEntries.length > 0 ? (
               <>
-                {featuredCaseStudies.length} {featuredCountLabel}, {archiveCaseStudies.length} {archiveCountLabel}, and {highlights.length} project highlight{highlights.length === 1 ? '' : 's'} are available.
+                {featuredCaseStudies.length} {featuredCountLabel}, {experiments.length} experiment{experiments.length === 1 ? '' : 's'}, and {archive.length} archived project{archive.length === 1 ? '' : 's'} are available.
               </>
             ) : (
               <>Counts appear after the project index loads. Each card links to the full case study.</>
@@ -128,7 +125,7 @@ export function ProjectsPage() {
                   Featured Case Studies
                 </h2>
                 <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
-                  {featuredEntries.length} curated case study{featuredEntries.length === 1 ? '' : 's'} leading the archive.
+                  The clearest evidence of shipped product work, technical judgment, and operational ownership.
                 </p>
               </div>
 
@@ -140,39 +137,45 @@ export function ProjectsPage() {
             </section>
           ) : null}
 
-          {archiveEntries.length > 0 ? (
-            <section className="grid gap-5" aria-labelledby="more-case-studies-heading">
+          {experiments.length > 0 ? (
+            <section className="grid gap-5" aria-labelledby="experiments-heading">
               <div>
-                <h2 id="more-case-studies-heading" className={monoLabelClass}>
-                  More Case Studies
+                <h2 id="experiments-heading" className={monoLabelClass}>
+                  Experiments
                 </h2>
                 <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
-                  {archiveEntries.length} additional case study{archiveEntries.length === 1 ? '' : 's'} in a compact archive.
+                  Focused prototypes and technical investigations. Useful supporting evidence, not equal-weight case studies.
                 </p>
               </div>
 
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {archiveEntries.map(({ order, project }) => (
-                  <ProjectCard key={project.slug} density="archive" order={order} project={project} />
+              <div className="grid border-2 border-stroke bg-surface">
+                {experiments.map((project) => (
+                  <Link className="grid gap-1 border-b-2 border-stroke px-5 py-4 last:border-b-0 hover:bg-panel md:grid-cols-[minmax(0,1fr)_auto] md:items-center" key={project.slug} to={`/projects/${project.slug}`}>
+                    <span className="font-display text-xl font-bold text-heading">{project.title}</span>
+                    <span className={monoLabelClass}>Experiment · {project.year}</span>
+                  </Link>
                 ))}
               </div>
             </section>
           ) : null}
 
-          {highlightEntries.length > 0 ? (
-            <section className="grid gap-5" aria-labelledby="project-highlights-heading">
+          {archive.length > 0 ? (
+            <section className="grid gap-5" aria-labelledby="archive-heading">
               <div>
-                <h2 id="project-highlights-heading" className={monoLabelClass}>
-                  Project Highlights
+                <h2 id="archive-heading" className={monoLabelClass}>
+                  Archive
                 </h2>
                 <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
-                  {highlightEntries.length} lighter project highlight{highlightEntries.length === 1 ? '' : 's'}: scoped builds, infrastructure, prototypes, and product experiments.
+                  Earlier or non-priority work retained for provenance and verification.
                 </p>
               </div>
 
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {highlightEntries.map(({ order, project }) => (
-                  <ProjectCard key={project.slug} density="archive" order={order} project={project} />
+              <div className="grid border-2 border-stroke bg-surface md:grid-cols-2">
+                {archive.map((project) => (
+                  <Link className="flex items-center justify-between gap-4 border-b-2 border-stroke px-5 py-4 hover:bg-panel md:[&:nth-last-child(-n+2)]:border-b-0" key={project.slug} to={`/projects/${project.slug}`}>
+                    <span className="font-display text-lg font-bold text-heading">{project.title}</span>
+                    <span className={monoLabelClass}>{project.year}</span>
+                  </Link>
                 ))}
               </div>
             </section>

@@ -40,17 +40,17 @@ describe('ToolsPage', () => {
 		expect(screen.queryByText(/0 archive/i)).not.toBeInTheDocument()
 	})
 
-	it('renders a featured tools section', async () => {
+	it('classifies non-flagship tools as source archive entries', async () => {
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(toolsFixtureWithArchive)
 
 		renderInRouter(<ToolsPage />, '/tools')
 
-		expect(await screen.findByRole('heading', { name: /featured tools/i, level: 2 })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /source archive/i, level: 2 })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: /source archive/i, level: 2 })).toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /featured tools/i, level: 2 })).not.toBeInTheDocument()
 		expect(await screen.findByRole('heading', { name: toolProject.title })).toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: 'Clpr' })).not.toBeInTheDocument()
-		expect(screen.getByText(/featured first/i)).toBeInTheDocument()
-		expect(screen.getByText(/3 featured tools/i)).toBeInTheDocument()
+		expect(screen.getByText(/supporting archive/i)).toBeInTheDocument()
+		expect(screen.getAllByText(/4 source archive entries/i)).toHaveLength(2)
 	})
 
 	it('renders an intentional empty-archive state when the API returns no tools', async () => {

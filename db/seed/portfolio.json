@@ -74,7 +74,7 @@
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/subcorp",
       "liveUrl": "https://subcorp.subcult.tv",
-      "featured": true,
+      "featured": false,
       "sortOrder": 2,
       "stack": [
         "Next.js",
@@ -132,11 +132,11 @@
       "slug": "transcript-create",
       "title": "HasanAra",
       "kind": "case-study",
-      "summary": "GPU transcription and searchable video archive for YouTube channels, built with Whisper workers, speaker diarization, full-text search, and export tooling.",
-      "description": "HasanAra turns long-form YouTube content into searchable, exportable transcripts. A FastAPI backend coordinates yt-dlp ingestion, GPU-accelerated Whisper transcription, optional speaker diarization, queue-backed workers, and transcript export formats such as SRT, VTT, and PDF. The React frontend gives users channel search, deep links, and transcript review, while PostgreSQL, OpenSearch, Redis, Docker, and observability tooling keep the pipeline operable for real workloads.",
+      "summary": "Deployed branded video-intelligence platform that turns long-form YouTube archives into searchable transcripts, moments, chapters, and exports.",
+      "description": "HasanAra is the deployed, branded successor to Transcript Create. It turns long-form YouTube archives into a searchable research surface: GPU transcription, speaker-aware transcript review, moment discovery, saved items, chapter navigation, and export tooling. A FastAPI backend and React frontend are backed by PostgreSQL, queue-driven workers, containerized delivery, and an operational API contract.",
       "role": "Lead full-stack engineer",
       "year": 2025,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/transcript-create",
+      "repoUrl": "https://git.subcult.tv/subculture-collective/hasanara",
       "liveUrl": "https://hasanara.tv",
       "featured": true,
       "sortOrder": 3,
@@ -151,9 +151,9 @@
         "Docker"
       ],
       "highlights": [
-        "Built a GPU-accelerated Whisper transcription pipeline with optional pyannote speaker diarization, scaling horizontally via Postgres SKIP LOCKED worker queues.",
-        "Published client SDKs for Python and TypeScript, giving third-party developers a typed interface to the transcription and search API.",
-        "Shipped full SaaS infrastructure including OAuth login, Stripe billing with tiered plans, and 255 Playwright E2E tests across the stack."
+        "Deployed a branded research interface that makes long-form channel archives searchable by transcript, moment, speaker, and chapter.",
+        "Built a GPU transcription and enrichment pipeline with queue-backed workers, retryable ingestion, and durable PostgreSQL storage.",
+        "Kept the product operable with a versioned API contract, browser coverage, container images, health checks, and release automation."
       ],
       "architecture": [
         "FastAPI backend orchestrating GPU Whisper workers (ROCm/CUDA) through a Postgres SKIP LOCKED queue; workers scale independently and pick up jobs without coordination overhead.",
@@ -201,8 +201,7 @@
       "role": "Full-stack systems engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/jury-rigged",
-      "liveUrl": "https://jury-rigged.subcult.tv",
-      "featured": true,
+      "featured": false,
       "sortOrder": 4,
       "stack": [
         "TypeScript",
@@ -1281,14 +1280,14 @@
     {
       "slug": "super-productivity-mcp",
       "title": "Super Productivity MCP",
-      "kind": "tool",
-      "summary": "MCP and desktop quick-add bridge for automating Super Productivity task capture and planning workflows.",
-      "description": "MCP and desktop quick-add bridge for automating Super Productivity task capture and planning workflows. It stays in Tools because the primary value is the reusable utility or service itself, not a long-form product case study.",
-      "role": "Automation tool",
+      "kind": "case-study",
+      "summary": "Local-first MCP, plugin, and desktop bridge that lets AI agents plan and capture work in Super Productivity without sacrificing user control.",
+      "description": "Super Productivity MCP connects AI-assisted planning to a real task system through a typed MCP surface, a Super Productivity plugin bridge, and a native desktop quick-add path. The project emphasizes local-first operation, explicit mutation boundaries, generated contract documentation, protocol smoke tests, and release packaging that can be verified before installation.",
+      "role": "Product and integration engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/PatrickFanella/super-productivity-mcp",
-      "featured": false,
-      "sortOrder": 41,
+      "featured": true,
+      "sortOrder": 3,
       "stack": [
         "Go",
         "JavaScript",
@@ -1296,9 +1295,20 @@
         "Super Productivity",
         "Automation"
       ],
-      "highlights": [],
-      "architecture": [],
-      "lessons": [],
+      "highlights": [
+        "Shipped a 55-action MCP contract for task capture, planning, scheduling, and project workflows with explicit read/write boundaries.",
+        "Connected the same workflow through an installable Super Productivity plugin and a native desktop quick-add bridge.",
+        "Built a release gate covering Go, 56 JavaScript tests, end-to-end protocol checks, 10 evaluation scenarios, generated-doc drift, install profiles, and plugin packaging."
+      ],
+      "architecture": [
+        "A Go MCP server owns the typed tool surface and task-system integration, while JavaScript clients and protocol fixtures exercise the same contract end to end.",
+        "An installable plugin and desktop quick-add bridge provide two user-facing capture paths without requiring a hosted intermediary.",
+        "Generated catalogs, smoke tests, evaluation scenarios, and a reproducible packaging target keep documentation and shipped behavior aligned."
+      ],
+      "lessons": [
+        "Agent integrations are safer when mutation boundaries are visible in the tool contract instead of being left to prompt convention.",
+        "Treating installation profiles and generated documentation as release artifacts prevents a passing unit suite from masking a broken user setup."
+      ],
       "media": []
     },
     {

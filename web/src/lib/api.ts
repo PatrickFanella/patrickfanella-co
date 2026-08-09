@@ -5,11 +5,13 @@ export type ProjectMedia = {
 }
 
 export type ProjectKind = 'case-study' | 'highlight' | 'tool'
+export type ProjectClassification = 'flagship' | 'experiment' | 'archive'
 
 export type Project = {
   slug: string
   title: string
   kind: ProjectKind
+  classification: ProjectClassification
   summary: string
   description: string
   role: string

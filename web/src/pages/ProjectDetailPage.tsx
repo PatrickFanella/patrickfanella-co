@@ -110,8 +110,11 @@ export function ProjectDetailPage() {
     return <Navigate replace to="/tools" />
   }
 
-  const isHighlight = project.kind === 'highlight'
-  const projectKindLabel = isHighlight ? 'Project highlight' : 'Case study'
+  const projectKindLabel = project.classification === 'flagship'
+    ? 'Flagship case study'
+    : project.classification === 'experiment'
+      ? 'Experiment'
+      : 'Archive'
 
   return (
     <section className={pageSectionClass}>

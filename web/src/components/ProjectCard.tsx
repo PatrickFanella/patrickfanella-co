@@ -18,8 +18,8 @@ export function ProjectCard({ order, project, density = 'featured' }: ProjectCar
   const orderLabel = order ? order.toString().padStart(2, '0') : null
   const isArchive = density === 'archive'
   const maxVisibleStack = isArchive ? 2 : 3
-  const kindLabel = project.kind === 'highlight' ? 'Project Highlight' : 'Case Study'
-  const ctaLabel = project.kind === 'highlight' ? 'View Highlight' : 'Read Case Study'
+  const kindLabel = project.classification === 'experiment' ? 'Experiment' : project.classification === 'archive' ? 'Archive' : 'Flagship Case Study'
+  const ctaLabel = project.classification === 'flagship' ? 'Read Case Study' : 'View Project'
 
   return (
     <article
@@ -58,7 +58,7 @@ export function ProjectCard({ order, project, density = 'featured' }: ProjectCar
       <StackCueList ariaLabel={`${project.title} technology stack`} items={project.stack} maxVisible={maxVisibleStack} />
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-4 border-t-2 border-stroke pt-4">
-        {project.featured ? <p className={monoLabelClass}>Featured Project</p> : isArchive ? <p className={monoLabelClass}>{kindLabel}</p> : <span />}
+        {project.featured ? <p className={monoLabelClass}>Flagship Case Study</p> : isArchive ? <p className={monoLabelClass}>{kindLabel}</p> : <span />}
 
         <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>
           {ctaLabel}

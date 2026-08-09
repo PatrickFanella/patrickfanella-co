@@ -18,18 +18,20 @@ describe('ProjectsPage', () => {
 		expect(screen.queryByText(/0 archive/i)).not.toBeInTheDocument()
 	})
 
-	it('renders featured and archive case study sections', async () => {
+	it('renders flagship case studies and a compact classified archive', async () => {
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
 		expect(await screen.findByRole('heading', { name: /featured case studies/i, level: 2 })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /more case studies/i, level: 2 })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: /^archive$/i, level: 2 })).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: 'Internet-ID' })).toBeInTheDocument()
+		expect(screen.getByText('Internet-ID')).toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
 		expect(screen.getByText(/featured first/i)).toBeInTheDocument()
 		expect(screen.getByText(/1 featured case study/i)).toBeInTheDocument()
+		expect(screen.getByText(/0 experiments/i)).toBeInTheDocument()
+		expect(screen.getByText(/1 archived project/i)).toBeInTheDocument()
 	})
 
 	it('renders an intentional empty-archive state when the API returns no projects', async () => {

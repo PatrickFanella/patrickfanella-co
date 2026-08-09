@@ -28,6 +28,7 @@ SELECT
 	p.slug,
 	p.title,
 	p.kind,
+	p.classification,
 	p.summary,
 	p.description,
 	p.role,
@@ -304,6 +305,7 @@ func scanProject(scan func(dest ...any) error) (models.Project, error) {
 		&project.Slug,
 		&project.Title,
 		&project.Kind,
+		&project.Classification,
 		&project.Summary,
 		&project.Description,
 		&project.Role,
@@ -331,6 +333,9 @@ func scanProject(scan func(dest ...any) error) (models.Project, error) {
 
 	if project.Kind == "" {
 		project.Kind = "case-study"
+	}
+	if project.Classification == "" {
+		project.Classification = "archive"
 	}
 
 	if len(mediaPayload) > 0 {
