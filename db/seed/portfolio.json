@@ -245,8 +245,9 @@
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/patchwork",
       "liveUrl": "https://patchwork.subcult.tv",
-      "featured": false,
-      "sortOrder": 5,
+      "featured": true,
+      "classification": "flagship",
+      "sortOrder": 2,
       "stack": [
         "TypeScript",
         "React",
@@ -1286,8 +1287,9 @@
       "role": "Product and integration engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/PatrickFanella/super-productivity-mcp",
-      "featured": true,
-      "sortOrder": 3,
+      "featured": false,
+      "classification": "experiment",
+      "sortOrder": 30,
       "stack": [
         "Go",
         "JavaScript",
