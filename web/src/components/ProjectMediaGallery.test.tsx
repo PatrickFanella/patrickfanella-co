@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 
 import { ProjectMediaGallery } from './ProjectMediaGallery'
@@ -41,7 +42,26 @@ describe('ProjectMediaGallery', () => {
 
 		expect(screen.getByRole('img', { name: /demo project placeholder artwork/i })).toHaveAttribute(
 			'src',
-			'/assets/projects/diagrams/v10-by-the-numbers.webp',
+			'/assets/projects/project-fallback.svg',
 		)
+	})
+
+	it('opens a modal dialog, focuses close, and restores focus to Expand', async () => {
+		const user = userEvent.setup()
+		render(
+			<ProjectMediaGallery
+				projectTitle="Demo project"
+				items={[{ src: '/assets/projects/demo.svg', alt: 'Demo project poster', caption: 'Demo screen' }]}
+			/>,
+		)
+
+		const expand = screen.getByRole('button', { name: /expand demo screen/i })
+		await user.click(expand)
+		expect(screen.getByRole('dialog', { name: /demo screen/i })).toBeInTheDocument()
+		const close = screen.getByRole('button', { name: /^close$/i })
+		expect(close).toHaveFocus()
+		await user.click(close)
+		expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+		expect(expand).toHaveFocus()
 	})
 })

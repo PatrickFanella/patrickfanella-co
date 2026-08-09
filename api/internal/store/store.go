@@ -29,6 +29,8 @@ SELECT
 	p.title,
 	p.kind,
 	p.classification,
+	p.delivery_status,
+	p.period_label,
 	p.summary,
 	p.description,
 	p.role,
@@ -295,6 +297,25 @@ func (s *Store) SaveContact(ctx context.Context, input models.ContactInput) (mod
 	return message, nil
 }
 
+// PruneContacts deletes contact submissions created before the provided cutoff.
+// The returned count is safe to log; submission content is never returned.
+func (s *Store) PruneContacts(ctx context.Context, cutoff time.Time) (int64, error) {
+	s.mu.RLock()
+	pool := s.db
+	s.mu.RUnlock()
+
+	if pool == nil {
+		return 0, models.ErrDatabaseUnavailable
+	}
+
+	result, err := pool.Exec(ctx, `DELETE FROM contact_messages WHERE created_at < $1`, cutoff.UTC())
+	if err != nil {
+		return 0, err
+	}
+
+	return result.RowsAffected(), nil
+}
+
 func scanProject(scan func(dest ...any) error) (models.Project, error) {
 	var project models.Project
 	var repoURL sql.NullString
@@ -306,6 +327,8 @@ func scanProject(scan func(dest ...any) error) (models.Project, error) {
 		&project.Title,
 		&project.Kind,
 		&project.Classification,
+		&project.DeliveryStatus,
+		&project.PeriodLabel,
 		&project.Summary,
 		&project.Description,
 		&project.Role,

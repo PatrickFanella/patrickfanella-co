@@ -9,30 +9,32 @@ import (
 )
 
 type Config struct {
-	Port                    string
-	DatabaseURL             string
-	CORSOrigin              string
-	ContactMaxBodyBytes     int64
-	ContactRateLimitMax     int
-	ContactRateLimitWindow  time.Duration
-	ContactHoneypotField    string
-	ContactNotificationNtfyURL     string
-	ContactNotificationNtfyToken   string
-	ContactNotificationN8nURL      string
-	ContactNotificationTimeout     time.Duration
+	Port                         string
+	DatabaseURL                  string
+	CORSOrigin                   string
+	ContactMaxBodyBytes          int64
+	ContactRateLimitMax          int
+	ContactRateLimitWindow       time.Duration
+	ContactHoneypotField         string
+	ContactRetentionDays         int
+	ContactNotificationNtfyURL   string
+	ContactNotificationNtfyToken string
+	ContactNotificationN8nURL    string
+	ContactNotificationTimeout   time.Duration
 }
 
 func Load() Config {
 	_ = godotenv.Load("../.env", ".env")
 
 	return Config{
-		Port:                   getEnv("API_PORT", "8181"),
-		DatabaseURL:            os.Getenv("DATABASE_URL"),
-		CORSOrigin:             getEnv("CORS_ORIGIN", "http://localhost:5173"),
-		ContactMaxBodyBytes:    getEnvInt64("CONTACT_MAX_BODY_BYTES", 16*1024),
-		ContactRateLimitMax:    getEnvInt("CONTACT_RATE_LIMIT_MAX_REQUESTS", 5),
-		ContactRateLimitWindow: getEnvSeconds("CONTACT_RATE_LIMIT_WINDOW_SECONDS", 60*time.Second),
-		ContactHoneypotField:   getEnv("CONTACT_HONEYPOT_FIELD", "website"),
+		Port:                         getEnv("API_PORT", "8181"),
+		DatabaseURL:                  os.Getenv("DATABASE_URL"),
+		CORSOrigin:                   getEnv("CORS_ORIGIN", "http://localhost:5173"),
+		ContactMaxBodyBytes:          getEnvInt64("CONTACT_MAX_BODY_BYTES", 16*1024),
+		ContactRateLimitMax:          getEnvInt("CONTACT_RATE_LIMIT_MAX_REQUESTS", 5),
+		ContactRateLimitWindow:       getEnvSeconds("CONTACT_RATE_LIMIT_WINDOW_SECONDS", 60*time.Second),
+		ContactHoneypotField:         getEnv("CONTACT_HONEYPOT_FIELD", "website"),
+		ContactRetentionDays:         getEnvInt("CONTACT_RETENTION_DAYS", 90),
 		ContactNotificationNtfyURL:   getEnv("CONTACT_NOTIFICATION_NTFY_URL", ""),
 		ContactNotificationNtfyToken: getEnv("CONTACT_NOTIFICATION_NTFY_TOKEN", ""),
 		ContactNotificationN8nURL:    getEnv("CONTACT_NOTIFICATION_N8N_URL", ""),

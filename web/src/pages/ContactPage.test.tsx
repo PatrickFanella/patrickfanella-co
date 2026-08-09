@@ -27,10 +27,11 @@ describe('ContactPage', () => {
 		vi.spyOn(api, 'submitContact').mockResolvedValue(contactSubmissionFixture)
 
 		renderInRouter(<ContactPage />, '/contact')
-		expect(screen.getByRole('link', { name: /open github/i })).toHaveAttribute(
+		expect(screen.getByRole('link', { name: /compose email/i })).toHaveAttribute(
 			'href',
-			'https://github.com/PatrickFanella',
+			'mailto:fanella.patrick@gmail.com',
 		)
+		expect(screen.getByText(/retained for no more than 90 days/i)).toBeInTheDocument()
 
 		await fillContactForm()
 

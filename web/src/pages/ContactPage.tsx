@@ -28,16 +28,16 @@ type ContactFormValues = z.infer<typeof contactSchema>
 
 const alternateContactPaths = [
   {
-    title: 'GitHub profile',
-    href: 'https://github.com/PatrickFanella',
-    description: 'Browse my repositories, commit history, and the practical work behind the case studies across Go, TypeScript, Python, and Solidity.',
-    cta: 'Open GitHub ↗',
+    title: 'Email directly',
+    href: 'mailto:fanella.patrick@gmail.com',
+    description: 'Prefer email? Send the role, team context, and timing directly to fanella.patrick@gmail.com.',
+    cta: 'Compose email ↗',
   },
   {
-    title: 'Portfolio source',
-    href: 'https://github.com/PatrickFanella/patrickfanella-co',
-    description: 'Review the React + Go + PostgreSQL source behind this portfolio, with the same stack discipline applied to the site itself.',
-    cta: 'Open repository ↗',
+    title: 'LinkedIn',
+    href: 'https://linkedin.com/in/patrick-fanella',
+    description: 'Connect for senior full-stack or backend opportunities in Chicago or on a remote team.',
+    cta: 'Open LinkedIn ↗',
   },
 ]
 
@@ -117,7 +117,7 @@ export function ContactPage() {
               Let's build something useful.
             </h1>
             <p className={pageIntroClass}>
-              I'm strongest on full-stack and backend roles, especially teams building real-time systems or AI-driven products. If you value production discipline alongside shipping speed, we should talk.
+              I'm actively interviewing for senior full-stack and backend roles in Chicago or remote. If your team values clear product decisions and reliable delivery, we should talk.
             </p>
           </div>
 
@@ -223,6 +223,10 @@ export function ContactPage() {
               {submitState === 'error' ? 'Error: ' : 'Success: '} {submitMessage}
             </p>
           ) : null}
+
+          <p className="border-t-2 border-stroke pt-4 text-xs leading-relaxed text-ink-soft">
+            Privacy: this form stores your name, email, and message only so I can reply. Submissions and portfolio database backups are retained for no more than 90 days, then deleted automatically. They are not sold or used for advertising.
+          </p>
         </form>
       </div>
     </section>

@@ -5,6 +5,8 @@ export const featuredProject: Project = {
 	title: 'Clpr',
 	kind: 'case-study',
 	classification: 'flagship',
+	deliveryStatus: 'Production',
+	periodLabel: '2025–present',
 	summary: 'Full-stack Twitch clip curation platform with community voting, hybrid search, and a React Native mobile app, live in production at clpr.tv.',
 	description: 'Clpr started as a way to surface the best Twitch clips without relying on platform algorithms.',
 	role: 'Full-stack engineer',
@@ -40,6 +42,8 @@ export const archivedProject: Project = {
 	title: 'Internet-ID',
 	kind: 'case-study',
 	classification: 'archive',
+	deliveryStatus: 'Archive',
+	periodLabel: '2025',
 	summary: 'Content provenance system anchoring creator ownership on-chain via Solidity smart contracts, IPFS storage, and a browser extension for one-click verification.',
 	description: 'Content authenticity is collapsing in the AI era.',
 	role: 'Full-stack engineer',
@@ -68,6 +72,8 @@ export const toolProject: Project = {
 	title: 'tmux-popups',
 	kind: 'tool',
 	classification: 'archive',
+	deliveryStatus: 'Tool',
+	periodLabel: '2026',
 	summary: 'Developer utility for opening tmux popup panes quickly, keeping terminal side quests and scratch workflows out of the main window.',
 	description: 'A small tmux helper for launching popup panes for quick commands, notes, and short-lived shell tasks.',
 	role: 'Developer tool',
@@ -87,11 +93,4 @@ export const projectsFixture: Project[] = [featuredProject, archivedProject, too
 
 export const contactSubmissionFixture: ContactSubmissionResponse = {
 	message: 'Thanks. Your note has been saved.',
-	item: {
-		id: 7,
-		name: 'Patrick Fanella',
-		email: 'patrick@example.com',
-		message: 'I would love to talk about one of your featured case studies.',
-		createdAt: '2026-03-17T00:00:00Z',
-	},
 }

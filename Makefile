@@ -8,7 +8,7 @@ COMPOSE := docker compose
 GO ?= go
 NPM ?= npm
 
-.PHONY: help init-env install bootstrap status db-up db-down db-reset db-logs migrate seed api web api-test web-lint web-test web-build e2e test verify stack-up stack-down stack-logs
+.PHONY: help init-env install bootstrap status db-up db-down db-reset db-logs migrate seed api web api-test web-lint web-test web-build e2e lighthouse test verify verify-release stack-up stack-down stack-logs
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage: make <target>\n\nTargets:\n"} /^[a-zA-Z0-9_.-]+:.*##/ {printf "  %-12s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -69,9 +69,14 @@ web-build: ## Build the frontend production bundle
 e2e: ## Run Playwright end-to-end tests
 	cd $(WEB_DIR) && $(NPM) run test:e2e
 
+lighthouse: ## Run mobile Lighthouse budgets against the production-shaped stack
+	cd $(WEB_DIR) && $(NPM) run lighthouse:ci
+
 test: api-test web-test ## Run the main automated test suites
 
 verify: api-test web-lint web-test web-build ## Run the core pre-release verification commands
+
+verify-release: verify e2e lighthouse ## Run the complete release gate
 
 stack-up: init-env ## Build and start the full Docker stack in detached mode
 	$(COMPOSE) --profile stack up --build -d

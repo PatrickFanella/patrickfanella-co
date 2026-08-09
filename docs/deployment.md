@@ -64,6 +64,7 @@ Health checks:
 | `CONTACT_RATE_LIMIT_MAX_REQUESTS` | api | `5` | Per-IP submission cap |
 | `CONTACT_RATE_LIMIT_WINDOW_SECONDS` | api | `60` | Rate-limit rolling window |
 | `CONTACT_HONEYPOT_FIELD` | api | `website` | Hidden bot-trap field |
+| `CONTACT_RETENTION_DAYS` | api | `90` | Active contact-record retention; pruning runs at startup and daily |
 
 ### Optional release integrations
 
@@ -106,14 +107,20 @@ Verify at minimum:
 
 1. `GET /api/health` returns `200` with `databaseEnabled: true`
 2. `GET /healthz` on the web container returns `200`
-3. a representative contact submission is stored successfully
+3. a representative contact submission returns only a confirmation message
 4. if configured, the contact webhook receives a notification
 5. the web app can browse home, projects, project detail, and contact routes without console or network failures
 
 ## Notes on analytics and notifications
 
-- Analytics are **opt-in** and intentionally minimal: Plausible page views plus outbound-link tracking only.
+- Analytics are **opt-in** and intentionally minimal: Plausible page views plus outbound-link tracking only. Do not enable a second browser telemetry product.
 - Contact notifications support two targets simultaneously:
   - **ntfy**: push notification with title, priority, and 240-char message preview (set `CONTACT_NOTIFICATION_NTFY_URL`)
   - **n8n**: structured JSON webhook with full message body for workflow automation (set `CONTACT_NOTIFICATION_N8N_URL`)
 - The database remains the source of truth for the full message body.
+
+## Edge, backup, and immutable-release contract
+
+The public Caddy route must serve web and API responses with a local-assets-first CSP, `nosniff`, a strict referrer policy, a restrictive permissions policy, frame protection, and HSTS. Start HSTS at `max-age=86400`; promote it to one year only after 24 hours of verified HTTPS operation. Cloudflare Browser Insights must remain disabled so Plausible is the sole analytics system.
+
+Before a migration or reseed, create a custom-format PostgreSQL dump on Almaz, verify it with `pg_restore --list`, and copy the same verified file to the NUC rollback directory. Deploy only immutable `api:<commit-sha>` and `web:<commit-sha>` images built from a clean exact commit; record the previous image digests and Caddy configuration first.

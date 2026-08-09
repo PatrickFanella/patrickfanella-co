@@ -4,8 +4,11 @@
       "slug": "clpr",
       "title": "Clpr",
       "kind": "case-study",
-      "summary": "Production Twitch clip curation platform with community voting, hybrid BM25/vector search, web/mobile clients, and live deployment at clpr.tv.",
-      "description": "Clpr is a production content platform for discovering, organizing, and sharing Twitch clips without depending on platform algorithms. It combines Reddit-style voting, collections, moderation workflows, hybrid BM25 plus vector search, and shared API contracts for React web and React Native mobile clients. The backend is a Go service backed by PostgreSQL, Redis, and OpenSearch, with containerized deployment, observability, and CI/CD around the full stack.",
+      "classification": "flagship",
+      "deliveryStatus": "Production",
+      "periodLabel": "2025–present",
+      "summary": "Production Twitch clip curation platform with community voting, hybrid search, web and mobile clients, and a public deployment at clpr.tv.",
+      "description": "Clpr addresses a concrete discovery problem: useful Twitch clips are difficult to organize and find once they leave a live stream. I built the product across its Go API, React web client, React Native client, moderation surfaces, and search pipeline. PostgreSQL remains the system of record while Redis and OpenSearch support sessions, caching, and retrieval. The public repository, release, and deployment provide verifiable evidence of the current production state.",
       "role": "Lead full-stack engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/clpr",
@@ -23,9 +26,9 @@
         "Docker"
       ],
       "highlights": [
-        "Shipped a production web and mobile client with community voting, collections, and hybrid BM25 + semantic vector search.",
-        "Built a Go API layer handling auth, content moderation, and real-time feed composition across PostgreSQL, Redis, and OpenSearch.",
-        "Deployed to a VPS with Kubernetes orchestration, Prometheus/Grafana monitoring, and automated CI/CD through GitHub Actions."
+        "Delivered shared product workflows across a React web client, a React Native client, and a Go API.",
+        "Implemented community voting, collections, moderation, and hybrid lexical/vector search over Twitch clips.",
+        "Maintains a public production deployment, green repository verification, and a tagged v0.1.0 release."
       ],
       "architecture": [
         "Go API with Gin serving both the React web client and the React Native Expo mobile app through a shared JSON contract.",
@@ -33,18 +36,19 @@
         "PostgreSQL 17 as the primary store, Redis 7 for caching and session management, OpenSearch 2.11 for search indexing; all containerized and orchestrated with Kubernetes."
       ],
       "lessons": [
-        "Hybrid search is worth the infrastructure cost; users consistently found clips that pure text search missed, and the BM25 + vector blend outperformed either approach alone.",
-        "Running a mobile and web client against the same API forced cleaner contract discipline early, which paid off when adding features later."
+        "A hybrid search stack adds operational cost, so its lexical and semantic paths need independent failure handling and measurable relevance tests.",
+        "Serving mobile and web clients from one API made contract discipline and backward-compatible response changes essential."
       ],
       "media": [
         {
-          "src": "/assets/projects/clpr-overview.svg",
-          "alt": "Architecture diagram showing the Clpr platform stack: Go API, React web, React Native mobile, PostgreSQL, Redis, and OpenSearch.",
-          "caption": "Full platform architecture spanning web, mobile, and search infrastructure."
+          "src": "/assets/projects/screenshots/clpr-feed-1440.webp",
+          "srcSet": "/assets/projects/screenshots/clpr-feed-720.webp 720w, /assets/projects/screenshots/clpr-feed-1440.webp 1440w",
+          "alt": "Clpr feed showing one synthetic Twitch clip with voting, search, and discussion controls.",
+          "caption": "Production Clpr interface rendered with a deterministic synthetic clip fixture; no user data is shown."
         },
         {
           "src": "/assets/projects/diagrams/clpr-architecture.webp",
-          "alt": "System architecture diagram showing CLPR's layered stack: client tier with web, mobile, and browser extension; Caddy reverse proxy; Go API server with 63 handlers and 73 services; PostgreSQL 17, Redis 7, and OpenSearch 2.11 data tier; Docker Compose infrastructure.",
+          "alt": "System architecture diagram showing Clpr's client, reverse proxy, Go API, PostgreSQL, Redis, and OpenSearch layers.",
           "caption": "Layered system architecture from client surfaces through the Go API to the data and infrastructure tiers."
         },
         {
@@ -56,11 +60,6 @@
           "src": "/assets/projects/diagrams/clpr-tech-stack.webp",
           "alt": "Tech stack overview showing CLPR's backend (Go, Gin, PostgreSQL 17, Redis 7, OpenSearch), frontend (React 19, TypeScript, Vite, Tailwind), mobile (React Native 0.81, Expo 54), and infrastructure (Docker, Caddy, GitHub Actions, Vault).",
           "caption": "Full tech stack spanning backend, frontend, mobile, and infrastructure with key capabilities."
-        },
-        {
-          "src": "/assets/projects/diagrams/clpr-metrics.webp",
-          "alt": "Codebase metrics dashboard for CLPR showing 280k+ lines of code, 1,094 source files, 102 DB migrations, and backend service breakdown across 12 domains.",
-          "caption": "Codebase metrics: 280k+ LoC across Go, TypeScript, SQL, with backend service breakdown by domain."
         }
       ]
     },
@@ -129,11 +128,14 @@
       ]
     },
     {
-      "slug": "transcript-create",
+      "slug": "hasanara",
       "title": "HasanAra",
       "kind": "case-study",
+      "classification": "flagship",
+      "deliveryStatus": "Active development",
+      "periodLabel": "2025–present",
       "summary": "Deployed branded video-intelligence platform that turns long-form YouTube archives into searchable transcripts, moments, chapters, and exports.",
-      "description": "HasanAra is the deployed, branded successor to Transcript Create. It turns long-form YouTube archives into a searchable research surface: GPU transcription, speaker-aware transcript review, moment discovery, saved items, chapter navigation, and export tooling. A FastAPI backend and React frontend are backed by PostgreSQL, queue-driven workers, containerized delivery, and an operational API contract.",
+      "description": "HasanAra is the branded successor to Transcript Create. It turns long-form YouTube archives into a searchable research surface with GPU transcription, transcript review, moment discovery, saved items, chapter navigation, and export tooling. I own the FastAPI backend, React frontend, PostgreSQL data model, queue-driven workers, and containerized delivery. The public deployment is usable but the product remains under active development, so the case study distinguishes current behavior from planned work.",
       "role": "Lead full-stack engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/hasanara",
@@ -151,44 +153,40 @@
         "Docker"
       ],
       "highlights": [
-        "Deployed a branded research interface that makes long-form channel archives searchable by transcript, moment, speaker, and chapter.",
+        "Deployed a branded research interface for searching and reviewing long-form channel archives by transcript, moment, and chapter.",
         "Built a GPU transcription and enrichment pipeline with queue-backed workers, retryable ingestion, and durable PostgreSQL storage.",
-        "Kept the product operable with a versioned API contract, browser coverage, container images, health checks, and release automation."
+        "Maintains an explicit API contract, browser tests, container images, health checks, and release automation while the product evolves."
       ],
       "architecture": [
         "FastAPI backend orchestrating GPU Whisper workers (ROCm/CUDA) through a Postgres SKIP LOCKED queue; workers scale independently and pick up jobs without coordination overhead.",
         "PostgreSQL as the primary store with OpenSearch indexing for full-text transcript search across channels, with SRT/VTT/PDF export pipelines.",
-        "Prometheus/Grafana monitoring, health and readiness checks, and containerized release automation across the API, frontend, and worker services."
+        "Health and readiness checks plus containerized release automation cover the API, frontend, and worker services."
       ],
       "lessons": [
-        "The SKIP LOCKED queue pattern in Postgres eliminated the need for a separate message broker: one fewer service to operate, and the transactional guarantees simplified error recovery.",
-        "Publishing typed SDKs early forced the API contract to stabilize faster than internal-only consumption would have; external consumers are unforgiving about breaking changes."
+        "A PostgreSQL SKIP LOCKED queue keeps job state and application state in one transactional system, but requires explicit retry and stuck-job recovery behavior.",
+        "A branded successor needs naming, authentication, documentation, and release metadata to change together; a visual rename alone is not enough."
       ],
       "media": [
         {
-          "src": "/assets/projects/transcript-create-overview.svg",
-          "alt": "Pipeline diagram showing video ingestion, GPU Whisper transcription, speaker diarization, and full-text search indexing.",
-          "caption": "Transcription pipeline from video ingestion through GPU processing to searchable, exportable output."
+          "src": "/assets/projects/screenshots/hasanara-home-1280.webp",
+          "srcSet": "/assets/projects/screenshots/hasanara-home-720.webp 720w, /assets/projects/screenshots/hasanara-home-1280.webp 1280w",
+          "alt": "HasanAra home interface showing synthetic channel, video, transcript, and search content.",
+          "caption": "HasanAra rendered from its deterministic browser fixture with synthetic content; no production or user data is shown."
         },
         {
           "src": "/assets/projects/diagrams/tc-architecture.webp",
-          "alt": "System architecture diagram showing Transcript Create's layered stack: web frontend, Python/JS SDKs; FastAPI server with 13 route modules; GPU transcription worker with yt-dlp, Whisper v3, and diarization; PostgreSQL 16, Redis 7, OpenSearch; Prometheus and Grafana; five deployment targets.",
+          "alt": "System architecture diagram showing HasanAra's frontend, FastAPI service, GPU transcription worker, PostgreSQL, Redis, and OpenSearch layers.",
           "caption": "Layered architecture from client SDKs through the FastAPI server and GPU worker to data and deployment tiers."
         },
         {
           "src": "/assets/projects/diagrams/tc-features.webp",
-          "alt": "Feature ecosystem diagram showing Transcript Create's eight domains: transcription engine, YouTube ingestion, search and discovery, export formats, auth and monetization, observability, testing and quality, and deployment.",
-          "caption": "Feature ecosystem spanning GPU transcription, multi-format export, billing, observability, and five deployment targets."
+          "alt": "Feature ecosystem diagram showing HasanAra transcription, ingestion, search, export, account, quality, and deployment concerns.",
+          "caption": "Feature ecosystem spanning transcription, discovery, exports, account workflows, and delivery."
         },
         {
           "src": "/assets/projects/diagrams/tc-tech-stack.webp",
-          "alt": "Tech stack overview showing Transcript Create's backend (Python, FastAPI, Alembic, yt-dlp), AI/ML (Whisper large-v3, pyannote, ROCm, CUDA), frontend (React, TypeScript, Vite), data (PostgreSQL, Redis, OpenSearch), and infrastructure (Docker, Kubernetes, Terraform, Ansible).",
+          "alt": "Tech stack overview showing HasanAra's Python and FastAPI backend, GPU transcription components, React frontend, PostgreSQL, Redis, OpenSearch, and container infrastructure.",
           "caption": "Full tech stack spanning Python backend, GPU-accelerated AI/ML, React frontend, and multi-target infrastructure."
-        },
-        {
-          "src": "/assets/projects/diagrams/tc-metrics.webp",
-          "alt": "Codebase metrics dashboard for Transcript Create showing 45k+ LoC, 17k test lines, 255 E2E tests, 70 documentation pages, and API route complexity breakdown.",
-          "caption": "Codebase metrics: 45k+ LoC with 255 E2E tests, 13 route modules, and API complexity breakdown."
         }
       ]
     },
@@ -239,14 +237,16 @@
       "slug": "patchwork",
       "title": "Patchwork",
       "kind": "case-study",
-      "summary": "AT Protocol-native mutual aid platform with map-based discovery, geoprivacy controls, moderation workers, and Bluesky Jetstream ingestion.",
-      "description": "Patchwork is a mutual-aid platform built around decentralized identity and community safety. It ingests Bluesky Jetstream data, indexes community posts, and surfaces them through map-based discovery while protecting precise location through geoprivacy controls. The TypeScript monorepo separates the web client, query API, ingestion pipeline, and moderation worker so discovery, safety, and protocol integration can evolve independently.",
+      "summary": "Pre-alpha AT Protocol mutual-aid platform exploring map-based discovery, location privacy, moderation, and Bluesky ingestion.",
+      "description": "Patchwork explores how mutual-aid requests can use decentralized identity without exposing precise locations or collapsing community safety into one service. I built the TypeScript monorepo across its React client, query API, ingestion pipeline, and moderation worker. Its public environment is explicitly pre-alpha: the case study demonstrates the architecture and safety constraints without presenting the product as complete or broadly adopted.",
       "role": "Full-stack protocol engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/patchwork",
       "liveUrl": "https://patchwork.subcult.tv",
       "featured": true,
       "classification": "flagship",
+      "deliveryStatus": "Pre-alpha",
+      "periodLabel": "2025–present",
       "sortOrder": 2,
       "stack": [
         "TypeScript",
@@ -259,9 +259,9 @@
         "Playwright"
       ],
       "highlights": [
-        "Built an AT Protocol-native platform ingesting Bluesky Jetstream data for decentralized identity and social graph integration.",
-        "Implemented geoprivacy controls that fuzz coordinates before storage, protecting user locations while preserving map-based community discovery.",
-        "Shipped a moderation worker as a dedicated service with automated content review, keeping community safety concerns separated from the main application logic."
+        "Separated the React client, query API, ingestion pipeline, and moderation worker into independently testable workspaces.",
+        "Implemented location-privacy controls before persistence so the product does not require exact coordinates for discovery.",
+        "Exercises its core record lifecycle, privacy boundaries, and accessibility behavior through browser tests in a public pre-alpha environment."
       ],
       "architecture": [
         "TypeScript monorepo (npm workspaces) with four services: React web client, query API, Jetstream ingestion pipeline, and moderation worker.",
@@ -269,14 +269,15 @@
         "Geoprivacy layer fuzzes coordinates before persistence, moderation worker processes content asynchronously, and the web client renders map-based discovery through a privacy-aware tile layer."
       ],
       "lessons": [
-        "Building on the AT Protocol forced good architectural decisions; decentralized identity eliminated the need for a custom auth system, and the social graph came for free.",
-        "Geoprivacy is harder than it looks. Simple coordinate rounding creates grid artifacts that can be reverse-engineered; adding controlled random noise within a privacy radius was more resilient."
+        "Using an external identity protocol reduces custom account code but does not remove authorization, moderation, or account-lifecycle responsibilities.",
+        "Location privacy must be tested as an information boundary, not described as a UI setting; stored, returned, logged, and mapped values all matter."
       ],
       "media": [
         {
-          "src": "/assets/projects/patchwork-overview.svg",
-          "alt": "Map-based interface showing community aid posts with geoprivacy-fuzzed location markers and AT Protocol identity integration.",
-          "caption": "Map-based mutual aid discovery with geoprivacy controls and decentralized identity."
+          "src": "/assets/projects/screenshots/patchwork-home-1440.webp",
+          "srcSet": "/assets/projects/screenshots/patchwork-home-720.webp 720w, /assets/projects/screenshots/patchwork-home-1440.webp 1440w",
+          "alt": "Patchwork public pre-alpha home showing mutual-aid discovery and decentralized identity entry points.",
+          "caption": "Public Patchwork pre-alpha captured without account or private-location data."
         }
       ]
     },

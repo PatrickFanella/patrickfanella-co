@@ -1,5 +1,6 @@
 export type ProjectMedia = {
   src: string
+  srcSet?: string
   alt: string
   caption?: string
 }
@@ -12,6 +13,8 @@ export type Project = {
   title: string
   kind: ProjectKind
   classification: ProjectClassification
+  deliveryStatus: string
+  periodLabel: string
   summary: string
   description: string
   role: string
@@ -41,17 +44,8 @@ export type ContactInput = {
   website?: string
 }
 
-export type ContactMessage = {
-  id: number
-  name: string
-  email: string
-  message: string
-  createdAt: string
-}
-
 export type ContactSubmissionResponse = {
   message: string
-  item: ContactMessage
 }
 
 type ApiErrorPayload = {

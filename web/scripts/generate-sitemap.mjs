@@ -37,11 +37,10 @@ async function main() {
 	const routes = [
 		'/',
 		'/projects',
-		'/tools',
 		'/resume',
 		'/contact',
 		...portfolio.projects
-			.filter((project) => ['case-study', 'highlight'].includes(project.kind || 'case-study'))
+			.filter((project) => project.classification === 'flagship')
 			.map((project) => `/projects/${project.slug}`),
 	]
 	const uniqueRoutes = [...new Set(routes)]

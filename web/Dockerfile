@@ -2,8 +2,8 @@ FROM node:22-alpine AS build
 
 WORKDIR /workspace/web
 
-COPY web/package.json ./package.json
-RUN npm install
+COPY web/package.json web/package-lock.json ./
+RUN npm ci
 
 COPY web/ ./
 COPY db/ ../db/

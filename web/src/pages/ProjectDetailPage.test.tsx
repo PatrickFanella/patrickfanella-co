@@ -39,7 +39,7 @@ describe('ProjectDetailPage', () => {
 				<MemoryRouter initialEntries={['/projects/tmux-popups']}>
 					<Routes>
 						<Route element={<ProjectDetailPage />} path="/projects/:slug" />
-						<Route element={<h1>Tools archive</h1>} path="/tools" />
+						<Route element={<h1>Tools archive</h1>} path="/archive" />
 					</Routes>
 				</MemoryRouter>
 			</HelmetProvider>,

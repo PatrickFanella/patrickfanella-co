@@ -94,11 +94,6 @@ cd web && npm run test:e2e
 
 - overall service status (`ok` or `degraded`)
 - database availability
-- notification integration enablement
-- API uptime
-- request and error counters
-- contact submission count
-- notification failure count
 
 ### Log expectations
 
@@ -135,9 +130,8 @@ Behavior:
 
 If notifications stop arriving:
 
-1. check `GET /api/health` for `notificationsEnabled`
-2. inspect API logs for `contact.create notification_failed`
-3. verify the webhook URL and token in the production secret store
+1. inspect API logs for `contact.create notification_failed`
+2. verify the webhook URL and token in the production secret store
 
 ## 7. Privacy-safe analytics
 
@@ -154,6 +148,8 @@ Tracked events:
 - outbound link clicks
 
 No invasive session replay or cross-site behavioral tracking is included in this baseline.
+
+Contact records are retained for 90 days by default. The API prunes expired rows at startup and daily and logs only deletion counts. Portfolio database dumps are kept in the exact Almaz portfolio-backup directory and removed after 90 days by the dedicated weekly timer.
 
 ## 8. Release flow
 

@@ -22,6 +22,7 @@ Use this checklist for the initial launch and future high-confidence updates.
 - [ ] `cd web && npm run test`
 - [ ] `cd web && npm run build`
 - [ ] `cd web && npm run test:e2e`
+- [ ] `cd web && npm run lighthouse:ci`
 
 ## Health and observability
 
@@ -35,10 +36,13 @@ Use this checklist for the initial launch and future high-confidence updates.
 ## UX and content spot checks
 
 - [ ] home page loads featured work without empty-state regressions
-- [ ] projects archive and at least one project detail page load correctly
+- [ ] only Clpr, Patchwork, and HasanAra appear in the primary journey
+- [ ] the footer-only archive and at least one archived detail page load with `noindex`
 - [ ] contact form submits successfully against production
 - [ ] tab order, focus treatment, and reduced-motion behavior look correct on key routes
 - [ ] SEO basics are present: canonical tags, social image tags, `robots.txt`, and `sitemap.xml`
+- [ ] public web and API responses include the required Caddy security headers
+- [ ] `/projects/hasanara` is canonical and legacy Transcript Create URLs redirect permanently
 - [ ] 404 or missing-project behavior is still usable and intentional
 
 ## Notifications and analytics

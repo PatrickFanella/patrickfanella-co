@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Patrick Fanella project placeholder</title>
+  <desc id="desc">Industrial grid artwork used when a project image is unavailable.</desc>
+  <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#805bca" opacity=".35"/></pattern></defs>
+  <rect width="1600" height="1000" fill="#282a36"/>
+  <rect width="1600" height="1000" fill="url(#grid)"/>
+  <rect x="80" y="80" width="1440" height="840" fill="#21222c" stroke="#805bca" stroke-width="8"/>
+  <rect x="128" y="130" width="24" height="24" fill="#50fa7b"/>
+  <text x="180" y="154" fill="#50fa7b" font-family="JetBrains Mono, monospace" font-size="30" font-weight="700" letter-spacing="5">PROJECT EVIDENCE</text>
+  <text x="128" y="510" fill="#f8f8f2" font-family="Space Grotesk, Arial, sans-serif" font-size="98" font-weight="800">VISUAL UNAVAILABLE</text>
+  <text x="128" y="585" fill="#a5a6b5" font-family="Inter, Arial, sans-serif" font-size="32">The written case study and repository remain available.</text>
+</svg>

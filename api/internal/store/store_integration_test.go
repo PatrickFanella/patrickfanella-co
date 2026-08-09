@@ -132,6 +132,25 @@ func TestListProjectsAndGetProjectUseSeededPostgresData(t *testing.T) {
 	if message.CreatedAt.IsZero() {
 		t.Fatalf("expected contact created_at timestamp, got %#v", message)
 	}
+
+	if _, err := pool.Exec(ctx, `UPDATE contact_messages SET created_at = NOW() - INTERVAL '91 days' WHERE id = $1`, message.ID); err != nil {
+		t.Fatalf("age contact fixture: %v", err)
+	}
+	newer, err := st.SaveContact(ctx, models.ContactInput{Name: "Recent", Email: "recent@example.com", Message: "This recent message must remain after retention pruning."})
+	if err != nil {
+		t.Fatalf("save recent contact: %v", err)
+	}
+	deleted, err := st.PruneContacts(ctx, time.Now().UTC().AddDate(0, 0, -90))
+	if err != nil {
+		t.Fatalf("prune contacts: %v", err)
+	}
+	if deleted != 1 {
+		t.Fatalf("expected one expired contact deleted, got %d", deleted)
+	}
+	var remaining bool
+	if err := pool.QueryRow(ctx, `SELECT EXISTS(SELECT 1 FROM contact_messages WHERE id = $1)`, newer.ID).Scan(&remaining); err != nil || !remaining {
+		t.Fatalf("expected recent contact to remain, exists=%t err=%v", remaining, err)
+	}
 }
 
 func applyMigrations(ctx context.Context, pool *pgxpool.Pool) error {

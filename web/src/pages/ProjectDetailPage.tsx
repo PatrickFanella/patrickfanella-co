@@ -107,7 +107,7 @@ export function ProjectDetailPage() {
   }
 
   if (project.kind === 'tool') {
-    return <Navigate replace to="/tools" />
+    return <Navigate replace to="/archive#tools" />
   }
 
   const projectKindLabel = project.classification === 'flagship'
@@ -120,9 +120,10 @@ export function ProjectDetailPage() {
     <section className={pageSectionClass}>
       <Seo
         description={project.summary}
-        image={project.media[0]?.src}
-        imageAlt={project.media[0]?.alt}
+        image={project.classification === 'flagship' ? `/assets/social/${project.slug}-1200x630.png` : project.media[0]?.src}
+        imageAlt={`${project.title} case study by Patrick Fanella`}
         path={`/projects/${project.slug}`}
+        robots={project.classification === 'flagship' ? 'index,follow' : 'noindex,follow'}
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'CreativeWork',
@@ -142,7 +143,7 @@ export function ProjectDetailPage() {
       />
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b-2 border-stroke pb-10 mb-8">
         <div>
-          <SectionLabel>{`${projectKindLabel} / ${project.year}`}</SectionLabel>
+          <SectionLabel>{`${projectKindLabel} / ${project.deliveryStatus || project.year}`}</SectionLabel>
           <h1 className={`${pageTitleClass} mt-6 uppercase`}>{project.title}</h1>
           <p className="mt-6 text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
         </div>
@@ -158,9 +159,15 @@ export function ProjectDetailPage() {
             </p>
             <p className={metaCardClass}>
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Year
+                Period
               </span>
-              <span className="text-[1.05rem] text-heading">{project.year}</span>
+              <span className="text-[1.05rem] text-heading">{project.periodLabel || project.year}</span>
+            </p>
+            <p className={metaCardClass}>
+              <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
+                Status
+              </span>
+              <span className="text-[1.05rem] text-heading">{project.deliveryStatus || projectKindLabel}</span>
             </p>
           </div>
 
@@ -191,9 +198,9 @@ export function ProjectDetailPage() {
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.8fr)] lg:items-start">
         <article className="pr-4 lg:pr-8">
-          <SectionLabel>Overview</SectionLabel>
+          <SectionLabel>Problem and role</SectionLabel>
           <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-            What I built and why.
+            What needed to work.
           </h2>
           <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft">
             {project.description}
@@ -201,7 +208,7 @@ export function ProjectDetailPage() {
         </article>
 
         <article className={`${surfaceCardClass} bg-surface p-8`}>
-          <p className={monoLabelClass}>Key outcomes</p>
+          <p className={monoLabelClass}>Evidence</p>
           <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft">
             {project.highlights.map((highlight, index) => (
               <li
@@ -226,7 +233,7 @@ export function ProjectDetailPage() {
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
-              A concise look at the architecture behind the shipped product.
+              A concise look at decisions implemented in the current product state.
             </p>
           </div>
 

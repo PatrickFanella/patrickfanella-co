@@ -15,6 +15,8 @@ type Project struct {
 	Title          string         `json:"title"`
 	Kind           string         `json:"kind"`
 	Classification string         `json:"classification"`
+	DeliveryStatus string         `json:"deliveryStatus"`
+	PeriodLabel    string         `json:"periodLabel"`
 	Summary        string         `json:"summary"`
 	Description    string         `json:"description"`
 	Role           string         `json:"role"`
@@ -31,6 +33,7 @@ type Project struct {
 
 type ProjectMedia struct {
 	Src     string `json:"src"`
+	SrcSet  string `json:"srcSet,omitempty"`
 	Alt     string `json:"alt"`
 	Caption string `json:"caption,omitempty"`
 }
@@ -69,6 +72,5 @@ type ContactMessage struct {
 }
 
 type ContactSubmissionResponse struct {
-	Message string         `json:"message"`
-	Item    ContactMessage `json:"item"`
+	Message string `json:"message"`
 }

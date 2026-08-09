@@ -26,15 +26,15 @@ type Store interface {
 }
 
 type API struct {
-	store           Store
-	contactSecurity ContactSecurityConfig
-	contactLimiter  *contactRateLimiter
-	logger          *slog.Logger
-	notifier        ContactNotifier
-	startedAt       time.Time
-	requestCount    atomic.Uint64
-	errorCount      atomic.Uint64
-	contactCount    atomic.Uint64
+	store                Store
+	contactSecurity      ContactSecurityConfig
+	contactLimiter       *contactRateLimiter
+	logger               *slog.Logger
+	notifier             ContactNotifier
+	startedAt            time.Time
+	requestCount         atomic.Uint64
+	errorCount           atomic.Uint64
+	contactCount         atomic.Uint64
 	notificationFailures atomic.Uint64
 }
 
@@ -77,26 +77,13 @@ func (api *API) NotificationsEnabled() bool {
 
 func (api *API) Health(w http.ResponseWriter, r *http.Request) {
 	status := "ok"
-	databaseStatus := "ok"
 	if !api.store.DatabaseEnabled() {
 		status = "degraded"
-		databaseStatus = "unavailable"
 	}
 
-	now := time.Now().UTC()
 	writeJSON(w, http.StatusOK, map[string]any{
-		"status":                 status,
-		"databaseEnabled":        api.store.DatabaseEnabled(),
-		"databaseStatus":         databaseStatus,
-		"notificationsEnabled":   api.NotificationsEnabled(),
-		"startedAt":              api.startedAt,
-		"uptimeSeconds":          int64(now.Sub(api.startedAt).Seconds()),
-		"requestCount":           api.requestCount.Load(),
-		"errorCount":             api.errorCount.Load(),
-		"contactSubmissionCount": api.contactCount.Load(),
-		"notificationFailureCount": api.notificationFailures.Load(),
-		"requestId":              middleware.GetReqID(r.Context()),
-		"timestamp":              now,
+		"status":          status,
+		"databaseEnabled": api.store.DatabaseEnabled(),
 	})
 }
 
@@ -113,6 +100,10 @@ func (api *API) ListProjects(w http.ResponseWriter, r *http.Request) {
 
 func (api *API) GetProject(w http.ResponseWriter, r *http.Request) {
 	slug := chi.URLParam(r, "slug")
+	if slug == "transcript-create" {
+		http.Redirect(w, r, "/api/projects/hasanara", http.StatusPermanentRedirect)
+		return
+	}
 	project, err := api.store.GetProject(r.Context(), slug)
 	if err != nil {
 		api.loggerForRequest(r).Error("projects.detail failed", slog.String("slug", slug), slog.Any("error", err))
@@ -182,11 +173,6 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 		api.loggerForRequest(r).Warn("contact.create suppressed", slog.String("reason", "honeypot"), slog.String("client_ip", clientIP), slog.String("field", api.contactSecurity.HoneypotField))
 		writeJSON(w, http.StatusAccepted, models.ContactSubmissionResponse{
 			Message: "Thanks. Your note has been saved.",
-			Item: models.ContactMessage{
-				Name:    request.Name,
-				Email:   request.Email,
-				Message: request.Message,
-			},
 		})
 		return
 	}
@@ -230,7 +216,6 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 
 	writeJSON(w, http.StatusCreated, models.ContactSubmissionResponse{
 		Message: "Thanks. Your note has been saved.",
-		Item:    message,
 	})
 }
 

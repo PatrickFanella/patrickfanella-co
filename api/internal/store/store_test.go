@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"testing"
+	"time"
 
 	"patrickfanella.co/api/internal/models"
 )
@@ -35,22 +36,33 @@ func TestSaveContactReturnsDatabaseUnavailableWithoutDB(t *testing.T) {
 	}
 }
 
+func TestPruneContactsReturnsDatabaseUnavailableWithoutDB(t *testing.T) {
+	st := &Store{}
+
+	_, err := st.PruneContacts(context.Background(), time.Now())
+	if !errors.Is(err, models.ErrDatabaseUnavailable) {
+		t.Fatalf("expected database unavailable, got %v", err)
+	}
+}
+
 func TestScanProjectDecodesMediaPayload(t *testing.T) {
 	project, err := scanProject(func(dest ...any) error {
 		*dest[0].(*string) = "clpr"
 		*dest[1].(*string) = "Clpr"
 		*dest[2].(*string) = ""
 		*dest[3].(*string) = ""
-		*dest[4].(*string) = "Summary"
-		*dest[5].(*string) = "Description"
-		*dest[6].(*string) = "Full stack developer"
-		*dest[7].(*int) = 2025
-		*dest[8].(*bool) = true
-		*dest[11].(*[]string) = []string{"Go", "React"}
-		*dest[12].(*[]string) = []string{"Highlight"}
-		*dest[13].(*[]string) = []string{"Architecture"}
-		*dest[14].(*[]string) = []string{"Lesson"}
-		*dest[15].(*[]byte) = []byte(`[{"src":"/assets/projects/clpr-overview.svg","alt":"Architecture diagram"}]`)
+		*dest[4].(*string) = "Production"
+		*dest[5].(*string) = "2025-present"
+		*dest[6].(*string) = "Summary"
+		*dest[7].(*string) = "Description"
+		*dest[8].(*string) = "Full stack developer"
+		*dest[9].(*int) = 2025
+		*dest[10].(*bool) = true
+		*dest[13].(*[]string) = []string{"Go", "React"}
+		*dest[14].(*[]string) = []string{"Highlight"}
+		*dest[15].(*[]string) = []string{"Architecture"}
+		*dest[16].(*[]string) = []string{"Lesson"}
+		*dest[17].(*[]byte) = []byte(`[{"src":"/assets/projects/clpr-overview.svg","alt":"Architecture diagram"}]`)
 		return nil
 	})
 	if err != nil {
@@ -66,5 +78,8 @@ func TestScanProjectDecodesMediaPayload(t *testing.T) {
 	}
 	if project.Classification != "archive" {
 		t.Fatalf("expected default classification archive, got %q", project.Classification)
+	}
+	if project.DeliveryStatus != "Production" || project.PeriodLabel != "2025-present" {
+		t.Fatalf("expected delivery metadata, got %#v", project)
 	}
 }

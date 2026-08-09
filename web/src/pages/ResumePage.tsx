@@ -16,7 +16,7 @@ export function ResumePage() {
   return (
     <section className={`${pageSectionClass} pt-4`}>
       <Seo
-        description="View or download Patrick Fanella's resume: full-stack engineer specializing in Go, React, PostgreSQL, and production systems."
+        description="View or download Patrick Fanella's resume for senior full-stack and backend engineering roles."
         path="/resume"
         title="Resume"
       />
@@ -28,7 +28,7 @@ export function ResumePage() {
             Patrick Fanella
           </h1>
           <p className={pageIntroClass}>
-            Full-stack engineer building production systems across Go, React, Python, and TypeScript. View the resume below or download a copy.
+            Senior full-stack and backend engineer building operational products across Go, React, Python, TypeScript, and PostgreSQL. View the one-page resume below or download a copy.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -63,7 +63,7 @@ export function ResumePage() {
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
                 Focus
               </span>
-              <span className="text-[1.05rem] text-heading">Full-Stack Engineering</span>
+              <span className="text-[1.05rem] text-heading">Senior Full-Stack / Backend</span>
             </p>
           </div>
         </aside>

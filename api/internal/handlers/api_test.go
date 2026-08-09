@@ -45,7 +45,6 @@ func (s stubStore) GetProject(context.Context, string) (models.Project, error) {
 	return s.project, s.projectErr
 }
 
-
 func (s *stubStore) SaveContact(context.Context, models.ContactInput) (models.ContactMessage, error) {
 	s.saveCalls++
 	return s.contact, s.contactErr
@@ -61,7 +60,7 @@ func (n *stubNotifier) Enabled() bool {
 	return n != nil && n.enabled
 }
 
-func TestHealthReportsOperationalFields(t *testing.T) {
+func TestHealthReturnsMinimalPublicPayload(t *testing.T) {
 	api := New(&stubStore{databaseEnabled: true})
 	api.SetNotifier(&stubNotifier{enabled: true})
 	req := httptest.NewRequest(http.MethodGet, "/api/health", nil)
@@ -82,25 +81,8 @@ func TestHealthReportsOperationalFields(t *testing.T) {
 		t.Fatalf("expected ok status, got %#v", payload["status"])
 	}
 
-	if payload["databaseStatus"] != "ok" {
-		t.Fatalf("expected ok database status, got %#v", payload["databaseStatus"])
-	}
-
-	if payload["notificationsEnabled"] != true {
-		t.Fatalf("expected notifications enabled, got %#v", payload["notificationsEnabled"])
-	}
-
-	if _, ok := payload["uptimeSeconds"]; !ok {
-		t.Fatalf("expected uptimeSeconds in payload: %#v", payload)
-	}
-	if _, ok := payload["startedAt"]; !ok {
-		t.Fatalf("expected startedAt in payload: %#v", payload)
-	}
-	if _, ok := payload["notificationFailureCount"]; !ok {
-		t.Fatalf("expected notificationFailureCount in payload: %#v", payload)
-	}
-	if _, ok := payload["contactSubmissionCount"]; !ok {
-		t.Fatalf("expected contactSubmissionCount in payload: %#v", payload)
+	if payload["databaseEnabled"] != true || len(payload) != 2 {
+		t.Fatalf("expected only public health fields, got %#v", payload)
 	}
 }
 
@@ -240,12 +222,33 @@ func TestCreateContactSuccess(t *testing.T) {
 	}
 
 	var payload models.ContactSubmissionResponse
-	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
+	body := res.Body.Bytes()
+	if err := json.Unmarshal(body, &payload); err != nil {
 		t.Fatalf("decode response: %v", err)
 	}
 
-	if payload.Item.ID != 7 || payload.Message == "" {
+	if payload.Message == "" {
 		t.Fatalf("unexpected success payload: %#v", payload)
+	}
+	var raw map[string]any
+	if err := json.Unmarshal(body, &raw); err != nil {
+		t.Fatalf("decode raw response: %v", err)
+	}
+	if _, exposed := raw["item"]; exposed {
+		t.Fatalf("contact response must not expose the stored submission: %#v", raw)
+	}
+}
+
+func TestGetProjectRedirectsLegacyHasanAraSlug(t *testing.T) {
+	api := New(&stubStore{})
+	req := httptest.NewRequest(http.MethodGet, "/api/projects/transcript-create", nil)
+	req = withSlug(req, "transcript-create")
+	res := httptest.NewRecorder()
+
+	api.GetProject(res, req)
+
+	if res.Code != http.StatusPermanentRedirect || res.Header().Get("Location") != "/api/projects/hasanara" {
+		t.Fatalf("expected permanent HasanAra redirect, got status=%d location=%q", res.Code, res.Header().Get("Location"))
 	}
 }
 

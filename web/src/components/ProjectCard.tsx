@@ -34,7 +34,7 @@ export function ProjectCard({ order, project, density = 'featured' }: ProjectCar
               </p>
             ) : null}
             <p className="border-2 border-stroke bg-panel px-3 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-heading">
-              {project.year}
+              {project.periodLabel || project.year}
             </p>
           </div>
 
@@ -58,7 +58,7 @@ export function ProjectCard({ order, project, density = 'featured' }: ProjectCar
       <StackCueList ariaLabel={`${project.title} technology stack`} items={project.stack} maxVisible={maxVisibleStack} />
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-4 border-t-2 border-stroke pt-4">
-        {project.featured ? <p className={monoLabelClass}>Flagship Case Study</p> : isArchive ? <p className={monoLabelClass}>{kindLabel}</p> : <span />}
+        {project.featured ? <p className={monoLabelClass}>{project.deliveryStatus || 'Flagship case study'}</p> : isArchive ? <p className={monoLabelClass}>{kindLabel}</p> : <span />}
 
         <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>
           {ctaLabel}

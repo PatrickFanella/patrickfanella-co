@@ -158,6 +158,7 @@ vite.config.ts.timestamp-*
 # Code coverage profiles and other test artifacts
 *.out
 coverage.*
+.lighthouseci/
 *.coverprofile
 profile.cov
 

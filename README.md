@@ -1,20 +1,25 @@
-# Patrick Fanella Portfolio
+# Patrick Fanella portfolio
 
-Full-stack portfolio application built to showcase product thinking, clean engineering, and production-ready delivery. The project combines a polished React frontend, a Go API, and a PostgreSQL-backed content layer to present case-study work through a real application instead of a static brochure site.
+The source for [patrickfanella.co](https://patrickfanella.co), a focused hiring portfolio for a senior full-stack / backend engineer. The primary journey presents three evidence-bounded case studies—Clpr, Patchwork, and HasanAra—while older work remains publicly verifiable in a footer-only, `noindex` archive.
 
-## Why this project stands out
+The application combines a React frontend, Go API, PostgreSQL content layer, static route documents, and an Nginx production image. Delivery status is explicit; the site does not imply that pre-alpha or active-development work is production-ready.
 
-- **End-to-end ownership:** frontend, backend, database, and deployment workflow in one repo
-- **Production-minded architecture:** containerized web/API/PostgreSQL stack with health checks and environment-based configuration
-- **Strong UX fundamentals:** accessible route states, SEO assets, form validation, and resilient error handling
-- **Operational maturity:** database migrations, seed data, deployment docs, runbook, and launch checklist
-- **Quality built in:** ESLint, Vitest, Playwright, and Go tests to support reliable changes
+## Reliability and privacy contract
+
+- sitemap routes have generated static documents and a failing route-contract check
+- production-shaped Playwright tests run through the Nginx image, not Vite fallback routing
+- axe and keyboard-dialog checks cover the primary journey
+- mobile Lighthouse budgets enforce performance, accessibility, best practices, SEO, and CLS thresholds
+- health responses expose only `status` and `databaseEnabled`
+- successful contact responses do not echo stored submissions
+- contact records are pruned after 90 days at startup and daily
+- Plausible is the only supported analytics integration
 
 ## Tech stack
 
 - **Frontend:** Vite, React, TypeScript, Tailwind CSS, React Router, React Hook Form, Zod, Framer Motion
 - **Backend:** Go, Chi, PostgreSQL, pgx
-- **Tooling:** Docker, Docker Compose, ESLint, Vitest, Playwright
+- **Tooling:** Docker, Docker Compose, ESLint, Vitest, Playwright, axe, Lighthouse CI
 
 ## Local setup
 
@@ -25,6 +30,7 @@ make bootstrap   # postgres + install + migrate + seed
 make api         # run Go API (separate terminal)
 make web         # run Vite frontend (separate terminal)
 make verify      # lint + test + build
+make verify-release # core verification + production E2E + Lighthouse budgets
 ```
 
 Or step by step:

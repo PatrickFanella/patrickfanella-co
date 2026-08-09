@@ -12,26 +12,20 @@ describe('ProjectsPage', () => {
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(screen.getByRole('status')).toHaveTextContent(/loading project index/i)
-		expect(screen.getByText(/counts appear after the project index loads/i)).toBeInTheDocument()
+		expect(screen.getByRole('status')).toHaveTextContent(/loading the selected case studies/i)
 		expect(screen.queryByText(/0 featured/i)).not.toBeInTheDocument()
 		expect(screen.queryByText(/0 archive/i)).not.toBeInTheDocument()
 	})
 
-	it('renders flagship case studies and a compact classified archive', async () => {
+	it('renders only flagship case studies in the primary project journey', async () => {
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: /featured case studies/i, level: 2 })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /^archive$/i, level: 2 })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
-		expect(screen.getByText('Internet-ID')).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
+		expect(screen.queryByText('Internet-ID')).not.toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
-		expect(screen.getByText(/featured first/i)).toBeInTheDocument()
-		expect(screen.getByText(/1 featured case study/i)).toBeInTheDocument()
-		expect(screen.getByText(/0 experiments/i)).toBeInTheDocument()
-		expect(screen.getByText(/1 archived project/i)).toBeInTheDocument()
+		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
 	})
 
 	it('renders an intentional empty-archive state when the API returns no projects', async () => {
@@ -39,7 +33,7 @@ describe('ProjectsPage', () => {
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: /the case study archive is empty/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: /selected work index is empty/i })).toBeInTheDocument()
 	})
 
 	it('renders an error state when the project index request fails', async () => {
@@ -50,8 +44,6 @@ describe('ProjectsPage', () => {
 		renderInRouter(<ProjectsPage />, '/projects')
 
 		expect(await screen.findByRole('alert')).toHaveTextContent(/unable to load portfolio data/i)
-		expect(screen.getByText(/counts appear after the project index loads/i)).toBeInTheDocument()
-		expect(screen.queryByText(/0 featured/i)).not.toBeInTheDocument()
-		expect(screen.queryByText(/0 archive/i)).not.toBeInTheDocument()
+		expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument()
 	})
 })

@@ -1,0 +1,34 @@
+name: Verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: api/go.mod
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Verify API
+        run: cd api && go test ./...
+      - name: Prepare representative environment
+        run: cp .env.example .env
+      - name: Install web dependencies
+        run: cd web && npm ci
+      - name: Verify web
+        run: cd web && npm run lint && npm run test && npm run build
+      - name: Install Chromium
+        run: cd web && npx playwright install --with-deps chromium
+      - name: Production-shaped browser tests
+        run: cd web && npm run test:e2e
+      - name: Mobile Lighthouse budgets
+        run: cd web && npm run lighthouse:ci

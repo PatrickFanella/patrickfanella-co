@@ -12,7 +12,7 @@ describe('HomePage', () => {
 
 		renderInRouter(<HomePage />)
 
-		expect(screen.getByRole('status')).toHaveTextContent(/loading featured projects/i)
+		expect(screen.getByRole('status')).toHaveTextContent(/loading the three featured case studies/i)
 	})
 
 	it('renders featured projects from the API response', async () => {
@@ -21,12 +21,12 @@ describe('HomePage', () => {
 		renderInRouter(<HomePage />)
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.getByText(/start with focused case studies/i)).toBeInTheDocument()
-		expect(document.title).toBe('Patrick Fanella | Full Stack Developer')
+		expect(screen.getByText(/production, pre-alpha, and active-development labels/i)).toBeInTheDocument()
+		expect(document.title).toBe('Patrick Fanella | Senior Full-Stack / Backend Engineer')
 		expect(screen.queryByRole('heading', { name: 'Internet-ID' })).not.toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
-		expect(screen.getByRole('link', { name: /browse the archive/i })).toHaveAttribute('href', '/projects')
-		expect(screen.getByRole('link', { name: /browse developer tools/i })).toHaveAttribute('href', '/tools')
+		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
+		expect(screen.queryByText(/886k/i)).not.toBeInTheDocument()
 	})
 
 	it('renders a recoverable error state when the featured query fails', async () => {

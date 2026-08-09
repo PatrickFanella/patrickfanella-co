@@ -1,0 +1,10 @@
+[Unit]
+Description=Weekly Patrick Fanella portfolio database dump retention
+
+[Timer]
+OnCalendar=Sun *-*-* 04:30:00
+Persistent=true
+RandomizedDelaySec=15m
+
+[Install]
+WantedBy=timers.target

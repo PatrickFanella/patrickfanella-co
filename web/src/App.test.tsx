@@ -37,7 +37,7 @@ describe('App navigation flows', () => {
 		renderApp('/')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		await user.click(screen.getByRole('link', { name: /view case studies/i }))
+		await user.click(screen.getByRole('link', { name: /view three case studies/i }))
 
 		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
 		expect(scrollToSpy).toHaveBeenCalledWith(0, 0)
@@ -47,16 +47,17 @@ describe('App navigation flows', () => {
 		})
 	})
 
-	it('navigates from the home page to the tools archive', async () => {
+	it('keeps the archive out of primary navigation and available in the footer', async () => {
 		const user = userEvent.setup()
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
 		renderApp('/')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		await user.click(screen.getByRole('link', { name: /^tools$/i }))
+		expect(screen.queryByRole('link', { name: /^tools$/i })).not.toBeInTheDocument()
+		await user.click(screen.getAllByRole('link', { name: /^archive$/i })[0])
 
-		expect(await screen.findByRole('heading', { level: 1, name: /^tools$/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { level: 1, name: /^archive$/i })).toBeInTheDocument()
 	})
 
 	it('navigates from the projects archive to a project detail route', async () => {
@@ -67,9 +68,9 @@ describe('App navigation flows', () => {
 		renderApp('/projects')
 
 		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
-		await user.click(screen.getAllByRole('link', { name: /read case study/i })[0])
+		await user.click(await screen.findByRole('link', { name: /read case study/i }))
 
-		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { level: 1, name: featuredProject.title })).toBeInTheDocument()
 		await waitFor(() => {
 			expect(document.title).toBe(`${featuredProject.title} | Patrick Fanella`)
 		})

@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strconv"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -21,6 +22,8 @@ type Project struct {
 	Title          string         `json:"title"`
 	Kind           string         `json:"kind,omitempty"`
 	Classification string         `json:"classification,omitempty"`
+	DeliveryStatus string         `json:"deliveryStatus,omitempty"`
+	PeriodLabel    string         `json:"periodLabel,omitempty"`
 	Summary        string         `json:"summary"`
 	Description    string         `json:"description"`
 	Role           string         `json:"role"`
@@ -115,6 +118,22 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			}
 		}
 
+		deliveryStatus := project.DeliveryStatus
+		if deliveryStatus == "" {
+			switch classification {
+			case "experiment":
+				deliveryStatus = "Experiment"
+			case "flagship":
+				deliveryStatus = "Active"
+			default:
+				deliveryStatus = "Archive"
+			}
+		}
+		periodLabel := project.PeriodLabel
+		if periodLabel == "" {
+			periodLabel = strconv.Itoa(project.Year)
+		}
+
 		mediaPayload, err := json.Marshal(project.Media)
 		if err != nil {
 			return err
@@ -123,12 +142,14 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 		var projectID int64
 		err = tx.QueryRow(
 			ctx,
-			`INSERT INTO projects (slug, title, kind, classification, summary, description, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
-			 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NULLIF($9, ''), NULLIF($10, ''), $11, $12, $13, $14, $15, $16)
+			`INSERT INTO projects (slug, title, kind, classification, delivery_status, period_label, summary, description, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
+			 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NULLIF($11, ''), NULLIF($12, ''), $13, $14, $15, $16, $17, $18)
 			 ON CONFLICT (slug) DO UPDATE SET
 			   title = EXCLUDED.title,
 			   kind = EXCLUDED.kind,
 			   classification = EXCLUDED.classification,
+			   delivery_status = EXCLUDED.delivery_status,
+			   period_label = EXCLUDED.period_label,
 			   summary = EXCLUDED.summary,
 			   description = EXCLUDED.description,
 			   role = EXCLUDED.role,
@@ -146,6 +167,8 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			project.Title,
 			kind,
 			classification,
+			deliveryStatus,
+			periodLabel,
 			project.Summary,
 			project.Description,
 			project.Role,

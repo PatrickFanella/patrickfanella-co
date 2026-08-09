@@ -12,10 +12,9 @@ const seedPath = path.join(repoRoot, 'db', 'seed', 'portfolio.json')
 
 const siteName = 'Patrick Fanella'
 const defaultDescription =
-  'Project-first portfolio for Patrick Fanella covering Go APIs, React interfaces, PostgreSQL, AI pipelines, and production systems.'
-const toolsDescription = 'Compact index of public developer tools, services, CLIs, and automation utilities on Gitea.'
-const resumeDescription = "View or download Patrick Fanella's resume: full-stack engineer specializing in Go, React, PostgreSQL, and production systems."
-const fallbackImagePath = '/assets/projects/project-fallback.svg'
+  'Patrick Fanella is a senior full-stack and backend engineer building reliable products with Go, React, TypeScript, Python, and PostgreSQL.'
+const resumeDescription = "View or download Patrick Fanella's resume: senior full-stack and backend engineer specializing in Go, React, PostgreSQL, and reliable product systems."
+const fallbackImagePath = '/assets/social/patrick-fanella-portfolio-1200x630.png'
 
 function readEnvValue(source, key) {
   const line = source
@@ -139,13 +138,13 @@ function getHomePageDefinition(siteUrl, assetTags) {
       canonicalUrl: `${siteUrl}/`,
       description: defaultDescription,
       imageUrl: toAbsoluteUrl(siteUrl, fallbackImagePath),
-      title: `${siteName} | Full Stack Developer`,
+      title: `${siteName} | Senior Full-Stack / Backend Engineer`,
       url: `${siteUrl}/`,
       structuredData: [
         {
           '@context': 'https://schema.org',
           '@type': 'Person',
-          jobTitle: 'Full Stack Developer',
+          jobTitle: 'Senior Full-Stack and Backend Engineer',
           knowsAbout: [
             'Go / Backend Architecture',
             'React / TypeScript Interfaces',
@@ -177,18 +176,19 @@ function getProjectsPageDefinition(siteUrl, assetTags) {
   }
 }
 
-function getToolsPageDefinition(siteUrl, assetTags) {
-  const canonicalUrl = `${siteUrl}/tools`
+function getArchivePageDefinition(siteUrl, assetTags) {
+  const canonicalUrl = `${siteUrl}/archive`
   return {
     html: createHtmlDocument({
       assetTags,
       canonicalUrl,
-      description: toolsDescription,
+      description: 'Older projects, experiments, and tools retained for provenance.',
       imageUrl: toAbsoluteUrl(siteUrl, fallbackImagePath),
-      title: `Tools | ${siteName}`,
+      robots: 'noindex,follow',
+      title: `Archive | ${siteName}`,
       url: canonicalUrl,
     }),
-    outputPath: path.join(distDir, 'tools', 'index.html'),
+    outputPath: path.join(distDir, 'archive', 'index.html'),
   }
 }
 
@@ -224,7 +224,9 @@ function getContactPageDefinition(siteUrl, assetTags) {
 
 function getProjectPageDefinition(siteUrl, assetTags, project) {
   const canonicalUrl = `${siteUrl}/projects/${project.slug}`
-  const imagePath = project.media?.[0]?.src || fallbackImagePath
+  const imagePath = project.classification === 'flagship'
+    ? `/assets/social/${project.slug}-1200x630.png`
+    : project.media?.[0]?.src || fallbackImagePath
   const imageAlt = project.media?.[0]?.alt || `${project.title} supporting visual`
   const keywordsSource = ensureArray(project.stack).length > 0 ? ensureArray(project.stack) : ensureArray(project.tags)
 
@@ -236,6 +238,7 @@ function getProjectPageDefinition(siteUrl, assetTags, project) {
       imageAlt,
       imageUrl: toAbsoluteUrl(siteUrl, imagePath),
       ogType: 'article',
+      robots: project.classification === 'flagship' ? 'index,follow' : 'noindex,follow',
       title: `${project.title} | ${siteName}`,
       url: canonicalUrl,
       structuredData: [
@@ -286,12 +289,12 @@ async function main() {
   const pages = [
     getHomePageDefinition(siteUrl, assetTags),
     getProjectsPageDefinition(siteUrl, assetTags),
-    getToolsPageDefinition(siteUrl, assetTags),
+    getArchivePageDefinition(siteUrl, assetTags),
     getResumePageDefinition(siteUrl, assetTags),
     getContactPageDefinition(siteUrl, assetTags),
     getNotFoundPageDefinition(assetTags),
     ...portfolio.projects
-      .filter((project) => (project.kind || 'case-study') === 'case-study')
+      .filter((project) => (project.kind || 'case-study') !== 'tool')
       .map((project) => getProjectPageDefinition(siteUrl, assetTags, project)),
   ]
 

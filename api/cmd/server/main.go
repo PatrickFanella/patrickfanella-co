@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"log/slog"
 	"net/http"
 	"os"
@@ -13,6 +14,7 @@ import (
 
 	"patrickfanella.co/api/internal/config"
 	"patrickfanella.co/api/internal/handlers"
+	"patrickfanella.co/api/internal/models"
 	"patrickfanella.co/api/internal/notifications"
 	"patrickfanella.co/api/internal/store"
 )
@@ -31,6 +33,28 @@ func main() {
 		logger.Warn("database unavailable, starting in degraded mode", slog.Any("error", err))
 	}
 	defer appStore.Close()
+
+	pruneContacts := func() {
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer cancel()
+		cutoff := time.Now().UTC().AddDate(0, 0, -cfg.ContactRetentionDays)
+		deleted, err := appStore.PruneContacts(ctx, cutoff)
+		if err != nil {
+			if !errors.Is(err, models.ErrDatabaseUnavailable) {
+				logger.Error("contact retention prune failed", slog.Any("error", err))
+			}
+			return
+		}
+		logger.Info("contact retention prune complete", slog.Int64("deleted_count", deleted), slog.Int("retention_days", cfg.ContactRetentionDays))
+	}
+	pruneContacts()
+	go func() {
+		ticker := time.NewTicker(24 * time.Hour)
+		defer ticker.Stop()
+		for range ticker.C {
+			pruneContacts()
+		}
+	}()
 
 	// Background goroutine: periodically check DB health and reconnect if needed.
 	go func() {

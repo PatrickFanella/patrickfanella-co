@@ -2,10 +2,10 @@ import { Helmet } from 'react-helmet-async'
 
 import { siteName, toAbsoluteUrl } from '../lib/site'
 
-const defaultTitle = `${siteName} | Full Stack Developer`
+const defaultTitle = `${siteName} | Senior Full-Stack / Backend Engineer`
 const defaultDescription =
-	'Project-first portfolio for Patrick Fanella covering Go APIs, React interfaces, PostgreSQL, AI pipelines, and production systems.'
-const defaultImagePath = '/assets/projects/diagrams/v10-by-the-numbers.webp'
+	'Patrick Fanella is a senior full-stack and backend engineer building reliable products with Go, React, TypeScript, Python, and PostgreSQL.'
+const defaultImagePath = '/assets/social/patrick-fanella-portfolio-1200x630.png'
 
 type StructuredData = Record<string, unknown> | Array<Record<string, unknown>>
 

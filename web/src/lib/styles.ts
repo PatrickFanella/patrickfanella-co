@@ -21,10 +21,10 @@ export const compactButtonClass =
 export const navButtonClass =
   'inline-flex min-w-0 cursor-pointer items-center justify-center whitespace-nowrap border-2 px-3 py-2.5 text-center text-[0.78rem] font-bold uppercase leading-none tracking-[0.04em] transition-all duration-150 ease-out hover:-translate-x-1 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none sm:px-4 sm:text-sm lg:px-2 lg:text-[0.72rem] lg:tracking-[0.02em] xl:px-3 xl:text-[0.78rem] xl:tracking-[0.04em] 2xl:px-4 2xl:text-sm'
 
-export const pageSectionClass = 'px-1 pt-12 pb-16'
+export const pageSectionClass = 'px-1 pt-3 pb-16'
 
 export const pageTitleClass =
-  'max-w-[12ch] font-display text-[clamp(3.5rem,7vw,7.5rem)] font-bold leading-[0.9] tracking-[-0.04em] text-heading'
+  'max-w-[12ch] font-display text-[clamp(3rem,6vw,6.5rem)] font-bold leading-[0.9] tracking-[-0.04em] text-heading'
 
 export const pageIntroClass = 'mt-6 max-w-[50ch] text-[1.1rem] leading-relaxed text-ink-soft'
 
