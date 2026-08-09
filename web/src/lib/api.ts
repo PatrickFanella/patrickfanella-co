@@ -5,8 +5,8 @@ export type ProjectMedia = {
   caption?: string
 }
 
-export type ProjectKind = 'case-study' | 'highlight' | 'tool'
-export type ProjectClassification = 'flagship' | 'experiment' | 'archive'
+type ProjectKind = 'case-study' | 'highlight' | 'tool'
+type ProjectClassification = 'flagship' | 'experiment' | 'archive'
 
 export type Project = {
   slug: string
@@ -29,15 +29,15 @@ export type Project = {
   media: ProjectMedia[]
 }
 
-export type ProjectListResponse = {
+type ProjectListResponse = {
   items: Project[]
 }
 
-export type ProjectDetailResponse = {
+type ProjectDetailResponse = {
   item: Project
 }
 
-export type ContactInput = {
+type ContactInput = {
   name: string
   email: string
   message: string

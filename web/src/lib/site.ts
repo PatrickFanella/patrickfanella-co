@@ -1,6 +1,6 @@
 export const siteName = 'Patrick Fanella'
 
-export type AnalyticsConfig = {
+type AnalyticsConfig = {
 	domain: string
 	scriptUrl: string
 }
