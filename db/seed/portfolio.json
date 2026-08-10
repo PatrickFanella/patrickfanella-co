@@ -101,6 +101,12 @@
       ],
       "media": [
         {
+          "src": "/assets/projects/screenshots/subcorp-home-1440.webp",
+          "srcSet": "/assets/projects/screenshots/subcorp-home-720.webp 720w, /assets/projects/screenshots/subcorp-home-1440.webp 1440w",
+          "alt": "Subcorp public home introducing its six-agent autonomous AI collective and live system status.",
+          "caption": "Public Subcorp landing page captured in a clean browser session; no authenticated workspace or user data is shown."
+        },
+        {
           "src": "/assets/projects/subcorp-overview.svg",
           "alt": "Diagram of the Subcorp agent system: six named agents communicating through the Sanctum WebSocket interface with a shared sandboxed toolbox.",
           "caption": "Multi-agent coordination architecture with real-time WebSocket chat and sandboxed execution."
@@ -931,6 +937,12 @@
       "featured": false,
       "sortOrder": 20,
       "media": [
+        {
+          "src": "/assets/projects/screenshots/subcult-tv-home-1440.webp",
+          "srcSet": "/assets/projects/screenshots/subcult-tv-home-720.webp 720w, /assets/projects/screenshots/subcult-tv-home-1440.webp 1440w",
+          "alt": "Subcult.tv home presenting open-source tools for independent culture and links to selected work and field notes.",
+          "caption": "Public Subcult.tv home captured after the focused positioning and navigation pass."
+        },
         {
           "src": "/assets/projects/subcult-tv-overview.svg",
           "alt": "Overview diagram for Subcult.tv showing the project scope, stack, and core system relationships.",
