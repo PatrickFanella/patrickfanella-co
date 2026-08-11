@@ -20,7 +20,7 @@ import {
 const contactSchema = z.object({
   name: z.string().min(2, 'Please enter at least 2 characters.'),
   email: z.email('Please enter a valid email address.'),
-  message: z.string().min(20, 'Please include a bit more context so I can respond helpfully.'),
+  message: z.string().min(20, 'Messages need at least 20 characters. Tell me about the role, project, or what you\'re working on.'),
   website: z.string(),
 })
 
