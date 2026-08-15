@@ -9,6 +9,10 @@ const envPath = path.join(repoRoot, '.env')
 const seedPath = path.join(repoRoot, 'db', 'seed', 'portfolio.json')
 const publicDir = path.join(webRoot, 'public')
 
+function isFlagship(project) {
+	return project.classification === 'flagship' || (!project.classification && project.featured && project.kind === 'case-study')
+}
+
 function readEnvValue(source, key) {
 	const line = source
 		.split(/\r?\n/)
@@ -40,7 +44,7 @@ async function main() {
 		'/resume',
 		'/contact',
 		...portfolio.projects
-			.filter((project) => project.classification === 'flagship')
+			.filter(isFlagship)
 			.map((project) => `/projects/${project.slug}`),
 	]
 	const uniqueRoutes = [...new Set(routes)]

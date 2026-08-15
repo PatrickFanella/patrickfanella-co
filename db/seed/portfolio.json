@@ -129,7 +129,7 @@
       ]
     },
     {
-      "slug": "transcript-create",
+      "slug": "hasanara",
       "title": "HasanAra",
       "kind": "case-study",
       "summary": "GPU transcription and searchable video archive for YouTube channels, built with Whisper workers, speaker diarization, full-text search, and export tooling.",

@@ -1,7 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
-  <rect width="48" height="48" fill="#282a36"/>
-  <rect x="0" y="0" width="48" height="3" fill="#805bca"/>
-  <rect x="12" y="8" width="7" height="32" fill="#bd93f9"/>
-  <path d="M19 8H32C36.418 8 40 11.582 40 16C40 20.418 36.418 24 32 24H19V8Z" fill="#bd93f9"/>
-  <circle cx="36" cy="36" r="3" fill="#50fa7b"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Patrick Fanella monogram</title>
+  <rect width="64" height="64" fill="#21222c" />
+  <path fill="#805bca" d="M0 0h64v6H0zM0 58h64v6H0zM0 6h6v52H0zM58 6h6v52h-6z" />
+  <path fill="#bd93f9" d="M6 6h52v4H6zM6 54h52v4H6zM6 10h4v44H6zM54 10h4v44h-4z" />
+  <path fill="#50fa7b" d="M15 15h7v35h-7zm7 0h11v7H22zm0 14h11v7H22zm11-7h7v7h-7zm10-7h7v35h-7zm7 0h4v7h-4zm0 14h4v7h-4z" />
+  <rect x="50" y="46" width="4" height="4" fill="#8be9fd" />
 </svg>

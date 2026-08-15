@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 import { CarouselNav } from '../components/CarouselNav'
@@ -249,7 +248,6 @@ function DiagramLightbox({ initialIndex, onClose }: { initialIndex: number; onCl
 }
 
 export function HomePage() {
-  const prefersReducedMotion = useReducedMotion()
   const { projects, status, error, retry } = useProjects()
   const caseStudies = projects.filter((project) => project.kind === 'case-study')
   const highlights = projects.filter((project) => project.kind === 'highlight')
@@ -260,20 +258,6 @@ export function HomePage() {
     error,
     'Featured case studies are temporarily unavailable.',
   )
-  const motionProps = prefersReducedMotion
-    ? {}
-    : {
-      initial: { opacity: 0, y: 10 },
-      animate: { opacity: 1, y: 0 },
-      transition: { duration: 0.3, ease: 'easeOut' as const },
-    }
-  const fadeInProps = prefersReducedMotion
-    ? {}
-    : {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      transition: { duration: 0.3, delay: 0.1, ease: 'easeOut' as const },
-    }
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -292,37 +276,26 @@ export function HomePage() {
           <div className="flex flex-col justify-center">
             <SectionLabel>Index / 2026</SectionLabel>
 
-            <motion.h1
+            <h1
               className="mt-8 font-display text-[clamp(4rem,8vw,8rem)] font-bold leading-[0.85] tracking-[-0.05em] text-heading uppercase"
-              {...motionProps}
             >
               Backend<span className="text-accent-green"> depth.</span> Frontend<span className="text-accent-teal"> clarity.</span> Production<span className="text-accent-pink"> discipline.</span>
-            </motion.h1>
+            </h1>
 
-            <motion.p
+            <p
               className={`${pageIntroClass} max-w-[46ch] mt-8 text-[1.2rem]`}
-              {...fadeInProps}
             >
               I'm <span className="text-accent-pink">Patrick Fanella</span>. I build production software across Go, React, Python, and TypeScript — AI agent platforms, GPU transcription pipelines, 3D graph tools, and on-chain provenance systems. From first commit to monitored deployment.
-            </motion.p>
+            </p>
 
-            <motion.div
-              className="mt-10 flex flex-wrap gap-4"
-              {...(prefersReducedMotion
-                ? {}
-                : {
-                  initial: { opacity: 0 },
-                  animate: { opacity: 1 },
-                  transition: { duration: 0.2, delay: 0.15, ease: 'linear' as const },
-                })}
-            >
+            <div className="mt-10 flex flex-wrap gap-4">
               <Link className={primaryButtonClass} to="/projects">
                 View Case Studies
               </Link>
               <Link className={secondaryButtonClass} to="/contact">
                 Get in Touch
               </Link>
-            </motion.div>
+            </div>
           </div>
 
           <div className="grid gap-6 content-start">

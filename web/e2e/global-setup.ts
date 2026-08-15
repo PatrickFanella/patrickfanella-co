@@ -66,7 +66,9 @@ export default async function globalSetup() {
 	const localEnv = readLocalEnv()
 	const postgresPort = Number(process.env.POSTGRES_HOST_PORT || localEnv.POSTGRES_HOST_PORT || 5432)
 	const postgresUser = process.env.POSTGRES_USER || localEnv.POSTGRES_USER || 'postgres'
+	const postgresPassword = process.env.POSTGRES_PASSWORD || localEnv.POSTGRES_PASSWORD || 'postgres'
 	const postgresDatabase = process.env.POSTGRES_DB || localEnv.POSTGRES_DB || 'patrickfanella'
+	process.env.DATABASE_URL = `postgres://${encodeURIComponent(postgresUser)}:${encodeURIComponent(postgresPassword)}@127.0.0.1:${postgresPort}/${encodeURIComponent(postgresDatabase)}?sslmode=disable`
 	try {
 		execSync('docker compose up -d postgres', {
 			cwd: repoRoot,

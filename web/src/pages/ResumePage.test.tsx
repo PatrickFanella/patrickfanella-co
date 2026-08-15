@@ -12,9 +12,8 @@ describe('ResumePage', () => {
 			'src',
 			'/assets/patrick_fanella_resume.webp',
 		)
-		expect(screen.getAllByRole('link', { name: /download pdf/i })[0]).toHaveAttribute(
-			'href',
-			'/assets/patrick_fanella_resume.pdf',
+		expect(screen.getAllByRole('link', { name: /download pdf/i })[0].getAttribute('href')).toMatch(
+			/^\/assets\/patrick_fanella_resume\.pdf(?:\?.*)?$/,
 		)
 		expect(document.querySelector('object')).not.toBeInTheDocument()
 	})
