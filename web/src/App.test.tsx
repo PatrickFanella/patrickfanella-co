@@ -56,7 +56,7 @@ describe('App navigation flows', () => {
 		expect(await screen.findByRole('heading', { name: featuredProject.title }, { timeout: 5000 })).toBeInTheDocument()
 		await user.click(screen.getByRole('link', { name: /^tools$/i }))
 
-		expect(await screen.findByRole('heading', { level: 1, name: /^archive$/i }, { timeout: 5000 })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { level: 1, name: /^all projects$/i }, { timeout: 5000 })).toBeInTheDocument()
 	})
 
 	it('navigates from the projects archive to a project detail route', async () => {

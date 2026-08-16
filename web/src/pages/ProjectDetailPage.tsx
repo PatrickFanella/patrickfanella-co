@@ -141,11 +141,11 @@ export function ProjectDetailPage() {
         <div>
           <SectionLabel>{`${projectKindLabel} / ${project.year}`}</SectionLabel>
           <h1 className={`${pageTitleClass} mt-6 uppercase`}>{project.title}</h1>
-          <p className="mt-6 text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
+          <p className="mt-6 max-w-[55ch] text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
         </div>
 
         <aside className={`${surfaceCardClass} h-fit bg-panel p-6`} aria-label="Project meta information">
-          <p className={monoLabelClass}>Project Details</p>
+          <p className={monoLabelClass}>Role &amp; timeline</p>
           <div className="mt-5 grid gap-3">
             <p className={metaCardClass}>
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
