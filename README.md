@@ -48,3 +48,7 @@ Run `make help` to see all available targets.
 - `docs/deployment.md` - deployment topology and environment contract
 - `docs/runbook.md` - day-to-day operations and release workflow
 - `docs/launch-checklist.md` - reusable launch verification steps
+
+## License
+
+Licensed under `GPL-3.0-or-later`. See [LICENSE](LICENSE).

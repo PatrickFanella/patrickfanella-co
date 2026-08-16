@@ -23,7 +23,9 @@ function dockerHostForCI() {
 }
 
 const webHost = process.env.E2E_WEB_HOST || dockerHostForCI()
-const webBaseURL = `http://${webHost}:4173`
+const webPort = process.env.E2E_WEB_PORT || '4173'
+const apiPort = process.env.E2E_API_PORT || '8181'
+const webBaseURL = `http://${webHost}:${webPort}`
 
 export default defineConfig({
 	testDir: './e2e',
@@ -45,14 +47,14 @@ export default defineConfig({
 	webServer: [
 		{
 			name: 'API',
-			command: `CORS_ORIGIN=${webBaseURL} bash ./scripts/start-api-preview.sh`,
-			url: 'http://localhost:8181/api/health',
+			command: `API_PORT=${apiPort} CORS_ORIGIN=${webBaseURL} bash ./scripts/start-api-preview.sh`,
+			url: `http://localhost:${apiPort}/api/health`,
 			timeout: 120_000,
 			reuseExistingServer: false,
 		},
 		{
 			name: 'Production Nginx web',
-			command: 'bash ./scripts/start-e2e-web.sh',
+			command: `E2E_API_PORT=${apiPort} E2E_WEB_PORT=${webPort} bash ./scripts/start-e2e-web.sh`,
 			url: `${webBaseURL}/healthz`,
 			timeout: 120_000,
 			reuseExistingServer: false,

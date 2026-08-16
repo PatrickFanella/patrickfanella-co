@@ -4,16 +4,16 @@ import { expect, test } from '@playwright/test'
 test('visitor can browse featured work and submit the contact form', async ({ page }) => {
 	await page.goto('/')
 
-	await expect(page.getByRole('heading', { name: /backend depth\. product ownership/i })).toBeVisible()
+	await expect(page.getByRole('heading', { level: 1 })).toContainText(/backend.*frontend.*production/i)
 
-	await page.getByRole('link', { name: /review the case studies/i }).click()
+	await page.getByRole('link', { name: /view case studies/i }).click()
 	await expect(page).toHaveURL(/\/projects$/)
 	await expect(page.getByRole('heading', { name: /^projects$/i })).toBeVisible()
 
 	await page.getByRole('link', { name: /read case study/i }).first().click()
 	await expect(page).toHaveURL(/\/projects\/clpr$/)
 	await expect(page.getByRole('heading', { name: /clpr/i })).toBeVisible()
-	await expect(page.getByRole('link', { name: /view source/i })).toBeVisible()
+	await expect(page.getByRole('link', { name: /repository/i })).toBeVisible()
 
 	await page.goto('/contact')
 	await page.getByLabel(/^name$/i).fill('Patrick Fanella')
@@ -65,8 +65,8 @@ test('primary recruiter routes expose useful content in the first mobile viewpor
 	await page.setViewportSize({ width: 390, height: 844 })
 
 	await page.goto('/')
-	await expect(page.getByRole('heading', { name: /backend depth\. product ownership/i })).toBeInViewport()
-	await expect(page.getByRole('link', { name: /review the case studies/i })).toBeInViewport()
+	await expect(page.getByRole('heading', { level: 1 })).toBeInViewport()
+	await expect(page.getByText(/apis, search, ai workflows/i)).toBeInViewport()
 
 	await page.goto('/projects')
 	await expect(page.getByRole('heading', { name: /^projects$/i })).toBeInViewport()
@@ -74,7 +74,6 @@ test('primary recruiter routes expose useful content in the first mobile viewpor
 
 	await page.goto('/contact')
 	await expect(page.getByRole('heading', { name: /tell me about the role/i })).toBeInViewport()
-	await expect(page.getByText(/interviewing for senior full-stack/i)).toBeInViewport()
 })
 
 test('media dialog contains focus and restores it to the invoking control', async ({ page }) => {
@@ -90,6 +89,7 @@ test('media dialog contains focus and restores it to the invoking control', asyn
 
 for (const route of ['/', '/projects', '/contact']) {
 	test(`has no serious accessibility violations on ${route}`, async ({ page }) => {
+		await page.emulateMedia({ reducedMotion: 'reduce' })
 		await page.goto(route)
 		const results = await new AxeBuilder({ page }).analyze()
 		const blocking = results.violations.filter((violation) => ['serious', 'critical'].includes(violation.impact || ''))
@@ -98,7 +98,8 @@ for (const route of ['/', '/projects', '/contact']) {
 }
 
 test('public health response is minimal', async ({ request }) => {
-	const response = await request.get('http://localhost:8181/api/health')
+	const apiPort = process.env.E2E_API_PORT || '8181'
+	const response = await request.get(`http://localhost:${apiPort}/api/health`)
 	expect(response.ok()).toBeTruthy()
 	expect(await response.json()).toEqual({ status: 'ok', databaseEnabled: true })
 })

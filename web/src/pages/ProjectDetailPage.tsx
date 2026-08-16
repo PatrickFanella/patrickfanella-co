@@ -38,7 +38,7 @@ export function ProjectDetailPage() {
   const { project, status, error, retry } = useProject(slug)
   const siteUrl = getSiteUrl()
   const metaCardClass =
-    'flex items-baseline gap-3 border-2 border-stroke bg-surface px-5 pt-[calc(0.75rem+0.5px)] pb-[calc(0.75rem-0.5px)] text-ink-soft'
+    'flex items-baseline gap-3 border-2 border-stroke bg-surface px-5 py-3 text-ink-soft'
 
   if (status === 'loading') {
     return (
@@ -121,14 +121,11 @@ export function ProjectDetailPage() {
   }
 
   if (project.kind === 'tool') {
-    return <Navigate replace to="/archive#tools" />
+    return <Navigate replace to="/tools" />
   }
 
-  const projectKindLabel = project.classification === 'flagship'
-    ? 'Flagship case study'
-    : project.classification === 'experiment'
-      ? 'Experiment'
-      : 'Archive'
+  const isHighlight = project.kind === 'highlight'
+  const projectKindLabel = isHighlight ? 'Project highlight' : 'Case study'
 
   return (
     <section className={pageSectionClass}>
@@ -141,7 +138,6 @@ export function ProjectDetailPage() {
             : project.media[0]?.src}
         imageAlt={`${project.title} case study by Patrick Fanella`}
         path={`/projects/${project.slug}`}
-        robots={project.classification === 'flagship' ? 'index,follow' : 'noindex,follow'}
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'CreativeWork',
@@ -156,7 +152,7 @@ export function ProjectDetailPage() {
           name: project.title,
             url: `${siteUrl}/projects/${project.slug}`,
         }}
-        title={flagshipSeoTitles[project.slug] || project.title}
+        title={project.title}
         type="article"
       />
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b-2 border-stroke pb-10 mb-8">
@@ -177,15 +173,9 @@ export function ProjectDetailPage() {
             </p>
             <p className={metaCardClass}>
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Period
+                Year
               </span>
-              <span className="text-[1.05rem] text-heading">{project.periodLabel || project.year}</span>
-            </p>
-            <p className={metaCardClass}>
-              <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Status
-              </span>
-              <span className="text-[1.05rem] text-heading">{project.deliveryStatus || projectKindLabel}</span>
+              <span className="text-[1.05rem] text-heading">{project.year}</span>
             </p>
           </div>
 
@@ -193,12 +183,12 @@ export function ProjectDetailPage() {
             <div className="mt-5 flex flex-wrap gap-4 border-t-2 border-stroke pt-5">
               {project.repoUrl ? (
                 <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">
-                  View source ↗
+                  Repository ↗
                 </a>
               ) : null}
               {project.liveUrl ? (
                 <a className={textLinkClass} href={project.liveUrl} rel="noreferrer" target="_blank">
-                  Open {project.title} ↗
+                  Live Site ↗
                 </a>
               ) : null}
             </div>
@@ -216,9 +206,9 @@ export function ProjectDetailPage() {
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.8fr)] lg:items-start">
         <article className="pr-4 lg:pr-8">
-          <SectionLabel>Problem and ownership</SectionLabel>
+          <SectionLabel>Overview</SectionLabel>
           <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-            {flagshipProblemHeadings[project.slug] || 'The problem this project explored.'}
+            What I built and why.
           </h2>
           <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft">
             {project.description}
@@ -226,7 +216,7 @@ export function ProjectDetailPage() {
         </article>
 
         <article className={`${surfaceCardClass} bg-surface p-8`}>
-          <p className={monoLabelClass}>What I shipped</p>
+          <p className={monoLabelClass}>Key outcomes</p>
           <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft">
             {project.highlights.map((highlight, index) => (
               <li
@@ -247,18 +237,18 @@ export function ProjectDetailPage() {
             <div>
               <SectionLabel>Architecture</SectionLabel>
               <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                Decisions and tradeoffs.
+                Technical decisions that mattered.
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
-              Why the system is built this way, including the constraints each choice introduced.
+              The key architecture decisions behind the shipped product.
             </p>
           </div>
 
           <div className="grid gap-5 md:grid-cols-3">
             {project.architecture.map((item, index) => (
               <article key={item} className={`${surfaceCardClass} bg-panel p-6`}>
-                <p className={monoLabelClass}>{`Decision ${index + 1}`}</p>
+                <p className={monoLabelClass}>{`Choice ${index + 1}`}</p>
                 <p className="mt-4 text-[1.02rem] leading-relaxed text-ink-soft">{item}</p>
               </article>
             ))}
@@ -272,11 +262,11 @@ export function ProjectDetailPage() {
             <div>
               <SectionLabel>Supporting media</SectionLabel>
               <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                See it working.
+                Screens and diagrams.
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
-              Product captures and architecture diagrams showing the implemented system.
+              Architecture diagrams, interface captures, and supporting visuals for the build.
             </p>
           </div>
 
@@ -289,7 +279,7 @@ export function ProjectDetailPage() {
           <div>
             <SectionLabel>Lessons learned</SectionLabel>
             <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-              What I learned.
+              What held up, and what I'd change.
             </h2>
           </div>
 
@@ -304,22 +294,10 @@ export function ProjectDetailPage() {
         </section>
       ) : null}
 
-      {project.classification === 'flagship' ? (
-        <section className={`${surfaceCardClass} mt-16 grid gap-6 bg-panel p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end`} aria-labelledby="case-study-contact-heading">
-          <div>
-            <SectionLabel>Work together</SectionLabel>
-            <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading" id="case-study-contact-heading">Discuss this work.</h2>
-            <p className="mt-4 max-w-[58ch] leading-relaxed text-ink-soft">Building a product with similar backend, search, data, or workflow challenges? I’d be glad to discuss the tradeoffs and hear about the role.</p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Link className={primaryButtonClass} to="/contact">Discuss a role</Link>
-            <a className={secondaryButtonClass} download="Patrick_Fanella_Resume.pdf" href="/assets/patrick_fanella_resume.pdf">Download résumé</a>
-          </div>
-        </section>
-      ) : null}
-
-      <div className="mt-10 border-t-2 border-stroke pt-8">
-        <Link className={textLinkClass} to="/projects">← Back to Projects</Link>
+      <div className="mt-16 border-t-2 border-stroke pt-8">
+        <Link className={textLinkClass} to="/projects">
+          ← Back to Projects
+        </Link>
       </div>
     </section>
   )

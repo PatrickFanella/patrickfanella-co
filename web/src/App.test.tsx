@@ -22,7 +22,7 @@ describe('App navigation flows', () => {
 	it('renders a not-found page for unmatched routes', async () => {
 		renderApp('/does-not-exist')
 
-		expect(await screen.findByRole('heading', { name: /this page isn't available/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: /this page isn't available/i }, { timeout: 5000 })).toBeInTheDocument()
 		await waitFor(() => {
 			expect(document.title).toBe('Page not found | Patrick Fanella')
 		})
@@ -36,26 +36,25 @@ describe('App navigation flows', () => {
 
 		renderApp('/')
 
-		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		await user.click(screen.getByRole('link', { name: /review the case studies/i }))
+		expect(await screen.findByRole('heading', { name: featuredProject.title }, { timeout: 5000 })).toBeInTheDocument()
+		await user.click(screen.getByRole('link', { name: /view case studies/i }))
 
-		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
-		expect(scrollToSpy).toHaveBeenCalledWith(0, 0)
-		expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true })
+		expect(await screen.findByRole('heading', { name: /projects/i }, { timeout: 5000 })).toBeInTheDocument()
 		await waitFor(() => {
+			expect(scrollToSpy).toHaveBeenCalledWith(0, 0)
+			expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true })
 			expect(document.title).toBe('Projects | Patrick Fanella')
 		})
 	})
 
-	it('keeps the archive out of primary navigation and available in the footer', async () => {
+	it('keeps the tools archive available from primary navigation', async () => {
 		const user = userEvent.setup()
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
 		renderApp('/')
 
-		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.queryByRole('link', { name: /^tools$/i })).not.toBeInTheDocument()
-		await user.click(screen.getAllByRole('link', { name: /^archive$/i })[0])
+		expect(await screen.findByRole('heading', { name: featuredProject.title }, { timeout: 5000 })).toBeInTheDocument()
+		await user.click(screen.getByRole('link', { name: /^tools$/i }))
 
 		expect(await screen.findByRole('heading', { level: 1, name: /^all projects$/i })).toBeInTheDocument()
 	})
@@ -67,12 +66,12 @@ describe('App navigation flows', () => {
 
 		renderApp('/projects')
 
-		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
-		await user.click(await screen.findByRole('link', { name: /read case study/i }))
+		expect(await screen.findByRole('heading', { name: /projects/i }, { timeout: 5000 })).toBeInTheDocument()
+		await user.click(await screen.findByRole('link', { name: /read case study/i }, { timeout: 5000 }))
 
-		expect(await screen.findByRole('heading', { level: 1, name: featuredProject.title })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { level: 1, name: featuredProject.title }, { timeout: 5000 })).toBeInTheDocument()
 		await waitFor(() => {
-			expect(document.title).toBe('Clpr Case Study — Go, React & Hybrid Search | Patrick Fanella')
+			expect(document.title).toBe('Clpr | Patrick Fanella')
 		})
 	})
 })

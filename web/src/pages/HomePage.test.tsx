@@ -27,8 +27,8 @@ describe('HomePage', () => {
 		expect(document.title).toBe('Patrick Fanella | Senior Full-Stack / Backend Engineer')
 		expect(screen.queryByRole('heading', { name: 'Internet-ID' })).not.toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
-		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
-		expect(screen.queryByText(/886k/i)).not.toBeInTheDocument()
+		expect(screen.getByRole('link', { name: /browse the archive/i })).toHaveAttribute('href', '/projects')
+		expect(screen.getByRole('img', { name: /886k/i })).toBeInTheDocument()
 	})
 
 	it('renders the full selected project collection without a three-card cap', async () => {

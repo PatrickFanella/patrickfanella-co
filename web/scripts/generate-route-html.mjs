@@ -99,7 +99,9 @@ function createHtmlDocument({
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeHtml(description)}" />
@@ -241,7 +243,7 @@ function getProjectPageDefinition(siteUrl, assetTags, project) {
       imageAlt,
       imageUrl: toAbsoluteUrl(siteUrl, imagePath),
       ogType: 'article',
-      robots: project.classification === 'flagship' ? 'index,follow' : 'noindex,follow',
+      robots: isFlagship ? 'index,follow' : 'noindex,follow',
       title: `${project.title} | ${siteName}`,
       url: canonicalUrl,
       structuredData: [

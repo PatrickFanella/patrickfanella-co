@@ -10,7 +10,7 @@ import {
   textLinkClass,
 } from '../lib/styles'
 
-const resumePath = '/assets/patrick_fanella_resume.pdf'
+const resumePath = '/assets/patrick_fanella_resume.pdf?v=871a50592b3d'
 
 export function ResumePage() {
   return (

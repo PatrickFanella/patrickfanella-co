@@ -2,6 +2,9 @@
 **/dist
 **/.vite
 **/coverage
+web/.lighthouseci
+web/playwright-report
+web/test-results
 .git
 .gitignore
 .env

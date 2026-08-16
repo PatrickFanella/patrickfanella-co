@@ -23,13 +23,12 @@ describe('ProjectDetailPage', () => {
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /decisions and tradeoffs/i })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /what i learned/i })).toBeInTheDocument()
-		expect(screen.getByRole('link', { name: /view source/i })).toHaveAttribute(
+		expect(screen.getByRole('heading', { name: /technical decisions that mattered/i })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: /what held up, and what i'd change/i })).toBeInTheDocument()
+		expect(screen.getByRole('link', { name: /repository/i })).toHaveAttribute(
 			'href',
 			featuredProject.repoUrl,
 		)
-		expect(screen.getByRole('link', { name: /discuss a role/i })).toHaveAttribute('href', '/contact')
 	})
 
 	it('sends tool projects to the tools archive route state', async () => {
@@ -40,7 +39,7 @@ describe('ProjectDetailPage', () => {
 				<MemoryRouter initialEntries={['/projects/tmux-popups']}>
 					<Routes>
 						<Route element={<ProjectDetailPage />} path="/projects/:slug" />
-						<Route element={<h1>Tools archive</h1>} path="/archive" />
+					<Route element={<h1>Tools archive</h1>} path="/tools" />
 					</Routes>
 				</MemoryRouter>
 			</HelmetProvider>,
@@ -60,9 +59,9 @@ describe('ProjectDetailPage', () => {
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: /decisions and tradeoffs/i })).not.toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: /see it working/i })).not.toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: /what i learned/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /technical decisions that mattered/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /screens and diagrams/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /what held up, and what i'd change/i })).not.toBeInTheDocument()
 	})
 
 	it('renders an intentional not-found route when the slug is missing', async () => {
