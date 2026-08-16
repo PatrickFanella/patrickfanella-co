@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
-import { projectsFixture, toolProject } from '../test/fixtures'
+import { featuredProject, projectsFixture, toolProject } from '../test/fixtures'
 import { renderInRouter } from '../test/renderWithRouter'
 import { ProjectsPage } from './ProjectsPage'
 
@@ -26,6 +26,19 @@ describe('ProjectsPage', () => {
 		expect(screen.queryByText('Internet-ID')).not.toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
 		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
+	})
+
+	it('renders every selected flagship project', async () => {
+		const selectedProjects = Array.from({ length: 7 }, (_, index) => ({
+			...featuredProject,
+			slug: `selected-${index + 1}`,
+			title: `Selected Project ${index + 1}`,
+		}))
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue(selectedProjects)
+
+		renderInRouter(<ProjectsPage />, '/projects')
+
+		expect(await screen.findByRole('heading', { name: 'Selected Project 7' })).toBeInTheDocument()
 	})
 
 	it('renders an intentional empty-archive state when the API returns no projects', async () => {

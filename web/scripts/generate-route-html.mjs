@@ -15,6 +15,7 @@ const defaultDescription =
   'Patrick Fanella is a senior full-stack and backend engineer building reliable products with Go, React, TypeScript, Python, and PostgreSQL.'
 const resumeDescription = "View or download Patrick Fanella's resume: senior full-stack and backend engineer specializing in Go, React, PostgreSQL, and reliable product systems."
 const fallbackImagePath = '/assets/social/patrick-fanella-portfolio-1200x630.png'
+const bespokeSocialImageSlugs = new Set(['clpr', 'patchwork', 'hasanara'])
 
 function readEnvValue(source, key) {
   const line = source
@@ -224,9 +225,11 @@ function getContactPageDefinition(siteUrl, assetTags) {
 
 function getProjectPageDefinition(siteUrl, assetTags, project) {
   const canonicalUrl = `${siteUrl}/projects/${project.slug}`
-  const imagePath = project.classification === 'flagship'
+  const imagePath = bespokeSocialImageSlugs.has(project.slug)
     ? `/assets/social/${project.slug}-1200x630.png`
-    : project.media?.[0]?.src || fallbackImagePath
+    : project.classification === 'flagship'
+      ? fallbackImagePath
+      : project.media?.[0]?.src || fallbackImagePath
   const imageAlt = project.media?.[0]?.alt || `${project.title} supporting visual`
   const keywordsSource = ensureArray(project.stack).length > 0 ? ensureArray(project.stack) : ensureArray(project.tags)
 

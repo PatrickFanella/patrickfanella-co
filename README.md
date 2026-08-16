@@ -1,6 +1,6 @@
 # Patrick Fanella portfolio
 
-The source for [patrickfanella.co](https://patrickfanella.co), a focused hiring portfolio for a senior full-stack / backend engineer. The primary journey presents three evidence-bounded case studies—Clpr, Patchwork, and HasanAra—while older work remains publicly verifiable in a footer-only, `noindex` archive.
+The source for [patrickfanella.co](https://patrickfanella.co), a focused hiring portfolio for a senior full-stack / backend engineer. The primary journey presents a curated set of evidence-bounded projects, while older work remains publicly verifiable in a footer-only, `noindex` archive.
 
 The application combines a React frontend, Go API, PostgreSQL content layer, static route documents, and an Nginx production image. Delivery status is explicit; the site does not imply that pre-alpha or active-development work is production-ready.
 

@@ -31,6 +31,8 @@ const flagshipSeoTitles: Record<string, string> = {
   hasanara: 'HasanAra Case Study — GPU Transcription & Search',
 }
 
+const bespokeSocialImageSlugs = new Set(['clpr', 'patchwork', 'hasanara'])
+
 export function ProjectDetailPage() {
   const { slug } = useParams()
   const { project, status, error, retry } = useProject(slug)
@@ -132,7 +134,11 @@ export function ProjectDetailPage() {
     <section className={pageSectionClass}>
       <Seo
         description={project.summary}
-        image={project.classification === 'flagship' ? `/assets/social/${project.slug}-1200x630.png` : project.media[0]?.src}
+        image={bespokeSocialImageSlugs.has(project.slug)
+          ? `/assets/social/${project.slug}-1200x630.png`
+          : project.classification === 'flagship'
+            ? '/assets/social/patrick-fanella-portfolio-1200x630.png'
+            : project.media[0]?.src}
         imageAlt={`${project.title} case study by Patrick Fanella`}
         path={`/projects/${project.slug}`}
         robots={project.classification === 'flagship' ? 'index,follow' : 'noindex,follow'}

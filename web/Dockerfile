@@ -25,6 +25,8 @@ FROM nginx:1.27-alpine
 COPY web/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /workspace/web/dist /usr/share/nginx/html
 
+RUN chmod -R a+rX /usr/share/nginx/html
+
 EXPOSE 80
 
 HEALTHCHECK --interval=15s --timeout=5s --retries=5 CMD wget -q -O - http://127.0.0.1/healthz >/dev/null 2>&1 || exit 1

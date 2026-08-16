@@ -70,7 +70,7 @@ test('primary recruiter routes expose useful content in the first mobile viewpor
 
 	await page.goto('/projects')
 	await expect(page.getByRole('heading', { name: /^projects$/i })).toBeInViewport()
-	await expect(page.getByText(/three projects showing/i)).toBeInViewport()
+	await expect(page.getByText(/projects showing production delivery/i)).toBeInViewport()
 
 	await page.goto('/contact')
 	await expect(page.getByRole('heading', { name: /tell me about the role/i })).toBeInViewport()

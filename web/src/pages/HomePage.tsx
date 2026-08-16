@@ -13,7 +13,7 @@ const focusAreas = ['Go APIs and services', 'React and TypeScript products', 'Po
 
 export function HomePage() {
   const { projects, status, error, retry } = useProjects()
-  const flagships = projects.filter((project) => project.classification === 'flagship').slice(0, 3)
+  const flagships = projects.filter((project) => project.classification === 'flagship')
 
   return (
     <>
@@ -36,7 +36,9 @@ export function HomePage() {
         <div>
           <SectionLabel>Senior Full-Stack / Backend</SectionLabel>
           <h1 className="mt-5 max-w-[13ch] font-display text-[clamp(3.2rem,8vw,7.6rem)] font-bold uppercase leading-[0.84] tracking-[-0.055em] text-heading">
-            Backend depth. <span className="text-accent-green">Product ownership.</span>
+            <span className="block">Backend depth.</span>{' '}
+            <span className="block text-accent-pink">User minded.</span>{' '}
+            <span className="block text-accent-green">Product ownership.</span>
           </h1>
           <p className="mt-6 max-w-[48ch] text-[1.08rem] leading-relaxed text-ink-soft sm:text-[1.2rem]">
             I build operational products from data model and API design through accessible React interfaces and production delivery—using Go, Python, TypeScript, PostgreSQL, search, and asynchronous workflows.
@@ -63,13 +65,13 @@ export function HomePage() {
           <div>
             <SectionLabel>Selected evidence</SectionLabel>
             <h2 className="mt-5 font-display text-[clamp(2.6rem,5vw,4.6rem)] font-bold uppercase leading-[0.9] tracking-[-0.04em] text-heading" id="featured-heading">
-              Three case studies.
+              Selected work.
             </h2>
           </div>
-          <p className="max-w-[38ch] text-ink-soft">Three projects showing production delivery, safety-conscious prototyping, and systems under active development.</p>
+          <p className="max-w-[38ch] text-ink-soft">Projects showing production delivery, user-minded design, and systems under active development.</p>
         </div>
 
-        {status === 'loading' ? <RouteState ariaLive="polite" description="Loading the three featured case studies." label="Loading" role="status" title="Loading featured work." /> : null}
+        {status === 'loading' ? <RouteState ariaLive="polite" description="Loading the selected case studies." label="Loading" role="status" title="Loading featured work." /> : null}
         {status === 'error' ? (
           <RouteState
             actions={<button className={secondaryButtonClass} onClick={retry} type="button">Try again</button>}
@@ -80,7 +82,7 @@ export function HomePage() {
           />
         ) : null}
         {status === 'success' ? (
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {flagships.map((project, index) => <ProjectCard key={project.slug} order={index + 1} project={project} />)}
           </div>
         ) : null}

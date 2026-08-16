@@ -12,7 +12,7 @@ describe('HomePage', () => {
 
 		renderInRouter(<HomePage />)
 
-		expect(screen.getByRole('status')).toHaveTextContent(/loading the three featured case studies/i)
+		expect(screen.getByRole('status')).toHaveTextContent(/loading the selected case studies/i)
 	})
 
 	it('renders featured projects from the API response', async () => {
@@ -21,7 +21,7 @@ describe('HomePage', () => {
 		renderInRouter(<HomePage />)
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /backend depth\. product ownership/i })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: /backend depth\. user minded\. product ownership\./i })).toBeInTheDocument()
 		expect(screen.getByRole('link', { name: /review the case studies/i })).toHaveAttribute('href', '/projects')
 		expect(screen.getByRole('link', { name: /discuss a role/i })).toHaveAttribute('href', '/contact')
 		expect(document.title).toBe('Patrick Fanella | Senior Full-Stack / Backend Engineer')
@@ -29,6 +29,19 @@ describe('HomePage', () => {
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
 		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
 		expect(screen.queryByText(/886k/i)).not.toBeInTheDocument()
+	})
+
+	it('renders the full selected project collection without a three-card cap', async () => {
+		const selectedProjects = Array.from({ length: 7 }, (_, index) => ({
+			...featuredProject,
+			slug: `selected-${index + 1}`,
+			title: `Selected Project ${index + 1}`,
+		}))
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue(selectedProjects)
+
+		renderInRouter(<HomePage />)
+
+		expect(await screen.findByRole('heading', { name: 'Selected Project 7' })).toBeInTheDocument()
 	})
 
 	it('renders a recoverable error state when the featured query fails', async () => {

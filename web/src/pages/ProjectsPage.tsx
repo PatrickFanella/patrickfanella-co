@@ -8,12 +8,12 @@ import { useProjects } from '../lib/useProjects'
 
 export function ProjectsPage() {
   const { projects, status, error, retry } = useProjects()
-  const flagships = projects.filter((project) => project.classification === 'flagship').slice(0, 3)
+  const flagships = projects.filter((project) => project.classification === 'flagship')
 
   return (
     <section className={`${pageSectionClass} pt-3`}>
       <Seo
-        description="See how Patrick Fanella built and shipped Clpr, Patchwork, and HasanAra across Go, Python, TypeScript, React, PostgreSQL, search, and asynchronous workflows."
+        description="Explore Patrick Fanella's selected backend, product, community, graph, and workflow projects across Go, Python, TypeScript, React, PostgreSQL, Unity, and distributed systems."
         image="/assets/social/patrick-fanella-portfolio-1200x630.png"
         path="/projects"
         title="Projects"
@@ -21,7 +21,7 @@ export function ProjectsPage() {
       <div className="mb-10 border-b-2 border-stroke pb-9">
         <SectionLabel>Selected work</SectionLabel>
         <h1 className={`${pageTitleClass} mt-5 uppercase`}>Projects</h1>
-        <p className={pageIntroClass}>Three projects showing how I design backend systems, turn them into usable products, and carry them through testing and deployment.</p>
+        <p className={pageIntroClass}>Selected projects showing how I design backend systems, turn them into usable products, and carry them through testing and deployment.</p>
       </div>
 
       {status === 'loading' ? <RouteState ariaLive="polite" description="Loading the selected case studies." label="Loading" role="status" title="Project index incoming." /> : null}
@@ -30,7 +30,7 @@ export function ProjectsPage() {
       ) : null}
       {status === 'success' && flagships.length === 0 ? <RouteState description="No flagship case studies are currently published." label="No projects" title="The selected work index is empty." /> : null}
       {status === 'success' && flagships.length > 0 ? (
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {flagships.map((project, index) => <ProjectCard key={project.slug} order={index + 1} project={project} />)}
         </div>
       ) : null}
