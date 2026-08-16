@@ -15,6 +15,7 @@ type Project struct {
 	Title          string         `json:"title"`
 	Kind           string         `json:"kind"`
 	Classification string         `json:"classification"`
+	Category       string         `json:"category"`
 	DeliveryStatus string         `json:"deliveryStatus"`
 	PeriodLabel    string         `json:"periodLabel"`
 	Summary        string         `json:"summary"`

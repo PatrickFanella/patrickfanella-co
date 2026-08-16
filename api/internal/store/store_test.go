@@ -51,18 +51,19 @@ func TestScanProjectDecodesMediaPayload(t *testing.T) {
 		*dest[1].(*string) = "Clpr"
 		*dest[2].(*string) = ""
 		*dest[3].(*string) = ""
-		*dest[4].(*string) = "Production"
-		*dest[5].(*string) = "2025-present"
-		*dest[6].(*string) = "Summary"
-		*dest[7].(*string) = "Description"
-		*dest[8].(*string) = "Full stack developer"
-		*dest[9].(*int) = 2025
-		*dest[10].(*bool) = true
-		*dest[13].(*[]string) = []string{"Go", "React"}
-		*dest[14].(*[]string) = []string{"Highlight"}
-		*dest[15].(*[]string) = []string{"Architecture"}
-		*dest[16].(*[]string) = []string{"Lesson"}
-		*dest[17].(*[]byte) = []byte(`[{"src":"/assets/projects/clpr-overview.svg","alt":"Architecture diagram"}]`)
+		*dest[4].(*string) = "Community & Media"
+		*dest[5].(*string) = "Production"
+		*dest[6].(*string) = "2025-present"
+		*dest[7].(*string) = "Summary"
+		*dest[8].(*string) = "Description"
+		*dest[9].(*string) = "Full stack developer"
+		*dest[10].(*int) = 2025
+		*dest[11].(*bool) = true
+		*dest[14].(*[]string) = []string{"Go", "React"}
+		*dest[15].(*[]string) = []string{"Highlight"}
+		*dest[16].(*[]string) = []string{"Architecture"}
+		*dest[17].(*[]string) = []string{"Lesson"}
+		*dest[18].(*[]byte) = []byte(`[{"src":"/assets/projects/clpr-overview.svg","alt":"Architecture diagram"}]`)
 		return nil
 	})
 	if err != nil {

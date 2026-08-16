@@ -32,7 +32,7 @@ describe('ProjectDetailPage', () => {
 		expect(screen.getByRole('link', { name: /discuss a role/i })).toHaveAttribute('href', '/contact')
 	})
 
-	it('sends tool projects to the tools archive route state', async () => {
+	it('redirects tool projects to the all projects page', async () => {
 		vi.spyOn(api, 'fetchProject').mockResolvedValue(toolProject)
 
 		render(
@@ -40,13 +40,13 @@ describe('ProjectDetailPage', () => {
 				<MemoryRouter initialEntries={['/projects/tmux-popups']}>
 					<Routes>
 						<Route element={<ProjectDetailPage />} path="/projects/:slug" />
-						<Route element={<h1>Tools archive</h1>} path="/archive" />
+						<Route element={<h1>All projects</h1>} path="/archive" />
 					</Routes>
 				</MemoryRouter>
 			</HelmetProvider>,
 		)
 
-		expect(await screen.findByRole('heading', { name: /tools archive/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: /all projects/i })).toBeInTheDocument()
 	})
 
 	it('omits optional rich-content sections when the project does not provide them', async () => {

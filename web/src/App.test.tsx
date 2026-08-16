@@ -28,7 +28,7 @@ describe('App navigation flows', () => {
 		})
 	})
 
-	it('navigates from the home page to the projects archive', async () => {
+	it('navigates from the home page to the projects page', async () => {
 		const user = userEvent.setup()
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 		const scrollToSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {})
@@ -37,7 +37,7 @@ describe('App navigation flows', () => {
 		renderApp('/')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		await user.click(screen.getByRole('link', { name: /review the case studies/i }))
+		await user.click(screen.getAllByRole('link', { name: /review the case studies/i })[0])
 
 		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
 		expect(scrollToSpy).toHaveBeenCalledWith(0, 0)
@@ -47,7 +47,7 @@ describe('App navigation flows', () => {
 		})
 	})
 
-	it('keeps the archive out of primary navigation and available in the footer', async () => {
+	it('keeps all projects out of primary navigation and available in the footer', async () => {
 		const user = userEvent.setup()
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
@@ -57,10 +57,10 @@ describe('App navigation flows', () => {
 		expect(screen.queryByRole('link', { name: /^tools$/i })).not.toBeInTheDocument()
 		await user.click(screen.getAllByRole('link', { name: /^archive$/i })[0])
 
-		expect(await screen.findByRole('heading', { level: 1, name: /^archive$/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { level: 1, name: /^all projects$/i })).toBeInTheDocument()
 	})
 
-	it('navigates from the projects archive to a project detail route', async () => {
+	it('navigates from the all projects page to a project detail route', async () => {
 		const user = userEvent.setup()
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 		vi.spyOn(api, 'fetchProject').mockResolvedValue(featuredProject)

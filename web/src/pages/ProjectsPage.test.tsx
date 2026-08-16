@@ -28,7 +28,7 @@ describe('ProjectsPage', () => {
 		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
 	})
 
-	it('renders an intentional empty-archive state when the API returns no projects', async () => {
+	it('renders an intentional empty state when the API returns no projects', async () => {
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue([])
 
 		renderInRouter(<ProjectsPage />, '/projects')

@@ -80,9 +80,15 @@ export function HomePage() {
           />
         ) : null}
         {status === 'success' ? (
-          <div className="grid gap-6 lg:grid-cols-3">
-            {flagships.map((project, index) => <ProjectCard key={project.slug} order={index + 1} project={project} />)}
-          </div>
+          <>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {flagships.map((project, index) => <ProjectCard key={project.slug} order={index + 1} project={project} />)}
+            </div>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link className={primaryButtonClass} to="/archive">View all projects</Link>
+              <Link className={secondaryButtonClass} to="/projects">Review the case studies</Link>
+            </div>
+          </>
         ) : null}
 
       </section>

@@ -22,12 +22,12 @@ describe('HomePage', () => {
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: /backend depth\. product ownership/i })).toBeInTheDocument()
-		expect(screen.getByRole('link', { name: /review the case studies/i })).toHaveAttribute('href', '/projects')
+		expect(screen.getAllByRole('link', { name: /review the case studies/i })[0]).toHaveAttribute('href', '/projects')
 		expect(screen.getByRole('link', { name: /discuss a role/i })).toHaveAttribute('href', '/contact')
 		expect(document.title).toBe('Patrick Fanella | Senior Full-Stack / Backend Engineer')
 		expect(screen.queryByRole('heading', { name: 'Internet-ID' })).not.toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
-		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
+		expect(screen.getByRole('link', { name: /view all projects/i })).toHaveAttribute('href', '/archive')
 		expect(screen.queryByText(/886k/i)).not.toBeInTheDocument()
 	})
 

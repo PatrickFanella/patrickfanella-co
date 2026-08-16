@@ -8,22 +8,26 @@ import { getErrorMessage } from '../lib/errors'
 import { monoLabelClass, pageIntroClass, pageSectionClass, pageTitleClass, secondaryButtonClass, surfaceCardClass, textLinkClass } from '../lib/styles'
 import { useProjects } from '../lib/useProjects'
 
-function ArchiveGroup({ id, title, description, projects }: { id: string; title: string; description: string; projects: Project[] }) {
+const categoryOrder = [
+  'AI & Automation',
+  'Data & Search',
+  'Community & Media',
+  'Platform & Infrastructure',
+  'Developer Tools',
+]
+
+function CategoryGroup({ category, projects }: { category: string; projects: Project[] }) {
   if (projects.length === 0) return null
 
   return (
-    <section className="grid gap-5" id={id} aria-labelledby={`${id}-heading`}>
+    <section className="grid gap-5" aria-labelledby={`category-${category.replace(/\s+/g, '-').toLowerCase()}-heading`}>
       <div>
-        <h2 className={monoLabelClass} id={`${id}-heading`}>{title}</h2>
-        <p className="mt-3 max-w-[58ch] text-ink-soft">{description}</p>
+        <h2 className={monoLabelClass} id={`category-${category.replace(/\s+/g, '-').toLowerCase()}-heading`}>{category}</h2>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         {projects.map((project) => (
           <article className={`${surfaceCardClass} grid gap-4 p-5`} key={project.slug}>
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <h3 className="font-display text-2xl font-bold text-heading">{project.title}</h3>
-              <span className="font-mono text-xs uppercase tracking-[0.12em] text-accent-pink">{project.deliveryStatus || title}</span>
-            </div>
+            <h3 className="font-display text-2xl font-bold text-heading">{project.title}</h3>
             <p className="text-sm leading-relaxed text-ink-soft">{project.summary}</p>
             <div className="flex flex-wrap gap-4">
               {project.repoUrl ? <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">Repository ↗</a> : <Link className={textLinkClass} to={`/projects/${project.slug}`}>Project details →</Link>}
@@ -38,26 +42,30 @@ function ArchiveGroup({ id, title, description, projects }: { id: string; title:
 export function ArchivePage() {
   const { projects, status, error, retry } = useProjects()
   const nonFlagships = projects.filter((project) => project.classification !== 'flagship')
-  const experiments = nonFlagships.filter((project) => project.classification === 'experiment' && project.kind !== 'tool')
-  const archived = nonFlagships.filter((project) => project.classification === 'archive' && project.kind !== 'tool')
-  const tools = nonFlagships.filter((project) => project.kind === 'tool')
+
+  const grouped = new Map<string, Project[]>()
+  for (const project of nonFlagships) {
+    const cat = project.category || 'Other'
+    if (!grouped.has(cat)) grouped.set(cat, [])
+    grouped.get(cat)!.push(project)
+  }
 
   return (
     <section className={`${pageSectionClass} pt-3`}>
-      <Seo description="Earlier projects, technical experiments, and small utilities from Patrick Fanella." path="/archive" robots="noindex,follow" title="Archive" />
+      <Seo description="Every project Patrick Fanella has built, organized by domain." path="/archive" robots="noindex,follow" title="All Projects" />
       <div className="mb-10 border-b-2 border-stroke pb-9">
         <SectionLabel>Supporting evidence</SectionLabel>
-        <h1 className={`${pageTitleClass} mt-5 uppercase`}>Archive</h1>
-        <p className={pageIntroClass}>Earlier projects, technical experiments, and small utilities. Kept here for context; not part of the primary case-study set.</p>
+        <h1 className={`${pageTitleClass} mt-5 uppercase`}>All projects</h1>
+        <p className={pageIntroClass}>Every project I've built, organized by domain. Flagship case studies are on the Projects page.</p>
       </div>
 
-      {status === 'loading' ? <RouteState ariaLive="polite" description="Loading archived work." label="Loading" role="status" title="Archive incoming." /> : null}
-      {status === 'error' ? <RouteState actions={<button className={secondaryButtonClass} onClick={retry} type="button">Try again</button>} description={getErrorMessage(error, 'Please try again in a moment.')} label="Unavailable" role="alert" title="The archive could not be loaded." /> : null}
+      {status === 'loading' ? <RouteState ariaLive="polite" description="Loading all projects." label="Loading" role="status" title="Projects incoming." /> : null}
+      {status === 'error' ? <RouteState actions={<button className={secondaryButtonClass} onClick={retry} type="button">Try again</button>} description={getErrorMessage(error, 'Please try again in a moment.')} label="Unavailable" role="alert" title="The project index could not be loaded." /> : null}
       {status === 'success' ? (
         <div className="grid gap-14">
-          <ArchiveGroup description="Focused prototypes built to test one product or systems question. Current state: experiment." id="experiments" projects={experiments} title="Experiments" />
-          <ArchiveGroup description="Earlier product work retained for context. Current state: archived." id="projects-archive" projects={archived} title="Archived projects" />
-          <ArchiveGroup description="Small developer utilities and operational tools. Current state: archived or maintained as noted in the repository." id="tools" projects={tools} title="Tools" />
+          {categoryOrder.map((category) => (
+            <CategoryGroup key={category} category={category} projects={grouped.get(category) || []} />
+          ))}
         </div>
       ) : null}
     </section>

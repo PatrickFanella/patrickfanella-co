@@ -10,12 +10,23 @@ async function main() {
   const locations = [...sitemap.matchAll(/<loc>https?:\/\/[^/]+([^<]*)<\/loc>/g)].map((match) => match[1] || '/')
   const failures = []
 
+  for (const asset of ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png']) {
+    try {
+      await access(path.join(distDir, asset))
+    } catch {
+      failures.push(`missing favicon asset: ${asset}`)
+    }
+  }
+
   for (const route of locations) {
     const output = route === '/' ? path.join(distDir, 'index.html') : path.join(distDir, route.replace(/^\//, ''), 'index.html')
     try {
       await access(output)
       const html = await readFile(output, 'utf8')
       if (html.includes('noindex')) failures.push(`${route} is in the sitemap but marked noindex`)
+      if (!html.includes('href="/favicon.ico"')) failures.push(`${route} is missing the ICO favicon`)
+      if (!html.includes('href="/favicon.svg"')) failures.push(`${route} is missing the SVG favicon`)
+      if (!html.includes('href="/apple-touch-icon.png"')) failures.push(`${route} is missing the Apple touch icon`)
     } catch {
       failures.push(`${route} has no generated route document`)
     }
