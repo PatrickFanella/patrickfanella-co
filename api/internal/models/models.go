@@ -20,6 +20,7 @@ type Project struct {
 	PeriodLabel    string         `json:"periodLabel"`
 	Summary        string         `json:"summary"`
 	Description    string         `json:"description"`
+	Problem        string         `json:"problem"`
 	Role           string         `json:"role"`
 	Year           int            `json:"year"`
 	Stack          []string       `json:"stack"`

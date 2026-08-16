@@ -30,7 +30,8 @@ function CategoryGroup({ category, projects }: { category: string; projects: Pro
             <h3 className="font-display text-2xl font-bold text-heading">{project.title}</h3>
             <p className="text-sm leading-relaxed text-ink-soft">{project.summary}</p>
             <div className="flex flex-wrap gap-4">
-              {project.repoUrl ? <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">Repository ↗</a> : <Link className={textLinkClass} to={`/projects/${project.slug}`}>Project details →</Link>}
+              {project.repoUrl ? <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">Repository ↗</a> : null}
+              <Link className={textLinkClass} to={`/projects/${project.slug}`}>View project →</Link>
             </div>
           </article>
         ))}

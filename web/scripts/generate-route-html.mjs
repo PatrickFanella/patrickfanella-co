@@ -12,10 +12,20 @@ const seedPath = path.join(repoRoot, 'db', 'seed', 'portfolio.json')
 
 const siteName = 'Patrick Fanella'
 const defaultDescription =
-  'Patrick Fanella is a senior full-stack and backend engineer building reliable products with Go, React, TypeScript, Python, and PostgreSQL.'
+  'Patrick Fanella is a senior full-stack and backend engineer who builds operational products from data modeling and API design through React interfaces and production delivery.'
 const resumeDescription = "View or download Patrick Fanella's resume: senior full-stack and backend engineer specializing in Go, React, PostgreSQL, and reliable product systems."
 const fallbackImagePath = '/assets/social/patrick-fanella-portfolio-1200x630.png'
 const bespokeSocialImageSlugs = new Set(['clpr', 'patchwork', 'hasanara'])
+
+const flagshipSeoTitles = {
+  clpr: 'Clpr Case Study — Go, React & Hybrid Search',
+  patchwork: 'Patchwork Case Study — AT Protocol & Location Privacy',
+  hasanara: 'HasanAra Case Study — GPU Transcription & Search',
+  clustr: 'Clustr Case Study — Graph Analysis & Unity Client',
+  subcults: 'Subcults Case Study — Go, Maps & Community Infrastructure',
+  switchyard: 'SwitchYard Case Study — Go, React & Workflow Routing',
+  'subcult-os': 'Subcult OS Case Study — Go, React & Platform Foundations',
+}
 
 function readEnvValue(source, key) {
   const line = source
@@ -147,13 +157,23 @@ function getHomePageDefinition(siteUrl, assetTags) {
           '@type': 'Person',
           jobTitle: 'Senior Full-Stack and Backend Engineer',
           knowsAbout: [
-            'Go / Backend Architecture',
-            'React / TypeScript Interfaces',
-            'AI, Search, and Data Pipelines',
-            'Infrastructure / DevOps',
+            'Go APIs and services',
+            'React and TypeScript products',
+            'PostgreSQL and search',
+            'Delivery and operations',
           ],
           name: siteName,
-          sameAs: ['https://github.com/PatrickFanella', 'https://git.subcult.tv/PatrickFanella'],
+          email: 'mailto:fanella.patrick@gmail.com',
+          image: toAbsoluteUrl(siteUrl, fallbackImagePath),
+          jobLocation: {
+            '@type': 'Place',
+            name: 'Chicago or remote',
+          },
+          sameAs: [
+            'https://github.com/PatrickFanella',
+            'https://git.subcult.tv/PatrickFanella',
+            'https://linkedin.com/in/patrick-fanella',
+          ],
           url: siteUrl,
         },
       ],
@@ -168,9 +188,9 @@ function getProjectsPageDefinition(siteUrl, assetTags) {
     html: createHtmlDocument({
       assetTags,
       canonicalUrl,
-      description: "Browse Patrick Fanella's production case studies by stack, problem domain, and shipped system design.",
+      description: "Explore Patrick Fanella's selected backend, product, community, graph, and workflow projects across Go, Python, TypeScript, React, PostgreSQL, Unity, and distributed systems.",
       imageUrl: toAbsoluteUrl(siteUrl, fallbackImagePath),
-      title: `Projects | ${siteName}`,
+      title: `Projects — Senior Full-Stack & Backend Engineer | ${siteName}`,
       url: canonicalUrl,
     }),
     outputPath: path.join(distDir, 'projects', 'index.html'),
@@ -183,10 +203,10 @@ function getArchivePageDefinition(siteUrl, assetTags) {
     html: createHtmlDocument({
       assetTags,
       canonicalUrl,
-      description: 'Older projects, experiments, and tools retained for provenance.',
+      description: 'Every project Patrick Fanella has built, organized by domain. Flagship case studies are on the Projects page.',
       imageUrl: toAbsoluteUrl(siteUrl, fallbackImagePath),
       robots: 'noindex,follow',
-      title: `Archive | ${siteName}`,
+      title: `All Projects | ${siteName}`,
       url: canonicalUrl,
     }),
     outputPath: path.join(distDir, 'archive', 'index.html'),
@@ -201,7 +221,7 @@ function getResumePageDefinition(siteUrl, assetTags) {
       canonicalUrl,
       description: resumeDescription,
       imageUrl: toAbsoluteUrl(siteUrl, fallbackImagePath),
-      title: `Resume | ${siteName}`,
+      title: `Resume — Senior Full-Stack & Backend Engineer | ${siteName}`,
       url: canonicalUrl,
     }),
     outputPath: path.join(distDir, 'resume', 'index.html'),
@@ -214,9 +234,9 @@ function getContactPageDefinition(siteUrl, assetTags) {
     html: createHtmlDocument({
       assetTags,
       canonicalUrl,
-      description: 'Start a conversation with Patrick Fanella about backend, full stack, AI-driven, or real-time product work.',
+      description: 'Contact Patrick Fanella about senior full-stack or backend engineering roles in Chicago or remote.',
       imageUrl: toAbsoluteUrl(siteUrl, fallbackImagePath),
-      title: `Contact | ${siteName}`,
+      title: `Contact — Senior Full-Stack & Backend Engineer | ${siteName}`,
       url: canonicalUrl,
     }),
     outputPath: path.join(distDir, 'contact', 'index.html'),
@@ -227,11 +247,10 @@ function getProjectPageDefinition(siteUrl, assetTags, project) {
   const canonicalUrl = `${siteUrl}/projects/${project.slug}`
   const imagePath = bespokeSocialImageSlugs.has(project.slug)
     ? `/assets/social/${project.slug}-1200x630.png`
-    : project.classification === 'flagship'
-      ? fallbackImagePath
-      : project.media?.[0]?.src || fallbackImagePath
+    : fallbackImagePath
   const imageAlt = project.media?.[0]?.alt || `${project.title} supporting visual`
   const keywordsSource = ensureArray(project.stack).length > 0 ? ensureArray(project.stack) : ensureArray(project.tags)
+  const pageTitle = `${flagshipSeoTitles[project.slug] || project.title} | ${siteName}`
 
   return {
     html: createHtmlDocument({
@@ -242,7 +261,7 @@ function getProjectPageDefinition(siteUrl, assetTags, project) {
       imageUrl: toAbsoluteUrl(siteUrl, imagePath),
       ogType: 'article',
       robots: project.classification === 'flagship' ? 'index,follow' : 'noindex,follow',
-      title: `${project.title} | ${siteName}`,
+      title: pageTitle,
       url: canonicalUrl,
       structuredData: [
         {
@@ -252,6 +271,7 @@ function getProjectPageDefinition(siteUrl, assetTags, project) {
             '@type': 'Person',
             name: siteName,
           },
+          datePublished: project.year ? String(project.year) : undefined,
           description: project.summary,
           headline: project.title,
           image: imagePath ? [toAbsoluteUrl(siteUrl, imagePath)] : undefined,

@@ -18,6 +18,7 @@ export type Project = {
   periodLabel: string
   summary: string
   description: string
+  problem: string
   role: string
   year: number
   stack: string[]

@@ -13,7 +13,7 @@ describe('ProjectCard', () => {
 	})
 
 	it('shows a focused stack cue list instead of the full stack', () => {
-		renderInRouter(<ProjectCard density="featured" order={1} project={featuredProject} />)
+		renderInRouter(<ProjectCard order={1} project={featuredProject} />)
 
 		expect(screen.getByText(featuredProject.stack[0])).toBeInTheDocument()
 		expect(screen.getByText(featuredProject.stack[1])).toBeInTheDocument()

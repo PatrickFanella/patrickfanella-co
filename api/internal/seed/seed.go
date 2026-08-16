@@ -27,6 +27,7 @@ type Project struct {
 	PeriodLabel    string         `json:"periodLabel,omitempty"`
 	Summary        string         `json:"summary"`
 	Description    string         `json:"description"`
+	Problem        string         `json:"problem,omitempty"`
 	Role           string         `json:"role"`
 	Year           int            `json:"year"`
 	RepoURL        string         `json:"repoUrl,omitempty"`
@@ -143,8 +144,8 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 		var projectID int64
 		err = tx.QueryRow(
 			ctx,
-			`INSERT INTO projects (slug, title, kind, classification, category, delivery_status, period_label, summary, description, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
-			 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NULLIF($12, ''), NULLIF($13, ''), $14, $15, $16, $17, $18, $19)
+			`INSERT INTO projects (slug, title, kind, classification, category, delivery_status, period_label, summary, description, problem, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
+			 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NULLIF($13, ''), NULLIF($14, ''), $15, $16, $17, $18, $19, $20)
 			 ON CONFLICT (slug) DO UPDATE SET
 			   title = EXCLUDED.title,
 			   kind = EXCLUDED.kind,
@@ -154,6 +155,7 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			   period_label = EXCLUDED.period_label,
 			   summary = EXCLUDED.summary,
 			   description = EXCLUDED.description,
+			   problem = EXCLUDED.problem,
 			   role = EXCLUDED.role,
 			   year = EXCLUDED.year,
 			   repo_url = EXCLUDED.repo_url,
@@ -174,6 +176,7 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			periodLabel,
 			project.Summary,
 			project.Description,
+			project.Problem,
 			project.Role,
 			project.Year,
 			project.RepoURL,

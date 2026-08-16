@@ -18,7 +18,7 @@ export function ResumePage() {
       <Seo
         description="Download Patrick Fanella's one-page resume for senior full-stack and backend engineering roles."
         path="/resume"
-        title="Resume"
+        title="Resume — Senior Full-Stack & Backend Engineer"
       />
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.85fr)] lg:items-start border-b-2 border-stroke pb-12 mb-10">

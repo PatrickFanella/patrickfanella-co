@@ -27,6 +27,12 @@ export function HomePage() {
           jobTitle: 'Senior Full-Stack and Backend Engineer',
           knowsAbout: focusAreas,
           name: 'Patrick Fanella',
+          email: 'mailto:fanella.patrick@gmail.com',
+          image: `${getSiteUrl()}/assets/social/patrick-fanella-portfolio-1200x630.png`,
+          jobLocation: {
+            '@type': 'Place',
+            name: 'Chicago or remote',
+          },
           sameAs: ['https://github.com/PatrickFanella', 'https://git.subcult.tv/PatrickFanella', 'https://linkedin.com/in/patrick-fanella'],
           url: getSiteUrl(),
         }}
@@ -41,12 +47,12 @@ export function HomePage() {
             <span className="block text-accent-green">Product ownership.</span>
           </h1>
           <p className="mt-6 max-w-[48ch] text-[1.08rem] leading-relaxed text-ink-soft sm:text-[1.2rem]">
-            I build operational products from data model and API design through accessible React interfaces and production delivery—using Go, Python, TypeScript, PostgreSQL, search, and asynchronous workflows.
+            I'm a senior full-stack and backend engineer. I build operational products from data model and API design through accessible React interfaces and production delivery—using Go, Python, TypeScript, PostgreSQL, search, and asynchronous workflows.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className={primaryButtonClass} to="/projects">Review the case studies</Link>
-            <Link className={secondaryButtonClass} to="/resume">Download my résumé</Link>
-            <Link className={textLinkClass} to="/contact">Discuss a role →</Link>
+            <Link className={primaryButtonClass} to="/contact">Discuss a role</Link>
+            <Link className={secondaryButtonClass} to="/projects">Review the case studies</Link>
+            <Link className={textLinkClass} to="/resume">Download my résumé</Link>
           </div>
         </div>
 
@@ -87,7 +93,7 @@ export function HomePage() {
               {flagships.map((project, index) => <ProjectCard key={project.slug} order={index + 1} project={project} />)}
             </div>
             <div className="mt-8">
-              <Link className={secondaryButtonClass} to="/archive">View all projects</Link>
+              <Link className={secondaryButtonClass} to="/projects">View all projects</Link>
             </div>
           </>
         ) : null}

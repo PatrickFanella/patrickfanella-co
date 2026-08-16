@@ -2,49 +2,74 @@ import { Link } from 'react-router-dom'
 
 import type { Project } from '../lib/api'
 import {
+  monoLabelClass,
   secondaryButtonClass,
   surfaceCardClass,
 } from '../lib/styles'
 import { StackCueList } from './StackCueList'
 
+const pipColors = [
+  'bg-accent-green',
+  'bg-accent-purple',
+  'bg-accent-pink',
+  'bg-accent-teal',
+  'bg-accent-orange',
+  'bg-accent-yellow',
+]
+
 type ProjectCardProps = {
   order?: number
   project: Project
-  density?: 'featured' | 'archive'
 }
 
-export function ProjectCard({ order, project, density = 'featured' }: ProjectCardProps) {
+export function ProjectCard({ order, project }: ProjectCardProps) {
   const orderLabel = order ? order.toString().padStart(2, '0') : null
-  const isArchive = density === 'archive'
-  const maxVisibleStack = isArchive ? 2 : 3
-  const ctaLabel = project.classification === 'flagship' ? 'Read Case Study' : 'View Project'
+  const ctaLabel = project.kind === 'case-study' ? 'Read Case Study' : 'View Project'
+  const pipCount = Math.min(project.stack.length, 8)
 
   return (
     <article
-      className={`${surfaceCardClass} group flex h-full flex-col justify-between ${isArchive ? 'p-5' : 'p-7'} hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}
+      className={`${surfaceCardClass} group flex h-full flex-col p-7 hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}
     >
-      <div className={`${isArchive ? 'mb-3 gap-4' : 'mb-4 gap-5'} grid border-b-2 border-stroke pb-4`}>
+      {/* Top row: order badge + category */}
+      <div className="flex items-start justify-between gap-3">
         {orderLabel ? (
           <p className="w-fit border-2 border-heading bg-heading px-3 pt-[calc(0.25rem+0.5px)] pb-[calc(0.25rem-0.5px)] font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-paper">
             {orderLabel}
           </p>
         ) : null}
+        {project.category ? (
+          <p className={`${monoLabelClass} text-right`}>{project.category}</p>
+        ) : null}
+      </div>
 
-        <div>
-          <h3 className={`${isArchive ? 'max-w-[18ch] text-[1.75rem] md:text-[2rem]' : 'max-w-[14ch] text-[2.25rem] md:text-[2.5rem]'} font-display font-bold leading-[0.92] tracking-[-0.05em] text-heading`}>
-            {project.title}
-          </h3>
-          <p className={`${isArchive ? 'mt-2 text-[0.98rem]' : 'mt-3 text-[1.05rem]'} max-w-[42ch] leading-relaxed text-ink-soft`}>
-            {project.summary}
-          </p>
+      {/* Title + summary */}
+      <div className="mt-4 border-b-2 border-stroke pb-4">
+        <h3 className="max-w-[14ch] font-display text-[clamp(1.9rem,3vw,2.5rem)] font-bold leading-[0.92] tracking-[-0.05em] text-heading md:text-[2rem] xl:text-[2.25rem]">
+          {project.title}
+        </h3>
+        <p className="mt-3 max-w-[42ch] text-[1.05rem] leading-relaxed text-ink-soft">
+          {project.summary}
+        </p>
+      </div>
+
+      {/* Tags: fixed height, centered at bottom */}
+      <div className="mt-auto flex h-14 items-center justify-center pt-4">
+        <StackCueList ariaLabel={`${project.title} technology stack`} items={project.stack} maxVisible={3} />
+      </div>
+
+      {/* Footer: decoration left + CTA right */}
+      <div className="mt-4 flex items-center justify-between gap-4 border-t-2 border-stroke pt-4">
+        <div className="flex items-center gap-2" aria-label={`${project.stack.length} technologies in the stack`}>
+          <div className="flex gap-1" aria-hidden="true">
+            {Array.from({ length: pipCount }).map((_, i) => (
+              <span key={i} className={`h-2 w-2 ${pipColors[i % pipColors.length]}`} />
+            ))}
+          </div>
+          <span className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-ink-soft">
+            {project.stack.length} tech
+          </span>
         </div>
-      </div>
-
-      <div className="min-h-[2.5rem]">
-        <StackCueList ariaLabel={`${project.title} technology stack`} items={project.stack} maxVisible={maxVisibleStack} />
-      </div>
-
-      <div className="mt-4 flex items-center justify-end gap-4 border-t-2 border-stroke pt-4">
         <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>
           {ctaLabel}
         </Link>

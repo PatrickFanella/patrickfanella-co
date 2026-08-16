@@ -16,7 +16,7 @@ export function ProjectsPage() {
         description="Explore Patrick Fanella's selected backend, product, community, graph, and workflow projects across Go, Python, TypeScript, React, PostgreSQL, Unity, and distributed systems."
         image="/assets/social/patrick-fanella-portfolio-1200x630.png"
         path="/projects"
-        title="Projects"
+        title="Projects — Senior Full-Stack & Backend Engineer"
       />
       <div className="mb-10 border-b-2 border-stroke pb-9">
         <SectionLabel>Selected work</SectionLabel>

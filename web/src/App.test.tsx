@@ -43,7 +43,7 @@ describe('App navigation flows', () => {
 		expect(scrollToSpy).toHaveBeenCalledWith(0, 0)
 		expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true })
 		await waitFor(() => {
-			expect(document.title).toBe('Projects | Patrick Fanella')
+			expect(document.title).toBe('Projects — Senior Full-Stack & Backend Engineer | Patrick Fanella')
 		})
 	})
 

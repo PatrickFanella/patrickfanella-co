@@ -107,7 +107,7 @@ export function ContactPage() {
       <Seo
         description="Contact Patrick Fanella about senior full-stack or backend engineering roles in Chicago or remote."
         path="/contact"
-        title="Contact"
+        title="Contact — Senior Full-Stack & Backend Engineer"
       />
       <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(380px,1fr)] lg:items-start border-b-2 border-stroke pb-16 mb-10">
         <div className="grid gap-8">
@@ -126,7 +126,7 @@ export function ContactPage() {
             <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">Include the role, team, and timing if you have them. A job description is welcome but not required.</p>
           </aside>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2">
             {alternateContactPaths.map((path) => (
               <a
                 key={path.href}
@@ -143,7 +143,7 @@ export function ContactPage() {
           </div>
         </div>
 
-        <form className={`${surfaceCardClass} grid gap-6 p-8 lg:p-10 bg-panel lg:self-end`} onSubmit={onSubmit} noValidate>
+        <form className={`${surfaceCardClass} grid gap-6 p-8 lg:p-10 bg-panel lg:self-start`} onSubmit={onSubmit} noValidate>
           <p className="font-mono text-[1.1rem] uppercase tracking-[0.05em] text-heading font-bold pb-4 border-b-2 border-stroke">
             Send a message
           </p>

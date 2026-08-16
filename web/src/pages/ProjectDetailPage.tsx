@@ -23,12 +23,20 @@ const flagshipProblemHeadings: Record<string, string> = {
   clpr: 'Twitch clips disappear after the stream.',
   patchwork: 'Discovery without exposing precise locations.',
   hasanara: 'Finding one moment across hundreds of hours.',
+  clustr: 'Community relationships are invisible.',
+  subcults: 'Discovery without feeding an algorithm.',
+  switchyard: 'Automation you can actually watch.',
+  'subcult-os': 'One shell for a growing ecosystem.',
 }
 
 const flagshipSeoTitles: Record<string, string> = {
   clpr: 'Clpr Case Study — Go, React & Hybrid Search',
   patchwork: 'Patchwork Case Study — AT Protocol & Location Privacy',
   hasanara: 'HasanAra Case Study — GPU Transcription & Search',
+  clustr: 'Clustr Case Study — Graph Analysis & Unity Client',
+  subcults: 'Subcults Case Study — Go, Maps & Community Infrastructure',
+  switchyard: 'SwitchYard Case Study — Go, React & Workflow Routing',
+  'subcult-os': 'Subcult OS Case Study — Go, React & Platform Foundations',
 }
 
 const bespokeSocialImageSlugs = new Set(['clpr', 'patchwork', 'hasanara'])
@@ -124,11 +132,11 @@ export function ProjectDetailPage() {
     return <Navigate replace to="/archive#tools" />
   }
 
-  const projectKindLabel = project.classification === 'flagship'
-    ? 'Flagship case study'
-    : project.classification === 'experiment'
-      ? 'Experiment'
-      : 'Archive'
+  const evidenceLabel = [
+    project.media.length > 0 ? `${project.media.length} captures & diagrams` : null,
+    project.architecture.length > 0 ? `${project.architecture.length} decisions` : null,
+    project.lessons.length > 0 ? `${project.lessons.length} lessons` : null,
+  ].filter(Boolean).join(' · ') || 'None'
 
   return (
     <section className={pageSectionClass}>
@@ -161,31 +169,32 @@ export function ProjectDetailPage() {
       />
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b-2 border-stroke pb-10 mb-8">
         <div>
-          <SectionLabel>{projectKindLabel}</SectionLabel>
+          <SectionLabel>{project.category}</SectionLabel>
           <h1 className={`${pageTitleClass} mt-6 uppercase`}>{project.title}</h1>
           <p className="mt-6 max-w-[55ch] text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
+          <p className="mt-4 max-w-[58ch] text-[1.05rem] leading-relaxed text-ink-soft">{project.description}</p>
         </div>
 
-        <aside className={`${surfaceCardClass} h-fit bg-panel p-6`} aria-label="Project meta information">
-          <p className={monoLabelClass}>Role &amp; timeline</p>
+        <aside className={`${surfaceCardClass} h-fit bg-panel p-6`} aria-label="Project overview">
+          <p className={monoLabelClass}>At a glance</p>
           <div className="mt-5 grid gap-3">
             <p className={metaCardClass}>
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Role
+                Domain
               </span>
-              <span className="text-[1.05rem] text-heading">{project.role}</span>
+              <span className="text-[1.05rem] text-heading">{project.category}</span>
             </p>
             <p className={metaCardClass}>
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Period
+                Stack
               </span>
-              <span className="text-[1.05rem] text-heading">{project.periodLabel || project.year}</span>
+              <span className="text-[1.05rem] text-heading">{project.stack.length} technologies</span>
             </p>
             <p className={metaCardClass}>
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Status
+                Evidence
               </span>
-              <span className="text-[1.05rem] text-heading">{project.deliveryStatus || projectKindLabel}</span>
+              <span className="text-[1.05rem] text-heading">{evidenceLabel}</span>
             </p>
           </div>
 
@@ -214,19 +223,24 @@ export function ProjectDetailPage() {
         </ul>
       </div>
 
-      <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.8fr)] lg:items-start">
+      <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.75fr)] lg:items-start">
         <article className="pr-4 lg:pr-8">
           <SectionLabel>Problem and ownership</SectionLabel>
-          <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-            {flagshipProblemHeadings[project.slug] || 'The problem this project explored.'}
+          <h2 className="mt-6 font-display text-[clamp(2rem,3.4vw,2.9rem)] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
+            {flagshipProblemHeadings[project.slug] || 'The problem it solves.'}
           </h2>
           <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft">
-            {project.description}
+            {project.problem || project.description}
           </p>
         </article>
 
         <article className={`${surfaceCardClass} bg-surface p-8`}>
-          <p className={monoLabelClass}>What I shipped</p>
+          <h2 className="font-display text-[clamp(1.75rem,2.6vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading">
+            What I shipped.
+          </h2>
+          <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-soft">
+            The concrete outcomes I delivered.
+          </p>
           <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft">
             {project.highlights.map((highlight, index) => (
               <li
@@ -250,12 +264,12 @@ export function ProjectDetailPage() {
                 Decisions and tradeoffs.
               </h2>
             </div>
-            <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
+            <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft lg:justify-self-end lg:text-right">
               Why the system is built this way, including the constraints each choice introduced.
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {project.architecture.map((item, index) => (
               <article key={item} className={`${surfaceCardClass} bg-panel p-6`}>
                 <p className={monoLabelClass}>{`Decision ${index + 1}`}</p>
@@ -275,7 +289,7 @@ export function ProjectDetailPage() {
                 See it working.
               </h2>
             </div>
-            <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft">
+            <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft lg:justify-self-end lg:text-right">
               Product captures and architecture diagrams showing the implemented system.
             </p>
           </div>
@@ -309,7 +323,7 @@ export function ProjectDetailPage() {
           <div>
             <SectionLabel>Work together</SectionLabel>
             <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading" id="case-study-contact-heading">Discuss this work.</h2>
-            <p className="mt-4 max-w-[58ch] leading-relaxed text-ink-soft">Building a product with similar backend, search, data, or workflow challenges? I’d be glad to discuss the tradeoffs and hear about the role.</p>
+            <p className="mt-4 max-w-[58ch] leading-relaxed text-ink-soft">Building a product with similar backend, search, data, or workflow challenges? I'd be glad to discuss the tradeoffs and hear about the role.</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link className={primaryButtonClass} to="/contact">Discuss a role</Link>
