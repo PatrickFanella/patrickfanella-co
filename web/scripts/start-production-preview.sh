@@ -4,6 +4,8 @@ set -euo pipefail
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 repo_dir=$(cd -- "${script_dir}/../.." && pwd)
 container_name=patrickfanella-portfolio-lighthouse-web
+web_port=${E2E_WEB_PORT:-4173}
+api_port=${E2E_API_PORT:-8181}
 api_bin=$(mktemp /tmp/patrickfanella-api-lighthouse.XXXXXX)
 
 cleanup() {
@@ -23,6 +25,9 @@ if [[ -f "${repo_dir}/.env" ]]; then
   set +a
 fi
 
+postgres_port=${POSTGRES_HOST_PORT:-5432}
+export DATABASE_URL="postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@127.0.0.1:${postgres_port}/${POSTGRES_DB:-patrickfanella}?sslmode=disable"
+
 cd "${repo_dir}"
 docker compose up -d postgres
 
@@ -30,18 +35,18 @@ cd "${repo_dir}/api"
 go run ./cmd/migrate
 go run ./cmd/seed
 go build -o "${api_bin}" ./cmd/server
-CORS_ORIGIN=http://127.0.0.1:4173 "${api_bin}" &
+API_PORT="${api_port}" CORS_ORIGIN="http://127.0.0.1:${web_port}" "${api_bin}" &
 api_pid=$!
 
 cd "${repo_dir}"
 docker build \
   -f web/Dockerfile \
-  --build-arg VITE_API_BASE_URL=http://127.0.0.1:8181 \
+  --build-arg VITE_API_BASE_URL="http://127.0.0.1:${api_port}" \
   -t patrickfanella-portfolio-lighthouse .
 docker rm -f "${container_name}" >/dev/null 2>&1 || true
-docker run -d --rm --name "${container_name}" -p 4173:80 patrickfanella-portfolio-lighthouse >/dev/null
+docker run -d --rm --name "${container_name}" -p "${web_port}:80" patrickfanella-portfolio-lighthouse >/dev/null
 for _ in {1..30}; do
-  if curl --fail --silent http://127.0.0.1:4173/healthz >/dev/null; then
+  if curl --fail --silent "http://127.0.0.1:${web_port}/healthz" >/dev/null; then
     echo "Portfolio preview ready"
     docker wait "${container_name}" >/dev/null
     exit 0

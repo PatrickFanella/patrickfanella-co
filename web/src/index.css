@@ -105,7 +105,7 @@
   input:not([type='button']):not([type='submit']):not([type='reset']),
   select,
   textarea {
-    cursor: default;
+    cursor: text;
   }
 
   /* Enhanced focus state for better accessibility and tactile feel */
@@ -124,7 +124,7 @@
     top: 1rem;
     z-index: 50;
     transform: translateY(-220%);
-    border: 1px solid var(--color-accent-green);
+    border: 2px solid var(--color-accent-green);
     background: var(--color-surface);
     box-shadow: var(--shadow-brutal-green);
     padding: 0.75rem 1rem;
@@ -151,5 +151,32 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  header,
+  nav,
+  footer,
+  .skip-link {
+    display: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    background-image: none;
+  }
+}
+
+/* Skeleton loading pulse — uses border blocks from brutalist skeletons */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [aria-hidden='true'] .bg-panel {
+    animation: skeleton-pulse 2s ease-in-out infinite;
   }
 }

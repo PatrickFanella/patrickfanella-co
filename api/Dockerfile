@@ -21,6 +21,8 @@ WORKDIR /app
 COPY --from=build /out/server /out/migrate /out/seed /app/
 COPY db/ /app/db/
 
+RUN chmod -R a+rX /app/db
+
 EXPOSE 8181
 
 USER appuser
