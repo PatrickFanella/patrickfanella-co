@@ -13,6 +13,7 @@ export type Project = {
   title: string
   kind: ProjectKind
   classification: ProjectClassification
+  category: string
   deliveryStatus: string
   periodLabel: string
   summary: string

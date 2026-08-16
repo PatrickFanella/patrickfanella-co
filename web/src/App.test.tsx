@@ -57,7 +57,7 @@ describe('App navigation flows', () => {
 		expect(screen.queryByRole('link', { name: /^tools$/i })).not.toBeInTheDocument()
 		await user.click(screen.getAllByRole('link', { name: /^archive$/i })[0])
 
-		expect(await screen.findByRole('heading', { level: 1, name: /^archive$/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { level: 1, name: /^all projects$/i })).toBeInTheDocument()
 	})
 
 	it('navigates from the projects archive to a project detail route', async () => {

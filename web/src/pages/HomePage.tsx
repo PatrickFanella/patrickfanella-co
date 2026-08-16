@@ -82,9 +82,14 @@ export function HomePage() {
           />
         ) : null}
         {status === 'success' ? (
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {flagships.map((project, index) => <ProjectCard key={project.slug} order={index + 1} project={project} />)}
-          </div>
+          <>
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {flagships.map((project, index) => <ProjectCard key={project.slug} order={index + 1} project={project} />)}
+            </div>
+            <div className="mt-8">
+              <Link className={secondaryButtonClass} to="/archive">View all projects</Link>
+            </div>
+          </>
         ) : null}
 
       </section>

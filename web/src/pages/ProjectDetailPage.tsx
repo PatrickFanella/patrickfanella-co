@@ -161,13 +161,13 @@ export function ProjectDetailPage() {
       />
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b-2 border-stroke pb-10 mb-8">
         <div>
-          <SectionLabel>{`${projectKindLabel} / ${project.deliveryStatus || project.year}`}</SectionLabel>
+          <SectionLabel>{projectKindLabel}</SectionLabel>
           <h1 className={`${pageTitleClass} mt-6 uppercase`}>{project.title}</h1>
-          <p className="mt-6 text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
+          <p className="mt-6 max-w-[55ch] text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
         </div>
 
         <aside className={`${surfaceCardClass} h-fit bg-panel p-6`} aria-label="Project meta information">
-          <p className={monoLabelClass}>Project Details</p>
+          <p className={monoLabelClass}>Role &amp; timeline</p>
           <div className="mt-5 grid gap-3">
             <p className={metaCardClass}>
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
