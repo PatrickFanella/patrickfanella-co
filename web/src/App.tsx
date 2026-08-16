@@ -24,7 +24,7 @@ function App() {
             <Route path="projects/transcript-create" element={<Navigate replace to="/projects/hasanara" />} />
             <Route path="projects/:slug" element={<ProjectDetailPage />} />
             <Route path="archive" element={<ArchivePage />} />
-            <Route path="tools" element={<Navigate replace to="/archive#tools" />} />
+            <Route path="tools" element={<Navigate replace to="/archive" />} />
             <Route path="resume" element={<ResumePage />} />
             <Route path="contact" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />

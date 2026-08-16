@@ -24,17 +24,24 @@ export function ProjectCard({ order, project, density = 'featured' }: ProjectCar
       className={`${surfaceCardClass} group flex h-full flex-col justify-between ${isArchive ? 'p-5' : 'p-7'} hover:-translate-x-1 hover:-translate-y-1 hover:border-accent-green hover:shadow-brutal-green`}
     >
       <div className={`${isArchive ? 'mb-3 gap-4' : 'mb-4 gap-5'} grid border-b-2 border-stroke pb-4`}>
-        {orderLabel ? (
-          <p className="w-fit border-2 border-heading bg-heading px-3 pt-[calc(0.25rem+0.5px)] pb-[calc(0.25rem-0.5px)] font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-paper">
-            {orderLabel}
-          </p>
-        ) : null}
+        <div className="flex flex-wrap items-center gap-2">
+          {orderLabel ? (
+            <p className="border-2 border-heading bg-heading px-3 pt-[calc(0.25rem+0.5px)] pb-[calc(0.25rem-0.5px)] font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-paper">
+              {orderLabel}
+            </p>
+          ) : null}
+          {project.category ? (
+            <p className="border-2 border-stroke bg-surface px-3 pt-[calc(0.25rem+0.5px)] pb-[calc(0.25rem-0.5px)] font-mono text-[0.72rem] font-bold uppercase tracking-[0.15em] text-accent-purple">
+              {project.category}
+            </p>
+          ) : null}
+        </div>
 
         <div>
           <h3 className={`${isArchive ? 'max-w-[18ch] text-[1.75rem] md:text-[2rem]' : 'max-w-[14ch] text-[2.25rem] md:text-[2.5rem]'} font-display font-bold leading-[0.92] tracking-[-0.05em] text-heading`}>
             {project.title}
           </h3>
-          <p className={`${isArchive ? 'mt-2 text-[0.98rem]' : 'mt-3 text-[1.05rem]'} max-w-[42ch] leading-relaxed text-ink-soft`}>
+          <p className={`${isArchive ? 'mt-2 text-[0.98rem]' : 'mt-3 text-[1.05rem]'} max-w-[42ch] leading-relaxed text-ink-soft line-clamp-2`}>
             {project.summary}
           </p>
         </div>

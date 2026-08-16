@@ -31,7 +31,7 @@ describe('HomePage', () => {
 		expect(screen.queryByText(/886k/i)).not.toBeInTheDocument()
 	})
 
-	it('renders the full selected project collection without a three-card cap', async () => {
+	it('renders only the top three flagship projects on the home page', async () => {
 		const selectedProjects = Array.from({ length: 7 }, (_, index) => ({
 			...featuredProject,
 			slug: `selected-${index + 1}`,
@@ -41,7 +41,9 @@ describe('HomePage', () => {
 
 		renderInRouter(<HomePage />)
 
-		expect(await screen.findByRole('heading', { name: 'Selected Project 7' })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: 'Selected Project 3' })).toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: 'Selected Project 4' })).not.toBeInTheDocument()
+		expect(screen.getByRole('link', { name: /view all projects/i })).toHaveAttribute('href', '/archive')
 	})
 
 	it('renders a recoverable error state when the featured query fails', async () => {

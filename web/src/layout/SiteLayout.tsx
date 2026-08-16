@@ -72,7 +72,7 @@ export function SiteLayout() {
                   {item.label}
                 </a>
               ))}
-              <Link className={textLinkClass} to="/archive">Archive</Link>
+              <Link className={textLinkClass} to="/archive">All projects</Link>
             </div>
           </div>
           <p className={`${monoLabelClass} lg:justify-self-end`}>2026 // SYSTEM ONLINE</p>
