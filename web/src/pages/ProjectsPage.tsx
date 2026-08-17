@@ -4,7 +4,7 @@ import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage } from '../lib/errors'
 import { pageIntroClass, pageSectionClass, pageTitleClass, secondaryButtonClass } from '../lib/styles'
-import { coreLegendTechs } from '../lib/techColors'
+import { flagshipLegendTechs } from '../lib/techColors'
 import { useProjects } from '../lib/useProjects'
 
 export function ProjectsPage() {
@@ -32,21 +32,26 @@ export function ProjectsPage() {
       {status === 'success' && flagships.length === 0 ? <RouteState description="No flagship case studies are currently published." label="No projects" title="The selected work index is empty." /> : null}
       {status === 'success' && flagships.length > 0 ? (
         <div>
-          <div className="mb-8 border-2 border-stroke bg-surface p-5 shadow-brutal">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <p className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-accent-green">
-                  Stack Legend
-                </p>
-                <p className="mt-1 font-mono text-[0.72rem] text-ink-soft">
-                  Color pips indicate core technologies. Hover pips on any project card for full stack inspection.
-                </p>
+          <div className="mb-8 border-2 border-stroke bg-surface p-6 shadow-brutal">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1 border-b border-stroke pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+                <div>
+                  <p className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-accent-green">
+                    Stack Legend
+                  </p>
+                  <p className="mt-1 font-mono text-[0.72rem] text-ink-soft">
+                    Distinct color identifiers for technologies across flagship case studies. Hover pips on any project card for stack inspection.
+                  </p>
+                </div>
+                <span className="shrink-0 font-mono text-[0.68rem] font-bold uppercase tracking-[0.15em] text-ink-soft">
+                  {flagshipLegendTechs.length} Technologies
+                </span>
               </div>
-              <div className="grid grid-cols-2 gap-x-5 gap-y-2 sm:grid-cols-3 xl:grid-cols-6">
-                {coreLegendTechs.map(({ name, color }) => (
-                  <div key={name} className="flex items-center gap-2 font-mono text-[0.78rem] text-ink">
-                    <span className={`h-2.5 w-2.5 shrink-0 ${color}`} aria-hidden="true" />
-                    <span className="font-medium whitespace-nowrap">{name}</span>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+                {flagshipLegendTechs.map(({ name, color }) => (
+                  <div key={name} className="flex items-center gap-2 font-mono text-[0.75rem] text-ink">
+                    <span className="h-2.5 w-2.5 shrink-0" style={{ backgroundColor: color }} aria-hidden="true" />
+                    <span className="truncate font-medium whitespace-nowrap" title={name}>{name}</span>
                   </div>
                 ))}
               </div>

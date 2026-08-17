@@ -7,7 +7,7 @@ import {
   secondaryButtonClass,
   surfaceCardClass,
 } from '../lib/styles'
-import { getTechPipColor } from '../lib/techColors'
+import { getTechColor } from '../lib/techColors'
 
 type ProjectCardProps = {
   order?: number
@@ -68,7 +68,8 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
             <span
               key={tech}
               aria-label={tech}
-              className={`h-2.5 w-2.5 cursor-pointer transition-transform hover:scale-150 ${getTechPipColor(tech)}`}
+              className="h-2.5 w-2.5 cursor-pointer transition-transform hover:scale-150"
+              style={{ backgroundColor: getTechColor(tech) }}
               onMouseMove={(e) => handlePipMove(e, tech)}
               onMouseEnter={(e) => handlePipMove(e, tech)}
             />
