@@ -25,7 +25,6 @@ type ProjectCardProps = {
 export function ProjectCard({ order, project }: ProjectCardProps) {
   const orderLabel = order ? order.toString().padStart(2, '0') : null
   const ctaLabel = project.kind === 'case-study' ? 'Read Case Study' : 'View Project'
-  const pipCount = Math.min(project.stack.length, 8)
 
   return (
     <article
@@ -60,11 +59,16 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
 
       {/* Footer: stack legend left + CTA right */}
       <div className="mt-4 flex items-end justify-between gap-4 border-t-2 border-stroke pt-4">
-        <div className="grid gap-1.5" aria-label={`${project.stack.length} technologies in the stack`}>
+        <div className="grid gap-1.5">
           <p className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-ink-soft">Stack</p>
-          <div className="flex gap-1" aria-hidden="true">
-            {Array.from({ length: pipCount }).map((_, i) => (
-              <span key={i} className={`h-2 w-2 ${pipColors[i % pipColors.length]}`} />
+          <div className="flex gap-1" aria-label={`${project.stack.length} technologies in the stack`}>
+            {project.stack.slice(0, 8).map((tech, i) => (
+              <span
+                key={tech}
+                title={tech}
+                aria-label={tech}
+                className={`h-2 w-2 ${pipColors[i % pipColors.length]}`}
+              />
             ))}
           </div>
         </div>
