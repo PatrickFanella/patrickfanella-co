@@ -149,9 +149,9 @@
       "classification": "flagship",
       "deliveryStatus": "Production",
       "periodLabel": "2024–present",
-      "summary": "Turns long-form YouTube archives into searchable transcripts, chapters, and reusable moments. I built and deployed the FastAPI and React product with its GPU-backed processing pipeline.",
-      "description": "Long-form video archives contain useful research material, but finding one statement across hundreds of hours is painfully slow. HasanAra transcribes, indexes, and organizes those archives into searchable transcripts, chapters, moments, saved items, and exports. I built the FastAPI backend, React frontend, PostgreSQL model, GPU workers, and containerized delivery path. It is the branded successor to Transcript Create and remains under active development.",
-      "problem": "Hundreds of hours of long-form video hide statements and research material that are nearly impossible to find by scrubbing through playback. Finding one moment should take seconds, not days.",
+      "summary": "Turns long-form YouTube archives into searchable transcripts, chapters, automated smart tags, and reusable moments. I built and deployed the FastAPI and React product with its GPU-backed processing pipeline.",
+      "description": "Long-form video archives contain useful research material, but finding one statement across hundreds of hours is painfully slow. HasanAra transcribes, indexes, and organizes those archives into searchable transcripts, chapters, automated smart tags, moments, saved items, and exports. I built the FastAPI backend, React frontend, PostgreSQL model, GPU workers, automated entity and topic tagging pipeline, and containerized delivery path. It is the branded successor to Transcript Create and remains under active development.",
+      "problem": "Hundreds of hours of long-form video hide statements, recurring themes, and research material that are nearly impossible to find by scrubbing through playback. Finding one moment or tracking specific topics should take seconds, not days.",
       "role": "Lead full-stack engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/hasanara",
@@ -170,12 +170,13 @@
       ],
       "highlights": [
         "Deployed a research interface for finding and reviewing material by transcript, moment, and chapter instead of scrubbing through full videos.",
+        "Built an automated smart tagging pipeline that extracts entities, recurring topics, and thematic markers across transcripts to enable contextual filtering.",
         "Built a GPU transcription and enrichment pipeline with queue-backed workers, retryable ingestion, and durable PostgreSQL job state.",
         "Established an explicit API contract, browser tests, health checks, and release automation so the product can evolve without hiding unfinished work."
       ],
       "architecture": [
-        "Because transcription jobs must survive worker restarts, I keep job and application state together in PostgreSQL and use SKIP LOCKED claims. This avoids a separate queue service but requires stuck-job recovery and explicit retries.",
-        "PostgreSQL owns durable transcript and account data, while OpenSearch serves cross-channel full-text retrieval. Export pipelines produce SRT, VTT, and PDF without making the search index authoritative.",
+        "Because transcription and NLP enrichment jobs must survive worker restarts, I keep job and application state together in PostgreSQL and use SKIP LOCKED claims. This avoids a separate queue service but requires stuck-job recovery and explicit retries.",
+        "PostgreSQL owns durable transcript, automated tag hierarchies, and account data, while OpenSearch serves cross-channel full-text retrieval and faceted tag filtering. Export pipelines produce SRT, VTT, and PDF without making the search index authoritative.",
         "The API, frontend, and GPU workers ship as separate containers with readiness checks. Independent deployment keeps worker hardware concerns away from the browser-facing application, but expands release coordination."
       ],
       "lessons": [
@@ -205,8 +206,8 @@
           "caption": "Full tech stack spanning Python backend, GPU-accelerated AI/ML, React frontend, and multi-target infrastructure."
         }
       ],
-      "coreMechanism": "Asynchronous GPU transcription and vector indexing pipeline",
-      "shippedOutcome": "Searchable long-form video intelligence and clip engine"
+      "coreMechanism": "Asynchronous GPU transcription, vector indexing, and automated smart-tagging pipeline",
+      "shippedOutcome": "Searchable long-form video intelligence platform with automated topic extraction and moment clipping"
     },
     {
       "slug": "jury-rigged",
