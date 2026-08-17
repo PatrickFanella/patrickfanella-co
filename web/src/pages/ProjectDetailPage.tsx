@@ -26,7 +26,7 @@ const flagshipProblemHeadings: Record<string, string> = {
   clustr: 'Community relationships are invisible.',
   subcults: 'Discovery without feeding an algorithm.',
   switchyard: 'Automation you can actually watch.',
-  'subcult-os': 'One shell for a growing ecosystem.',
+  'subcult-os': 'Live event operations are fragmented.',
 }
 
 const flagshipSeoTitles: Record<string, string> = {
@@ -36,7 +36,7 @@ const flagshipSeoTitles: Record<string, string> = {
   clustr: 'Clustr Case Study — Graph Analysis & Unity Client',
   subcults: 'Subcults Case Study — Go, Maps & Community Infrastructure',
   switchyard: 'SwitchYard Case Study — Go, React & Workflow Routing',
-  'subcult-os': 'Subcult OS Case Study — Go, React & Platform Foundations',
+  'subcult-os': 'Subcult-OS Case Study — Go, React & Event Operations',
 }
 
 const bespokeSocialImageSlugs = new Set(['clpr', 'patchwork', 'hasanara'])
@@ -228,6 +228,8 @@ export function ProjectDetailPage() {
           </h2>
           <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft">
             {project.problem}
+          </p>
+          <p className="mt-4 text-[1.1rem] leading-relaxed text-ink-soft">
             {project.description}
           </p>
         </article>

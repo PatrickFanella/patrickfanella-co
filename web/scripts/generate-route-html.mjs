@@ -24,7 +24,7 @@ const flagshipSeoTitles = {
   clustr: 'Clustr Case Study — Graph Analysis & Unity Client',
   subcults: 'Subcults Case Study — Go, Maps & Community Infrastructure',
   switchyard: 'SwitchYard Case Study — Go, React & Workflow Routing',
-  'subcult-os': 'Subcult OS Case Study — Go, React & Platform Foundations',
+  'subcult-os': 'Subcult-OS Case Study — Go, React & Event Operations',
 }
 
 function readEnvValue(source, key) {

@@ -9,9 +9,9 @@
       "deliveryStatus": "Production",
       "periodLabel": "2025–present",
       "summary": "A production platform for organizing and rediscovering Twitch clips. I built the Go API, React and React Native clients, moderation workflows, and hybrid search—and operate it at clpr.tv.",
-      "description": "Useful Twitch clips become difficult to find once they leave a live stream. Clpr gives communities a place to vote, organize, discuss, and search that material across web and mobile clients. I built the product end to end: the Go API, React and React Native interfaces, PostgreSQL model, moderation surfaces, and hybrid search pipeline. I also own its containerized release and production delivery path.",
+      "description": "Clpr gives communities a place to vote, organize, discuss, and search that material across web and mobile clients. I built the product end to end: the Go API, React and React Native interfaces, PostgreSQL model, moderation surfaces, and hybrid search pipeline. I also own its containerized release and production delivery path.",
       "problem": "Twitch clips vanish into search-resistant archives the moment a stream ends. Communities have no dependable way to vote, organize, discuss, or find the moments that mattered.",
-      "role": "Lead full-stack engineer",
+      "role": "Full-stack engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/clpr",
       "liveUrl": "https://clpr.tv",
@@ -145,10 +145,10 @@
       "slug": "hasanara",
       "title": "HasanAra",
       "kind": "case-study",
-      "category": "Data & Search",
+      "category": "Data, Transcription & Search",
       "classification": "flagship",
-      "deliveryStatus": "Active development",
-      "periodLabel": "2025–present",
+      "deliveryStatus": "Production",
+      "periodLabel": "2024–present",
       "summary": "Turns long-form YouTube archives into searchable transcripts, chapters, and reusable moments. I built and deployed the FastAPI and React product with its GPU-backed processing pipeline.",
       "description": "Long-form video archives contain useful research material, but finding one statement across hundreds of hours is painfully slow. HasanAra transcribes, indexes, and organizes those archives into searchable transcripts, chapters, moments, saved items, and exports. I built the FastAPI backend, React frontend, PostgreSQL model, GPU workers, and containerized delivery path. It is the branded successor to Transcript Create and remains under active development.",
       "problem": "Hundreds of hours of long-form video hide statements and research material that are nearly impossible to find by scrubbing through playback. Finding one moment should take seconds, not days.",
@@ -260,16 +260,16 @@
       "title": "Patchwork",
       "kind": "case-study",
       "category": "Community & Media",
-      "summary": "A pre-alpha mutual-aid platform built on AT Protocol. I designed its privacy-preserving location model, Bluesky ingestion, moderation workflow, React client, and PostgreSQL-backed services.",
+      "summary": "A mutual-aid platform built on AT Protocol. I designed its privacy-preserving location model, Bluesky ingestion, moderation workflow, React client, and PostgreSQL-backed services.",
       "description": "Mutual-aid discovery requires enough location information to connect nearby people without exposing exact addresses or sensitive movement. I designed Patchwork so coordinates are reduced before persistence, then built the React client, query API, Jetstream ingestion pipeline, and moderation worker around that boundary. The public environment is pre-alpha and demonstrates the implemented record lifecycle, privacy model, and moderation approach rather than broad adoption.",
-      "problem": "Mutual-aid discovery needs to connect nearby people, but storing exact locations puts vulnerable users at risk. Discovery has to work without exposing where anyone lives.",
+      "problem": "Storing exact locations puts vulnerable users at risk. Discovery has to work without exposing where anyone lives.",
       "role": "Full-stack engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/patchwork",
       "liveUrl": "https://patchwork.subcult.tv",
       "featured": true,
       "classification": "flagship",
-      "deliveryStatus": "Pre-alpha",
+      "deliveryStatus": "Live beta",
       "periodLabel": "2025–present",
       "sortOrder": 2,
       "stack": [
@@ -316,11 +316,12 @@
       "description": "Augr is an autonomous trading system where LLM-powered agents collaborate through a structured pipeline: parallel analysis, bull/bear debate, signal generation, risk debate, and execution. The Go backend unifies multiple LLM providers, market-data feeds, broker adapters, a Cobra CLI, Bubble Tea TUI, REST API, WebSocket streaming, and a React dashboard. Paper-trading paths make the full workflow testable before live execution.",
       "problem": "Automated trading systems need structured decision-making that can be tested safely before risking capital. Augr shows how LLM agents can debate bull and bear perspectives, review risk, and generate signals through a pipeline that supports paper trading against real market data.",
       "role": "Systems/product engineer",
-      "year": 2026,
+      "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/augr",
       "liveUrl": "https://augr.subcult.tv",
       "featured": false,
       "sortOrder": 6,
+      "deliveryStatus":"Active development",
       "stack": [
         "Go",
         "React",
@@ -359,10 +360,10 @@
       "slug": "clustr",
       "title": "Clustr/Clustr-Galaxy",
       "kind": "case-study",
-      "category": "Data & Search",
+      "category": "Data Visualization, Rendering, & Search",
       "classification": "flagship",
       "deliveryStatus": "Live beta",
-      "periodLabel": "2025–present",
+      "periodLabel": "2024–present",
       "summary": "A graph-analysis platform and controller-first Unity client that turn Reddit community relationships into an explorable, revision-pinned galaxy.",
       "description": "Clustr maps relationships between Reddit communities and publishes them as revision-pinned graph data. A Go backend handles API serving, crawling, and graph precalculation; PostgreSQL stores nodes, edges, and community assignments; and React provides analytical 2D/3D views. Clustr Galaxy extends that system with a controller-first Unity client for exploring the published community universe as a flyable galaxy, using bounded API payloads, deterministic orbital models, discovery-gated surveying, and offline-safe fallbacks.",
       "problem": "The relationships between Reddit communities are invisible from the outside: which subreddits cluster together, who bridges them, and how the network shifts over time.",
@@ -623,9 +624,9 @@
       "category": "Community & Media",
       "classification": "flagship",
       "deliveryStatus": "Active development",
-      "periodLabel": "2026–present",
+      "periodLabel": "2026",
       "summary": "A platform for underground music communities built around scene sovereignty, privacy-first discovery, and live audio—without algorithmic feeds.",
-      "description": "Subcults is a platform for underground and local music communities built around presence, scene sovereignty, and privacy-first discovery. It maps scenes, events, and live audio sessions without leaning on opaque follower-feed ranking, instead combining trust-aware discovery, decentralized AT Protocol ingestion, and coarse-location controls. The stack uses a Go API and Jetstream indexer, a Vite + React + TypeScript frontend with MapLibre, Neon Postgres with PostGIS, LiveKit for audio sessions, Cloudflare R2 for media, and Stripe Connect for direct scene payouts. The hosted site at subcults.subcult.tv is the public-facing home for that product direction.",
+      "description": "Subcults is a platform built around presence, scene sovereignty, and privacy-first discovery. It maps scenes, events, and live audio sessions without leaning on opaque follower-feed ranking, instead combining trust-aware discovery, decentralized AT Protocol ingestion, and coarse-location controls. The stack uses a Go API and Jetstream indexer, a Vite + React + TypeScript frontend with MapLibre, Neon Postgres with PostGIS, LiveKit for audio sessions, Cloudflare R2 for media, and Stripe Connect for direct scene payouts. The hosted site at subcults.subcult.tv is the public-facing home for that product direction.",
       "problem": "Underground music communities need tools for discovery and coordination that respect their independence and privacy. Subcults shows how map-based discovery, AT Protocol ingestion, and coarse-location controls can serve scenes without turning them into content for an algorithm.",
       "role": "Full-stack product engineer",
       "year": 2026,
@@ -952,10 +953,10 @@
       "classification": "flagship",
       "deliveryStatus": "Active development",
       "periodLabel": "2026–present",
-      "summary": "A full-stack operating-system layer for tying together identity, workflows, dashboards, and collective infrastructure under one coherent interface.",
-      "description": "Subcult OS is a full-stack foundation for a SUBCULT operating-system layer: a Go backend, Vite React TypeScript Tailwind frontend, Postgres database, and Docker Compose topology. It exists as a product scaffold for tying together identity, workflows, dashboards, and collective infrastructure under one coherent interface. The repository emphasizes reproducible local development, clear service ownership, and an Open Pilot-ready project shape.",
-      "problem": "Multiple products and services need a shared foundation for identity, dashboards, and workflows. Subcult OS shows how a consistent application shell can serve as the operating layer for a growing ecosystem of tools.",
-      "role": "Platform engineer",
+      "summary": "A full-stack event operations platform managing ticketing, staffing, door admissions, security logs, vendor payouts, and end-of-night reconciliations.",
+      "description": "Subcult-OS is an end-to-end event operations management platform built to run live events cleanly from doors open to final settlement. It unifies ticketing, door scanning, staff scheduling, security incident logs, vendor payouts, and automated end-of-night financial and operational reporting into a single operational interface. Built with a Go backend, Vite React TypeScript frontend, and PostgreSQL.",
+      "problem": "Live event operations are typically fragmented across disconnected spreadsheets, ticketing platforms, staff rosters, and cash envelopes. I built Subcult-OS to unify admissions, security dispatch, staff shifts, vendor settlements, and audit-ready end-of-night reports into one real-time command system.",
+      "role": "Lead full-stack engineer",
       "repoUrl": "https://git.subcult.tv/subculture-collective/subcult-os",
       "stack": [
         "Go",
@@ -966,18 +967,18 @@
         "TailwindCSS"
       ],
       "highlights": [
-        "Created a full-stack OS-style product shell for SUBCULT infrastructure and workflows.",
-        "Combined Go, Vite React, Postgres, and Docker Compose into one repeatable application base.",
-        "Kept the repo Open Pilot-ready with template conventions that support automated issue-to-PR work."
+        "Built end-to-end event operations workflows covering online ticketing, door check-in, and guest list management.",
+        "Created operational modules for staff shift scheduling, security incident logging, and automated vendor payout calculations.",
+        "Designed real-time financial tracking and automated end-of-night reporting to reconcile door revenue, bar cuts, and vendor disbursements."
       ],
       "architecture": [
-        "Go API and Vite React frontend run as separate services against a Postgres persistence layer.",
-        "Docker Compose defines the local service topology while Make targets wrap common development and verification tasks.",
-        "Frontend shell is designed to host dashboards and workflow surfaces as the larger SUBCULT operating layer grows."
+        "Go API and Vite React frontend run as separate services against a Postgres persistence layer with transactional event state management.",
+        "Real-time door and security check-in surfaces designed for fast mobile and tablet execution under poor venue connectivity.",
+        "Comprehensive reporting engine aggregates admission counts, vendor receipts, and staff hours into structured closing summaries."
       ],
       "lessons": [
-        "Operating-system metaphors work best when backed by boring service contracts and repeatable local infrastructure.",
-        "A strong scaffold is worthwhile when multiple future products need the same deployment and automation conventions."
+        "Event day operational tools must prioritize extreme speed and offline-resilience over complex multi-step UI flows.",
+        "Automating the end-of-night reconciliation saves hours of high-stress bookkeeping after venue close and eliminates cash-count discrepancies."
       ],
       "kind": "highlight",
       "category": "Community & Media",
@@ -987,12 +988,12 @@
       "media": [
         {
           "src": "/assets/projects/subcult-os-overview.svg",
-          "alt": "Overview diagram for Subcult OS showing the project scope, stack, and core system relationships.",
-          "caption": "Subcult OS overview: project scope, stack, and core architecture cues."
+          "alt": "Overview diagram for Subcult-OS showing the project scope, stack, and core system relationships.",
+          "caption": "Subcult-OS overview: project scope, stack, and core architecture cues."
         }
       ],
-      "coreMechanism": "Containerized Linux workspace environment with declarative runtime configs",
-      "shippedOutcome": "Reproducible development and broadcast operating system"
+      "coreMechanism": "End-to-end event lifecycle state machine spanning ticketing, door scanning, vendor settlement, and night-close reconciliation",
+      "shippedOutcome": "Unified live-event operations platform with automated end-of-night reporting and financial audits"
     },
     {
       "slug": "subcult-tv",
