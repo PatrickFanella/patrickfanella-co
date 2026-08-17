@@ -15,7 +15,7 @@ export const textLinkClass =
 
 /* Navigation button variant */
 export const navButtonClass =
-  'inline-flex min-w-0 cursor-pointer items-center justify-center whitespace-nowrap border-2 px-3 pt-[calc(0.625rem+0.5px)] pb-[calc(0.625rem-0.5px)] text-center text-[0.78rem] font-bold uppercase leading-none tracking-[0.04em] transition-all duration-150 ease-out hover:-translate-x-1 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none sm:px-4 sm:text-sm lg:px-2 lg:text-[0.72rem] lg:tracking-[0.02em] xl:px-3 xl:text-[0.78rem] xl:tracking-[0.04em] 2xl:px-4 2xl:text-sm'
+  'inline-flex min-w-0 cursor-pointer items-center justify-center whitespace-nowrap border-2 px-3 pt-[calc(0.625rem+0.5px)] pb-[calc(0.625rem-0.5px)] text-center text-xs font-bold uppercase leading-none tracking-[0.05em] transition-all duration-150 ease-out hover:-translate-x-1 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-paper active:translate-x-0 active:translate-y-0 active:shadow-none sm:px-4 sm:text-sm'
 
 export const pageSectionClass = 'px-1 pt-3 pb-16'
 

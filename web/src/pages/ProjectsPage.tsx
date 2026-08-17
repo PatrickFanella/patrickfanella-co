@@ -30,7 +30,7 @@ export function ProjectsPage() {
       ) : null}
       {status === 'success' && flagships.length === 0 ? <RouteState description="No flagship case studies are currently published." label="No projects" title="The selected work index is empty." /> : null}
       {status === 'success' && flagships.length > 0 ? (
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {flagships.map((project, index) => <ProjectCard key={project.slug} order={index + 1} project={project} />)}
         </div>
       ) : null}

@@ -38,7 +38,7 @@ export function HomePage() {
         }}
       />
 
-      <section className="grid gap-8 border-b-2 border-stroke pb-12 pt-3 xl:grid-cols-[minmax(0,1.55fr)_minmax(20rem,0.65fr)] xl:items-end">
+      <section className="grid gap-8 border-b-2 border-stroke pb-12 pt-3 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-end">
         <div>
           <SectionLabel>Senior Full-Stack / Backend</SectionLabel>
           <h1 className="mt-5 max-w-[13ch] font-display text-[clamp(3.2rem,8vw,7.6rem)] font-bold uppercase leading-[0.84] tracking-[-0.055em] text-heading">
@@ -56,7 +56,7 @@ export function HomePage() {
           </div>
         </div>
 
-        <aside className={`${surfaceCardClass} bg-panel p-6 lg:max-w-md lg:justify-self-end xl:max-w-none xl:justify-self-stretch`} aria-label="Availability and core strengths">
+        <aside className={`${surfaceCardClass} bg-panel p-6`} aria-label="Availability and core strengths">
           <p className={monoLabelClass}>Available now</p>
           <p className="mt-4 font-display text-2xl font-bold leading-tight text-heading">Chicago or remote</p>
           <ul className="mt-5 grid list-none gap-2 p-0">
@@ -74,7 +74,7 @@ export function HomePage() {
               Selected work.
             </h2>
           </div>
-          <p className="max-w-[38ch] text-ink-soft">Projects showing production delivery, user-minded design, and systems under active development.</p>
+          <p className="max-w-[38ch] text-ink-soft md:justify-self-end md:text-right">Projects showing production delivery, user-minded design, and systems under active development.</p>
         </div>
 
         {status === 'loading' ? <RouteState ariaLive="polite" description="Loading the selected case studies." label="Loading" role="status" title="Loading featured work." /> : null}
@@ -89,7 +89,7 @@ export function HomePage() {
         ) : null}
         {status === 'success' ? (
           <>
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {flagships.map((project, index) => <ProjectCard key={project.slug} order={index + 1} project={project} />)}
             </div>
             <div className="mt-8">

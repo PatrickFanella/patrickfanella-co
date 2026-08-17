@@ -269,7 +269,7 @@ export function ProjectDetailPage() {
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {project.architecture.map((item, index) => (
               <article key={item} className={`${surfaceCardClass} bg-panel p-6`}>
                 <p className={monoLabelClass}>{`Decision ${index + 1}`}</p>
@@ -307,7 +307,7 @@ export function ProjectDetailPage() {
             </h2>
           </div>
 
-          <div className="grid gap-5 lg:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2">
             {project.lessons.map((lesson, index) => (
               <article key={lesson} className={`${surfaceCardClass} bg-panel p-6`}>
                 <p className={monoLabelClass}>{`Lesson ${index + 1}`}</p>
