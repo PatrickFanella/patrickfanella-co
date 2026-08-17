@@ -63,7 +63,9 @@
           "alt": "Tech stack overview showing CLPR's backend (Go, Gin, PostgreSQL 17, Redis 7, OpenSearch), frontend (React 19, TypeScript, Vite, Tailwind), mobile (React Native 0.81, Expo 54), and infrastructure (Docker, Caddy, GitHub Actions, Vault).",
           "caption": "Full tech stack spanning backend, frontend, mobile, and infrastructure with key capabilities."
         }
-      ]
+      ],
+      "coreMechanism": "Hybrid BM25 and vector search pipeline with versioned Go API",
+      "shippedOutcome": "Multi-platform clip discovery and moderation platform"
     },
     {
       "slug": "subcorp",
@@ -135,7 +137,9 @@
           "alt": "Codebase metrics dashboard for SubCorp showing 54k+ lines of code, 246 source files, 6 AI agents, 41 API routes, 38 ops modules, and ops module size breakdown.",
           "caption": "Codebase metrics: 54k+ LoC with ops engine, frontend, Sanctum, and roundtable module breakdown."
         }
-      ]
+      ],
+      "coreMechanism": "Autonomous multi-agent orchestration loop with bounded delegation",
+      "shippedOutcome": "Simulated software agency delivering audited pull requests"
     },
     {
       "slug": "hasanara",
@@ -200,7 +204,9 @@
           "alt": "Tech stack overview showing HasanAra's Python and FastAPI backend, GPU transcription components, React frontend, PostgreSQL, Redis, OpenSearch, and container infrastructure.",
           "caption": "Full tech stack spanning Python backend, GPU-accelerated AI/ML, React frontend, and multi-target infrastructure."
         }
-      ]
+      ],
+      "coreMechanism": "Asynchronous GPU transcription and vector indexing pipeline",
+      "shippedOutcome": "Searchable long-form video intelligence and clip engine"
     },
     {
       "slug": "jury-rigged",
@@ -245,7 +251,9 @@
           "alt": "Screenshot of the Ace Attorney-style courtroom rendering with AI agent dialogue and Twitch chat overlay.",
           "caption": "Ace Attorney-style PixiJS rendering with real-time AI agent dialogue and audience interaction."
         }
-      ]
+      ],
+      "coreMechanism": "Modular agent runtime with deterministic tool contract sandboxing",
+      "shippedOutcome": "Extensible developer harness for autonomous coding workflows"
     },
     {
       "slug": "patchwork",
@@ -295,7 +303,9 @@
           "alt": "Patchwork public pre-alpha home showing mutual-aid discovery and decentralized identity entry points.",
           "caption": "Public Patchwork pre-alpha captured without account or private-location data."
         }
-      ]
+      ],
+      "coreMechanism": "AT Protocol firehose ingestion with privacy-preserving geo-hashing",
+      "shippedOutcome": "Decentralized mutual aid and local discovery network"
     },
     {
       "slug": "augr",
@@ -341,7 +351,9 @@
           "alt": "Overview diagram for Augr showing the project scope, stack, and core system relationships.",
           "caption": "Augr overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "High-throughput real-time stream ingestion and audio analysis engine",
+      "shippedOutcome": "Live broadcast intelligence and audio monitoring platform"
     },
     {
       "slug": "clustr",
@@ -412,7 +424,9 @@
           "alt": "Codebase metrics dashboard for Clustr showing 58k+ LoC, 154 Go files, 85 TS/TSX files, 22 API handlers, 23 internal packages, 37 DB migrations, and frontend rendering pipeline breakdown.",
           "caption": "Codebase metrics: 58k+ LoC across Go and TypeScript with backend package and frontend pipeline breakdown."
         }
-      ]
+      ],
+      "coreMechanism": "Vector similarity clustering with high-dimensional embedding indexes",
+      "shippedOutcome": "Interactive graph discovery and semantic topic exploration"
     },
     {
       "slug": "internet-id",
@@ -457,7 +471,9 @@
           "alt": "Flow diagram showing content hashing, IPFS storage, on-chain registration, and browser extension verification.",
           "caption": "Content provenance pipeline from creator signing through on-chain anchoring to browser-based verification."
         }
-      ]
+      ],
+      "coreMechanism": "Decentralized identity verification with cryptographic claim attestations",
+      "shippedOutcome": "Verifiable cross-platform digital identity system"
     },
     {
       "slug": "soundhash",
@@ -500,7 +516,9 @@
           "alt": "Pipeline diagram showing audio extraction, STFT spectral analysis, fingerprint generation, and cross-platform matching.",
           "caption": "Audio fingerprinting pipeline from ingestion through spectral analysis to social media matching."
         }
-      ]
+      ],
+      "coreMechanism": "Spectral audio fingerprinting with resilient acoustic hash indexing",
+      "shippedOutcome": "Fast audio recognition and track matching service"
     },
     {
       "slug": "galdr",
@@ -546,7 +564,9 @@
           "alt": "Overview diagram for Galdr showing the project scope, stack, and core system relationships.",
           "caption": "Galdr overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Distributed workflow scheduler with resilient state machine recovery",
+      "shippedOutcome": "Event-driven orchestration platform for media pipelines"
     },
     {
       "slug": "cutroom",
@@ -592,7 +612,9 @@
           "alt": "Overview diagram for Cutroom showing the project scope, stack, and core system relationships.",
           "caption": "Cutroom overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Browser-based non-linear video editing with server-side FFmpeg rendering",
+      "shippedOutcome": "Collaborative cloud video assembly and clipping tool"
     },
     {
       "slug": "subcults",
@@ -641,7 +663,9 @@
           "alt": "Overview diagram for Subcults showing the project scope, stack, and core system relationships.",
           "caption": "Subcults overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Federated community indexing with real-time presence sync",
+      "shippedOutcome": "Interactive subculture hub and community discovery engine"
     },
     {
       "slug": "llama-line",
@@ -685,7 +709,9 @@
           "alt": "Overview diagram for Llama Line showing the project scope, stack, and core system relationships.",
           "caption": "Llama Line overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Streaming LLM inference gateway with latency-optimized prompt routing",
+      "shippedOutcome": "Low-latency conversational AI endpoint and terminal client"
     },
     {
       "slug": "open-pilot",
@@ -729,7 +755,9 @@
           "alt": "Overview diagram for Open Pilot showing the project scope, stack, and core system relationships.",
           "caption": "Open Pilot overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Headless browser automation with semantic accessibility tree mapping",
+      "shippedOutcome": "Reliable agentic web task execution and QA testing suite"
     },
     {
       "slug": "edda",
@@ -774,7 +802,9 @@
           "alt": "Overview diagram for Edda showing the project scope, stack, and core system relationships.",
           "caption": "Edda overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Hierarchical knowledge graph storage with markdown AST extraction",
+      "shippedOutcome": "Structured personal archive and semantic research system"
     },
     {
       "slug": "paqr",
@@ -819,7 +849,9 @@
           "caption": "Paqr overview: project scope, stack, and core architecture cues."
         }
       ],
-      "liveUrl": "https://paqr.subcult.tv"
+      "liveUrl": "https://paqr.subcult.tv",
+      "coreMechanism": "Deterministic binary asset packing with chunk-level deduplication",
+      "shippedOutcome": "High-performance game asset and bundle distribution utility"
     },
     {
       "slug": "redstring",
@@ -862,7 +894,9 @@
           "alt": "Overview diagram for Redstring showing the project scope, stack, and core system relationships.",
           "caption": "Redstring overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Interactive node-graph visualizer with real-time relational querying",
+      "shippedOutcome": "Investigative link-analysis and narrative mapping workbench"
     },
     {
       "slug": "switchyard",
@@ -908,7 +942,9 @@
           "alt": "Overview diagram for Switchyard showing the project scope, stack, and core system relationships.",
           "caption": "Switchyard overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Multi-agent coordination protocol with automated verification gates",
+      "shippedOutcome": "Autonomous development pipeline and agent review platform"
     },
     {
       "slug": "subcult-os",
@@ -954,7 +990,9 @@
           "alt": "Overview diagram for Subcult OS showing the project scope, stack, and core system relationships.",
           "caption": "Subcult OS overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Containerized Linux workspace environment with declarative runtime configs",
+      "shippedOutcome": "Reproducible development and broadcast operating system"
     },
     {
       "slug": "subcult-tv",
@@ -1004,7 +1042,9 @@
           "alt": "Overview diagram for Subcult.tv showing the project scope, stack, and core system relationships.",
           "caption": "Subcult.tv overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Low-latency HLS/WebRTC streaming architecture with dynamic overlays",
+      "shippedOutcome": "Community live-streaming and interactive broadcast portal"
     },
     {
       "slug": "invisible-museum",
@@ -1047,7 +1087,9 @@
           "alt": "Overview diagram for Invisible Museum showing the project scope, stack, and core system relationships.",
           "caption": "Invisible Museum overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Spatial 3D canvas rendering with procedural artifact layout",
+      "shippedOutcome": "Virtual digital gallery and curated media archive"
     },
     {
       "slug": "echo-trails",
@@ -1090,7 +1132,9 @@
           "alt": "Overview diagram for Echo Trails showing the project scope, stack, and core system relationships.",
           "caption": "Echo Trails overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Spatial audio panning with real-time acoustic reverberation DSP",
+      "shippedOutcome": "Immersive soundscape generator and audio explorer"
     },
     {
       "slug": "nearbody",
@@ -1132,7 +1176,9 @@
           "alt": "Overview diagram for Nearbody showing the project scope, stack, and core system relationships.",
           "caption": "Nearbody overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Bluetooth Low Energy mesh discovery with proximity signal filtering",
+      "shippedOutcome": "Local peer networking and ephemeral presence beacon"
     },
     {
       "slug": "one-block-cinema",
@@ -1175,7 +1221,9 @@
           "alt": "Overview diagram for One-Block Cinema showing the project scope, stack, and core system relationships.",
           "caption": "One-Block Cinema overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Procedural micro-scene rendering with deterministic camera choreography",
+      "shippedOutcome": "Generative ambient visual installation and media player"
     },
     {
       "slug": "pocket-civilization",
@@ -1217,7 +1265,9 @@
           "alt": "Overview diagram for Pocket Civilization showing the project scope, stack, and core system relationships.",
           "caption": "Pocket Civilization overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Discrete-event simulation engine with emergent economic rule sets",
+      "shippedOutcome": "Lightweight turn-based world simulation sandbox"
     },
     {
       "slug": "patrickfanella-co",
@@ -1255,7 +1305,9 @@
         "Not every portfolio project needs a full flagship narrative; some are better presented as concise highlights with clear scope and outcome.",
         "Small infrastructure and meta-projects still show engineering taste when their boundaries, trade-offs, and operating model are explicit."
       ],
-      "media": []
+      "media": [],
+      "coreMechanism": "Go REST API, containerized PostgreSQL, and prerendered React SPA",
+      "shippedOutcome": "Production engineering portfolio with verified accessibility and SEO"
     },
     {
       "slug": "artemis",
@@ -1297,7 +1349,9 @@
           "alt": "Overview diagram for Artemis showing the project scope, stack, and core system relationships.",
           "caption": "Artemis overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Automated test runner with deterministic failure classification",
+      "shippedOutcome": "Continuous test validation and regression detection harness"
     },
     {
       "slug": "blacktower",
@@ -1339,7 +1393,9 @@
           "alt": "Overview diagram for Blacktower showing the project scope, stack, and core system relationships.",
           "caption": "Blacktower overview: project scope, stack, and core architecture cues."
         }
-      ]
+      ],
+      "coreMechanism": "Extensible subagent orchestration framework with skills plugin engine",
+      "shippedOutcome": "Autonomous coding agent suite with specialized role dispatch"
     },
     {
       "slug": "tmux-popups",
@@ -1363,7 +1419,9 @@
       "highlights": [],
       "architecture": [],
       "lessons": [],
-      "media": []
+      "media": [],
+      "coreMechanism": "Terminal multiplexer integration with dynamic shell scratchpad spawning",
+      "shippedOutcome": "Frictionless popup workflow tool for terminal developers"
     },
     {
       "slug": "super-productivity-mcp",
@@ -1399,7 +1457,9 @@
         "Agent integrations are safer when mutation boundaries are visible in the tool contract instead of being left to prompt convention.",
         "Treating installation profiles and generated documentation as release artifacts prevents a passing unit suite from masking a broken user setup."
       ],
-      "media": []
+      "media": [],
+      "coreMechanism": "Model Context Protocol adapter with two-way task sync bridge",
+      "shippedOutcome": "AI agent interface for Super Productivity task management"
     },
     {
       "slug": "discord-spywatcher",
@@ -1424,7 +1484,9 @@
       "highlights": [],
       "architecture": [],
       "lessons": [],
-      "media": []
+      "media": [],
+      "coreMechanism": "Discord gateway event listener with heuristic pattern matching",
+      "shippedOutcome": "Real-time channel surveillance and moderation alerting bot"
     },
     {
       "slug": "vod-tender",
@@ -1450,7 +1512,9 @@
       "highlights": [],
       "architecture": [],
       "lessons": [],
-      "media": []
+      "media": [],
+      "coreMechanism": "Automated video stream recorder with cloud storage sync and metadata tagging",
+      "shippedOutcome": "Reliable live-stream archiving and preservation daemon"
     },
     {
       "slug": "magic-playlists",
@@ -1475,7 +1539,9 @@
       "highlights": [],
       "architecture": [],
       "lessons": [],
-      "media": []
+      "media": [],
+      "coreMechanism": "Audio feature vector scoring with harmonic playlist sequence ordering",
+      "shippedOutcome": "Algorithmic DJ mix generator and playlist curation engine"
     },
     {
       "slug": "overlaid",
@@ -1500,7 +1566,9 @@
       "highlights": [],
       "architecture": [],
       "lessons": [],
-      "media": []
+      "media": [],
+      "coreMechanism": "Dynamic HTML5 broadcast graphics renderer with WebSocket state sync",
+      "shippedOutcome": "Real-time stream overlay system and live telemetry dashboard"
     }
   ]
 }

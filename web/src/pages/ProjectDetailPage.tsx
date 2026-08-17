@@ -132,12 +132,6 @@ export function ProjectDetailPage() {
     return <Navigate replace to="/archive#tools" />
   }
 
-  const evidenceLabel = [
-    project.media.length > 0 ? `${project.media.length} captures & diagrams` : null,
-    project.architecture.length > 0 ? `${project.architecture.length} decisions` : null,
-    project.lessons.length > 0 ? `${project.lessons.length} lessons` : null,
-  ].filter(Boolean).join(' · ') || 'None'
-
   return (
     <section className={pageSectionClass}>
       <Seo
@@ -172,7 +166,6 @@ export function ProjectDetailPage() {
           <SectionLabel>{project.category}</SectionLabel>
           <h1 className={`${pageTitleClass} mt-6 uppercase`}>{project.title}</h1>
           <p className="mt-6 max-w-[55ch] text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
-          <p className="mt-4 max-w-[58ch] text-[1.05rem] leading-relaxed text-ink-soft">{project.description}</p>
         </div>
 
         <aside className={`${surfaceCardClass} h-fit bg-panel p-6`} aria-label="Project overview">
@@ -184,18 +177,22 @@ export function ProjectDetailPage() {
               </span>
               <span className="text-[1.05rem] text-heading">{project.category}</span>
             </p>
-            <p className={metaCardClass}>
-              <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Stack
-              </span>
-              <span className="text-[1.05rem] text-heading">{project.stack.length} technologies</span>
-            </p>
-            <p className={metaCardClass}>
-              <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                Evidence
-              </span>
-              <span className="text-[1.05rem] text-heading">{evidenceLabel}</span>
-            </p>
+            {project.coreMechanism ? (
+              <p className={metaCardClass}>
+                <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
+                  Mechanism
+                </span>
+                <span className="text-[1.05rem] text-heading">{project.coreMechanism}</span>
+              </p>
+            ) : null}
+            {project.shippedOutcome ? (
+              <p className={metaCardClass}>
+                <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
+                  Outcome
+                </span>
+                <span className="text-[1.05rem] text-heading">{project.shippedOutcome}</span>
+              </p>
+            ) : null}
           </div>
 
           {project.repoUrl || project.liveUrl ? (
@@ -230,7 +227,8 @@ export function ProjectDetailPage() {
             {flagshipProblemHeadings[project.slug] || 'The problem it solves.'}
           </h2>
           <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft">
-            {project.problem || project.description}
+            {project.problem}
+            {project.description}
           </p>
         </article>
 

@@ -21,6 +21,8 @@ type Project struct {
 	Summary        string         `json:"summary"`
 	Description    string         `json:"description"`
 	Problem        string         `json:"problem"`
+	CoreMechanism  string         `json:"coreMechanism"`
+	ShippedOutcome string         `json:"shippedOutcome"`
 	Role           string         `json:"role"`
 	Year           int            `json:"year"`
 	Stack          []string       `json:"stack"`

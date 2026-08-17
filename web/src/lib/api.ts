@@ -19,6 +19,8 @@ export type Project = {
   summary: string
   description: string
   problem: string
+  coreMechanism: string
+  shippedOutcome: string
   role: string
   year: number
   stack: string[]

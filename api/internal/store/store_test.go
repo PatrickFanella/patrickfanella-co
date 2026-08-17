@@ -56,14 +56,17 @@ func TestScanProjectDecodesMediaPayload(t *testing.T) {
 		*dest[6].(*string) = "2025-present"
 		*dest[7].(*string) = "Summary"
 		*dest[8].(*string) = "Description"
-		*dest[9].(*string) = "Full stack developer"
-		*dest[10].(*int) = 2025
-		*dest[11].(*bool) = true
-		*dest[14].(*[]string) = []string{"Go", "React"}
-		*dest[15].(*[]string) = []string{"Highlight"}
-		*dest[16].(*[]string) = []string{"Architecture"}
-		*dest[17].(*[]string) = []string{"Lesson"}
-		*dest[18].(*[]byte) = []byte(`[{"src":"/assets/projects/clpr-overview.svg","alt":"Architecture diagram"}]`)
+		*dest[9].(*string) = "Problem statement"
+		*dest[10].(*string) = "Hybrid BM25 and vector search pipeline"
+		*dest[11].(*string) = "Multi-platform clip discovery platform"
+		*dest[12].(*string) = "Full stack developer"
+		*dest[13].(*int) = 2025
+		*dest[14].(*bool) = true
+		*dest[17].(*[]string) = []string{"Go", "React"}
+		*dest[18].(*[]string) = []string{"Highlight"}
+		*dest[19].(*[]string) = []string{"Architecture"}
+		*dest[20].(*[]string) = []string{"Lesson"}
+		*dest[21].(*[]byte) = []byte(`[{"src":"/assets/projects/clpr-overview.svg","alt":"Architecture diagram"}]`)
 		return nil
 	})
 	if err != nil {
@@ -82,5 +85,8 @@ func TestScanProjectDecodesMediaPayload(t *testing.T) {
 	}
 	if project.DeliveryStatus != "Production" || project.PeriodLabel != "2025-present" {
 		t.Fatalf("expected delivery metadata, got %#v", project)
+	}
+	if project.CoreMechanism != "Hybrid BM25 and vector search pipeline" || project.ShippedOutcome != "Multi-platform clip discovery platform" {
+		t.Fatalf("expected mechanism and outcome metadata, got %#v", project)
 	}
 }

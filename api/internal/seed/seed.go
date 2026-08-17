@@ -28,6 +28,8 @@ type Project struct {
 	Summary        string         `json:"summary"`
 	Description    string         `json:"description"`
 	Problem        string         `json:"problem,omitempty"`
+	CoreMechanism  string         `json:"coreMechanism,omitempty"`
+	ShippedOutcome string         `json:"shippedOutcome,omitempty"`
 	Role           string         `json:"role"`
 	Year           int            `json:"year"`
 	RepoURL        string         `json:"repoUrl,omitempty"`
@@ -144,8 +146,8 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 		var projectID int64
 		err = tx.QueryRow(
 			ctx,
-			`INSERT INTO projects (slug, title, kind, classification, category, delivery_status, period_label, summary, description, problem, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
-			 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NULLIF($13, ''), NULLIF($14, ''), $15, $16, $17, $18, $19, $20)
+			`INSERT INTO projects (slug, title, kind, classification, category, delivery_status, period_label, summary, description, problem, core_mechanism, shipped_outcome, role, year, repo_url, live_url, featured, sort_order, highlights, architecture, lessons_learned, media)
+			 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, NULLIF($15, ''), NULLIF($16, ''), $17, $18, $19, $20, $21, $22)
 			 ON CONFLICT (slug) DO UPDATE SET
 			   title = EXCLUDED.title,
 			   kind = EXCLUDED.kind,
@@ -156,6 +158,8 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			   summary = EXCLUDED.summary,
 			   description = EXCLUDED.description,
 			   problem = EXCLUDED.problem,
+			   core_mechanism = EXCLUDED.core_mechanism,
+			   shipped_outcome = EXCLUDED.shipped_outcome,
 			   role = EXCLUDED.role,
 			   year = EXCLUDED.year,
 			   repo_url = EXCLUDED.repo_url,
@@ -177,6 +181,8 @@ func Run(ctx context.Context, pool *pgxpool.Pool, portfolio Portfolio, logger *l
 			project.Summary,
 			project.Description,
 			project.Problem,
+			project.CoreMechanism,
+			project.ShippedOutcome,
 			project.Role,
 			project.Year,
 			project.RepoURL,
