@@ -7,15 +7,7 @@ import {
   secondaryButtonClass,
   surfaceCardClass,
 } from '../lib/styles'
-
-const pipColors = [
-  'bg-accent-green',
-  'bg-accent-purple',
-  'bg-accent-pink',
-  'bg-accent-teal',
-  'bg-accent-orange',
-  'bg-accent-yellow',
-]
+import { getTechPipColor } from '../lib/techColors'
 
 type ProjectCardProps = {
   order?: number
@@ -54,7 +46,7 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
       </div>
 
       {/* Title + summary */}
-      <div className="mt-4 border-b-2 border-stroke pb-4">
+      <div className="mt-4 pb-4">
         <h3 className="max-w-[14ch] font-display text-[clamp(1.9rem,3vw,2.5rem)] font-bold leading-[0.92] tracking-[-0.05em] text-heading md:text-[2rem] xl:text-[2.25rem]">
           {project.title}
         </h3>
@@ -64,7 +56,7 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
       </div>
 
       {/* Stack pips with hover tooltip */}
-      <div className="mt-auto pt-4">
+      <div className="mt-auto border-t-2 border-b-2 border-stroke pt-4 pb-4">
         <p className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-ink-soft">Stack</p>
         <div
           ref={pipContainerRef}
@@ -72,11 +64,11 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
           aria-label={`${project.stack.length} technologies in the stack: ${project.stack.join(', ')}`}
           onMouseLeave={() => setHoveredTech(null)}
         >
-          {project.stack.map((tech, i) => (
+          {project.stack.map((tech) => (
             <span
               key={tech}
               aria-label={tech}
-              className={`h-2.5 w-2.5 cursor-pointer transition-transform hover:scale-150 ${pipColors[i % pipColors.length]}`}
+              className={`h-2.5 w-2.5 cursor-pointer transition-transform hover:scale-150 ${getTechPipColor(tech)}`}
               onMouseMove={(e) => handlePipMove(e, tech)}
               onMouseEnter={(e) => handlePipMove(e, tech)}
             />
@@ -92,9 +84,12 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
         </div>
       </div>
 
-      {/* Footer: CTA */}
-      <div className="mt-4 flex items-center justify-end border-t-2 border-stroke pt-4">
-        <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>
+      {/* Footer: status + CTA */}
+      <div className="mt-4 flex items-center justify-between">
+        <div className={`${monoLabelClass} text-left`}>
+          {project.deliveryStatus}
+        </div>
+        <Link className={`${secondaryButtonClass} text-nowrap`} to={`/projects/${project.slug}`}>
           {ctaLabel}
         </Link>
       </div>
