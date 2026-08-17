@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import type { Project } from '../lib/api'
@@ -25,6 +26,17 @@ type ProjectCardProps = {
 export function ProjectCard({ order, project }: ProjectCardProps) {
   const orderLabel = order ? order.toString().padStart(2, '0') : null
   const ctaLabel = project.kind === 'case-study' ? 'Read Case Study' : 'View Project'
+
+  const [hoveredTech, setHoveredTech] = useState<string | null>(null)
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 })
+  const pipContainerRef = useRef<HTMLDivElement>(null)
+
+  const handlePipMove = (e: React.MouseEvent, tech: string) => {
+    const rect = pipContainerRef.current?.getBoundingClientRect()
+    if (!rect) return
+    setTooltipPos({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+    setHoveredTech(tech)
+  }
 
   return (
     <article
@@ -61,15 +73,29 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
       <div className="mt-4 flex items-end justify-between gap-4 border-t-2 border-stroke pt-4">
         <div className="grid gap-1.5">
           <p className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-ink-soft">Stack</p>
-          <div className="flex gap-1" aria-label={`${project.stack.length} technologies in the stack`}>
+          <div
+            ref={pipContainerRef}
+            className="relative flex gap-1"
+            aria-label={`${project.stack.length} technologies in the stack`}
+            onMouseLeave={() => setHoveredTech(null)}
+          >
             {project.stack.slice(0, 8).map((tech, i) => (
               <span
                 key={tech}
-                title={tech}
                 aria-label={tech}
-                className={`h-2 w-2 ${pipColors[i % pipColors.length]}`}
+                className={`h-2 w-2 cursor-pointer transition-transform hover:scale-150 ${pipColors[i % pipColors.length]}`}
+                onMouseMove={(e) => handlePipMove(e, tech)}
+                onMouseEnter={(e) => handlePipMove(e, tech)}
               />
             ))}
+            {hoveredTech ? (
+              <div
+                className="pointer-events-none absolute z-50 -translate-x-1/2 -translate-y-full whitespace-nowrap border-2 border-heading bg-panel px-2.5 py-1 font-mono text-[0.7rem] font-bold uppercase tracking-[0.1em] text-heading shadow-brutal-green"
+                style={{ left: `${tooltipPos.x}px`, top: `${tooltipPos.y - 8}px` }}
+              >
+                {hoveredTech}
+              </div>
+            ) : null}
           </div>
         </div>
         <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>
