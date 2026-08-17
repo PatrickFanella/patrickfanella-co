@@ -7,7 +7,6 @@ import {
   secondaryButtonClass,
   surfaceCardClass,
 } from '../lib/styles'
-import { StackCueList } from './StackCueList'
 
 const pipColors = [
   'bg-accent-green',
@@ -64,40 +63,37 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
         </p>
       </div>
 
-      {/* Tags: fixed height, centered at bottom */}
-      <div className="mt-auto flex h-14 items-center justify-center pt-4">
-        <StackCueList ariaLabel={`${project.title} technology stack`} items={project.stack} maxVisible={3} />
+      {/* Stack pips with hover tooltip */}
+      <div className="mt-auto pt-4">
+        <p className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-ink-soft">Stack</p>
+        <div
+          ref={pipContainerRef}
+          className="relative mt-2 flex flex-wrap gap-1.5"
+          aria-label={`${project.stack.length} technologies in the stack: ${project.stack.join(', ')}`}
+          onMouseLeave={() => setHoveredTech(null)}
+        >
+          {project.stack.map((tech, i) => (
+            <span
+              key={tech}
+              aria-label={tech}
+              className={`h-2.5 w-2.5 cursor-pointer transition-transform hover:scale-150 ${pipColors[i % pipColors.length]}`}
+              onMouseMove={(e) => handlePipMove(e, tech)}
+              onMouseEnter={(e) => handlePipMove(e, tech)}
+            />
+          ))}
+          {hoveredTech ? (
+            <div
+              className="pointer-events-none absolute z-50 -translate-x-1/2 -translate-y-full whitespace-nowrap border-2 border-heading bg-panel px-2.5 py-1 font-mono text-[0.7rem] font-bold uppercase tracking-[0.1em] text-heading shadow-brutal-green"
+              style={{ left: `${tooltipPos.x}px`, top: `${tooltipPos.y - 10}px` }}
+            >
+              {hoveredTech}
+            </div>
+          ) : null}
+        </div>
       </div>
 
-      {/* Footer: stack legend left + CTA right */}
-      <div className="mt-4 flex items-end justify-between gap-4 border-t-2 border-stroke pt-4">
-        <div className="grid gap-1.5">
-          <p className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-ink-soft">Stack</p>
-          <div
-            ref={pipContainerRef}
-            className="relative flex gap-1"
-            aria-label={`${project.stack.length} technologies in the stack`}
-            onMouseLeave={() => setHoveredTech(null)}
-          >
-            {project.stack.slice(0, 8).map((tech, i) => (
-              <span
-                key={tech}
-                aria-label={tech}
-                className={`h-2 w-2 cursor-pointer transition-transform hover:scale-150 ${pipColors[i % pipColors.length]}`}
-                onMouseMove={(e) => handlePipMove(e, tech)}
-                onMouseEnter={(e) => handlePipMove(e, tech)}
-              />
-            ))}
-            {hoveredTech ? (
-              <div
-                className="pointer-events-none absolute z-50 -translate-x-1/2 -translate-y-full whitespace-nowrap border-2 border-heading bg-panel px-2.5 py-1 font-mono text-[0.7rem] font-bold uppercase tracking-[0.1em] text-heading shadow-brutal-green"
-                style={{ left: `${tooltipPos.x}px`, top: `${tooltipPos.y - 8}px` }}
-              >
-                {hoveredTech}
-              </div>
-            ) : null}
-          </div>
-        </div>
+      {/* Footer: CTA */}
+      <div className="mt-4 flex items-center justify-end border-t-2 border-stroke pt-4">
         <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>
           {ctaLabel}
         </Link>

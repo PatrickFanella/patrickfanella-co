@@ -38,7 +38,7 @@ export function HomePage() {
         }}
       />
 
-      <section className="grid gap-8 border-b-2 border-stroke pb-12 pt-3 lg:grid-cols-[minmax(0,1.55fr)_minmax(18rem,0.65fr)] lg:items-end">
+      <section className="grid gap-8 border-b-2 border-stroke pb-12 pt-3 xl:grid-cols-[minmax(0,1.55fr)_minmax(20rem,0.65fr)] xl:items-end">
         <div>
           <SectionLabel>Senior Full-Stack / Backend</SectionLabel>
           <h1 className="mt-5 max-w-[13ch] font-display text-[clamp(3.2rem,8vw,7.6rem)] font-bold uppercase leading-[0.84] tracking-[-0.055em] text-heading">
@@ -56,7 +56,7 @@ export function HomePage() {
           </div>
         </div>
 
-        <aside className={`${surfaceCardClass} bg-panel p-6`} aria-label="Availability and core strengths">
+        <aside className={`${surfaceCardClass} bg-panel p-6 lg:max-w-md lg:justify-self-end xl:max-w-none xl:justify-self-stretch`} aria-label="Availability and core strengths">
           <p className={monoLabelClass}>Available now</p>
           <p className="mt-4 font-display text-2xl font-bold leading-tight text-heading">Chicago or remote</p>
           <ul className="mt-5 grid list-none gap-2 p-0">
