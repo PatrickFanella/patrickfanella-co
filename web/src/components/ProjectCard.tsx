@@ -58,17 +58,15 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
         <StackCueList ariaLabel={`${project.title} technology stack`} items={project.stack} maxVisible={3} />
       </div>
 
-      {/* Footer: decoration left + CTA right */}
-      <div className="mt-4 flex items-center justify-between gap-4 border-t-2 border-stroke pt-4">
-        <div className="flex items-center gap-2" aria-label={`${project.stack.length} technologies in the stack`}>
+      {/* Footer: stack legend left + CTA right */}
+      <div className="mt-4 flex items-end justify-between gap-4 border-t-2 border-stroke pt-4">
+        <div className="grid gap-1.5" aria-label={`${project.stack.length} technologies in the stack`}>
+          <p className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-ink-soft">Stack</p>
           <div className="flex gap-1" aria-hidden="true">
             {Array.from({ length: pipCount }).map((_, i) => (
               <span key={i} className={`h-2 w-2 ${pipColors[i % pipColors.length]}`} />
             ))}
           </div>
-          <span className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-ink-soft">
-            {project.stack.length} tech
-          </span>
         </div>
         <Link className={secondaryButtonClass} to={`/projects/${project.slug}`}>
           {ctaLabel}

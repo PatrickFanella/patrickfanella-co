@@ -13,7 +13,7 @@ const focusAreas = ['Go APIs and services', 'React and TypeScript products', 'Po
 
 export function HomePage() {
   const { projects, status, error, retry } = useProjects()
-  const flagships = projects.filter((project) => project.classification === 'flagship')
+  const flagships = projects.filter((project) => project.featured)
 
   return (
     <>

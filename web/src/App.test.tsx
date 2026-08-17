@@ -62,17 +62,18 @@ describe('App navigation flows', () => {
 
 	it('navigates from the projects archive to a project detail route', async () => {
 		const user = userEvent.setup()
-		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
-		vi.spyOn(api, 'fetchProject').mockResolvedValue(featuredProject)
+		const nonFeaturedFlagship = { ...featuredProject, slug: 'clustr', title: 'Clustr', featured: false }
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue([...projectsFixture, nonFeaturedFlagship])
+		vi.spyOn(api, 'fetchProject').mockResolvedValue({ ...featuredProject, slug: 'clustr', title: 'Clustr', featured: false })
 
 		renderApp('/projects')
 
 		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
 		await user.click(await screen.findByRole('link', { name: /read case study/i }))
 
-		expect(await screen.findByRole('heading', { level: 1, name: featuredProject.title })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { level: 1, name: 'Clustr' })).toBeInTheDocument()
 		await waitFor(() => {
-			expect(document.title).toBe('Clpr Case Study — Go, React & Hybrid Search | Patrick Fanella')
+			expect(document.title).toBe('Clustr Case Study — Graph Analysis & Unity Client | Patrick Fanella')
 		})
 	})
 })

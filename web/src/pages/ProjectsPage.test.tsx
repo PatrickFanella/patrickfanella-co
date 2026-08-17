@@ -17,12 +17,14 @@ describe('ProjectsPage', () => {
 		expect(screen.queryByText(/0 archive/i)).not.toBeInTheDocument()
 	})
 
-	it('renders only flagship case studies in the primary project journey', async () => {
-		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
+	it('renders only non-featured flagship case studies in the primary project journey', async () => {
+		const nonFeaturedFlagship = { ...featuredProject, slug: 'clustr', title: 'Clustr', featured: false }
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue([...projectsFixture, nonFeaturedFlagship])
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: 'Clustr' })).toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: 'Clpr' })).not.toBeInTheDocument()
 		expect(screen.queryByText('Internet-ID')).not.toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
 		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
@@ -33,6 +35,7 @@ describe('ProjectsPage', () => {
 			...featuredProject,
 			slug: `selected-${index + 1}`,
 			title: `Selected Project ${index + 1}`,
+			featured: false,
 		}))
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(selectedProjects)
 

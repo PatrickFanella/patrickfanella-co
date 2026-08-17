@@ -357,7 +357,7 @@
       "role": "Full-stack data engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/clustr",
-      "featured": true,
+      "featured": false,
       "sortOrder": 6,
       "stack": [
         "Go",
@@ -609,7 +609,7 @@
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/subcults",
       "liveUrl": "https://subcults.subcult.tv",
-      "featured": true,
+      "featured": false,
       "sortOrder": 4,
       "stack": [
         "Go",
@@ -900,7 +900,7 @@
       "kind": "highlight",
       "category": "AI & Automation",
       "year": 2026,
-      "featured": true,
+      "featured": false,
       "sortOrder": 7,
       "media": [
         {
@@ -946,7 +946,7 @@
       "kind": "highlight",
       "category": "Community & Media",
       "year": 2026,
-      "featured": true,
+      "featured": false,
       "sortOrder": 5,
       "media": [
         {

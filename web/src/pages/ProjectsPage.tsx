@@ -8,7 +8,7 @@ import { useProjects } from '../lib/useProjects'
 
 export function ProjectsPage() {
   const { projects, status, error, retry } = useProjects()
-  const flagships = projects.filter((project) => project.classification === 'flagship')
+  const flagships = projects.filter((project) => project.classification === 'flagship' && !project.featured)
 
   return (
     <section className={`${pageSectionClass} pt-3`}>
