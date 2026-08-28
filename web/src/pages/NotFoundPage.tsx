@@ -17,10 +17,10 @@ export function NotFoundPage() {
 			<RouteState
 				actions={
 					<Link className={primaryButtonClass} to="/">
-						Back to Home
+						Back to home
 					</Link>
 				}
-				description="The page you requested does not exist or may have moved."
+				description="That page does not exist or has moved."
 				headingLevel="h1"
 				label="Not found"
 				title="This page isn't available."

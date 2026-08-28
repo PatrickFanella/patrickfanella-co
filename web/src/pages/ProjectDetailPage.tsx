@@ -25,18 +25,18 @@ const flagshipProblemHeadings: Record<string, string> = {
   hasanara: 'Finding one moment across hundreds of hours.',
   clustr: 'Community relationships are invisible.',
   subcults: 'Discovery without feeding an algorithm.',
-  switchyard: 'Automation you can actually watch.',
+  switchyard: 'Automation you can watch.',
   'subcult-os': 'Live event operations are fragmented.',
 }
 
 const flagshipSeoTitles: Record<string, string> = {
-  clpr: 'Clpr Case Study — Go, React & Hybrid Search',
-  patchwork: 'Patchwork Case Study — AT Protocol & Location Privacy',
-  hasanara: 'HasanAra Case Study — GPU Transcription & Search',
-  clustr: 'Clustr Case Study — Graph Analysis & Unity Client',
-  subcults: 'Subcults Case Study — Go, Maps & Community Infrastructure',
-  switchyard: 'SwitchYard Case Study — Go, React & Workflow Routing',
-  'subcult-os': 'Subcult-OS Case Study — Go, React & Event Operations',
+  clpr: 'Clpr case study | Go, React and hybrid search',
+  patchwork: 'Patchwork case study | AT Protocol and location privacy',
+  hasanara: 'HasanAra case study | GPU transcription and search',
+  clustr: 'Clustr case study | Graph analysis and Unity client',
+  subcults: 'Subcults case study | Go, maps and community infrastructure',
+  switchyard: 'Switchyard case study | Go, React and workflow routing',
+  'subcult-os': 'Subcult-OS case study | Go, React and event operations',
 }
 
 const bespokeSocialImageSlugs = new Set(['clpr', 'patchwork', 'hasanara'])
@@ -52,13 +52,13 @@ export function ProjectDetailPage() {
     return (
       <section className={pageSectionClass}>
         <Seo
-          description="Fetching project details, supporting media, and architecture notes."
+          description="Loading project details."
           path={slug ? `/projects/${slug}` : '/projects'}
           title="Loading project"
         />
         <RouteState
           ariaLive="polite"
-          description="Fetching the project details, media, and architecture notes."
+          description="Loading project details."
           headingLevel="h1"
           label="Loading"
           role="status"
@@ -82,10 +82,10 @@ export function ProjectDetailPage() {
         <RouteState
           actions={
             <Link className={primaryButtonClass} to="/projects">
-              Back to Projects
+              Back to projects
             </Link>
           }
-          description="The route exists, but this case study has not been published yet."
+          description="This case study has not been published."
           headingLevel="h1"
           label="Not found"
           title="This case study isn't available."
@@ -107,10 +107,10 @@ export function ProjectDetailPage() {
           actions={(
             <>
               <button className={secondaryButtonClass} onClick={retry} type="button">
-                Try Again
+                Try again
               </button>
               <Link className={textLinkClass} to="/projects">
-                Back to Projects
+                Back to projects
               </Link>
             </>
           )}
@@ -153,10 +153,9 @@ export function ProjectDetailPage() {
           },
           description: project.summary,
           headline: project.title,
-            image: project.media[0]?.src ? [`${siteUrl}${project.media[0].src}`] : undefined,
-          keywords: project.stack.join(', '),
+          image: project.media[0]?.src ? [`${siteUrl}${project.media[0].src}`] : undefined,
           name: project.title,
-            url: `${siteUrl}/projects/${project.slug}`,
+          url: `${siteUrl}/projects/${project.slug}`,
         }}
         title={flagshipSeoTitles[project.slug] || project.title}
         type="article"
@@ -180,7 +179,7 @@ export function ProjectDetailPage() {
             {project.coreMechanism ? (
               <p className={metaCardClass}>
                 <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
-                  Mechanism
+                  Core work
                 </span>
                 <span className="text-[1.05rem] text-heading">{project.coreMechanism}</span>
               </p>
@@ -236,10 +235,10 @@ export function ProjectDetailPage() {
 
         <article className={`${surfaceCardClass} bg-surface p-8`}>
           <h2 className="font-display text-[clamp(1.75rem,2.6vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading">
-            What I shipped.
+            What I delivered.
           </h2>
           <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-soft">
-            The concrete outcomes I delivered.
+            Key implementation and delivery work.
           </p>
           <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft">
             {project.highlights.map((highlight, index) => (
@@ -265,7 +264,7 @@ export function ProjectDetailPage() {
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft lg:justify-self-end lg:text-right">
-              Why the system is built this way, including the constraints each choice introduced.
+              Why I made each choice and what it required.
             </p>
           </div>
 
@@ -290,7 +289,7 @@ export function ProjectDetailPage() {
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft lg:justify-self-end lg:text-right">
-              Product captures and architecture diagrams showing the implemented system.
+              Screenshots and diagrams from the working project.
             </p>
           </div>
 
@@ -322,18 +321,18 @@ export function ProjectDetailPage() {
         <section className={`${surfaceCardClass} mt-16 grid gap-6 bg-panel p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end`} aria-labelledby="case-study-contact-heading">
           <div>
             <SectionLabel>Work together</SectionLabel>
-            <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading" id="case-study-contact-heading">Discuss this work.</h2>
-            <p className="mt-4 max-w-[58ch] leading-relaxed text-ink-soft">Building a product with similar backend, search, data, or workflow challenges? I'd be glad to discuss the tradeoffs and hear about the role.</p>
+            <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading" id="case-study-contact-heading">Hiring for similar work?</h2>
+            <p className="mt-4 max-w-[58ch] leading-relaxed text-ink-soft">Tell me about the role, the team, and the backend or product problems you need to solve.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link className={primaryButtonClass} to="/contact">Discuss a role</Link>
-            <a className={secondaryButtonClass} download="Patrick_Fanella_Resume.pdf" href="/assets/patrick_fanella_resume.pdf">Download résumé</a>
+            <Link className={primaryButtonClass} to="/contact">Tell me about a role</Link>
+            <a className={secondaryButtonClass} download="Patrick_Fanella_Resume.pdf" href="/assets/patrick_fanella_resume.pdf">Download resume</a>
           </div>
         </section>
       ) : null}
 
       <div className="mt-10 border-t-2 border-stroke pt-8">
-        <Link className={textLinkClass} to="/projects">← Back to Projects</Link>
+        <Link className={textLinkClass} to="/projects">← Back to projects</Link>
       </div>
     </section>
   )

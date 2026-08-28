@@ -28,15 +28,15 @@ type ContactFormValues = z.infer<typeof contactSchema>
 
 const alternateContactPaths = [
   {
-    title: 'Email directly',
+    title: 'Email me',
     href: 'mailto:fanella.patrick@gmail.com',
-    description: 'Send the role, team context, and timing directly to fanella.patrick@gmail.com.',
-    cta: 'Compose email ↗',
+    description: 'Send the role, team, and timing to fanella.patrick@gmail.com.',
+    cta: 'Write an email ↗',
   },
   {
     title: 'LinkedIn',
     href: 'https://linkedin.com/in/patrick-fanella',
-    description: 'Connect for senior full-stack or backend opportunities in Chicago or on a remote team.',
+    description: 'Contact me about senior full-stack or backend roles in Chicago or remote.',
     cta: 'Open LinkedIn ↗',
   },
 ]
@@ -90,7 +90,7 @@ export function ContactPage() {
         }
 
         if (error.code === 'network_error') {
-          setSubmitMessage('The contact form couldn\'t be reached. Please try again in a moment.')
+          setSubmitMessage('The contact service is unavailable. Please try again in a moment.')
           return
         }
 
@@ -98,7 +98,7 @@ export function ContactPage() {
         return
       }
 
-      setSubmitMessage('Something went wrong while sending your message. Please try again shortly.')
+      setSubmitMessage('I couldn\'t send your message. Please try again shortly.')
     }
   })
 
@@ -107,7 +107,7 @@ export function ContactPage() {
       <Seo
         description="Contact Patrick Fanella about senior full-stack or backend engineering roles in Chicago or remote."
         path="/contact"
-        title="Contact — Senior Full-Stack & Backend Engineer"
+        title="Contact | Senior full-stack and backend engineer"
       />
       <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(380px,1fr)] lg:items-start border-b-2 border-stroke pb-16 mb-10">
         <div className="grid gap-8">
@@ -117,12 +117,12 @@ export function ContactPage() {
               Tell me about the role.
             </h1>
             <p className={pageIntroClass}>
-              I'm interviewing for senior full-stack and backend roles in Chicago or remote. If your team needs someone who can own backend systems, product interfaces, and the path to production, I'd like to hear from you.
+              I'm interviewing for senior full-stack and backend roles in Chicago or on remote teams. Tell me what your team needs and where I could help.
             </p>
           </div>
 
           <aside className={`${surfaceCardClass} bg-panel p-8`} aria-label="Input guidelines">
-            <p className={monoLabelClass}>What to include</p>
+            <p className={monoLabelClass}>Useful context</p>
             <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">Include the role, team, and timing if you have them. A job description is welcome but not required.</p>
           </aside>
 
@@ -207,7 +207,7 @@ export function ContactPage() {
           </label>
 
           <button className={`${primaryButtonClass} mt-4 w-full justify-center`} type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send Patrick a message'}
+            {isSubmitting ? 'Sending...' : 'Send message'}
           </button>
 
           {submitMessage ? (
@@ -216,12 +216,12 @@ export function ContactPage() {
               className={`text-sm tracking-wide font-mono px-4 py-3 border-2 ${submitState === 'error' ? 'text-danger border-danger bg-danger/10' : 'text-paper border-accent-green bg-accent-green'}`}
               role={submitState === 'error' ? 'alert' : 'status'}
             >
-              {submitState === 'error' ? 'Error: ' : 'Success: '} {submitMessage}
+              {submitState === 'error' ? 'Error: ' : ''}{submitMessage}
             </p>
           ) : null}
 
           <p className="border-t-2 border-stroke pt-4 text-xs leading-relaxed text-ink-soft">
-            Privacy: this form stores your name, email, and message only so I can reply. Submissions and portfolio database backups are retained for no more than 90 days, then deleted automatically. They are not sold or used for advertising.
+            I store your name, email, and message so I can reply. I delete submissions and backups within 90 days. I do not sell your information or use it for advertising.
           </p>
         </form>
       </div>

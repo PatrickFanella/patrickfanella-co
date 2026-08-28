@@ -27,6 +27,16 @@ async function main() {
     if (locations.includes(route)) failures.push(`${route} must not be in the sitemap`)
   }
 
+  const homeHtml = await readFile(path.join(distDir, 'index.html'), 'utf8')
+  const homeFocusAreas = ['Backend systems', 'Accessible product interfaces', 'Testing and deployment', 'Production operations']
+  if (!homeHtml.includes(`"knowsAbout":${JSON.stringify(homeFocusAreas)}`)) {
+    failures.push('home Person knowsAbout must match the rendered focus areas')
+  }
+
+  if (homeHtml.includes(`| Patrick Fanella | Patrick Fanella`)) {
+    failures.push('home title must include the site name once')
+  }
+
   if (failures.length > 0) throw new Error(`Route contract failed:\n- ${failures.join('\n- ')}`)
   console.log(`Route contract verified: ${locations.length} indexed routes, archive routes are noindex.`)
 }

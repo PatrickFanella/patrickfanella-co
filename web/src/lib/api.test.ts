@@ -116,4 +116,55 @@ describe('api client', () => {
       }),
     )
   })
+
+  it('uses a plain connection error when fetch fails', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new TypeError('offline')))
+
+    await expect(fetchProjects()).rejects.toEqual(
+      expect.objectContaining({ code: 'network_error', message: 'Connection failed.', status: 0 }),
+    )
+  })
+
+  it('uses a plain request error when an error response has no message', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ error: { code: 'internal_error' } }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      ),
+    )
+
+    await expect(fetchProjects()).rejects.toEqual(
+      expect.objectContaining({ code: 'internal_error', message: 'The request failed. Please try again.', status: 500 }),
+    )
+  })
+
+  it('uses a request error when an error response contains HTML', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(new Response('<html>Bad gateway</html>', { status: 502 })),
+    )
+
+    await expect(fetchProjects()).rejects.toEqual(
+      expect.objectContaining({
+        code: 'unknown_error',
+        message: 'The request failed. Please try again.',
+        status: 502,
+      }),
+    )
+  })
+
+  it('uses a request error when an error response has an empty body', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(null, { status: 503 })))
+
+    await expect(fetchProjects()).rejects.toEqual(
+      expect.objectContaining({
+        code: 'unknown_error',
+        message: 'The request failed. Please try again.',
+        status: 503,
+      }),
+    )
+  })
 })

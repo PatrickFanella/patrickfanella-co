@@ -123,19 +123,19 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 
 	if origin != "" && !sameOrigin(origin, api.contactSecurity.AllowedOrigin) {
 		api.loggerForRequest(r).Warn("contact.create rejected", slog.String("reason", "origin_mismatch"), slog.String("origin", origin), slog.String("client_ip", clientIP))
-		writeError(w, http.StatusForbidden, "forbidden_origin", "This origin is not allowed to submit the contact form.", nil)
+		writeError(w, http.StatusForbidden, "forbidden_origin", "Origin not allowed.", nil)
 		return
 	}
 
 	if !strings.HasPrefix(strings.ToLower(contentType), "application/json") {
 		api.loggerForRequest(r).Warn("contact.create rejected", slog.String("reason", "unsupported_media_type"), slog.String("content_type", contentType), slog.String("client_ip", clientIP))
-		writeError(w, http.StatusUnsupportedMediaType, "unsupported_media_type", "Contact submissions must be sent as JSON.", nil)
+		writeError(w, http.StatusUnsupportedMediaType, "unsupported_media_type", "Send contact submissions as JSON.", nil)
 		return
 	}
 
 	if !api.contactLimiter.Allow(clientIP) {
 		api.loggerForRequest(r).Warn("contact.create rejected", slog.String("reason", "rate_limit"), slog.String("client_ip", clientIP))
-		writeError(w, http.StatusTooManyRequests, "rate_limited", "Too many contact attempts. Please wait a moment and try again.", nil)
+		writeError(w, http.StatusTooManyRequests, "rate_limited", "Too many attempts. Try again later.", nil)
 		return
 	}
 
@@ -148,19 +148,19 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 		var maxBytesErr *http.MaxBytesError
 		if errors.As(err, &maxBytesErr) {
 			api.loggerForRequest(r).Warn("contact.create rejected", slog.String("reason", "payload_too_large"), slog.String("client_ip", clientIP), slog.Int64("limit_bytes", api.contactSecurity.MaxBodyBytes))
-			writeError(w, http.StatusRequestEntityTooLarge, "payload_too_large", "The contact request is too large.", nil)
+			writeError(w, http.StatusRequestEntityTooLarge, "payload_too_large", "Request too large.", nil)
 			return
 		}
 
 		api.loggerForRequest(r).Warn("contact.create invalid_json", slog.Any("error", err), slog.String("client_ip", clientIP))
-		writeError(w, http.StatusBadRequest, "invalid_json", "Request body must be valid JSON.", nil)
+		writeError(w, http.StatusBadRequest, "invalid_json", "Invalid JSON.", nil)
 		return
 	}
 
 	var extra json.RawMessage
 	if err := decoder.Decode(&extra); err != io.EOF {
 		api.loggerForRequest(r).Warn("contact.create invalid_json", slog.String("reason", "multiple_json_values"), slog.String("client_ip", clientIP))
-		writeError(w, http.StatusBadRequest, "invalid_json", "Request body must contain a single JSON object.", nil)
+		writeError(w, http.StatusBadRequest, "invalid_json", "Send one JSON object.", nil)
 		return
 	}
 
@@ -185,7 +185,7 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 
 	if fields := validateContactInput(input); len(fields) > 0 {
 		api.loggerForRequest(r).Warn("contact.create validation_failed", slog.Any("fields", fields), slog.String("client_ip", clientIP))
-		writeError(w, http.StatusBadRequest, "validation_error", "Please correct the highlighted fields.", fields)
+		writeError(w, http.StatusBadRequest, "validation_error", "Correct the highlighted fields.", fields)
 		return
 	}
 
@@ -194,10 +194,10 @@ func (api *API) CreateContact(w http.ResponseWriter, r *http.Request) {
 		switch {
 		case errors.Is(err, models.ErrDatabaseUnavailable):
 			api.loggerForRequest(r).Error("contact.create database_unavailable", slog.String("client_ip", clientIP))
-			writeError(w, http.StatusServiceUnavailable, "database_unavailable", "Contact submissions are temporarily unavailable.", nil)
+			writeError(w, http.StatusServiceUnavailable, "database_unavailable", "Contact form temporarily unavailable.", nil)
 		default:
 			api.loggerForRequest(r).Error("contact.create persistence_error", slog.Any("error", err), slog.String("client_ip", clientIP))
-			writeError(w, http.StatusInternalServerError, "internal_error", "Unable to store message.", nil)
+			writeError(w, http.StatusInternalServerError, "internal_error", "Message could not be saved.", nil)
 		}
 		return
 	}
@@ -230,9 +230,9 @@ func writeStoreError(w http.ResponseWriter, err error) {
 	case errors.Is(err, models.ErrProjectNotFound):
 		writeError(w, http.StatusNotFound, "project_not_found", "Project not found.", nil)
 	case errors.Is(err, models.ErrDatabaseUnavailable):
-		writeError(w, http.StatusServiceUnavailable, "database_unavailable", "Portfolio data is temporarily unavailable.", nil)
+		writeError(w, http.StatusServiceUnavailable, "database_unavailable", "Projects temporarily unavailable.", nil)
 	default:
-		writeError(w, http.StatusInternalServerError, "internal_error", "Unable to load portfolio data.", nil)
+		writeError(w, http.StatusInternalServerError, "internal_error", "Projects could not be loaded.", nil)
 	}
 }
 
@@ -258,7 +258,7 @@ func validateContactInput(input models.ContactInput) map[string]string {
 	}
 
 	if len(input.Message) < 20 {
-		fields["message"] = "A little more detail helps; aim for at least 20 characters."
+		fields["message"] = "Enter at least 20 characters."
 	}
 
 	if len(fields) == 0 {

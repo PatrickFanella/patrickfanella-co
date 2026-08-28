@@ -18,7 +18,7 @@ export function ResumePage() {
       <Seo
         description="Download Patrick Fanella's one-page resume for senior full-stack and backend engineering roles."
         path="/resume"
-        title="Resume — Senior Full-Stack & Backend Engineer"
+        title="Resume | Senior full-stack and backend engineer"
       />
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.85fr)] lg:items-start border-b-2 border-stroke pb-12 mb-10">
@@ -28,7 +28,7 @@ export function ResumePage() {
             Patrick Fanella
           </h1>
           <p className={pageIntroClass}>
-            Senior full-stack and backend engineer building operational products across Go, React, Python, TypeScript, and PostgreSQL. Download the one-page résumé or open it in a new tab.
+            My one-page resume covers my senior full-stack and backend work. Download it or open it in a new tab.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -45,7 +45,7 @@ export function ResumePage() {
               rel="noreferrer"
               target="_blank"
             >
-              Open in New Tab ↗
+              Open in new tab ↗
             </a>
           </div>
         </div>
@@ -63,7 +63,7 @@ export function ResumePage() {
               <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
                 Focus
               </span>
-              <span className="text-[1.05rem] text-heading">Senior Full-Stack / Backend</span>
+              <span className="text-[1.05rem] text-heading">Senior full-stack / backend</span>
             </p>
           </div>
         </aside>

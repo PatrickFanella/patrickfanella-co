@@ -108,15 +108,20 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   try {
     response = await fetch(`${getApiBaseUrl()}${path}`, init)
   } catch {
-    throw new ApiClientError(0, 'network_error', 'The API is not reachable right now.')
+    throw new ApiClientError(0, 'network_error', 'Connection failed.')
   }
-
-  const payload = await parseJson<ApiErrorPayload | T>(response)
 
   if (!response.ok) {
-    throw toApiClientError(response.status, payload as ApiErrorPayload | null)
+    let payload: ApiErrorPayload | null = null
+    try {
+      payload = await parseJson<ApiErrorPayload>(response)
+    } catch {
+      // Invalid error bodies use the same stable fallback as empty bodies.
+    }
+    throw toApiClientError(response.status, payload)
   }
 
+  const payload = await parseJson<T>(response)
   return payload as T
 }
 
@@ -131,7 +136,7 @@ async function parseJson<T>(response: Response): Promise<T | null> {
 
 function toApiClientError(status: number, payload: ApiErrorPayload | null): ApiClientError {
   const code = payload?.error?.code || 'unknown_error'
-  const message = payload?.error?.message || 'Something went wrong while talking to the API.'
+  const message = payload?.error?.message || 'The request failed. Please try again.'
   const fields = payload?.error?.fields
 
   return new ApiClientError(status, code, message, fields)

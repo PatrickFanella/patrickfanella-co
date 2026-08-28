@@ -17,7 +17,7 @@ async function fillContactForm() {
 		'I would love to talk about one of your featured case studies.',
 	)
 
-	await user.click(screen.getByRole('button', { name: /send patrick a message/i }))
+	await user.click(screen.getByRole('button', { name: /send message/i }))
 
 	return user
 }
@@ -27,15 +27,16 @@ describe('ContactPage', () => {
 		vi.spyOn(api, 'submitContact').mockResolvedValue(contactSubmissionFixture)
 
 		renderInRouter(<ContactPage />, '/contact')
-		expect(screen.getByRole('link', { name: /compose email/i })).toHaveAttribute(
+		expect(screen.getByRole('link', { name: /write an email/i })).toHaveAttribute(
 			'href',
 			'mailto:fanella.patrick@gmail.com',
 		)
-		expect(screen.getByText(/retained for no more than 90 days/i)).toBeInTheDocument()
+		expect(screen.getByText(/delete submissions and backups within 90 days/i)).toBeInTheDocument()
 
 		await fillContactForm()
 
 		expect(await screen.findByRole('status')).toHaveTextContent(/thanks\. your note has been saved/i)
+		expect(screen.getByRole('status')).not.toHaveTextContent(/success:/i)
 		expect(api.submitContact).toHaveBeenCalledWith({
 			name: 'Patrick Fanella',
 			email: 'patrick@example.com',
@@ -68,6 +69,20 @@ describe('ContactPage', () => {
 
 		await fillContactForm()
 
-		expect(await screen.findByRole('alert')).toHaveTextContent(/couldn't be reached/i)
+		expect(await screen.findByRole('alert')).toHaveTextContent(
+			'The contact service is unavailable. Please try again in a moment.',
+		)
+	})
+
+	it('shows a plain fallback for unknown submission errors', async () => {
+		vi.spyOn(api, 'submitContact').mockRejectedValue(new Error('Unexpected failure'))
+
+		renderInRouter(<ContactPage />, '/contact')
+
+		await fillContactForm()
+
+		expect(await screen.findByRole('alert')).toHaveTextContent(
+			"I couldn't send your message. Please try again shortly.",
+		)
 	})
 })

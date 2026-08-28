@@ -1,7 +1,8 @@
-import { screen } from '@testing-library/react'
+import { screen, within } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
+import type { Project } from '../lib/api'
 import { featuredProject, projectsFixture, toolProject } from '../test/fixtures'
 import { renderInRouter } from '../test/renderWithRouter'
 import { ProjectsPage } from './ProjectsPage'
@@ -12,12 +13,12 @@ describe('ProjectsPage', () => {
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(screen.getByRole('status')).toHaveTextContent(/loading the selected case studies/i)
+		expect(screen.getByRole('status')).toHaveTextContent(/loading projects/i)
 		expect(screen.queryByText(/0 featured/i)).not.toBeInTheDocument()
 		expect(screen.queryByText(/0 archive/i)).not.toBeInTheDocument()
 	})
 
-	it('renders only flagship case studies in the primary project journey', async () => {
+	it('renders flagship case studies and excludes unrelated projects', async () => {
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
 		renderInRouter(<ProjectsPage />, '/projects')
@@ -26,6 +27,63 @@ describe('ProjectsPage', () => {
 		expect(screen.queryByText('Internet-ID')).not.toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
 		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
+	})
+
+	it('renders the curated tools once and in the requested order', async () => {
+		const curatedToolDetails: Array<[string, string, Project['kind']]> = [
+			['switchyard', 'Switchyard', 'highlight'],
+			['blacktower', 'Blacktower', 'highlight'],
+			['tmux-plugins', 'tmux-plugins', 'tool'],
+			['obsidian-plugin-metronome-tuner', 'obsidian-plugin-metronome-tuner', 'tool'],
+			['omarchy-plugin-shelfish', 'omarchy-plugin-shelfish', 'tool'],
+			['omarchy-plugin-superproductivity', 'omarchy-plugin-superproductivity', 'tool'],
+			['omarchy-plugin-topbar', 'omarchy-plugin-topbar', 'tool'],
+		]
+		const curatedTools = curatedToolDetails.map(([slug, title, kind]): Project => ({
+			...toolProject,
+			slug,
+			title,
+			kind,
+			classification: slug === 'switchyard' ? 'flagship' : 'archive',
+		}))
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue([
+			featuredProject,
+			...curatedTools,
+			toolProject,
+		])
+
+		renderInRouter(<ProjectsPage />, '/projects')
+
+		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
+		const tools = screen.getByRole('region', { name: 'Tools' })
+		expect(within(tools).getByRole('heading', { name: 'Tools' })).toBeInTheDocument()
+		expect(
+			within(tools).getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent),
+		).toEqual(curatedToolDetails.map(([, title]) => title))
+		const switchyardLink = within(tools).getByRole('link', { name: 'View project: Switchyard' })
+		expect(switchyardLink).toHaveAttribute('href', '/projects/switchyard')
+		expect(switchyardLink).not.toHaveAttribute('target')
+		expect(switchyardLink).not.toHaveAttribute('rel')
+		const repositoryLinks = curatedToolDetails.slice(1).map(([, title]) =>
+			within(tools).getByRole('link', { name: `View repository: ${title}` }),
+		)
+		expect(repositoryLinks.map((link) => link.getAttribute('href'))).toEqual(
+			curatedTools.slice(1).map((tool) => tool.repoUrl),
+		)
+		expect(repositoryLinks.every((link) => link.getAttribute('target') === '_blank')).toBe(true)
+		expect(repositoryLinks.every((link) => link.getAttribute('rel') === 'noreferrer')).toBe(true)
+		expect(within(tools).getAllByRole('link')).toEqual([switchyardLink, ...repositoryLinks])
+		expect(screen.getAllByRole('heading', { name: 'Switchyard' })).toHaveLength(1)
+		expect(screen.queryByRole('heading', { name: 'tmux-popups' })).not.toBeInTheDocument()
+	})
+
+	it('explains that card colors match the named stack technologies', async () => {
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue([featuredProject])
+
+		renderInRouter(<ProjectsPage />, '/projects')
+
+		expect(await screen.findByText(/legend names the technologies/i)).toHaveTextContent(/card colors match it/i)
+		expect(screen.queryByText(/hover over a marker/i)).not.toBeInTheDocument()
 	})
 
 	it('renders every selected flagship project', async () => {
@@ -46,7 +104,7 @@ describe('ProjectsPage', () => {
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: /selected work index is empty/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: /no projects found/i })).toBeInTheDocument()
 	})
 
 	it('renders an error state when the project index request fails', async () => {

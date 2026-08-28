@@ -10,13 +10,18 @@ import {
 import { getTechColor } from '../lib/techColors'
 
 type ProjectCardProps = {
+  linkToRepository?: boolean
   order?: number
   project: Project
 }
 
-export function ProjectCard({ order, project }: ProjectCardProps) {
+export function ProjectCard({ linkToRepository = false, order, project }: ProjectCardProps) {
   const orderLabel = order ? order.toString().padStart(2, '0') : null
-  const ctaLabel = project.kind === 'case-study' ? 'Read Case Study' : 'View Project'
+  const ctaLabel = project.kind === 'case-study'
+    ? 'Read case study'
+    : project.kind === 'highlight'
+      ? 'View project'
+      : 'View tool'
 
   const [hoveredTech, setHoveredTech] = useState<string | null>(null)
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 })
@@ -90,9 +95,27 @@ export function ProjectCard({ order, project }: ProjectCardProps) {
         <div className={`${monoLabelClass} text-left`}>
           {project.deliveryStatus}
         </div>
-        <Link className={`${secondaryButtonClass} text-nowrap`} to={`/projects/${project.slug}`}>
-          {ctaLabel}
-        </Link>
+        {linkToRepository && project.repoUrl ? (
+          <a
+            aria-label={`View repository: ${project.title}`}
+            className={`${secondaryButtonClass} text-nowrap`}
+            href={project.repoUrl}
+            rel="noreferrer"
+            target="_blank"
+          >
+            View repository
+          </a>
+        ) : linkToRepository ? (
+          <span className={`${monoLabelClass} text-right`}>Source unavailable</span>
+        ) : (
+          <Link
+            aria-label={`${ctaLabel}: ${project.title}`}
+            className={`${secondaryButtonClass} text-nowrap`}
+            to={`/projects/${project.slug}`}
+          >
+            {ctaLabel}
+          </Link>
+        )}
       </div>
     </article>
   )

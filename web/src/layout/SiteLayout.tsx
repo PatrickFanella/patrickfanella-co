@@ -38,7 +38,7 @@ export function SiteLayout() {
           <Link className="group grid w-fit gap-1" to="/">
             <span className={monoLabelClass}>Patrick Fanella</span>
             <span className="font-display text-xl font-bold leading-none tracking-[-0.03em] text-heading group-hover:text-accent-green sm:text-2xl">
-              Senior Full-Stack / Backend Engineer
+              Senior full-stack / backend engineer
             </span>
           </Link>
           <nav className="grid grid-cols-3 gap-2" aria-label="Primary navigation">
@@ -75,7 +75,7 @@ export function SiteLayout() {
               <Link className={textLinkClass} to="/archive">Archive</Link>
             </div>
           </div>
-          <p className={`${monoLabelClass} lg:justify-self-end`}>2026 // SYSTEM ONLINE</p>
+          <p className={`${monoLabelClass} lg:justify-self-end`}>2026 // Site online</p>
         </footer>
       </div>
     </div>

@@ -14,7 +14,7 @@ describe('ProjectDetailPage', () => {
 
 		renderRoute(<ProjectDetailPage />, '/projects/:slug', '/projects/clpr')
 
-		expect(screen.getByRole('status')).toHaveTextContent(/fetching the project details, media, and architecture notes/i)
+		expect(screen.getByRole('status')).toHaveTextContent(/loading project details/i)
 	})
 
 	it('renders project detail data from the API', async () => {
@@ -29,7 +29,13 @@ describe('ProjectDetailPage', () => {
 			'href',
 			featuredProject.repoUrl,
 		)
-		expect(screen.getByRole('link', { name: /discuss a role/i })).toHaveAttribute('href', '/contact')
+		expect(screen.getByRole('link', { name: /tell me about a role/i })).toHaveAttribute('href', '/contact')
+		const creativeWorkSchema = JSON.parse(document.querySelector('script[type="application/ld+json"]')!.textContent!)
+		expect(creativeWorkSchema).not.toHaveProperty('keywords')
+		expect(creativeWorkSchema.image).toEqual(['https://patrickfanella.co/assets/projects/clpr-overview.svg'])
+		expect(creativeWorkSchema.url).toBe('https://patrickfanella.co/projects/clpr')
+		expect(document.title).toContain('Go, React and hybrid search')
+		expect(document.title).not.toContain('&')
 	})
 
 	it('sends tool projects to the tools archive route state', async () => {

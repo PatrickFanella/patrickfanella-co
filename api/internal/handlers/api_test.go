@@ -137,7 +137,7 @@ func TestGetProjectReturnsStructuredNotFound(t *testing.T) {
 
 	api.GetProject(res, req)
 
-	assertErrorResponse(t, res, http.StatusNotFound, "project_not_found")
+	assertErrorResponse(t, res, http.StatusNotFound, "project_not_found", "Project not found.")
 }
 
 func TestListProjectsReturnsStructuredInternalError(t *testing.T) {
@@ -147,7 +147,7 @@ func TestListProjectsReturnsStructuredInternalError(t *testing.T) {
 
 	api.ListProjects(res, req)
 
-	assertErrorResponse(t, res, http.StatusInternalServerError, "internal_error")
+	assertErrorResponse(t, res, http.StatusInternalServerError, "internal_error", "Projects could not be loaded.")
 }
 
 func TestCreateContactMalformedJSON(t *testing.T) {
@@ -158,7 +158,7 @@ func TestCreateContactMalformedJSON(t *testing.T) {
 
 	api.CreateContact(res, req)
 
-	assertErrorResponse(t, res, http.StatusBadRequest, "invalid_json")
+	assertErrorResponse(t, res, http.StatusBadRequest, "invalid_json", "Invalid JSON.")
 }
 
 func TestCreateContactValidationFailureIncludesFields(t *testing.T) {
@@ -181,9 +181,15 @@ func TestCreateContactValidationFailureIncludesFields(t *testing.T) {
 	if payload.Error.Code != "validation_error" {
 		t.Fatalf("expected validation_error, got %#v", payload.Error)
 	}
+	if payload.Error.Message != "Correct the highlighted fields." {
+		t.Fatalf("expected validation message, got %q", payload.Error.Message)
+	}
 
 	if payload.Error.Fields["name"] == "" || payload.Error.Fields["email"] == "" || payload.Error.Fields["message"] == "" {
 		t.Fatalf("expected validation fields, got %#v", payload.Error.Fields)
+	}
+	if payload.Error.Fields["message"] != "Enter at least 20 characters." {
+		t.Fatalf("expected message field guidance, got %q", payload.Error.Fields["message"])
 	}
 }
 
@@ -195,7 +201,7 @@ func TestCreateContactDatabaseUnavailable(t *testing.T) {
 
 	api.CreateContact(res, req)
 
-	assertErrorResponse(t, res, http.StatusServiceUnavailable, "database_unavailable")
+	assertErrorResponse(t, res, http.StatusServiceUnavailable, "database_unavailable", "Contact form temporarily unavailable.")
 }
 
 func TestCreateContactPersistenceError(t *testing.T) {
@@ -206,7 +212,7 @@ func TestCreateContactPersistenceError(t *testing.T) {
 
 	api.CreateContact(res, req)
 
-	assertErrorResponse(t, res, http.StatusInternalServerError, "internal_error")
+	assertErrorResponse(t, res, http.StatusInternalServerError, "internal_error", "Message could not be saved.")
 }
 
 func TestCreateContactSuccess(t *testing.T) {
@@ -306,7 +312,7 @@ func TestCreateContactRejectsUnsupportedMediaType(t *testing.T) {
 
 	api.CreateContact(res, req)
 
-	assertErrorResponse(t, res, http.StatusUnsupportedMediaType, "unsupported_media_type")
+	assertErrorResponse(t, res, http.StatusUnsupportedMediaType, "unsupported_media_type", "Send contact submissions as JSON.")
 }
 
 func TestCreateContactRejectsUnexpectedOrigin(t *testing.T) {
@@ -318,7 +324,7 @@ func TestCreateContactRejectsUnexpectedOrigin(t *testing.T) {
 
 	api.CreateContact(res, req)
 
-	assertErrorResponse(t, res, http.StatusForbidden, "forbidden_origin")
+	assertErrorResponse(t, res, http.StatusForbidden, "forbidden_origin", "Origin not allowed.")
 }
 
 func TestCreateContactSilentlyAcceptsHoneypotSubmissions(t *testing.T) {
@@ -377,7 +383,7 @@ func TestCreateContactRejectsRateLimitedRequests(t *testing.T) {
 
 	api.CreateContact(secondRes, second)
 
-	assertErrorResponse(t, secondRes, http.StatusTooManyRequests, "rate_limited")
+	assertErrorResponse(t, secondRes, http.StatusTooManyRequests, "rate_limited", "Too many attempts. Try again later.")
 }
 
 func TestCreateContactRejectsOversizedPayload(t *testing.T) {
@@ -396,7 +402,7 @@ func TestCreateContactRejectsOversizedPayload(t *testing.T) {
 
 	api.CreateContact(res, req)
 
-	assertErrorResponse(t, res, http.StatusRequestEntityTooLarge, "payload_too_large")
+	assertErrorResponse(t, res, http.StatusRequestEntityTooLarge, "payload_too_large", "Request too large.")
 }
 
 func newTestAPI(store *stubStore) *API {
@@ -414,7 +420,7 @@ func withSlug(req *http.Request, slug string) *http.Request {
 	return req.WithContext(context.WithValue(req.Context(), chi.RouteCtxKey, rctx))
 }
 
-func assertErrorResponse(t *testing.T, res *httptest.ResponseRecorder, wantStatus int, wantCode string) {
+func assertErrorResponse(t *testing.T, res *httptest.ResponseRecorder, wantStatus int, wantCode, wantMessage string) {
 	t.Helper()
 
 	if res.Code != wantStatus {
@@ -428,5 +434,8 @@ func assertErrorResponse(t *testing.T, res *httptest.ResponseRecorder, wantStatu
 
 	if payload.Error.Code != wantCode {
 		t.Fatalf("expected error code %q, got %#v", wantCode, payload.Error)
+	}
+	if payload.Error.Message != wantMessage {
+		t.Fatalf("expected error message %q, got %#v", wantMessage, payload.Error)
 	}
 }

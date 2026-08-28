@@ -37,13 +37,13 @@ describe('App navigation flows', () => {
 		renderApp('/')
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		await user.click(screen.getByRole('link', { name: /review the case studies/i }))
+		await user.click(screen.getByRole('link', { name: /read the case studies/i }))
 
 		expect(await screen.findByRole('heading', { name: /projects/i })).toBeInTheDocument()
 		expect(scrollToSpy).toHaveBeenCalledWith(0, 0)
 		expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true })
 		await waitFor(() => {
-			expect(document.title).toBe('Projects — Senior Full-Stack & Backend Engineer | Patrick Fanella')
+			expect(document.title).toBe('Projects | Senior full-stack and backend engineer | Patrick Fanella')
 		})
 	})
 
@@ -57,7 +57,8 @@ describe('App navigation flows', () => {
 		expect(screen.queryByRole('link', { name: /^tools$/i })).not.toBeInTheDocument()
 		await user.click(screen.getAllByRole('link', { name: /^archive$/i })[0])
 
-		expect(await screen.findByRole('heading', { level: 1, name: /^all projects$/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { level: 1, name: /^additional projects$/i })).toBeInTheDocument()
+		expect(await screen.findByRole('region', { name: /developer tools/i })).toHaveAttribute('id', 'tools')
 	})
 
 	it('navigates from the projects archive to a project detail route', async () => {
@@ -72,7 +73,7 @@ describe('App navigation flows', () => {
 
 		expect(await screen.findByRole('heading', { level: 1, name: featuredProject.title })).toBeInTheDocument()
 		await waitFor(() => {
-			expect(document.title).toBe('Clpr Case Study — Go, React & Hybrid Search | Patrick Fanella')
+			expect(document.title).toBe('Clpr case study | Go, React and hybrid search | Patrick Fanella')
 		})
 	})
 })

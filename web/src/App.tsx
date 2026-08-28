@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <Analytics />
-      <Suspense fallback={<p className="p-8 font-mono text-sm uppercase text-accent-green" role="status">Loading page…</p>}>
+      <Suspense fallback={<p className="p-8 font-mono text-sm uppercase text-accent-green" role="status">Loading page...</p>}>
         <Routes>
           <Route element={<SiteLayout />}>
             <Route index element={<HomePage />} />

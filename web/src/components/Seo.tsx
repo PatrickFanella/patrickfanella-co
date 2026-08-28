@@ -2,10 +2,11 @@ import { Helmet } from 'react-helmet-async'
 
 import { siteName, toAbsoluteUrl } from '../lib/site'
 
-const defaultTitle = `${siteName} | Senior Full-Stack / Backend Engineer`
+const defaultTitle = 'Patrick Fanella | Senior Full-Stack and Backend Engineer'
 const defaultDescription =
-	'Patrick Fanella is a senior full-stack and backend engineer who builds operational products from data modeling and API design through React interfaces and production delivery.'
+	'Patrick Fanella builds Go and Python services, PostgreSQL data systems, and accessible React interfaces.'
 const defaultImagePath = '/assets/social/patrick-fanella-portfolio-1200x630.png'
+const defaultImageAlt = 'Patrick Fanella portfolio preview'
 
 type StructuredData = Record<string, unknown> | Array<Record<string, unknown>>
 
@@ -27,14 +28,17 @@ export function Seo({
 	description = defaultDescription,
 	path = '/',
 	image = defaultImagePath,
-	imageAlt,
+	imageAlt = defaultImageAlt,
 	type = 'website',
 	robots = 'index,follow',
 	includeCanonical = true,
 	includeSocialUrl = true,
 	structuredData,
 }: SeoProps) {
-	const resolvedTitle = title ? `${title} | ${siteName}` : defaultTitle
+	const siteNameSuffix = ` | ${siteName}`
+	const resolvedTitle = title
+		? title.endsWith(siteNameSuffix) ? title : `${title}${siteNameSuffix}`
+		: defaultTitle
 	const absoluteUrl = toAbsoluteUrl(path)
 	const canonicalUrl = includeCanonical ? absoluteUrl : undefined
 	const ogUrl = includeSocialUrl ? absoluteUrl : undefined

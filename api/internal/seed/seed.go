@@ -45,6 +45,7 @@ type Project struct {
 
 type ProjectMedia struct {
 	Src     string `json:"src"`
+	SrcSet  string `json:"srcSet,omitempty"`
 	Alt     string `json:"alt"`
 	Caption string `json:"caption,omitempty"`
 }
