@@ -1397,15 +1397,18 @@
     },
     {
       "slug": "tmux-popups",
-      "title": "Tmux Popups",
+      "title": "tmux-popups",
       "kind": "tool",
+      "classification": "archive",
       "category": "Developer Tools",
+      "deliveryStatus": "Tool",
+      "periodLabel": "2026",
       "summary": "A tmux popup toolkit with a TSV registry, generated bindings, quick menu, local overrides, and diagnostics.",
       "description": "Tmux Popups reads a TSV registry to generate popup bindings and a quick menu. Local overrides and diagnostics keep project-specific changes separate from the shared registry.",
       "problem": "Hand-maintained tmux popup bindings drift across machines and projects. One registry should drive both bindings and the menu.",
       "role": "Tool developer",
       "year": 2026,
-      "repoUrl": "https://git.subcult.tv/PatrickFanella/tmux-popups",
+      "repoUrl": "https://github.com/PatrickFanella/tmux-popups",
       "featured": false,
       "sortOrder": 40,
       "stack": [
@@ -1569,32 +1572,6 @@
       "shippedOutcome": "Dockerized broadcast overlay for livestream status and alerts"
     },
     {
-      "slug": "tmux-plugins",
-      "title": "tmux-plugins",
-      "kind": "tool",
-      "classification": "archive",
-      "category": "Developer Tools",
-      "deliveryStatus": "Tool",
-      "periodLabel": "2026",
-      "summary": "A collection of tmux plugins for tailoring terminal sessions and recurring command-line workflows.",
-      "description": "tmux-plugins collects small tmux extensions for customizing terminal sessions and reducing repeated setup in command-line workflows.",
-      "problem": "Repeated terminal setup adds friction to daily work. This collection packages focused tmux customizations for reuse.",
-      "role": "Developer tool",
-      "year": 2026,
-      "featured": false,
-      "sortOrder": 46,
-      "stack": [
-        "Shell",
-        "tmux"
-      ],
-      "highlights": [],
-      "architecture": [],
-      "lessons": [],
-      "media": [],
-      "coreMechanism": "Reusable tmux plugin collection",
-      "shippedOutcome": "Repeatable terminal workflow customizations"
-    },
-    {
       "slug": "obsidian-plugin-metronome-tuner",
       "title": "obsidian-plugin-metronome-tuner",
       "kind": "tool",
@@ -1678,18 +1655,19 @@
       "shippedOutcome": "Super Productivity task visibility and control from the Omarchy top bar"
     },
     {
-      "slug": "omarchy-plugin-topbar",
-      "title": "omarchy-plugin-topbar",
+      "slug": "omarchy-monitor-bar",
+      "title": "omarchy-monitor-bar",
       "kind": "tool",
       "classification": "archive",
       "category": "Developer Tools",
       "deliveryStatus": "Tool",
       "periodLabel": "2026",
-      "summary": "A small Omarchy plugin for basic top-bar arrangement and visibility preferences.",
-      "description": "Adjusts the arrangement and visibility of top-bar elements in Omarchy.",
-      "problem": "Omarchy users may want a different arrangement or fewer visible top-bar elements.",
+      "summary": "Per-monitor Omarchy bar layouts with Full, Minimal, and Hidden modes.",
+      "description": "omarchy-monitor-bar assigns a separate bar layout to each monitor. One primary monitor uses Full mode; other monitors can use Minimal or Hidden mode. Minimal bars use a configurable glyph and workspace list.",
+      "problem": "A shared bar layout cannot distinguish the primary monitor from secondary monitors. Each monitor needs its own layout while one primary monitor keeps the Full bar.",
       "role": "Plugin developer",
       "year": 2026,
+      "repoUrl": "https://github.com/PatrickFanella/omarchy-monitor-bar",
       "featured": false,
       "sortOrder": 50,
       "stack": [
@@ -1700,8 +1678,8 @@
       "architecture": [],
       "lessons": [],
       "media": [],
-      "coreMechanism": "Top-bar element arrangement and visibility settings",
-      "shippedOutcome": "Basic top-bar customization for Omarchy"
+      "coreMechanism": "Per-monitor selection of Full, Minimal, or Hidden bar layouts",
+      "shippedOutcome": "One primary Full bar with configurable Minimal or Hidden bars on other monitors"
     }
   ]
 }

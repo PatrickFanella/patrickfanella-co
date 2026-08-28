@@ -10,11 +10,11 @@ import { useProjects } from '../lib/useProjects'
 const toolSlugs = [
   'switchyard',
   'blacktower',
-  'tmux-plugins',
+  'tmux-popups',
   'obsidian-plugin-metronome-tuner',
   'omarchy-plugin-shelfish',
   'omarchy-plugin-superproductivity',
-  'omarchy-plugin-topbar',
+  'omarchy-monitor-bar',
 ] as const
 
 export function ProjectsPage() {

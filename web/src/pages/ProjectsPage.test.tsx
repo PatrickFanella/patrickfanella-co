@@ -25,25 +25,26 @@ describe('ProjectsPage', () => {
 
 		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
 		expect(screen.queryByText('Internet-ID')).not.toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: toolProject.title })).toBeInTheDocument()
 		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
 	})
 
 	it('renders the curated tools once and in the requested order', async () => {
-		const curatedToolDetails: Array<[string, string, Project['kind']]> = [
-			['switchyard', 'Switchyard', 'highlight'],
-			['blacktower', 'Blacktower', 'highlight'],
-			['tmux-plugins', 'tmux-plugins', 'tool'],
-			['obsidian-plugin-metronome-tuner', 'obsidian-plugin-metronome-tuner', 'tool'],
-			['omarchy-plugin-shelfish', 'omarchy-plugin-shelfish', 'tool'],
-			['omarchy-plugin-superproductivity', 'omarchy-plugin-superproductivity', 'tool'],
-			['omarchy-plugin-topbar', 'omarchy-plugin-topbar', 'tool'],
+		const curatedToolDetails: Array<[string, string, Project['kind'], string]> = [
+			['switchyard', 'Switchyard', 'highlight', 'https://git.subcult.tv/subculture-collective/switchyard'],
+			['blacktower', 'Blacktower', 'highlight', 'https://git.subcult.tv/subculture-collective/blacktower'],
+			['tmux-popups', 'tmux-popups', 'tool', 'https://github.com/PatrickFanella/tmux-popups'],
+			['obsidian-plugin-metronome-tuner', 'obsidian-plugin-metronome-tuner', 'tool', 'https://github.com/PatrickFanella/obsidian-plugin-metronome-tuner'],
+			['omarchy-plugin-shelfish', 'omarchy-plugin-shelfish', 'tool', 'https://github.com/PatrickFanella/omarchy-plugin-shelfish'],
+			['omarchy-plugin-superproductivity', 'omarchy-plugin-superproductivity', 'tool', 'https://github.com/PatrickFanella/omarchy-superproductivity'],
+			['omarchy-monitor-bar', 'omarchy-monitor-bar', 'tool', 'https://github.com/PatrickFanella/omarchy-monitor-bar'],
 		]
-		const curatedTools = curatedToolDetails.map(([slug, title, kind]): Project => ({
+		const curatedTools = curatedToolDetails.map(([slug, title, kind, repoUrl]): Project => ({
 			...toolProject,
 			slug,
 			title,
 			kind,
+			repoUrl,
 			classification: slug === 'switchyard' ? 'flagship' : 'archive',
 		}))
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue([
@@ -74,7 +75,8 @@ describe('ProjectsPage', () => {
 		expect(repositoryLinks.every((link) => link.getAttribute('rel') === 'noreferrer')).toBe(true)
 		expect(within(tools).getAllByRole('link')).toEqual([switchyardLink, ...repositoryLinks])
 		expect(screen.getAllByRole('heading', { name: 'Switchyard' })).toHaveLength(1)
-		expect(screen.queryByRole('heading', { name: 'tmux-popups' })).not.toBeInTheDocument()
+		expect(within(tools).getByRole('heading', { name: 'tmux-popups' })).toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: 'tmux-plugins' })).not.toBeInTheDocument()
 	})
 
 	it('explains that card colors match the named stack technologies', async () => {
