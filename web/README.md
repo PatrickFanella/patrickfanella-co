@@ -29,6 +29,19 @@ It centralizes:
 - `npm run test`: run frontend unit tests
 - `npm run test:e2e`: run the Playwright smoke path against the seeded local stack
 
+## Social cards
+
+The four 1200x630 PNGs in `public/assets/social/` are drawn by `scripts/generate-social-cards.mjs`. It writes one SVG per card and converts it with `rsvg-convert` (librsvg).
+
+- `npm run social:cards`: redraw the cards in place
+- `npm run social:cards -- --out /tmp/cards`: draw them somewhere else, to compare before replacing anything
+
+The script needs `rsvg-convert`, `fc-list` and three installed fonts: Liberation Sans Bold (title), the Inter variable font (detail line) and JetBrainsMono Nerd Font in Regular and Bold (eyebrow and footer). It finds those files by exact family name and renders through a private fontconfig that holds only them, so host font aliases cannot substitute another face. A missing font stops the run with an error.
+
+The title face is Liberation Sans because the first cards were drawn on a machine without Space Grotesk, where the `Arial` fallback resolved to it. With the pinned fonts and librsvg 2.62.3, the script reproduced the cards committed in August byte for byte.
+
+Card text: the default card carries the home page headline, set in the script. Each project card takes its title and the first sentence of its summary from `db/seed/portfolio.json`. Detail text longer than one line wraps to two. After changing the headline or a flagship summary, rerun the command, open every PNG, and commit the images with the text change.
+
 ## Phase 2 route states
 
 Phase 2 replaces runtime usage of `src/data/projects.ts` with the shared API client and intentional route states:

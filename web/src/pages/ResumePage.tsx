@@ -16,7 +16,7 @@ export function ResumePage() {
   return (
     <section className={`${pageSectionClass} pt-4`}>
       <Seo
-        description="Download Patrick Fanella's one-page resume for senior full-stack and backend engineering roles."
+        description="Patrick Fanella's one-page resume as a PDF, for senior full-stack and backend engineering roles."
         path="/resume"
         title="Resume | Senior full-stack and backend engineer"
       />
@@ -28,7 +28,7 @@ export function ResumePage() {
             Patrick Fanella
           </h1>
           <p className={pageIntroClass}>
-            My one-page resume covers my senior full-stack and backend work. Download it or open it in a new tab.
+            One page, PDF. Download it or open it in a new tab.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">

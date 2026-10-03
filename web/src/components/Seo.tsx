@@ -4,7 +4,7 @@ import { siteName, toAbsoluteUrl } from '../lib/site'
 
 const defaultTitle = 'Patrick Fanella | Senior Full-Stack and Backend Engineer'
 const defaultDescription =
-	'Patrick Fanella builds Go and Python services, PostgreSQL data systems, and accessible React interfaces.'
+	"I'm Patrick Fanella. I write Go and Python services on PostgreSQL and the React interfaces in front of them. Case studies, tools and a resume."
 const defaultImagePath = '/assets/social/patrick-fanella-portfolio-1200x630.png'
 const defaultImageAlt = 'Patrick Fanella portfolio preview'
 

@@ -40,7 +40,7 @@ export function ProjectsPage() {
       <div className="mb-10 border-b-2 border-stroke pb-9">
         <SectionLabel>Selected work</SectionLabel>
         <h1 className={`${pageTitleClass} mt-5 uppercase`}>Projects</h1>
-        <p className={pageIntroClass}>Selected projects showing how I design backend systems, turn them into usable products, and carry them through testing and deployment.</p>
+        <p className={pageIntroClass}>The longer write-ups. Some of these run in production, some are demos or still in development, and each card says which.</p>
       </div>
 
       {status === 'loading' ? <RouteState ariaLive="polite" description="Loading projects." label="Loading" role="status" title="Loading projects." /> : null}
@@ -94,7 +94,7 @@ export function ProjectsPage() {
               </h2>
             </div>
             <p className="max-w-[42ch] text-[1.05rem] leading-relaxed text-ink-soft sm:justify-self-end">
-              Tools, plugins, and integrations I built for development, automation, and desktop workflows.
+              Smaller things I built for my own terminal, notes and desktop: tmux popups, Obsidian and Omarchy plugins, and two automation projects.
             </p>
           </div>
 

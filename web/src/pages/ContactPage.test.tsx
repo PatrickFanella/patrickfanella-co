@@ -70,7 +70,7 @@ describe('ContactPage', () => {
 		await fillContactForm()
 
 		expect(await screen.findByRole('alert')).toHaveTextContent(
-			'The contact service is unavailable. Please try again in a moment.',
+			"I can't reach the contact service right now. Try again in a moment, or email fanella.patrick@gmail.com.",
 		)
 	})
 
@@ -82,7 +82,7 @@ describe('ContactPage', () => {
 		await fillContactForm()
 
 		expect(await screen.findByRole('alert')).toHaveTextContent(
-			"I couldn't send your message. Please try again shortly.",
+			'Your message did not send. Try again, or email fanella.patrick@gmail.com.',
 		)
 	})
 })

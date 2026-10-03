@@ -74,11 +74,11 @@ export function ArchivePage() {
 
   return (
     <section className={`${pageSectionClass} pt-3`}>
-      <Seo description="Additional projects by Patrick Fanella, organized by area." path="/archive" robots="noindex,follow" title="Additional projects" />
+      <Seo description="Prototypes, concepts and small tools by Patrick Fanella, grouped by area." path="/archive" robots="noindex,follow" title="Additional projects" />
       <div className="mb-10 border-b-2 border-stroke pb-9">
         <SectionLabel>More work</SectionLabel>
         <h1 className={`${pageTitleClass} mt-5 uppercase`}>Additional projects</h1>
-        <p className={pageIntroClass}>More projects organized by area. The main Projects page has the full case studies.</p>
+        <p className={pageIntroClass}>Everything else, grouped by area: prototypes, concepts and small tools. The full case studies are on the Projects page.</p>
       </div>
 
       {status === 'loading' ? <RouteState ariaLive="polite" description="Loading additional projects." label="Loading" role="status" title="Loading projects." /> : null}

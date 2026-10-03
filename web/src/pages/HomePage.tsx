@@ -40,17 +40,17 @@ export function HomePage() {
         <div>
           <SectionLabel>Senior full-stack / backend</SectionLabel>
           <h1 className="mt-5 max-w-[13ch] font-display text-[clamp(3.2rem,8vw,7.6rem)] font-bold uppercase leading-[0.84] tracking-[-0.055em] text-heading">
-            <span className="block">Backend depth.</span>{' '}
-            <span className="block text-accent-pink">Usable products.</span>{' '}
-            <span className="block text-accent-green">Shipped end to end.</span>
+            <span className="block">I write the API,</span>{' '}
+            <span className="block text-accent-pink">the interface,</span>{' '}
+            <span className="block text-accent-green">and the runbook.</span>
           </h1>
           <p className="mt-6 max-w-[48ch] text-[1.08rem] leading-relaxed text-ink-soft sm:text-[1.2rem]">
-            I design backend systems, turn them into accessible product interfaces, and own testing, deployment, and operations.
+            Mostly Go and Python on PostgreSQL, with React in front. I test what I build, deploy it, and stay on to run it. clpr.tv and hasanara.tv are both live.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link className={primaryButtonClass} to="/contact">Tell me about a role</Link>
             <Link className={secondaryButtonClass} to="/projects">Read the case studies</Link>
-            <Link className={textLinkClass} to="/resume">Download my resume</Link>
+            <Link className={textLinkClass} to="/resume">See my resume</Link>
           </div>
         </div>
 
@@ -69,10 +69,10 @@ export function HomePage() {
           <div>
             <SectionLabel>Case studies</SectionLabel>
             <h2 className="mt-5 font-display text-[clamp(2.6rem,5vw,4.6rem)] font-bold uppercase leading-[0.9] tracking-[-0.04em] text-heading" id="featured-heading">
-              How I work.
+              Start here.
             </h2>
           </div>
-          <p className="max-w-[38ch] text-ink-soft md:justify-self-end md:text-right">Each case study covers the problem, my ownership, architecture decisions, and what shipped.</p>
+          <p className="max-w-[38ch] text-ink-soft md:justify-self-end md:text-right">Each one covers the problem, what I owned, the calls I made, and what I learned from them.</p>
         </div>
 
         {status === 'loading' ? <RouteState ariaLive="polite" description="Loading case studies." label="Loading" role="status" title="Loading case studies." /> : null}
