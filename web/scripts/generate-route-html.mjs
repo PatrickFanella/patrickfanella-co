@@ -13,9 +13,9 @@ const seedPath = path.join(repoRoot, 'db', 'seed', 'portfolio.json')
 const siteName = 'Patrick Fanella'
 const defaultTitle = 'Patrick Fanella | Senior Full-Stack and Backend Engineer'
 const defaultDescription =
-  'Patrick Fanella builds Go and Python services, PostgreSQL data systems, and accessible React interfaces.'
+  "I'm Patrick Fanella. I write Go and Python services on PostgreSQL and the React interfaces in front of them. Case studies, tools and a resume."
 const defaultImageAlt = 'Patrick Fanella portfolio preview'
-const resumeDescription = "Download Patrick Fanella's one-page resume for senior full-stack and backend engineering roles."
+const resumeDescription = "Patrick Fanella's one-page resume as a PDF, for senior full-stack and backend engineering roles."
 const fallbackImagePath = '/assets/social/patrick-fanella-portfolio-1200x630.png'
 const bespokeSocialImageSlugs = new Set(['clpr', 'patchwork', 'hasanara'])
 
@@ -26,7 +26,7 @@ const flagshipSeoTitles = {
   clustr: 'Clustr case study | Graph analysis and Unity client',
   subcults: 'Subcults case study | Go, maps and community infrastructure',
   switchyard: 'Switchyard case study | Go, React and workflow routing',
-  'subcult-os': 'Subcult-OS case study | Go, React and event operations',
+  'subcult-os': 'Subcult OS case study | Go, React and event operations',
 }
 
 function readEnvValue(source, key) {
@@ -202,7 +202,7 @@ function getArchivePageDefinition(siteUrl, assetTags) {
     html: createHtmlDocument({
       assetTags,
       canonicalUrl,
-      description: 'Additional projects by Patrick Fanella, organized by area.',
+      description: 'Prototypes, concepts and small tools by Patrick Fanella, grouped by area.',
       imageUrl: toAbsoluteUrl(siteUrl, fallbackImagePath),
       robots: 'noindex,follow',
       title: `Additional projects | ${siteName}`,

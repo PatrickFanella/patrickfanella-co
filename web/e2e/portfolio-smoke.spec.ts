@@ -4,7 +4,7 @@ import { expect, test } from '@playwright/test'
 test('visitor can browse featured work and submit the contact form', async ({ page }) => {
 	await page.goto('/')
 
-	await expect(page.getByRole('heading', { name: /backend depth\.\s*usable products\.\s*shipped end to end\./i })).toBeVisible()
+	await expect(page.getByRole('heading', { name: /i write the api,\s*the interface,\s*and the runbook\./i })).toBeVisible()
 
 	await page.getByRole('link', { name: /^read the case studies$/i }).click()
 	await expect(page).toHaveURL(/\/projects$/)
@@ -65,12 +65,12 @@ test('primary recruiter routes expose useful content in the first mobile viewpor
 	await page.setViewportSize({ width: 390, height: 844 })
 
 	await page.goto('/')
-	await expect(page.getByRole('heading', { name: /backend depth\.\s*usable products\.\s*shipped end to end\./i })).toBeInViewport()
+	await expect(page.getByRole('heading', { name: /i write the api,\s*the interface,\s*and the runbook\./i })).toBeInViewport()
 	await expect(page.getByRole('link', { name: /^read the case studies$/i })).toBeInViewport()
 
 	await page.goto('/projects')
 	await expect(page.getByRole('heading', { name: /^projects$/i })).toBeInViewport()
-	await expect(page.getByText(/selected projects showing how i design backend systems, turn them into usable products, and carry them through testing and deployment\./i)).toBeInViewport()
+	await expect(page.getByText(/some of these run in production, some are demos or still in development, and each card says which\./i)).toBeInViewport()
 
 	await page.goto('/contact')
 	await expect(page.getByRole('heading', { name: /tell me about the role/i })).toBeInViewport()

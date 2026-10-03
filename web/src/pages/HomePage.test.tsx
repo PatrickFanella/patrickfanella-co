@@ -21,7 +21,7 @@ describe('HomePage', () => {
 		renderInRouter(<HomePage />)
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: /backend depth\. usable products\. shipped end to end\./i })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: /i write the api, the interface, and the runbook\./i })).toBeInTheDocument()
 		expect(screen.getByRole('link', { name: /read the case studies/i })).toHaveAttribute('href', '/projects')
 		expect(screen.getByRole('link', { name: /tell me about a role/i })).toHaveAttribute('href', '/contact')
 		expect(document.title).toBe('Patrick Fanella | Senior Full-Stack and Backend Engineer')
@@ -31,7 +31,7 @@ describe('HomePage', () => {
 		expect(screen.queryByText(/886k/i)).not.toBeInTheDocument()
 		expect(document.querySelector('meta[name="description"]')).toHaveAttribute(
 			'content',
-			'Patrick Fanella builds Go and Python services, PostgreSQL data systems, and accessible React interfaces.',
+			"I'm Patrick Fanella. I write Go and Python services on PostgreSQL and the React interfaces in front of them. Case studies, tools and a resume.",
 		)
 		expect(document.querySelector('meta[property="og:image:alt"]')).toHaveAttribute(
 			'content',

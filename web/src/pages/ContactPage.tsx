@@ -20,7 +20,7 @@ import {
 const contactSchema = z.object({
   name: z.string().min(2, 'Please enter at least 2 characters.'),
   email: z.email('Please enter a valid email address.'),
-  message: z.string().min(20, 'Please include a bit more context so I can respond helpfully.'),
+  message: z.string().min(20, 'Add a little more, at least 20 characters, so I have something to reply to.'),
   website: z.string(),
 })
 
@@ -36,7 +36,7 @@ const alternateContactPaths = [
   {
     title: 'LinkedIn',
     href: 'https://linkedin.com/in/patrick-fanella',
-    description: 'Contact me about senior full-stack or backend roles in Chicago or remote.',
+    description: 'Message me there if that is easier.',
     cta: 'Open LinkedIn ↗',
   },
 ]
@@ -90,7 +90,7 @@ export function ContactPage() {
         }
 
         if (error.code === 'network_error') {
-          setSubmitMessage('The contact service is unavailable. Please try again in a moment.')
+          setSubmitMessage('I can\'t reach the contact service right now. Try again in a moment, or email fanella.patrick@gmail.com.')
           return
         }
 
@@ -98,7 +98,7 @@ export function ContactPage() {
         return
       }
 
-      setSubmitMessage('I couldn\'t send your message. Please try again shortly.')
+      setSubmitMessage('Your message did not send. Try again, or email fanella.patrick@gmail.com.')
     }
   })
 
@@ -117,7 +117,7 @@ export function ContactPage() {
               Tell me about the role.
             </h1>
             <p className={pageIntroClass}>
-              I'm interviewing for senior full-stack and backend roles in Chicago or on remote teams. Tell me what your team needs and where I could help.
+              I'm interviewing for senior full-stack and backend roles, in Chicago or remote. Tell me what the team is building and where you think I'd fit.
             </p>
           </div>
 

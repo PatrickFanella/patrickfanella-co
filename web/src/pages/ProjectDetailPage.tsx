@@ -20,13 +20,13 @@ import {
 import { useProject } from '../lib/useProjects'
 
 const flagshipProblemHeadings: Record<string, string> = {
-  clpr: 'Twitch clips disappear after the stream.',
-  patchwork: 'Discovery without exposing precise locations.',
+  clpr: 'A good clip is hard to find twice.',
+  patchwork: 'A request needs an area, not an address.',
   hasanara: 'Finding one moment across hundreds of hours.',
-  clustr: 'Community relationships are invisible.',
-  subcults: 'Discovery without feeding an algorithm.',
+  clustr: 'Reddit does not show which communities overlap.',
+  subcults: 'Scene discovery without a ranked feed.',
   switchyard: 'Automation you can watch.',
-  'subcult-os': 'Live event operations are fragmented.',
+  'subcult-os': 'A show night runs on four different lists.',
 }
 
 const flagshipSeoTitles: Record<string, string> = {
@@ -36,7 +36,7 @@ const flagshipSeoTitles: Record<string, string> = {
   clustr: 'Clustr case study | Graph analysis and Unity client',
   subcults: 'Subcults case study | Go, maps and community infrastructure',
   switchyard: 'Switchyard case study | Go, React and workflow routing',
-  'subcult-os': 'Subcult-OS case study | Go, React and event operations',
+  'subcult-os': 'Subcult OS case study | Go, React and event operations',
 }
 
 const bespokeSocialImageSlugs = new Set(['clpr', 'patchwork', 'hasanara'])
@@ -235,10 +235,10 @@ export function ProjectDetailPage() {
 
         <article className={`${surfaceCardClass} bg-surface p-8`}>
           <h2 className="font-display text-[clamp(1.75rem,2.6vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading">
-            What I delivered.
+            What I built.
           </h2>
           <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-soft">
-            Key implementation and delivery work.
+            The main pieces of work.
           </p>
           <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft">
             {project.highlights.map((highlight, index) => (
@@ -264,7 +264,7 @@ export function ProjectDetailPage() {
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft lg:justify-self-end lg:text-right">
-              Why I made each choice and what it required.
+              What I chose, and what each choice cost.
             </p>
           </div>
 
@@ -285,11 +285,11 @@ export function ProjectDetailPage() {
             <div>
               <SectionLabel>Supporting media</SectionLabel>
               <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
-                See it working.
+                Screens and diagrams.
               </h2>
             </div>
             <p className="max-w-[38ch] text-[1rem] leading-relaxed text-ink-soft lg:justify-self-end lg:text-right">
-              Screenshots and diagrams from the working project.
+              Screenshots where there is something to screenshot, diagrams where there is not.
             </p>
           </div>
 
@@ -300,7 +300,7 @@ export function ProjectDetailPage() {
       {project.lessons.length > 0 ? (
         <section className="mt-16 grid gap-8 border-t-2 border-stroke pt-10">
           <div>
-            <SectionLabel>Lessons learned</SectionLabel>
+            <SectionLabel>Lessons</SectionLabel>
             <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
               What I learned.
             </h2>
@@ -321,8 +321,8 @@ export function ProjectDetailPage() {
         <section className={`${surfaceCardClass} mt-16 grid gap-6 bg-panel p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end`} aria-labelledby="case-study-contact-heading">
           <div>
             <SectionLabel>Work together</SectionLabel>
-            <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading" id="case-study-contact-heading">Hiring for similar work?</h2>
-            <p className="mt-4 max-w-[58ch] leading-relaxed text-ink-soft">Tell me about the role, the team, and the backend or product problems you need to solve.</p>
+            <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading" id="case-study-contact-heading">Hiring for something like this?</h2>
+            <p className="mt-4 max-w-[58ch] leading-relaxed text-ink-soft">Send me the role, the team, and what is broken or missing. A paragraph is enough.</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link className={primaryButtonClass} to="/contact">Tell me about a role</Link>

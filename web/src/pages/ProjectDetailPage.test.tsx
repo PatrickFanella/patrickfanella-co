@@ -67,7 +67,7 @@ describe('ProjectDetailPage', () => {
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: /decisions and tradeoffs/i })).not.toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: /see it working/i })).not.toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: /screens and diagrams/i })).not.toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: /what i learned/i })).not.toBeInTheDocument()
 	})
 
