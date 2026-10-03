@@ -1,4 +1,5 @@
 import { screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
@@ -23,7 +24,7 @@ describe('ProjectsPage', () => {
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: 'Clpr', level: 2 })).toBeInTheDocument()
 		expect(screen.queryByText('Internet-ID')).not.toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: toolProject.title })).toBeInTheDocument()
 		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
@@ -86,6 +87,38 @@ describe('ProjectsPage', () => {
 
 		expect(await screen.findByText(/legend names the technologies/i)).toHaveTextContent(/card colors match it/i)
 		expect(screen.queryByText(/hover over a marker/i)).not.toBeInTheDocument()
+	})
+
+	it('filters projects from the interactive stack legend', async () => {
+		const user = userEvent.setup()
+		const pythonProject: Project = {
+			...featuredProject,
+			slug: 'python-project',
+			title: 'Python Project',
+			stack: ['Python', 'FastAPI'],
+		}
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue([featuredProject, pythonProject, toolProject])
+
+		renderInRouter(<ProjectsPage />, '/projects')
+
+		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
+		const filterGroup = screen.getByRole('group', { name: /filter projects by technology/i })
+		const pythonFilter = within(filterGroup).getByRole('button', { name: 'Python' })
+
+		await user.click(pythonFilter)
+
+		expect(pythonFilter).toHaveAttribute('aria-pressed', 'true')
+		expect(screen.queryByRole('heading', { name: 'Clpr' })).not.toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: 'Python Project' })).toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
+		expect(screen.getByRole('status')).toHaveTextContent('1 project using Python')
+
+		await user.click(pythonFilter)
+
+		expect(pythonFilter).toHaveAttribute('aria-pressed', 'false')
+		expect(screen.getByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: 'Python Project' })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: toolProject.title })).toBeInTheDocument()
 	})
 
 	it('renders every selected flagship project', async () => {
