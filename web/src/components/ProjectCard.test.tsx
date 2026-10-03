@@ -37,11 +37,17 @@ describe('ProjectCard', () => {
 		)
 	})
 
-	it('renders all stack technologies as pips with accessible labels', () => {
-		renderInRouter(<ProjectCard order={1} project={featuredProject} />)
+	it('names every stack technology once through the pip group', () => {
+		const { container } = renderInRouter(<ProjectCard order={1} project={featuredProject} />)
 
+		expect(
+			screen.getByRole('img', {
+				name: `${featuredProject.stack.length} technologies in the stack: ${featuredProject.stack.join(', ')}`,
+			}),
+		).toBeInTheDocument()
 		featuredProject.stack.forEach((tech) => {
-			expect(screen.getByLabelText(tech)).toBeInTheDocument()
+			expect(screen.queryByLabelText(tech)).not.toBeInTheDocument()
 		})
+		expect(container.querySelectorAll('[role="img"] > span[aria-hidden="true"]')).toHaveLength(featuredProject.stack.length)
 	})
 })

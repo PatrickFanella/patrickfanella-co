@@ -116,7 +116,7 @@ export function ProjectsPage() {
           {visibleFlagships.length > 0 ? (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {visibleFlagships.map((project, index) => (
-                <ProjectCard key={project.slug} order={index + 1} project={project} />
+                <ProjectCard key={project.slug} headingLevel="h2" order={index + 1} project={project} />
               ))}
             </div>
           ) : selectedTech && visibleTools.length === 0 ? (

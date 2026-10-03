@@ -24,7 +24,7 @@ describe('ProjectsPage', () => {
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: 'Clpr', level: 2 })).toBeInTheDocument()
 		expect(screen.queryByText('Internet-ID')).not.toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: toolProject.title })).toBeInTheDocument()
 		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()

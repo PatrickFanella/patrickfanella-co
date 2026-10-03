@@ -10,12 +10,14 @@ import {
 import { getTechColor } from '../lib/techColors'
 
 type ProjectCardProps = {
+  headingLevel?: 'h2' | 'h3'
   linkToRepository?: boolean
   order?: number
   project: Project
 }
 
-export function ProjectCard({ linkToRepository = false, order, project }: ProjectCardProps) {
+export function ProjectCard({ headingLevel = 'h3', linkToRepository = false, order, project }: ProjectCardProps) {
+  const Heading = headingLevel
   const orderLabel = order ? order.toString().padStart(2, '0') : null
   const ctaLabel = project.kind === 'case-study'
     ? 'Read case study'
@@ -52,9 +54,9 @@ export function ProjectCard({ linkToRepository = false, order, project }: Projec
 
       {/* Title + summary */}
       <div className="mt-4 pb-4">
-        <h3 className="max-w-[14ch] font-display text-[clamp(1.9rem,3vw,2.5rem)] font-bold leading-[0.92] tracking-[-0.05em] text-heading md:text-[2rem] xl:text-[2.25rem]">
+        <Heading className="max-w-[14ch] font-display text-[clamp(1.9rem,3vw,2.5rem)] font-bold leading-[0.92] tracking-[-0.05em] text-heading md:text-[2rem] xl:text-[2.25rem]">
           {project.title}
-        </h3>
+        </Heading>
         <p className="mt-3 max-w-[42ch] text-[1.05rem] leading-relaxed text-ink-soft">
           {project.summary}
         </p>
@@ -67,12 +69,13 @@ export function ProjectCard({ linkToRepository = false, order, project }: Projec
           ref={pipContainerRef}
           className="relative mt-2 flex flex-wrap gap-1.5"
           aria-label={`${project.stack.length} technologies in the stack: ${project.stack.join(', ')}`}
+          role="img"
           onMouseLeave={() => setHoveredTech(null)}
         >
           {project.stack.map((tech) => (
             <span
               key={tech}
-              aria-label={tech}
+              aria-hidden="true"
               className="h-2.5 w-2.5 cursor-pointer transition-transform hover:scale-150"
               style={{ backgroundColor: getTechColor(tech) }}
               onMouseMove={(e) => handlePipMove(e, tech)}
