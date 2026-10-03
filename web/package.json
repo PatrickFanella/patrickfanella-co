@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "social:cards": "node ./scripts/generate-social-cards.mjs",
     "lighthouse:ci": "npx --yes @lhci/cli@0.15.1 autorun",
     "preview": "vite preview"
   },
