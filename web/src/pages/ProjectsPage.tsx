@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { ProjectCard } from '../components/ProjectCard'
 import { RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
@@ -19,6 +21,7 @@ const toolSlugs = [
 
 export function ProjectsPage() {
   const { projects, status, error, retry } = useProjects()
+  const [selectedTech, setSelectedTech] = useState<string | null>(null)
   const flagships = projects.filter(
     (project) =>
       project.classification === 'flagship' &&
@@ -28,6 +31,17 @@ export function ProjectsPage() {
     const project = projects.find((candidate) => candidate.slug === slug)
     return project ? [project] : []
   })
+  const visibleFlagships = selectedTech
+    ? flagships.filter((project) => project.stack.includes(selectedTech))
+    : flagships
+  const visibleTools = selectedTech
+    ? tools.filter((project) => project.stack.includes(selectedTech))
+    : tools
+  const visibleProjectCount = visibleFlagships.length + visibleTools.length
+
+  const toggleTech = (tech: string) => {
+    setSelectedTech((current) => current === tech ? null : tech)
+  }
 
   return (
     <section className={`${pageSectionClass} pt-3`}>
@@ -58,33 +72,66 @@ export function ProjectsPage() {
                     Stack legend
                   </p>
                   <p className="mt-1 font-mono text-[0.72rem] text-ink-soft">
-                    The legend names the technologies used in the case studies, and card colors match it.
+                    The legend names the technologies used in the case studies, and card colors match it. Select one to filter the projects.
                   </p>
                 </div>
                 <span className="shrink-0 font-mono text-[0.68rem] font-bold uppercase tracking-[0.15em] text-ink-soft">
                   {flagshipLegendTechs.length} technologies
                 </span>
               </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+              <div aria-label="Filter projects by technology" className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7" role="group">
                 {flagshipLegendTechs.map(({ name, color }) => (
-                  <div key={name} className="flex items-center gap-2 font-mono text-[0.75rem] text-ink">
+                  <button
+                    key={name}
+                    aria-pressed={selectedTech === name}
+                    className={`flex min-w-0 items-center gap-2 border-2 px-2 py-2 text-left font-mono text-[0.75rem] transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-surface ${selectedTech === name
+                      ? '-translate-x-0.5 -translate-y-0.5 border-heading bg-panel text-heading shadow-brutal-green'
+                      : 'border-transparent text-ink hover:border-stroke hover:bg-paper'
+                    }`}
+                    onClick={() => toggleTech(name)}
+                    type="button"
+                  >
                     <span className="h-2.5 w-2.5 shrink-0" style={{ backgroundColor: color }} aria-hidden="true" />
                     <span className="truncate font-medium whitespace-nowrap" title={name}>{name}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
+              {selectedTech ? (
+                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-stroke pt-3">
+                  <p aria-live="polite" className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.1em] text-heading" role="status">
+                    {visibleProjectCount} {visibleProjectCount === 1 ? 'project' : 'projects'} using {selectedTech}
+                  </p>
+                  <button
+                    className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.12em] text-accent-green underline decoration-2 underline-offset-4 hover:text-heading focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green"
+                    onClick={() => setSelectedTech(null)}
+                    type="button"
+                  >
+                    Clear filter
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {flagships.map((project, index) => (
-              <ProjectCard key={project.slug} order={index + 1} project={project} />
-            ))}
-          </div>
+          {visibleFlagships.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {visibleFlagships.map((project, index) => (
+                <ProjectCard key={project.slug} order={index + 1} project={project} />
+              ))}
+            </div>
+          ) : selectedTech && visibleTools.length === 0 ? (
+            <RouteState
+              actions={<button className={secondaryButtonClass} onClick={() => setSelectedTech(null)} type="button">Clear filter</button>}
+              description={`No published projects use ${selectedTech}. Choose another technology or clear the filter.`}
+              headingLevel="h2"
+              label="No matches"
+              title="No projects found."
+            />
+          ) : null}
         </div>
       ) : null}
 
-      {status === 'success' && tools.length > 0 ? (
+      {status === 'success' && visibleTools.length > 0 ? (
         <section className="mt-16 border-t-2 border-stroke pt-10" aria-labelledby="tools-heading">
           <div className="mb-8 grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(16rem,0.7fr)] sm:items-end">
             <div>
@@ -99,7 +146,7 @@ export function ProjectsPage() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {tools.map((project, index) => (
+            {visibleTools.map((project, index) => (
               <ProjectCard
                 key={project.slug}
                 linkToRepository={project.slug !== 'switchyard'}
