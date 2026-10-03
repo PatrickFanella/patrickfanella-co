@@ -1,8 +1,8 @@
 # Patrick Fanella portfolio
 
-The source for [patrickfanella.co](https://patrickfanella.co), a focused hiring portfolio for a senior full-stack / backend engineer. The primary journey presents a curated set of evidence-bounded projects, while older work remains publicly verifiable in a footer-only, `noindex` archive.
+The source for [patrickfanella.co](https://patrickfanella.co), my portfolio. The main pages show a short list of case studies and tools. Older and smaller projects sit in a `noindex` archive linked only from the footer.
 
-The application combines a React frontend, Go API, PostgreSQL content layer, static route documents, and an Nginx production image. Delivery status is explicit; the site does not imply that pre-alpha or active-development work is production-ready.
+The application is a React frontend, a Go API, a PostgreSQL content layer, generated static route documents and an Nginx production image. Every project carries a delivery status, and copy must not describe pre-alpha or in-development work as production-ready. Project copy lives in `db/seed/portfolio.json`.
 
 ## Reliability and privacy contract
 
