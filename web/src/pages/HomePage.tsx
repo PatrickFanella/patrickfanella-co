@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { ProjectCard } from '../components/ProjectCard'
-import { RouteState } from '../components/RouteState'
+import { LoadingState, RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage } from '../lib/errors'
@@ -75,7 +75,7 @@ export function HomePage() {
           <p className="max-w-[38ch] text-ink-soft md:justify-self-end md:text-right">Each one covers the problem, what I owned, the calls I made, and what I learned from them.</p>
         </div>
 
-        {status === 'loading' ? <RouteState ariaLive="polite" description="Loading case studies." label="Loading" role="status" title="Loading case studies." /> : null}
+        {status === 'loading' ? <LoadingState description="Loading case studies." title="Loading case studies." /> : null}
         {status === 'error' ? (
           <RouteState
             actions={<button className={secondaryButtonClass} onClick={retry} type="button">Try again</button>}

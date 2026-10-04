@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { ProjectCard } from '../components/ProjectCard'
-import { RouteState } from '../components/RouteState'
+import { LoadingState, RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage } from '../lib/errors'
@@ -57,7 +57,7 @@ export function ProjectsPage() {
         <p className={pageIntroClass}>The longer write-ups. Some of these run in production, some are demos or still in development, and each card says which.</p>
       </div>
 
-      {status === 'loading' ? <RouteState ariaLive="polite" description="Loading projects." label="Loading" role="status" title="Loading projects." /> : null}
+      {status === 'loading' ? <LoadingState description="Loading projects." title="Loading projects." /> : null}
       {status === 'error' ? (
         <RouteState actions={<button className={secondaryButtonClass} onClick={retry} type="button">Try again</button>} description={getErrorMessage(error, 'Please try again in a moment.')} label="Unavailable" role="alert" title="The project index could not be loaded." />
       ) : null}

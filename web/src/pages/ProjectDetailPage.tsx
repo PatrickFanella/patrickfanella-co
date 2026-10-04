@@ -1,7 +1,7 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 
 import { ProjectMediaGallery } from '../components/ProjectMediaGallery'
-import { RouteState } from '../components/RouteState'
+import { LoadingState, RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage, isNotFoundError } from '../lib/errors'
@@ -56,14 +56,7 @@ export function ProjectDetailPage() {
           path={slug ? `/projects/${slug}` : '/projects'}
           title="Loading project"
         />
-        <RouteState
-          ariaLive="polite"
-          description="Loading project details."
-          headingLevel="h1"
-          label="Loading"
-          role="status"
-          title="Loading case study."
-        />
+        <LoadingState description="Loading project details." headingLevel="h1" title="Loading case study." />
       </section>
     )
   }

@@ -1,7 +1,7 @@
 import { useEffect, useRef, type RefObject } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { RouteState } from '../components/RouteState'
+import { LoadingState, RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import type { Project } from '../lib/api'
@@ -81,7 +81,7 @@ export function ArchivePage() {
         <p className={pageIntroClass}>Everything else, grouped by area: prototypes, concepts and small tools. The full case studies are on the Projects page.</p>
       </div>
 
-      {status === 'loading' ? <RouteState ariaLive="polite" description="Loading additional projects." label="Loading" role="status" title="Loading projects." /> : null}
+      {status === 'loading' ? <LoadingState description="Loading additional projects." title="Loading projects." /> : null}
       {status === 'error' ? <RouteState actions={<button className={secondaryButtonClass} onClick={retry} type="button">Try again</button>} description={getErrorMessage(error, 'Please try again in a moment.')} label="Unavailable" role="alert" title="The project index could not be loaded." /> : null}
       {status === 'success' ? (
         <div className="grid gap-14">
