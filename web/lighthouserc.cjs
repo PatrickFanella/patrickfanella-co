@@ -9,6 +9,8 @@ module.exports = {
       },
       startServerCommand: 'bash ./scripts/start-production-preview.sh',
       startServerReadyPattern: 'Portfolio preview ready',
+      // The command migrates, seeds and builds the production image first; lhci waits only 10 s by default.
+      startServerReadyTimeout: 600_000,
       url: ['http://127.0.0.1:4173/', 'http://127.0.0.1:4173/projects', 'http://127.0.0.1:4173/contact'],
     },
     assert: {
