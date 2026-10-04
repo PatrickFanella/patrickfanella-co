@@ -134,10 +134,11 @@ function createHtmlDocument({
 }
 
 function extractAssetTags(html) {
+  const preloadTags = [...html.matchAll(/<link rel="preload"[^>]*>/g)].map((match) => match[0])
   const stylesheetTags = [...html.matchAll(/<link rel="stylesheet"[^>]*>/g)].map((match) => match[0])
   const scriptTags = [...html.matchAll(/<script type="module"[^>]*><\/script>/g)].map((match) => match[0])
 
-  return [...stylesheetTags, ...scriptTags].join('\n    ')
+  return [...preloadTags, ...stylesheetTags, ...scriptTags].join('\n    ')
 }
 
 function getHomePageDefinition(siteUrl, assetTags) {

@@ -47,3 +47,17 @@ export function RouteState({
 		</article>
 	)
 }
+
+type LoadingStateProps = Pick<RouteStateProps, 'title' | 'description' | 'headingLevel'>
+
+/**
+ * Placeholder shown while page data loads. It reserves a full viewport so the
+ * footer starts below the fold and does not jump when the content arrives.
+ */
+export function LoadingState(props: LoadingStateProps) {
+	return (
+		<div className="min-h-screen">
+			<RouteState ariaLive="polite" label="Loading" role="status" {...props} />
+		</div>
+	)
+}

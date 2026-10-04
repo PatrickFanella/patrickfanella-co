@@ -3,10 +3,78 @@
 @import '@fontsource-variable/space-grotesk';
 @import 'tailwindcss';
 
+/*
+ * Metric-matched fallbacks. Until a web font arrives, text renders in a local
+ * Arial/Courier New (or their metric-compatible Liberation equivalents) scaled
+ * to the web font's average width and vertical metrics, so the swap does not
+ * change line breaks or line boxes and the page does not shift. Values come
+ * from the Fontsource latin files measured against Liberation Sans/Mono at
+ * weights 400 and 700.
+ */
+@font-face {
+  font-family: 'Space Grotesk Fallback';
+  font-weight: 100 550;
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans');
+  size-adjust: 104.57%;
+  ascent-override: 94.1%;
+  descent-override: 27.92%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Space Grotesk Fallback';
+  font-weight: 551 900;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  size-adjust: 99.51%;
+  ascent-override: 98.89%;
+  descent-override: 29.34%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Inter Fallback';
+  font-weight: 100 550;
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans');
+  size-adjust: 104.48%;
+  ascent-override: 92.72%;
+  descent-override: 23.09%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Inter Fallback';
+  font-weight: 551 900;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  size-adjust: 101.61%;
+  ascent-override: 95.34%;
+  descent-override: 23.74%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Fallback';
+  font-weight: 100 550;
+  src: local('Courier New'), local('CourierNewPSMT'), local('Liberation Mono'), local('LiberationMono');
+  size-adjust: 99.98%;
+  ascent-override: 102.02%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Fallback';
+  font-weight: 551 900;
+  src: local('Courier New Bold'), local('CourierNewPS-BoldMT'), local('Liberation Mono Bold'), local('LiberationMono-Bold');
+  size-adjust: 99.98%;
+  ascent-override: 102.02%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+
 @theme {
-  --font-display: 'Space Grotesk Variable', 'Space Grotesk', sans-serif;
-  --font-body: 'Inter Variable', 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', monospace;
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
+  --font-body: 'Inter Variable', 'Inter', 'Inter Fallback', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', 'JetBrains Mono Fallback', monospace;
 
   --color-paper: #282a36;
   --color-surface: #21222c;
