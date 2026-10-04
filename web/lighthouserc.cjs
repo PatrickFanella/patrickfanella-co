@@ -3,7 +3,7 @@ module.exports = {
     collect: {
       numberOfRuns: 3,
       settings: {
-        chromeFlags: '--headless --no-sandbox',
+        chromeFlags: '--headless --no-sandbox --disable-dev-shm-usage',
         formFactor: 'mobile',
         screenEmulation: { mobile: true, width: 390, height: 844, deviceScaleFactor: 1 },
       },
