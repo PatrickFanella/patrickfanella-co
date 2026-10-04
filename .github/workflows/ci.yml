@@ -50,3 +50,25 @@ jobs:
           cd web
           export CHROME_PATH=$(node -e "console.log(require('@playwright/test').chromium.executablePath())")
           npm run lighthouse:ci
+      - name: Remove test containers
+        # Playwright and Lighthouse CI can stop their server commands before
+        # the scripts' cleanup traps run, and containers sharing the job's
+        # network namespace outlive the job container. Remove this run's
+        # containers and image tags explicitly.
+        if: always() && env.E2E_RUN_ID != ''
+        run: |
+          filter="name=patrickfanella-portfolio-.*-${E2E_RUN_ID}$"
+          # A container started with --rm may already be removing itself.
+          docker ps -aq --filter "$filter" | xargs -r docker rm -f || true
+          for _ in 1 2 3 4 5; do
+            [ -z "$(docker ps -aq --filter "$filter")" ] && break
+            sleep 2
+          done
+          leftover=$(docker ps -a --filter "$filter" --format '{{.Names}}')
+          if [ -n "$leftover" ]; then
+            echo "Test containers still present: $leftover" >&2
+            exit 1
+          fi
+          for repo in patrickfanella-portfolio-e2e patrickfanella-portfolio-lighthouse; do
+            docker image rm "${repo}:${E2E_RUN_ID}" >/dev/null 2>&1 || true
+          done
