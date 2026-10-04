@@ -1,4 +1,4 @@
-import { screen, within } from '@testing-library/react'
+import { screen, waitFor, within } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
@@ -46,6 +46,7 @@ describe('ArchivePage', () => {
 		const toolsSection = (await screen.findByRole('heading', { name: 'Developer Tools' })).closest('section')
 		expect(toolsSection).toHaveAttribute('id', 'tools')
 		expect(toolsSection).toHaveAttribute('tabindex', '-1')
-		expect(toolsSection).toHaveFocus()
+		// The heading renders on commit; the focus effect runs afterwards as a passive effect.
+		await waitFor(() => expect(toolsSection).toHaveFocus())
 	})
 })
