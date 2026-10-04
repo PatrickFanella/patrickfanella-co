@@ -1,28 +1,8 @@
 import { defineConfig, devices } from '@playwright/test'
-import { readFileSync } from 'node:fs'
 
-function dockerHostForCI() {
-	if (!process.env.CI) return 'localhost'
-
-	try {
-		const defaultRoute = readFileSync('/proc/net/route', 'utf8')
-			.split(/\r?\n/)
-			.map((line) => line.trim().split(/\s+/))
-			.find((fields) => fields[1] === '00000000')
-		const gateway = defaultRoute?.[2]
-		if (!gateway || gateway.length !== 8) return 'localhost'
-
-		return gateway
-			.match(/../g)!
-			.reverse()
-			.map((octet) => Number.parseInt(octet, 16))
-			.join('.')
-	} catch {
-		return 'localhost'
-	}
-}
-
-const webHost = process.env.E2E_WEB_HOST || dockerHostForCI()
+// In CI the web container joins the job container's network namespace
+// (E2E_DOCKER_NETWORK), so it is reachable on localhost there as well.
+const webHost = process.env.E2E_WEB_HOST || 'localhost'
 const webBaseURL = `http://${webHost}:4173`
 
 export default defineConfig({
@@ -45,7 +25,9 @@ export default defineConfig({
 	webServer: [
 		{
 			name: 'API',
-			command: `CORS_ORIGIN=${webBaseURL} bash ./scripts/start-api-preview.sh`,
+			// Playwright starts web servers before global setup. Start PostgreSQL
+			// first so the API does not begin in degraded mode and serve empty data.
+			command: `bash ./scripts/start-postgres.sh && CORS_ORIGIN=${webBaseURL} bash ./scripts/start-api-preview.sh`,
 			url: 'http://localhost:8181/api/health',
 			timeout: 120_000,
 			reuseExistingServer: false,

@@ -3,12 +3,14 @@ module.exports = {
     collect: {
       numberOfRuns: 3,
       settings: {
-        chromeFlags: '--headless --no-sandbox',
+        chromeFlags: '--headless --no-sandbox --disable-dev-shm-usage',
         formFactor: 'mobile',
         screenEmulation: { mobile: true, width: 390, height: 844, deviceScaleFactor: 1 },
       },
       startServerCommand: 'bash ./scripts/start-production-preview.sh',
       startServerReadyPattern: 'Portfolio preview ready',
+      // The command migrates, seeds and builds the production image first; lhci waits only 10 s by default.
+      startServerReadyTimeout: 600_000,
       url: ['http://127.0.0.1:4173/', 'http://127.0.0.1:4173/projects', 'http://127.0.0.1:4173/contact'],
     },
     assert: {
