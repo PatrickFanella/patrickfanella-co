@@ -45,4 +45,8 @@ jobs:
       - name: Production-shaped browser tests
         run: cd web && npm run test:e2e
       - name: Mobile Lighthouse budgets
-        run: cd web && npm run lighthouse:ci
+        # Lighthouse CI needs a Chrome binary; reuse the Chromium Playwright installed.
+        run: |
+          cd web
+          export CHROME_PATH=$(node -e "console.log(require('@playwright/test').chromium.executablePath())")
+          npm run lighthouse:ci

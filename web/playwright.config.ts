@@ -25,7 +25,9 @@ export default defineConfig({
 	webServer: [
 		{
 			name: 'API',
-			command: `CORS_ORIGIN=${webBaseURL} bash ./scripts/start-api-preview.sh`,
+			// Playwright starts web servers before global setup. Start PostgreSQL
+			// first so the API does not begin in degraded mode and serve empty data.
+			command: `bash ./scripts/start-postgres.sh && CORS_ORIGIN=${webBaseURL} bash ./scripts/start-api-preview.sh`,
 			url: 'http://localhost:8181/api/health',
 			timeout: 120_000,
 			reuseExistingServer: false,

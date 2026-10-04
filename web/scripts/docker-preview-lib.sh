@@ -47,12 +47,16 @@ e2e_start_postgres() {
   if e2e_shared_network; then
     local container_name
     container_name=$(e2e_postgres_container)
-    docker rm -f "${container_name}" >/dev/null 2>&1 || true
-    docker run -d --rm --name "${container_name}" --network "${E2E_DOCKER_NETWORK}" \
-      -e POSTGRES_DB="${database}" \
-      -e POSTGRES_USER="${user}" \
-      -e POSTGRES_PASSWORD="${POSTGRES_PASSWORD:-postgres}" \
-      postgres:17-alpine -c "port=${POSTGRES_HOST_PORT:-5432}" >/dev/null
+    # Reuse a running database so a second start call (Playwright starts it
+    # for the API, then again in global setup) keeps the existing connection.
+    if [[ "$(docker inspect --format '{{.State.Running}}' "${container_name}" 2>/dev/null)" != true ]]; then
+      docker rm -f "${container_name}" >/dev/null 2>&1 || true
+      docker run -d --rm --name "${container_name}" --network "${E2E_DOCKER_NETWORK}" \
+        -e POSTGRES_DB="${database}" \
+        -e POSTGRES_USER="${user}" \
+        -e POSTGRES_PASSWORD="${POSTGRES_PASSWORD:-postgres}" \
+        postgres:17-alpine -c "port=${POSTGRES_HOST_PORT:-5432}" >/dev/null
+    fi
     for _ in {1..60}; do
       # Connect over TCP so the check passes only after the final server start,
       # not during the image's socket-only initialisation phase.
