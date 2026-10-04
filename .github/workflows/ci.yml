@@ -28,6 +28,20 @@ jobs:
         run: cd web && npm run lint && npm run test && npm run build
       - name: Install Chromium
         run: cd web && npx playwright install --with-deps chromium
+      - name: Share the job network with test containers
+        # Containers started through the mounted Docker socket run beside this
+        # job container, and their published ports land on the Docker host,
+        # which this container may not be able to reach. Joining the job
+        # container's network namespace exposes them on localhost instead.
+        run: |
+          job_container=$(hostname)
+          if docker inspect --format '{{.Id}}' "$job_container" >/dev/null 2>&1; then
+            echo "E2E_DOCKER_NETWORK=container:$job_container" >> "$GITHUB_ENV"
+            echo "E2E_RUN_ID=$job_container" >> "$GITHUB_ENV"
+            echo "Test containers will join job container $job_container"
+          else
+            echo "Not running in a Docker job container; test containers publish host ports"
+          fi
       - name: Production-shaped browser tests
         run: cd web && npm run test:e2e
       - name: Mobile Lighthouse budgets
