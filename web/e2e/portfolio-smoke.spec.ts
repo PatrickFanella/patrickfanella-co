@@ -40,6 +40,10 @@ test('production routing, metadata, and legacy redirects are correct', async ({ 
 	expect(legacy.status()).toBe(308)
 	expect(legacy.headers().location).toBe('/projects/hasanara')
 
+	const renamed = await request.get('/projects/discord-spywatcher', { maxRedirects: 0 })
+	expect(renamed.status()).toBe(308)
+	expect(renamed.headers().location).toBe('/projects/backline')
+
 	await page.goto('/projects/hasanara')
 	await expect(page).toHaveTitle(/HasanAra/)
 	await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://patrickfanella.co/projects/hasanara')

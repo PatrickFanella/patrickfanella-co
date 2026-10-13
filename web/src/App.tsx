@@ -22,6 +22,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="projects" element={<ProjectsPage />} />
             <Route path="projects/transcript-create" element={<Navigate replace to="/projects/hasanara" />} />
+            <Route path="projects/discord-spywatcher" element={<Navigate replace to="/projects/backline" />} />
             <Route path="projects/:slug" element={<ProjectDetailPage />} />
             <Route path="archive" element={<ArchivePage />} />
             <Route path="tools" element={<Navigate replace to="/archive#tools" />} />

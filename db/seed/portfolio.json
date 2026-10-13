@@ -210,6 +210,262 @@
       "shippedOutcome": "Transcript, chapter, tag and moment search over the archive at hasanara.tv"
     },
     {
+      "slug": "prichal",
+      "title": "Prichal",
+      "kind": "case-study",
+      "category": "Platform & Infrastructure",
+      "classification": "flagship",
+      "deliveryStatus": "Private preview",
+      "periodLabel": "2026–present",
+      "summary": "Managed hosting for AT Protocol account servers, so a Bluesky user can have a server of their own without running it. I built the Go control plane, the restricted host agent, the certificate and restore operators, and the React dashboard. It is a private preview with no public sign-up.",
+      "description": "Every Bluesky account lives on a personal data server (PDS). Prichal runs each customer's PDS in its own container on a managed host and handles the upkeep. I built the Go API and River job worker on PostgreSQL, a node agent that runs only a fixed set of operations over mutual TLS, Ansible-provisioned KVM guests, hourly certificate renewal with automatic rollback, and encrypted checkpoints that restore into an isolated guest. A closed staging PDS and the management dashboard are live behind sign-in. Public sign-up, accounts and production provisioning are not done yet.",
+      "problem": "Leaving Bluesky's own servers means running a PDS yourself: a machine, certificates, backups and upgrades. Most people who want their account on their own server will not do that work.",
+      "role": "Lead engineer",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/prichal",
+      "liveUrl": "https://prichal.subcult.tv",
+      "featured": true,
+      "stack": [
+        "Go",
+        "PostgreSQL",
+        "React",
+        "TypeScript",
+        "AT Protocol",
+        "Docker",
+        "Ansible",
+        "mTLS"
+      ],
+      "highlights": [
+        "Kept the public API away from Docker sockets and fleet credentials. A node agent accepts only defined operations on pinned images over mutual TLS.",
+        "Built hourly certificate renewal that keeps private keys inside each guest, sends only signing requests over SSH, and rolls back automatically. A deliberately failed run proved the rollback.",
+        "Restored encrypted checkpoints into a network-restricted guest and confirmed the clone could not reach the identity directory, so a restore cannot publish a duplicate account identity."
+      ],
+      "architecture": [
+        "Customer PDS containers share managed hosts instead of getting a VM each. Each PDS keeps its own SQLite data, separate from the management database. That keeps hosting affordable, and the product copy promises container isolation, not a dedicated machine.",
+        "Provisioning, renewal and recovery run as River jobs in PostgreSQL, so enqueueing is transactional and retries are bounded. Effects outside the database still have to be idempotent, and after a database restore the worker reconciles live host inventory before it processes recovered jobs.",
+        "Hosts run a separate agent that the API reaches over mutual TLS. Customers cannot pass shell commands, images, Compose files or volume paths through it. This costs an extra service and its certificate operations, but a compromised API cannot run arbitrary containers."
+      ],
+      "lessons": [
+        "SSH connection sharing hid a dead tunnel: a tunnel could exit successfully while it depended on a shared master connection. The supervised units now disable sharing, and a restart test is what exposed it.",
+        "Passing builds do not prove an exit gate. Each milestone in the roadmap stays open until a live check covers it, which is why sign-up is still listed as unqualified."
+      ],
+      "coreMechanism": "Restricted mTLS node agent with River jobs, certificate rollback and isolated restore drills",
+      "shippedOutcome": "Private preview with a closed staging PDS, dashboard sign-in and tested recovery",
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/prichal-home-1440.webp",
+          "srcSet": "/assets/projects/screenshots/prichal-home-720.webp 720w, /assets/projects/screenshots/prichal-home-1440.webp 1440w",
+          "alt": "Prichal home page headed 'Your server. We keep it running.' with a notice that sign-up is closed during private testing.",
+          "caption": "The public Prichal page. Sign-up is closed while the service is tested privately."
+        }
+      ],
+      "sortOrder": 4
+    },
+    {
+      "slug": "undertow",
+      "title": "Undertow",
+      "kind": "case-study",
+      "category": "Data Visualization, Rendering, & Search",
+      "classification": "flagship",
+      "deliveryStatus": "Live beta",
+      "periodLabel": "2026–present",
+      "summary": "A browser editor for music visualizer videos: Milkdrop, spectrum, VU meters, artwork and timed lyrics stacked in layers, exported as MP4 on your own machine. I built the React editor, the WebCodecs export pipeline and the render worker that reuses it.",
+      "description": "Undertow lays out each layer separately for 16:9, 9:16 and 1:1 and encodes the video in the browser with WebCodecs. I built the React and Zustand editor, the Butterchurn Milkdrop layer, lyric timing from LRC, SRT and VTT, and the export pipeline. A Hono API and a headless Chrome worker render the same page server-side for cloud renders, which are still in testing. Paid plans are off.",
+      "problem": "A track posted as a video needs something to look at. Building a visualizer usually means learning a video editor. Undertow puts the layers in a browser editor and renders the video on the musician's own computer.",
+      "role": "Full-stack engineer",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/undertow",
+      "liveUrl": "https://undertow.subcult.tv",
+      "featured": true,
+      "stack": [
+        "TypeScript",
+        "React",
+        "WebCodecs",
+        "WebGL",
+        "Butterchurn",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "highlights": [
+        "Export advances time at a fixed frame rate and decodes video layers to the exact frame, so the output does not depend on how fast the machine renders.",
+        "Copies canvas frames to the CPU before encoding: about 6 ms per 1080p frame against about 75 ms for passing the canvas directly, measured in Chrome on Apple silicon. A fallback covers devices where the copy fails.",
+        "Writes the MP4 in seekable Blob chunks, so long exports do not need a file-sized buffer in memory."
+      ],
+      "architecture": [
+        "The cloud worker loads the same render page in headless Chrome and calls the same export function. There is no second renderer to keep in sync. Milkdrop then runs on software WebGL, which is much slower than a GPU.",
+        "The exporter tries H.264, then HEVC, VP9 and AV1 for video, and AAC then Opus for audio. If no audio encoder is available, the export is silent and the dialog says so instead of failing.",
+        "Milkdrop preset choices are seeded so the preview and the export pick the same presets, although Milkdrop output is not bit-identical between runs."
+      ],
+      "lessons": [
+        "The first CI runs exposed assumptions the local setup hid: service-name DNS missing on the runner's default Docker bridge, and a fixture reset racing an asynchronous usage insert.",
+        "Copy has to follow what is switched on. While live billing is off, the editor shows plan details only when the API reports billing enabled."
+      ],
+      "coreMechanism": "Fixed-step WebCodecs export shared by the browser and a headless render worker",
+      "shippedOutcome": "Public editor with six templates and local H.264 MP4 export",
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/undertow-editor-1440.webp",
+          "srcSet": "/assets/projects/screenshots/undertow-editor-720.webp 720w, /assets/projects/screenshots/undertow-editor-1440.webp 1440w",
+          "alt": "Undertow editor showing six visualizer templates: Classic, Vinyl, Karaoke, Neon, Poster and Video loop.",
+          "caption": "Undertow's template picker on the live editor. Each template opens as a new project with every layer editable."
+        }
+      ],
+      "sortOrder": 5
+    },
+    {
+      "slug": "arkhiv",
+      "title": "Arkhiv",
+      "kind": "case-study",
+      "category": "Data & Search",
+      "classification": "flagship",
+      "deliveryStatus": "Live beta",
+      "periodLabel": "2026–present",
+      "summary": "A shared archive engine for print, audio and video collections. It keeps each original file as the bytes it arrived in and serves a catalogue you can read or download. I built the Go backend, the PostgreSQL model, the React reader and the release and backup tooling.",
+      "description": "Arkhiv runs several branded archives from one engine, including the Anarchist Zine Archive, Bill Nye TV and Democracy Now! TV. Each original is stored with its SHA-256 and checked again before it is served. Where a source gives no rights information, the archive records none instead of assigning a reuse license. I built the Go service, the PostgreSQL schema and migrations, the React reader with pdf.js, the reusable viewer package and the backup tooling. Some collections and recovery checks are still open.",
+      "problem": "Zines and broadcast recordings scattered across upload sites change, vanish or lose their context. An archive has to keep the exact file and say plainly what it does not know about it, including who holds the rights.",
+      "role": "Lead engineer",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/arkhiv",
+      "liveUrl": "https://arkhiv.subcult.tv",
+      "featured": true,
+      "stack": [
+        "Go",
+        "PostgreSQL",
+        "React",
+        "TypeScript",
+        "pdf.js",
+        "Python",
+        "Docker"
+      ],
+      "highlights": [
+        "Stores the exact source response bytes beside parsed metadata, so search fields and normalized records can be rebuilt without refetching anything.",
+        "Checks each original's hash and size before serving it and uses the hash as the ETag. Downloads match the source byte for byte.",
+        "Ships engine releases as immutable container digests with checksum-locked additive migrations, and backs up with hard-linked snapshots. An unchanged collection snapshot added about 4 MB."
+      ],
+      "architecture": [
+        "Raw source records live in PostgreSQL as bytes keyed by SHA-256, with parsed fields in JSONB. Editorial decisions are stored separately, so a source update never overwrites them. The cost is storage.",
+        "The print module takes the PDF library from the app that uses it. Poppler extracts text, OCR is a fallback, and a revoked or corrupt original takes its derived files down with it.",
+        "Missing rights fields stay missing and pass through the API as unknown. A collection whose terms allow only streaming from the source is locked to that mode in both the domain code and the database."
+      ],
+      "lessons": [
+        "A failed backup experiment showed that Compose teardown could leave a one-off restore container running. Cleanup now removes containers only by exact project label and refuses live project names.",
+        "A restore that missed its 30-minute deadline stays recorded as a failure. A later run with a longer budget is reported separately and does not count as meeting the original target."
+      ],
+      "coreMechanism": "SHA-256 preservation of original bytes with per-read verification",
+      "shippedOutcome": "Public catalogue with an in-browser reader and byte-exact downloads",
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/arkhiv-catalogue-1440.webp",
+          "srcSet": "/assets/projects/screenshots/arkhiv-catalogue-720.webp 720w, /assets/projects/screenshots/arkhiv-catalogue-1440.webp 1440w",
+          "alt": "Arkhiv catalogue page listing print items with collection and media filters, a title search and Read buttons.",
+          "caption": "The live Arkhiv catalogue. Each item shows its source's own description of the rights."
+        }
+      ],
+      "sortOrder": 6
+    },
+    {
+      "slug": "kork",
+      "title": "Kork",
+      "kind": "case-study",
+      "category": "Community & Media",
+      "classification": "flagship",
+      "deliveryStatus": "Live beta",
+      "periodLabel": "2026–present",
+      "summary": "A free link page for socials, tip buttons, music, video, QR codes and a contact card. Tips go straight to the owner's own accounts. I built the Go service, the server-rendered public pages, the React editor and the PostgreSQL model. It is new, so expect rough edges.",
+      "description": "Kork publishes one page per person at a short address. It supports 92 services and ten themes, renders public pages as plain HTML with a strict content security policy, and counts visits without storing IPs, cookies or user agents. I built the Go API and renderer, the embedded React editor, the URL validation and outbound fetching, the link screening and the analytics. Custom domains and paid plans exist in the code but are switched off on the public service.",
+      "problem": "Link-in-bio services are where creators put their tip links, and many of them take a cut, add trackers or route payments through themselves. Kork links to the owner's own payment accounts and never handles the money.",
+      "role": "Full-stack engineer",
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/kork",
+      "liveUrl": "https://kork.subcult.tv",
+      "featured": false,
+      "stack": [
+        "Go",
+        "PostgreSQL",
+        "React",
+        "TypeScript",
+        "Vite",
+        "Docker"
+      ],
+      "highlights": [
+        "Defined each of the 92 services in code with its allowed hosts and handle pattern. Tests reject look-alike domains, javascript: links and URLs with credentials.",
+        "Built one outbound fetcher for link import, previews and latest-post feeds. It checks the resolved IP when the connection opens, which blocks DNS rebinding to internal addresses.",
+        "Counts page views as daily totals by referrer domain and country only, with no IPs, cookies or user agents stored."
+      ],
+      "architecture": [
+        "One Go binary serves the API, the public pages and the embedded React editor. Public pages are server-rendered HTML with one small script and no third-party requests except embeds the owner adds.",
+        "New accounts wait 24 hours before publishing, and links are screened against a phishing list refreshed daily. The README states that the list cannot catch every threat.",
+        "Sessions use HttpOnly SameSite cookies, writes require a custom request header against CSRF, passwords use argon2id, and tokens are stored only as SHA-256 hashes."
+      ],
+      "lessons": [
+        "Country counts trusted a forwarded header anyone could set. Without an explicit trusted-proxy setting, those views now count as unknown.",
+        "Public copy has to match what the code enforces. The README states the exact service count and that custom domains are off, and the confirmation notice no longer says a new account can publish right away."
+      ],
+      "coreMechanism": "Per-service URL validation and a rebinding-safe outbound fetcher",
+      "shippedOutcome": "Free public link pages with 92 services, ten themes and tracker-free analytics",
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/kork-home-1440.webp",
+          "srcSet": "/assets/projects/screenshots/kork-home-720.webp 720w, /assets/projects/screenshots/kork-home-1440.webp 1440w",
+          "alt": "Kork home page headed 'One link in your bio, and everything else pinned to it.' with feature cards for 92 services, payment buttons, QR codes and ten themes.",
+          "caption": "The Kork home page on the live service."
+        }
+      ],
+      "sortOrder": 8
+    },
+    {
+      "slug": "backline",
+      "title": "Backline",
+      "kind": "case-study",
+      "category": "Community & Media",
+      "classification": "flagship",
+      "deliveryStatus": "Private pilot",
+      "periodLabel": "2025–present",
+      "summary": "A Discord bot and dashboard for the people running a server: onboarding, moderation cases, private tickets, feeds and recovery snapshots, in 23 modules switched on per server. I built the bot, the Express API, the React dashboard and the backup tooling. It is in a private pilot, and public installation is not open.",
+      "description": "Backline started as Discord Spywatcher, a presence-analytics bot, and I rebuilt it in 2026 as a community tool. Every module starts disabled and is turned on per server. I built the discord.js bot and its durable job worker, the Express and Prisma API on PostgreSQL, Discord OAuth sign-in, the React dashboard and a backup script that proves each dump by restoring it. The pilot runs in a few approved servers. Public installation, global command registration and a sustained observation period are still to come.",
+      "problem": "Small Discord communities often run several bots for welcome roles, moderation, tickets and feeds, each with its own settings and records. Moderators need one case history, and owners need to switch features on only where they are wanted.",
+      "role": "Full-stack engineer",
+      "year": 2025,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/backline",
+      "liveUrl": "https://backline.subcult.tv",
+      "featured": false,
+      "stack": [
+        "TypeScript",
+        "Node.js",
+        "Discord",
+        "Express",
+        "Prisma",
+        "PostgreSQL",
+        "React",
+        "Playwright"
+      ],
+      "highlights": [
+        "Made all 23 modules opt-in per server. The registry reads current settings on each event, so turning a module off takes effect without a restart.",
+        "Checks live Discord permissions on every configuration change. Sessions and API keys need the same current authorization as a fresh member fetch.",
+        "Verifies each nightly backup by restoring it into a disposable database and comparing every public table's rows and sequence values before keeping it."
+      ],
+      "architecture": [
+        "Jobs are claimed with FOR UPDATE SKIP LOCKED under 30-second leases. When the outcome of a Discord action is uncertain, the job is held for reconciliation instead of retried, because Discord and PostgreSQL cannot commit one transaction together.",
+        "Closed ticket channels and their local transcripts expire after 1 to 90 days, even when the module is later switched off. Message content is left out of transcripts by default.",
+        "Discord rate limits are retried once when the reset is five seconds or less. Longer limits fail the request instead of holding a user's sign-in open."
+      ],
+      "lessons": [
+        "Each check proves one thing. A restore receipt proves database rows and sequences match. It does not prove a Discord action or an OAuth flow, so the pilot notes list what is still unverified.",
+        "Duplicate side effects are worse than a stuck job. Recovery confirms the current state and never retries a create, overwrite or delete on its own."
+      ],
+      "coreMechanism": "Per-server module gates with live permission checks and reconciled durable jobs",
+      "shippedOutcome": "Private pilot of 23 community modules with restore-verified backups",
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/backline-home-1440.webp",
+          "srcSet": "/assets/projects/screenshots/backline-home-720.webp 720w, /assets/projects/screenshots/backline-home-1440.webp 1440w",
+          "alt": "Backline home page headed 'Keep your people together.' beside example welcome, moderation case and support ticket cards.",
+          "caption": "The public Backline page. The cards on the right are illustrative workflows, not pilot data."
+        }
+      ],
+      "sortOrder": 7
+    },
+    {
       "slug": "jury-rigged",
       "title": "Jury-Rigged",
       "kind": "case-study",
@@ -372,7 +628,7 @@
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/clustr",
       "featured": false,
-      "sortOrder": 6,
+      "sortOrder": 11,
       "stack": [
         "Go",
         "React",
@@ -634,7 +890,7 @@
       "repoUrl": "https://git.subcult.tv/subculture-collective/subcults",
       "liveUrl": "https://subcults.subcult.tv",
       "featured": false,
-      "sortOrder": 4,
+      "sortOrder": 10,
       "stack": [
         "Go",
         "React",
@@ -936,7 +1192,7 @@
       "category": "AI & Automation",
       "year": 2026,
       "featured": false,
-      "sortOrder": 7,
+      "sortOrder": 12,
       "media": [
         {
           "src": "/assets/projects/switchyard-overview.svg",
@@ -984,7 +1240,7 @@
       "category": "Community & Media",
       "year": 2026,
       "featured": false,
-      "sortOrder": 5,
+      "sortOrder": 9,
       "media": [
         {
           "src": "/assets/projects/subcult-os-overview.svg",
@@ -1460,33 +1716,6 @@
       "media": [],
       "coreMechanism": "Model Context Protocol adapter with two-way task sync bridge",
       "shippedOutcome": "AI agent interface for Super Productivity task management"
-    },
-    {
-      "slug": "discord-spywatcher",
-      "title": "Discord Spywatcher",
-      "kind": "tool",
-      "category": "Developer Tools",
-      "summary": "A Discord presence and analytics service with bot collection, REST APIs, dashboard surfaces, and monitoring hooks.",
-      "description": "Discord Spywatcher collects Discord presence events through a bot and exposes activity data through REST APIs and dashboards. Monitoring hooks report service health.",
-      "problem": "Raw Discord presence events are difficult to inspect over time. Collection, APIs, and dashboard views need to share one activity record.",
-      "role": "Service engineer",
-      "year": 2026,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/discord-spywatcher",
-      "featured": false,
-      "sortOrder": 42,
-      "stack": [
-        "TypeScript",
-        "Discord",
-        "Analytics",
-        "REST API",
-        "Automation"
-      ],
-      "highlights": [],
-      "architecture": [],
-      "lessons": [],
-      "media": [],
-      "coreMechanism": "Discord bot presence collection exposed through REST APIs",
-      "shippedOutcome": "Discord activity dashboards with service monitoring"
     },
     {
       "slug": "vod-tender",
