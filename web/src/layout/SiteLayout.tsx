@@ -73,6 +73,7 @@ export function SiteLayout() {
                 </a>
               ))}
               <Link className={textLinkClass} to="/archive">Archive</Link>
+              <a className={textLinkClass} href="https://subcult.tv/support">Support my work through SUBCULT</a>
             </div>
           </div>
           <p className={`${monoLabelClass} lg:justify-self-end`}>Software. Sound. Culture. // 2026</p>
