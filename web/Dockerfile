@@ -20,7 +20,7 @@ ENV VITE_ANALYTICS_PLAUSIBLE_SCRIPT_URL=${VITE_ANALYTICS_PLAUSIBLE_SCRIPT_URL}
 
 RUN npm run build
 
-FROM nginx:1.27-alpine
+FROM docker.io/library/nginx:1.31.7-alpine@sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d
 
 COPY web/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /workspace/web/dist /usr/share/nginx/html
