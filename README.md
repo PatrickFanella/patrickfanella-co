@@ -48,3 +48,13 @@ Run `make help` to see all available targets.
 - `docs/deployment.md` - deployment topology and environment contract
 - `docs/runbook.md` - day-to-day operations and release workflow
 - `docs/launch-checklist.md` - reusable launch verification steps
+
+## License
+
+Original contributions in this repository are licensed under the GNU General
+Public License, version 3 or (at your option) any later version
+(`GPL-3.0-or-later`). See [LICENSE](LICENSE).
+
+Third-party code, documentation, fonts, data, and other assets retain their own
+licenses, copyright notices, and attribution. This license does not replace
+those terms or grant rights to upstream material that its authors have not granted.
