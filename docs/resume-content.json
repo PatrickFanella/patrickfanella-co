@@ -1,0 +1,39 @@
+{
+  "target_role": "Senior full-stack and backend engineer",
+  "source_resume": "Patrick_Fanella_Resume_Full_Stack.pdf",
+  "headline": "Senior full-stack and backend engineer",
+  "compact_spacing": true,
+  "profile": "Senior full-stack and backend engineer building Go, Python, and TypeScript services with React interfaces. At DeliverZero, built inventory, returns, and partner integrations that reduced manual operations work by about 25%. Independent work covers searchable media, browser rendering, and self-hosted tools that I test, deploy, and operate.",
+  "skills": [
+    [
+      "Languages",
+      "Go, Python, TypeScript, SQL"
+    ],
+    [
+      "Product",
+      "React, React Native/Expo, WebCodecs, Web Audio, accessibility, Playwright"
+    ],
+    [
+      "Backend and data",
+      "PostgreSQL, PostGIS, Redis, OpenSearch, FastAPI, REST APIs, durable jobs"
+    ],
+    [
+      "Delivery",
+      "Docker, Linux, CI/CD, migrations, observability, backup and recovery"
+    ]
+  ],
+  "studio_bullets": [
+    "Built and operate clpr.tv, a Twitch discovery app with a Go API, React client, PostgreSQL, hybrid keyword/vector search, playlists, and moderation.",
+    "Built HasanAra and its Rekolekt core, combining a React transcript-search frontend with Python/FastAPI services, durable GPU transcription jobs, PostgreSQL, and OpenSearch.",
+    "Built Undertow, a React music-video editor with layered WebGL visuals, timed lyrics, and local MP4 export through fixed-step WebCodecs rendering and seekable Blob chunks.",
+    "Built Tadooer, a self-hosted planner with queued task edits, CalDAV ETag conflicts, and server-authoritative focus sessions across web and prerelease desktop/mobile clients.",
+    "Built a Go MCP server and plugin bridge for Super Productivity, with typed tool contracts, dry-run-first bulk changes, local file IPC, and protocol/package checks.",
+    "Deliver container releases through CI, browser tests, monitored services, documented rollback, and verified backup and restore procedures."
+  ],
+  "deliverzero_bullets": [
+    "Built tracking, returns, inventory, and dashboard workflows supporting launches across three markets through delivery-platform, POS, and partner API integrations.",
+    "Built replenishment monitoring, exception routing, and self-service partner workflows that reduced manual operations work by approximately 25%.",
+    "Designed idempotent integrations, retries, reconciliation, and partner test harnesses for thousands of weekly inventory and customer-status updates.",
+    "Delivered internal and partner reporting on reuse impact, including water, waste, and emissions metrics."
+  ]
+}

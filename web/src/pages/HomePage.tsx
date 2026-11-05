@@ -41,7 +41,7 @@ export function HomePage() {
           <SectionLabel>Senior full-stack / backend engineer</SectionLabel>
           <h1 className="home-title"><span className="block">I write the API,</span> <span className="block text-accent-pink">the interface,</span> <span className="block text-accent-green">and the runbook.</span></h1>
           <p className="mt-6 max-w-[51ch] text-lg leading-relaxed text-ink-soft">
-            Go and Python on PostgreSQL, with React in front. I build the product, test it, deploy it, and stay on to run it.
+            I build Go and Python services with React interfaces, from the data model through deployment and recovery. Recent work spans searchable media archives, browser video rendering, and self-hosted tools.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <Link className={primaryButtonClass} to="/projects">Read the case studies</Link>
@@ -67,7 +67,7 @@ export function HomePage() {
               Selected work.
             </h2>
           </div>
-          <p className="max-w-[38ch] text-ink-soft md:justify-self-end md:text-right">Three ways into the work: clip discovery, a searchable broadcast archive, and a browser video editor.</p>
+          <p className="max-w-[38ch] text-ink-soft md:justify-self-end md:text-right">Clip discovery, transcript search, and local video export show the API, data, and browser work behind each product.</p>
         </div>
 
         {status === 'loading' ? <LoadingState description="Loading case studies." title="Loading case studies." /> : null}

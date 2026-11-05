@@ -308,6 +308,8 @@
 
 .project-brand {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex: 0 0 4rem;
   width: 4rem;
   height: 4rem;
@@ -323,6 +325,20 @@
 .archive-thumbnail { aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 2px solid var(--color-stroke); }
 .archive-tile .project-brand { flex-basis: 3rem; width: 3rem; height: 3rem; padding: 0.45rem; }
 .archive-tile h3 { overflow-wrap: anywhere; }
+.project-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+.project-tile { display: grid; grid-template-rows: subgrid; grid-row: span 5; row-gap: 0; }
+.project-tile > :not(.archive-thumbnail) { margin-inline: 1.5rem; }
+.project-tile-header { display: flex; align-items: flex-start; gap: 0.75rem; min-width: 0; padding-top: 1.5rem; }
+.project-tile .project-tile-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; overflow-wrap: normal; }
+.project-tile-summary { padding-top: 1rem; }
+.project-tile-relations:not(:empty) { padding-top: 1rem; }
+.project-tile-links { align-content: end; padding-block: 1.25rem 1.5rem; }
+@media (min-width: 768px) {
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1280px) {
+  .project-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 @media (max-width: 599px) {
   .case-intro .case-brand { flex-basis: 3rem; width: 3rem; height: 3rem; padding: 0.4rem; }
   .case-intro h1 { overflow-wrap: anywhere; font-size: clamp(1.9rem, 8vw, 2.8rem); }

@@ -90,7 +90,8 @@
       "project": "chatty-cat",
       "repository": "subculture-collective/chatty-cat",
       "private": true,
-      "description": "Chatty Cat \u2014 self-hosted Twitch chat workspace with a Go service and TypeScript frontend."
+      "description": "Chatty Cat \u2014 self-hosted Twitch chat workspace with a Go service and TypeScript frontend.",
+      "publicSourceArchive": "https://chat.subcult.tv/source.tar.gz"
     },
     {
       "project": "commons",
@@ -151,6 +152,106 @@
       "repository": "PatrickFanella/obsidian-plugin-metronome-tuner",
       "private": false,
       "description": "Metronome + Tuner adds timing and chromatic tuning tools to Obsidian."
+    },
+    {
+      "project": "subcorp",
+      "repository": "subculture-collective/subcorp",
+      "private": true,
+      "description": "Self-hosted multi-agent system \u2014 6 AI agents with native tool execution, autonomous workflows, roundtable conversations, and semantic memory. Next.js 16 \u00b7 PostgreSQL + pgvector \u00b7 OpenRouter."
+    },
+    {
+      "project": "jury-rigged",
+      "repository": "subculture-collective/jury-rigged",
+      "private": true,
+      "description": "JuryRigged is a real-time, multi-agent courtroom simulation. An Express API orchestrates agent dialogue across deterministic phases, streams live events via Server-Sent Events (SSE), and supports jury voting for verdict and sentence outcomes."
+    },
+    {
+      "project": "augr",
+      "repository": "subculture-collective/augr",
+      "private": true,
+      "description": "Autonomous multi-agent trading system in Go with LLM-powered analysis, debate, and execution pipelines"
+    },
+    {
+      "project": "cutroom",
+      "repository": "subculture-collective/cutroom",
+      "private": true,
+      "description": ""
+    },
+    {
+      "project": "open-pilot",
+      "repository": "PatrickFanella/open-pilot",
+      "description": "",
+      "error": "not found",
+      "visibilityCheck": "Repository unavailable at the recorded URL"
+    },
+    {
+      "project": "edda",
+      "repository": "subculture-collective/edda",
+      "private": false,
+      "description": "LLM-powered dungeon master with Go TUI and REST API, supporting multiple AI providers"
+    },
+    {
+      "project": "switchyard",
+      "repository": "subculture-collective/switchyard",
+      "private": true,
+      "description": "Self-hosted automation runtime for workflows, model routing, coding agents, policy, artifacts, and operator controls."
+    },
+    {
+      "project": "subcult-tv",
+      "repository": "subculture-collective/subcult-tv",
+      "private": true,
+      "description": "Software for independent culture: clips, archives, link pages, neighborhood coordination and small shows."
+    },
+    {
+      "project": "invisible-museum",
+      "repository": "subculture-collective/invisible-museum",
+      "private": true,
+      "description": "Swift application prototype for location-aware cultural storytelling and discovery."
+    },
+    {
+      "project": "patrickfanella-co",
+      "repository": "PatrickFanella/patrickfanella-co",
+      "private": false,
+      "description": "Full-stack portfolio application built to showcase product thinking, clean engineering, and production-ready delivery."
+    },
+    {
+      "project": "blacktower",
+      "repository": "subculture-collective/blacktower",
+      "private": true,
+      "description": "Blacktower \u2014 OpenCode orchestration plugin for specialist agents, reviews, research, and workflows."
+    },
+    {
+      "project": "overlaid",
+      "repository": "subculture-collective/overlaid",
+      "private": false,
+      "description": "live stream stuff."
     }
-  ]
+  ],
+  "contentRefresh": {
+    "reviewedAt": "2026-11-05",
+    "source": "Owner-supplied project inventory",
+    "sourceSha256": "63995dcba13b4a716020cc862599983ca4cbccc334a7ae33f10db153b612213c",
+    "crossChecks": [
+      {
+        "project": "tadooer",
+        "release": "v0.15.0-rc.13",
+        "scope": "Published prerelease assets include Linux and macOS desktop, Android APK, and unsigned iOS development IPA."
+      },
+      {
+        "project": "rekolekt",
+        "readmeBlob": "828509a43611858328f5ef373c20ebce7fd413f3",
+        "scope": "Current README identifies the headless backend and independently owned frontends."
+      },
+      {
+        "project": "pirs",
+        "readmeBlob": "23e2cec08b32123c9b2810b9b9e0a3c5742be611",
+        "scope": "Current README describes a separate bounded Wasmtime host and opt-in retained-event bridge."
+      },
+      {
+        "project": "chatty-cat",
+        "readmeBlob": "33f6361424728b64992eb76a10801244269b1134",
+        "scope": "Current README documents anonymous reading, permission-checked account actions, and upstream attribution. Public source archive returned HTTP 200."
+      }
+    ]
+  }
 }

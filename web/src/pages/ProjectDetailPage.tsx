@@ -172,7 +172,7 @@ export function ProjectDetailPage() {
           <div><dt className={monoLabelClass}>Period</dt><dd>{project.periodLabel}</dd></div>
         </dl>
         <div className="mt-6 flex flex-wrap items-center gap-5">
-          {project.repoUrl ? <a className={secondaryButtonClass} href={project.repoUrl} rel="noreferrer" target="_blank"><Icon name="gitea" />View source</a> : null}
+          {project.repoUrl || project.sourceUrl ? <a className={secondaryButtonClass} href={project.repoUrl || project.sourceUrl} rel="noreferrer" target="_blank"><Icon name={project.repoUrl ? 'gitea' : 'download'} />{project.repoUrl ? 'View source' : 'Download source'}</a> : null}
           {project.liveUrl ? <a className={textLinkClass} href={project.liveUrl} rel="noreferrer" target="_blank"><Icon name="external" />Open {project.title}</a> : null}
         </div>
         <ul className={tagListClass}>

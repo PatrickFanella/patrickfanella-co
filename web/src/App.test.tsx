@@ -82,4 +82,19 @@ describe('App navigation flows', () => {
 			expect(document.title).toBe('Clpr case study | Go, React and hybrid search | Patrick Fanella')
 		})
 	})
+
+	it('routes the historical transcript core URL to Rekolekt', async () => {
+		const core = { ...featuredProject, slug: 'rekolekt', title: 'Rekolekt' }
+		const fetchProject = vi.spyOn(api, 'fetchProject').mockResolvedValue(core)
+		renderApp('/projects/transcript-create')
+		expect(await screen.findByRole('heading', { level: 1, name: 'Rekolekt' })).toBeInTheDocument()
+		expect(fetchProject).toHaveBeenCalledWith('rekolekt')
+	})
+
+	it('routes the tools shortcut to the selected project collection', async () => {
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
+		renderApp('/tools')
+		expect(await screen.findByRole('heading', { level: 1, name: 'Projects' })).toBeInTheDocument()
+		expect(await screen.findByRole('region', { name: 'Developer Tools' })).toBeInTheDocument()
+	})
 })
