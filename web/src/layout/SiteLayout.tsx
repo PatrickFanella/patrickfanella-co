@@ -33,15 +33,15 @@ export function SiteLayout() {
   return (
     <div className="relative min-h-screen bg-paper font-body text-ink selection:bg-accent-green selection:text-paper">
       <a className="skip-link" href="#main-content">Skip to main content</a>
-      <div className="mx-auto flex min-h-screen max-w-350 flex-col border-x-2 border-stroke bg-paper">
-        <header className="grid gap-4 border-b-2 border-stroke p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center md:px-8 md:py-5">
+      <div className="mx-auto flex min-h-screen max-w-320 flex-col bg-paper">
+        <header className="grid gap-4 border-b border-stroke px-5 py-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center md:px-10 md:py-6">
           <Link className="group grid w-fit gap-1" to="/">
-            <span className={monoLabelClass}>Patrick Fanella</span>
-            <span className="font-display text-xl font-bold leading-none tracking-[-0.03em] text-heading group-hover:text-accent-green sm:text-2xl">
-              Senior full-stack / backend engineer
+            <span className="font-display text-xl font-semibold tracking-tight text-heading">Patrick Fanella</span>
+            <span className="text-sm text-ink-soft">
+              Software engineer · Chicago
             </span>
           </Link>
-          <nav className="grid grid-cols-3 gap-2" aria-label="Primary navigation">
+          <nav className="grid grid-cols-3 gap-4" aria-label="Primary navigation">
             {navigation.map((item) => (
               <NavLink
                 key={item.to}
@@ -49,8 +49,8 @@ export function SiteLayout() {
                 className={({ isActive }) => [
                   navButtonClass,
                   isActive
-                    ? 'border-heading bg-heading text-paper shadow-brutal-green'
-                    : 'border-stroke bg-surface text-heading hover:border-accent-purple hover:text-accent-purple hover:shadow-brutal-purple',
+                    ? 'border-accent-purple text-heading'
+                    : 'border-transparent text-ink-soft hover:border-stroke',
                 ].join(' ')}
               >
                 {item.label}
@@ -59,11 +59,11 @@ export function SiteLayout() {
           </nav>
         </header>
 
-        <main className="flex-1 p-5 focus-visible:outline-none md:p-8" id="main-content" ref={mainRef} tabIndex={-1}>
+        <main className="flex-1 px-5 py-6 focus-visible:outline-none md:px-10 md:py-10" id="main-content" ref={mainRef} tabIndex={-1}>
           <Outlet />
         </main>
 
-        <footer className="grid gap-6 border-t-2 border-stroke bg-surface p-5 text-sm leading-relaxed text-ink-soft md:p-8 lg:grid-cols-[minmax(0,1fr)_auto]">
+        <footer className="grid gap-6 border-t border-stroke p-5 text-sm leading-relaxed text-ink-soft md:px-10 md:py-8 lg:grid-cols-[minmax(0,1fr)_auto]">
           <div className="grid gap-3">
             <p className="font-display text-lg font-bold text-heading">Actively interviewing · Chicago or remote</p>
             <div className="flex flex-wrap gap-x-5 gap-y-2">
@@ -76,7 +76,7 @@ export function SiteLayout() {
               <a className={textLinkClass} href="https://subcult.tv/support">Support my work through SUBCULT</a>
             </div>
           </div>
-          <p className={`${monoLabelClass} lg:justify-self-end`}>Software. Sound. Culture. // 2026</p>
+          <p className={`${monoLabelClass} lg:justify-self-end`}>Independent work / 2026</p>
         </footer>
       </div>
     </div>

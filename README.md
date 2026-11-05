@@ -45,6 +45,8 @@ Run `make help` to see all available targets.
 
 ## Project docs
 
+- `docs/portfolio-selection.md` - project selection, source evidence and content release requirements
+
 - `docs/deployment.md` - deployment topology and environment contract
 - `docs/runbook.md` - day-to-day operations and release workflow
 - `docs/launch-checklist.md` - reusable launch verification steps

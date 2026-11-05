@@ -8,8 +8,8 @@
       "classification": "flagship",
       "deliveryStatus": "Production",
       "periodLabel": "2025–present",
-      "summary": "A site for finding Twitch clips again, by creator, topic and tag. I built the Go API, the web and mobile clients, the moderation tools and the hybrid search, and I run it at clpr.tv.",
-      "description": "Clpr is where a community votes on, organizes, discusses and searches Twitch clips. I built the Go API, the React and React Native clients, the PostgreSQL model, the moderation tools and the hybrid search pipeline. I also cut the container releases and run the production deployment.",
+      "summary": "Find a Twitch clip again by creator, topic, or tag. I built the Go API, React interface, moderation tools, and hybrid search, and operate the public deployment.",
+      "description": "Clpr lets a community find, organize, discuss, and share Twitch clips. I built the Go API, React web client, PostgreSQL model, moderation tools, and hybrid search pipeline, alongside container releases and production operations. The responsive web app is available today; native mobile apps are planned.",
       "problem": "A Twitch clip is easy to make and hard to find a week later. Viewers had no dependable place to vote on clips, organize them, talk about them, or search for one they half remember.",
       "role": "Full-stack engineer",
       "year": 2025,
@@ -20,7 +20,6 @@
       "stack": [
         "Go",
         "React",
-        "React Native",
         "PostgreSQL",
         "Redis",
         "OpenSearch",
@@ -28,18 +27,18 @@
         "Docker"
       ],
       "highlights": [
-        "Shipped voting, collections, discussions, search, and moderation across web and mobile clients backed by one Go API.",
+        "Built clip discovery, playlists, voting, discussions, and moderation around one Go API and responsive React client.",
         "Designed hybrid lexical and semantic retrieval so exact clip metadata and conversational queries can use different relevance signals.",
         "Operate the public clpr.tv deployment from a tested, tagged release with documented verification and rollback paths."
       ],
       "architecture": [
-        "Because the web and mobile clients share the same product workflows, I put them behind one versioned Go API. That reduced duplicated backend behavior but made backward-compatible response changes essential.",
+        "The React client uses a versioned Go API for discovery, accounts, playlists, and moderation. PostgreSQL owns the durable data; client behavior stays separate from retrieval and background processing.",
         "Clip titles and tags benefit from exact matching, while conversational queries need semantic retrieval. I combined BM25 and vector search so each path can be evaluated and fail independently.",
         "PostgreSQL remains the system of record, while Redis handles sessions and caching and OpenSearch serves retrieval. Keeping those responsibilities separate improves recovery, at the cost of explicit synchronization and health checks."
       ],
       "lessons": [
         "A hybrid search stack adds operational cost, so its lexical and semantic paths need independent failure handling and measurable relevance tests.",
-        "Serving mobile and web clients from one API made contract discipline and backward-compatible response changes essential."
+        "A versioned API keeps interface changes separate from retrieval and moderation behavior, but requires explicit contract checks."
       ],
       "media": [
         {
@@ -51,7 +50,7 @@
         {
           "src": "/assets/projects/diagrams/clpr-architecture.webp",
           "alt": "System architecture diagram showing Clpr's client, reverse proxy, Go API, PostgreSQL, Redis, and OpenSearch layers.",
-          "caption": "Clpr clients connect through the Go API to PostgreSQL, Redis, and OpenSearch."
+          "caption": "Clpr architecture reference. The responsive web app is available today; native clients shown in the diagram are planned."
         },
         {
           "src": "/assets/projects/diagrams/clpr-features.webp",
@@ -61,11 +60,11 @@
         {
           "src": "/assets/projects/diagrams/clpr-tech-stack.webp",
           "alt": "Tech stack overview showing CLPR's backend (Go, Gin, PostgreSQL 17, Redis 7, OpenSearch), frontend (React 19, TypeScript, Vite, Tailwind), mobile (React Native 0.81, Expo 54), and infrastructure (Docker, Caddy, GitHub Actions, Vault).",
-          "caption": "Clpr's backend, web, mobile, and deployment technologies."
+          "caption": "Clpr technology reference, including the planned native-client stack. Public delivery is currently the responsive web app."
         }
       ],
       "coreMechanism": "Hybrid BM25 and vector search pipeline with versioned Go API",
-      "shippedOutcome": "Clip discovery and moderation across web and mobile clients"
+      "shippedOutcome": "Public web application for clip discovery, playlists, and moderation"
     },
     {
       "slug": "subcorp",
@@ -149,15 +148,15 @@
       "classification": "flagship",
       "deliveryStatus": "Production",
       "periodLabel": "2024–present",
-      "summary": "A searchable archive of HasanAbi broadcast transcripts, with chapters, tags and saved moments. I built the FastAPI and React product and its GPU transcription pipeline. The transcripts are machine-made and need checking against the recording.",
-      "description": "HasanAra transcribes and indexes those recordings into searchable transcripts, chapters, automated tags, moments, saved items and exports. I built the FastAPI backend, the React frontend, the PostgreSQL model, the GPU workers, the entity and topic tagging pipeline, and the containerized delivery path. It is one archive running on the shared transcript-create software, and it is still under active development. The transcripts are automatic and sometimes wrong, so check a quote against the recording before using it.",
+      "summary": "Search long broadcasts and open a result at the second it was spoken. I built the archive interface and the shared Python transcription and search system behind it. Automatic transcripts need checking against the recording.",
+      "description": "HasanAra is a broadcast archive running on Rekolekt, the shared headless transcription and search backend. I built the React archive interface and the Python/FastAPI backend, PostgreSQL job model, GPU transcription workers, and release path. The archive frontend and configuration now live separately from the reusable core. Transcripts are automatic and sometimes wrong; verify quotations against the source recording.",
       "problem": "Hundreds of hours of long-form video hold statements, recurring themes and research material that nobody can realistically find by scrubbing through playback.",
       "role": "Lead full-stack engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/hasanara",
       "liveUrl": "https://hasanara.tv",
       "featured": true,
-      "sortOrder": 3,
+      "sortOrder": 2,
       "stack": [
         "Python",
         "FastAPI",
@@ -169,7 +168,7 @@
         "Docker"
       ],
       "highlights": [
-        "Deployed a research interface for finding and reviewing material by transcript, moment, and chapter instead of scrubbing through full videos.",
+        "Built a timestamped transcript search interface with surrounding context, passage links, saved moments, and exports.",
         "Built a tagging pipeline that extracts entities, recurring topics and themes from transcripts so results can be filtered by them.",
         "Built a GPU transcription and enrichment pipeline with queue-backed workers, retryable ingestion, and durable PostgreSQL job state.",
         "Set up an explicit API contract, browser tests, health checks and release automation."
@@ -177,7 +176,7 @@
       "architecture": [
         "Because transcription and NLP enrichment jobs must survive worker restarts, I keep job and application state together in PostgreSQL and use SKIP LOCKED claims. This avoids a separate queue service but requires stuck-job recovery and explicit retries.",
         "PostgreSQL owns durable transcript, automated tag hierarchies, and account data, while OpenSearch serves cross-channel full-text retrieval and faceted tag filtering. Export pipelines produce SRT, VTT, and PDF without making the search index authoritative.",
-        "The API, frontend, and GPU workers ship as separate containers with readiness checks. Independent deployment keeps worker hardware concerns away from the browser-facing application, but expands release coordination."
+        "Rekolekt owns the API and GPU workers; HasanAra owns the archive frontend and deployment profile. Separating them lets archives share backend improvements while retaining their own source configuration and interface."
       ],
       "lessons": [
         "A PostgreSQL SKIP LOCKED queue keeps job state and application state in one transactional system, but requires explicit retry and stuck-job recovery behavior.",
@@ -214,7 +213,7 @@
       "title": "Prichal",
       "kind": "case-study",
       "category": "Platform & Infrastructure",
-      "classification": "flagship",
+      "classification": "archive",
       "deliveryStatus": "Private preview",
       "periodLabel": "2026–present",
       "summary": "Managed hosting for AT Protocol account servers, so a Bluesky user can have a server of their own without running it. I built the Go control plane, the restricted host agent, the certificate and restore operators, and the React dashboard. It is a private preview with no public sign-up.",
@@ -224,7 +223,7 @@
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/prichal",
       "liveUrl": "https://prichal.subcult.tv",
-      "featured": true,
+      "featured": false,
       "stack": [
         "Go",
         "PostgreSQL",
@@ -265,11 +264,11 @@
       "slug": "undertow",
       "title": "Undertow",
       "kind": "case-study",
-      "category": "Data Visualization, Rendering, & Search",
+      "category": "Browser Rendering & Media",
       "classification": "flagship",
       "deliveryStatus": "Live beta",
       "periodLabel": "2026–present",
-      "summary": "A browser editor for music visualizer videos: Milkdrop, spectrum, VU meters, artwork and timed lyrics stacked in layers, exported as MP4 on your own machine. I built the React editor, the WebCodecs export pipeline and the render worker that reuses it.",
+      "summary": "Layer visuals, artwork, and timed lyrics around a track, then export video in the browser. I built the React editor and WebCodecs rendering pipeline; codec support depends on the browser and hardware.",
       "description": "Undertow lays out each layer separately for 16:9, 9:16 and 1:1 and encodes the video in the browser with WebCodecs. I built the React and Zustand editor, the Butterchurn Milkdrop layer, lyric timing from LRC, SRT and VTT, and the export pipeline. A Hono API and a headless Chrome worker render the same page server-side for cloud renders, which are still in testing. Paid plans are off.",
       "problem": "A track posted as a video needs something to look at. Building a visualizer usually means learning a video editor. Undertow puts the layers in a browser editor and renders the video on the musician's own computer.",
       "role": "Full-stack engineer",
@@ -310,14 +309,14 @@
           "caption": "Undertow's template picker on the live editor. Each template opens as a new project with every layer editable."
         }
       ],
-      "sortOrder": 5
+      "sortOrder": 3
     },
     {
       "slug": "arkhiv",
       "title": "Arkhiv",
       "kind": "case-study",
       "category": "Data & Search",
-      "classification": "flagship",
+      "classification": "archive",
       "deliveryStatus": "Live beta",
       "periodLabel": "2026–present",
       "summary": "A shared archive engine for print, audio and video collections. It keeps each original file as the bytes it arrived in and serves a catalogue you can read or download. I built the Go backend, the PostgreSQL model, the React reader and the release and backup tooling.",
@@ -327,7 +326,7 @@
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/arkhiv",
       "liveUrl": "https://arkhiv.subcult.tv",
-      "featured": true,
+      "featured": false,
       "stack": [
         "Go",
         "PostgreSQL",
@@ -368,7 +367,7 @@
       "title": "Kork",
       "kind": "case-study",
       "category": "Community & Media",
-      "classification": "flagship",
+      "classification": "archive",
       "deliveryStatus": "Live beta",
       "periodLabel": "2026–present",
       "summary": "A free link page for socials, tip buttons, music, video, QR codes and a contact card. Tips go straight to the owner's own accounts. I built the Go service, the server-rendered public pages, the React editor and the PostgreSQL model. It is new, so expect rough edges.",
@@ -418,7 +417,7 @@
       "title": "Backline",
       "kind": "case-study",
       "category": "Community & Media",
-      "classification": "flagship",
+      "classification": "archive",
       "deliveryStatus": "Private pilot",
       "periodLabel": "2025–present",
       "summary": "A Discord bot and dashboard for the people running a server: onboarding, moderation cases, private tickets, feeds and recovery snapshots, in 23 modules switched on per server. I built the bot, the Express API, the React dashboard and the backup tooling. It is in a private pilot, and public installation is not open.",
@@ -517,18 +516,18 @@
       "title": "Patchwork",
       "kind": "case-study",
       "category": "Community & Media",
-      "summary": "A pre-alpha demonstration of mutual-aid requests and offers on AT Protocol. I designed the location model that keeps requests to approximate areas, and built the Bluesky ingestion, moderation workflow, React client and PostgreSQL-backed services. It is not for arranging real help yet.",
+      "summary": "A mutual-aid development preview built on AT Protocol. I worked on public-record ingestion, neighborhood discovery, and approximate-location privacy. It is not approved for arranging real help.",
       "description": "Mutual-aid discovery needs enough location data to connect nearby people, and no more. I designed Patchwork to reduce the coordinate precision of a request before it is stored, then built the React client, query API, Jetstream ingestion pipeline and moderation worker around that rule. Approved public resources are the exception and can show their addresses. The demonstration environment shows the record lifecycle, the location model and the moderation flow.",
       "problem": "Storing the exact location of someone asking for help puts that person at risk. A request has to be findable by neighbors without recording where anyone lives.",
       "role": "Full-stack engineer",
       "year": 2025,
       "repoUrl": "https://git.subcult.tv/subculture-collective/patchwork",
       "liveUrl": "https://patchwork.subcult.tv",
-      "featured": true,
+      "featured": false,
       "classification": "flagship",
       "deliveryStatus": "Pre-alpha demo",
       "periodLabel": "2025–present",
-      "sortOrder": 2,
+      "sortOrder": 5,
       "stack": [
         "TypeScript",
         "React",
@@ -618,7 +617,7 @@
       "title": "Clustr/Clustr-Galaxy",
       "kind": "case-study",
       "category": "Data Visualization, Rendering, & Search",
-      "classification": "flagship",
+      "classification": "archive",
       "deliveryStatus": "Live beta",
       "periodLabel": "2024–present",
       "summary": "A graph-analysis platform and controller-first Unity client that turn Reddit community relationships into an explorable, revision-pinned galaxy.",
@@ -879,7 +878,7 @@
       "title": "Subcults",
       "kind": "highlight",
       "category": "Community & Media",
-      "classification": "flagship",
+      "classification": "archive",
       "deliveryStatus": "Active development",
       "periodLabel": "2026",
       "summary": "An active-development platform for underground music scenes with coarse-location map discovery and live audio, without algorithmic feeds.",
@@ -1159,7 +1158,7 @@
     {
       "slug": "switchyard",
       "title": "Switchyard",
-      "classification": "flagship",
+      "classification": "archive",
       "deliveryStatus": "Active development",
       "periodLabel": "2026–present",
       "summary": "An automation runtime in active development. It routes workflow state between services and shows operators where each piece of work is.",
@@ -1206,7 +1205,7 @@
     {
       "slug": "subcult-os",
       "title": "Subcult OS",
-      "classification": "flagship",
+      "classification": "archive",
       "deliveryStatus": "Active development",
       "periodLabel": "2026–present",
       "summary": "Software in development for running a show night: free ticket reservations, staffing, door check-in, security logs, vendor payout calculations and night-close reconciliation.",
@@ -1663,7 +1662,7 @@
       "problem": "Hand-maintained tmux popup bindings drift across machines and projects. One registry should drive both bindings and the menu.",
       "role": "Tool developer",
       "year": 2026,
-      "repoUrl": "https://github.com/PatrickFanella/tmux-popups",
+      "repoUrl": "https://git.subcult.tv/PatrickFanella/tmux-popups",
       "featured": false,
       "sortOrder": 40,
       "stack": [
@@ -1684,14 +1683,14 @@
       "title": "Super Productivity MCP",
       "kind": "case-study",
       "category": "AI & Automation",
-      "summary": "A local-first MCP integration that connects AI-assisted planning to Super Productivity through a typed tool surface, plugin bridge, and desktop quick-add.",
+      "summary": "Connect an AI client to a local task manager through a Go MCP server, in-app plugin, and desktop quick-add. A shared catalog keeps tool definitions, documentation, and bridge behavior aligned.",
       "description": "Super Productivity MCP connects assisted planning to a local task system through a typed MCP interface, a Super Productivity plugin, and a native desktop quick-add path. Read and write actions stay explicit. Generated contract docs, protocol smoke tests, and package checks verify each release before installation.",
       "problem": "Task automation must distinguish reads from mutations and work with the task manager already on the desktop. A prompt-only contract cannot enforce either requirement.",
       "role": "Product and integration engineer",
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/PatrickFanella/super-productivity-mcp",
       "featured": false,
-      "sortOrder": 30,
+      "sortOrder": 6,
       "stack": [
         "Go",
         "JavaScript",
@@ -1700,12 +1699,12 @@
         "Automation"
       ],
       "highlights": [
-        "Shipped a 55-action MCP contract for task capture, planning, scheduling, and project workflows with explicit read/write boundaries.",
-        "Connected the same workflow through an installable Super Productivity plugin and a native desktop quick-add bridge.",
-        "Built a release gate covering Go, 56 JavaScript tests, end-to-end protocol checks, 10 evaluation scenarios, generated-doc drift, install profiles, and plugin packaging."
+        "Built a Go MCP server and Super Productivity plugin connected through local file-based IPC.",
+        "Added desktop quick-add through the same plugin bridge, with explicit read/write and preview/confirmation boundaries.",
+        "Added release checks for catalog consistency, generated documentation, Go and JavaScript tests, protocol scenarios, installation profiles, and plugin packaging."
       ],
       "architecture": [
-        "A Go MCP server owns the typed tool surface and task-system integration, while JavaScript clients and protocol fixtures exercise the same contract end to end.",
+        "A Go MCP server and desktop quick-add client send requests to the in-app JavaScript plugin through inbox/outbox files. The plugin bridge must be running for either client to reach task data.",
         "An installable plugin and desktop quick-add bridge provide two user-facing capture paths without requiring a hosted intermediary.",
         "Generated catalogs, smoke tests, evaluation scenarios, and a reproducible packaging target keep documentation and shipped behavior aligned."
       ],
@@ -1714,8 +1713,11 @@
         "Treating installation profiles and generated documentation as release artifacts prevents a passing unit suite from masking a broken user setup."
       ],
       "media": [],
-      "coreMechanism": "Model Context Protocol adapter with two-way task sync bridge",
-      "shippedOutcome": "AI agent interface for Super Productivity task management"
+      "coreMechanism": "Catalog-driven MCP tools with local file IPC and an in-app plugin bridge",
+      "shippedOutcome": "Local integration suite with protocol tests and reproducible plugin packaging",
+      "classification": "flagship",
+      "deliveryStatus": "Development preview",
+      "periodLabel": "2026–present"
     },
     {
       "slug": "vod-tender",
@@ -1908,6 +1910,106 @@
       "media": [],
       "coreMechanism": "Per-monitor selection of Full, Minimal, or Hidden bar layouts",
       "shippedOutcome": "One primary Full bar with configurable Minimal or Hidden bars on other monitors"
+    },
+    {
+      "slug": "tadooer",
+      "title": "Tadooer",
+      "kind": "case-study",
+      "classification": "flagship",
+      "category": "Synchronization & Productivity",
+      "deliveryStatus": "Private single-owner use",
+      "periodLabel": "2026–present",
+      "featured": false,
+      "sortOrder": 4,
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/tadooer",
+      "summary": "A self-hosted task, calendar, and focus planner for one owner. The engineering work centers on queued task edits, explicit sync conflicts, CalDAV integration, and a focus session shared across clients.",
+      "description": "Tadooer puts tasks beside calendar events and one active focus session. The server is authoritative; browser task edits can queue temporarily offline and replay when connected. Calendar and focus commands need a connection. It is a private single-owner planner with public source, not a hosted signup service. Desktop and mobile shells have separate platform qualification requirements.",
+      "problem": "A planner used from several clients needs to survive a dropped connection without silently overwriting a calendar edit or starting competing focus sessions.",
+      "role": "Full-stack engineer",
+      "stack": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "SQLite",
+        "CalDAV",
+        "Electron"
+      ],
+      "highlights": [
+        "Built browser-local task caching and queued writes with replay protection and explicit two-client conflicts.",
+        "Integrated calendar planning through CalDAV with ETag-based conflict checks, alongside Google calendar projections with visible freshness.",
+        "Made focus sessions server-authoritative with one controller, read-only followers, and explicit takeover."
+      ],
+      "architecture": [
+        "IndexedDB holds the browser task cache and immutable outbox. Foreground sync replays core task changes; calendar and focus mutations remain online-only.",
+        "Calendar changes use the previously observed DAV ETag. A concurrent edit becomes a conflict for the owner to resolve rather than an unconditional overwrite.",
+        "Web and desktop clients use the same server authority. A second client follows the active focus session until the owner explicitly takes control."
+      ],
+      "lessons": [
+        "Offline support needs a command-by-command boundary. Queuing task edits is useful without pretending calendar or focus commands can run disconnected.",
+        "Conflict and freshness states belong in the planner interface, where the owner can make the decision."
+      ],
+      "media": [],
+      "coreMechanism": "Server-authoritative sync with queued task writes and calendar conflict checks",
+      "shippedOutcome": "Self-hosted planner for private single-owner use"
+    },
+    {
+      "slug": "subsets",
+      "title": "Subsets",
+      "kind": "tool",
+      "classification": "archive",
+      "category": "Developer Tools",
+      "deliveryStatus": "Public alpha",
+      "periodLabel": "2026",
+      "featured": false,
+      "sortOrder": 38,
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/subculture-collective/subsets",
+      "summary": "A terminal interface and CLI for discovering agent skills, grouping them by task, and previewing changes before applying a set. Ownership and drift checks protect folders managed by other tools.",
+      "description": "Subsets discovers skills in supported user and project folders and applies named groups through explicit adoption and recorded transactions. The native npm edition uses TypeScript, React, and Ink. Linux is tested; macOS remains unverified and Windows is unsupported by the preview.",
+      "problem": "A growing skill library needs task-specific selections without losing track of which package or installer owns each folder.",
+      "role": "Developer tools engineer",
+      "stack": [
+        "TypeScript",
+        "React",
+        "Ink",
+        "Node.js"
+      ],
+      "highlights": [],
+      "architecture": [],
+      "lessons": [],
+      "media": [],
+      "coreMechanism": "Read-only discovery followed by previewed, ownership-aware transactions",
+      "shippedOutcome": "Public alpha CLI and terminal interface distributed through npm"
+    },
+    {
+      "slug": "twitchdl",
+      "title": "twitchdl",
+      "kind": "tool",
+      "classification": "archive",
+      "category": "Developer Tools",
+      "deliveryStatus": "Functional CLI",
+      "periodLabel": "2026",
+      "featured": false,
+      "sortOrder": 42,
+      "year": 2026,
+      "repoUrl": "https://git.subcult.tv/PatrickFanella/twitchdl",
+      "summary": "A Go CLI for downloading public Twitch clips and VODs and recording live streams. It orchestrates yt-dlp, Streamlink, and ffmpeg; discovery, scheduling, and authenticated content are deferred.",
+      "description": "twitchdl accepts public URLs and channel names, supports bounded live recording, and checks the external media tools it needs. Its application layer is designed to support a future terminal interface.",
+      "problem": "Clip downloads, ranged VODs, and bounded live recordings need consistent command behavior across several external media tools.",
+      "role": "Media tooling engineer",
+      "stack": [
+        "Go",
+        "yt-dlp",
+        "Streamlink",
+        "ffmpeg"
+      ],
+      "highlights": [],
+      "architecture": [],
+      "lessons": [],
+      "media": [],
+      "coreMechanism": "Go orchestration of external media capture tools",
+      "shippedOutcome": "Functional CLI for public Twitch media"
     }
   ]
 }

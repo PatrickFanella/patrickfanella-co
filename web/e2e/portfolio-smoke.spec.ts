@@ -74,7 +74,7 @@ test('primary recruiter routes expose useful content in the first mobile viewpor
 
 	await page.goto('/projects')
 	await expect(page.getByRole('heading', { name: /^projects$/i })).toBeInViewport()
-	await expect(page.getByText(/some of these run in production, some are demos or still in development, and each card says which\./i)).toBeInViewport()
+	await expect(page.getByText(/each project names its delivery status/i)).toBeInViewport()
 
 	await page.goto('/contact')
 	await expect(page.getByRole('heading', { name: /tell me about the role/i })).toBeInViewport()
@@ -112,4 +112,36 @@ test('missing project routes render the intentional not-found experience', async
 
 	await expect(page.getByRole('heading', { name: /this case study isn't available/i })).toBeVisible()
 	await expect(page.getByRole('link', { name: /back to projects/i })).toBeVisible()
+})
+
+
+test('selected work has six case studies and supports tool-only filter results', async ({ page }) => {
+	await page.goto('/projects')
+	const caseStudies = page.getByRole('link', { name: /read case study:/i })
+	await expect(caseStudies).toHaveCount(6)
+	expect(await caseStudies.evaluateAll((links) => links.map((link) => link.getAttribute('aria-label')))).toEqual(['Read case study: Clpr', 'Read case study: HasanAra', 'Read case study: Undertow', 'Read case study: Tadooer', 'Read case study: Patchwork', 'Read case study: Super Productivity MCP'])
+	const filter = page.getByRole('combobox', { name: 'Filter by technology' })
+	await filter.focus()
+	await expect(filter).toBeFocused()
+	await filter.selectOption('CalDAV')
+	await expect(page.getByRole('heading', { name: 'Tadooer', exact: true })).toBeVisible()
+	await expect(caseStudies).toHaveCount(1)
+	await filter.selectOption('Ink')
+	await expect(page.getByRole('heading', { name: 'Subsets', exact: true })).toBeVisible()
+	await expect(caseStudies).toHaveCount(0)
+	await page.getByRole('button', { name: 'Clear filter' }).click()
+	await expect(caseStudies).toHaveCount(6)
+	await page.getByRole('link', { name: 'Read case study: Tadooer' }).click()
+	await expect(page.getByRole('heading', { name: 'Tadooer', exact: true })).toBeVisible()
+	await expect(page.getByText('Private single-owner use', { exact: true })).toBeVisible()
+})
+
+test('recruiter routes fit a narrow screen without horizontal scrolling', async ({ page }) => {
+	await page.setViewportSize({ width: 320, height: 780 })
+	for (const route of ['/', '/projects', '/projects/tadooer', '/projects/super-productivity-mcp', '/resume', '/contact']) {
+		await page.goto(route)
+		await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+		await expect(page.getByRole('status').filter({ hasText: /loading/i })).toHaveCount(0)
+		expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), route).toBe(true)
+	}
 })
