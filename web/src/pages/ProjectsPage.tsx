@@ -33,8 +33,8 @@ export function ProjectsPage() {
       {status === 'success' && flagships.length === 0 && tools.length === 0 ? <RouteState description="No case studies or tools are published yet." label="No projects" title="No projects found." /> : null}
       {status === 'success' && technologies.length > 0 ? (
         <div className="project-filters">
-          <label className="text-sm font-medium text-heading" htmlFor="technology-filter">Filter by technology</label>
-          <select className="min-h-11 max-w-full border border-stroke bg-surface px-3 py-2 text-sm text-heading" id="technology-filter" onChange={(event) => setSelectedTech(event.target.value || null)} value={selectedTech || ''}>
+          <label className="font-mono text-xs font-bold uppercase tracking-wider text-accent-green" htmlFor="technology-filter">Filter by technology</label>
+          <select className="min-h-11 max-w-full border-2 border-stroke bg-surface px-3 py-2 text-sm text-heading" id="technology-filter" onChange={(event) => setSelectedTech(event.target.value || null)} value={selectedTech || ''}>
             <option value="">All technologies</option>
             {technologies.map((tech) => <option key={tech} value={tech}>{tech}</option>)}
           </select>
@@ -51,7 +51,7 @@ export function ProjectsPage() {
           {visibleTools.length > 0 ? (
             <section className="mt-16" aria-labelledby="tools-heading">
               <SectionLabel>Smaller, focused work</SectionLabel>
-              <h2 className="mt-5 font-display text-4xl font-semibold tracking-[-0.04em] text-heading" id="tools-heading">Tools</h2>
+              <h2 className="mt-5 font-display text-4xl font-bold uppercase tracking-[-0.04em] text-heading" id="tools-heading">Tools</h2>
               <p className={`${pageIntroClass} mb-8`}>Utilities for managing agent skills, keeping terminal bindings consistent, and capturing public media. The source includes installation and usage notes.</p>
               <div className="tool-list">{visibleTools.map((project) => <ProjectCard key={project.slug} linkToRepository project={project} />)}</div>
             </section>
