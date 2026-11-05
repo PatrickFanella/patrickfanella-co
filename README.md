@@ -1,6 +1,6 @@
 # Patrick Fanella portfolio
 
-The source for [patrickfanella.co](https://patrickfanella.co), my portfolio. The main pages show a short list of case studies and tools. The main navigation also opens a searchable `noindex` archive with project thumbnails and logos.
+The source for [patrickfanella.co](https://patrickfanella.co), my portfolio. The Projects page groups 25 applications, archives, research projects, creative projects, and tools, with fresh screenshots, brand marks, diagrams, and links between related work. The main navigation also opens a searchable `noindex` archive with project thumbnails and logos.
 
 The application is a React frontend, a Go API, a PostgreSQL content layer, generated static route documents and an Nginx production image. Every project carries a delivery status, and copy must not describe pre-alpha or in-development work as production-ready. Project copy lives in `db/seed/portfolio.json`. The web build publishes it as a static catalog so content and interface updates ship together. Contact submissions use the Go API and PostgreSQL, with a server-side email notification to `patrick@subcult.tv`. Successful main verification deploys both web and API images to the existing NUC.
 

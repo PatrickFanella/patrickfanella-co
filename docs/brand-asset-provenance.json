@@ -1,351 +1,304 @@
 {
   "sourceRepository": "subculture-collective/subcult-tv",
-  "sourceRevision": "d633a86a4f16b30811a7528eeab1864e389e50c8",
-  "sourceDirty": true,
-  "selection": "Explicit portfolio selection from Studio approved marks and existing public product captures. No private catalog, drafts or account state copied.",
+  "sourceRevision": "a871aec9579c7e3119d3920fb499a06eb70313b8",
+  "sourceDirty": false,
+  "selection": "Explicit approved primary marks and the existing overview illustration, read from the immutable Studio main revision. Browser captures have separate dated provenance.",
   "files": [
     {
       "source": "studio/brands/clpr/logos/mark-primary-outlined.svg",
       "sourceSha256": "3e2610121784e39caaa2bf73aefd56bb1a16fc75b552fd30d2c05d31e4ca4520",
       "target": "web/public/assets/brands/clpr.svg",
       "sha256": "3e2610121784e39caaa2bf73aefd56bb1a16fc75b552fd30d2c05d31e4ca4520",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 256 256"
     },
     {
       "source": "studio/brands/hasanara/logos/mark-primary-outlined.svg",
       "sourceSha256": "0fa5d99d5023567e34691010e5ff52123ff8aa205b8842128454b610e02d54b9",
       "target": "web/public/assets/brands/hasanara.svg",
       "sha256": "0fa5d99d5023567e34691010e5ff52123ff8aa205b8842128454b610e02d54b9",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 256 256"
     },
     {
       "source": "studio/brands/undertow/logos/mark-primary-outlined.svg",
       "sourceSha256": "9382d62c8b2965132c4f286cf30d55073550669ea53f162bef2ad5078b925b23",
       "target": "web/public/assets/brands/undertow.svg",
       "sha256": "9382d62c8b2965132c4f286cf30d55073550669ea53f162bef2ad5078b925b23",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 256 256"
     },
     {
       "source": "studio/brands/patchwork/logos/mark-primary-outlined.svg",
       "sourceSha256": "28ef1e207e11db34e8c07fdeed40a645183c0f90de41025fe0161a3071f3d3b0",
       "target": "web/public/assets/brands/patchwork.svg",
       "sha256": "28ef1e207e11db34e8c07fdeed40a645183c0f90de41025fe0161a3071f3d3b0",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 256 256"
     },
     {
       "source": "studio/brands/tadooer/logos/mark-primary-outlined.svg",
       "sourceSha256": "cc9d06b65ad262ed2584e809c65bc5597b721127dfe13e1748bd53d966a67667",
       "target": "web/public/assets/brands/tadooer.svg",
       "sha256": "cc9d06b65ad262ed2584e809c65bc5597b721127dfe13e1748bd53d966a67667",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 256 256"
     },
     {
       "source": "studio/brands/super-productivity-mcp/product/mark.svg",
       "sourceSha256": "1f0a28e2dbcf0550ca02dea825bec7198e7bc0c715652d55b9ee948f5d9bdf08",
       "target": "web/public/assets/brands/super-productivity-mcp.svg",
       "sha256": "1f0a28e2dbcf0550ca02dea825bec7198e7bc0c715652d55b9ee948f5d9bdf08",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 512 512"
     },
     {
       "source": "studio/brands/subsets/logos/mark-primary-outlined.svg",
       "sourceSha256": "6d2a5976b581e8b45cfc28a8769dbc2827c6e40c505b338cb4b2c63ad6379e08",
       "target": "web/public/assets/brands/subsets.svg",
       "sha256": "6d2a5976b581e8b45cfc28a8769dbc2827c6e40c505b338cb4b2c63ad6379e08",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 96 96"
     },
     {
       "source": "studio/brands/tmux-popups/product/mark.svg",
       "sourceSha256": "31d49ef5a06884b87451f9148e97b7e61c8530278b28926f729f9f94a7239010",
       "target": "web/public/assets/brands/tmux-popups.svg",
       "sha256": "31d49ef5a06884b87451f9148e97b7e61c8530278b28926f729f9f94a7239010",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 512 512"
     },
     {
       "source": "studio/brands/arkhiv/product/mark.svg",
       "sourceSha256": "bb09af00162e1d23a59cced52584beb8fa1c84271751742041e684633c5f710c",
       "target": "web/public/assets/brands/arkhiv.svg",
       "sha256": "bb09af00162e1d23a59cced52584beb8fa1c84271751742041e684633c5f710c",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 512 512"
     },
     {
       "source": "studio/brands/backline/product/mark.svg",
       "sourceSha256": "29bf6ce06154a5b7d65461c3d02a48dbe4e12ecf648bcc7b0564d7193141393c",
       "target": "web/public/assets/brands/backline.svg",
       "sha256": "29bf6ce06154a5b7d65461c3d02a48dbe4e12ecf648bcc7b0564d7193141393c",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 128 128"
     },
     {
       "source": "studio/brands/kork/logos/mark-primary-outlined.svg",
       "sourceSha256": "3009bd9560ae0d36246e8944ce7f2a63764bc4a056825d76052c5df58a4c35cd",
       "target": "web/public/assets/brands/kork.svg",
       "sha256": "3009bd9560ae0d36246e8944ce7f2a63764bc4a056825d76052c5df58a4c35cd",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 256 256"
     },
     {
       "source": "studio/brands/prichal/logos/mark-primary-outlined.svg",
       "sourceSha256": "3d18a3dc5d9e3463882bbbed7f93169c7f53313796d78a59c0702d1cecc4f332",
       "target": "web/public/assets/brands/prichal.svg",
       "sha256": "3d18a3dc5d9e3463882bbbed7f93169c7f53313796d78a59c0702d1cecc4f332",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 256 256"
     },
     {
       "source": "studio/brands/subcult-os/logos/mark-primary-outlined.svg",
       "sourceSha256": "bba63acf3dce3adfc4cd330e001941832ab82b779a4360354a8116f42bd191b1",
       "target": "web/public/assets/brands/subcult-os.svg",
       "sha256": "bba63acf3dce3adfc4cd330e001941832ab82b779a4360354a8116f42bd191b1",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 256 256"
     },
     {
       "source": "studio/brands/overlaid/product/mark.svg",
       "sourceSha256": "74de7324fd3ab69550a373ad60d2234624ecc0e7193998362a34d20e355c5a5d",
       "target": "web/public/assets/brands/overlaid.svg",
       "sha256": "74de7324fd3ab69550a373ad60d2234624ecc0e7193998362a34d20e355c5a5d",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 512 512"
     },
     {
       "source": "studio/brands/obsidian-plugin-metronome-tuner/product/mark.svg",
       "sourceSha256": "f59e2285810ba5a80586c0f8786aa17d05e9e49a1c9c24cbbeed352c5c7a4fc0",
       "target": "web/public/assets/brands/obsidian-plugin-metronome-tuner.svg",
       "sha256": "f59e2285810ba5a80586c0f8786aa17d05e9e49a1c9c24cbbeed352c5c7a4fc0",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 512 512"
     },
     {
       "source": "studio/brands/omarchy-monitor-bar/product/mark.svg",
       "sourceSha256": "8e1209f9f1ddacf441d9cc7b94d2d98167b2c5f0e01f234f10ba345d85a9aa5c",
       "target": "web/public/assets/brands/omarchy-monitor-bar.svg",
       "sha256": "8e1209f9f1ddacf441d9cc7b94d2d98167b2c5f0e01f234f10ba345d85a9aa5c",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 512 512"
     },
     {
       "source": "studio/brands/omarchy-plugin-shelfish/product/mark.svg",
       "sourceSha256": "1685b23936a0e36592af1c75a543bc20099e8a7de9b8ebb4327a9f0783676840",
       "target": "web/public/assets/brands/omarchy-plugin-shelfish.svg",
       "sha256": "1685b23936a0e36592af1c75a543bc20099e8a7de9b8ebb4327a9f0783676840",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 512 512"
     },
     {
       "source": "studio/brands/omarchy-superproductivity/product/mark.svg",
       "sourceSha256": "fb70032e6831ebe08456293c45967169fcc4ba6208c3df08acaf146ce37ef8a7",
       "target": "web/public/assets/brands/omarchy-superproductivity.svg",
       "sha256": "fb70032e6831ebe08456293c45967169fcc4ba6208c3df08acaf146ce37ef8a7",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 512 512"
     },
     {
       "source": "studio/brands/subcult/logos/mark-primary-outlined.svg",
       "sourceSha256": "b6dd6fc7d48e21a8903682e8beca105a09d8c9b06ed96c04544fc544b085e222",
       "target": "web/public/assets/brands/subcult.svg",
       "sha256": "b6dd6fc7d48e21a8903682e8beca105a09d8c9b06ed96c04544fc544b085e222",
-      "kind": "Studio selected product mark"
+      "kind": "Studio selected product mark",
+      "viewBox": "0 0 256 256"
     },
     {
       "source": "studio/brands/patrick__eff/logos/waveform/01-lavender.svg",
       "sourceSha256": "bebf9e478e1fc7a576001e53d768ff9108e2fe0843c17992690e2bdc7366297e",
       "target": "web/public/assets/brands/patrick-eff.svg",
       "sha256": "bebf9e478e1fc7a576001e53d768ff9108e2fe0843c17992690e2bdc7366297e",
-      "kind": "Studio approved Lavender waveform mark"
-    },
-    {
-      "source": "public/screenshots/clpr-home-1440.webp",
-      "sourceSha256": "d4cf1724d8a00d0f54a0a6af99ebe171a1af95f16f428ab0f75e64ca6508eae4",
-      "target": "web/public/assets/projects/screenshots/current-clpr-1440.webp",
-      "sha256": "d4cf1724d8a00d0f54a0a6af99ebe171a1af95f16f428ab0f75e64ca6508eae4",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/clpr-home-1440.webp",
-      "sourceSha256": "d4cf1724d8a00d0f54a0a6af99ebe171a1af95f16f428ab0f75e64ca6508eae4",
-      "target": "web/public/assets/projects/screenshots/current-clpr-720.webp",
-      "sha256": "2dacf9c8cd1b77f1bcfa9af9d98b9ccf8122439432c7a018f9356ae8df33c78b",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/hasanara-home-1440.webp",
-      "sourceSha256": "bf9fcc8878af1abba076f20609b156207ef7635fd02a946894220363f915b4cb",
-      "target": "web/public/assets/projects/screenshots/current-hasanara-1440.webp",
-      "sha256": "bf9fcc8878af1abba076f20609b156207ef7635fd02a946894220363f915b4cb",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/hasanara-home-1440.webp",
-      "sourceSha256": "bf9fcc8878af1abba076f20609b156207ef7635fd02a946894220363f915b4cb",
-      "target": "web/public/assets/projects/screenshots/current-hasanara-720.webp",
-      "sha256": "17be81181b002ccded245eaacd7c4ca875b53cfaadc468ab92347f591cd1814b",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/undertow-editor-1440.webp",
-      "sourceSha256": "8ec3e7fe7b2172e6417d3e398e9859b7feb5e4d0d3876cd00d43092a41a7fcf6",
-      "target": "web/public/assets/projects/screenshots/current-undertow-1440.webp",
-      "sha256": "8ec3e7fe7b2172e6417d3e398e9859b7feb5e4d0d3876cd00d43092a41a7fcf6",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/undertow-editor-1440.webp",
-      "sourceSha256": "8ec3e7fe7b2172e6417d3e398e9859b7feb5e4d0d3876cd00d43092a41a7fcf6",
-      "target": "web/public/assets/projects/screenshots/current-undertow-720.webp",
-      "sha256": "374a53208b3d5d929b7901fd32755ad08f995eb76d293bd491152d9a1f355dee",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/patchwork-home-1440.webp",
-      "sourceSha256": "28b7a7d7123f42558ccaa2399fe779c93f84d81bdedab2c8a913b2831fc9d033",
-      "target": "web/public/assets/projects/screenshots/current-patchwork-1440.webp",
-      "sha256": "28b7a7d7123f42558ccaa2399fe779c93f84d81bdedab2c8a913b2831fc9d033",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/patchwork-home-1440.webp",
-      "sourceSha256": "28b7a7d7123f42558ccaa2399fe779c93f84d81bdedab2c8a913b2831fc9d033",
-      "target": "web/public/assets/projects/screenshots/current-patchwork-720.webp",
-      "sha256": "92197bbaeb8df3dd6c12133209267817589be283fc45638e846ea9271ecd3530",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/tadooer-today-1280.webp",
-      "sourceSha256": "9b3d4570abed9c38f8744f3601dbcfddd5581a28a094071324f0431449cf8ac6",
-      "target": "web/public/assets/projects/screenshots/current-tadooer-1440.webp",
-      "sha256": "9b3d4570abed9c38f8744f3601dbcfddd5581a28a094071324f0431449cf8ac6",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/tadooer-today-1280.webp",
-      "sourceSha256": "9b3d4570abed9c38f8744f3601dbcfddd5581a28a094071324f0431449cf8ac6",
-      "target": "web/public/assets/projects/screenshots/current-tadooer-720.webp",
-      "sha256": "d88f2aab16e4c444f1732fc9dd38536ae3606c968ffce1f31f655dced3d85c8c",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/arkhiv-home-1440.webp",
-      "sourceSha256": "cad962c646015e5841c5ba61b72c7f17e40a46526feddbb4b2f6cf97518ee3ba",
-      "target": "web/public/assets/projects/screenshots/current-arkhiv-1440.webp",
-      "sha256": "cad962c646015e5841c5ba61b72c7f17e40a46526feddbb4b2f6cf97518ee3ba",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/arkhiv-home-1440.webp",
-      "sourceSha256": "cad962c646015e5841c5ba61b72c7f17e40a46526feddbb4b2f6cf97518ee3ba",
-      "target": "web/public/assets/projects/screenshots/current-arkhiv-720.webp",
-      "sha256": "1e5973f0dd142287c44c457f52fd2438f85d5e345100be13002e88ac60443a6b",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/backline-home-1440.webp",
-      "sourceSha256": "5b71faa6b45a74f59e3ca21b9213264f5495fbe399279b600c1c1995bc80de88",
-      "target": "web/public/assets/projects/screenshots/current-backline-1440.webp",
-      "sha256": "5b71faa6b45a74f59e3ca21b9213264f5495fbe399279b600c1c1995bc80de88",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/backline-home-1440.webp",
-      "sourceSha256": "5b71faa6b45a74f59e3ca21b9213264f5495fbe399279b600c1c1995bc80de88",
-      "target": "web/public/assets/projects/screenshots/current-backline-720.webp",
-      "sha256": "fe04af3d53e3d8b58c6adaac69d9f7cb12d74af473710ad47c8af7a80f360f90",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/kork-editor-1440.webp",
-      "sourceSha256": "3e169418159affaa8af58dbcfaf7f5ab2e5d83d9603e72623cf33a5f892bfeb5",
-      "target": "web/public/assets/projects/screenshots/current-kork-1440.webp",
-      "sha256": "3e169418159affaa8af58dbcfaf7f5ab2e5d83d9603e72623cf33a5f892bfeb5",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/kork-editor-1440.webp",
-      "sourceSha256": "3e169418159affaa8af58dbcfaf7f5ab2e5d83d9603e72623cf33a5f892bfeb5",
-      "target": "web/public/assets/projects/screenshots/current-kork-720.webp",
-      "sha256": "c8931b48d7af56e99446cd6db31a8e2bc0b34f71fe663013a948dc38326ddda2",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/prichal-home-1440.webp",
-      "sourceSha256": "b28406714f047ddf5217c81199f41a268a46a4af94e713adf414fbdb6e451f35",
-      "target": "web/public/assets/projects/screenshots/current-prichal-1440.webp",
-      "sha256": "b28406714f047ddf5217c81199f41a268a46a4af94e713adf414fbdb6e451f35",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/prichal-home-1440.webp",
-      "sourceSha256": "b28406714f047ddf5217c81199f41a268a46a4af94e713adf414fbdb6e451f35",
-      "target": "web/public/assets/projects/screenshots/current-prichal-720.webp",
-      "sha256": "ec11e2e01f869778646380600af6278954d12b03cb0ee203eb27fb81d5ba76f1",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/tmux-popups-menu-1440.webp",
-      "sourceSha256": "8f39af520ee9f6911c536c6d1ef494077e64a184e0b64a123274e7ad9e23cdf9",
-      "target": "web/public/assets/projects/screenshots/current-tmux-popups-1440.webp",
-      "sha256": "8f39af520ee9f6911c536c6d1ef494077e64a184e0b64a123274e7ad9e23cdf9",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/tmux-popups-menu-1440.webp",
-      "sourceSha256": "8f39af520ee9f6911c536c6d1ef494077e64a184e0b64a123274e7ad9e23cdf9",
-      "target": "web/public/assets/projects/screenshots/current-tmux-popups-720.webp",
-      "sha256": "07a76432d2941d8eccb8c1bf3ac8bf6390ee005179b435a9505bd1b14440548c",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/obsidian-plugin-metronome-tuner-view-1440.webp",
-      "sourceSha256": "59adf4a5c6a547e6ceb91b35635f10a018c18a7b088182ec826145a9eea12c16",
-      "target": "web/public/assets/projects/screenshots/current-obsidian-plugin-metronome-tuner-1440.webp",
-      "sha256": "59adf4a5c6a547e6ceb91b35635f10a018c18a7b088182ec826145a9eea12c16",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/obsidian-plugin-metronome-tuner-view-1440.webp",
-      "sourceSha256": "59adf4a5c6a547e6ceb91b35635f10a018c18a7b088182ec826145a9eea12c16",
-      "target": "web/public/assets/projects/screenshots/current-obsidian-plugin-metronome-tuner-720.webp",
-      "sha256": "9bbd0cbee85b7b58317164f3208f0d6cebd6e76910ef17aae51bdf99e36b0732",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/omarchy-monitor-bar-preview-1440.webp",
-      "sourceSha256": "e42cd636ffa07804d96286c3b982fedb6d7b28390e9ddeaf42a62cea87544193",
-      "target": "web/public/assets/projects/screenshots/current-omarchy-monitor-bar-1440.webp",
-      "sha256": "e42cd636ffa07804d96286c3b982fedb6d7b28390e9ddeaf42a62cea87544193",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/omarchy-monitor-bar-preview-1440.webp",
-      "sourceSha256": "e42cd636ffa07804d96286c3b982fedb6d7b28390e9ddeaf42a62cea87544193",
-      "target": "web/public/assets/projects/screenshots/current-omarchy-monitor-bar-720.webp",
-      "sha256": "312613c275b9e1e8cb4f3bbbad550814517ea859db0ceb29e583ee0a1ceec4f4",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/omarchy-plugin-shelfish-preview-1440.webp",
-      "sourceSha256": "6cb23f79097d4b0629d678261774c53d7fb009f4aa82411897b00b5826f65527",
-      "target": "web/public/assets/projects/screenshots/current-omarchy-plugin-shelfish-1440.webp",
-      "sha256": "6cb23f79097d4b0629d678261774c53d7fb009f4aa82411897b00b5826f65527",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/omarchy-plugin-shelfish-preview-1440.webp",
-      "sourceSha256": "6cb23f79097d4b0629d678261774c53d7fb009f4aa82411897b00b5826f65527",
-      "target": "web/public/assets/projects/screenshots/current-omarchy-plugin-shelfish-720.webp",
-      "sha256": "a2cd0804cf7fdba9adb1d6962ba66d0fdd75f550195b9dd8e75498a5b4eaa928",
-      "kind": "Public capture downscaled for narrow screens"
-    },
-    {
-      "source": "public/screenshots/omarchy-superproductivity-panel-1440.webp",
-      "sourceSha256": "73904f2481235f9434ef5046a8a9f04c02223ba634dc0841b89ada7a318f3345",
-      "target": "web/public/assets/projects/screenshots/current-omarchy-superproductivity-1440.webp",
-      "sha256": "73904f2481235f9434ef5046a8a9f04c02223ba634dc0841b89ada7a318f3345",
-      "kind": "Existing public product capture"
-    },
-    {
-      "source": "public/screenshots/omarchy-superproductivity-panel-1440.webp",
-      "sourceSha256": "73904f2481235f9434ef5046a8a9f04c02223ba634dc0841b89ada7a318f3345",
-      "target": "web/public/assets/projects/screenshots/current-omarchy-superproductivity-720.webp",
-      "sha256": "ce6a9f2270886fb9d616f906bfdb6f0fc032eecce4023ed4725d06438535982a",
-      "kind": "Public capture downscaled for narrow screens"
+      "kind": "Studio approved Lavender waveform mark",
+      "viewBox": "0 0 512 512"
     },
     {
       "source": "studio/brands/super-productivity-mcp/product/hero.svg",
       "sourceSha256": "262fd825f57c1bd357e8e61321513ad97f7889c158379a95f2e8d762b7f35c15",
       "target": "web/public/assets/brands/super-productivity-mcp-overview.svg",
       "sha256": "262fd825f57c1bd357e8e61321513ad97f7889c158379a95f2e8d762b7f35c15",
-      "kind": "Studio product illustration; not a screenshot"
+      "kind": "Studio product illustration; not a screenshot",
+      "viewBox": "0 0 1440 900"
+    },
+    {
+      "source": "studio/brands/chatty-cat/logos/mark-primary.svg",
+      "target": "web/public/assets/brands/chatty-cat.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "694ef776e16f3db3a19b32c7181e0eab475cc9e9d8fe23faee3c906cb72212fb",
+      "sha256": "694ef776e16f3db3a19b32c7181e0eab475cc9e9d8fe23faee3c906cb72212fb",
+      "viewBox": "0 0 128 128"
+    },
+    {
+      "source": "studio/brands/headcount/logos/mark-primary.svg",
+      "target": "web/public/assets/brands/headcount.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "a1921d1a59c4633f0455bd01f7be09755f4df6ceadc04c3aae0da1b5a81d9dc6",
+      "sha256": "a1921d1a59c4633f0455bd01f7be09755f4df6ceadc04c3aae0da1b5a81d9dc6",
+      "viewBox": "0 0 128 128"
+    },
+    {
+      "source": "studio/brands/left-field/logos/mark-primary-outlined.svg",
+      "target": "web/public/assets/brands/left-field.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "90e94c7fea0a6b172e94de4851a798d7a0de450c935f772163a86691e21fe26c",
+      "sha256": "90e94c7fea0a6b172e94de4851a798d7a0de450c935f772163a86691e21fe26c",
+      "viewBox": "0 0 256 256"
+    },
+    {
+      "source": "studio/brands/rekolekt/logos/mark-primary-outlined.svg",
+      "target": "web/public/assets/brands/rekolekt.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "8deb1ca24f642bdaefc2eb1ee4c78142959a0eefa0835dbdc43bd5f6401f48ca",
+      "sha256": "8deb1ca24f642bdaefc2eb1ee4c78142959a0eefa0835dbdc43bd5f6401f48ca",
+      "viewBox": "0 0 256 256"
+    },
+    {
+      "source": "studio/brands/patstack/logos/mark-primary.svg",
+      "target": "web/public/assets/brands/patstack.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "e564ec311901ecf766b71955eb50fa6af297c35befce36f90e6c214d59114696",
+      "sha256": "e564ec311901ecf766b71955eb50fa6af297c35befce36f90e6c214d59114696",
+      "viewBox": "0 0 512 512"
+    },
+    {
+      "source": "studio/brands/pirs/logos/mark.svg",
+      "target": "web/public/assets/brands/pirs.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "4ac00db6335a429ee14eced96c120080f3295e30b49c30169a69c706f0a61b53",
+      "sha256": "4ac00db6335a429ee14eced96c120080f3295e30b49c30169a69c706f0a61b53",
+      "viewBox": "0 0 512 512"
+    },
+    {
+      "source": "studio/brands/commons/logos/mark.svg",
+      "target": "web/public/assets/brands/commons.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "8b5bb04cb8dde5d992860d8f89867b5edd11b30e907dca35dada05e3e919d14a",
+      "sha256": "8b5bb04cb8dde5d992860d8f89867b5edd11b30e907dca35dada05e3e919d14a",
+      "viewBox": "0 0 512 512"
+    },
+    {
+      "source": "studio/brands/dedhed/logos/mark-primary-outlined.svg",
+      "target": "web/public/assets/brands/dedhed.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "247df548d3e252bf474e14b5ac65551e2705a79bafa7597dd5bcae78f6a78d46",
+      "sha256": "247df548d3e252bf474e14b5ac65551e2705a79bafa7597dd5bcae78f6a78d46",
+      "viewBox": "0 0 256 256"
+    },
+    {
+      "source": "studio/brands/anarchist-archive/logos/mark.svg",
+      "target": "web/public/assets/brands/anarchist-archive.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "19af71f3df4946a55ba7f8fe184c767064cdbdf4a7e53cff07939558c1521930",
+      "sha256": "19af71f3df4946a55ba7f8fe184c767064cdbdf4a7e53cff07939558c1521930",
+      "viewBox": "0 0 512 512"
+    },
+    {
+      "source": "studio/brands/arkhiv-riot-grrrl/logos/mark.svg",
+      "target": "web/public/assets/brands/arkhiv-riot-grrrl.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "c795dff4d7661bdb8b83bca71416ea10ab44df7aceb96c1ed273199044e249c5",
+      "sha256": "c795dff4d7661bdb8b83bca71416ea10ab44df7aceb96c1ed273199044e249c5",
+      "viewBox": "0 0 512 512"
+    },
+    {
+      "source": "studio/brands/lineage/logos/mark.svg",
+      "target": "web/public/assets/brands/lineage.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "2b4f5cd6a5dad2fbc5f623a4ebcf99ad2d31352986a70df02a0965c04def1d55",
+      "sha256": "2b4f5cd6a5dad2fbc5f623a4ebcf99ad2d31352986a70df02a0965c04def1d55",
+      "viewBox": "0 0 512 512"
+    },
+    {
+      "source": "studio/brands/bill-nye-tv/logos/mark.svg",
+      "target": "web/public/assets/brands/bill-nye-tv.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "7b502b742b0c0e7fe9075f0d70e34e42e042162f4a2ffc1b6a2a5fd44a7ee7c5",
+      "sha256": "7b502b742b0c0e7fe9075f0d70e34e42e042162f4a2ffc1b6a2a5fd44a7ee7c5",
+      "viewBox": "0 0 512 512"
+    },
+    {
+      "source": "studio/brands/democracy-now-tv/logos/mark.svg",
+      "target": "web/public/assets/brands/democracy-now-tv.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "25a755b4d098e631ae448452b596a3d9bb3c08f6f48857f3b418feb9f95fc111",
+      "sha256": "25a755b4d098e631ae448452b596a3d9bb3c08f6f48857f3b418feb9f95fc111",
+      "viewBox": "0 0 512 512"
+    },
+    {
+      "source": "studio/brands/blacktower/logos/mark.svg",
+      "target": "web/public/assets/brands/blacktower.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "90ecd11014ad26d2e62ca93d16fe8fd32764e3019cc369e2becd1d92fbc3ec17",
+      "sha256": "90ecd11014ad26d2e62ca93d16fe8fd32764e3019cc369e2becd1d92fbc3ec17",
+      "viewBox": "0 0 512 512"
+    },
+    {
+      "source": "studio/brands/edda/logos/mark.svg",
+      "target": "web/public/assets/brands/edda.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "987773c75b69709e237d0029f62d18a81406f7adc5805679b92b5b843aa09580",
+      "sha256": "987773c75b69709e237d0029f62d18a81406f7adc5805679b92b5b843aa09580",
+      "viewBox": "0 0 512 512"
+    },
+    {
+      "source": "studio/brands/switchyard/logos/mark.svg",
+      "target": "web/public/assets/brands/switchyard.svg",
+      "kind": "Studio selected product mark",
+      "sourceSha256": "0c3b22c4f0d9c265a2950fb311ba22b7c2aefd564e718a7eb4896d9511ba3084",
+      "sha256": "0c3b22c4f0d9c265a2950fb311ba22b7c2aefd564e718a7eb4896d9511ba3084",
+      "viewBox": "0 0 512 512"
     }
   ]
 }

@@ -24,8 +24,8 @@ describe('ProjectsPage', () => {
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
-		expect(await screen.findByRole('heading', { name: 'Clpr', level: 2 })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: 'Internet-ID' })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: 'Clpr', level: 3 })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: 'Subcorp' })).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: toolProject.title })).toBeInTheDocument()
 		expect(screen.getByRole('link', { name: 'Browse the full archive' })).toHaveAttribute('href', '/archive')
 	})
@@ -36,11 +36,11 @@ describe('ProjectsPage', () => {
 			repoUrl: `https://git.subcult.tv/PatrickFanella/${slug}`,
 		}))
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue([featuredProject, ...curatedTools, {
-			...toolProject, slug: 'omarchy-monitor-bar', title: 'Omarchy Monitor Bar',
+			...toolProject, selected: false, slug: 'omarchy-monitor-bar', title: 'Omarchy Monitor Bar',
 		}])
 		renderInRouter(<ProjectsPage />, '/projects')
 		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
-		const tools = screen.getByRole('region', { name: 'Tools' })
+		const tools = screen.getByRole('region', { name: 'Developer Tools' })
 		expect(within(tools).getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent)).toEqual(['subsets', 'tmux-popups', 'twitchdl'])
 		curatedTools.forEach((tool) => expect(within(tools).getByRole('link', { name: `View repository: ${tool.title}` })).toHaveAttribute('href', tool.repoUrl))
 		expect(screen.queryByText('Omarchy Monitor Bar')).not.toBeInTheDocument()

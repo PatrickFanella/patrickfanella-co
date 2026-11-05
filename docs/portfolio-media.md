@@ -1,63 +1,75 @@
 # Portfolio media
 
+The November 5, 2026 selection contains 20 browser screenshots captured during
+this task, 37 explicit Studio assets, and 25 source-authored component-flow
+diagrams. No older screenshots are referenced by the published catalog.
+
+## Browser captures
+
+`screenshot-provenance.json` records the public URL, page title, UTC capture time,
+browser viewport, original dimensions and hash, state notes, and export hashes.
+The T3 Code shared browser used a 1440 × 900 CSS viewport; its screenshot export
+is 1280 × 800. Each capture has 1280px and 640px WebP exports under a dated filename.
+These are full-frame exports without fabricated interface elements.
+
+The captures cover Clpr, HasanAra, Undertow, Chatty Cat, Commons, Headcount, Left
+Field, Arkhiv, Backline, Kork, Patchwork, Prichal, Subcult OS, Subsets, and Arkhiv's
+six collection frontends. Captions distinguish application interfaces from public
+marketing pages, sample terminal output, local demonstrations, and previews.
+Screenshots document the visible interface at capture time; they do not establish
+product maturity or qualify every feature.
+
+Tadooer's browser profile contained personal signed-in tasks, so no capture from
+that session was imported. Its portfolio page uses approved branding and a fresh
+workflow diagram. Native tools and projects without a suitable public interface
+use approved marks, the existing Super Productivity MCP overview illustration,
+or original title covers. Covers and illustrations are labeled as such.
+
+## Studio assets
+
 Studio owns the brand masters. The active source is
-`subculture-collective/subcult-tv/studio`; the older `subcult-studio` checkout
-has been incorporated into that repository. The selected source revision and
-per-file SHA-256 hashes are recorded in `brand-asset-provenance.json`.
-Unrelated source work was present during selection; none of it was copied.
+`subculture-collective/subcult-tv/studio`; the older `subcult-studio` checkout was
+incorporated into that repository. This selection reads immutable revision
+`a871aec9579c7e3119d3920fb499a06eb70313b8`.
+`brand-asset-provenance.json` records each selected source path and hash, output
+path and hash, viewBox, and usage. The existing local Studio checkout had unrelated
+work; its dirty files were neither changed nor copied. Selected files were read
+from the pinned Git revision.
 
-## Selected assets and usage
+The header uses the approved `patrick__eff` lavender waveform. Product marks use
+their Studio pack's selected primary or outlined export on an appropriate dark or
+light background, without recoloring. They appear in the gallery, detail pages,
+collection cards, and archive. Space Grotesk, Inter, and JetBrains Mono remain
+self-hosted through the existing Fontsource dependencies and licenses.
 
-- `patrick__eff` uses its approved lavender waveform (`01-lavender.svg`) in the
-  site header. The existing poster/terminal palette and bold display style follow
-  the owner's design preference. Space Grotesk, Inter and JetBrains Mono remain
-  self-hosted through the existing Fontsource dependencies and their licenses.
-- Product marks come from each Studio pack's approved primary/outlined selection.
-  Logos sit on a pack-appropriate dark or light background without recoloring.
-  They appear next to project names and in archive cards.
-- Fourteen existing public product captures replace the older portfolio fixtures.
-  Each has an unchanged wide WebP and a 720px derivative. These are refreshed
-  portfolio assets, not a claim that a new capture or runtime qualification took
-  place today. Patchwork and Tadooer captions retain development/demo boundaries.
-- Super Productivity MCP uses a Studio overview illustration where a product
-  capture would misrepresent its integration interfaces. Its caption identifies
-  the illustration. Subsets uses its approved mark in the archive. Projects without approved marks or captures
-  use original title covers; a cover is not presented as an application screenshot.
-
-The manifest records the exact source and output paths, copy/transformation kind
-and hashes. No entire pack, draft, private catalog, marketing plan or account
-state enters the public asset directory. Selected source assets retain their
-upstream licensing; Studio selection does not transfer trademark ownership.
-
-To verify and rebuild this explicit selection, with Python and Pillow installed:
+To verify and rebuild the explicit Studio selection, use a checkout or selected
+file tree containing the pinned revision's bytes:
 
 ```sh
 python3 web/scripts/sync-studio-assets.py /path/to/subcult-tv
 ```
 
-The script rejects changed source hashes and changed destination bytes. Review
-both the pack's current selection and a new manifest before adopting later art.
-A hash refresh alone does not authorize a new public asset.
+The script refuses changed source or destination hashes. Review the pack's current
+selection and a new manifest before adopting later art. No whole pack, draft,
+private catalog, marketing plan, or account state is published. Selected assets
+retain their upstream licensing and trademark ownership.
 
 ## Original diagrams
 
-Six new SVG component-flow diagrams are authored here in
-`web/scripts/generate-project-diagrams.py`. The nodes and edges follow the public
-repository architecture notes reviewed for Clpr, HasanAra/Rekolekt, Undertow,
-Tadooer, Patchwork and Super Productivity MCP. These are selected conceptual
-paths, not traffic measurements, deployment maps or a product maturity claim.
-They replace the old illustrated architecture/metrics assets in case-study data.
-No performance or adoption figures are introduced.
+`web/scripts/generate-project-diagrams.py` authors a diagram for each of the 25
+selected projects. This update adds 19 diagrams to the six written for the previous
+portfolio update. Their nodes and edges follow the reviewed repository architecture
+notes. They explain selected component paths; they are not traffic measurements,
+deployment inventories, or product-readiness claims.
 
-Regenerate the diagrams and their catalog entries with:
+Regenerate the SVGs and their catalog entries with:
 
 ```sh
 python3 web/scripts/generate-project-diagrams.py
 ```
 
-Review the SVGs at full size and on a narrow screen. The media dialog provides
-an expanded view, captions remain visible, and alt text names the component path.
-`npm run build --prefix web` checks that every referenced logo, thumbnail, capture
-variant and diagram is present in the published artifact. The archive is part of
-the main navigation and the Projects page links a preview into it; archive and
-older-project search indexing remain disabled.
+Review the SVGs at full size and on a narrow screen. The media dialog provides an
+expanded view; captions remain visible, and alt text names the component path.
+`npm run build --prefix web` checks referenced logos, thumbnails, collection assets,
+capture variants, diagrams, related-project targets, and generated detail routes.
+It also rejects the removed project entries and their static documents.

@@ -3,6 +3,7 @@ export type ProjectMedia = {
   srcSet?: string
   alt: string
   caption?: string
+  capturedAt?: string
 }
 
 type ProjectKind = 'case-study' | 'highlight' | 'tool'
@@ -35,6 +36,17 @@ export type Project = {
   thumbnailUrl?: string
   thumbnailAlt?: string
   brandBackground?: string
+  selected?: boolean
+  relatedProjects?: { slug: string; label: string; relationship: string }[]
+  collections?: {
+    slug: string
+    title: string
+    url: string
+    summary: string
+    thumbnailUrl?: string
+    logoUrl?: string
+    brandBackground?: string
+  }[]
 }
 
 type ProjectListResponse = {

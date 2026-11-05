@@ -27,18 +27,18 @@ test('visitor can browse featured work and submit the contact form', async ({ pa
 })
 
 test('production routing, metadata, and legacy redirects are correct', async ({ page, request }) => {
-	const archived = await request.get('/projects/internet-id', { maxRedirects: 0 })
+	const archived = await request.get('/projects/subcorp', { maxRedirects: 0 })
 	expect(archived.status()).toBe(200)
 	const archivedHtml = await archived.text()
 	expect(archivedHtml).toContain('noindex,follow')
 
 	const tools = await request.get('/tools', { maxRedirects: 0 })
 	expect(tools.status()).toBe(308)
-	expect(tools.headers().location).toBe('/archive#tools')
+	expect(tools.headers().location).toBe('/projects#tools')
 
 	const legacy = await request.get('/projects/transcript-create', { maxRedirects: 0 })
 	expect(legacy.status()).toBe(308)
-	expect(legacy.headers().location).toBe('/projects/hasanara')
+	expect(legacy.headers().location).toBe('/projects/rekolekt')
 
 	const renamed = await request.get('/projects/discord-spywatcher', { maxRedirects: 0 })
 	expect(renamed.status()).toBe(308)
@@ -119,7 +119,7 @@ test('selected work has six case studies and supports tool-only filter results',
 	await page.goto('/projects')
 	const caseStudies = page.getByRole('link', { name: /read case study:/i })
 	await expect(caseStudies).toHaveCount(6)
-	expect(await caseStudies.evaluateAll((links) => links.map((link) => link.getAttribute('aria-label')))).toEqual(['Read case study: Clpr', 'Read case study: HasanAra', 'Read case study: Undertow', 'Read case study: Tadooer', 'Read case study: Patchwork', 'Read case study: Super Productivity MCP'])
+	expect(await caseStudies.evaluateAll((links) => links.map((link) => link.getAttribute('aria-label')))).toEqual(['Read case study: Clpr', 'Read case study: Patchwork', 'Read case study: HasanAra', 'Read case study: Tadooer', 'Read case study: Super Productivity MCP', 'Read case study: Undertow'])
 	const filter = page.getByRole('combobox', { name: 'Filter by technology' })
 	await filter.focus()
 	await expect(filter).toBeFocused()
@@ -175,8 +175,8 @@ test('archive navigation exposes thumbnails and searchable project records', asy
 	await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'Archive', exact: true }).click()
 	await expect(page.getByRole('heading', { level: 1, name: 'Archive' })).toBeVisible()
 	await expect(page.locator('.archive-thumbnail img').first()).toBeVisible()
-	await page.getByRole('searchbox', { name: 'Find a project' }).fill('tmux-popups')
-	await expect(page.getByRole('heading', { name: 'tmux-popups', exact: true })).toBeVisible()
+	await page.getByRole('searchbox', { name: 'Find a project' }).fill('monitor')
+	await expect(page.getByRole('heading', { name: /monitor/i })).toBeVisible()
 	await expect(page.locator('.archive-tile')).toHaveCount(1)
 })
 
@@ -189,4 +189,64 @@ test('case-study overview uses compact facts instead of a tall sidebar', async (
 	const media = page.locator('.case-intro + .case-story')
 	await expect(media).toBeVisible()
 	await expect(page.locator('.case-intro img')).toBeVisible()
+})
+
+test('the requested project collection is visible and removed projects return 404', async ({ page, request }) => {
+	const required = ['clpr', 'hasanara', 'undertow', 'chatty-cat', 'commons', 'headcount', 'left-field', 'arkhiv', 'rekolekt', 'tadooer', 'subsets', 'patstack', 'obsidian-plugin-metronome-tuner', 'super-productivity-mcp', 'ytclip', 'twitchdl', 'patchwork', 'clustr-galaxy', 'the-common-house', 'backline', 'tmux-popups', 'prichal', 'pirs', 'subcult-os', 'kork']
+	const removed = ['subcults', 'redstring', 'echo-trails', 'nearbody', 'one-block-cinema', 'pocket-civilization', 'vod-tender', 'magic-playlists', 'internet-id', 'soundhash', 'paqr', 'galdr', 'llama-line', 'artemis', 'clustr']
+	const { items } = await (await request.get('/content/projects.json')).json()
+	expect(items.filter((project: { selected: boolean }) => project.selected).map((project: { slug: string }) => project.slug).sort()).toEqual(required.sort())
+	await page.goto('/projects')
+	await expect(page.getByRole('status')).toContainText('25 projects')
+	for (const project of items.filter((project: { selected: boolean }) => project.selected)) {
+		await expect(page.getByRole('heading', { level: 3, name: project.title, exact: true })).toHaveCount(1)
+		expect(project.media.some((media: { src: string }) => media.src.includes('/diagrams/'))).toBe(true)
+	}
+	for (const slug of removed) {
+		expect(items.some((project: { slug: string }) => project.slug === slug)).toBe(false)
+		expect((await request.get(`/projects/${slug}`, { maxRedirects: 0 })).status(), slug).toBe(404)
+	}
+	const screenshots = items.flatMap((project: { media: { src: string; capturedAt?: string }[] }) => project.media).filter((media: { src: string }) => media.src.includes('/screenshots/'))
+	expect(screenshots).toHaveLength(20)
+	for (const media of screenshots) {
+		expect(media.capturedAt).toMatch(/^2026-11-05T/)
+		expect(media.src).toContain('/2026-11-05-')
+	}
+})
+
+test('connected projects link both ways and Arkhiv exposes its collection frontends', async ({ page }) => {
+	await page.goto('/projects/hasanara')
+	await page.getByRole('link', { name: 'Rekolekt', exact: true }).click()
+	await expect(page).toHaveURL(/\/projects\/rekolekt$/)
+	await expect(page.getByText(/it ships no web pages/i)).toBeVisible()
+	await page.getByRole('link', { name: 'HasanAra', exact: true }).click()
+	await expect(page).toHaveURL(/\/projects\/hasanara$/)
+	await page.goto('/projects/subsets')
+	await page.getByRole('link', { name: 'Patstack', exact: true }).click()
+	await expect(page).toHaveURL(/\/projects\/patstack$/)
+	await page.getByRole('link', { name: 'Subsets', exact: true }).click()
+	await expect(page).toHaveURL(/\/projects\/subsets$/)
+	await page.goto('/projects/arkhiv')
+	await expect(page.locator('#collections article')).toHaveCount(6)
+	for (const title of ['Anarchist Archive', 'Riot Grrrl Zine Archive', 'Dedhed', 'Lineage', 'Bill Nye TV', 'Democracy Now! TV']) {
+		await expect(page.locator('#collections').getByRole('heading', { name: title, exact: true })).toBeVisible()
+	}
+	await page.goto('/projects/obsidian-plugin-metronome-tuner')
+	await expect(page.getByRole('heading', { name: 'Metronome + Tuner', exact: true })).toBeVisible()
+})
+
+test('the source button separates its icon from the text on narrow and wide screens', async ({ page }) => {
+	for (const width of [320, 1280]) {
+		await page.setViewportSize({ width, height: 900 })
+		await page.goto('/projects/clpr')
+		const source = page.getByRole('link', { name: 'View source', exact: true })
+		await expect(source).toBeVisible()
+		const gap = await source.evaluate((element) => {
+			const text = [...element.childNodes].find((node) => node.nodeType === Node.TEXT_NODE && node.textContent?.trim())!
+			const range = document.createRange()
+			range.selectNodeContents(text)
+			return range.getBoundingClientRect().left - element.querySelector('svg')!.getBoundingClientRect().right
+		})
+		expect(gap, `visible icon/text gap at ${width}px`).toBeGreaterThanOrEqual(7.5)
+	}
 })

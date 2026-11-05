@@ -58,7 +58,7 @@ describe('App navigation flows', () => {
 		await user.click(within(screen.getByRole('navigation', { name: 'Primary navigation' })).getByRole('link', { name: /^archive$/i }))
 
 		expect(await screen.findByRole('heading', { level: 1, name: /^archive$/i })).toBeInTheDocument()
-		expect(await screen.findByRole('region', { name: /developer tools/i })).toHaveAttribute('id', 'tools')
+		expect(screen.getByRole('link', { name: 'View project: Subcorp' })).toHaveAttribute('href', '/projects/subcorp')
 	})
 
 	it('navigates from the projects archive to a project detail route', async () => {

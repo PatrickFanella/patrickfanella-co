@@ -21,15 +21,16 @@ const categoryOrder = [
 function CategoryGroup({ category, projects, toolsSectionRef }: { category: string; projects: Project[]; toolsSectionRef: RefObject<HTMLElement | null> }) {
   if (projects.length === 0) return null
 
+  const isTools = category === 'Developer Tools' || category === 'Tools & Workflows'
   const headingId = `category-${category.replace(/\s+/g, '-').toLowerCase()}-heading`
 
   return (
     <section
       className="grid gap-5"
       aria-labelledby={headingId}
-      id={category === 'Developer Tools' ? 'tools' : undefined}
-      ref={category === 'Developer Tools' ? toolsSectionRef : undefined}
-      tabIndex={category === 'Developer Tools' ? -1 : undefined}
+      id={isTools ? 'tools' : undefined}
+      ref={isTools ? toolsSectionRef : undefined}
+      tabIndex={isTools ? -1 : undefined}
     >
       <div>
         <h2 className={monoLabelClass} id={headingId}>{category}</h2>
@@ -46,7 +47,7 @@ export function ArchivePage() {
   const location = useLocation()
   const [query, setQuery] = useState('')
   const toolsSectionRef = useRef<HTMLElement>(null)
-  const nonFlagships = projects.filter((project) => project.classification !== 'flagship')
+  const nonFlagships = projects.filter((project) => project.classification !== 'flagship' && !project.selected)
   const visibleProjects = nonFlagships.filter((project) => `${project.title} ${project.category} ${project.summary} ${project.stack.join(' ')}`.toLowerCase().includes(query.toLowerCase().trim()))
 
   useEffect(() => {
