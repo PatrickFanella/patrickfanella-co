@@ -6,7 +6,7 @@ import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import { getErrorMessage } from '../lib/errors'
 import { getSiteUrl } from '../lib/site'
-import { monoLabelClass, primaryButtonClass, secondaryButtonClass, surfaceCardClass, textLinkClass } from '../lib/styles'
+import { primaryButtonClass, secondaryButtonClass, textLinkClass } from '../lib/styles'
 import { useProjects } from '../lib/useProjects'
 
 const focusAreas = ['Backend systems', 'Accessible product interfaces', 'Testing and deployment', 'Production operations']
@@ -36,31 +36,26 @@ export function HomePage() {
         }}
       />
 
-      <section className="grid gap-8 border-b-2 border-stroke pb-12 pt-3 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-end">
+      <section className="home-intro">
         <div>
-          <SectionLabel>Senior full-stack / backend</SectionLabel>
-          <h1 className="mt-5 max-w-[13ch] font-display text-[clamp(3.2rem,8vw,7.6rem)] font-bold uppercase leading-[0.84] tracking-[-0.055em] text-heading">
-            <span className="block">I write the API,</span>{' '}
-            <span className="block text-accent-pink">the interface,</span>{' '}
-            <span className="block text-accent-green">and the runbook.</span>
-          </h1>
-          <p className="mt-6 max-w-[48ch] text-[1.08rem] leading-relaxed text-ink-soft sm:text-[1.2rem]">
-            Mostly Go and Python on PostgreSQL, with React in front. I test what I build, deploy it, and stay on to run it. clpr.tv and hasanara.tv are both live.
+          <SectionLabel>Senior full-stack / backend engineer</SectionLabel>
+          <h1 className="home-title">I write the API,<br /> the interface,<br /> <span className="text-accent-purple">and the runbook.</span></h1>
+          <p className="mt-6 max-w-[51ch] text-lg leading-relaxed text-ink-soft">
+            Go and Python on PostgreSQL, with React in front. I build the product, test it, deploy it, and stay on to run it.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link className={primaryButtonClass} to="/contact">Tell me about a role</Link>
-            <Link className={secondaryButtonClass} to="/projects">Read the case studies</Link>
+          <div className="mt-8 flex flex-wrap items-center gap-5">
+            <Link className={primaryButtonClass} to="/projects">Read the case studies</Link>
             <Link className={textLinkClass} to="/resume">See my resume</Link>
           </div>
         </div>
-
-        <aside className={`${surfaceCardClass} bg-panel p-6`} aria-label="Availability and work areas">
-          <p className={monoLabelClass}>Actively interviewing</p>
-          <p className="mt-4 font-display text-2xl font-bold leading-tight text-heading">Chicago or remote</p>
-          <ul className="mt-5 grid list-none gap-2 p-0">
-            {focusAreas.map((area) => <li className="border-2 border-stroke bg-surface px-3 pt-[calc(0.5rem+0.5px)] pb-[calc(0.5rem-0.5px)] font-mono text-xs uppercase tracking-[0.12em]" key={area}>{area}</li>)}
+        <aside className="home-note" aria-label="Availability and work areas">
+          <p className="flex items-center gap-2 text-sm text-accent-green"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-green" />Actively interviewing</p>
+          <h2 className="mt-4 font-display text-2xl font-medium tracking-tight text-heading">Chicago or remote</h2>
+          <p className="mt-3 text-sm leading-relaxed text-ink-soft">Looking for a senior engineering role with ownership from the data model to the running service.</p>
+          <ul className="mt-6 grid list-none gap-3 border-t border-stroke pt-6 text-sm text-ink-soft">
+            {focusAreas.map((area) => <li key={area}>{area}</li>)}
           </ul>
-          <a className={`${textLinkClass} mt-5`} href="mailto:fanella.patrick@gmail.com">fanella.patrick@gmail.com</a>
+          <Link className={`${textLinkClass} mt-7`} to="/contact">Tell me about a role</Link>
         </aside>
       </section>
 
@@ -68,11 +63,11 @@ export function HomePage() {
         <div className="mb-8 grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
           <div>
             <SectionLabel>Case studies</SectionLabel>
-            <h2 className="mt-5 font-display text-[clamp(2.6rem,5vw,4.6rem)] font-bold uppercase leading-[0.9] tracking-[-0.04em] text-heading" id="featured-heading">
-              Start here.
+            <h2 className="mt-4 font-display text-[clamp(2.3rem,5vw,3.5rem)] font-semibold leading-tight tracking-[-0.04em] text-heading" id="featured-heading">
+              Selected work.
             </h2>
           </div>
-          <p className="max-w-[38ch] text-ink-soft md:justify-self-end md:text-right">Each one covers the problem, what I owned, the calls I made, and what I learned from them.</p>
+          <p className="max-w-[38ch] text-ink-soft md:justify-self-end md:text-right">Three ways into the work: clip discovery, a searchable broadcast archive, and a browser video editor.</p>
         </div>
 
         {status === 'loading' ? <LoadingState description="Loading case studies." title="Loading case studies." /> : null}
@@ -85,10 +80,11 @@ export function HomePage() {
             title="Case studies could not be loaded."
           />
         ) : null}
-        {status === 'success' ? (
+        {status === 'success' && flagships.length === 0 ? <RouteState description="Case studies will appear here when they are published." label="No projects" title="No featured projects yet." /> : null}
+        {status === 'success' && flagships.length > 0 ? (
           <>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {flagships.map((project, index) => <ProjectCard key={project.slug} order={index + 1} project={project} />)}
+            <div>
+              {flagships.map((project) => <ProjectCard key={project.slug} project={project} />)}
             </div>
             <div className="mt-8">
               <Link className={secondaryButtonClass} to="/projects">Read all case studies</Link>

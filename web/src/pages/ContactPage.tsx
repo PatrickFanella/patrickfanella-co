@@ -109,11 +109,11 @@ export function ContactPage() {
         path="/contact"
         title="Contact | Senior full-stack and backend engineer"
       />
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(380px,1fr)] lg:items-start border-b-2 border-stroke pb-16 mb-10">
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(380px,1fr)] lg:items-start border-b border-stroke pb-16 mb-10">
         <div className="grid gap-8">
           <div>
             <SectionLabel>Contact</SectionLabel>
-            <h1 className={`${pageTitleClass} mt-6 uppercase`}>
+            <h1 className={`${pageTitleClass} mt-6`}>
               Tell me about the role.
             </h1>
             <p className={pageIntroClass}>
@@ -144,7 +144,7 @@ export function ContactPage() {
         </div>
 
         <form className={`${surfaceCardClass} grid gap-6 p-8 lg:p-10 bg-panel lg:self-start`} onSubmit={onSubmit} noValidate>
-          <p className="font-mono text-[1.1rem] uppercase tracking-[0.05em] text-heading font-bold pb-4 border-b-2 border-stroke">
+          <p className="text-[1.1rem] tracking-[0.05em] text-heading font-bold pb-4 border-b border-stroke">
             Send a message
           </p>
 
@@ -156,7 +156,7 @@ export function ContactPage() {
           </div>
 
           <label className="grid gap-3 text-ink-soft mt-2">
-            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Name</span>
+            <span className="text-[0.75rem] text-heading font-bold">Name</span>
             <input
               aria-describedby={errors.name ? `${nameFieldId}-error` : undefined}
               aria-invalid={Boolean(errors.name)}
@@ -166,14 +166,14 @@ export function ContactPage() {
               {...register('name')}
             />
             {errors.name ? (
-              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${nameFieldId}-error`} role="alert">
+              <span className="text-danger text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${nameFieldId}-error`} role="alert">
                 Error: {errors.name.message}
               </span>
             ) : null}
           </label>
 
           <label className="grid gap-3 text-ink-soft">
-            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Email</span>
+            <span className="text-[0.75rem] text-heading font-bold">Email</span>
             <input
               aria-describedby={errors.email ? `${emailFieldId}-error` : undefined}
               aria-invalid={Boolean(errors.email)}
@@ -183,14 +183,14 @@ export function ContactPage() {
               {...register('email')}
             />
             {errors.email ? (
-              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${emailFieldId}-error`} role="alert">
+              <span className="text-danger text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${emailFieldId}-error`} role="alert">
                 Error: {errors.email.message}
               </span>
             ) : null}
           </label>
 
           <label className="grid gap-3 text-ink-soft">
-            <span className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-heading font-bold">Message</span>
+            <span className="text-[0.75rem] text-heading font-bold">Message</span>
             <textarea
               aria-describedby={errors.message ? `${messageFieldId}-error` : undefined}
               aria-invalid={Boolean(errors.message)}
@@ -200,7 +200,7 @@ export function ContactPage() {
               {...register('message')}
             />
             {errors.message ? (
-              <span className="text-danger font-mono text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${messageFieldId}-error`} role="alert">
+              <span className="text-danger text-[0.8rem] bg-danger/10 px-3 py-1.5 border border-danger" id={`${messageFieldId}-error`} role="alert">
                 Error: {errors.message.message}
               </span>
             ) : null}
@@ -213,14 +213,14 @@ export function ContactPage() {
           {submitMessage ? (
             <p
               aria-live="polite"
-              className={`text-sm tracking-wide font-mono px-4 py-3 border-2 ${submitState === 'error' ? 'text-danger border-danger bg-danger/10' : 'text-paper border-accent-green bg-accent-green'}`}
+              className={`text-sm tracking-wide px-4 py-3 border-2 ${submitState === 'error' ? 'text-danger border-danger bg-danger/10' : 'text-paper border-accent-green bg-accent-green'}`}
               role={submitState === 'error' ? 'alert' : 'status'}
             >
               {submitState === 'error' ? 'Error: ' : ''}{submitMessage}
             </p>
           ) : null}
 
-          <p className="border-t-2 border-stroke pt-4 text-xs leading-relaxed text-ink-soft">
+          <p className="border-t border-stroke pt-4 text-xs leading-relaxed text-ink-soft">
             I store your name, email, and message so I can reply. I delete submissions and backups within 90 days. I do not sell your information or use it for advertising.
           </p>
         </form>

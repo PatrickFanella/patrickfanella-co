@@ -30,94 +30,45 @@ describe('ProjectsPage', () => {
 		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
 	})
 
-	it('renders the curated tools once and in the requested order', async () => {
-		const curatedToolDetails: Array<[string, string, Project['kind'], string]> = [
-			['switchyard', 'Switchyard', 'highlight', 'https://git.subcult.tv/subculture-collective/switchyard'],
-			['blacktower', 'Blacktower', 'highlight', 'https://git.subcult.tv/subculture-collective/blacktower'],
-			['tmux-popups', 'tmux-popups', 'tool', 'https://github.com/PatrickFanella/tmux-popups'],
-			['obsidian-plugin-metronome-tuner', 'obsidian-plugin-metronome-tuner', 'tool', 'https://github.com/PatrickFanella/obsidian-plugin-metronome-tuner'],
-			['omarchy-plugin-shelfish', 'omarchy-plugin-shelfish', 'tool', 'https://github.com/PatrickFanella/omarchy-plugin-shelfish'],
-			['omarchy-plugin-superproductivity', 'omarchy-plugin-superproductivity', 'tool', 'https://github.com/PatrickFanella/omarchy-superproductivity'],
-			['omarchy-monitor-bar', 'omarchy-monitor-bar', 'tool', 'https://github.com/PatrickFanella/omarchy-monitor-bar'],
-		]
-		const curatedTools = curatedToolDetails.map(([slug, title, kind, repoUrl]): Project => ({
-			...toolProject,
-			slug,
-			title,
-			kind,
-			repoUrl,
-			classification: slug === 'switchyard' ? 'flagship' : 'archive',
+	it('renders the selected tools once, in order, linked to their public source', async () => {
+		const curatedTools = ['subsets', 'tmux-popups', 'twitchdl'].map((slug): Project => ({
+			...toolProject, slug, title: slug,
+			repoUrl: `https://git.subcult.tv/PatrickFanella/${slug}`,
 		}))
-		vi.spyOn(api, 'fetchProjects').mockResolvedValue([
-			featuredProject,
-			...curatedTools,
-			toolProject,
-		])
-
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue([featuredProject, ...curatedTools, {
+			...toolProject, slug: 'omarchy-monitor-bar', title: 'Omarchy Monitor Bar',
+		}])
 		renderInRouter(<ProjectsPage />, '/projects')
-
 		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
 		const tools = screen.getByRole('region', { name: 'Tools' })
-		expect(within(tools).getByRole('heading', { name: 'Tools' })).toBeInTheDocument()
-		expect(
-			within(tools).getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent),
-		).toEqual(curatedToolDetails.map(([, title]) => title))
-		const switchyardLink = within(tools).getByRole('link', { name: 'View project: Switchyard' })
-		expect(switchyardLink).toHaveAttribute('href', '/projects/switchyard')
-		expect(switchyardLink).not.toHaveAttribute('target')
-		expect(switchyardLink).not.toHaveAttribute('rel')
-		const repositoryLinks = curatedToolDetails.slice(1).map(([, title]) =>
-			within(tools).getByRole('link', { name: `View repository: ${title}` }),
-		)
-		expect(repositoryLinks.map((link) => link.getAttribute('href'))).toEqual(
-			curatedTools.slice(1).map((tool) => tool.repoUrl),
-		)
-		expect(repositoryLinks.every((link) => link.getAttribute('target') === '_blank')).toBe(true)
-		expect(repositoryLinks.every((link) => link.getAttribute('rel') === 'noreferrer')).toBe(true)
-		expect(within(tools).getAllByRole('link')).toEqual([switchyardLink, ...repositoryLinks])
-		expect(screen.getAllByRole('heading', { name: 'Switchyard' })).toHaveLength(1)
-		expect(within(tools).getByRole('heading', { name: 'tmux-popups' })).toBeInTheDocument()
-		expect(screen.queryByRole('heading', { name: 'tmux-plugins' })).not.toBeInTheDocument()
+		expect(within(tools).getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent)).toEqual(['subsets', 'tmux-popups', 'twitchdl'])
+		curatedTools.forEach((tool) => expect(within(tools).getByRole('link', { name: `View repository: ${tool.title}` })).toHaveAttribute('href', tool.repoUrl))
+		expect(screen.queryByText('Omarchy Monitor Bar')).not.toBeInTheDocument()
 	})
 
-	it('explains that card colors match the named stack technologies', async () => {
-		vi.spyOn(api, 'fetchProjects').mockResolvedValue([featuredProject])
-
-		renderInRouter(<ProjectsPage />, '/projects')
-
-		expect(await screen.findByText(/legend names the technologies/i)).toHaveTextContent(/card colors match it/i)
-		expect(screen.queryByText(/hover over a marker/i)).not.toBeInTheDocument()
-	})
-
-	it('filters projects from the interactive stack legend', async () => {
+	it('filters both case studies and tools using technologies present in the response', async () => {
 		const user = userEvent.setup()
-		const pythonProject: Project = {
-			...featuredProject,
-			slug: 'python-project',
-			title: 'Python Project',
-			stack: ['Python', 'FastAPI'],
-		}
+		const pythonProject: Project = { ...featuredProject, slug: 'python-project', title: 'Python Project', stack: ['Python', 'FastAPI'] }
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue([featuredProject, pythonProject, toolProject])
-
 		renderInRouter(<ProjectsPage />, '/projects')
-
 		expect(await screen.findByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
-		const filterGroup = screen.getByRole('group', { name: /filter projects by technology/i })
-		const pythonFilter = within(filterGroup).getByRole('button', { name: 'Python' })
-
-		await user.click(pythonFilter)
-
-		expect(pythonFilter).toHaveAttribute('aria-pressed', 'true')
+		const filter = screen.getByRole('combobox', { name: 'Filter by technology' })
+		expect(screen.queryByRole('option', { name: 'C#' })).not.toBeInTheDocument()
+		await user.selectOptions(filter, 'Python')
 		expect(screen.queryByRole('heading', { name: 'Clpr' })).not.toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: 'Python Project' })).toBeInTheDocument()
 		expect(screen.queryByRole('heading', { name: toolProject.title })).not.toBeInTheDocument()
 		expect(screen.getByRole('status')).toHaveTextContent('1 project using Python')
-
-		await user.click(pythonFilter)
-
-		expect(pythonFilter).toHaveAttribute('aria-pressed', 'false')
+		await user.click(screen.getByRole('button', { name: 'Clear filter' }))
+		expect(filter).toHaveValue('')
 		expect(screen.getByRole('heading', { name: 'Clpr' })).toBeInTheDocument()
-		expect(screen.getByRole('heading', { name: 'Python Project' })).toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: toolProject.title })).toBeInTheDocument()
+	})
+
+	it('keeps filtering available when the response contains only tools', async () => {
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue([toolProject])
+		renderInRouter(<ProjectsPage />, '/projects')
+		expect(await screen.findByRole('combobox', { name: 'Filter by technology' })).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: toolProject.title })).toBeInTheDocument()
 	})
 

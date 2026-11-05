@@ -67,14 +67,14 @@ func TestListProjectsAndGetProjectUseSeededPostgresData(t *testing.T) {
 		t.Fatalf("expected %d projects, got %d", len(portfolio.Projects), len(projects))
 	}
 
-	featuredCount := 0
+	featuredSlugs := []string{}
 	for _, p := range projects {
 		if p.Featured {
-			featuredCount++
+			featuredSlugs = append(featuredSlugs, p.Slug)
 		}
 	}
-	if featuredCount != 7 {
-		t.Fatalf("expected 7 featured projects, got %d", featuredCount)
+	if strings.Join(featuredSlugs, ",") != "clpr,hasanara,undertow" {
+		t.Fatalf("unexpected homepage selection: %v", featuredSlugs)
 	}
 	if !projects[0].Featured {
 		t.Fatalf("expected first project to be featured, got %#v", projects[0])

@@ -7,13 +7,13 @@ import { ProjectCard } from './ProjectCard'
 
 describe('ProjectCard', () => {
 	it('links to the project detail page', () => {
-		renderInRouter(<ProjectCard order={1} project={featuredProject} />)
+		renderInRouter(<ProjectCard project={featuredProject} />)
 
 		expect(screen.getByRole('link', { name: /read case study/i })).toHaveAttribute('href', `/projects/${featuredProject.slug}`)
 	})
 
 	it('links curated projects with repositories directly to their source', () => {
-		renderInRouter(<ProjectCard linkToRepository order={1} project={toolProject} />)
+		renderInRouter(<ProjectCard linkToRepository project={toolProject} />)
 
 		const link = screen.getByRole('link', { name: `View repository: ${toolProject.title}` })
 		expect(link).toHaveAttribute('href', toolProject.repoUrl)
@@ -22,14 +22,14 @@ describe('ProjectCard', () => {
 	})
 
 	it('shows an honest status for curated projects without repositories', () => {
-		renderInRouter(<ProjectCard linkToRepository order={1} project={{ ...toolProject, repoUrl: undefined }} />)
+		renderInRouter(<ProjectCard linkToRepository project={{ ...toolProject, repoUrl: undefined }} />)
 
 		expect(screen.getByText('Source unavailable')).toBeInTheDocument()
 		expect(screen.queryByRole('link', { name: /view tool/i })).not.toBeInTheDocument()
 	})
 
 	it('keeps the default tool CTA linked to project details', () => {
-		renderInRouter(<ProjectCard order={1} project={toolProject} />)
+		renderInRouter(<ProjectCard project={toolProject} />)
 
 		expect(screen.getByRole('link', { name: `View tool: ${toolProject.title}` })).toHaveAttribute(
 			'href',
@@ -37,17 +37,19 @@ describe('ProjectCard', () => {
 		)
 	})
 
-	it('names every stack technology once through the pip group', () => {
-		const { container } = renderInRouter(<ProjectCard order={1} project={featuredProject} />)
+	it('shows technology names without needing a pointer or color legend', () => {
+		renderInRouter(<ProjectCard project={featuredProject} />)
+		expect(screen.getByRole('list', { name: 'Clpr technologies' })).toBeInTheDocument()
+		featuredProject.stack.forEach((tech) => expect(screen.getByText(tech)).toBeVisible())
+	})
 
-		expect(
-			screen.getByRole('img', {
-				name: `${featuredProject.stack.length} technologies in the stack: ${featuredProject.stack.join(', ')}`,
-			}),
-		).toBeInTheDocument()
-		featuredProject.stack.forEach((tech) => {
-			expect(screen.queryByLabelText(tech)).not.toBeInTheDocument()
-		})
-		expect(container.querySelectorAll('[role="img"] > span[aria-hidden="true"]')).toHaveLength(featuredProject.stack.length)
+	it('shows screenshots with their fixture disclosures', () => {
+		renderInRouter(<ProjectCard project={{ ...featuredProject, media: [{
+			src: '/assets/projects/screenshots/clpr-feed-1440.webp',
+			alt: 'Clpr feed with synthetic clips',
+			caption: 'Synthetic fixture; no user data is shown.',
+		}] }} />)
+		expect(screen.getByRole('img', { name: 'Clpr feed with synthetic clips' })).toHaveAttribute('loading', 'lazy')
+		expect(screen.getByText('Synthetic fixture; no user data is shown.')).toBeVisible()
 	})
 })

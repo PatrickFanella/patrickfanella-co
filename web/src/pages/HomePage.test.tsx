@@ -58,6 +58,12 @@ describe('HomePage', () => {
 		expect(await screen.findByRole('heading', { name: 'Selected Project 7' })).toBeInTheDocument()
 	})
 
+	it('shows an intentional empty state when no featured work is published', async () => {
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue([])
+		renderInRouter(<HomePage />)
+		expect(await screen.findByRole('heading', { name: 'No featured projects yet.' })).toBeInTheDocument()
+	})
+
 	it('renders a recoverable error state when the featured query fails', async () => {
 		vi.spyOn(api, 'fetchProjects').mockRejectedValue(
 			new api.ApiClientError(503, 'database_unavailable', 'Featured case studies are temporarily unavailable.'),

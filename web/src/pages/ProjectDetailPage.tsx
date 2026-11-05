@@ -20,6 +20,8 @@ import {
 import { useProject } from '../lib/useProjects'
 
 const flagshipProblemHeadings: Record<string, string> = {
+  tadooer: 'One plan, even when clients disagree.',
+  'super-productivity-mcp': 'A task manager needs more than a prompt.',
   clpr: 'A good clip is hard to find twice.',
   patchwork: 'A request needs an area, not an address.',
   hasanara: 'Finding one moment across hundreds of hours.',
@@ -56,7 +58,7 @@ export function ProjectDetailPage() {
   const { project, status, error, retry } = useProject(slug)
   const siteUrl = getSiteUrl()
   const metaCardClass =
-    'flex items-baseline gap-3 border-2 border-stroke bg-surface px-5 pt-[calc(0.75rem+0.5px)] pb-[calc(0.75rem-0.5px)] text-ink-soft'
+    'grid gap-2 border-t border-stroke py-4 text-ink-soft'
 
   if (status === 'loading') {
     return (
@@ -163,10 +165,10 @@ export function ProjectDetailPage() {
         title={flagshipSeoTitles[project.slug] || project.title}
         type="article"
       />
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b-2 border-stroke pb-10 mb-8">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b border-stroke pb-10 mb-8">
         <div>
           <SectionLabel>{project.category}</SectionLabel>
-          <h1 className={`${pageTitleClass} mt-6 uppercase`}>{project.title}</h1>
+          <h1 className={`${pageTitleClass} mt-6`}>{project.title}</h1>
           <p className="mt-6 max-w-[55ch] text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
         </div>
 
@@ -174,14 +176,18 @@ export function ProjectDetailPage() {
           <p className={monoLabelClass}>At a glance</p>
           <div className="mt-5 grid gap-3">
             <p className={metaCardClass}>
-              <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
+              <span className="text-sm text-ink-soft">Delivery</span>
+              <span className="text-heading">{project.deliveryStatus}</span>
+            </p>
+            <p className={metaCardClass}>
+              <span className="text-[0.8rem] text-accent-green font-bold">
                 Domain
               </span>
               <span className="text-[1.05rem] text-heading">{project.category}</span>
             </p>
             {project.coreMechanism ? (
               <p className={metaCardClass}>
-                <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
+                <span className="text-[0.8rem] text-accent-green font-bold">
                   Core work
                 </span>
                 <span className="text-[1.05rem] text-heading">{project.coreMechanism}</span>
@@ -189,7 +195,7 @@ export function ProjectDetailPage() {
             ) : null}
             {project.shippedOutcome ? (
               <p className={metaCardClass}>
-                <span className="font-mono text-[0.8rem] uppercase tracking-[0.18em] text-accent-green font-bold">
+                <span className="text-[0.8rem] text-accent-green font-bold">
                   Outcome
                 </span>
                 <span className="text-[1.05rem] text-heading">{project.shippedOutcome}</span>
@@ -198,7 +204,7 @@ export function ProjectDetailPage() {
           </div>
 
           {project.repoUrl || project.liveUrl ? (
-            <div className="mt-5 flex flex-wrap gap-4 border-t-2 border-stroke pt-5">
+            <div className="mt-5 flex flex-wrap gap-4 border-t border-stroke pt-5">
               {project.repoUrl ? (
                 <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">
                   View source ↗
@@ -225,7 +231,7 @@ export function ProjectDetailPage() {
       <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.75fr)] lg:items-start">
         <article className="pr-4 lg:pr-8">
           <SectionLabel>Problem and ownership</SectionLabel>
-          <h2 className="mt-6 font-display text-[clamp(2rem,3.4vw,2.9rem)] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
+          <h2 className="mt-6 font-display text-[clamp(2rem,3.4vw,2.9rem)] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
             {flagshipProblemHeadings[project.slug] || 'The problem it solves.'}
           </h2>
           <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft">
@@ -237,7 +243,7 @@ export function ProjectDetailPage() {
         </article>
 
         <article className={`${surfaceCardClass} bg-surface p-8`}>
-          <h2 className="font-display text-[clamp(1.75rem,2.6vw,2.3rem)] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading">
+          <h2 className="font-display text-[clamp(1.75rem,2.6vw,2.3rem)] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
             What I built.
           </h2>
           <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-soft">
@@ -247,9 +253,9 @@ export function ProjectDetailPage() {
             {project.highlights.map((highlight, index) => (
               <li
                 key={highlight}
-                className="border-2 border-stroke bg-panel p-5 grid gap-3"
+                className="border border-stroke bg-panel p-5 grid gap-3"
               >
-                <p className="font-mono text-[0.85rem] font-bold text-accent-purple">{String(index + 1).padStart(2, '0')}</p>
+                <p className="text-[0.85rem] font-bold text-accent-purple">{String(index + 1).padStart(2, '0')}</p>
                 <p className="text-[1.05rem] leading-relaxed">{highlight}</p>
               </li>
             ))}
@@ -258,11 +264,11 @@ export function ProjectDetailPage() {
       </div>
 
       {project.architecture.length > 0 ? (
-        <section className="mt-16 grid gap-8 border-t-2 border-stroke pt-10">
+        <section className="mt-16 grid gap-8 border-t border-stroke pt-10">
           <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.8fr)] lg:items-end">
             <div>
               <SectionLabel>Architecture</SectionLabel>
-              <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
+              <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
                 Decisions and tradeoffs.
               </h2>
             </div>
@@ -283,11 +289,11 @@ export function ProjectDetailPage() {
       ) : null}
 
       {project.media.length > 0 ? (
-        <section className="mt-16 grid gap-8 border-t-2 border-stroke pt-10">
+        <section className="mt-16 grid gap-8 border-t border-stroke pt-10">
           <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.8fr)] lg:items-end">
             <div>
               <SectionLabel>Supporting media</SectionLabel>
-              <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
+              <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
                 Screens and diagrams.
               </h2>
             </div>
@@ -301,10 +307,10 @@ export function ProjectDetailPage() {
       ) : null}
 
       {project.lessons.length > 0 ? (
-        <section className="mt-16 grid gap-8 border-t-2 border-stroke pt-10">
+        <section className="mt-16 grid gap-8 border-t border-stroke pt-10">
           <div>
             <SectionLabel>Lessons</SectionLabel>
-            <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading uppercase">
+            <h2 className="mt-6 font-display text-[2.5rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
               What I learned.
             </h2>
           </div>
@@ -324,7 +330,7 @@ export function ProjectDetailPage() {
         <section className={`${surfaceCardClass} mt-16 grid gap-6 bg-panel p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end`} aria-labelledby="case-study-contact-heading">
           <div>
             <SectionLabel>Work together</SectionLabel>
-            <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading" id="case-study-contact-heading">Hiring for something like this?</h2>
+            <h2 className="mt-5 font-display text-[2.25rem] font-bold leading-[0.95] tracking-[-0.04em] text-heading" id="case-study-contact-heading">Hiring for something like this?</h2>
             <p className="mt-4 max-w-[58ch] leading-relaxed text-ink-soft">Send me the role, the team, and what is broken or missing. A paragraph is enough.</p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -334,7 +340,7 @@ export function ProjectDetailPage() {
         </section>
       ) : null}
 
-      <div className="mt-10 border-t-2 border-stroke pt-8">
+      <div className="mt-10 border-t border-stroke pt-8">
         <Link className={textLinkClass} to="/projects">← Back to projects</Link>
       </div>
     </section>
