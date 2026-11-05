@@ -14,7 +14,8 @@ describe('api client', () => {
     expect(getApiBaseUrl()).toBe('http://localhost:8181')
   })
 
-  it('loads projects from the wrapped list payload', async () => {
+  it('loads the same-origin project catalog independently of the contact API host', async () => {
+    vi.stubEnv('VITE_API_BASE_URL', 'https://api.example.com')
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValue(
@@ -48,15 +49,16 @@ describe('api client', () => {
     await expect(fetchProjects()).resolves.toEqual([
       expect.objectContaining({ slug: 'demo', title: 'Demo' }),
     ])
+    expect(fetch).toHaveBeenCalledWith('/content/projects.json', undefined)
   })
 
-  it('loads a single project from the wrapped detail payload', async () => {
+  it('loads a single project by slug from the deployed catalog', async () => {
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValue(
         new Response(
           JSON.stringify({
-            item: {
+            items: [{
               slug: 'demo',
               title: 'Demo',
               summary: 'Summary',
@@ -69,7 +71,7 @@ describe('api client', () => {
               architecture: [],
               lessons: [],
               media: [],
-            },
+            }],
           }),
           {
             status: 200,
@@ -80,6 +82,18 @@ describe('api client', () => {
     )
 
     await expect(fetchProject('demo')).resolves.toEqual(expect.objectContaining({ slug: 'demo' }))
+  })
+
+  it('returns a not-found error when a slug is absent from the catalog', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({ items: [] }), { status: 200 })))
+    await expect(fetchProject('missing')).rejects.toEqual(expect.objectContaining({ status: 404, code: 'project_not_found' }))
+  })
+
+  it('keeps contact submissions on the configured API host', async () => {
+    vi.stubEnv('VITE_API_BASE_URL', 'https://api.example.com/')
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({ message: 'Saved' }), { status: 201 })))
+    await submitContact({ name: 'Pat', email: 'pat@example.com', message: 'A role to discuss.' })
+    expect(fetch).toHaveBeenCalledWith('https://api.example.com/api/contact', expect.objectContaining({ method: 'POST' }))
   })
 
   it('surfaces structured validation errors for contact submissions', async () => {

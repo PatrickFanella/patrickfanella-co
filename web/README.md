@@ -46,9 +46,9 @@ Card text: the default card carries the home page headline, set in the script. E
 
 Phase 2 replaces runtime usage of `src/data/projects.ts` with the shared API client and intentional route states:
 
-- `HomePage` renders featured projects from `GET /api/projects`
+- `HomePage` renders featured projects from the same-origin `/content/projects.json` catalog included in the web build
 - `ProjectsPage` splits the live dataset into featured and archived sections
-- `ProjectDetailPage` loads by slug from `GET /api/projects/:slug` and distinguishes not-found vs generic failures
+- `ProjectDetailPage` resolves slugs from the same deployed catalog and distinguishes not-found vs generic failures
 - `ContactPage` submits directly to `POST /api/contact` and maps validation, network, and generic failures
 
 For browser smoke coverage, seed the database first from the repo root:

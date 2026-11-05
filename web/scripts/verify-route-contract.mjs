@@ -9,6 +9,9 @@ async function main() {
   const sitemap = await readFile(path.join(distDir, 'sitemap.xml'), 'utf8')
   const locations = [...sitemap.matchAll(/<loc>https?:\/\/[^/]+([^<]*)<\/loc>/g)].map((match) => match[1] || '/')
   const failures = []
+  const expectedCatalog = await readFile(path.join(webRoot, 'public/content/projects.json'), 'utf8')
+  const publishedCatalog = await readFile(path.join(distDir, 'content/projects.json'), 'utf8')
+  if (publishedCatalog !== expectedCatalog) failures.push('web artifact must contain the prepared project catalog')
 
   for (const route of locations) {
     const output = route === '/' ? path.join(distDir, 'index.html') : path.join(distDir, route.replace(/^\//, ''), 'index.html')

@@ -80,7 +80,7 @@ jobs:
           done
 
   frontend:
-    name: Build frontend and deploy NUC
+    name: Build site and deploy NUC
     needs: verify
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -90,6 +90,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Prepare the versioned project catalog
+        run: node web/scripts/generate-project-catalog.mjs
       - name: Reuse an already accepted frontend artifact
         id: artifact
         if: github.server_url == 'https://git.subcult.tv' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
@@ -174,3 +179,7 @@ jobs:
           actual=$(sha256sum "$deploy_dir/live.html" | cut -d' ' -f1)
           test "$actual" = "$expected"
           printf 'Live HTML matches the image built from %s\n' "$DEPLOY_REVISION"
+          curl --fail --silent --show-error --retry 4 --retry-all-errors \
+            --max-time 30 https://patrickfanella.co/content/projects.json > "$deploy_dir/live-projects.json"
+          cmp web/public/content/projects.json "$deploy_dir/live-projects.json"
+          printf 'Live project catalog matches source revision %s\n' "$DEPLOY_REVISION"

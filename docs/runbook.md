@@ -67,12 +67,17 @@ Refresh command:
 cd api && go run ./cmd/seed
 ```
 
-When content changes:
+For site content changes:
 
 1. update `db/seed/portfolio.json`
-2. make sure any referenced media assets exist under `web/public/assets/projects/`
-3. rerun the seed command
-4. rebuild the web app if SEO or route data changed
+2. make sure referenced media assets exist under `web/public/assets/projects/`
+3. build and verify the web app
+4. merge to `main`; CI deploys the web image and catalog after verification
+
+The web app reads `/content/projects.json`, prepared before development/build.
+It does not need a production reseed. The seed command above updates only the
+legacy database-backed `/api/projects` endpoints; use the backup procedure in
+`docs/deployment.md` before changing production database contents.
 
 ## 4. Verification commands
 
@@ -152,6 +157,10 @@ No invasive session replay or cross-site behavioral tracking is included in this
 Contact records are retained for 90 days by default. The API prunes expired rows at startup and daily and logs only deletion counts. Portfolio database dumps are kept in the exact Almaz portfolio-backup directory and removed after 90 days by the dedicated weekly timer.
 
 ## 8. Release flow
+
+Site UI/content changes deploy automatically after successful verification on a
+`main` push. CI checks public HTML and the exact project catalog. The following
+full-stack procedure applies to API/database changes:
 
 1. confirm `.env.example`, deployment docs, and any new runtime variables are current
 2. run migrations
