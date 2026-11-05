@@ -78,11 +78,11 @@
 
   --color-paper: #282a36;
   --color-surface: #21222c;
-  --color-panel: #30323f;
+  --color-panel: #343344;
   --color-ink: #d7d7eb; /* Toned down from pure white / f8f8f2 */
   --color-ink-soft: #b4b5c4;
   --color-heading: #f8f8f2; /* Swapped pure white for Dracula foreground */
-  --color-stroke: #515363;
+  --color-stroke: #805bca;
 
   --color-accent-green: #50fa7b;
   --color-accent-purple: #bd93f9;
@@ -139,7 +139,6 @@
     -moz-osx-font-smoothing: grayscale;
     font-family: var(--font-body);
     background-color: var(--color-paper);
-
   }
 
   a {
@@ -219,56 +218,93 @@
   }
 }
 
-/* Project images carry the visual detail; type and rules organize the work. */
+/* The original poster/terminal identity frames the curated project content. */
+.portfolio-stage {
+  background-color: var(--color-surface);
+  background-image: radial-gradient(var(--color-stroke) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
 .home-intro {
   display: grid;
-  gap: 3rem;
-  padding-block: 2rem 4rem;
-  border-bottom: 1px solid var(--color-stroke);
+  gap: 2.5rem;
+  padding-block: 1rem 3rem;
+  border-bottom: 2px solid var(--color-stroke);
 }
 .home-title {
   margin-top: 1.5rem;
   font-family: var(--font-display);
-  font-size: clamp(2.9rem, 6.5vw, 5.8rem);
-  font-weight: 600;
+  font-size: clamp(2.35rem, 6.5vw, 6.6rem);
+  font-weight: 700;
+  text-transform: uppercase;
   letter-spacing: -0.055em;
-  line-height: 1.04;
+  line-height: 0.94;
+  color: var(--color-heading);
 }
 .home-note {
-  max-width: 26rem;
-  padding-left: 1.5rem;
-  border-left: 1px solid var(--color-stroke);
+  max-width: 28rem;
+  padding: 1.5rem;
+  border: 2px solid var(--color-stroke);
+  background: var(--color-panel);
+  box-shadow: var(--shadow-brutal);
 }
-.page-intro { padding-block: 1.5rem 3rem; }
+.page-intro { padding-block: 1rem 2.5rem; }
 .project-filters {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem 1rem;
-  padding-block: 1.25rem;
-  border-top: 1px solid var(--color-stroke);
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  border: 2px solid var(--color-stroke);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-brutal);
 }
 .project-entry {
   display: grid;
   gap: 2rem;
-  padding-block: 2.5rem;
-  border-top: 1px solid var(--color-stroke);
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 2px solid var(--color-stroke);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-brutal);
+  transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+}
+.project-entry:focus-within,
+.project-entry:hover {
+  border-color: var(--color-accent-green);
+  box-shadow: var(--shadow-brutal-green);
 }
 .project-entry-copy { min-width: 0; }
+.project-entry-copy h2,
+.project-entry-copy h3 { overflow-wrap: anywhere; }
 .project-entry-media { min-width: 0; align-self: center; }
-.project-entry-media img { background: var(--color-surface); }
-.project-status {
+.project-entry-media img { background: var(--color-paper); }
+.project-stack li {
   border: 1px solid var(--color-stroke);
-  padding: 0.2rem 0.6rem;
+  background: var(--color-paper);
+  padding: 0.3rem 0.5rem;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
+  line-height: 1.5;
   color: var(--color-ink);
 }
-.project-status-live { color: var(--color-accent-green); }
-.tool-list .project-entry { padding-block: 2rem; }
+.project-status {
+  border: 1px solid var(--color-accent-purple);
+  padding: 0.3rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-accent-purple);
+}
+.project-status-live {
+  border-color: var(--color-accent-green);
+  color: var(--color-accent-green);
+}
 .tool-list h3 { font-size: 1.75rem; }
 @media (min-width: 900px) {
-  .home-intro { grid-template-columns: minmax(0, 1fr) 18rem; align-items: center; padding-block: 3rem 5rem; gap: 4rem; }
-  .project-entry-with-image { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); align-items: center; gap: 3rem; padding-block: 3rem; }
+  .home-intro { grid-template-columns: minmax(0, 1fr) 20rem; align-items: center; padding-block: 1.5rem 4rem; gap: 3rem; }
+  .project-entry { padding: 2rem; }
+  .project-entry-with-image { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); align-items: center; gap: 2.5rem; }
   .tool-list .project-entry-copy { display: grid; grid-template-columns: 1fr 1.4fr; gap: 0 3rem; }
   .tool-list .project-entry-copy > :first-child { grid-column: 1; }
   .tool-list h3 { grid-column: 1; grid-row: 2; }

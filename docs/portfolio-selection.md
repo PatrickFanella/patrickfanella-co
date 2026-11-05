@@ -56,15 +56,14 @@ archive. No existing project records or assets were deleted.
 
 ## Design and release
 
-The dark palette and existing locally hosted fonts remain. Sentence-case type,
-thin rules, readable technology names, and large screenshot rows put the work
-before interface decoration. A native technology select lists only technologies
-present in the published selection. The quieter shared navigation, buttons, form
-controls, and section labels carry through the resume, contact, and detail pages.
-
-The advisory `ui-cliche-audit` scanner is a review aid. Keeping the existing
-Space Grotesk face, accent color, and external-link indicators is deliberate;
-scanner findings are not accessibility verdicts.
+The visual direction follows the owner's preference for the original
+poster/terminal identity: purple framing, hard offset shadows, bold uppercase
+display type, pink and green headline accents, boxed navigation, and monospace
+section labels. The larger project screenshots and readable technology names
+remain. These are deliberate brand choices; advisory design-scanner matches
+must be reviewed in that context rather than used as a reason to flatten the
+site's character. Responsive layout, contrast, focus visibility, reduced motion,
+and project disclosures remain verification requirements.
 
 Project selection and copy live in `db/seed/portfolio.json`. The web build
 publishes a normalized catalog at `/content/projects.json`; the project pages
