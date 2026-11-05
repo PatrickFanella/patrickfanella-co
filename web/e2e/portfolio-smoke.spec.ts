@@ -119,7 +119,10 @@ test('selected work has six case studies and supports tool-only filter results',
 	await page.goto('/projects')
 	const caseStudies = page.getByRole('link', { name: /read case study:/i })
 	await expect(caseStudies).toHaveCount(6)
-	expect(await caseStudies.evaluateAll((links) => links.map((link) => link.getAttribute('aria-label')))).toEqual(['Read case study: Clpr', 'Read case study: Patchwork', 'Read case study: HasanAra', 'Read case study: Tadooer', 'Read case study: Super Productivity MCP', 'Read case study: Undertow'])
+	expect(await caseStudies.evaluateAll((links) => links.map((link) => link.getAttribute('aria-label')))).toEqual(['Read case study: Clpr', 'Read case study: HasanAra', 'Read case study: Undertow', 'Read case study: Patchwork', 'Read case study: Tadooer', 'Read case study: Super Productivity MCP'])
+	const featured = page.getByRole('region', { name: 'Featured case studies' })
+	await expect(featured.getByRole('heading', { level: 3 })).toHaveText(['Clpr', 'HasanAra', 'Undertow'])
+	await expect(page.locator('.project-grid').first().getByRole('heading', { level: 3 })).toHaveText(['Clpr', 'HasanAra', 'Undertow'])
 	const filter = page.getByRole('combobox', { name: 'Filter by technology' })
 	await filter.focus()
 	await expect(filter).toBeFocused()
@@ -134,6 +137,60 @@ test('selected work has six case studies and supports tool-only filter results',
 	await page.getByRole('link', { name: 'Read case study: Tadooer' }).click()
 	await expect(page.getByRole('heading', { name: 'Tadooer', exact: true })).toBeVisible()
 	await expect(page.getByText('Private single-owner use', { exact: true })).toBeVisible()
+})
+
+test('project cards align each row, inset their text, and keep actions at the bottom', async ({ page }) => {
+	for (const width of [1440, 768, 320]) {
+		await page.setViewportSize({ width, height: 900 })
+		for (const route of ['/projects', '/archive']) {
+			await page.goto(route)
+			await expect(page.locator('.project-tile').first()).toBeVisible()
+			await page.evaluate(() => document.fonts.ready)
+			const grids = await page.locator('.project-grid').evaluateAll((grids) => grids.map((grid) => [...grid.querySelectorAll('.project-tile')].map((card) => {
+				const header = card.querySelector('.project-tile-header')!
+				const title = header.querySelector('h3')!
+				const status = header.querySelector('p')!
+				const brand = header.querySelector('.project-brand')!
+				const summary = card.querySelector('.project-tile-summary')!
+				const actions = card.querySelector('.project-tile-links')!
+				const bounds = card.getBoundingClientRect()
+				return {
+					title: title.textContent,
+					top: bounds.top,
+					titleTop: title.getBoundingClientRect().top,
+					statusTop: status.getBoundingClientRect().top,
+					statusUnderTitle: status.getBoundingClientRect().top >= title.getBoundingClientRect().bottom,
+					statusLeft: status.getBoundingClientRect().left,
+					titleLeft: title.getBoundingClientRect().left,
+					summaryTop: summary.getBoundingClientRect().top,
+					actionsTop: actions.getBoundingClientRect().top,
+					bottomInset: bounds.bottom - actions.getBoundingClientRect().bottom,
+					textInset: header.getBoundingClientRect().left - bounds.left,
+					brandWidth: brand.getBoundingClientRect().width,
+					identity: Boolean(brand.querySelector('img, .project-monogram')),
+					whiteSpace: getComputedStyle(title).whiteSpace,
+					textOverflow: getComputedStyle(title).textOverflow,
+				}
+			})))
+			for (const cards of grids) {
+				for (const card of cards) {
+					expect(card.identity, `${card.title} at ${width}px`).toBe(true)
+					expect(card.brandWidth).toBe(48)
+					expect(card.whiteSpace).toBe('nowrap')
+					expect(card.textOverflow).toBe('ellipsis')
+					expect(card.statusUnderTitle).toBe(true)
+					expect(card.statusLeft).toBe(card.titleLeft)
+					expect(card.textInset).toBeGreaterThanOrEqual(24)
+					expect(card.bottomInset).toBeCloseTo(2, 0)
+					const row = cards.filter((sibling) => Math.abs(sibling.top - card.top) < 1)
+					for (const field of ['titleTop', 'statusTop', 'summaryTop', 'actionsTop'] as const) {
+						const positions = row.map((sibling) => sibling[field])
+						expect(Math.max(...positions) - Math.min(...positions), `${field} on ${route} at ${width}px`).toBeLessThan(1)
+					}
+				}
+			}
+		}
+	}
 })
 
 test('recruiter routes fit a narrow screen without horizontal scrolling', async ({ page }) => {

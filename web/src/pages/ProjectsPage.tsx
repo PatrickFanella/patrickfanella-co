@@ -19,6 +19,8 @@ export function ProjectsPage() {
   const selected = projects.filter((project) => project.selected || project.classification === 'flagship')
   const technologies = [...new Set(selected.flatMap((project) => project.stack))].sort()
   const visible = selectedTech ? selected.filter((project) => project.stack.includes(selectedTech)) : selected
+  const featured = visible.filter((project) => project.featured)
+  const remaining = visible.filter((project) => !project.featured)
   const categories = [...categoryOrder, ...new Set(visible.map((project) => project.category).filter((category) => !categoryOrder.includes(category)))]
   const archive = projects.filter((project) => !project.selected && project.classification !== 'flagship')
 
@@ -52,14 +54,18 @@ export function ProjectsPage() {
       </div> : null}
       {status === 'success' ? <>
         <div className="grid gap-14">
+          {featured.length > 0 ? <section aria-labelledby="featured-projects-heading">
+            <h2 className="mb-6 font-display text-3xl font-bold uppercase tracking-[-0.03em] text-heading" id="featured-projects-heading">Featured case studies</h2>
+            <div className="project-grid">{featured.map((project) => <ProjectTile key={project.slug} project={project} />)}</div>
+          </section> : null}
           {categories.map((category) => {
-            const entries = visible.filter((project) => project.category === category)
+            const entries = remaining.filter((project) => project.category === category)
             if (!entries.length) return null
             const isTools = category === 'Tools & Workflows' || category === 'Developer Tools'
             const id = isTools ? 'tools' : `projects-${category.toLowerCase().replace(/[^a-z]+/g, '-')}`
             return <section aria-labelledby={`${id}-heading`} id={id} key={category} ref={isTools ? toolsRef : undefined} tabIndex={isTools ? -1 : undefined}>
               <h2 className="mb-6 font-display text-3xl font-bold uppercase tracking-[-0.03em] text-heading" id={`${id}-heading`}>{category}</h2>
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">{entries.map((project) => <ProjectTile key={project.slug} project={project} />)}</div>
+              <div className="project-grid">{entries.map((project) => <ProjectTile key={project.slug} project={project} />)}</div>
             </section>
           })}
         </div>
@@ -67,7 +73,7 @@ export function ProjectsPage() {
         {!selectedTech && archive.length > 0 ? <section className="mt-16" aria-labelledby="archive-preview-heading">
           <SectionLabel>More from the archive</SectionLabel>
           <h2 className="mt-5 font-display text-3xl font-bold uppercase text-heading" id="archive-preview-heading">Earlier experiments.</h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">{archive.filter((project) => project.kind !== 'tool').slice(0, 3).map((project) => <ProjectTile key={project.slug} project={project} />)}</div>
+          <div className="project-grid mt-8">{archive.filter((project) => project.kind !== 'tool').slice(0, 3).map((project) => <ProjectTile key={project.slug} project={project} />)}</div>
           <Link className={`${secondaryButtonClass} mt-8`} to="/archive">Browse the full archive</Link>
         </section> : null}
       </> : null}

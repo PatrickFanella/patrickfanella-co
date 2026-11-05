@@ -35,7 +35,7 @@ function CategoryGroup({ category, projects, toolsSectionRef }: { category: stri
       <div>
         <h2 className={monoLabelClass} id={headingId}>{category}</h2>
       </div>
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="project-grid">
         {projects.map((project) => <ProjectTile key={project.slug} project={project} />)}
       </div>
     </section>
