@@ -87,6 +87,7 @@ func main() {
 		cfg.ContactNotificationNtfyToken,
 		cfg.ContactNotificationN8nURL,
 		cfg.ContactNotificationTimeout,
+		notifications.EmailConfig{APIKey: cfg.ContactEmailAPIKey, From: cfg.ContactEmailFrom, To: cfg.ContactEmailTo},
 	))
 
 	r := chi.NewRouter()

@@ -9,6 +9,9 @@ import (
 )
 
 type Config struct {
+	ContactEmailAPIKey           string
+	ContactEmailFrom             string
+	ContactEmailTo               string
 	Port                         string
 	DatabaseURL                  string
 	CORSOrigin                   string
@@ -27,6 +30,9 @@ func Load() Config {
 	_ = godotenv.Load("../.env", ".env")
 
 	return Config{
+		ContactEmailAPIKey:           getEnv("CONTACT_NOTIFICATION_EMAIL_API_KEY", ""),
+		ContactEmailFrom:             getEnv("CONTACT_NOTIFICATION_EMAIL_FROM", "alerts@subcult.tv"),
+		ContactEmailTo:               getEnv("CONTACT_NOTIFICATION_EMAIL_TO", "patrick@subcult.tv"),
 		Port:                         getEnv("API_PORT", "8181"),
 		DatabaseURL:                  os.Getenv("DATABASE_URL"),
 		CORSOrigin:                   getEnv("CORS_ORIGIN", "http://localhost:5173"),

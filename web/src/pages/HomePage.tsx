@@ -25,7 +25,7 @@ export function HomePage() {
           jobTitle: 'Senior Full-Stack and Backend Engineer',
           knowsAbout: focusAreas,
           name: 'Patrick Fanella',
-          email: 'mailto:fanella.patrick@gmail.com',
+          email: 'mailto:patrick@subcult.tv',
           image: `${getSiteUrl()}/assets/social/patrick-fanella-portfolio-1200x630.png`,
           homeLocation: {
             '@type': 'Place',

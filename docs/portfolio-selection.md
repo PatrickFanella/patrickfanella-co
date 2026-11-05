@@ -27,9 +27,9 @@ establish product maturity.
 | 6 | [Super Productivity MCP](https://git.subcult.tv/PatrickFanella/super-productivity-mcp) | A Go/JavaScript integration with catalog-driven tools, local IPC, explicit mutation boundaries, and installation/package checks. | Development preview; the in-app plugin bridge must be running. A passing server probe alone does not qualify the integration. |
 
 The first three lead the homepage because each has a public product and existing
-product screenshots. The complete six appear on the Projects page. Existing
-screenshots retain captions identifying synthetic fixtures where applicable;
-they do not establish current production behavior.
+product screenshots. The complete six appear on the Projects page. Refreshed screenshots come from the existing public Studio capture selection.
+Demo and development captions remain explicit; captures do not establish current
+production behavior. See [portfolio-media.md](portfolio-media.md) for provenance.
 
 Supporting source checks included Tadooer's `DEVELOPMENT.md`, Subsets'
 `package.json`, and Super Productivity MCP's `Makefile`, alongside the candidate
@@ -68,7 +68,7 @@ and project disclosures remain verification requirements.
 Project selection and copy live in `db/seed/portfolio.json`. The web build
 publishes a normalized catalog at `/content/projects.json`; the project pages
 read that same-origin catalog. Main CI verifies the application before deploying
-the web image and then compares the public catalog with the merged source.
+the web and schema-compatible API images and then compares the public catalog with the merged source.
 Design, route metadata, and project content deploy and roll back together.
 
 Content-only edits no longer require a production database reseed. The Go API

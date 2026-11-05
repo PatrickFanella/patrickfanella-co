@@ -40,7 +40,7 @@ export function ProjectMediaGallery({ items, projectTitle }: ProjectMediaGallery
             height="1000"
             loading="lazy"
             onError={() => { if (item.src) setFailedSrcs((current) => new Set(current).add(item.src)) }}
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(min-width: 1280px) 1152px, 100vw"
             src={src}
             srcSet={failed ? undefined : item.srcSet}
             width="1600"

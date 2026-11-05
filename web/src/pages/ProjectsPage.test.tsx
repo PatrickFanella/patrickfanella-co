@@ -19,15 +19,15 @@ describe('ProjectsPage', () => {
 		expect(screen.queryByText(/0 archive/i)).not.toBeInTheDocument()
 	})
 
-	it('renders flagship case studies and excludes unrelated projects', async () => {
+	it('renders flagship case studies and an archive preview', async () => {
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
 		renderInRouter(<ProjectsPage />, '/projects')
 
 		expect(await screen.findByRole('heading', { name: 'Clpr', level: 2 })).toBeInTheDocument()
-		expect(screen.queryByText('Internet-ID')).not.toBeInTheDocument()
+		expect(screen.getByRole('heading', { name: 'Internet-ID' })).toBeInTheDocument()
 		expect(screen.getByRole('heading', { name: toolProject.title })).toBeInTheDocument()
-		expect(screen.queryByRole('link', { name: /archive/i })).not.toBeInTheDocument()
+		expect(screen.getByRole('link', { name: 'Browse the full archive' })).toHaveAttribute('href', '/archive')
 	})
 
 	it('renders the selected tools once, in order, linked to their public source', async () => {

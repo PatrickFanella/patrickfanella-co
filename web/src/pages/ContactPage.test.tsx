@@ -29,9 +29,9 @@ describe('ContactPage', () => {
 		renderInRouter(<ContactPage />, '/contact')
 		expect(screen.getByRole('link', { name: /write an email/i })).toHaveAttribute(
 			'href',
-			'mailto:fanella.patrick@gmail.com',
+			'mailto:patrick@subcult.tv',
 		)
-		expect(screen.getByText(/delete submissions and backups within 90 days/i)).toBeInTheDocument()
+		expect(screen.getByText(/form records and backups are deleted within 90 days/i)).toBeInTheDocument()
 
 		await fillContactForm()
 
@@ -70,7 +70,7 @@ describe('ContactPage', () => {
 		await fillContactForm()
 
 		expect(await screen.findByRole('alert')).toHaveTextContent(
-			"I can't reach the contact service right now. Try again in a moment, or email fanella.patrick@gmail.com.",
+			"I can't reach the contact service right now. Try again in a moment, or email patrick@subcult.tv.",
 		)
 	})
 
@@ -82,7 +82,7 @@ describe('ContactPage', () => {
 		await fillContactForm()
 
 		expect(await screen.findByRole('alert')).toHaveTextContent(
-			'Your message did not send. Try again, or email fanella.patrick@gmail.com.',
+			'Your message did not send. Try again, or email patrick@subcult.tv.',
 		)
 	})
 })

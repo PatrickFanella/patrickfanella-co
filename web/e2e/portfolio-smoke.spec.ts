@@ -92,7 +92,7 @@ test('media dialog contains focus and restores it to the invoking control', asyn
 	await expect(expand).toBeFocused()
 })
 
-for (const route of ['/', '/projects', '/contact']) {
+for (const route of ['/', '/projects', '/archive', '/projects/clpr', '/contact']) {
 	test(`has no serious accessibility violations on ${route}`, async ({ page }) => {
 		await page.goto(route)
 		const results = await new AxeBuilder({ page }).analyze()
@@ -137,12 +137,14 @@ test('selected work has six case studies and supports tool-only filter results',
 })
 
 test('recruiter routes fit a narrow screen without horizontal scrolling', async ({ page }) => {
-	await page.setViewportSize({ width: 320, height: 780 })
-	for (const route of ['/', '/projects', '/projects/tadooer', '/projects/super-productivity-mcp', '/resume', '/contact']) {
+	for (const width of [320, 768]) {
+	await page.setViewportSize({ width, height: 780 })
+	for (const route of ['/', '/projects', '/archive', '/projects/tadooer', '/projects/super-productivity-mcp', '/resume', '/contact']) {
 		await page.goto(route)
 		await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
 		await expect(page.getByRole('status').filter({ hasText: /loading/i })).toHaveCount(0)
-		expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), route).toBe(true)
+		expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${route} at ${width}px`).toBe(true)
+	}
 	}
 })
 
@@ -165,4 +167,26 @@ test('project content is deployed with the web artifact and remains available wi
 	await expect(page.getByRole('link', { name: /read case study:/i })).toHaveCount(6)
 	await page.getByRole('link', { name: 'Read case study: Tadooer' }).click()
 	await expect(page.getByRole('heading', { name: 'Tadooer', exact: true })).toBeVisible()
+})
+
+
+test('archive navigation exposes thumbnails and searchable project records', async ({ page }) => {
+	await page.goto('/')
+	await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'Archive', exact: true }).click()
+	await expect(page.getByRole('heading', { level: 1, name: 'Archive' })).toBeVisible()
+	await expect(page.locator('.archive-thumbnail img').first()).toBeVisible()
+	await page.getByRole('searchbox', { name: 'Find a project' }).fill('tmux-popups')
+	await expect(page.getByRole('heading', { name: 'tmux-popups', exact: true })).toBeVisible()
+	await expect(page.locator('.archive-tile')).toHaveCount(1)
+})
+
+test('case-study overview uses compact facts instead of a tall sidebar', async ({ page }) => {
+	await page.setViewportSize({ width: 1280, height: 900 })
+	await page.goto('/projects/clpr')
+	await expect(page.locator('.case-facts')).toBeVisible()
+	await expect(page.getByRole('complementary', { name: 'Project overview' })).toHaveCount(0)
+	await expect(page.locator('.case-intro')).toHaveCSS('display', 'block')
+	const media = page.locator('.case-intro + .case-story')
+	await expect(media).toBeVisible()
+	await expect(page.locator('.case-intro img')).toBeVisible()
 })

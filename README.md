@@ -1,8 +1,8 @@
 # Patrick Fanella portfolio
 
-The source for [patrickfanella.co](https://patrickfanella.co), my portfolio. The main pages show a short list of case studies and tools. Older and smaller projects sit in a `noindex` archive linked only from the footer.
+The source for [patrickfanella.co](https://patrickfanella.co), my portfolio. The main pages show a short list of case studies and tools. The main navigation also opens a searchable `noindex` archive with project thumbnails and logos.
 
-The application is a React frontend, a Go API, a PostgreSQL content layer, generated static route documents and an Nginx production image. Every project carries a delivery status, and copy must not describe pre-alpha or in-development work as production-ready. Project copy lives in `db/seed/portfolio.json`. The web build publishes it as a static catalog so content and interface updates ship together. Contact submissions use the Go API and PostgreSQL.
+The application is a React frontend, a Go API, a PostgreSQL content layer, generated static route documents and an Nginx production image. Every project carries a delivery status, and copy must not describe pre-alpha or in-development work as production-ready. Project copy lives in `db/seed/portfolio.json`. The web build publishes it as a static catalog so content and interface updates ship together. Contact submissions use the Go API and PostgreSQL, with a server-side email notification to `patrick@subcult.tv`. Successful main verification deploys both web and API images to the existing NUC.
 
 ## Reliability and privacy contract
 
@@ -46,6 +46,7 @@ Run `make help` to see all available targets.
 ## Project docs
 
 - `docs/portfolio-selection.md` - project selection, source evidence and content release requirements
+- `docs/portfolio-media.md` - approved Studio assets, capture provenance and diagram generation
 
 - `docs/deployment.md` - deployment topology and environment contract
 - `docs/runbook.md` - day-to-day operations and release workflow

@@ -1,3 +1,4 @@
+import { Icon } from '../components/Icon'
 import { Seo } from '../components/Seo'
 import { SectionLabel } from '../components/SectionLabel'
 import {
@@ -37,7 +38,7 @@ export function ResumePage() {
               href={resumePath}
               download="Patrick_Fanella_Resume.pdf"
             >
-              Download PDF
+              <Icon name="download" />Download PDF
             </a>
             <a
               className={textLinkClass}
@@ -45,7 +46,7 @@ export function ResumePage() {
               rel="noreferrer"
               target="_blank"
             >
-              Open in new tab ↗
+              Open in new tab <Icon name="external" />
             </a>
           </div>
         </div>
@@ -77,7 +78,7 @@ export function ResumePage() {
             href={resumePath}
             download="Patrick_Fanella_Resume.pdf"
           >
-            Download ↗
+            <Icon name="download" />Download
           </a>
         </div>
 

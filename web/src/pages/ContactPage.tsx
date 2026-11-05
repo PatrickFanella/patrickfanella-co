@@ -5,6 +5,7 @@ import { z } from 'zod'
 
 import { isApiClientError, submitContact } from '../lib/api'
 import { Seo } from '../components/Seo'
+import { Icon } from '../components/Icon'
 import { SectionLabel } from '../components/SectionLabel'
 import {
   monoLabelClass,
@@ -29,15 +30,15 @@ type ContactFormValues = z.infer<typeof contactSchema>
 const alternateContactPaths = [
   {
     title: 'Email me',
-    href: 'mailto:fanella.patrick@gmail.com',
-    description: 'Send the role, team, and timing to fanella.patrick@gmail.com.',
-    cta: 'Write an email ↗',
+    href: 'mailto:patrick@subcult.tv',
+    description: 'Send the role, team, and timing to patrick@subcult.tv.',
+    cta: 'Write an email',
   },
   {
     title: 'LinkedIn',
     href: 'https://linkedin.com/in/patrick-fanella',
     description: 'Message me there if that is easier.',
-    cta: 'Open LinkedIn ↗',
+    cta: 'Open LinkedIn',
   },
 ]
 
@@ -90,7 +91,7 @@ export function ContactPage() {
         }
 
         if (error.code === 'network_error') {
-          setSubmitMessage('I can\'t reach the contact service right now. Try again in a moment, or email fanella.patrick@gmail.com.')
+          setSubmitMessage('I can\'t reach the contact service right now. Try again in a moment, or email patrick@subcult.tv.')
           return
         }
 
@@ -98,7 +99,7 @@ export function ContactPage() {
         return
       }
 
-      setSubmitMessage('Your message did not send. Try again, or email fanella.patrick@gmail.com.')
+      setSubmitMessage('Your message did not send. Try again, or email patrick@subcult.tv.')
     }
   })
 
@@ -135,9 +136,9 @@ export function ContactPage() {
                 rel="noreferrer"
                 target="_blank"
               >
-                <p className={monoLabelClass}>{path.title}</p>
+                <p className={`${monoLabelClass} flex items-center gap-3`}><Icon name={path.title === "LinkedIn" ? "linkedin" : "mail"} />{path.title}</p>
                 <p className="text-[1rem] leading-relaxed text-ink-soft">{path.description}</p>
-                <span className={textLinkClass}>{path.cta}</span>
+                <span className={textLinkClass}>{path.cta}<Icon name="external" /></span>
               </a>
             ))}
           </div>
@@ -221,7 +222,7 @@ export function ContactPage() {
           ) : null}
 
           <p className="border-t border-stroke pt-4 text-xs leading-relaxed text-ink-soft">
-            I store your name, email, and message so I can reply. I delete submissions and backups within 90 days. I do not sell your information or use it for advertising.
+            I store your name, email, and message so I can reply, and send a copy to my inbox. Form records and backups are deleted within 90 days; email correspondence stays in my inbox. I do not sell your information or use it for advertising.
           </p>
         </form>
       </div>

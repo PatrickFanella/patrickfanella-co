@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
 
+import { ProjectBrand } from './ProjectBrand'
+import { Icon } from './Icon'
+
 import type { Project } from '../lib/api'
 import { monoLabelClass, secondaryButtonClass } from '../lib/styles'
 
@@ -25,23 +28,26 @@ export function ProjectCard({ headingLevel = 'h3', linkToRepository = false, pro
             {project.deliveryStatus}
           </p>
         </div>
-        <Heading className="mt-5 font-display text-[clamp(2rem,4vw,3.2rem)] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading">
-          {project.title}
-        </Heading>
+        <div className="mt-5 flex items-center gap-4">
+          <ProjectBrand project={project} />
+          <Heading className="min-w-0 font-display text-[clamp(2rem,4vw,3.2rem)] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-heading">
+            {project.title}
+          </Heading>
+        </div>
         <p className="mt-4 max-w-[58ch] leading-relaxed text-ink-soft">{project.summary}</p>
         <ul aria-label={`${project.title} technologies`} className="project-stack mt-5 flex list-none flex-wrap gap-2 p-0">
           {project.stack.map((tech) => <li key={tech}>{tech}</li>)}
         </ul>
         <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
           {linkToRepository && project.repoUrl ? (
-            <a aria-label={`View repository: ${project.title}`} className={secondaryButtonClass} href={project.repoUrl} rel="noreferrer" target="_blank">View repository</a>
+            <a aria-label={`View repository: ${project.title}`} className={secondaryButtonClass} href={project.repoUrl} rel="noreferrer" target="_blank"><Icon name="gitea" />View repository</a>
           ) : linkToRepository ? (
             <span className="text-sm text-ink-soft">Source unavailable</span>
           ) : (
             <Link aria-label={`${ctaLabel}: ${project.title}`} className={secondaryButtonClass} to={`/projects/${project.slug}`}>{ctaLabel}</Link>
           )}
           {!linkToRepository && project.repoUrl ? (
-            <a aria-label={`View repository: ${project.title}`} className="text-sm text-ink-soft underline underline-offset-4 hover:text-heading" href={project.repoUrl} rel="noreferrer" target="_blank">Source code</a>
+            <a aria-label={`View repository: ${project.title}`} className="text-sm text-ink-soft underline underline-offset-4 hover:text-heading" href={project.repoUrl} rel="noreferrer" target="_blank"><Icon name="external" className="inline h-4 w-4" /> Source code</a>
           ) : null}
         </div>
       </div>
