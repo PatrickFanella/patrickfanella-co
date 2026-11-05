@@ -175,3 +175,6 @@ go.work.sum
 # Editor/IDE
 # .idea/
 .vscode/
+
+# Generated public project catalog; prepared before dev/build
+web/public/content/

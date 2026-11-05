@@ -37,10 +37,6 @@ type ProjectListResponse = {
   items: Project[]
 }
 
-type ProjectDetailResponse = {
-  item: Project
-}
-
 type ContactInput = {
   name: string
   email: string
@@ -83,17 +79,19 @@ export function getApiBaseUrl(): string {
 }
 
 export async function fetchProjects(): Promise<Project[]> {
-  const payload = await request<ProjectListResponse>('/api/projects')
+  const payload = await request<ProjectListResponse>('/content/projects.json')
   return payload.items
 }
 
 export async function fetchProject(slug: string): Promise<Project> {
-  const payload = await request<ProjectDetailResponse>(`/api/projects/${encodeURIComponent(slug)}`)
-  return payload.item
+  const projects = await fetchProjects()
+  const project = projects.find((candidate) => candidate.slug === slug)
+  if (!project) throw new ApiClientError(404, 'project_not_found', 'Project not found.')
+  return project
 }
 
 export async function submitContact(input: ContactInput): Promise<ContactSubmissionResponse> {
-  return request<ContactSubmissionResponse>('/api/contact', {
+  return request<ContactSubmissionResponse>(`${getApiBaseUrl()}/api/contact`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -106,7 +104,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   let response: Response
 
   try {
-    response = await fetch(`${getApiBaseUrl()}${path}`, init)
+    response = await fetch(path, init)
   } catch {
     throw new ApiClientError(0, 'network_error', 'Connection failed.')
   }

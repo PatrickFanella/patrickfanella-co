@@ -2,7 +2,7 @@
 
 The source for [patrickfanella.co](https://patrickfanella.co), my portfolio. The main pages show a short list of case studies and tools. Older and smaller projects sit in a `noindex` archive linked only from the footer.
 
-The application is a React frontend, a Go API, a PostgreSQL content layer, generated static route documents and an Nginx production image. Every project carries a delivery status, and copy must not describe pre-alpha or in-development work as production-ready. Project copy lives in `db/seed/portfolio.json`.
+The application is a React frontend, a Go API, a PostgreSQL content layer, generated static route documents and an Nginx production image. Every project carries a delivery status, and copy must not describe pre-alpha or in-development work as production-ready. Project copy lives in `db/seed/portfolio.json`. The web build publishes it as a static catalog so content and interface updates ship together. Contact submissions use the Go API and PostgreSQL.
 
 ## Reliability and privacy contract
 

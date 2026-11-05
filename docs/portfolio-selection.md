@@ -66,10 +66,13 @@ The advisory `ui-cliche-audit` scanner is a review aid. Keeping the existing
 Space Grotesk face, accent color, and external-link indicators is deliberate;
 scanner findings are not accessibility verdicts.
 
-Project selection and copy live in `db/seed/portfolio.json`. Deploying only the
-frontend does not update the API's stored projects. Follow the backup and reseed
-procedure in [deployment.md](deployment.md) before publishing the matching
-frontend. Check the API's three featured projects and six flagship projects, then
-check the homepage, project list, and newly selected case-study routes against
-that same content revision. Local and PR validation use a disposable database;
-production publication needs the matching reseed and frontend release.
+Project selection and copy live in `db/seed/portfolio.json`. The web build
+publishes a normalized catalog at `/content/projects.json`; the project pages
+read that same-origin catalog. Main CI verifies the application before deploying
+the web image and then compares the public catalog with the merged source.
+Design, route metadata, and project content deploy and roll back together.
+
+Content-only edits no longer require a production database reseed. The Go API
+still handles contact submissions and retains its database-backed project
+endpoints for compatibility; those endpoints follow the separate backup/reseed
+procedure in [deployment.md](deployment.md).

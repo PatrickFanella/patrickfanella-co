@@ -145,3 +145,24 @@ test('recruiter routes fit a narrow screen without horizontal scrolling', async 
 		expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), route).toBe(true)
 	}
 })
+
+
+test('project content is deployed with the web artifact and remains available without project API requests', async ({ page, request }) => {
+	const catalogResponse = await request.get('/content/projects.json')
+	expect(catalogResponse.ok()).toBe(true)
+	expect(catalogResponse.headers()['cache-control']).toContain('no-store')
+	const { items } = await catalogResponse.json()
+	expect(items.filter((project: { featured: boolean }) => project.featured).map((project: { slug: string }) => project.slug)).toEqual(['clpr', 'hasanara', 'undertow'])
+	for (const project of items) {
+		expect(project.classification).toMatch(/^(flagship|experiment|archive)$/)
+		expect(project.deliveryStatus).toBeTruthy()
+		expect(project.periodLabel).toBeTruthy()
+	}
+	await page.route('**/api/**', (route) => route.abort())
+	await page.goto('/')
+	await expect(page.getByRole('link', { name: /read case study:/i })).toHaveCount(3)
+	await page.goto('/projects')
+	await expect(page.getByRole('link', { name: /read case study:/i })).toHaveCount(6)
+	await page.getByRole('link', { name: 'Read case study: Tadooer' }).click()
+	await expect(page.getByRole('heading', { name: 'Tadooer', exact: true })).toBeVisible()
+})
