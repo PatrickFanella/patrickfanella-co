@@ -124,3 +124,32 @@ Verify at minimum:
 The public Caddy route must serve web and API responses with a local-assets-first CSP, `nosniff`, a strict referrer policy, a restrictive permissions policy, frame protection, and HSTS. Start HSTS at `max-age=86400`; promote it to one year only after 24 hours of verified HTTPS operation. Cloudflare Browser Insights must remain disabled so Plausible is the sole analytics system.
 
 Before a migration or reseed, create a custom-format PostgreSQL dump on Almaz, verify it with `pg_restore --list`, and copy the same verified file to the NUC rollback directory. Deploy only immutable `api:<commit-sha>` and `web:<commit-sha>` images built from a clean exact commit; record the previous image digests and Caddy configuration first. Production TLS currently terminates at Cloudflare, so the Caddy site address remains explicitly `http://` while Caddy supplies the application security headers returned through the edge.
+
+## Native CI frontend delivery to the existing NUC
+
+The native Gitea workflow retains API tests, web lint/tests/build, production-shaped
+browser checks and mobile Lighthouse budgets. A frontend job directly depends
+on those gates and builds/validates the exact image on PRs. Main pushes and manual
+main dispatches deploy that image to the existing NUC `patrickfanella-web`,
+Compose service `web`, through an app-specific restricted fleet-deploy key.
+
+The build uses canonical `https://patrickfanella.co`, same-origin API requests
+and an empty optional analytics domain. The retained live bundle had no analytics
+loader URL; this deployment does not opt into a new tracker. The existing web
+network, loopback port, healthcheck and runtime settings are captured in the
+operator-owned frontend baseline. Caddy API routing and the separately hosted
+API/database remain on their existing procedures. No contact submission or
+notification is sent as part of deployment verification.
+
+Main-only secrets are guarded at step level. The receiver permits only the current
+main and this frontend, refuses runtime drift, checks image/configuration/health
+and exact public HTML, and restores the prior image on failed readiness. Retries
+reuse the accepted image. Exact image IDs, diagnostics and rollback commands stay
+in private host receipts. Gitea stores only this app's `HOMELAB_DEPLOY_KEY` and
+pinned `HOMELAB_KNOWN_HOSTS`; the homelab operator owns the key, initially due for
+rotation February 3, 2027. Register/test its host profile before merging.
+
+After rollout, compare public HTML/branding/build assets and representative
+route HTML with the running image. Check `/api/health` separately. Database
+migrations, reseeding and API cutover still require the verified backup and
+immutable-release procedure above; a frontend rollback cannot undo schema changes.
