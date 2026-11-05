@@ -13,6 +13,21 @@ async function main() {
   const publishedCatalog = await readFile(path.join(distDir, 'content/projects.json'), 'utf8')
   if (publishedCatalog !== expectedCatalog) failures.push('web artifact must contain the prepared project catalog')
 
+  const { items } = JSON.parse(publishedCatalog)
+  const assets = new Set(['/assets/brands/patrick-eff.svg'])
+  for (const project of items) {
+    for (const asset of [project.logoUrl, project.thumbnailUrl, ...project.media.flatMap((media) => [media.src, ...(media.srcSet || '').split(',').map((source) => source.trim().split(/\s+/)[0])])]) {
+      if (asset?.startsWith('/assets/')) assets.add(asset)
+    }
+  }
+  for (const asset of assets) {
+    try {
+      await access(path.join(distDir, asset.slice(1)))
+    } catch {
+      failures.push(`missing published project asset: ${asset}`)
+    }
+  }
+
   for (const route of locations) {
     const output = route === '/' ? path.join(distDir, 'index.html') : path.join(distDir, route.replace(/^\//, ''), 'index.html')
     try {

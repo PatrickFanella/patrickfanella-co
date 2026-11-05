@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
+import { ProjectTile } from '../components/ProjectTile'
 import { ProjectCard } from '../components/ProjectCard'
 import { LoadingState, RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
@@ -28,6 +30,7 @@ export function ProjectsPage() {
         <h1 className={`${pageTitleClass} mt-5`}>Projects</h1>
         <p className={pageIntroClass}>From a search query to a running service. These case studies cover the interfaces, data pipelines, and operational decisions behind the work. Each project names its delivery status.</p>
       </div>
+      <p className="mb-8 text-ink-soft">Looking for the smaller builds? <Link className="text-accent-green underline underline-offset-4" to="/archive">Browse the project archive</Link>.</p>
       {status === 'loading' ? <LoadingState description="Loading projects." title="Loading projects." /> : null}
       {status === 'error' ? <RouteState actions={<button className={secondaryButtonClass} onClick={retry} type="button">Try again</button>} description={getErrorMessage(error, 'Please try again in a moment.')} label="Unavailable" role="alert" title="The project index could not be loaded." /> : null}
       {status === 'success' && flagships.length === 0 && tools.length === 0 ? <RouteState description="No case studies or tools are published yet." label="No projects" title="No projects found." /> : null}
@@ -54,6 +57,16 @@ export function ProjectsPage() {
               <h2 className="mt-5 font-display text-4xl font-bold uppercase tracking-[-0.04em] text-heading" id="tools-heading">Tools</h2>
               <p className={`${pageIntroClass} mb-8`}>Utilities for managing agent skills, keeping terminal bindings consistent, and capturing public media. The source includes installation and usage notes.</p>
               <div className="tool-list">{visibleTools.map((project) => <ProjectCard key={project.slug} linkToRepository project={project} />)}</div>
+            </section>
+          ) : null}
+          {!selectedTech && projects.some((project) => project.classification !== 'flagship' && project.kind !== 'tool') ? (
+            <section className="mt-16" aria-labelledby="archive-preview-heading">
+              <SectionLabel>More from the archive</SectionLabel>
+              <h2 className="mt-5 font-display text-4xl font-bold uppercase text-heading" id="archive-preview-heading">Keep browsing.</h2>
+              <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {projects.filter((project) => project.classification !== 'flagship' && project.kind !== 'tool').slice(0, 3).map((project) => <ProjectTile key={project.slug} project={project} />)}
+              </div>
+              <Link className={`${secondaryButtonClass} mt-8`} to="/archive">Browse the full archive</Link>
             </section>
           ) : null}
         </>

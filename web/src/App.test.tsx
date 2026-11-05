@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { HelmetProvider } from 'react-helmet-async'
 import { MemoryRouter } from 'react-router-dom'
@@ -47,7 +47,7 @@ describe('App navigation flows', () => {
 		})
 	})
 
-	it('keeps the archive out of primary navigation and available in the footer', async () => {
+	it('includes the archive in primary navigation and the footer', async () => {
 		const user = userEvent.setup()
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
 
@@ -55,9 +55,9 @@ describe('App navigation flows', () => {
 
 		expect(await screen.findByRole('heading', { name: featuredProject.title })).toBeInTheDocument()
 		expect(screen.queryByRole('link', { name: /^tools$/i })).not.toBeInTheDocument()
-		await user.click(screen.getAllByRole('link', { name: /^archive$/i })[0])
+		await user.click(within(screen.getByRole('navigation', { name: 'Primary navigation' })).getByRole('link', { name: /^archive$/i }))
 
-		expect(await screen.findByRole('heading', { level: 1, name: /^additional projects$/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { level: 1, name: /^archive$/i })).toBeInTheDocument()
 		expect(await screen.findByRole('region', { name: /developer tools/i })).toHaveAttribute('id', 'tools')
 	})
 

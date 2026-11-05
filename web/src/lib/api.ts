@@ -31,6 +31,10 @@ export type Project = {
   architecture: string[]
   lessons: string[]
   media: ProjectMedia[]
+  logoUrl?: string
+  thumbnailUrl?: string
+  thumbnailAlt?: string
+  brandBackground?: string
 }
 
 type ProjectListResponse = {

@@ -49,7 +49,7 @@ type n8nPayload struct {
 }
 
 // NewMultiNotifier creates a notifier that sends to all configured targets.
-func NewMultiNotifier(ntfyURL, ntfyToken, n8nURL string, timeout time.Duration) *MultiNotifier {
+func NewMultiNotifier(ntfyURL, ntfyToken, n8nURL string, timeout time.Duration, email ...EmailConfig) *MultiNotifier {
 	if timeout <= 0 {
 		timeout = 5 * time.Second
 	}
@@ -71,6 +71,12 @@ func NewMultiNotifier(ntfyURL, ntfyToken, n8nURL string, timeout time.Duration) 
 		})
 	}
 
+	if len(email) > 0 {
+		n := &emailNotifier{config: email[0], client: &http.Client{Timeout: timeout}, endpoint: "https://api.brevo.com/v3/smtp/email"}
+		if n.enabled() {
+			notifiers = append(notifiers, n)
+		}
+	}
 	return &MultiNotifier{notifiers: notifiers}
 }
 

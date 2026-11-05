@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
 import { archivedProject, toolProject } from '../test/fixtures'
+import userEvent from '@testing-library/user-event'
 import { renderInRouter } from '../test/renderWithRouter'
 import { ArchivePage } from './ArchivePage'
 
@@ -49,4 +50,14 @@ describe('ArchivePage', () => {
 		// The heading renders on commit; the focus effect runs afterwards as a passive effect.
 		await waitFor(() => expect(toolsSection).toHaveFocus())
 	})
+	it('searches archive records and includes categories outside the original list', async () => {
+		const user = userEvent.setup()
+		vi.spyOn(api, 'fetchProjects').mockResolvedValue([archivedProject, { ...toolProject, category: 'Music practice' }])
+		renderInRouter(<ArchivePage />, '/archive')
+		expect(await screen.findByRole('heading', { name: 'Music practice' })).toBeInTheDocument()
+		await user.type(screen.getByRole('searchbox', { name: 'Find a project' }), 'tmux')
+		expect(screen.getByRole('heading', { name: toolProject.title })).toBeInTheDocument()
+		expect(screen.queryByRole('heading', { name: archivedProject.title })).not.toBeInTheDocument()
+	})
+
 })

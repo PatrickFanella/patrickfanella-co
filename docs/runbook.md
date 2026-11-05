@@ -121,22 +121,27 @@ The Nginx web container serves `GET /healthz` for uptime checks.
 
 ## 6. Contact notifications
 
-Optional webhook notifications are controlled by:
+Email notifications use these API-only settings:
 
-- `CONTACT_NOTIFICATION_WEBHOOK_URL`
-- `CONTACT_NOTIFICATION_BEARER_TOKEN`
-- `CONTACT_NOTIFICATION_TIMEOUT_SECONDS`
+- `CONTACT_NOTIFICATION_EMAIL_API_KEY`: Brevo transactional key
+- `CONTACT_NOTIFICATION_EMAIL_FROM`: verified `alerts@subcult.tv` sender
+- `CONTACT_NOTIFICATION_EMAIL_TO`: fixed `patrick@subcult.tv` recipient
+- `CONTACT_NOTIFICATION_TIMEOUT_SECONDS`: provider timeout, default five seconds
 
-Behavior:
+Optional ntfy and n8n targets remain available through
+`CONTACT_NOTIFICATION_NTFY_URL`, `CONTACT_NOTIFICATION_NTFY_TOKEN` and
+`CONTACT_NOTIFICATION_N8N_URL`.
 
-- contact messages are stored in PostgreSQL first
-- if a webhook is configured, the API posts sender metadata plus a short message preview
-- webhook failure does **not** fail the visitor-facing request, but it is counted and logged
+The API stores the contact message before notifying. Email includes the full
+message and sets Reply-To to the validated visitor address. A provider failure
+is counted and logged without the message, API key or provider response body.
+The visitor still receives a saved-message confirmation; that response does not
+promise mail delivery. There is no background retry queue.
 
-If notifications stop arriving:
-
-1. inspect API logs for `contact.create notification_failed`
-2. verify the webhook URL and token in the production secret store
+If email stops arriving, inspect `contact.create notification_failed` and the
+`email` notifier result, then check the host-only key, verified sender and Brevo
+transactional delivery records. Never paste resolved Compose settings or provider
+bodies into CI, issues or logs. Database pruning does not delete inbox copies.
 
 ## 7. Privacy-safe analytics
 
@@ -158,17 +163,15 @@ Contact records are retained for 90 days by default. The API prunes expired rows
 
 ## 8. Release flow
 
-Site UI/content changes deploy automatically after successful verification on a
-`main` push. CI checks public HTML and the exact project catalog. The following
-full-stack procedure applies to API/database changes:
+Site UI/content and schema-compatible API changes deploy automatically after
+successful verification on a `main` push. CI activates both application images,
+then checks public HTML, the exact project catalog and API database health.
+The app's NUC fleet-deploy profile retains the live runtime configuration and
+private email settings. It does not update PostgreSQL, run migrations or seed.
 
-1. confirm `.env.example`, deployment docs, and any new runtime variables are current
-2. run migrations
-3. run seed if content changed
-4. build and deploy the API image
-5. build and deploy the web image with the correct `VITE_*` values
-6. execute `docs/launch-checklist.md`
-7. watch logs and health endpoints during the first verification pass
+For a schema or production data change, follow the verified backup and migration
+procedure in `docs/deployment.md` before deploying a dependent API build. A normal
+portfolio content edit needs no database update.
 
 ## 9. Rollback approach
 
@@ -204,7 +207,8 @@ If a deploy causes regressions:
 
 - visitor request should still return `201`
 - inspect logs for `contact.create notification_failed`
-- verify the webhook endpoint accepts JSON POST requests
+- check the configured email provider, verified sender, recipient and delivery records
+- check any separately enabled webhook endpoint accepts JSON POST requests
 
 ### analytics script does not load
 

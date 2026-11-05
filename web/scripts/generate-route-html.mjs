@@ -170,7 +170,7 @@ function getHomePageDefinition(siteUrl, assetTags) {
             'Production operations',
           ],
           name: siteName,
-          email: 'mailto:fanella.patrick@gmail.com',
+          email: 'mailto:patrick@subcult.tv',
           image: toAbsoluteUrl(siteUrl, fallbackImagePath),
           homeLocation: {
             '@type': 'Place',

@@ -42,29 +42,23 @@
       ],
       "media": [
         {
-          "src": "/assets/projects/screenshots/clpr-feed-1440.webp",
-          "srcSet": "/assets/projects/screenshots/clpr-feed-720.webp 720w, /assets/projects/screenshots/clpr-feed-1440.webp 1440w",
-          "alt": "Clpr feed showing one synthetic Twitch clip with voting, search, and discussion controls.",
-          "caption": "Production Clpr interface rendered with a deterministic synthetic clip fixture; no user data is shown."
+          "src": "/assets/projects/screenshots/current-clpr-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-clpr-720.webp 720w, /assets/projects/screenshots/current-clpr-1440.webp 1440w",
+          "alt": "Clpr interface, selected from the public SUBCULT product gallery.",
+          "caption": "The public clip feed, creator/topic filters, and clip player."
         },
         {
-          "src": "/assets/projects/diagrams/clpr-architecture.webp",
-          "alt": "System architecture diagram showing Clpr's client, reverse proxy, Go API, PostgreSQL, Redis, and OpenSearch layers.",
-          "caption": "Clpr architecture reference. The responsive web app is available today; native clients shown in the diagram are planned."
-        },
-        {
-          "src": "/assets/projects/diagrams/clpr-features.webp",
-          "alt": "Feature ecosystem diagram showing CLPR's eight domains: search and discovery, community and social, content management, moderation and safety, auth and monetization, infrastructure, real-time streaming, and data intelligence.",
-          "caption": "Clpr features grouped across search, community, moderation, monetization, and real-time streaming."
-        },
-        {
-          "src": "/assets/projects/diagrams/clpr-tech-stack.webp",
-          "alt": "Tech stack overview showing CLPR's backend (Go, Gin, PostgreSQL 17, Redis 7, OpenSearch), frontend (React 19, TypeScript, Vite, Tailwind), mobile (React Native 0.81, Expo 54), and infrastructure (Docker, Caddy, GitHub Actions, Vault).",
-          "caption": "Clpr technology reference, including the planned native-client stack. Public delivery is currently the responsive web app."
+          "src": "/assets/projects/diagrams/clpr-data-path.svg",
+          "alt": "Clpr component flow: React web client, Versioned Go API, PostgreSQL records, OpenSearch retrieval, Redis sessions / cache.",
+          "caption": "Selected component flow from the project’s repository architecture notes."
         }
       ],
       "coreMechanism": "Hybrid BM25 and vector search pipeline with versioned Go API",
-      "shippedOutcome": "Public web application for clip discovery, playlists, and moderation"
+      "shippedOutcome": "Public web application for clip discovery, playlists, and moderation",
+      "logoUrl": "/assets/brands/clpr.svg",
+      "brandBackground": "#0e0c13",
+      "thumbnailUrl": "/assets/projects/screenshots/current-clpr-720.webp",
+      "thumbnailAlt": "Clpr interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "subcorp",
@@ -110,35 +104,12 @@
           "srcSet": "/assets/projects/screenshots/subcorp-home-720.webp 720w, /assets/projects/screenshots/subcorp-home-1440.webp 1440w",
           "alt": "Subcorp public home introducing its six-agent autonomous AI collective and live system status.",
           "caption": "Public Subcorp landing page captured in a clean browser session; no authenticated workspace or user data is shown."
-        },
-        {
-          "src": "/assets/projects/subcorp-overview.svg",
-          "alt": "Diagram of the Subcorp agent system: six named agents communicating through the Sanctum WebSocket interface with a shared sandboxed toolbox.",
-          "caption": "Multi-agent coordination architecture with real-time WebSocket chat and sandboxed execution."
-        },
-        {
-          "src": "/assets/projects/diagrams/subcorp-architecture.webp",
-          "alt": "System architecture diagram showing SubCorp's Docker Compose stack: Next.js app with 41 API routes, unified worker with 4 queues, Sanctum WebSocket server, sandboxed toolbox, six-agent council, 38 ops modules, 14 tools, and PostgreSQL 16 with pgvector.",
-          "caption": "Full system architecture from the agent council through the ops engine to PostgreSQL with pgvector."
-        },
-        {
-          "src": "/assets/projects/diagrams/subcorp-features.webp",
-          "alt": "Feature ecosystem diagram showing SubCorp's eight domains: agent system, Sanctum chat, autonomous ops, governance and safety, memory and knowledge, content generation, roundtable debates, and platform infrastructure.",
-          "caption": "Subcorp features grouped by agent coordination, governance, memory, content, and chat."
-        },
-        {
-          "src": "/assets/projects/diagrams/subcorp-tech-stack.webp",
-          "alt": "Tech stack overview showing SubCorp's application layer (Next.js 16, React 19, TypeScript, WebSocket), AI and LLM stack (OpenRouter, Claude, pgvector, Brave Search), data layer (PostgreSQL 16, 45 tables), and the six-agent council.",
-          "caption": "Subcorp's application, model, data, infrastructure, and six-agent council."
-        },
-        {
-          "src": "/assets/projects/diagrams/subcorp-metrics.webp",
-          "alt": "Codebase metrics dashboard for SubCorp showing 54k+ lines of code, 246 source files, 6 AI agents, 41 API routes, 38 ops modules, and ops module size breakdown.",
-          "caption": "Codebase metrics: 54k+ LoC with ops engine, frontend, Sanctum, and roundtable module breakdown."
         }
       ],
       "coreMechanism": "Autonomous multi-agent orchestration loop with bounded delegation",
-      "shippedOutcome": "Self-hosted six-agent mission and chat platform"
+      "shippedOutcome": "Self-hosted six-agent mission and chat platform",
+      "thumbnailUrl": "/assets/projects/covers/subcorp.svg",
+      "thumbnailAlt": "Subcorp project identity"
     },
     {
       "slug": "hasanara",
@@ -184,29 +155,23 @@
       ],
       "media": [
         {
-          "src": "/assets/projects/screenshots/hasanara-home-1280.webp",
-          "srcSet": "/assets/projects/screenshots/hasanara-home-720.webp 720w, /assets/projects/screenshots/hasanara-home-1280.webp 1280w",
-          "alt": "HasanAra home interface showing synthetic channel, video, transcript, and search content.",
-          "caption": "HasanAra rendered from its deterministic browser fixture with synthetic content; no production or user data is shown."
+          "src": "/assets/projects/screenshots/current-hasanara-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-hasanara-720.webp 720w, /assets/projects/screenshots/current-hasanara-1440.webp 1440w",
+          "alt": "HasanAra interface, selected from the public SUBCULT product gallery.",
+          "caption": "The broadcast archive, transcript search, and source-recording links."
         },
         {
-          "src": "/assets/projects/diagrams/tc-architecture.webp",
-          "alt": "System architecture diagram showing HasanAra's frontend, FastAPI service, GPU transcription worker, PostgreSQL, Redis, and OpenSearch layers.",
-          "caption": "Layered architecture from client SDKs through the FastAPI server and GPU worker to data and deployment tiers."
-        },
-        {
-          "src": "/assets/projects/diagrams/tc-features.webp",
-          "alt": "Feature ecosystem diagram showing HasanAra transcription, ingestion, search, export, account, quality, and deployment concerns.",
-          "caption": "HasanAra features grouped by transcription, search, exports, accounts, and delivery."
-        },
-        {
-          "src": "/assets/projects/diagrams/tc-tech-stack.webp",
-          "alt": "Tech stack overview showing HasanAra's Python and FastAPI backend, GPU transcription components, React frontend, PostgreSQL, Redis, OpenSearch, and container infrastructure.",
-          "caption": "HasanAra's Python backend, GPU workers, React frontend, and deployment targets."
+          "src": "/assets/projects/diagrams/hasanara-data-path.svg",
+          "alt": "HasanAra component flow: Source recordings, GPU transcription, PostgreSQL jobs / text, OpenSearch index, Rekolekt FastAPI, HasanAra web.",
+          "caption": "Selected component flow from the project’s repository architecture notes."
         }
       ],
       "coreMechanism": "GPU transcription and enrichment with PostgreSQL job claims and OpenSearch indexing",
-      "shippedOutcome": "Transcript, chapter, tag and moment search over the archive at hasanara.tv"
+      "shippedOutcome": "Transcript, chapter, tag and moment search over the archive at hasanara.tv",
+      "logoUrl": "/assets/brands/hasanara.svg",
+      "brandBackground": "#0f0f0f",
+      "thumbnailUrl": "/assets/projects/screenshots/current-hasanara-720.webp",
+      "thumbnailAlt": "HasanAra interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "prichal",
@@ -252,13 +217,17 @@
       "shippedOutcome": "Private preview with a closed staging PDS, dashboard sign-in and tested recovery",
       "media": [
         {
-          "src": "/assets/projects/screenshots/prichal-home-1440.webp",
-          "srcSet": "/assets/projects/screenshots/prichal-home-720.webp 720w, /assets/projects/screenshots/prichal-home-1440.webp 1440w",
-          "alt": "Prichal home page headed 'Your server. We keep it running.' with a notice that sign-up is closed during private testing.",
-          "caption": "The public Prichal page. Sign-up is closed while the service is tested privately."
+          "src": "/assets/projects/screenshots/current-prichal-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-prichal-720.webp 720w, /assets/projects/screenshots/current-prichal-1440.webp 1440w",
+          "alt": "Prichal interface, selected from the public SUBCULT product gallery.",
+          "caption": "The public introduction to the private-preview hosting service."
         }
       ],
-      "sortOrder": 4
+      "sortOrder": 4,
+      "logoUrl": "/assets/brands/prichal.svg",
+      "brandBackground": "#101322",
+      "thumbnailUrl": "/assets/projects/screenshots/current-prichal-720.webp",
+      "thumbnailAlt": "Prichal interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "undertow",
@@ -303,13 +272,22 @@
       "shippedOutcome": "Public editor with six templates and local H.264 MP4 export",
       "media": [
         {
-          "src": "/assets/projects/screenshots/undertow-editor-1440.webp",
-          "srcSet": "/assets/projects/screenshots/undertow-editor-720.webp 720w, /assets/projects/screenshots/undertow-editor-1440.webp 1440w",
-          "alt": "Undertow editor showing six visualizer templates: Classic, Vinyl, Karaoke, Neon, Poster and Video loop.",
-          "caption": "Undertow's template picker on the live editor. Each template opens as a new project with every layer editable."
+          "src": "/assets/projects/screenshots/current-undertow-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-undertow-720.webp 720w, /assets/projects/screenshots/current-undertow-1440.webp 1440w",
+          "alt": "Undertow interface, selected from the public SUBCULT product gallery.",
+          "caption": "The layered visualizer editor with a spectrum, artwork, and export controls."
+        },
+        {
+          "src": "/assets/projects/diagrams/undertow-data-path.svg",
+          "alt": "Undertow component flow: Audio / artwork / lyrics, React layer editor, WebGL compositor, WebCodecs encoder, Local video file.",
+          "caption": "Selected component flow from the project’s repository architecture notes."
         }
       ],
-      "sortOrder": 3
+      "sortOrder": 3,
+      "logoUrl": "/assets/brands/undertow.svg",
+      "brandBackground": "#0f0c1c",
+      "thumbnailUrl": "/assets/projects/screenshots/current-undertow-720.webp",
+      "thumbnailAlt": "Undertow interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "arkhiv",
@@ -354,13 +332,17 @@
       "shippedOutcome": "Public catalogue with an in-browser reader and byte-exact downloads",
       "media": [
         {
-          "src": "/assets/projects/screenshots/arkhiv-catalogue-1440.webp",
-          "srcSet": "/assets/projects/screenshots/arkhiv-catalogue-720.webp 720w, /assets/projects/screenshots/arkhiv-catalogue-1440.webp 1440w",
-          "alt": "Arkhiv catalogue page listing print items with collection and media filters, a title search and Read buttons.",
-          "caption": "The live Arkhiv catalogue. Each item shows its source's own description of the rights."
+          "src": "/assets/projects/screenshots/current-arkhiv-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-arkhiv-720.webp 720w, /assets/projects/screenshots/current-arkhiv-1440.webp 1440w",
+          "alt": "Arkhiv interface, selected from the public SUBCULT product gallery.",
+          "caption": "The public archive catalogue, with collection and format filters."
         }
       ],
-      "sortOrder": 6
+      "sortOrder": 6,
+      "logoUrl": "/assets/brands/arkhiv.svg",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/projects/screenshots/current-arkhiv-720.webp",
+      "thumbnailAlt": "Arkhiv interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "kork",
@@ -404,13 +386,17 @@
       "shippedOutcome": "Free public link pages with 92 services, ten themes and tracker-free analytics",
       "media": [
         {
-          "src": "/assets/projects/screenshots/kork-home-1440.webp",
-          "srcSet": "/assets/projects/screenshots/kork-home-720.webp 720w, /assets/projects/screenshots/kork-home-1440.webp 1440w",
-          "alt": "Kork home page headed 'One link in your bio, and everything else pinned to it.' with feature cards for 92 services, payment buttons, QR codes and ten themes.",
-          "caption": "The Kork home page on the live service."
+          "src": "/assets/projects/screenshots/current-kork-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-kork-720.webp 720w, /assets/projects/screenshots/current-kork-1440.webp 1440w",
+          "alt": "Kork interface, selected from the public SUBCULT product gallery.",
+          "caption": "The link-page editor, from the public product gallery."
         }
       ],
-      "sortOrder": 8
+      "sortOrder": 8,
+      "logoUrl": "/assets/brands/kork.svg",
+      "brandBackground": "#f2efe7",
+      "thumbnailUrl": "/assets/projects/screenshots/current-kork-720.webp",
+      "thumbnailAlt": "Kork interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "backline",
@@ -456,13 +442,17 @@
       "shippedOutcome": "Private pilot of 23 community modules with restore-verified backups",
       "media": [
         {
-          "src": "/assets/projects/screenshots/backline-home-1440.webp",
-          "srcSet": "/assets/projects/screenshots/backline-home-720.webp 720w, /assets/projects/screenshots/backline-home-1440.webp 1440w",
-          "alt": "Backline home page headed 'Keep your people together.' beside example welcome, moderation case and support ticket cards.",
-          "caption": "The public Backline page. The cards on the right are illustrative workflows, not pilot data."
+          "src": "/assets/projects/screenshots/current-backline-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-backline-720.webp 720w, /assets/projects/screenshots/current-backline-1440.webp 1440w",
+          "alt": "Backline interface, selected from the public SUBCULT product gallery.",
+          "caption": "The public introduction to the community bot and its opt-in tools."
         }
       ],
-      "sortOrder": 7
+      "sortOrder": 7,
+      "logoUrl": "/assets/brands/backline.svg",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/projects/screenshots/current-backline-720.webp",
+      "thumbnailAlt": "Backline interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "jury-rigged",
@@ -501,15 +491,11 @@
         "Replaying NDJSON recordings was how I debugged agent behavior. Running the exact same sequence again, without LLM variance, made the multi-agent interactions much easier to tune.",
         "Twitch commands such as !objection need to enter the same phase model as agent actions so audience input cannot bypass courtroom state."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/jury-rigged-overview.svg",
-          "alt": "Screenshot of the Ace Attorney-style courtroom rendering with AI agent dialogue and Twitch chat overlay.",
-          "caption": "Ace Attorney-style PixiJS rendering with real-time AI agent dialogue and audience interaction."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Deterministic courtroom phase machine with SSE events and recorded replay",
-      "shippedOutcome": "Interactive courtroom simulation with operator and Twitch audience controls"
+      "shippedOutcome": "Interactive courtroom simulation with operator and Twitch audience controls",
+      "thumbnailUrl": "/assets/projects/covers/jury-rigged.svg",
+      "thumbnailAlt": "Jury-Rigged project identity"
     },
     {
       "slug": "patchwork",
@@ -554,14 +540,23 @@
       ],
       "media": [
         {
-          "src": "/assets/projects/screenshots/patchwork-home-1440.webp",
-          "srcSet": "/assets/projects/screenshots/patchwork-home-720.webp 720w, /assets/projects/screenshots/patchwork-home-1440.webp 1440w",
-          "alt": "Patchwork demonstration home page showing mutual-aid discovery and decentralized identity entry points.",
-          "caption": "Patchwork demonstration environment captured without account or private-location data."
+          "src": "/assets/projects/screenshots/current-patchwork-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-patchwork-720.webp 720w, /assets/projects/screenshots/current-patchwork-1440.webp 1440w",
+          "alt": "Patchwork interface, selected from the public SUBCULT product gallery.",
+          "caption": "The development preview: neighborhood requests and resource discovery."
+        },
+        {
+          "src": "/assets/projects/diagrams/patchwork-data-path.svg",
+          "alt": "Patchwork component flow: AT Protocol records, Jetstream ingestion, Indexer / privacy rules, PostgreSQL store, Query API, React map / feed.",
+          "caption": "Selected component flow from the project’s repository architecture notes."
         }
       ],
       "coreMechanism": "Jetstream ingestion with reduced location precision before PostgreSQL storage",
-      "shippedOutcome": "Pre-alpha demonstration of approximate-area mutual-aid discovery and moderation"
+      "shippedOutcome": "Pre-alpha demonstration of approximate-area mutual-aid discovery and moderation",
+      "logoUrl": "/assets/brands/patchwork.svg",
+      "brandBackground": "#f2efe7",
+      "thumbnailUrl": "/assets/projects/screenshots/current-patchwork-720.webp",
+      "thumbnailAlt": "Patchwork interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "augr",
@@ -602,15 +597,11 @@
         "Giving agents opposing mandates (bull against bear, aggressive against conservative) and several rounds surfaced objections that a single-pass analysis did not raise.",
         "A paper-trading adapter is only useful if it simulates latency, partial fills and slippage. A mock that always fills instantly makes a strategy look better than it is."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/augr-overview.svg",
-          "alt": "Diagram of Augr's agent analysis, debate, risk review, and trading interfaces.",
-          "caption": "Augr's five-phase trading pipeline and operator interfaces."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Five-phase analysis, debate, risk review, and broker execution pipeline",
-      "shippedOutcome": "Active-development trading system with CLI, TUI, dashboard, and paper trading"
+      "shippedOutcome": "Active-development trading system with CLI, TUI, dashboard, and paper trading",
+      "thumbnailUrl": "/assets/projects/covers/augr.svg",
+      "thumbnailAlt": "Augr project identity"
     },
     {
       "slug": "clustr",
@@ -655,35 +646,11 @@
         "Running Louvain detection on the full dataset in real time was too slow for interactive use. Precalculating it in batches fixed that, and the frontend stopped waiting on it.",
         "Load testing with k6 early caught a connection pool exhaustion bug before real crawl traffic could find it for me."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/clustr-overview.svg",
-          "alt": "3D network graph visualization showing interconnected Reddit communities with color-coded Louvain clusters.",
-          "caption": "Interactive 3D force-directed graph with Louvain community detection overlays."
-        },
-        {
-          "src": "/assets/projects/diagrams/clustr-architecture.webp",
-          "alt": "System architecture diagram showing Clustr's full stack: Vite + React frontend with 4 visualization modes; Go backend with API server, crawler, and precalculate services; 23 internal packages; PostgreSQL with 37 migrations and sqlc; Prometheus, Grafana, and k6 observability.",
-          "caption": "Full stack from WebGL/D3.js visualization through the Go backend to PostgreSQL and observability."
-        },
-        {
-          "src": "/assets/projects/diagrams/clustr-features.webp",
-          "alt": "Feature ecosystem diagram showing Clustr's eight domains: visualization, graph engine, community detection, Reddit crawler, performance, security, user experience, and ops and observability.",
-          "caption": "Clustr features grouped by graph views, Louvain analysis, Reddit crawling, and operations."
-        },
-        {
-          "src": "/assets/projects/diagrams/clustr-tech-stack.webp",
-          "alt": "Tech stack overview showing Clustr's backend (Go, sqlc, Reddit OAuth, circuit breaker), frontend (React, TypeScript, Three.js, D3.js, react-force-graph-3d), graph algorithms (Louvain, Barnes-Hut, octree, edge bundling), and observability (Prometheus, Grafana, k6).",
-          "caption": "Clustr's Go services, WebGL renderer, graph algorithms, and monitoring tools."
-        },
-        {
-          "src": "/assets/projects/diagrams/clustr-metrics.webp",
-          "alt": "Codebase metrics dashboard for Clustr showing 58k+ LoC, 154 Go files, 85 TS/TSX files, 22 API handlers, 23 internal packages, 37 DB migrations, and frontend rendering pipeline breakdown.",
-          "caption": "Codebase metrics: 58k+ LoC across Go and TypeScript with backend package and frontend pipeline breakdown."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Revision-pinned Reddit graphs with precomputed Louvain community assignments",
-      "shippedOutcome": "Live beta with web graph analysis and a controller-first Unity explorer"
+      "shippedOutcome": "Live beta with web graph analysis and a controller-first Unity explorer",
+      "thumbnailUrl": "/assets/projects/covers/clustr.svg",
+      "thumbnailAlt": "Clustr/Clustr-Galaxy project identity"
     },
     {
       "slug": "internet-id",
@@ -722,15 +689,11 @@
         "IPFS pinning reliability varies a lot between providers. I put Infura, Web3.Storage and Pinata behind one interface with automatic failover.",
         "Supporting three browser engines (Chromium, Gecko, WebKit) took more platform-specific code than I expected. A shared core with thin platform adapters is what worked."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/internet-id-overview.svg",
-          "alt": "Flow diagram showing content hashing, IPFS storage, on-chain registration, and browser extension verification.",
-          "caption": "Content provenance pipeline from creator signing through on-chain anchoring to browser-based verification."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Signed content hashes anchored by IPFS manifests and a Solidity registry",
-      "shippedOutcome": "Content provenance claims verified through a web app and browser extension"
+      "shippedOutcome": "Content provenance claims verified through a web app and browser extension",
+      "thumbnailUrl": "/assets/projects/covers/internet-id.svg",
+      "thumbnailAlt": "Internet-ID project identity"
     },
     {
       "slug": "soundhash",
@@ -767,15 +730,11 @@
         "A fingerprint that survives re-encoding and compression catches more real-world matches than one tuned for exact-match accuracy.",
         "Rate limits on the social media APIs shaped the bot architecture more than the audio processing did. Batching and backoff were what kept it running."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/soundhash-overview.svg",
-          "alt": "Pipeline diagram showing audio extraction, STFT spectral analysis, fingerprint generation, and cross-platform matching.",
-          "caption": "Audio fingerprinting pipeline from ingestion through spectral analysis to social media matching."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Spectral audio fingerprinting with resilient acoustic hash indexing",
-      "shippedOutcome": "Audio matching service with Twitter and Reddit monitoring"
+      "shippedOutcome": "Audio matching service with Twitter and Reddit monitoring",
+      "thumbnailUrl": "/assets/projects/covers/soundhash.svg",
+      "thumbnailAlt": "SoundHash project identity"
     },
     {
       "slug": "galdr",
@@ -815,15 +774,11 @@
         "Billing lives in its own domain, with dedicated Stripe endpoints and its own environment contract. That kept payment code out of the scoring flows.",
         "Validating SEO artifacts during the build catches missing public metadata before deployment. A scripted VPS path also removes manual server-side deployment steps."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/galdr-overview.svg",
-          "alt": "Diagram of Galdr combining Stripe, HubSpot, and Intercom signals into customer health scores.",
-          "caption": "Galdr's data sources, scoring service, and customer health dashboard."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Customer health scoring from Stripe, HubSpot, and Intercom signals",
-      "shippedOutcome": "B2B customer health dashboard backed by Go and PostgreSQL"
+      "shippedOutcome": "B2B customer health dashboard backed by Go and PostgreSQL",
+      "thumbnailUrl": "/assets/projects/covers/galdr.svg",
+      "thumbnailAlt": "Galdr project identity"
     },
     {
       "slug": "cutroom",
@@ -863,15 +818,11 @@
         "Handoff structure mattered more than model quality here: the clearer the schema between stages, the less rework the editing stage had to absorb.",
         "Attribution changes the data model because every stage must retain its contributor and weight. Adding it after rendering would lose that history."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/cutroom-overview.svg",
-          "alt": "Diagram of Cutroom's seven video production stages and supporting services.",
-          "caption": "Cutroom's workflow from research through rendering and publishing."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Seven-stage production workflow with structured agent handoffs and Remotion rendering",
-      "shippedOutcome": "Hosted short-form video workflow with templates and pipeline tracking"
+      "shippedOutcome": "Hosted short-form video workflow with templates and pipeline tracking",
+      "thumbnailUrl": "/assets/projects/covers/cutroom.svg",
+      "thumbnailAlt": "Cutroom project identity"
     },
     {
       "slug": "subcults",
@@ -914,15 +865,11 @@
         "Making precise location optional and consent-based forced the map and discovery flows to be explicit about what they show. The product is clearer for it.",
         "Governance and observability had to arrive as early as the discovery features. For an underground scene, trust and safety are part of the product."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/subcults-overview.svg",
-          "alt": "Diagram of Subcults scene indexing, map discovery, live audio, and media services.",
-          "caption": "Subcults connects Jetstream indexing, PostGIS maps, LiveKit audio, and scene media."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Jetstream scene indexing with PostGIS discovery and LiveKit audio sessions",
-      "shippedOutcome": "Active-development home for privacy-aware scene, event, and live audio discovery"
+      "shippedOutcome": "Active-development home for privacy-aware scene, event, and live audio discovery",
+      "thumbnailUrl": "/assets/projects/covers/subcults.svg",
+      "thumbnailAlt": "Subcults project identity"
     },
     {
       "slug": "llama-line",
@@ -960,15 +907,11 @@
         "One GPU means waiting. A visible FIFO queue makes that wait explainable; without it, contention just looks like a hang.",
         "Because the broker speaks the Ollama API, existing tools need little more than a new address to use it."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/llama-line-overview.svg",
-          "alt": "Diagram of Ollama requests entering Llama Line's FIFO queue and receiving SSE wait updates.",
-          "caption": "Llama Line serializes inference while passing other Ollama routes through."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Strict FIFO Ollama broker with one in-flight inference request and SSE wait updates",
-      "shippedOutcome": "Ollama-compatible gateway with visible GPU backpressure"
+      "shippedOutcome": "Ollama-compatible gateway with visible GPU backpressure",
+      "thumbnailUrl": "/assets/projects/covers/llama-line.svg",
+      "thumbnailAlt": "Llama Line project identity"
     },
     {
       "slug": "open-pilot",
@@ -1006,15 +949,11 @@
         "Trusted automation still needs conservative defaults; FIFO scheduling and one-worker execution make the first self-hosted deployment easier to reason about.",
         "In an issue-to-PR system, policy, logs, tests and worktree isolation are the product, and I treat them that way."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/open-pilot-overview.svg",
-          "alt": "Diagram of a Gitea issue moving through Open Pilot's queue, worktree, tests, and pull request.",
-          "caption": "Open Pilot's path from approved issue to tested pull request."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Durable Gitea issue queue with one OpenCode worker per isolated git worktree",
-      "shippedOutcome": "Self-hosted issue-to-PR automation with tests and operator logs"
+      "shippedOutcome": "Self-hosted issue-to-PR automation with tests and operator logs",
+      "thumbnailUrl": "/assets/projects/covers/open-pilot.svg",
+      "thumbnailAlt": "Open Pilot project identity"
     },
     {
       "slug": "edda",
@@ -1053,15 +992,11 @@
         "People want a terminal and integrations want an API. Separate entry points over shared game logic serve both without duplicating the rules.",
         "Boring infrastructure helped. With explicit migrations, layered config and repeatable containers, the model was one of the few moving parts left to debug."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/edda-overview.svg",
-          "alt": "Diagram of Edda's shared Go game logic serving a terminal UI and REST API.",
-          "caption": "Edda shares game state and rules across terminal and API entry points."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Shared Go game logic behind separate terminal and REST API entry points",
-      "shippedOutcome": "LLM game master available through a TUI and REST API"
+      "shippedOutcome": "LLM game master available through a TUI and REST API",
+      "thumbnailUrl": "/assets/projects/covers/edda.svg",
+      "thumbnailAlt": "Edda project identity"
     },
     {
       "slug": "paqr",
@@ -1099,16 +1034,12 @@
         "A research package should record provenance during each transformation. Reconstructing it afterward leaves gaps.",
         "Mock-first AI defaults make data tooling easier to demo, test, and trust before connecting it to external model providers."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/paqr-overview.svg",
-          "alt": "Diagram of Paqr scanning, sanitizing, describing, and packaging research data as HDF5.",
-          "caption": "Paqr's path from raw research folders to searchable HDF5 archives."
-        }
-      ],
+      "media": [],
       "liveUrl": "https://paqr.subcult.tv",
       "coreMechanism": "Dataset discovery, sanitization, provenance capture, and HDF5 packaging pipeline",
-      "shippedOutcome": "Searchable research archive with CLI, REST, and Streamlit access"
+      "shippedOutcome": "Searchable research archive with CLI, REST, and Streamlit access",
+      "thumbnailUrl": "/assets/projects/covers/paqr.svg",
+      "thumbnailAlt": "Paqr project identity"
     },
     {
       "slug": "redstring",
@@ -1145,15 +1076,11 @@
       "year": 2026,
       "featured": false,
       "sortOrder": 17,
-      "media": [
-        {
-          "src": "/assets/projects/redstring-overview.svg",
-          "alt": "Diagram of Redstring linking evidence, facts, filings, communications, and deadlines in a case graph.",
-          "caption": "Redstring's case graph keeps legal facts connected to source evidence."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Case graph linking evidence, facts, filings, deadlines, and communications",
-      "shippedOutcome": "Foundation for a traceable litigation case workspace"
+      "shippedOutcome": "Foundation for a traceable litigation case workspace",
+      "thumbnailUrl": "/assets/projects/covers/redstring.svg",
+      "thumbnailAlt": "Redstring project identity"
     },
     {
       "slug": "switchyard",
@@ -1192,15 +1119,11 @@
       "year": 2026,
       "featured": false,
       "sortOrder": 12,
-      "media": [
-        {
-          "src": "/assets/projects/switchyard-overview.svg",
-          "alt": "Diagram of Switchyard routing workflow state between Go services and a React operator interface.",
-          "caption": "Switchyard makes routed work and service handoffs visible to operators."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Routed workflow state exposed by a Go runtime and React operator interface",
-      "shippedOutcome": "Active-development foundation for visible workflow routing and handoffs"
+      "shippedOutcome": "Active-development foundation for visible workflow routing and handoffs",
+      "thumbnailUrl": "/assets/projects/covers/switchyard.svg",
+      "thumbnailAlt": "Switchyard project identity"
     },
     {
       "slug": "subcult-os",
@@ -1240,15 +1163,13 @@
       "year": 2026,
       "featured": false,
       "sortOrder": 9,
-      "media": [
-        {
-          "src": "/assets/projects/subcult-os-overview.svg",
-          "alt": "Diagram of Subcult OS ticketing, door, staffing, incident, payout, and night-close workflows.",
-          "caption": "Subcult OS brings live-event records into one closing workflow."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Event lifecycle state spanning ticketing, door scanning, vendor settlement, and night-close reconciliation",
-      "shippedOutcome": "Active-development foundation for live-event operations and night-close reporting"
+      "shippedOutcome": "Active-development foundation for live-event operations and night-close reporting",
+      "logoUrl": "/assets/brands/subcult-os.svg",
+      "brandBackground": "#110d19",
+      "thumbnailUrl": "/assets/brands/subcult-os.svg",
+      "thumbnailAlt": "Subcult OS project identity"
     },
     {
       "slug": "subcult-tv",
@@ -1292,15 +1213,14 @@
           "srcSet": "/assets/projects/screenshots/subcult-tv-home-720.webp 720w, /assets/projects/screenshots/subcult-tv-home-1440.webp 1440w",
           "alt": "Subcult.tv home presenting open-source tools for independent culture and links to selected work and field notes.",
           "caption": "Public Subcult.tv home captured after the focused positioning and navigation pass."
-        },
-        {
-          "src": "/assets/projects/subcult-tv-overview.svg",
-          "alt": "Diagram of Subcult.tv organizing the collective's projects, tools, media, and public identity.",
-          "caption": "Subcult.tv connects the collective's catalog and public pages."
         }
       ],
       "coreMechanism": "TypeScript content catalog for the collective's projects, tools, and media",
-      "shippedOutcome": "Public home and project index for the Subculture Collective"
+      "shippedOutcome": "Public home and project index for the Subculture Collective",
+      "logoUrl": "/assets/brands/subcult.svg",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/brands/subcult.svg",
+      "thumbnailAlt": "Subcult.tv project identity"
     },
     {
       "slug": "invisible-museum",
@@ -1337,15 +1257,11 @@
       "year": 2026,
       "featured": false,
       "sortOrder": 21,
-      "media": [
-        {
-          "src": "/assets/projects/invisible-museum-overview.svg",
-          "alt": "Diagram of a SwiftUI museum app loading place-linked exhibits from a Go and PostgreSQL backend.",
-          "caption": "Invisible Museum attaches digital exhibits to physical locations."
-        }
-      ],
+      "media": [],
       "coreMechanism": "SwiftUI location-based exhibits served by a Go and PostgreSQL backend",
-      "shippedOutcome": "Prototype for discovering museum stories at physical locations"
+      "shippedOutcome": "Prototype for discovering museum stories at physical locations",
+      "thumbnailUrl": "/assets/projects/covers/invisible-museum.svg",
+      "thumbnailAlt": "Invisible Museum project identity"
     },
     {
       "slug": "echo-trails",
@@ -1382,15 +1298,11 @@
       "year": 2026,
       "featured": false,
       "sortOrder": 22,
-      "media": [
-        {
-          "src": "/assets/projects/echo-trails-overview.svg",
-          "alt": "Diagram of Echo Trails attaching short public stories to place records for local discovery.",
-          "caption": "Echo Trails links lightweight story capture to nearby places."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Short public story records attached to physical places",
-      "shippedOutcome": "Concept foundation for capturing and discovering local stories"
+      "shippedOutcome": "Concept foundation for capturing and discovering local stories",
+      "thumbnailUrl": "/assets/projects/covers/echo-trails.svg",
+      "thumbnailAlt": "Echo Trails project identity"
     },
     {
       "slug": "nearbody",
@@ -1426,15 +1338,11 @@
       "year": 2026,
       "featured": false,
       "sortOrder": 23,
-      "media": [
-        {
-          "src": "/assets/projects/nearbody-overview.svg",
-          "alt": "Diagram of a Nearbody body-doubling session centered on joining and starting one task.",
-          "caption": "Nearbody narrows body doubling to the first task-start moment."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Phone-based body-doubling sessions centered on one task-start moment",
-      "shippedOutcome": "Narrow product concept for shared presence while starting a task"
+      "shippedOutcome": "Narrow product concept for shared presence while starting a task",
+      "thumbnailUrl": "/assets/projects/covers/nearbody.svg",
+      "thumbnailAlt": "Nearbody project identity"
     },
     {
       "slug": "one-block-cinema",
@@ -1471,15 +1379,11 @@
       "year": 2026,
       "featured": false,
       "sortOrder": 24,
-      "media": [
-        {
-          "src": "/assets/projects/one-block-cinema-overview.svg",
-          "alt": "Diagram of One-Block Cinema guiding a filmmaker from an idea to a shot plan.",
-          "caption": "One-Block Cinema plans a 1–3 minute film within one city block."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Guided idea prompts and shot planning for a one-block film",
-      "shippedOutcome": "Planning concept for a guided idea and shot list for a 1–3 minute film"
+      "shippedOutcome": "Planning concept for a guided idea and shot list for a 1–3 minute film",
+      "thumbnailUrl": "/assets/projects/covers/one-block-cinema.svg",
+      "thumbnailAlt": "One-Block Cinema project identity"
     },
     {
       "slug": "pocket-civilization",
@@ -1515,15 +1419,11 @@
       "year": 2026,
       "featured": false,
       "sortOrder": 25,
-      "media": [
-        {
-          "src": "/assets/projects/pocket-civilization-overview.svg",
-          "alt": "Diagram of personal signals passing through privacy controls into Pocket Civilization's simulation state.",
-          "caption": "Pocket Civilization separates raw personal traces from the simulated world."
-        }
-      ],
+      "media": [],
       "coreMechanism": "Privacy controls separating personal traces from derived civilization state",
-      "shippedOutcome": "Concept foundation and privacy UI for a local lifelog simulation"
+      "shippedOutcome": "Concept foundation and privacy UI for a local lifelog simulation",
+      "thumbnailUrl": "/assets/projects/covers/pocket-civilization.svg",
+      "thumbnailAlt": "Pocket Civilization project identity"
     },
     {
       "slug": "patrickfanella-co",
@@ -1563,7 +1463,11 @@
       ],
       "media": [],
       "coreMechanism": "Go REST API, containerized PostgreSQL, and prerendered React SPA",
-      "shippedOutcome": "Production portfolio with axe, keyboard and Lighthouse checks in the release gate"
+      "shippedOutcome": "Production portfolio with axe, keyboard and Lighthouse checks in the release gate",
+      "thumbnailUrl": "/assets/brands/patrick-eff.svg",
+      "thumbnailAlt": "Patrick Fanella waveform mark",
+      "logoUrl": "/assets/brands/patrick-eff.svg",
+      "brandBackground": "#282a36"
     },
     {
       "slug": "artemis",
@@ -1595,15 +1499,11 @@
       "lessons": [
         "Repository automation can support changes before product-specific behavior is defined."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/artemis-overview.svg",
-          "alt": "Diagram of the Artemis TypeScript information site and API.",
-          "caption": "Artemis contains a TypeScript information site and API."
-        }
-      ],
+      "media": [],
       "coreMechanism": "TypeScript information site and API",
-      "shippedOutcome": "Repository setup for a TypeScript information site, API, and automation"
+      "shippedOutcome": "Repository setup for a TypeScript information site, API, and automation",
+      "thumbnailUrl": "/assets/projects/covers/artemis.svg",
+      "thumbnailAlt": "Artemis project identity"
     },
     {
       "slug": "blacktower",
@@ -1639,15 +1539,12 @@
         "More agent roles do not improve routing when their responsibilities overlap.",
         "Token limits work best as workflow defaults rather than reminders in every prompt."
       ],
-      "media": [
-        {
-          "src": "/assets/projects/blacktower-overview.svg",
-          "alt": "Diagram of Blacktower wiring OpenCode agent roles, managed skills, tools, and workflow defaults.",
-          "caption": "Blacktower packages the OpenCode roles and workflows used for daily coding."
-        }
-      ],
+      "media": [],
       "coreMechanism": "OpenCode configuration wiring selected agent roles, tools, skills, and workflow defaults",
-      "shippedOutcome": "Curated coding toolkit with lower-token defaults and role-based dispatch"
+      "shippedOutcome": "Curated coding toolkit with lower-token defaults and role-based dispatch",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/projects/covers/blacktower.svg",
+      "thumbnailAlt": "Blacktower project notes"
     },
     {
       "slug": "tmux-popups",
@@ -1674,9 +1571,20 @@
       "highlights": [],
       "architecture": [],
       "lessons": [],
-      "media": [],
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/current-tmux-popups-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-tmux-popups-720.webp 720w, /assets/projects/screenshots/current-tmux-popups-1440.webp 1440w",
+          "alt": "tmux-popups interface, selected from the public SUBCULT product gallery.",
+          "caption": "Product interface selected from the public SUBCULT gallery."
+        }
+      ],
       "coreMechanism": "TSV popup registry generating tmux bindings and a quick menu",
-      "shippedOutcome": "Reusable tmux popup toolkit with local overrides and diagnostics"
+      "shippedOutcome": "Reusable tmux popup toolkit with local overrides and diagnostics",
+      "logoUrl": "/assets/brands/tmux-popups.svg",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/projects/screenshots/current-tmux-popups-720.webp",
+      "thumbnailAlt": "tmux-popups interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "super-productivity-mcp",
@@ -1712,12 +1620,27 @@
         "Agent integrations are safer when mutation boundaries are visible in the tool contract instead of being left to prompt convention.",
         "Treating installation profiles and generated documentation as release artifacts prevents a passing unit suite from masking a broken user setup."
       ],
-      "media": [],
+      "media": [
+        {
+          "src": "/assets/brands/super-productivity-mcp-overview.svg",
+          "alt": "Super Productivity MCP overview illustration showing the server, plugin bridge, and quick-add paths.",
+          "caption": "Studio overview illustration, not a screenshot of an active plugin session."
+        },
+        {
+          "src": "/assets/projects/diagrams/super-productivity-mcp-data-path.svg",
+          "alt": "Super Productivity MCP component flow: AI client, Go MCP server, Local inbox / outbox, In-app plugin bridge, Super Productivity, Desktop quick-add.",
+          "caption": "Selected component flow from the project’s repository architecture notes."
+        }
+      ],
       "coreMechanism": "Catalog-driven MCP tools with local file IPC and an in-app plugin bridge",
       "shippedOutcome": "Local integration suite with protocol tests and reproducible plugin packaging",
       "classification": "flagship",
       "deliveryStatus": "Development preview",
-      "periodLabel": "2026–present"
+      "periodLabel": "2026–present",
+      "logoUrl": "/assets/brands/super-productivity-mcp.svg",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/brands/super-productivity-mcp.svg",
+      "thumbnailAlt": "Super Productivity MCP project identity"
     },
     {
       "slug": "vod-tender",
@@ -1745,7 +1668,9 @@
       "lessons": [],
       "media": [],
       "coreMechanism": "Twitch VOD discovery, download, and synchronized chat capture",
-      "shippedOutcome": "Service for archiving public Twitch VODs and chat logs"
+      "shippedOutcome": "Service for archiving public Twitch VODs and chat logs",
+      "thumbnailUrl": "/assets/projects/covers/vod-tender.svg",
+      "thumbnailAlt": "VOD Tender project identity"
     },
     {
       "slug": "magic-playlists",
@@ -1772,7 +1697,9 @@
       "lessons": [],
       "media": [],
       "coreMechanism": "Scheduled Magic Lists recipes applied to Navidrome playlists",
-      "shippedOutcome": "Go web tool for recipe-driven Navidrome playlist updates"
+      "shippedOutcome": "Go web tool for recipe-driven Navidrome playlist updates",
+      "thumbnailUrl": "/assets/projects/covers/magic-playlists.svg",
+      "thumbnailAlt": "Magic Playlists project identity"
     },
     {
       "slug": "overlaid",
@@ -1799,7 +1726,11 @@
       "lessons": [],
       "media": [],
       "coreMechanism": "OBS browser overlay for alerts, homelab status, and event data",
-      "shippedOutcome": "Dockerized broadcast overlay for livestream status and alerts"
+      "shippedOutcome": "Dockerized broadcast overlay for livestream status and alerts",
+      "logoUrl": "/assets/brands/overlaid.svg",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/brands/overlaid.svg",
+      "thumbnailAlt": "Overlaid project identity"
     },
     {
       "slug": "obsidian-plugin-metronome-tuner",
@@ -1824,9 +1755,20 @@
       "highlights": [],
       "architecture": [],
       "lessons": [],
-      "media": [],
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/current-obsidian-plugin-metronome-tuner-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-obsidian-plugin-metronome-tuner-720.webp 720w, /assets/projects/screenshots/current-obsidian-plugin-metronome-tuner-1440.webp 1440w",
+          "alt": "obsidian-plugin-metronome-tuner interface, selected from the public SUBCULT product gallery.",
+          "caption": "Product interface selected from the public SUBCULT gallery."
+        }
+      ],
       "coreMechanism": "In-app metronome and chromatic tuner",
-      "shippedOutcome": "Music practice tools inside Obsidian"
+      "shippedOutcome": "Music practice tools inside Obsidian",
+      "logoUrl": "/assets/brands/obsidian-plugin-metronome-tuner.svg",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/projects/screenshots/current-obsidian-plugin-metronome-tuner-720.webp",
+      "thumbnailAlt": "obsidian-plugin-metronome-tuner interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "omarchy-plugin-shelfish",
@@ -1852,9 +1794,20 @@
       "highlights": [],
       "architecture": [],
       "lessons": [],
-      "media": [],
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/current-omarchy-plugin-shelfish-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-omarchy-plugin-shelfish-720.webp 720w, /assets/projects/screenshots/current-omarchy-plugin-shelfish-1440.webp 1440w",
+          "alt": "omarchy-plugin-shelfish interface, selected from the public SUBCULT product gallery.",
+          "caption": "Product interface selected from the public SUBCULT gallery."
+        }
+      ],
       "coreMechanism": "Collapsible bar widget groups",
-      "shippedOutcome": "A less crowded Omarchy bar"
+      "shippedOutcome": "A less crowded Omarchy bar",
+      "logoUrl": "/assets/brands/omarchy-plugin-shelfish.svg",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/projects/screenshots/current-omarchy-plugin-shelfish-720.webp",
+      "thumbnailAlt": "omarchy-plugin-shelfish interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "omarchy-plugin-superproductivity",
@@ -1880,9 +1833,20 @@
       "highlights": [],
       "architecture": [],
       "lessons": [],
-      "media": [],
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/current-omarchy-superproductivity-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-omarchy-superproductivity-720.webp 720w, /assets/projects/screenshots/current-omarchy-superproductivity-1440.webp 1440w",
+          "alt": "omarchy-plugin-superproductivity interface, selected from the public SUBCULT product gallery.",
+          "caption": "Product interface selected from the public SUBCULT gallery."
+        }
+      ],
       "coreMechanism": "Current-task display and controls in the Omarchy top bar",
-      "shippedOutcome": "Super Productivity task visibility and control from the Omarchy top bar"
+      "shippedOutcome": "Super Productivity task visibility and control from the Omarchy top bar",
+      "logoUrl": "/assets/brands/omarchy-superproductivity.svg",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/projects/screenshots/current-omarchy-superproductivity-720.webp",
+      "thumbnailAlt": "omarchy-plugin-superproductivity interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "omarchy-monitor-bar",
@@ -1907,9 +1871,20 @@
       "highlights": [],
       "architecture": [],
       "lessons": [],
-      "media": [],
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/current-omarchy-monitor-bar-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-omarchy-monitor-bar-720.webp 720w, /assets/projects/screenshots/current-omarchy-monitor-bar-1440.webp 1440w",
+          "alt": "omarchy-monitor-bar interface, selected from the public SUBCULT product gallery.",
+          "caption": "Product interface selected from the public SUBCULT gallery."
+        }
+      ],
       "coreMechanism": "Per-monitor selection of Full, Minimal, or Hidden bar layouts",
-      "shippedOutcome": "One primary Full bar with configurable Minimal or Hidden bars on other monitors"
+      "shippedOutcome": "One primary Full bar with configurable Minimal or Hidden bars on other monitors",
+      "logoUrl": "/assets/brands/omarchy-monitor-bar.svg",
+      "brandBackground": "#21222c",
+      "thumbnailUrl": "/assets/projects/screenshots/current-omarchy-monitor-bar-720.webp",
+      "thumbnailAlt": "omarchy-monitor-bar interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "tadooer",
@@ -1949,9 +1924,25 @@
         "Offline support needs a command-by-command boundary. Queuing task edits is useful without pretending calendar or focus commands can run disconnected.",
         "Conflict and freshness states belong in the planner interface, where the owner can make the decision."
       ],
-      "media": [],
+      "media": [
+        {
+          "src": "/assets/projects/screenshots/current-tadooer-1440.webp",
+          "srcSet": "/assets/projects/screenshots/current-tadooer-720.webp 720w, /assets/projects/screenshots/current-tadooer-1440.webp 1440w",
+          "alt": "Tadooer interface, selected from the public SUBCULT product gallery.",
+          "caption": "Public demonstration of the Today view, with task capture, focus, and calendar planning."
+        },
+        {
+          "src": "/assets/projects/diagrams/tadooer-data-path.svg",
+          "alt": "Tadooer component flow: Web / desktop client, IndexedDB outbox, Suite API, SQLite task state, CalDAV connector, Calendar server.",
+          "caption": "Selected component flow from the project’s repository architecture notes."
+        }
+      ],
       "coreMechanism": "Server-authoritative sync with queued task writes and calendar conflict checks",
-      "shippedOutcome": "Self-hosted planner for private single-owner use"
+      "shippedOutcome": "Self-hosted planner for private single-owner use",
+      "logoUrl": "/assets/brands/tadooer.svg",
+      "brandBackground": "#1e1e2e",
+      "thumbnailUrl": "/assets/projects/screenshots/current-tadooer-720.webp",
+      "thumbnailAlt": "Tadooer interface, selected from the public SUBCULT product gallery."
     },
     {
       "slug": "subsets",
@@ -1980,7 +1971,11 @@
       "lessons": [],
       "media": [],
       "coreMechanism": "Read-only discovery followed by previewed, ownership-aware transactions",
-      "shippedOutcome": "Public alpha CLI and terminal interface distributed through npm"
+      "shippedOutcome": "Public alpha CLI and terminal interface distributed through npm",
+      "logoUrl": "/assets/brands/subsets.svg",
+      "brandBackground": "#d9dedc",
+      "thumbnailUrl": "/assets/brands/subsets.svg",
+      "thumbnailAlt": "Subsets project identity"
     },
     {
       "slug": "twitchdl",
@@ -2009,7 +2004,9 @@
       "lessons": [],
       "media": [],
       "coreMechanism": "Go orchestration of external media capture tools",
-      "shippedOutcome": "Functional CLI for public Twitch media"
+      "shippedOutcome": "Functional CLI for public Twitch media",
+      "thumbnailUrl": "/assets/projects/covers/twitchdl.svg",
+      "thumbnailAlt": "twitchdl project identity"
     }
   ]
 }

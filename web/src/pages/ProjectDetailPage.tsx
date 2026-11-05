@@ -1,5 +1,7 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 
+import { Icon } from '../components/Icon'
+import { ProjectBrand } from '../components/ProjectBrand'
 import { ProjectMediaGallery } from '../components/ProjectMediaGallery'
 import { LoadingState, RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
@@ -57,8 +59,6 @@ export function ProjectDetailPage() {
   const { slug } = useParams()
   const { project, status, error, retry } = useProject(slug)
   const siteUrl = getSiteUrl()
-  const metaCardClass =
-    'grid gap-2 border-t border-stroke py-4 text-ink-soft'
 
   if (status === 'loading') {
     return (
@@ -165,103 +165,44 @@ export function ProjectDetailPage() {
         title={flagshipSeoTitles[project.slug] || project.title}
         type="article"
       />
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] lg:items-start border-b border-stroke pb-10 mb-8">
-        <div>
-          <SectionLabel>{project.category}</SectionLabel>
-          <h1 className={`${pageTitleClass} mt-6`}>{project.title}</h1>
-          <p className="mt-6 max-w-[55ch] text-[1.2rem] leading-relaxed text-ink">{project.summary}</p>
+      <header className="case-intro">
+        <SectionLabel>{project.category}</SectionLabel>
+        <div className="mt-6 flex items-center gap-5">
+          <ProjectBrand className="case-brand" project={project} />
+          <h1 className={`${pageTitleClass} min-w-0`}>{project.title}</h1>
         </div>
-
-        <aside className={`${surfaceCardClass} h-fit bg-panel p-6`} aria-label="Project overview">
-          <p className={monoLabelClass}>At a glance</p>
-          <div className="mt-5 grid gap-3">
-            <p className={metaCardClass}>
-              <span className="text-sm text-ink-soft">Delivery</span>
-              <span className="text-heading">{project.deliveryStatus}</span>
-            </p>
-            <p className={metaCardClass}>
-              <span className="text-[0.8rem] text-accent-green font-bold">
-                Domain
-              </span>
-              <span className="text-[1.05rem] text-heading">{project.category}</span>
-            </p>
-            {project.coreMechanism ? (
-              <p className={metaCardClass}>
-                <span className="text-[0.8rem] text-accent-green font-bold">
-                  Core work
-                </span>
-                <span className="text-[1.05rem] text-heading">{project.coreMechanism}</span>
-              </p>
-            ) : null}
-            {project.shippedOutcome ? (
-              <p className={metaCardClass}>
-                <span className="text-[0.8rem] text-accent-green font-bold">
-                  Outcome
-                </span>
-                <span className="text-[1.05rem] text-heading">{project.shippedOutcome}</span>
-              </p>
-            ) : null}
-          </div>
-
-          {project.repoUrl || project.liveUrl ? (
-            <div className="mt-5 flex flex-wrap gap-4 border-t border-stroke pt-5">
-              {project.repoUrl ? (
-                <a className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank">
-                  View source ↗
-                </a>
-              ) : null}
-              {project.liveUrl ? (
-                <a className={textLinkClass} href={project.liveUrl} rel="noreferrer" target="_blank">
-                  Open {project.title} ↗
-                </a>
-              ) : null}
-            </div>
-          ) : null}
-        </aside>
-
-        <ul className={`${tagListClass} lg:col-span-2`}>
-          {project.stack.map((item) => (
-            <li key={item} className={tagClass}>
-              {item}
-            </li>
-          ))}
+        <p className="mt-6 max-w-[76ch] text-lg leading-relaxed text-ink">{project.summary}</p>
+        <dl className="case-facts">
+          <div><dt className={monoLabelClass}>Delivery</dt><dd>{project.deliveryStatus}</dd></div>
+          <div><dt className={monoLabelClass}>My role</dt><dd>{project.role}</dd></div>
+          <div><dt className={monoLabelClass}>Period</dt><dd>{project.periodLabel}</dd></div>
+        </dl>
+        <div className="mt-6 flex flex-wrap items-center gap-5">
+          {project.repoUrl ? <a className={secondaryButtonClass} href={project.repoUrl} rel="noreferrer" target="_blank"><Icon name="gitea" />View source</a> : null}
+          {project.liveUrl ? <a className={textLinkClass} href={project.liveUrl} rel="noreferrer" target="_blank"><Icon name="external" />Open {project.title}</a> : null}
+        </div>
+        <ul className={tagListClass}>
+          {project.stack.map((item) => <li key={item} className={tagClass}>{item}</li>)}
         </ul>
-      </div>
+      </header>
 
-      <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.75fr)] lg:items-start">
-        <article className="pr-4 lg:pr-8">
-          <SectionLabel>Problem and ownership</SectionLabel>
-          <h2 className="mt-6 font-display text-[clamp(2rem,3.4vw,2.9rem)] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
-            {flagshipProblemHeadings[project.slug] || 'The problem it solves.'}
-          </h2>
-          <p className="mt-6 text-[1.1rem] leading-relaxed text-ink-soft">
-            {project.problem}
-          </p>
-          <p className="mt-4 text-[1.1rem] leading-relaxed text-ink-soft">
-            {project.description}
-          </p>
-        </article>
-
-        <article className={`${surfaceCardClass} bg-surface p-8`}>
-          <h2 className="font-display text-[clamp(1.75rem,2.6vw,2.3rem)] font-bold leading-[0.95] tracking-[-0.04em] text-heading">
-            What I built.
-          </h2>
-          <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-soft">
-            The main pieces of work.
-          </p>
-          <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft">
-            {project.highlights.map((highlight, index) => (
-              <li
-                key={highlight}
-                className="border border-stroke bg-panel p-5 grid gap-3"
-              >
-                <p className="text-[0.85rem] font-bold text-accent-purple">{String(index + 1).padStart(2, '0')}</p>
-                <p className="text-[1.05rem] leading-relaxed">{highlight}</p>
-              </li>
-            ))}
+      <article className="case-story">
+        <SectionLabel>Problem and ownership</SectionLabel>
+        <h2 className="mt-6 max-w-[30ch] font-display text-[clamp(2rem,3.4vw,2.9rem)] font-bold leading-tight tracking-[-0.04em] text-heading">
+          {flagshipProblemHeadings[project.slug] || 'The problem it solves.'}
+        </h2>
+        <div className="mt-6 grid gap-6 text-lg leading-relaxed text-ink-soft lg:grid-cols-2">
+          <p>{project.problem}</p><p>{project.description}</p>
+        </div>
+      </article>
+      {project.highlights.length > 0 ? (
+        <section className="mt-10" aria-labelledby="built-heading">
+          <h2 className="font-display text-3xl font-bold text-heading" id="built-heading">What I built.</h2>
+          <ul className="mt-6 grid list-none gap-4 p-0 text-ink-soft md:grid-cols-2 xl:grid-cols-3">
+            {project.highlights.map((highlight) => <li className={`${surfaceCardClass} p-6 leading-relaxed`} key={highlight}>{highlight}</li>)}
           </ul>
-        </article>
-      </div>
+        </section>
+      ) : null}
 
       {project.architecture.length > 0 ? (
         <section className="mt-16 grid gap-8 border-t border-stroke pt-10">

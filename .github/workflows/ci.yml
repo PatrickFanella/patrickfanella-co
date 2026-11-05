@@ -95,7 +95,7 @@ jobs:
           node-version: 22
       - name: Prepare the versioned project catalog
         run: node web/scripts/generate-project-catalog.mjs
-      - name: Reuse an already accepted frontend artifact
+      - name: Reuse accepted release artifacts
         id: artifact
         if: github.server_url == 'https://git.subcult.tv' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         shell: bash
@@ -116,20 +116,17 @@ jobs:
           ssh_args=(-F /dev/null -i "$deploy_dir/key" -o ControlPath=none -o ControlMaster=no -o BatchMode=yes -o IdentitiesOnly=yes
             -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$deploy_dir/known_hosts"
             -o ConnectTimeout=15 onnwee@10.0.0.56)
-          # shellcheck disable=SC2029
-          ssh "${ssh_args[@]}" "artifact $DEPLOY_REVISION web" > "$deploy_dir/artifact.json"
-          python3 - "$deploy_dir/artifact.json" "$GITHUB_OUTPUT" <<'PYCODE'
-          import json, re, sys
-          from pathlib import Path
-          info = json.loads(Path(sys.argv[1]).read_text())
-          available = info.get("available") is True
-          if available:
-              assert re.fullmatch(r"[0-9a-f]{64}", info.get("html_sha256", ""))
-          with Path(sys.argv[2]).open("a") as output:
-              output.write("available=" + str(available).lower() + "\n")
+          for service in web api; do
+            ssh "${ssh_args[@]}" "artifact $DEPLOY_REVISION $service" > "$deploy_dir/$service.json"
+            python3 - "$deploy_dir/$service.json" "$service" "$GITHUB_OUTPUT" <<'PYCODE'
+          import json, sys
+          info = json.load(open(sys.argv[1]))
+          with open(sys.argv[3], 'a') as output:
+              output.write(sys.argv[2] + '_available=' + str(info.get('available') is True).lower() + '\n')
           PYCODE
-      - name: Build deployable images from the verified revision
-        if: steps.artifact.outputs.available != 'true'
+          done
+      - name: Build verified site image
+        if: steps.artifact.outputs.web_available != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -137,15 +134,26 @@ jobs:
           image="fleet-deploy/patrickfanella-co/web:$DEPLOY_REVISION"
           docker build --build-arg VITE_SITE_URL=https://patrickfanella.co --build-arg VITE_API_BASE_URL= --build-arg VITE_ANALYTICS_PLAUSIBLE_DOMAIN= -f web/Dockerfile --label "org.opencontainers.image.revision=$DEPLOY_REVISION" \
             --label "org.opencontainers.image.source=https://git.subcult.tv/PatrickFanella/patrickfanella-co" -t "$image" .
-          docker run --rm --network none --add-host api:127.0.0.1 --entrypoint nginx "$image" -t
-      - name: Deploy the built image and verify public HTML
+          docker run --rm --network none --entrypoint nginx "$image" -t
+      - name: Build verified contact API image
+        if: steps.artifact.outputs.api_available != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$DEPLOY_REVISION"
+          image="fleet-deploy/patrickfanella-co/api:$DEPLOY_REVISION"
+          docker build -f api/Dockerfile --label "org.opencontainers.image.revision=$DEPLOY_REVISION" \
+            --label "org.opencontainers.image.source=https://git.subcult.tv/PatrickFanella/patrickfanella-co" -t "$image" .
+          docker run --rm --network none --entrypoint /bin/sh "$image" -c 'test -x /app/server && test -x /app/migrate && test -x /app/seed'
+      - name: Deploy site and API and verify public responses
         if: >-
           github.server_url == 'https://git.subcult.tv' &&
           github.ref == 'refs/heads/main' &&
           (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         shell: bash
         env:
-          REUSE_ARTIFACT: ${{ steps.artifact.outputs.available }}
+          WEB_AVAILABLE: ${{ steps.artifact.outputs.web_available }}
+          API_AVAILABLE: ${{ steps.artifact.outputs.api_available }}
           DEPLOY_KEY: ${{ secrets.HOMELAB_DEPLOY_KEY }}
           DEPLOY_KNOWN_HOSTS: ${{ secrets.HOMELAB_KNOWN_HOSTS }}
         run: |
@@ -163,23 +171,27 @@ jobs:
             -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$deploy_dir/known_hosts"
             -o ConnectTimeout=15 onnwee@10.0.0.56)
           ssh "${ssh_args[@]}" status
-          image="fleet-deploy/patrickfanella-co/web:$DEPLOY_REVISION"
-          # The forced receiver accepts a full hexadecimal revision; expand it here.
-          if [[ "$REUSE_ARTIFACT" != true ]]; then
-            # shellcheck disable=SC2029
-            docker save "$image" | ssh "${ssh_args[@]}" "receive $DEPLOY_REVISION web"
-          fi
-          # shellcheck disable=SC2029
+          for service in web api; do
+            available="$WEB_AVAILABLE"
+            if [[ "$service" == api ]]; then available="$API_AVAILABLE"; fi
+            if [[ "$available" != true ]]; then
+              docker save "fleet-deploy/patrickfanella-co/$service:$DEPLOY_REVISION" | ssh "${ssh_args[@]}" "receive $DEPLOY_REVISION $service"
+            fi
+          done
           ssh "${ssh_args[@]}" "deploy $DEPLOY_REVISION"
-          # shellcheck disable=SC2029
           ssh "${ssh_args[@]}" "artifact $DEPLOY_REVISION web" > "$deploy_dir/artifact.json"
           expected=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["html_sha256"])' "$deploy_dir/artifact.json")
           curl --fail --silent --show-error --retry 4 --retry-all-errors \
             --max-time 30 https://patrickfanella.co/ > "$deploy_dir/live.html"
           actual=$(sha256sum "$deploy_dir/live.html" | cut -d' ' -f1)
           test "$actual" = "$expected"
-          printf 'Live HTML matches the image built from %s\n' "$DEPLOY_REVISION"
           curl --fail --silent --show-error --retry 4 --retry-all-errors \
             --max-time 30 https://patrickfanella.co/content/projects.json > "$deploy_dir/live-projects.json"
           cmp web/public/content/projects.json "$deploy_dir/live-projects.json"
-          printf 'Live project catalog matches source revision %s\n' "$DEPLOY_REVISION"
+          curl --fail --silent --show-error --retry 4 --retry-all-errors \
+            --max-time 30 https://patrickfanella.co/api/health > "$deploy_dir/health.json"
+          python3 - "$deploy_dir/health.json" <<'PYCODE'
+          import json, sys
+          assert json.load(open(sys.argv[1])) == {'status': 'ok', 'databaseEnabled': True}
+          PYCODE
+          printf 'Live site, catalog, and API match revision %s\n' "$DEPLOY_REVISION"

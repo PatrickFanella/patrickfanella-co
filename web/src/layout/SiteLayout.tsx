@@ -1,19 +1,22 @@
 import { useEffect, useRef } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 
+import { Icon } from '../components/Icon'
+
 import { monoLabelClass, navButtonClass, textLinkClass } from '../lib/styles'
 
 const navigation = [
   { to: '/projects', label: 'Projects' },
+  { to: '/archive', label: 'Archive' },
   { to: '/resume', label: 'Resume' },
   { to: '/contact', label: 'Contact' },
 ]
 
 const externalLinks = [
-  { href: 'mailto:fanella.patrick@gmail.com', label: 'Email' },
-  { href: 'https://linkedin.com/in/patrick-fanella', label: 'LinkedIn' },
-  { href: 'https://github.com/PatrickFanella', label: 'GitHub' },
-  { href: 'https://git.subcult.tv/PatrickFanella', label: 'Gitea' },
+  { href: 'mailto:patrick@subcult.tv', label: 'Email', icon: 'mail' as const },
+  { href: 'https://linkedin.com/in/patrick-fanella', label: 'LinkedIn', icon: 'linkedin' as const },
+  { href: 'https://github.com/PatrickFanella', label: 'GitHub', icon: 'github' as const },
+  { href: 'https://git.subcult.tv/PatrickFanella', label: 'Gitea', icon: 'gitea' as const },
 ]
 
 export function SiteLayout() {
@@ -34,14 +37,17 @@ export function SiteLayout() {
     <div className="portfolio-stage relative min-h-screen font-body text-ink selection:bg-accent-green selection:text-paper">
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div className="mx-auto flex min-h-screen max-w-350 flex-col border-x-2 border-stroke bg-paper">
-        <header className="grid gap-4 border-b-2 border-stroke p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center md:px-8 md:py-5">
-          <Link className="group grid w-fit gap-1" to="/">
+        <header className="grid gap-4 border-b-2 border-stroke p-4 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-center md:px-8 md:py-5">
+          <Link className="group flex min-w-0 items-center gap-4" to="/">
+            <img alt="" className="h-14 w-14 shrink-0 object-contain" height={56} src="/assets/brands/patrick-eff.svg" width={56} />
+            <span className="grid min-w-0 gap-1">
             <span className={monoLabelClass}>Patrick Fanella</span>
             <span className="font-display text-xl font-bold leading-none tracking-[-0.03em] text-heading group-hover:text-accent-green sm:text-2xl">
               Senior full-stack / backend engineer
             </span>
+            </span>
           </Link>
-          <nav className="grid grid-cols-3 gap-2" aria-label="Primary navigation">
+          <nav className="grid grid-cols-2 gap-2 sm:grid-cols-4" aria-label="Primary navigation">
             {navigation.map((item) => (
               <NavLink
                 key={item.to}
@@ -69,10 +75,10 @@ export function SiteLayout() {
             <div className="flex flex-wrap gap-x-5 gap-y-2">
               {externalLinks.map((item) => (
                 <a className={textLinkClass} href={item.href} key={item.href} rel={item.href.startsWith('http') ? 'noreferrer' : undefined} target={item.href.startsWith('http') ? '_blank' : undefined}>
-                  {item.label}
+                  <Icon name={item.icon} />{item.label}
                 </a>
               ))}
-              <Link className={textLinkClass} to="/archive">Archive</Link>
+              <Link className={textLinkClass} to="/archive"><Icon name="archive" />Archive</Link>
               <a className={textLinkClass} href="https://subcult.tv/support">Support my work through SUBCULT</a>
             </div>
           </div>
