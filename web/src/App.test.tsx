@@ -49,7 +49,11 @@ describe('App navigation flows', () => {
 
 	it('includes the archive in primary navigation and the footer', async () => {
 		const user = userEvent.setup()
-		vi.spyOn(api, 'fetchProjects').mockResolvedValue(projectsFixture)
+		let resolveArchive!: (projects: typeof projectsFixture) => void
+		const archiveRequest = new Promise<typeof projectsFixture>((resolve) => { resolveArchive = resolve })
+		vi.spyOn(api, 'fetchProjects')
+			.mockResolvedValueOnce(projectsFixture)
+			.mockReturnValueOnce(archiveRequest)
 
 		renderApp('/')
 
@@ -58,7 +62,9 @@ describe('App navigation flows', () => {
 		await user.click(within(screen.getByRole('navigation', { name: 'Primary navigation' })).getByRole('link', { name: /^archive$/i }))
 
 		expect(await screen.findByRole('heading', { level: 1, name: /^archive$/i })).toBeInTheDocument()
-		expect(screen.getByRole('link', { name: 'View project: Subcorp' })).toHaveAttribute('href', '/projects/subcorp')
+		expect(screen.queryByRole('link', { name: 'View project: Subcorp' })).not.toBeInTheDocument()
+		resolveArchive(projectsFixture)
+		expect(await screen.findByRole('link', { name: 'View project: Subcorp' })).toHaveAttribute('href', '/projects/subcorp')
 	})
 
 	it('navigates from the projects archive to a project detail route', async () => {
