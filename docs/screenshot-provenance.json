@@ -1,0 +1,626 @@
+{
+  "captureDate": "2026-11-05",
+  "selection": "Public interfaces captured during this task. No signed-in Tadooer data is included. Marketing pages and demonstrations are identified in captions.",
+  "captures": [
+    {
+      "slug": "clpr",
+      "url": "https://clpr.tv/discover/lists",
+      "pageTitle": "Collections | clpr",
+      "capturedAt": "2026-11-05T19:02:41.773Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "e12366a462c109880c2f481cd6c248f9f5a6c9ee5b8d068d09789f4ca94a8ed9",
+      "state": "Collections, creator navigation, and topic discovery.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-clpr-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "0403bfd0202fcec4ef52d9e5acb8a2971539d7f29b24836994ef7c39ed3d5ccd"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-clpr-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "1b45ae5245365bdd04204abb9d4afa7f3c2076269fd3beb9fc36042e31da2a25"
+        }
+      ]
+    },
+    {
+      "slug": "hasanara",
+      "url": "https://hasanara.tv/",
+      "pageTitle": "HasanAra \u2014 Broadcast archive",
+      "capturedAt": "2026-11-05T18:48:18.993Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "1daba9e47e46f0b5b3773a029114aa07a51d10076e0652657e20579b5b67a1a7",
+      "state": "The HasanAra broadcast archive frontend, powered by Rekolekt.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-hasanara-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "25f65d8c367ba420e51014979d005fe07ef4c30968eeaa639cf6c3f976488e53"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-hasanara-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "3c7a3b060088cb26485911577ec0eb25cde0acf6da92ab0b4aa8b9b30935cd15"
+        }
+      ]
+    },
+    {
+      "slug": "undertow",
+      "url": "https://undertow.subcult.tv/",
+      "pageTitle": "Undertow | Free Music Visualizer Video Editor",
+      "capturedAt": "2026-11-05T18:47:30.477Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "17227d4a506088f93976a13e10ce512eb69e27c4195ef160b82223c871659017",
+      "state": "The layered editor with an original-tone demonstration project.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-undertow-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "76d68330337d3ad3c9029ed76a951da3216ae6b92a6d436046b9fd877b0b9a03"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-undertow-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "cf22dde59a039efc96ec706c1848a351141b83538b939cc372e3ca7e4a04d514"
+        }
+      ]
+    },
+    {
+      "slug": "chatty-cat",
+      "url": "https://chat.subcult.tv/",
+      "pageTitle": "Chatty Cat \u2014 Self-hosted Twitch chat client",
+      "capturedAt": "2026-11-05T18:49:28.971Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "fbfeabf62a76dd2ce437e0a4a37bf24876fd5e21b1e85660ecf0bdbfa91d623c",
+      "state": "Anonymous public-channel chat history, video, and emote panes.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-chatty-cat-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "a9809e9075465a6e6263d17cd809f6043a4e4b61f50d0fa473cc7d4618b3d523"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-chatty-cat-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "ccc66cc5d49ea2e246eb653c2d6a712c75d6188b2c06e708d32c7c7622a1802d"
+        }
+      ]
+    },
+    {
+      "slug": "commons",
+      "url": "https://commons.subcult.tv/",
+      "pageTitle": "Commons \u2014 Rebuild familiar tools in the open",
+      "capturedAt": "2026-11-05T18:50:10.233Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "02281016ee411a96faeb1522724f8c978b51e0af30cc98b0c199dd8c88464198",
+      "state": "Public project discovery. Curated upstream references remain labeled.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-commons-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "a8c12d0ee30fc712744661b2f21b809dc22d04f63a3d703b81565cae2846b058"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-commons-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "76002fef5d13fb7af396b4b9a970588be0f72760d9bae585af61e88b35fd366d"
+        }
+      ]
+    },
+    {
+      "slug": "headcount",
+      "url": "https://headcount.subcult.tv/",
+      "pageTitle": "Headcount: Twitch viewbot signals for the top 200 channels",
+      "capturedAt": "2026-11-05T18:48:46.281Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "21f8b0eab311e7d20e62783b2fffd4c2b156c3c3a5ca90b741c719495dc6118c",
+      "state": "The read-only leaderboard. Scores are provisional signals, not proof of botting.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-headcount-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "33e49e32a08b6a36f4138135639b3cb803dec4ba2e1e67653927579ddc20e530"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-headcount-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "46001d98a5ce7889d41b71fbba985751ac445bb5cc430d971cafec7e26766101"
+        }
+      ]
+    },
+    {
+      "slug": "left-field",
+      "url": "https://left-field.subcult.tv/",
+      "pageTitle": "Election seat research | Left Field",
+      "capturedAt": "2026-11-05T18:50:11.115Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "a5e803c3a74f199e759745f7bfd67c4bbde3e83672c0e0ca52de339ffa43540a",
+      "state": "The published research priority index, with model version and coverage notes.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-left-field-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "5c708fe3e46195b6ba1e17a1e1aeccb3cf1f021e610e2faa3476a03a95632a03"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-left-field-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "d4d2d99d0b2c94c227a91b959e478ce9a29e16532b8b32cb9651b470ca86fed9"
+        }
+      ]
+    },
+    {
+      "slug": "arkhiv",
+      "url": "https://arkhiv.subcult.tv/",
+      "pageTitle": "Arkhiv \u2014 An archive across formats.",
+      "capturedAt": "2026-11-05T18:51:01.188Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "5618feb5f647d96d5103c0448adc6e0466a29a9c228a5d5213a230e7488bff18",
+      "state": "The shared catalog across print, audio, and video.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-arkhiv-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "07f8bbd173a9b7c0eebe894cd6442bd6fac5bde4bd8b0a595ed51d1ac3521f89"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-arkhiv-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "219a9297e3ac4b20b177227dec4465c8711984fa94328e7ca9071aa99b17e01e"
+        }
+      ]
+    },
+    {
+      "slug": "anarchist-archive",
+      "url": "https://anarchist-archive.subcult.tv/",
+      "pageTitle": "The Anarchist Zine Archive \u00b7 Anarchist Archive",
+      "capturedAt": "2026-11-05T18:51:02.070Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "61332d1e43d92426daff41caf602677463032193f2971722b2ed5416e807346f",
+      "state": "Public collection frontend",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-anarchist-archive-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "39ca3d442fd5d177677071f8ace27aa4b5088dc8ba4ea4fb526d9b414172d147"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-anarchist-archive-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "40919aceaa49dc5a7fa38d5cc78cc2f2797f3c811b862af5fe89de9c1c689cc6"
+        }
+      ]
+    },
+    {
+      "slug": "riot-grrrl",
+      "url": "https://riot-grrrl.subcult.tv/",
+      "pageTitle": "Riot Grrrl Zine Archive \u00b7 Riot Grrrl Archive",
+      "capturedAt": "2026-11-05T18:51:26.174Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "c6b2438d58ac8365d65818397fe1237dccfa8323d1a26590c0ff9690fe0b7716",
+      "state": "Public collection frontend",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-riot-grrrl-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "b003f476ec1360a83a37a0b73ed6004d20663dbcf611dc771f4cac4865b83f23"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-riot-grrrl-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "0eec28517d2f754896e91b9bca9ec93f2ea551aaaae42a7c888aebc1c6586878"
+        }
+      ]
+    },
+    {
+      "slug": "dedhed",
+      "url": "https://dedhed.subcult.tv/",
+      "pageTitle": "Dedhed \u2014 Live tapes, shared air",
+      "capturedAt": "2026-11-05T18:52:03.520Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "ea3e4a186a12d71af0b1b021da3c51fdae4ea7614847de9bfdc6c7946976b53a",
+      "state": "Public collection frontend",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-dedhed-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "0b3f910189f3ac0975dac724ab10ffb49826dbd5fcd15f76ad0849016de7f44c"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-dedhed-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "b9b5adb34e35ac6a140c12a720f9797d5ee86fa9387f90c764472d1688e07e72"
+        }
+      ]
+    },
+    {
+      "slug": "lineage",
+      "url": "https://lineage.subcult.tv/",
+      "pageTitle": "Lineage \u00b7 Live recordings, with their lineage",
+      "capturedAt": "2026-11-05T18:52:48.474Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "3716b2d7a8ca14ddc19f62e895c0ddec633ca54b6ff3f07f489c0bb1cb2a6a82",
+      "state": "Public collection frontend",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-lineage-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "d5011dabab2f9603d512bab148477d63f960cfa263216d9f1083bc8591314158"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-lineage-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "189fc2cd82d46f7c824103e35c5b0fe46d1226d0c1325a6f392c5c64308e6a5d"
+        }
+      ]
+    },
+    {
+      "slug": "bill-nye",
+      "url": "https://bill-nye.subcult.tv/",
+      "pageTitle": "Bill Nye TV",
+      "capturedAt": "2026-11-05T18:52:39.420Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "89411c82d8f6e887d87792cd1207112328086aeb40abcaeb631fab13361310cc",
+      "state": "Public collection frontend",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-bill-nye-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "6512fef4cb34af5f5d3517e01757a1be6d2028ddc52ec5d4382af5044a1ba632"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-bill-nye-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "113befbb3e48217896f46e4d0d05c22006d7826f4ebd8b72145eb64d59e8afa0"
+        }
+      ]
+    },
+    {
+      "slug": "democracy-now",
+      "url": "https://democracy-now.subcult.tv/",
+      "pageTitle": "Democracy Now! broadcast archive",
+      "capturedAt": "2026-11-05T18:52:41.853Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "8a5d688515dcb7c476abd578fc7e3f545194513ea77417aaaa9d9b62a3692893",
+      "state": "Public collection frontend",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-democracy-now-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "22a8971264c88838984a80d3f4ec2be50e689c37af106feb3d55abac48a88bb7"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-democracy-now-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "dc183726ea365c45ad05e6d21e3ffbe4a20e5093a1fdca063b3bc2c8509136b3"
+        }
+      ]
+    },
+    {
+      "slug": "backline",
+      "url": "https://backline.subcult.tv/",
+      "pageTitle": "Backline \u2014 The tools behind your community",
+      "capturedAt": "2026-11-05T19:02:42.365Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "928accf7a5508cc72100908bd950484e73d462d55aeed085db9c33e671750ecc",
+      "state": "The public project page; workflow panels contain illustrative sample content.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-backline-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "f33c53977285cb65e8337216cb8f724dcb91018736fe0cdb22bb58bff8a3f476"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-backline-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "a161afad9bcb27d912e8d6d624c0792a0e90fbceb01375d67b412f8a0ff8da56"
+        }
+      ]
+    },
+    {
+      "slug": "kork",
+      "url": "https://kork.subcult.tv/",
+      "pageTitle": "Kork: a free link page by SUBCULT",
+      "capturedAt": "2026-11-05T18:53:28.201Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "0960edba4f99470c870485b12723e115b51c6275f0c580a0c274dd37f15d9867",
+      "state": "The public link-page project and feature overview.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-kork-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "3ab51d8046635d207c7db5311385fb33df1a68fe6628a1ca16bf8defbbb6919d"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-kork-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "66570aa69d25c1ba5fa3925ffc0c86613f223a5e902bdb3eed68cf7999a9305f"
+        }
+      ]
+    },
+    {
+      "slug": "patchwork",
+      "url": "https://patchwork.subcult.tv/",
+      "pageTitle": "Mutual aid requests and community resources | Patchwork",
+      "capturedAt": "2026-11-05T18:53:29.180Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "905e5d14165c3742e6eafb17dc2a9d1d7f103d780c5557a5a23076106ba8e2d7",
+      "state": "The public pre-alpha preview. Example content is not a real request for help.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-patchwork-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "715fb0f747fee042445fbc5d5863d24acdc590049c9d9ec5b63ef2f79d38d85c"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-patchwork-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "3e419c631eb58b86ae4c448dee95c0fd6156fb3011cc8f49cbd952840b0a8353"
+        }
+      ]
+    },
+    {
+      "slug": "prichal",
+      "url": "https://prichal.subcult.tv/",
+      "pageTitle": "Prichal \u00b7 Account hosting for the open social web",
+      "capturedAt": "2026-11-05T18:53:48.949Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "ca3a2009b5e597b5bf9069f860977bfed2dbbe24c76b4e1b408ca5964a3a1ba4",
+      "state": "The public project page for a closed private preview.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-prichal-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "bcf6ffe8f6ef4c033498f5f4d6de51e3b95e0f83ffc0c1e1c55c7784a1ddc30a"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-prichal-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "87b3409fb3689fd0ca1c0589ddff8ef6e6e6bd977c48197c78e3857b6102948e"
+        }
+      ]
+    },
+    {
+      "slug": "subcult-os",
+      "url": "https://os.subcult.tv/discover",
+      "pageTitle": "Discover published events | Subcult OS",
+      "capturedAt": "2026-11-05T18:53:49.593Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "e7119603748e2edb4ba1fac73d4833b827013cbb1accf2dde9f1766a98a489a1",
+      "state": "Public event discovery, showing its current empty state.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-subcult-os-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "127fd251b40e9af5f81f2cdea57556d5b4fd08365bd3e43a7bdc4ccc56c27ab3"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-subcult-os-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "b8769294ac26489c232ce2ad11931a9c9d149b1aa175d946210db12425c26618"
+        }
+      ]
+    },
+    {
+      "slug": "subsets",
+      "url": "https://subsets.subcult.tv/",
+      "pageTitle": "Subsets \u2014 All your skills. Only the set you need.",
+      "capturedAt": "2026-11-05T18:55:07.199Z",
+      "browser": "T3 Code shared browser",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "originalDimensions": [
+        1280,
+        800
+      ],
+      "originalSha256": "6be6d648a2728c9edbd3bff589e31f7cd2e0948d06f3c1e5658a17a48c9d9bf0",
+      "state": "The public project page with its labeled sample terminal render.",
+      "exports": [
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-subsets-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "sha256": "03bd8a8685c1f5cf584f4e6090d63d46a45450ebd583f9ad71731907729d9d75"
+        },
+        {
+          "path": "web/public/assets/projects/screenshots/2026-11-05-subsets-640.webp",
+          "width": 640,
+          "height": 400,
+          "sha256": "b82a53b6768cacc3af2bc14aaf9bf41fe3d909274e3f2d4515157f86b49f1eaf"
+        }
+      ]
+    }
+  ]
+}

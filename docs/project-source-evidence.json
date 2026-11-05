@@ -1,0 +1,156 @@
+{
+  "reviewedAt": "2026-11-05",
+  "scope": "Repository README and product-guide review for portfolio copy. Runtime qualification remains separate. Private repository links are omitted from visitor-facing source buttons.",
+  "projects": [
+    {
+      "project": "clpr",
+      "repository": "subculture-collective/clpr",
+      "private": false,
+      "description": "Find Twitch clips by creator, topic, and tag. Keep playlists for the ones you want to share."
+    },
+    {
+      "project": "hasanara",
+      "repository": "subculture-collective/hasanara",
+      "private": false,
+      "description": "Search HasanAbi broadcasts by phrase and return to the source timestamp. Automatic transcripts need checking."
+    },
+    {
+      "project": "prichal",
+      "repository": "subculture-collective/prichal",
+      "private": true,
+      "description": "Account hosting for the open social web. Your server; we keep it running. Private preview, no sign-up."
+    },
+    {
+      "project": "undertow",
+      "repository": "subculture-collective/undertow",
+      "private": false,
+      "description": "Layer visuals, artwork and timed lyrics around a track. Export video locally in your browser."
+    },
+    {
+      "project": "arkhiv",
+      "repository": "subculture-collective/arkhiv",
+      "private": true,
+      "description": "Arkhiv \u2014 shared archive engine for independent print, audio, and video applications."
+    },
+    {
+      "project": "kork",
+      "repository": "subculture-collective/kork",
+      "private": true,
+      "description": "Free link pages for socials, music, media and tip jars. Payments go to your accounts; Kork takes no cut."
+    },
+    {
+      "project": "backline",
+      "repository": "subculture-collective/backline",
+      "private": true,
+      "description": "Backline \u2014 Discord community bot and dashboard for onboarding, moderation, events, and member support."
+    },
+    {
+      "project": "patchwork",
+      "repository": "subculture-collective/patchwork",
+      "private": false,
+      "description": "Patchwork \u2014 AT Protocol mutual-aid platform for neighborhood requests, offers, resource discovery, and coordination."
+    },
+    {
+      "project": "subcult-os",
+      "repository": "subculture-collective/subcult-os",
+      "private": false,
+      "description": "A run sheet for small shows: crew, free reservations, door check-in and close-out. In alpha development."
+    },
+    {
+      "project": "tmux-popups",
+      "repository": "PatrickFanella/tmux-popups",
+      "private": false,
+      "description": "TSV-driven tmux popup toolkit with generated bindings, quick menu, local overrides, diagnostics, and dependency-aware help."
+    },
+    {
+      "project": "super-productivity-mcp",
+      "repository": "PatrickFanella/super-productivity-mcp",
+      "private": false,
+      "description": "Local-first MCP, plugin bridge, and desktop quick-add integration for Super Productivity."
+    },
+    {
+      "project": "tadooer",
+      "repository": "subculture-collective/tadooer",
+      "private": false,
+      "description": "Tadooer \u2014 self-hosted task, calendar, and focus planner for one owner."
+    },
+    {
+      "project": "subsets",
+      "repository": "subculture-collective/subsets",
+      "private": false,
+      "description": "All your skills. Only the set you need. A local terminal app for discovering, grouping, and applying agent skills."
+    },
+    {
+      "project": "twitchdl",
+      "repository": "PatrickFanella/twitchdl",
+      "private": false,
+      "description": "Go CLI for downloading Twitch clips and VODs and safely recording live streams."
+    },
+    {
+      "project": "chatty-cat",
+      "repository": "subculture-collective/chatty-cat",
+      "private": true,
+      "description": "Chatty Cat \u2014 self-hosted Twitch chat workspace with a Go service and TypeScript frontend."
+    },
+    {
+      "project": "commons",
+      "repository": "subculture-collective/commons",
+      "private": true,
+      "description": "A hub for people rebuilding familiar tools in the open. Software made by people, for people, in public."
+    },
+    {
+      "project": "headcount",
+      "repository": "subculture-collective/headcount",
+      "private": true,
+      "description": "Headcount: bot-signal dashboard for the Twitch top 200. The score is the sus quotient."
+    },
+    {
+      "project": "left-field",
+      "repository": "subculture-collective/left-field",
+      "private": false,
+      "description": "Seat-level election research with public sources, provisional scores and explicit gaps. Not a forecast."
+    },
+    {
+      "project": "rekolekt",
+      "repository": "subculture-collective/rekolekt",
+      "private": false,
+      "description": "Software you deploy for timestamped, searchable recording archives. HasanAra runs on it."
+    },
+    {
+      "project": "patstack",
+      "repository": "subculture-collective/patstack",
+      "private": true,
+      "description": "patstack: maintained agent skills, catalogs, global instructions and guarded fleet deployment tooling."
+    },
+    {
+      "project": "ytclip",
+      "repository": "PatrickFanella/ytclip",
+      "private": false,
+      "description": "Download complete YouTube videos or precise timestamped clips with yt-dlp and ffmpeg."
+    },
+    {
+      "project": "clustr-galaxy",
+      "repository": "subculture-collective/clustr-galaxy",
+      "private": true,
+      "description": ""
+    },
+    {
+      "project": "the-common-house",
+      "repository": "subculture-collective/the-common-house",
+      "private": true,
+      "description": "The Common House \u2014 Unity narrative-investigation proof of concept set at a communal radio outpost."
+    },
+    {
+      "project": "pirs",
+      "repository": "subculture-collective/pirs",
+      "private": true,
+      "description": "Experimental extensible AT Protocol PDS distribution: plugin host and hook-point spec"
+    },
+    {
+      "project": "obsidian-plugin-metronome-tuner",
+      "repository": "PatrickFanella/obsidian-plugin-metronome-tuner",
+      "private": false,
+      "description": "Metronome + Tuner adds timing and chromatic tuning tools to Obsidian."
+    }
+  ]
+}

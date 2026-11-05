@@ -47,7 +47,7 @@ export function ProjectCard({ headingLevel = 'h3', linkToRepository = false, pro
             <Link aria-label={`${ctaLabel}: ${project.title}`} className={secondaryButtonClass} to={`/projects/${project.slug}`}>{ctaLabel}</Link>
           )}
           {!linkToRepository && project.repoUrl ? (
-            <a aria-label={`View repository: ${project.title}`} className="text-sm text-ink-soft underline underline-offset-4 hover:text-heading" href={project.repoUrl} rel="noreferrer" target="_blank"><Icon name="external" className="inline h-4 w-4" /> Source code</a>
+            <a aria-label={`View repository: ${project.title}`} className="inline-flex items-center gap-2 text-sm text-ink-soft underline underline-offset-4 hover:text-heading" href={project.repoUrl} rel="noreferrer" target="_blank"><Icon name="external" className="inline h-4 w-4" /> Source code</a>
           ) : null}
         </div>
       </div>

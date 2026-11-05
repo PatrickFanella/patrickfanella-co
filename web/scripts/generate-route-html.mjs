@@ -25,11 +25,9 @@ const flagshipSeoTitles = {
   hasanara: 'HasanAra case study | GPU transcription and search',
   prichal: 'Prichal case study | Go, mTLS and AT Protocol hosting',
   undertow: 'Undertow case study | WebCodecs video export in the browser',
-  arkhiv: 'Arkhiv case study | Go, PostgreSQL and byte-exact preservation',
+  arkhiv: 'Arkhiv | Shared archive engine and collection frontends',
   backline: 'Backline case study | Discord bot, dashboard and PostgreSQL',
   kork: 'Kork case study | Go link pages without trackers',
-  clustr: 'Clustr case study | Graph analysis and Unity client',
-  subcults: 'Subcults case study | Go, maps and community infrastructure',
   switchyard: 'Switchyard case study | Go, React and workflow routing',
   'subcult-os': 'Subcult OS case study | Go, React and event operations',
 }
@@ -213,7 +211,7 @@ function getArchivePageDefinition(siteUrl, assetTags) {
       description: 'Prototypes, concepts and small tools by Patrick Fanella, grouped by area.',
       imageUrl: toAbsoluteUrl(siteUrl, fallbackImagePath),
       robots: 'noindex,follow',
-      title: `Additional projects | ${siteName}`,
+      title: `Archive | ${siteName}`,
       url: canonicalUrl,
     }),
     outputPath: path.join(distDir, 'archive', 'index.html'),
@@ -322,7 +320,6 @@ async function main() {
     getContactPageDefinition(siteUrl, assetTags),
     getNotFoundPageDefinition(assetTags),
     ...portfolio.projects
-      .filter((project) => (project.kind || 'case-study') !== 'tool')
       .map((project) => getProjectPageDefinition(siteUrl, assetTags, project)),
   ]
 

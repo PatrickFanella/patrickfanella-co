@@ -38,7 +38,7 @@ describe('ProjectDetailPage', () => {
 		expect(document.title).not.toContain('&')
 	})
 
-	it('sends tool projects to the tools archive route state', async () => {
+	it('renders dedicated tool detail pages', async () => {
 		vi.spyOn(api, 'fetchProject').mockResolvedValue(toolProject)
 
 		render(
@@ -52,7 +52,8 @@ describe('ProjectDetailPage', () => {
 			</HelmetProvider>,
 		)
 
-		expect(await screen.findByRole('heading', { name: /tools archive/i })).toBeInTheDocument()
+		expect(await screen.findByRole('heading', { name: toolProject.title })).toBeInTheDocument()
+		expect(screen.getByRole('link', { name: /view source/i })).toHaveAttribute('href', toolProject.repoUrl)
 	})
 
 	it('omits optional rich-content sections when the project does not provide them', async () => {

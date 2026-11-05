@@ -1,7 +1,8 @@
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { Icon } from '../components/Icon'
 import { ProjectBrand } from '../components/ProjectBrand'
+import { ProjectRelations } from '../components/ProjectRelations'
 import { ProjectMediaGallery } from '../components/ProjectMediaGallery'
 import { LoadingState, RouteState } from '../components/RouteState'
 import { Seo } from '../components/Seo'
@@ -32,8 +33,6 @@ const flagshipProblemHeadings: Record<string, string> = {
   arkhiv: 'Keep the file, and say what you do not know.',
   backline: 'One server, the modules it needs.',
   kork: 'A link page that never touches the money.',
-  clustr: 'Reddit does not show which communities overlap.',
-  subcults: 'Scene discovery without a ranked feed.',
   switchyard: 'Automation you can watch.',
   'subcult-os': 'A show night runs on four different lists.',
 }
@@ -44,11 +43,9 @@ const flagshipSeoTitles: Record<string, string> = {
   hasanara: 'HasanAra case study | GPU transcription and search',
   prichal: 'Prichal case study | Go, mTLS and AT Protocol hosting',
   undertow: 'Undertow case study | WebCodecs video export in the browser',
-  arkhiv: 'Arkhiv case study | Go, PostgreSQL and byte-exact preservation',
+  arkhiv: 'Arkhiv | Shared archive engine and collection frontends',
   backline: 'Backline case study | Discord bot, dashboard and PostgreSQL',
   kork: 'Kork case study | Go link pages without trackers',
-  clustr: 'Clustr case study | Graph analysis and Unity client',
-  subcults: 'Subcults case study | Go, maps and community infrastructure',
   switchyard: 'Switchyard case study | Go, React and workflow routing',
   'subcult-os': 'Subcult OS case study | Go, React and event operations',
 }
@@ -133,10 +130,6 @@ export function ProjectDetailPage() {
     return null
   }
 
-  if (project.kind === 'tool') {
-    return <Navigate replace to="/archive#tools" />
-  }
-
   return (
     <section className={pageSectionClass}>
       <Seo
@@ -172,6 +165,7 @@ export function ProjectDetailPage() {
           <h1 className={`${pageTitleClass} min-w-0`}>{project.title}</h1>
         </div>
         <p className="mt-6 max-w-[76ch] text-lg leading-relaxed text-ink">{project.summary}</p>
+        {project.relatedProjects?.length ? <div className="mt-5"><ProjectRelations project={project} /></div> : null}
         <dl className="case-facts">
           <div><dt className={monoLabelClass}>Delivery</dt><dd>{project.deliveryStatus}</dd></div>
           <div><dt className={monoLabelClass}>My role</dt><dd>{project.role}</dd></div>
@@ -185,6 +179,25 @@ export function ProjectDetailPage() {
           {project.stack.map((item) => <li key={item} className={tagClass}>{item}</li>)}
         </ul>
       </header>
+
+      {project.collections?.length ? <section className="mt-10" aria-labelledby="collections-heading" id="collections">
+        <SectionLabel>Built on Arkhiv</SectionLabel>
+        <h2 className="mt-5 font-display text-3xl font-bold text-heading" id="collections-heading">Collections with their own identity.</h2>
+        <p className="mt-4 max-w-[72ch] leading-relaxed text-ink-soft">The shared engine sits behind independent print, audio, and video frontends. Source credits and access rules stay with each collection.</p>
+        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {project.collections.map((collection) => <article className="archive-tile" key={collection.slug}>
+            {collection.thumbnailUrl ? <img alt={`${collection.title} interface`} className="aspect-[16/10] w-full border-b-2 border-stroke object-cover object-top" decoding="async" height={800} loading="lazy" src={collection.thumbnailUrl} width={1280} /> : null}
+            <div className="grid gap-4 p-5">
+              <div className="flex items-center gap-3">
+                {collection.logoUrl ? <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center border border-stroke p-2" style={{ backgroundColor: collection.brandBackground }}><img alt="" className="h-full w-full object-contain" height={40} src={collection.logoUrl} width={40} /></span> : null}
+                <h3 className="font-display text-xl font-bold text-heading">{collection.title}</h3>
+              </div>
+              <p className="text-sm leading-relaxed text-ink-soft">{collection.summary}</p>
+              <a className={textLinkClass} href={collection.url} rel="noreferrer" target="_blank">Open collection<Icon name="external" /></a>
+            </div>
+          </article>)}
+        </div>
+      </section> : null}
 
       <article className="case-story">
         <SectionLabel>Problem and ownership</SectionLabel>

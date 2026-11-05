@@ -2,13 +2,15 @@ import { screen, waitFor, within } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import * as api from '../lib/api'
-import { archivedProject, toolProject } from '../test/fixtures'
+import { archivedProject, toolProject as selectedToolProject } from '../test/fixtures'
 import userEvent from '@testing-library/user-event'
 import { renderInRouter } from '../test/renderWithRouter'
 import { ArchivePage } from './ArchivePage'
 
+const toolProject = { ...selectedToolProject, selected: false }
+
 describe('ArchivePage', () => {
-	it('omits detail links for tools and keeps available repository links', async () => {
+	it('gives archived tools detail pages and keeps available repository links', async () => {
 		vi.spyOn(api, 'fetchProjects').mockResolvedValue([
 			archivedProject,
 			toolProject,
@@ -23,8 +25,8 @@ describe('ArchivePage', () => {
 		expect(toolCard).not.toBeNull()
 		expect(privateToolCard).not.toBeNull()
 		expect(within(toolCard!).getByRole('link', { name: /repository/i })).toHaveAttribute('href', toolProject.repoUrl)
-		expect(within(toolCard!).queryByRole('link', { name: /view project/i })).not.toBeInTheDocument()
-		expect(within(privateToolCard!).queryByRole('link')).not.toBeInTheDocument()
+		expect(within(toolCard!).getByRole('link', { name: /explore tool/i })).toHaveAttribute('href', `/projects/${toolProject.slug}`)
+		expect(within(privateToolCard!).getByRole('link', { name: /explore tool/i })).toHaveAttribute('href', '/projects/private-tool')
 		expect(document.querySelector('#tools')).toBeInTheDocument()
 	})
 

@@ -3,10 +3,12 @@ import type { Project } from '../lib/api'
 import { monoLabelClass, textLinkClass } from '../lib/styles'
 import { Icon } from './Icon'
 import { ProjectBrand } from './ProjectBrand'
+import { ProjectRelations } from './ProjectRelations'
 
 export function ProjectTile({ project }: { project: Project }) {
   const thumbnail = project.thumbnailUrl || project.media.find((media) => media.src.includes('/screenshots/'))?.src || project.logoUrl
   const identityOnly = thumbnail === project.logoUrl
+  const ctaLabel = project.classification === 'flagship' ? 'Read case study' : project.kind === 'tool' ? 'Explore tool' : 'View project'
   return (
     <article className="archive-tile">
       {thumbnail ? <div className="archive-thumbnail" style={{ backgroundColor: project.brandBackground || '#21222c' }}>
@@ -16,9 +18,10 @@ export function ProjectTile({ project }: { project: Project }) {
         <div className="flex items-center gap-3"><ProjectBrand project={project} /><h3 className="min-w-0 font-display text-2xl font-bold leading-tight text-heading">{project.title}</h3></div>
         <p className={monoLabelClass}>{project.deliveryStatus}</p>
         <p className="text-sm leading-relaxed text-ink-soft">{project.summary}</p>
+        <ProjectRelations project={project} />
         <div className="flex flex-wrap gap-x-5 gap-y-2">
-          {project.kind !== 'tool' ? <Link aria-label={`View project: ${project.title}`} className={textLinkClass} to={`/projects/${project.slug}`}>View project</Link> : null}
-          {project.repoUrl ? <a aria-label={`Repository: ${project.title}`} className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank"><Icon name="gitea" className="h-4 w-4" />Repository</a> : null}
+          <Link aria-label={`${ctaLabel}: ${project.title}`} className={textLinkClass} to={`/projects/${project.slug}`}>{ctaLabel}</Link>
+          {project.repoUrl ? <a aria-label={`View repository: ${project.title}`} className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank"><Icon name="gitea" className="h-4 w-4" />Repository</a> : null}
         </div>
       </div>
     </article>
