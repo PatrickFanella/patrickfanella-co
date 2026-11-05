@@ -27,6 +27,7 @@ export type Project = {
   stack: string[]
   featured: boolean
   repoUrl?: string
+  sourceUrl?: string
   liveUrl?: string
   highlights: string[]
   architecture: string[]

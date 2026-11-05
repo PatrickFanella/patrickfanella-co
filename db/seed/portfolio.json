@@ -8,8 +8,8 @@
       "classification": "flagship",
       "deliveryStatus": "Production",
       "periodLabel": "2025–present",
-      "summary": "Find a Twitch clip again by creator, topic, or tag. I built the Go API, React interface, moderation tools, and hybrid search, and operate the public deployment.",
-      "description": "Clpr lets a community find, organize, discuss, and share Twitch clips. I built the Go API, React web client, PostgreSQL model, moderation tools, and hybrid search pipeline, alongside container releases and production operations. The responsive web app is available today; native mobile apps are planned.",
+      "summary": "A Twitch clip discovery app with creator and topic search, playlists, and moderation. I built and operate the Go API, React client, and search pipeline.",
+      "description": "Clpr helps viewers find Twitch clips by creator, topic, and tag, then save and share them in playlists. I built the Go API, React web client, PostgreSQL model, moderation tools, and hybrid search pipeline, and handle container releases and public-service operations.",
       "problem": "A Twitch clip is easy to make and hard to find a week later. Viewers had no dependable place to vote on clips, organize them, talk about them, or search for one they half remember.",
       "role": "Full-stack engineer",
       "year": 2025,
@@ -72,7 +72,6 @@
       "problem": "Six agents sharing tools and a chat room need clear identities, ordered messages, and strict access boundaries. Without them, simultaneous actions conflict and tool access becomes unsafe.",
       "role": "Lead full-stack engineer",
       "year": 2026,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/subcorp",
       "liveUrl": "https://subcorp.subcult.tv",
       "featured": false,
       "sortOrder": 2,
@@ -115,8 +114,8 @@
       "classification": "flagship",
       "deliveryStatus": "Production",
       "periodLabel": "2024–present",
-      "summary": "The HasanAbi broadcast archive frontend built on Rekolekt, with transcript search and source-time links.",
-      "description": "HasanAra owns the broadcast sources, identity, and web interface; Rekolekt supplies the headless archive services and HTTP API. The frontend turns search results into contextual transcript passages and source-recording links. Automatic transcripts can be wrong, so a quotation should be checked against the recording.",
+      "summary": "A searchable HasanAbi broadcast archive. I built the React frontend and its integration with Rekolekt’s timestamped transcript and passage API.",
+      "description": "HasanAra gives a broadcast archive its identity, sources, and web interface on top of Rekolekt. I built search results with surrounding transcript context, source-time links, saved moments, and passage sharing. Automatic transcripts need checking against the recording before quoting.",
       "problem": "Hundreds of hours of long-form video hold statements, recurring themes and research material that nobody can realistically find by scrubbing through playback.",
       "role": "Lead full-stack engineer",
       "year": 2025,
@@ -135,10 +134,9 @@
         "Docker"
       ],
       "highlights": [
-        "Built a timestamped transcript search interface with surrounding context, passage links, saved moments, and exports.",
-        "Built a tagging pipeline that extracts entities, recurring topics and themes from transcripts so results can be filtered by them.",
-        "Built a GPU transcription and enrichment pipeline with queue-backed workers, retryable ingestion, and durable PostgreSQL job state.",
-        "Set up an explicit API contract, browser tests, health checks and release automation."
+        "Built a React search interface with transcript context, source timestamps, passage links, and saved moments.",
+        "Integrated the independent archive frontend with Rekolekt’s versioned HTTP API and reusable client contracts.",
+        "Added browser tests, health checks, and release automation for the public archive."
       ],
       "architecture": [
         "Because transcription and NLP enrichment jobs must survive worker restarts, I keep job and application state together in PostgreSQL and use SKIP LOCKED claims. This avoids a separate queue service but requires stuck-job recovery and explicit retries.",
@@ -163,7 +161,7 @@
           "caption": "Selected component flow from the project’s repository architecture notes."
         }
       ],
-      "coreMechanism": "GPU transcription and enrichment with PostgreSQL job claims and OpenSearch indexing",
+      "coreMechanism": "Source-linked transcript search through Rekolekt’s versioned archive API",
       "shippedOutcome": "Transcript, chapter, tag and moment search over the archive at hasanara.tv",
       "logoUrl": "/assets/brands/hasanara.svg",
       "brandBackground": "#0f0f0f",
@@ -186,7 +184,7 @@
       "classification": "archive",
       "deliveryStatus": "Private preview",
       "periodLabel": "2026–present",
-      "summary": "Managed hosting for AT Protocol account servers, so a Bluesky user can have a server of their own without running it. I built the Go control plane, the restricted host agent, the certificate and restore operators, and the React dashboard. It is a private preview with no public sign-up.",
+      "summary": "Managed AT Protocol account hosting in private preview. I built the Go control plane, restricted mTLS host agent, and React dashboard.",
       "description": "Every Bluesky account lives on a personal data server (PDS). Prichal runs each customer's PDS in its own container on a managed host and handles the upkeep. I built the Go API and River job worker on PostgreSQL, a node agent that runs only a fixed set of operations over mutual TLS, Ansible-provisioned KVM guests, hourly certificate renewal with automatic rollback, and encrypted checkpoints that restore into an isolated guest. A closed staging PDS and the management dashboard are live behind sign-in. Public sign-up, accounts and production provisioning are not done yet.",
       "problem": "Leaving Bluesky's own servers means running a PDS yourself: a machine, certificates, backups and upgrades. Most people who want their account on their own server will not do that work.",
       "role": "Lead engineer",
@@ -255,8 +253,8 @@
       "classification": "flagship",
       "deliveryStatus": "Live beta",
       "periodLabel": "2026–present",
-      "summary": "Layer visuals, artwork, and timed lyrics around a track, then export video in the browser. I built the React editor and WebCodecs rendering pipeline; codec support depends on the browser and hardware.",
-      "description": "Undertow lays out each layer separately for 16:9, 9:16 and 1:1 and encodes the video in the browser with WebCodecs. I built the React and Zustand editor, the Butterchurn Milkdrop layer, lyric timing from LRC, SRT and VTT, and the export pipeline. A Hono API and a headless Chrome worker render the same page server-side for cloud renders, which are still in testing. Paid plans are off.",
+      "summary": "A browser music-video editor with layered visuals, timed lyrics, and local MP4 export. I built the React editor and WebCodecs rendering pipeline.",
+      "description": "Undertow combines audio-reactive visuals, artwork, text, timed lyrics, and video backgrounds in landscape, portrait, and square layouts. I built the React editor, Butterchurn layer, lyric timing, and local WebCodecs export. Optional accounts save projects. Cloud rendering is in testing, with live billing disabled.",
       "problem": "A track posted as a video needs something to look at. Building a visualizer usually means learning a video editor. Undertow puts the layers in a browser editor and renders the video on the musician's own computer.",
       "role": "Full-stack engineer",
       "year": 2026,
@@ -273,9 +271,9 @@
         "Docker"
       ],
       "highlights": [
-        "Export advances time at a fixed frame rate and decodes video layers to the exact frame, so the output does not depend on how fast the machine renders.",
-        "Copies canvas frames to the CPU before encoding: about 6 ms per 1080p frame against about 75 ms for passing the canvas directly, measured in Chrome on Apple silicon. A fallback covers devices where the copy fails.",
-        "Writes the MP4 in seekable Blob chunks, so long exports do not need a file-sized buffer in memory."
+        "Built a layered editor with separate landscape, portrait, and square layouts and timed lyrics from LRC, SRT, and VTT.",
+        "Export advances on a fixed timeline and decodes video layers to the requested frame, keeping rendering speed separate from output timing.",
+        "Writes seekable MP4 Blob chunks to avoid a file-sized memory buffer during long exports."
       ],
       "architecture": [
         "The cloud worker loads the same render page in headless Chrome and calls the same export function. There is no second renderer to keep in sync. Milkdrop then runs on software WebGL, which is much slower than a GPU.",
@@ -317,7 +315,7 @@
       "classification": "archive",
       "deliveryStatus": "Public catalogs; collection-specific access",
       "periodLabel": "2026–present",
-      "summary": "A shared headless archive engine with independently branded print, audio, and video collection frontends.",
+      "summary": "A shared archive engine for print, audio, and video with independent collection frontends. I built provenance, access-review, and release contracts.",
       "description": "Arkhiv owns catalog metadata, editorial history, reviewed access decisions, search, preserved media identities, and shared playback schedules. Its collection applications own their interfaces and releases. Each item keeps its source credits and access policy; a readable or playable item does not imply a reuse license.",
       "problem": "Archives need shared preservation and retrieval tools without flattening every collection into the same interface or access policy.",
       "role": "Lead engineer",
@@ -334,9 +332,9 @@
         "Docker"
       ],
       "highlights": [
-        "Version the shared archive engine independently from each collection frontend.",
-        "Keep original files, metadata, editorial decisions, and access reviews distinct.",
-        "Serve print readers, recording catalogs, and shared replay interfaces through collection-specific policies."
+        "Versioned the shared archive engine independently from each collection frontend.",
+        "Separated original files, metadata, editorial decisions, and access reviews.",
+        "Added shared print, audio, and video services with collection-specific delivery policies."
       ],
       "architecture": [
         "Independent frontends pin engine and optional viewer releases; an engine upgrade does not replace their design.",
@@ -346,8 +344,8 @@
         "A failed backup experiment showed that Compose teardown could leave a one-off restore container running. Cleanup now removes containers only by exact project label and refuses live project names.",
         "A restore that missed its 30-minute deadline stays recorded as a failure. A later run with a longer budget is reported separately and does not count as meeting the original target."
       ],
-      "coreMechanism": "SHA-256 preservation of original bytes with per-read verification",
-      "shippedOutcome": "Public catalogue with an in-browser reader and byte-exact downloads",
+      "coreMechanism": "Versioned headless engine with per-item preservation, provenance, and access contracts",
+      "shippedOutcome": "Independent print, audio, and video catalogs backed by shared archive services",
       "media": [
         {
           "src": "/assets/projects/screenshots/2026-11-05-arkhiv-1280.webp",
@@ -433,7 +431,7 @@
           "slug": "dedhed",
           "title": "Dedhed",
           "url": "https://dedhed.subcult.tv/",
-          "summary": "Grateful Dead tapes, recording credits, sets, and scheduled shared listening.",
+          "summary": "A limited public pilot for concert-tape listening, recording credits, and a shared schedule.",
           "logoUrl": "/assets/brands/dedhed.svg",
           "brandBackground": "#f3efe4",
           "thumbnailUrl": "/assets/projects/screenshots/2026-11-05-dedhed-640.webp"
@@ -442,7 +440,7 @@
           "slug": "lineage",
           "title": "Lineage",
           "url": "https://lineage.subcult.tv/",
-          "summary": "A live-recording catalog preview with artist, venue, date, and taper lineage.",
+          "summary": "Browse live recordings with artist, venue, date, source credits, and recording lineage.",
           "logoUrl": "/assets/brands/lineage.svg",
           "brandBackground": "#f3efe4",
           "thumbnailUrl": "/assets/projects/screenshots/2026-11-05-lineage-640.webp"
@@ -475,8 +473,8 @@
       "classification": "archive",
       "deliveryStatus": "Live beta",
       "periodLabel": "2026–present",
-      "summary": "A free link page for socials, tip buttons, music, video, QR codes and a contact card. Tips go straight to the owner's own accounts. I built the Go service, the server-rendered public pages, the React editor and the PostgreSQL model. It is new, so expect rough edges.",
-      "description": "Kork publishes one page per person at a short address. It supports 92 services and ten themes, renders public pages as plain HTML with a strict content security policy, and counts visits without storing IPs, cookies or user agents. I built the Go API and renderer, the embedded React editor, the URL validation and outbound fetching, the link screening and the analytics. Custom domains and paid plans exist in the code but are switched off on the public service.",
+      "summary": "A self-serve link page service with a Go renderer and React editor. I built URL validation, safe outbound fetching, and aggregate analytics.",
+      "description": "Kork puts socials, music, video, payment buttons, QR codes, and contact details on one themed page. I built server-rendered public pages, the React editor, per-service URL rules, link screening, and anonymous daily analytics. New accounts wait 24 hours before publishing. Payment buttons lead to the creator’s own accounts.",
       "problem": "Link-in-bio services are where creators put their tip links, and many of them take a cut, add trackers or route payments through themselves. Kork links to the owner's own payment accounts and never handles the money.",
       "role": "Full-stack engineer",
       "year": 2026,
@@ -533,9 +531,9 @@
       "kind": "case-study",
       "category": "Community & Media",
       "classification": "archive",
-      "deliveryStatus": "Private pilot",
+      "deliveryStatus": "Release candidate; private pilot",
       "periodLabel": "2025–present",
-      "summary": "A Discord bot and dashboard for the people running a server: onboarding, moderation cases, private tickets, feeds and recovery snapshots, in 23 modules switched on per server. I built the bot, the Express API, the React dashboard and the backup tooling. It is in a private pilot, and public installation is not open.",
+      "summary": "A Discord bot and dashboard for onboarding, moderation cases, tickets, and feeds. I built the TypeScript services, React dashboard, and recovery tooling.",
       "description": "Backline started as Discord Spywatcher, a presence-analytics bot, and I rebuilt it in 2026 as a community tool. Every module starts disabled and is turned on per server. I built the discord.js bot and its durable job worker, the Express and Prisma API on PostgreSQL, Discord OAuth sign-in, the React dashboard and a backup script that proves each dump by restoring it. The pilot runs in a few approved servers. Public installation, global command registration and a sustained observation period are still to come.",
       "problem": "Small Discord communities often run several bots for welcome roles, moderation, tickets and feeds, each with its own settings and records. Moderators need one case history, and owners need to switch features on only where they are wanted.",
       "role": "Full-stack engineer",
@@ -599,7 +597,6 @@
       "problem": "A live courtroom simulation must keep unpredictable agent dialogue inside a reliable case sequence. It also needs to accept audience commands without letting chat derail the proceedings.",
       "role": "Full-stack systems engineer",
       "year": 2026,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/jury-rigged",
       "featured": false,
       "sortOrder": 4,
       "stack": [
@@ -706,7 +703,6 @@
       "problem": "A generated trade signal should not reach a broker before opposing analysis and risk review. The same pipeline also needs a paper-trading path for testing without capital risk.",
       "role": "Systems/product engineer",
       "year": 2025,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/augr",
       "liveUrl": "https://augr.subcult.tv",
       "featured": false,
       "sortOrder": 6,
@@ -752,7 +748,6 @@
       "problem": "Research, scripting, voice, visuals, editing, and publishing produce different artifacts. Cutroom gives each stage a defined handoff so the next worker does not have to reconstruct earlier decisions.",
       "role": "Full-stack product engineer",
       "year": 2026,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/cutroom",
       "liveUrl": "https://cutroom.subcult.tv",
       "featured": false,
       "sortOrder": 11,
@@ -797,7 +792,6 @@
       "problem": "Issue-driven code automation can change and push a repository, so operators need a clear approval boundary, isolated worktrees, test results, and durable job logs.",
       "role": "Automation engineer",
       "year": 2026,
-      "repoUrl": "https://git.subcult.tv/PatrickFanella/open-pilot",
       "featured": false,
       "sortOrder": 14,
       "stack": [
@@ -886,7 +880,6 @@
       "description": "Switchyard is an active-development automation runtime. Its Go backend routes workflow state, while a Vite, React, and TypeScript interface lets operators inspect work and service handoffs. The Dockerized monorepo provides the current foundation for adding workflow modules.",
       "problem": "Background automation is difficult to operate when queues and handoffs appear only in logs. Operators need to inspect routed work and its current state.",
       "role": "Automation engineer",
-      "repoUrl": "https://git.subcult.tv/subculture-collective/switchyard",
       "stack": [
         "Go",
         "React",
@@ -928,8 +921,8 @@
       "classification": "archive",
       "deliveryStatus": "Alpha development",
       "periodLabel": "2026–present",
-      "summary": "Software in development for running a show night: free ticket reservations, staffing, door check-in, security logs, vendor payout calculations and night-close reconciliation.",
-      "description": "Subcult OS covers free ticket reservations, door scanning, staff scheduling, security incident logs, vendor payout calculations and night-close reports for an event. I built the foundation with a Go backend, a Vite and React frontend, and PostgreSQL. It is still in development.",
+      "summary": "An event-operations app for planning, staffing, free reservations, door check-in, and close-out reports. I built the Go API, React web app, and mobile workflows.",
+      "description": "Subcult OS keeps event plans, crew roles, reservations, door check-in, and private closing reports in one workspace. The React web app handles planning and discovery, while an Expo mobile client supports event-time scanning and staff views. The alpha lifecycle has been exercised with rehearsal data. Public delivery currently covers free reservations.",
       "problem": "Live event work is split across spreadsheets, ticketing systems, staff rosters and cash records. I am building Subcult OS to keep admissions, incidents, shifts, settlements and closing reports in the same system.",
       "role": "Lead full-stack engineer",
       "repoUrl": "https://git.subcult.tv/subculture-collective/subcult-os",
@@ -939,7 +932,9 @@
         "TypeScript",
         "PostgreSQL",
         "Docker",
-        "TailwindCSS"
+        "TailwindCSS",
+        "Expo",
+        "React Native"
       ],
       "highlights": [
         "Built event workflows covering free ticket reservations, door check-in and guest lists.",
@@ -947,9 +942,9 @@
         "Designed financial tracking and night-close reports for door revenue, bar cuts, and vendor disbursements."
       ],
       "architecture": [
-        "Go API and Vite React frontend run as separate services against a Postgres persistence layer with transactional event state management.",
-        "Door and security check-in screens target quick use on phones and tablets under poor venue connectivity.",
-        "Closing reports combine admission counts, vendor receipts, and staff hours."
+        "The Go API and PostgreSQL model own workspace permissions, reservation state, and check-in transitions.",
+        "The React web app handles planning and discovery; the Expo/React Native client carries scanning, door search, and event-time views.",
+        "Closing reports retain the source records for admissions and event activity so discrepancies can be investigated."
       ],
       "lessons": [
         "On the night, the door screen has to be fast and has to survive bad venue connectivity. A multi-step flow loses to that every time.",
@@ -990,7 +985,6 @@
       "description": "Subcult.tv gives the Subculture Collective one public home for its identity, project catalog, tools, and media. The TypeScript site uses Docker and Make for local and deployment workflows.",
       "problem": "The collective's work spans many repositories. Without a maintained public index, visitors lose the context connecting those projects.",
       "role": "Frontend/product engineer",
-      "repoUrl": "https://git.subcult.tv/subculture-collective/subcult-tv",
       "liveUrl": "https://subcult.tv",
       "stack": [
         "TypeScript",
@@ -1035,7 +1029,6 @@
       "description": "Invisible Museum is a place-based museum prototype. A SwiftUI iOS app reads lightweight exhibits, stories, and artifacts tied to physical locations from a Dockerized Go and PostgreSQL backend.",
       "problem": "Stories about a place often lose context inside a general archive or feed. A location-aware exhibit can present them where they happened.",
       "role": "Prototype engineer",
-      "repoUrl": "https://git.subcult.tv/subculture-collective/invisible-museum",
       "stack": [
         "SwiftUI",
         "Go",
@@ -1125,7 +1118,6 @@
       "problem": "A large set of overlapping agent roles and verbose defaults wastes context and makes dispatch unpredictable. Blacktower keeps the roles and workflows I use in one configuration.",
       "role": "Agent tooling engineer",
       "year": 2026,
-      "repoUrl": "https://git.subcult.tv/subculture-collective/blacktower",
       "featured": false,
       "sortOrder": 28,
       "stack": [
@@ -1180,7 +1172,11 @@
         "CLI",
         "Developer Tooling"
       ],
-      "highlights": [],
+      "highlights": [
+        "Generated the quick menu and direct bindings from one TSV registry.",
+        "Added local overrides, dependency hints, and doctor diagnostics.",
+        "Packaged small and full Bash-based profiles for different working environments."
+      ],
       "architecture": [],
       "lessons": [],
       "media": [
@@ -1203,8 +1199,8 @@
       "title": "Super Productivity MCP",
       "kind": "case-study",
       "category": "Tools & Workflows",
-      "summary": "Connect an AI client to a local task manager through a Go MCP server, in-app plugin, and desktop quick-add. A shared catalog keeps tool definitions, documentation, and bridge behavior aligned.",
-      "description": "Super Productivity MCP connects assisted planning to a local task system through a typed MCP interface, a Super Productivity plugin, and a native desktop quick-add path. Read and write actions stay explicit. Generated contract docs, protocol smoke tests, and package checks verify each release before installation.",
+      "summary": "A Go MCP server, in-app plugin bridge, and desktop quick-add for Super Productivity. Shared contracts and dry-run-first bulk writes make task automation reviewable.",
+      "description": "I built the Go MCP server, JavaScript plugin bridge, and desktop quick-add path for Super Productivity. They create and inspect tasks and projects, track time, and work with schedules and recurrence through a file-based inbox/outbox. Bulk changes start with a dry run. Generated contracts, protocol smoke tests, and package checks cover the integration before installation.",
       "problem": "Task automation must distinguish reads from mutations and work with the task manager already on the desktop. A prompt-only contract cannot enforce either requirement.",
       "role": "Product and integration engineer",
       "year": 2026,
@@ -1260,8 +1256,8 @@
       "title": "Overlaid",
       "kind": "tool",
       "category": "Developer Tools",
-      "summary": "An OBS overlay that shows livestream alerts, homelab status and events.",
-      "description": "Overlaid renders livestream alerts, homelab status, and events in an OBS browser source. Docker packages the overlay service.",
+      "summary": "OBS overlays, a Twitch bot and an operator desk for live streams.",
+      "description": "Overlaid is an operator desk for a stream: alerts, chat, ticker, goals, now-playing and starting, BRB and ending overlays for OBS, Twitch events fed into them, a chat bot with commands, timers and moderation, OBS scene controls, rehearsal sessions and a health page. It runs on your own machine beside OBS. It is in development with no public instance.",
       "problem": "OBS needs a readable browser source for alerts, homelab status, and events without exposing an operator dashboard on stream.",
       "role": "Broadcast tooling engineer",
       "year": 2026,
@@ -1269,23 +1265,24 @@
       "featured": false,
       "sortOrder": 45,
       "stack": [
-        "Docker",
-        "OBS",
-        "Streaming",
-        "Alerts",
-        "Overlay UI"
+        "Go",
+        "TypeScript",
+        "React",
+        "PostgreSQL",
+        "OBS WebSocket"
       ],
       "highlights": [],
       "architecture": [],
       "lessons": [],
       "media": [],
-      "coreMechanism": "OBS browser overlay for alerts, homelab status, and event data",
-      "shippedOutcome": "Dockerized broadcast overlay for livestream status and alerts",
+      "coreMechanism": "Local operator desk connecting OBS overlays, Twitch events, and stream controls",
+      "shippedOutcome": "Development software for self-hosted stream operations",
       "logoUrl": "/assets/brands/overlaid.svg",
       "brandBackground": "#21222c",
       "thumbnailUrl": "/assets/brands/overlaid.svg",
       "thumbnailAlt": "Overlaid identity",
-      "selected": false
+      "selected": false,
+      "deliveryStatus": "Active development"
     },
     {
       "slug": "obsidian-plugin-metronome-tuner",
@@ -1295,8 +1292,8 @@
       "category": "Tools & Workflows",
       "deliveryStatus": "Tool",
       "periodLabel": "2026",
-      "summary": "An Obsidian practice companion with a metronome and microphone-based pitch tuner.",
-      "description": "An Obsidian plugin that puts metronome timing and chromatic instrument tuning tools inside the note-taking workspace.",
+      "summary": "An Obsidian metronome and chromatic tuner built with TypeScript and Web Audio. Microphone opt-in keeps audio analysis under the musician’s control.",
+      "description": "Metronome + Tuner keeps practice tools beside practice notes. It provides adjustable tempo, tap tempo, time signatures, accents, and click sounds, plus frequency, cents, and nearest-note feedback with an adjustable A4 reference. Tuning starts after explicit microphone permission and analyses the audio locally.",
       "problem": "Musicians using Obsidian for notes and practice plans need timing and tuning tools without leaving the workspace.",
       "role": "Plugin developer",
       "year": 2026,
@@ -1305,10 +1302,18 @@
       "sortOrder": 14,
       "stack": [
         "TypeScript",
-        "Obsidian"
+        "Obsidian",
+        "Web Audio"
       ],
-      "highlights": [],
-      "architecture": [],
+      "highlights": [
+        "Built configurable tempo, meter, accents, and tap-tempo controls inside an Obsidian view.",
+        "Show frequency, nearest note, and cents offset against an adjustable tuning reference.",
+        "Keep microphone permission explicit and audio processing local."
+      ],
+      "architecture": [
+        "Web Audio drives click scheduling and microphone analysis within the Obsidian client.",
+        "Separate metronome controls, tuner state, and saved practice settings keep the interface usable on desktop and mobile."
+      ],
       "lessons": [],
       "media": [
         {
@@ -1327,14 +1332,14 @@
     },
     {
       "slug": "omarchy-plugin-shelfish",
-      "title": "omarchy-plugin-shelfish",
+      "title": "Shelfish",
       "kind": "tool",
       "classification": "archive",
       "category": "Developer Tools",
       "deliveryStatus": "Tool",
       "periodLabel": "2026",
-      "summary": "Collapsible Omarchy bar widget groups, localized in ten languages.",
-      "description": "A JavaScript Omarchy plugin that groups bar widgets into collapsible sections and includes localization for ten languages.",
+      "summary": "Collapsible, named groups of Omarchy bar widgets.",
+      "description": "Shelfish organises existing Omarchy bar widgets into named, ordered, collapsible groups with an icon and direction. A group reveals itself when a member’s watched status changes, with per-widget reveal policies, and restores every widget before removal. Ten languages, no runtime dependencies.",
       "problem": "Dense desktop bars can become hard to scan. Collapsible widget groups keep secondary controls available without showing them all at once.",
       "role": "Plugin developer",
       "year": 2026,
@@ -1342,8 +1347,7 @@
       "featured": false,
       "sortOrder": 48,
       "stack": [
-        "JavaScript",
-        "Omarchy",
+        "QML",
         "Quickshell"
       ],
       "highlights": [],
@@ -1360,14 +1364,14 @@
     },
     {
       "slug": "omarchy-plugin-superproductivity",
-      "title": "omarchy-plugin-superproductivity",
+      "title": "Super Productivity for Omarchy",
       "kind": "tool",
       "classification": "archive",
       "category": "Developer Tools",
       "deliveryStatus": "Tool",
       "periodLabel": "2026",
-      "summary": "Show and control the current Super Productivity task from the Omarchy top bar.",
-      "description": "An Omarchy plugin that shows and controls the current Super Productivity task from the top bar.",
+      "summary": "The current Super Productivity task and its timer in the Omarchy top bar.",
+      "description": "Shows the current Super Productivity task in the Omarchy bar with a live countdown and overtime, Stop, Complete and Extend controls, a Today list, quick add with +project, @schedule and #tag, and alerts with sound when a task expires or is due to start. It talks to the desktop app over its local REST API on loopback.",
       "problem": "Opening the full task manager interrupts the desktop workflow. This plugin keeps the current task visible and controllable from the Omarchy top bar.",
       "role": "Plugin developer",
       "year": 2026,
@@ -1375,8 +1379,9 @@
       "featured": false,
       "sortOrder": 49,
       "stack": [
+        "QML",
+        "Quickshell",
         "Python",
-        "Omarchy",
         "Super Productivity"
       ],
       "highlights": [],
@@ -1393,14 +1398,14 @@
     },
     {
       "slug": "omarchy-monitor-bar",
-      "title": "omarchy-monitor-bar",
+      "title": "Omarchy Multi-Monitor Bar",
       "kind": "tool",
       "classification": "archive",
       "category": "Developer Tools",
       "deliveryStatus": "Tool",
       "periodLabel": "2026",
-      "summary": "Per-monitor Omarchy bar layouts with Full, Minimal, and Hidden modes.",
-      "description": "omarchy-monitor-bar assigns a separate bar layout to each monitor. One primary monitor uses Full mode; other monitors can use Minimal or Hidden mode. Minimal bars use a configurable glyph and workspace list.",
+      "summary": "A separate Omarchy bar layout for each connected monitor.",
+      "description": "Give each monitor its own bar: Full, Minimal or Hidden, with the primary monitor locked to Full. Minimal bars show a glyph and the workspace list. A settings panel validates changes and checks the plugin against the stock Omarchy bar files it is pinned to. Ten languages.",
       "problem": "A shared bar layout cannot distinguish the primary monitor from secondary monitors. Each monitor needs its own layout while one primary monitor keeps the Full bar.",
       "role": "Plugin developer",
       "year": 2026,
@@ -1408,8 +1413,9 @@
       "featured": false,
       "sortOrder": 50,
       "stack": [
-        "Omarchy",
-        "Desktop UI"
+        "QML",
+        "Quickshell",
+        "Python"
       ],
       "highlights": [],
       "architecture": [],
@@ -1436,7 +1442,7 @@
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/tadooer",
       "summary": "A self-hosted task, calendar, and focus planner for one owner. The engineering work centers on queued task edits, explicit sync conflicts, CalDAV integration, and a focus session shared across clients.",
-      "description": "Tadooer puts tasks beside calendar events and one active focus session. The server is authoritative; browser task edits can queue temporarily offline and replay when connected. Calendar and focus commands need a connection. It is a private single-owner planner with public source, not a hosted signup service. Desktop and mobile shells have separate platform qualification requirements.",
+      "description": "Tadooer puts tasks beside calendar blocks, boards, focus sessions, and a worklog on one owner’s server. I built an offline task outbox, CalDAV conflict handling, and shared focus authority across clients. Prerelease artifacts include Linux and macOS desktop clients, an Android APK, and an unsigned iOS development build. Calendar and focus commands use a live server connection.",
       "problem": "A planner used from several clients needs to survive a dropped connection without silently overwriting a calendar edit or starting competing focus sessions.",
       "role": "Full-stack engineer",
       "stack": [
@@ -1445,7 +1451,8 @@
         "Node.js",
         "SQLite",
         "CalDAV",
-        "Electron"
+        "Electron",
+        "Capacitor"
       ],
       "highlights": [
         "Built browser-local task caching and queued writes with replay protection and explicit two-client conflicts.",
@@ -1488,7 +1495,7 @@
       "sortOrder": 12,
       "year": 2026,
       "repoUrl": "https://git.subcult.tv/subculture-collective/subsets",
-      "summary": "A local terminal app for finding, grouping, previewing, and applying agent skills, including the portable Patstack pack.",
+      "summary": "A TypeScript CLI and terminal interface for selecting local agent skills. Previewed transactions, ownership checks, and verified rollback protect the working set.",
       "description": "Subsets discovers skills in supported user and project folders and applies named groups through explicit adoption and recorded transactions. The native npm edition uses TypeScript, React, and Ink. Linux is tested; macOS remains unverified and Windows is unsupported by the preview.",
       "problem": "A growing skill library needs task-specific selections without losing track of which package or installer owns each folder.",
       "role": "Developer tools engineer",
@@ -1498,7 +1505,11 @@
         "Ink",
         "Node.js"
       ],
-      "highlights": [],
+      "highlights": [
+        "Built skill discovery, named groups, and a React/Ink terminal interface.",
+        "Required explicit adoption of unmanaged folders before applying changes.",
+        "Recorded transactions and verified rollback for task-specific skill selections."
+      ],
       "architecture": [],
       "lessons": [],
       "media": [
@@ -1552,7 +1563,11 @@
         "Streamlink",
         "ffmpeg"
       ],
-      "highlights": [],
+      "highlights": [
+        "Built Go commands for public Twitch clips, VODs, and bounded live recording.",
+        "Orchestrated yt-dlp, Streamlink, and ffmpeg behind a shared application layer.",
+        "Checked external tool dependencies before starting media operations."
+      ],
       "architecture": [],
       "lessons": [],
       "media": [
@@ -1576,11 +1591,11 @@
       "category": "Community & Media",
       "deliveryStatus": "Public preview",
       "periodLabel": "Active in 2026",
-      "summary": "A self-hosted Twitch workspace that merges public chat, emotes, video, and channel context.",
-      "description": "Chatty Cat rebuilds mxmilkiib’s HasanAbi Chat Thing and relay in Go and TypeScript. Anonymous viewing combines up to six rooms, reconnects to Twitch IRC, and restores available public backfill. The workspace keeps chat transport separate from optional metadata and preview providers.",
+      "summary": "A self-hosted Twitch workspace with merged and independent chat panes. I built Go chat services, a TypeScript interface, and permission-checked account actions.",
+      "description": "Chatty Cat rebuilds mxmilkiib’s HasanAbi Chat Thing and Twitch relay as a Go service with a TypeScript frontend. Configurable workspaces support anonymous reading and Twitch-authenticated sending, replies, and whispers. Chat transport, public history, and optional context providers have separate failure boundaries.",
       "problem": "A busy community needs readable chat and useful context without losing its place when a connection drops.",
-      "coreMechanism": "Merge multiple rooms into a configurable workspace with independent panes.",
-      "shippedOutcome": "A self-hosted Twitch workspace that merges public chat, emotes, video, and channel context.",
+      "coreMechanism": "Go IRC/WebSocket transport with independent panes and isolated context providers",
+      "shippedOutcome": "Self-hosted Twitch chat with anonymous reading and permission-checked account actions",
       "role": "Design and engineering",
       "year": 2026,
       "stack": [
@@ -1592,9 +1607,9 @@
       ],
       "featured": false,
       "highlights": [
-        "Merge multiple rooms into a configurable workspace with independent panes.",
-        "Reconnect and restore available public history without coupling chat to optional providers.",
-        "Keep configurable palettes, emote presentation, filters, and local workspace state."
+        "Built merged and independent channel panes with saved display settings, emotes, filters, and local workspace state.",
+        "Keep OAuth credentials server-side and check account permissions for sends, replies, and whispers.",
+        "Reconnect and restore available public history while keeping optional provider failures separate from chat transport."
       ],
       "architecture": [
         "A Go service handles Twitch transport and bounded provider caches; the TypeScript frontend owns workspace presentation.",
@@ -1621,7 +1636,8 @@
       "logoUrl": "/assets/brands/chatty-cat.svg",
       "brandBackground": "#0b0f0c",
       "thumbnailUrl": "/assets/projects/screenshots/2026-11-05-chatty-cat-640.webp",
-      "thumbnailAlt": "Chatty Cat interface captured November 5, 2026"
+      "thumbnailAlt": "Chatty Cat interface captured November 5, 2026",
+      "sourceUrl": "https://chat.subcult.tv/source.tar.gz"
     },
     {
       "slug": "commons",
@@ -1631,11 +1647,11 @@
       "category": "Community & Media",
       "deliveryStatus": "Public preview",
       "periodLabel": "Active in 2026",
-      "summary": "A community workspace for discovering open software, finding collaborators, and sharing progress.",
+      "summary": "A discovery and collaboration hub with software comparisons, builder profiles, and discussions. Repository ownership checks gate project-management workflows.",
       "description": "Commons brings project discovery, an alternatives index, builder profiles, repository ownership claims, progress updates, and threaded discussions into one application. Curated upstream references are distinguished from projects claimed by community members.",
       "problem": "People rebuilding familiar tools need a place to find existing work and coordinate their contributions.",
-      "coreMechanism": "Browse software alternatives with source and maturity notes.",
-      "shippedOutcome": "A community workspace for discovering open software, finding collaborators, and sharing progress.",
+      "coreMechanism": "Repository ownership proofs and account-scoped project authorization",
+      "shippedOutcome": "Public project discovery with member profiles, saved projects, and discussions",
       "role": "Design and engineering",
       "year": 2026,
       "stack": [
@@ -1646,9 +1662,9 @@
       ],
       "featured": false,
       "highlights": [
-        "Browse software alternatives with source and maturity notes.",
-        "Verify repository ownership before granting project management capabilities.",
-        "Keep member activity separate from imported reference listings."
+        "Built project discovery and software comparisons with source and maturity notes.",
+        "Required repository ownership proof before granting project-management capabilities.",
+        "Separated member activity and account-owned projects from imported reference listings."
       ],
       "architecture": [
         "The server persists accounts, projects, claims, and discussions in SQLite.",
@@ -1685,11 +1701,11 @@
       "category": "Archives & Research",
       "deliveryStatus": "Public research preview",
       "periodLabel": "Active in 2026",
-      "summary": "A read-only Twitch dashboard for viewer, follower, and chat patterns, with explicit evidence limits.",
+      "summary": "A Twitch time-series dashboard built with Go and PostgreSQL/TimescaleDB. Viewer, follower, and chat signals feed provisional research scores.",
       "description": "Headcount follows channels once they reach Twitch’s global top 200. Go collectors retain time-series observations and aggregate chat signals, then combine detectors into a provisional sus quotient. A high score describes patterns; it does not establish that a streamer bought bots.",
       "problem": "A single viewer count cannot explain a stream’s audience behavior, and missing observations should remain visible.",
-      "coreMechanism": "Collect viewer, follower, and chat observations at distinct cadences.",
-      "shippedOutcome": "A read-only Twitch dashboard for viewer, follower, and chat patterns, with explicit evidence limits.",
+      "coreMechanism": "Time-series observations and detector evidence retained beside provisional scores",
+      "shippedOutcome": "Read-only stream research dashboard with inspectable evidence and visible collection gaps",
       "role": "Design and engineering",
       "year": 2026,
       "stack": [
@@ -1701,9 +1717,9 @@
       ],
       "featured": false,
       "highlights": [
-        "Collect viewer, follower, and chat observations at distinct cadences.",
-        "Retain gaps and detector evidence alongside provisional scores.",
-        "Aggregate chat signals without storing raw message text."
+        "Built Go collectors for viewer, follower, and aggregate chat observations.",
+        "Retained collection gaps and detector evidence alongside provisional scores.",
+        "Stored aggregate chat signals while keeping raw message text outside the retained dataset."
       ],
       "architecture": [
         "Collectors write time-series observations to PostgreSQL/TimescaleDB; scoring consumes those retained observations.",
@@ -1740,11 +1756,11 @@
       "category": "Archives & Research",
       "deliveryStatus": "Published research; active development",
       "periodLabel": "Active in 2026",
-      "summary": "Seat-level election research with public sources, versioned provisional scores, and visible gaps.",
+      "summary": "A source-backed election research app using Next.js and PostGIS. Versioned scores keep their inputs, missing evidence, and publication status visible.",
       "description": "Left Field organizes election, incumbent, campaign-finance, and geography evidence into seat records and research priorities. Each published score carries its inputs, version, and limitations. Missing evidence stays missing. A score is a research priority, not a forecast or endorsement.",
       "problem": "Research rankings are hard to assess when their inputs, omissions, and publication boundaries disappear behind a score.",
-      "coreMechanism": "Present source records and score inputs together at seat level.",
-      "shippedOutcome": "Seat-level election research with public sources, versioned provisional scores, and visible gaps.",
+      "coreMechanism": "Versioned research scores with source provenance and explicit missing inputs",
+      "shippedOutcome": "Seat records and research briefs backed by inspectable public evidence",
       "role": "Design and engineering",
       "year": 2026,
       "stack": [
@@ -1756,9 +1772,9 @@
       ],
       "featured": false,
       "highlights": [
-        "Present source records and score inputs together at seat level.",
-        "Keep research candidates, reviewed evidence, and published outputs separate.",
-        "Represent missing inputs explicitly rather than converting them to zero."
+        "Brought source records and score inputs together in seat-level research views.",
+        "Separated research candidates, reviewed evidence, and published outputs.",
+        "Represented missing inputs explicitly in the scoring and display model."
       ],
       "architecture": [
         "Next.js route handlers serve bounded read DTOs from PostgreSQL/PostGIS.",
@@ -1796,11 +1812,11 @@
       "category": "Archives & Research",
       "deliveryStatus": "Self-hosted software",
       "periodLabel": "Active in 2026",
-      "summary": "The headless recording-archive core behind HasanAra: transcription, search, passages, and source timestamps.",
+      "summary": "Headless Python/FastAPI services for timestamped recording archives. I built ingestion, transcription, search, and the API behind HasanAra’s independent frontend.",
       "description": "Rekolekt owns the backend services and HTTP API for timestamped recording archives. It ships no web pages. HasanAra supplies its own identity, sources, and frontend against that API; the rekolekt-web kit supplies reusable client types, hooks, and components.",
       "problem": "Each archive needs its own frontend while reusing ingestion, transcript indexing, and reliable source-time links.",
-      "coreMechanism": "Ingest recordings and produce timestamped transcripts and search indexes.",
-      "shippedOutcome": "The headless recording-archive core behind HasanAra: transcription, search, passages, and source timestamps.",
+      "coreMechanism": "Durable transcription jobs, timestamped search, and frontend-independent archive APIs",
+      "shippedOutcome": "Reusable recording-archive backend consumed by HasanAra",
       "role": "Design and engineering",
       "year": 2026,
       "stack": [
@@ -1813,9 +1829,9 @@
       ],
       "featured": false,
       "highlights": [
-        "Ingest recordings and produce timestamped transcripts and search indexes.",
-        "Resolve search passages back to the source recording and time range.",
-        "Expose a versioned HTTP contract for independently owned archive frontends."
+        "Built recording ingestion, timestamped transcription, and search indexing.",
+        "Resolved search passages back to source recordings and time ranges.",
+        "Defined a versioned HTTP contract for independently owned archive frontends."
       ],
       "architecture": [
         "Backend workers and API services own transcription, durable state, and retrieval.",
@@ -1853,11 +1869,11 @@
       "category": "Tools & Workflows",
       "deliveryStatus": "In daily use",
       "periodLabel": "Active in 2026",
-      "summary": "Maintained agent skills, task sets, instructions, and guarded deployment tooling, selected through Subsets.",
+      "summary": "A maintained source for agent skills, profiles, and deployment instructions. Hash-checked plans, journals, and backups keep installations consistent across machines.",
       "description": "Patstack owns the curated skill sources, profiles, global instructions, and installer that keeps the owner’s agent environment consistent across machines. Subsets selects the working set and generated tool views. The installer plans against recorded hashes and refuses unexpected destination drift.",
       "problem": "A skill collection needs clear ownership and a repeatable deployment process as it changes across machines.",
-      "coreMechanism": "Keep curated sources and profiles under one maintained owner.",
-      "shippedOutcome": "Maintained agent skills, task sets, instructions, and guarded deployment tooling, selected through Subsets.",
+      "coreMechanism": "Hash-checked installation plans with journaled changes and verified backups",
+      "shippedOutcome": "Maintained skill profiles and a portable pack used with Subsets",
       "role": "Design and engineering",
       "year": 2026,
       "stack": [
@@ -1869,9 +1885,9 @@
       ],
       "featured": false,
       "highlights": [
-        "Keep curated sources and profiles under one maintained owner.",
-        "Preview desired changes against expected hashes, file modes, and symlinks.",
-        "Apply with a journal and verified backups, and refuse destination drift."
+        "Consolidated curated skill sources and profiles under one maintained owner.",
+        "Built change previews against expected file hashes, modes, and symlinks.",
+        "Journaled installations with verified backups and destination-drift checks."
       ],
       "architecture": [
         "Patstack owns the source library and installation policy; Subsets owns user-level selection.",
@@ -1910,8 +1926,8 @@
       "summary": "A focused command-line wrapper for full YouTube downloads or precise timestamped excerpts.",
       "description": "ytclip wraps yt-dlp and ffmpeg behind a small command-line interface. Supply a video URL and optional start/end timestamps, choose audio-only when needed, and write the result to a selected output directory.",
       "problem": "A short excerpt should not require remembering a long sequence of downloader and encoder flags.",
-      "coreMechanism": "Accept complete videos or bounded timestamp ranges.",
-      "shippedOutcome": "A focused command-line wrapper for full YouTube downloads or precise timestamped excerpts.",
+      "coreMechanism": "Validated timestamp ranges and testable yt-dlp/ffmpeg command construction",
+      "shippedOutcome": "Local CLI for complete videos, audio, and timestamped excerpts",
       "role": "Design and engineering",
       "year": 2026,
       "stack": [
@@ -1922,9 +1938,9 @@
       ],
       "featured": false,
       "highlights": [
-        "Accept complete videos or bounded timestamp ranges.",
-        "Separate media download from local encoding and trimming.",
-        "Test command construction with recording fakes instead of depending on live downloads."
+        "Validated complete-video requests and bounded timestamp ranges.",
+        "Separated download, local encoding, and trimming commands.",
+        "Tested command construction with recording fakes for external media tools."
       ],
       "architecture": [
         "The wrapper delegates retrieval to yt-dlp and media processing to ffmpeg. External tool failures remain visible at the CLI."
@@ -1951,11 +1967,11 @@
       "category": "Games & Creative",
       "deliveryStatus": "Development prototype",
       "periodLabel": "Active in 2026",
-      "summary": "A controller-first Unity client that turns a published community graph into an explorable galaxy.",
+      "summary": "A controller-first Unity prototype for exploring community graphs. Revision-pinned APIs and isolated local progress keep sessions consistent.",
       "description": "Clustr Galaxy consumes Clustr’s bounded public graph payloads rather than connecting to its database. Explore provides navigation over loaded entities; Survey reveals compatible routes as signals are scanned. Sessions pin their graph revision and local progress stays in that revision’s namespace.",
       "problem": "A large community graph needs navigable scale, coherent local progress, and a useful response when live data is unavailable.",
-      "coreMechanism": "Navigate community systems with controller-first Explore and Survey modes.",
-      "shippedOutcome": "A controller-first Unity client that turns a published community graph into an explorable galaxy.",
+      "coreMechanism": "Revision-pinned graph contracts and namespaced local session progress",
+      "shippedOutcome": "Unity exploration prototype with controller navigation and an authored demo mode",
       "role": "Design and engineering",
       "year": 2026,
       "stack": [
@@ -1967,9 +1983,9 @@
       ],
       "featured": false,
       "highlights": [
-        "Navigate community systems with controller-first Explore and Survey modes.",
-        "Pin each session to a graph revision and validate response compatibility.",
-        "Use verified cache or an explicitly selected authored demo when live data is unavailable."
+        "Built controller-oriented Explore and Survey modes over a community graph.",
+        "Pinned sessions to a graph revision and checked response compatibility.",
+        "Kept verified caches and authored demonstration data explicit in the loading flow."
       ],
       "architecture": [
         "The Unity client reads bounded HTTP snapshots, never the collection database.",
@@ -1996,11 +2012,11 @@
       "category": "Games & Creative",
       "deliveryStatus": "Playable proof of concept",
       "periodLabel": "Active in 2026",
-      "summary": "A first-person narrative-investigation prototype set at a communal radio outpost.",
+      "summary": "A Unity narrative-investigation prototype at a communal radio outpost. I built clue and dialogue flows, versioned saves, and an explicit send-or-refuse ending.",
       "description": "A newcomer follows strange calls through a found-family radio outpost. The working Case 01 prototype combines inspection, transmission review, source comparison, resident conversations, and an explicit final send-or-refuse decision. Names, story details, and broader release scope remain provisional.",
       "problem": "A narrative system needs clear evidence, understandable choices, and consequences that still make sense when the player refuses.",
-      "coreMechanism": "Connect authored clues, conversations, and transmission records into a complete case.",
-      "shippedOutcome": "A first-person narrative-investigation prototype set at a communal radio outpost.",
+      "coreMechanism": "Versioned case state connecting clues, conversations, and consequential decisions",
+      "shippedOutcome": "Playable case prototype with inspection, local saves, and accessibility controls",
       "role": "Design and engineering",
       "year": 2026,
       "stack": [
@@ -2012,9 +2028,9 @@
       ],
       "featured": false,
       "highlights": [
-        "Connect authored clues, conversations, and transmission records into a complete case.",
-        "Make recipients visible before a consequential send, with a complete refusal outcome.",
-        "Persist versioned local case state and support keyboard paths and text scaling."
+        "Connected clues, conversations, and transmissions into a playable investigation case.",
+        "Made recipients visible before a final send, with a complete refusal outcome.",
+        "Persisted versioned local case state and added keyboard paths and text scaling."
       ],
       "architecture": [
         "Authored scene content feeds a deterministic case-state model with versioned saves.",
@@ -2041,11 +2057,11 @@
       "category": "AT Protocol & Events",
       "deliveryStatus": "Experimental research",
       "periodLabel": "Active in 2026",
-      "summary": "Experimental AT Protocol PDS extensibility: hook contracts, a sequencer bridge, and isolated host research.",
-      "description": "Pirs explores an extensible fork of the Bluesky PDS distribution. The repository includes a draft hook-point specification, a status bridge, disposable account/event checks, retained-event transport, and an isolated host with hostile fixtures. It is not production software; Prichal continues to use the unmodified upstream PDS.",
+      "summary": "AT Protocol server-extension research with a bounded Wasmtime host and resumable event transport. Isolation checks define the experimental delivery scope.",
+      "description": "Pirs explores extensions to an AT Protocol personal data server. I built a draft hook contract, a separate bounded Wasmtime/WIT host, and an opt-in retained-event bridge with a resumable cursor. The host applies call, memory, response, and log limits. Host isolation, transport recovery, and production admission have separate qualification gates. Prichal uses the upstream PDS.",
       "problem": "PDS extensions need observable hook boundaries and isolation without giving plugin code the account’s signing keys.",
-      "coreMechanism": "Define observe, serve, act, and decide hook boundaries.",
-      "shippedOutcome": "Experimental AT Protocol PDS extensibility: hook contracts, a sequencer bridge, and isolated host research.",
+      "coreMechanism": "Separate bounded Wasmtime/WIT host and resumable retained-event transport",
+      "shippedOutcome": "Experimental PDS fork with isolated host and transport checks",
       "role": "Design and engineering",
       "year": 2026,
       "stack": [
@@ -2053,13 +2069,14 @@
         "AT Protocol",
         "PDS",
         "WIT",
-        "Event transport"
+        "Event transport",
+        "Wasmtime"
       ],
       "featured": false,
       "highlights": [
-        "Define observe, serve, act, and decide hook boundaries.",
-        "Check sequenced event delivery with disposable PDS and PLC fixtures.",
-        "Keep host isolation, retained-event delivery, and production admission as separate gates."
+        "Specified observe, serve, act, and decide hook boundaries.",
+        "Checked sequenced event delivery with disposable PDS and PLC fixtures.",
+        "Tested a separate host with deadlines, memory and output limits, and hostile fixtures."
       ],
       "architecture": [
         "A bridge observes PDS sequencer events and feeds private retained-event transport.",

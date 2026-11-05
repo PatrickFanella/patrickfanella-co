@@ -332,7 +332,7 @@
 .project-tile .project-tile-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; overflow-wrap: normal; }
 .project-tile-summary { padding-top: 1rem; }
 .project-tile-relations:not(:empty) { padding-top: 1rem; }
-.project-tile-links { align-self: end; padding-block: 1.25rem 1.5rem; }
+.project-tile-links { align-content: end; padding-block: 1.25rem 1.5rem; }
 @media (min-width: 768px) {
   .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

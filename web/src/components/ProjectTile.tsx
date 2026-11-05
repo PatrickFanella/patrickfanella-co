@@ -9,6 +9,7 @@ export function ProjectTile({ project }: { project: Project }) {
   const thumbnail = project.thumbnailUrl || project.media.find((media) => media.src.includes('/screenshots/'))?.src || project.logoUrl
   const identityOnly = thumbnail === project.logoUrl
   const ctaLabel = project.classification === 'flagship' ? 'Read case study' : project.kind === 'tool' ? 'Explore tool' : 'View project'
+  const sourceUrl = project.repoUrl || project.sourceUrl
   return (
     <article className="archive-tile project-tile">
       {thumbnail ? <div className="archive-thumbnail" style={{ backgroundColor: project.brandBackground || '#21222c' }}>
@@ -25,7 +26,7 @@ export function ProjectTile({ project }: { project: Project }) {
       <div className="project-tile-relations"><ProjectRelations project={project} /></div>
       <div className="project-tile-links flex flex-wrap gap-x-5 gap-y-2">
         <Link aria-label={`${ctaLabel}: ${project.title}`} className={textLinkClass} to={`/projects/${project.slug}`}>{ctaLabel}</Link>
-        {project.repoUrl ? <a aria-label={`View repository: ${project.title}`} className={textLinkClass} href={project.repoUrl} rel="noreferrer" target="_blank"><Icon name="gitea" className="h-4 w-4" />Repository</a> : null}
+        {sourceUrl ? <a aria-label={`${project.repoUrl ? 'View repository' : 'Download source code'}: ${project.title}`} className={textLinkClass} href={sourceUrl} rel="noreferrer" target="_blank"><Icon name={project.repoUrl ? 'gitea' : 'download'} className="h-4 w-4" />{project.repoUrl ? 'Repository' : 'Source code'}</a> : null}
       </div>
     </article>
   )

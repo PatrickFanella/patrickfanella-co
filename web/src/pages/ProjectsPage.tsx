@@ -37,7 +37,7 @@ export function ProjectsPage() {
       <div className="page-intro">
         <SectionLabel>Selected work</SectionLabel>
         <h1 className={`${pageTitleClass} mt-5`}>Projects</h1>
-        <p className={pageIntroClass}>Software for communities, archives, creative work, and the tools behind it. Each project names its delivery status. Open a card for the interface, technical decisions, and connected projects.</p>
+        <p className={pageIntroClass}>Selected engineering work across media search, community tools, and creative software. Each project names its delivery status and explains the problem, my contribution, and the technical decisions behind it.</p>
       </div>
       <p className="mb-8 text-ink-soft">Earlier work and smaller experiments are in the <Link className="text-accent-green underline underline-offset-4" to="/archive">project archive</Link>.</p>
       {status === 'loading' ? <LoadingState description="Loading projects." title="Loading projects." /> : null}

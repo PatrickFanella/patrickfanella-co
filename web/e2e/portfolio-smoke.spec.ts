@@ -164,6 +164,8 @@ test('project cards align each row, inset their text, and keep actions at the bo
 					titleLeft: title.getBoundingClientRect().left,
 					summaryTop: summary.getBoundingClientRect().top,
 					actionsTop: actions.getBoundingClientRect().top,
+					firstLinkTop: actions.firstElementChild!.getBoundingClientRect().top,
+					lastLinkBottom: actions.lastElementChild!.getBoundingClientRect().bottom,
 					bottomInset: bounds.bottom - actions.getBoundingClientRect().bottom,
 					textInset: header.getBoundingClientRect().left - bounds.left,
 					brandWidth: brand.getBoundingClientRect().width,
@@ -183,7 +185,7 @@ test('project cards align each row, inset their text, and keep actions at the bo
 					expect(card.textInset).toBeGreaterThanOrEqual(24)
 					expect(card.bottomInset).toBeCloseTo(2, 0)
 					const row = cards.filter((sibling) => Math.abs(sibling.top - card.top) < 1)
-					for (const field of ['titleTop', 'statusTop', 'summaryTop', 'actionsTop'] as const) {
+					for (const field of ['titleTop', 'statusTop', 'summaryTop', 'actionsTop', 'firstLinkTop', 'lastLinkBottom'] as const) {
 						const positions = row.map((sibling) => sibling[field])
 						expect(Math.max(...positions) - Math.min(...positions), `${field} on ${route} at ${width}px`).toBeLessThan(1)
 					}
@@ -290,6 +292,8 @@ test('connected projects link both ways and Arkhiv exposes its collection fronte
 	}
 	await page.goto('/projects/obsidian-plugin-metronome-tuner')
 	await expect(page.getByRole('heading', { name: 'Metronome + Tuner', exact: true })).toBeVisible()
+	await page.goto('/projects/chatty-cat')
+	await expect(page.getByRole('link', { name: 'Download source', exact: true })).toHaveAttribute('href', 'https://chat.subcult.tv/source.tar.gz')
 })
 
 test('the source button separates its icon from the text on narrow and wide screens', async ({ page }) => {
